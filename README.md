@@ -44,7 +44,6 @@ The script counts **one point per occurrence** of the following Rust syntax node
 * `for_expression`
 * `while_expression`
 * `loop_expression`
-* `match_expression`
 * `match_arm`
 * `try_expression`
 * `closure_expression`
