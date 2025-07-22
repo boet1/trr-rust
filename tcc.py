@@ -11,7 +11,7 @@ parser = Parser(RUST_LANGUAGE)
 # Node types considered as decision points for Cyclomatic Complexity (TCC)
 DECISION_NODES = {
     'if_expression', 'for_expression', 'while_expression',
-    'loop_expression', 'match_expression', 'match_arm',
+    'loop_expression', 'match_arm',
     'try_expression', 'closure_expression', '&&', '||'
 }
 
