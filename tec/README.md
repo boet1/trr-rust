@@ -11,7 +11,7 @@ It processes individual files or entire folders of `.rs` files and generates:
 
 ## ⚙️ How It Works
 
-The script parses Rust files with **tree-sitter** and walks the AST to find **call expressions** that match CPI patterns in Solana:
+The script parses Rust files with **tree-sitter** and walks the AST to find **call expressions** that match CPI patterns in Solana.
 
 ### ✅ CPI kinds detected
 
@@ -20,17 +20,29 @@ The script parses Rust files with **tree-sitter** and walks the AST to find **ca
 * **`method_invoke`** — method syntax wrapper: `obj.invoke(...)`
 * **`method_invoke_signed`** — method syntax wrapper: `obj.invoke_signed(...)`
 * **`anchor_cpi_helper`** — any helper call with a path containing `::cpi::` (e.g., `anchor_spl::token::cpi::transfer(...)`)
+* **`anchor_cpi_helper_wrapped`** — Anchor helpers **without `::cpi::` in the path**, including calls via aliases (`spl_transfer`, `sys_transfer`, etc.), validated with extra context rules.
 
-### ℹ️ Why these patterns?
+### 🔎 Context & Closure Analysis
 
-In Solana, **external calls** are explicit:
-- **`invoke` / `invoke_signed`** trigger a CPI to another program (with `invoke_signed` passing PDA seeds).
-- Anchor/SPL **helpers** under `::cpi::` wrap those calls.
-- Some codebases use **method-style** wrappers that ultimately call `invoke`/`invoke_signed`.
+To reduce false positives, the script inspects **how the first argument is used**:
+- If the first argument is a `CpiContext` parameter (explicitly typed in a function signature).
+- If a `CpiContext` is created in the same scope or in an outer scope.
+- If the first argument is a closure parameter (typed or untyped) and the closure’s surrounding scope shows `CpiContext::new(...)` or `.with_signer(...)`.
+- If the argument variable was previously assigned from a `CpiContext`.
 
-### 📏 “Estimated CPI Sites”
+This allows the scanner to detect cases such as:
+```rust
+let ctx = CpiContext::new(...);
+let f = |amount| {
+    transfer(ctx, amount).unwrap();  // Detected as CPI
+};
+```
 
-To avoid inflating counts, `total_cpi` sums **only CPI call kinds**:
+---
+
+## 📏 CPI Counting
+
+To avoid inflating counts, `total_cpi` sums **only recognized CPI call kinds**:
 
 ```
 total_cpi =
@@ -39,6 +51,7 @@ total_cpi =
   + method_invoke
   + method_invoke_signed
   + anchor_cpi_helper
+  + anchor_cpi_helper_wrapped
 ```
 
 ---
@@ -84,14 +97,16 @@ python tec.py src/
         { "line": 24, "col": 5, "kind": "invoke_signed", "callee": "invoke_signed", "code": "invoke_signed(&instruction, &accounts, &[seeds]).unwrap();" },
         { "line": 49, "col": 13, "kind": "method_invoke", "callee": "invoke", "code": "helper.invoke(&ix, &accs).unwrap();" },
         { "line": 60, "col": 13, "kind": "method_invoke_signed", "callee": "invoke_signed", "code": "helper.invoke_signed(&ix, &accs, &[seeds_level]).unwrap();" },
-        { "line": 76, "col": 5, "kind": "anchor_cpi_helper", "callee": "token::cpi::transfer", "code": "token::cpi::transfer(ctx, 123u64).unwrap();" }
+        { "line": 76, "col": 5, "kind": "anchor_cpi_helper", "callee": "token::cpi::transfer", "code": "token::cpi::transfer(ctx, 123u64).unwrap();" },
+        { "line": 90, "col": 5, "kind": "anchor_cpi_helper_wrapped", "callee": "transfer", "code": "transfer(ctx, 50).unwrap();" }
       ],
       "totals": {
         "invoke": 1,
         "invoke_signed": 1,
         "method_invoke": 1,
         "method_invoke_signed": 1,
-        "anchor_cpi_helper": 2,
+        "anchor_cpi_helper": 1,
+        "anchor_cpi_helper_wrapped": 1,
         "total_cpi": 6
       }
     }
@@ -101,7 +116,8 @@ python tec.py src/
     "invoke_signed": 1,
     "method_invoke": 1,
     "method_invoke_signed": 1,
-    "anchor_cpi_helper": 2,
+    "anchor_cpi_helper": 1,
+    "anchor_cpi_helper_wrapped": 1,
     "total_cpi": 6
   }
 }
@@ -111,12 +127,14 @@ python tec.py src/
 
 ## 📝 Notes & Limitations
 
-* The scanner is **static**: it counts **sites** in code, not how many times a CPI runs at runtime.
-* Macros that generate CPIs **without** visible `invoke*` or `::cpi::` in source may be missed (rare in Anchor).
-* Works best when projects call CPIs via:
+* The scanner is **static**: it counts **sites** in code, not how many times a CPI executes at runtime.
+* Wrapped helpers without `::cpi::` are detected only if supported by:
+  - Known helper names (e.g., `transfer`, `mint_to`, `burn`, etc.)
+  - Context validation (argument must be `CpiContext`-like).
+  - Alias resolution (`use anchor_spl::token::transfer as spl_transfer;`).
+* Works best when projects follow common patterns:
   - `solana_program::program::invoke[_signed]`
   - Anchor/SPL `::cpi::...` helpers
-  - Thin wrappers exposing `.invoke()` / `.invoke_signed()`
+  - Anchor helpers without `::cpi::` but passing a `CpiContext`
 
-
-
+---

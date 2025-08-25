@@ -6,6 +6,12 @@
 use solana_program::program::{invoke, invoke_signed}; // identifier form
 use anchor_spl::{token, associated_token};            // helper modules with ::cpi::
 
+// New imports for helpers WITHOUT ::cpi::
+use anchor_lang::system_program::transfer;
+use anchor_lang::system_program::transfer as sys_transfer;
+use anchor_spl::token_interface::transfer_checked;
+use anchor_spl::associated_token::create_idempotent;
+
 #[allow(dead_code)]
 fn example_invoke_identifier_form() {
     // Identifier call: invoke(...)
@@ -86,7 +92,6 @@ fn example_method_invoke_signed() {
 fn example_anchor_spl_token_transfer() {
     // Helper: anchor_spl::token::cpi::transfer(...)
     // Scanner should tag: kind = "anchor_cpi_helper"
-    // CpiContext hint (not a CPI by itself):
     let ctx = CpiContext::new(/* token_program */ todo!(), token::Transfer {
         from: todo!(),
         to: todo!(),
@@ -99,7 +104,6 @@ fn example_anchor_spl_token_transfer() {
 fn example_anchor_spl_ata_create() {
     // Helper: anchor_spl::associated_token::cpi::create(...)
     // Scanner should tag: kind = "anchor_cpi_helper"
-    // Another CpiContext hint line:
     let ctx = CpiContext::new(/* associated_token_program */ todo!(), associated_token::Create {
         payer: todo!(),
         associated_token: todo!(),
@@ -114,16 +118,14 @@ fn example_anchor_spl_ata_create() {
 
 // ----- Minimal stand-ins so CpiContext::<...> appears in source -----
 
-// Fake CpiContext to produce "CpiContext<..." text for the scanner hint.
-// In real Anchor code, you'd use: use anchor_lang::prelude::*; and CpiContext from Anchor.
 #[allow(dead_code)]
 struct CpiContext<T>(T);
 #[allow(dead_code)]
 impl<T> CpiContext<T> {
     fn new(_program: (), _accounts: T) -> Self { CpiContext(_accounts) }
+    fn with_signer(self, _seeds: &[&[u8]]) -> Self { self }
 }
 
-// Token and ATA account structs shapes just for the source text (not real)
 #[allow(dead_code)]
 mod token {
     pub struct Transfer {
@@ -154,4 +156,137 @@ mod associated_token {
         #[allow(dead_code)]
         pub fn create<T>(_ctx: crate::CpiContext<Create>) -> Result<(), ()> { Ok(()) }
     }
+}
+
+// ============================================================================
+// NEW SECTION: Anchor helpers WITHOUT ::cpi::
+// ============================================================================
+
+#[allow(dead_code)]
+fn example_system_program_transfer_identifier() {
+    // Scanner should tag: kind = "anchor_cpi_helper"
+    let ctx = CpiContext::new((), SystemTransfer { from: (), to: () });
+    transfer(ctx, 100u64).unwrap();
+}
+
+#[allow(dead_code)]
+fn example_system_program_transfer_alias_signed() {
+    // Scanner should tag: kind = "anchor_cpi_helper_signed"
+    let ctx = CpiContext::new((), SystemTransfer { from: (), to: () })
+        .with_signer(&[&[b"seed", &[1]]]);
+    sys_transfer(ctx, 200u64).unwrap();
+}
+
+#[allow(dead_code)]
+fn example_token_interface_transfer_checked_identifier(amount: u64, ctx: CpiContext<Transfer>) {
+
+    transfer_checked(ctx, 777u64, 6u8).unwrap();
+}
+
+#[allow(dead_code)]
+fn example_associated_token_create_idempotent_identifier() {
+    // Scanner should tag: kind = "anchor_cpi_helper"
+    
+    create_idempotent(CpiContext::new((), AssociatedCreateIdempotent {
+        payer: (), associated_token: (), authority: (), mint: (),
+        system_program: (), token_program: ()
+    })).unwrap();
+}
+
+fn demo(ctx: CpiContext<Transfer>, amount: u64) {
+    token::transfer(ctx, amount).unwrap();   
+}
+
+// Stand-in structs for the new examples
+#[allow(dead_code)]
+struct SystemTransfer { from: (), to: () }
+
+#[allow(dead_code)]
+struct TokenTransferChecked { from: (), mint: (), to: (), authority: () }
+
+#[allow(dead_code)]
+struct AssociatedCreateIdempotent {
+    payer: (), associated_token: (), authority: (), mint: (), system_program: (), token_program: ()
+}
+
+
+// =====================================================
+// CLOSURE TEST CASES FOR CPI DETECTION
+// =====================================================
+
+use anchor_lang::system_program::transfer;
+use anchor_spl::token::transfer as spl_transfer;
+use anchor_spl::token::transfer_checked;
+
+// Fake context struct for tests
+struct SystemTransfer { from: (), to: () }
+struct TokenTransfer { from: (), to: (), authority: () }
+
+// Stand-in for CpiContext
+#[allow(dead_code)]
+struct CpiContext<T>(T);
+impl<T> CpiContext<T> {
+    fn new(_p: (), _a: T) -> Self { CpiContext(_a) }
+    fn with_signer(self, _s: &[&[u8]]) -> Self { self }
+}
+
+// =====================================================
+// 1) Confirmed CPI: closure param typed as CpiContext
+// =====================================================
+
+#[allow(dead_code)]
+fn closure_with_typed_ctx() {
+    let f = |ctx: CpiContext<SystemTransfer>| {
+        transfer(ctx, 123).unwrap();
+    };
+}
+
+// =====================================================
+// 2) Confirmed CPI: builds CpiContext inside closure
+// =====================================================
+
+#[allow(dead_code)]
+fn closure_builds_ctx() {
+    let f = || {
+        let ctx = CpiContext::new((), SystemTransfer { from: (), to: () })
+            .with_signer(&[&[b"seed", &[1]]]);
+        transfer(ctx, 456).unwrap();
+    };
+}
+
+// =====================================================
+// 3) High-confidence CPI: ctx built outside, closure param untyped
+// =====================================================
+
+#[allow(dead_code)]
+fn closure_uses_outer_ctx() {
+    let ctx = CpiContext::new((), SystemTransfer { from: (), to: () })
+        .with_signer(&[&[b"seed", &[2]]]);
+
+    let f = |amount| {
+        transfer(ctx, amount).unwrap();
+    };
+}
+
+// =====================================================
+// 4) High-confidence CPI: closure takes ctx untyped, outer scope has CpiContext
+// =====================================================
+
+#[allow(dead_code)]
+fn closure_param_untyped() {
+    let ctx = CpiContext::new((), TokenTransfer { from: (), to: (), authority: () });
+    let f = |ctx, amt| {
+        spl_transfer(ctx, amt).unwrap();
+    };
+}
+
+// =====================================================
+// 5) Confirmed CPI: first arg is function param typed as CpiContext
+// =====================================================
+
+#[allow(dead_code)]
+fn fn_param_with_closure(ctx: CpiContext<TokenTransfer>) {
+    let f = |amt| {
+        transfer_checked(ctx, amt, 9).unwrap();
+    };
 }
