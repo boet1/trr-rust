@@ -87,12 +87,6 @@ def count_decision_points(node, code_bytes):
     if node.type in DECISION_NODE_TYPES:
         count += 1
 
-    # Special handling: if_expression with 'else' (alternative) → +1 extra
-    if node.type == 'if_expression':
-        alt = node.child_by_field_name('alternative')
-        if alt is not None:
-            count += 1
-
     # Special handling: panic-like macros (panic!/assert!/unreachable!/todo!/...)
     if node.type == 'macro_invocation' and is_panic_macro(node, code_bytes):
         count += 1
