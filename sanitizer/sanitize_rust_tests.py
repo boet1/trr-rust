@@ -41,7 +41,7 @@ def is_attribute_test_like(text: str) -> bool:
     t = "".join(text.split())  # strip all spaces for robust matching
     if t.startswith("#!"):  # inner attribute handled separately
         return False
-    return t.startswith("#[test]") or t.startswith("#[cfg(test)]")
+    return t.startswith("#[cfg(test)]")
 
 def is_rust_item(node_type: str) -> bool:
     """Conservative list of Rust items we might remove after a test attribute."""

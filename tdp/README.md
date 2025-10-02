@@ -22,7 +22,7 @@ A higher TDP indicates more complex logic and potentially harder-to-maintain cod
 
 The script counts **one point per occurrence** of the following Rust syntax nodes:
 
-* `if_expression` (+1) and an extra (+1) if it contains an `else`
+* `if_expression` (+1) 
 * `while_expression`
 * `for_expression`
 * `loop_expression`

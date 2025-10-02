@@ -9,7 +9,6 @@ A small Python utility that walks one or more Rust codebases, **removes test-onl
 - **Removes entire test blocks _and_ their attributes:**
   - Any item annotated with `#[cfg(test)]` is removed **from the first attribute in the group to the end of the item**.
     - Supported items include at least: **modules (`mod_item`)**, **functions (`function_item`)**, and **use declarations (`use_declaration`)**.
-  - Any **function** annotated with `#[test]` is removed **from the first attribute to the end of the function**.
   - Files that contain an **inner attribute** `#![cfg(test)]` at the top level are removed entirely.
   - If attributes appear without a following item on the same attribute group, the attributes themselves are removed.
 - **Generates a JSON report** with every `#[cfg(test)]` and `#[test]` occurrence (file, line, and line_text) **prior to sanitization**.
@@ -21,7 +20,6 @@ A small Python utility that walks one or more Rust codebases, **removes test-onl
 
 - Uses the Rust grammar via **tree-sitter** to analyze the AST precisely.
 - Collects consecutive **outer attributes** adjacent to an item; if any in the group is `#[cfg(test)]`, it deletes the span from the **first attribute** to the **end of the item**.
-- For `#[test]`, it removes the entire **function item**.
 - The **reporter** is a simple regex that scans for `#[cfg(test)]` and `#[test]` before any changes are applied.
 
 ---
