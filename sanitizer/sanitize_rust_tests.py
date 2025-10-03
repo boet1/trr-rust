@@ -35,7 +35,6 @@ def is_inner_cfg_test(text: str) -> bool:
 def is_attribute_test_like(text: str) -> bool:
     """
     True only for:
-      - #[test]
       - #[cfg(test)]
     """
     t = "".join(text.split())  # strip all spaces for robust matching
@@ -43,78 +42,72 @@ def is_attribute_test_like(text: str) -> bool:
         return False
     return t.startswith("#[cfg(test)]")
 
-def is_rust_item(node_type: str) -> bool:
-    """Conservative list of Rust items we might remove after a test attribute."""
-    return node_type in {
-        "function_item",
-        "mod_item"
-    }
-
 # ---------- Core logic ----------
 
 def compute_removal_spans(src: str, root) -> List[Tuple[int, int]]:
     """
     Find byte spans to remove:
-    1) If an inner attribute #![cfg(test)] exists at file level -> remove whole file.
-    2) Group consecutive *outer* attributes; if any is test-like, remove from the FIRST attribute
-       through the END of the next item node. If there is no following item, remove only the attributes.
+    1) If an inner attribute #![cfg(test)] exists at file/module level -> remove whole file.
+    2) For each group of consecutive outer #[cfg(test)] attributes, remove from the
+       FIRST attribute start through the END of the annotated node (the next named sibling
+       that is not an attribute). If there is no following annotated node, remove only
+       the attributes. This logic does NOT depend on a list of Rust item kinds.
     """
     source_bytes = src.encode("utf-8", errors="replace")
     spans: List[Tuple[int, int]] = []
 
-    # 1) Inner attribute at top (#![cfg(test)]) -> remove entire file
+    # 1) Inner attribute kill-switch: remove entire file if found at the top level.
     for n in iter_nodes_preorder(root):
         if n.type in ("inner_attribute_item", "attribute_item"):
             txt = node_text(source_bytes, n)
             if is_inner_cfg_test(txt):
                 return [(0, len(source_bytes))]
-        # Stop scanning early if we've gone past the top-level attribute area
+        # Stop early once we dip into non-top-level contexts
         if n.parent and n.parent.type not in ("source_file", "mod_item"):
-            # once we dip into function bodies etc, we can break the inner-attr quick check
             break
 
-    # 2) Group outer attributes and remove from first attribute to end of next item
-    nodes = list(iter_nodes_preorder(root))
-    i = 0
-    N = len(nodes)
+    # 2) Remove blocks annotated by outer #[cfg(test)]
+    def is_first_attr_in_block(attr_node) -> bool:
+        prev_sib = attr_node.prev_named_sibling
+        return not prev_sib or prev_sib.type != "attribute_item"
 
-    while i < N:
-        n = nodes[i]
-        if n.type == "attribute_item":
-            group_attrs = [n]
-            j = i + 1
-            # Gather consecutive attributes
-            while j < N and nodes[j].type == "attribute_item":
-                group_attrs.append(nodes[j])
-                j += 1
+    # Preorder traversal is fine; we rely on sibling links to group properly.
+    for n in iter_nodes_preorder(root):
+        if n.type != "attribute_item":
+            continue
+        # Only act on the first attribute in a consecutive block
+        if not is_first_attr_in_block(n):
+            continue
 
-            # Next significant item after attributes
-            k = j
-            while k < N and not is_rust_item(nodes[k].type):
-                k += 1
+        # Collect consecutive attribute_items
+        group_attrs = [n]
+        sib = n.next_named_sibling
+        while sib is not None and sib.type == "attribute_item":
+            group_attrs.append(sib)
+            sib = sib.next_named_sibling
 
-            any_test_like = any(is_attribute_test_like(node_text(source_bytes, a)) for a in group_attrs)
+        # Check if ANY attribute in the block is #[cfg(test)]
+        any_cfg_test = False
+        for a in group_attrs:
+            txt = node_text(source_bytes, a)
+            if is_attribute_test_like(txt):
+                any_cfg_test = True
+                break
+        if not any_cfg_test:
+            continue
 
-            if any_test_like:
-                first_attr_start = group_attrs[0].start_byte
-                last_attr_end = group_attrs[-1].end_byte
+        first_attr = group_attrs[0]
+        first_attr_start = first_attr.start_byte
+        last_attr_end = group_attrs[-1].end_byte
 
-                if k < N:
-                    item_node = nodes[k]
-                    # Remove from FIRST attribute to END of the item (kills tags + block)
-                    spans.append((first_attr_start, item_node.end_byte))
-                    i = k + 1
-                    continue
-                else:
-                    # No following item -> remove the attributes themselves
-                    spans.append((first_attr_start, last_attr_end))
-                    i = j
-                    continue
-            else:
-                i = j
-                continue
+        # The annotated node is the first non-attribute named sibling after the group
+        annotated = sib  # sib already points to first non-attribute named sibling (or None)
+        if annotated is not None:
+            # Remove from FIRST attribute to END of the annotated node
+            spans.append((first_attr_start, annotated.end_byte))
         else:
-            i += 1
+            # No annotated node; remove only the attributes themselves
+            spans.append((first_attr_start, last_attr_end))
 
     # Merge overlapping spans
     if not spans:
