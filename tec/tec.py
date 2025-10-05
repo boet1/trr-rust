@@ -40,17 +40,420 @@ ANCHOR_HELPER_MODULE_HINTS = {
     b"associated_token",
     b"system_program",
 }
+# ---- CPI low-level entrypoints (Solana runtime + common wrappers) ----
+# Match function or method names like:
+#  - invoke, invoke_signed, invoke_unchecked, invoke_signed_unchecked
+#  - program_invoke, program_invoke_signed, program_invoke_unchecked, ...
+#  - invoke_with_program_id, program_invoke_with_program_id, ...
+CPI_ENTRYPOINT_NAME_PATTERNS = [
+    re.compile(r"^invoke(?:_signed)?(?:_unchecked)?$", re.ASCII),
+    re.compile(r"^invoke(?:_signed)?_with_program_id$", re.ASCII),
+]
 
+# Optional module hints for extra confidence when available
+CPI_ENTRYPOINT_MODULE_HINTS = {
+    b"solana_program::program",
+    b"anchor_lang::solana_program::program",
+    b"solana_program",
+}
 
 # ------------------------------------------------------------
 # Helpers
 # ------------------------------------------------------------
+def file_module_path_from(file_path: str) -> str:
+    """
+    Derive a stable, short module prefix from the file path:
+      - lib.rs / main.rs    -> ""
+      - foo.rs              -> "foo"
+      - foo/mod.rs          -> "foo"
+      - foo/bar.rs          -> "bar"   (prefer short, file-based)
+      - foo/bar/mod.rs      -> "bar"
+    Rationale: matches how many repos refer to items due to re-exports.
+    """
+    p = os.path.normpath(file_path)
+    base = os.path.basename(p)  # e.g., "bar.rs" or "mod.rs"
+    name, _ = os.path.splitext(base)
+    if name in ("lib", "main"):
+        return ""
+    if name == "mod":
+        parent = os.path.basename(os.path.dirname(p))
+        return "" if parent in ("src", "") else parent
+    return name
+    
+def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_names_global):
+    """
+    Second pass per file: tag callsites that target repo-wide wrappers as 'wrapper_cpi'.
+    Returns list of wrapper hits for this file.
+    """
+    code_str, code_bytes = read_rust_code(file_path)
+    tree = parser.parse(code_bytes)
+    root = tree.root_node
+
+    file_module_path = file_module_path_from(file_path)
+    local_mods = collect_local_mod_names(root, code_bytes)
+
+    wrapper_hits = []
+
+    # Iterate all call expressions, tag by method name or function qname/tail
+    stack = [root]
+    while stack:
+        n = stack.pop()
+        if n.type == 'call_expression':
+            name, full_path, marker = extract_callee_name_and_path(n, code_bytes)
+            if name and marker:
+                is_method = (marker.type == 'field_identifier')
+                if is_method:
+                    if name in wrapper_method_names_global:
+                        line, col = get_line_and_col(marker)
+                        callee_text = node_text(code_bytes, marker)
+                        code_line = get_line_str(code_str, line)
+                        wrapper_hits.append({
+                            'line': line, 'col': col,
+                            'kind': 'wrapper_cpi',
+                            'callee': callee_text,
+                            'reason': f'via_wrapper_method:{name}',
+                            'code': code_line
+                        })
+                else:
+                    # function or scoped (ONLY exact qualified-name match)
+                    callee_key = full_path.decode('utf8', errors='ignore') if full_path else name
+                   
+                    if full_path is not None and "::" in callee_key and file_module_path:
+                        first_seg = callee_key.split("::", 1)[0]
+                        if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
+                            callee_key = f"{file_module_path}::{callee_key}"
+
+                    if callee_key in wrapper_fn_qnames_global:
+                        line, col = get_line_and_col(marker)
+                        callee_text = node_text(code_bytes, marker)
+                        code_line = get_line_str(code_str, line)
+                        wrapper_hits.append({
+                            'line': line, 'col': col,
+                            'kind': 'wrapper_cpi',
+                            'callee': callee_text,
+                            'reason': f'via_wrapper_fn:{callee_key}',
+                            'code': code_line
+                        })
+        stack.extend(n.children)
+
+    return wrapper_hits
+
+
+def propagate_wrappers_repo_wide(wrapper_fn_qnames, wrapper_method_names, edges_fn, edges_meth, func_meta_by_qname):
+    """
+    Propagate wrapper status across the repository call graph until fixpoint.
+    - If a caller calls a callee that is a wrapper (by fn qname match OR method name match),
+      then the caller is also a wrapper.
+    """
+    # Build adjacency
+    callers_to_fn_callees = {}
+    callers_to_method_callees = {}
+    for caller, callee in edges_fn:
+        callers_to_fn_callees.setdefault(caller, set()).add(callee)
+    for caller, meth in edges_meth:
+        callers_to_method_callees.setdefault(caller, set()).add(meth)
+
+    changed = True
+    while changed:
+        changed = False
+        for caller_q in set(list(callers_to_fn_callees.keys()) + list(callers_to_method_callees.keys())):
+            # methods
+            for meth in callers_to_method_callees.get(caller_q, ()):
+                if meth in wrapper_method_names:
+                    meta = func_meta_by_qname.get(caller_q, {'is_method': False, 'name': None})
+                    if meta.get('is_method'):
+                        if meta['name'] not in wrapper_method_names:
+                            wrapper_method_names.add(meta['name']); changed = True
+                    else:
+                        if caller_q not in wrapper_fn_qnames:
+                            wrapper_fn_qnames.add(caller_q); changed = True
+
+            # functions (EXACT match only)
+            for callee_path in callers_to_fn_callees.get(caller_q, ()):
+                if callee_path in wrapper_fn_qnames:
+                    meta = func_meta_by_qname.get(caller_q, {'is_method': False, 'name': None})
+                    if meta.get('is_method'):
+                        if meta['name'] not in wrapper_method_names:
+                            wrapper_method_names.add(meta['name']); changed = True
+                    else:
+                        if caller_q not in wrapper_fn_qnames:
+                            wrapper_fn_qnames.add(caller_q); changed = True
+
+    return wrapper_fn_qnames, wrapper_method_names
+
+
+def file_pass1_scan(file_path, output_dir):
+    """
+    Pass 1 (per file):
+      - parse + write AST
+      - collect direct_cpi hits
+      - collect wrappers_local (fn qnames, method names)
+      - collect edges (caller->callee) for repo-wide propagation
+      - collect legacy hits (optional) only if not direct_cpi at that callsite
+    Returns a dict with per-file data.
+    """
+    print(f"🔎 Processing file (pass1): {file_path}")
+    code_str, code_bytes = read_rust_code(file_path)
+    tree = parser.parse(code_bytes)
+    root = tree.root_node
+    # Derive module path from file path for qname fallback
+    file_module_path = file_module_path_from(file_path)
+    local_mods = collect_local_mod_names(root, code_bytes)
+    # AST out
+    ast_lines = collect_ast_lines(root)
+    ast_file_name = os.path.basename(file_path).replace('.rs', '_ast.txt')
+    ast_output_path = os.path.join(output_dir, ast_file_name)
+    with open(ast_output_path, 'w', encoding='utf-8') as ast_file:
+        ast_file.write('\n'.join(ast_lines))
+    print(f"✅ AST written to {ast_output_path}")
+
+    # collect functions, calls and edges
+    func_nodes, func_meta, calls_by_func, edges_fn, edges_meth = collect_functions_calls_and_edges(
+        root, code_str, code_bytes, file_module_path,local_mods  
+    )
+
+    hits = []
+
+    wrapper_fn_qnames_local = set()
+    wrapper_method_names_local = set()
+
+    # walk all calls again to classify
+    def _walk_for_calls(n, current_func_q=None):
+        if n.type == "function_item":
+            current_func_q = qualified_name_of_function(n, code_bytes, file_module_path)
+
+        if n.type == 'call_expression':
+            # Pass 1: direct CPI (invoke*)
+            direct = classify_call_expr_direct_cpi(n, code_bytes)
+            if direct is not None:
+                kind, marker_node, reason = direct
+                line, col = get_line_and_col(marker_node)
+                callee_text = node_text(code_bytes, marker_node)
+                code_line = get_line_str(code_str, line)
+                hits.append({
+                    'line': line, 'col': col,
+                    'kind': kind,  # 'direct_cpi'
+                    'callee': callee_text,
+                    'reason': reason,
+                    'code': code_line
+                })
+                
+                # mark the enclosing function as wrapper-local
+                if current_func_q and current_func_q in func_nodes:
+                    if func_meta[current_func_q]['is_method']:
+                        wrapper_method_names_local.add(func_meta[current_func_q]['name'])
+                    else:
+                        wrapper_fn_qnames_local.add(current_func_q)
+            else:
+                # Optional legacy classification ONLY if no direct
+                # (keeps your Anchor helpers / heuristics)
+                
+                res = classify_call_expr(n, code_bytes, ScopeInfo(parent=None))
+                if res is not None:
+                    legacy_kind, marker_node = res
+                    line, col = get_line_and_col(marker_node)
+                    callee_text = node_text(code_bytes, marker_node)
+                    code_line = get_line_str(code_str, line)
+                    hits.append({
+                        'line': line, 'col': col,
+                        'kind': legacy_kind,
+                        'callee': callee_text,
+                        'code': code_line
+                    })
+
+                    if current_func_q and current_func_q in func_nodes:
+                        if legacy_kind in ('anchor_cpi_helper', 'anchor_cpi_helper_wrapped'):
+                            if func_meta[current_func_q]['is_method']:
+                                wrapper_method_names_local.add(func_meta[current_func_q]['name'])
+                            else:
+                                wrapper_fn_qnames_local.add(current_func_q)
+
+        for ch in n.children:
+            _walk_for_calls(ch, current_func_q)
+
+    _walk_for_calls(root, None)
+
+    return {
+        'ast_file': ast_file_name,
+        'hits_direct_and_legacy': hits,
+        'wrapper_fn_qnames_local': wrapper_fn_qnames_local,
+        'wrapper_method_names_local': wrapper_method_names_local,
+        'edges_fn': edges_fn,
+        'edges_meth': edges_meth,
+        'func_meta': func_meta,
+    }
+
+def collect_functions_calls_and_edges(root, code_str, code_bytes, file_module_path: str, local_mods: set):
+    """
+    Returns:
+      func_nodes: dict[qname] = function_item node
+      func_meta:  dict[qname] = {'is_method': bool, 'name': str}  # name is method/fn short name
+      calls_by_func: dict[qname] = list[call_expression nodes]
+      edges_fn: list[(caller_q, callee_path_str)]     # for identifier/scoped calls
+      edges_meth: list[(caller_q, method_name_str)]   # for method calls (field_expression)
+    """
+    func_nodes, calls_by_func = {}, {}
+    func_meta = {}
+    edges_fn, edges_meth = [], []
+
+    def _walk(n, current_func_q=None):
+        nonlocal func_nodes, calls_by_func, func_meta, edges_fn, edges_meth
+        if n.type == "function_item":
+            q = qualified_name_of_function(n, code_bytes, file_module_path)
+            func_nodes[q] = n
+            calls_by_func[q] = []
+            func_meta[q] = {
+                'is_method': is_method_function(n),
+                'name': function_name_of(n, code_bytes),
+            }
+            current_func_q = q
+
+        if n.type == "call_expression" and current_func_q is not None:
+            calls_by_func[current_func_q].append(n)
+            # record edges (best-effort)
+            name, full_path, marker = extract_callee_name_and_path(n, code_bytes)
+            if name:
+                if marker and marker.type == 'field_identifier':
+                    # method call: obj.name(...)
+                    edges_meth.append((current_func_q, name))
+                else:
+                    # function call: identifier or scoped_identifier
+                    callee_key = full_path.decode('utf8', errors='ignore') if full_path else name
+
+                    # if the callee path starts with a local `mod` name, prefix with file_module_path
+                    if full_path is not None and "::" in callee_key and file_module_path:
+                        first_seg = callee_key.split("::", 1)[0]
+                        if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
+                            callee_key = f"{file_module_path}::{callee_key}"
+
+
+                    edges_fn.append((current_func_q, callee_key))
+
+        for ch in n.children:
+            _walk(ch, current_func_q)
+
+    _walk(root, None)
+    return func_nodes, func_meta, calls_by_func, edges_fn, edges_meth
+
+
+def is_method_function(func_item_node) -> bool:
+    """Returns True if this function_item is inside an impl_item (i.e., a method), else False."""
+    parent = getattr(func_item_node, "parent", None)
+    while parent is not None:
+        if parent.type == "impl_item":
+            return True
+        parent = getattr(parent, "parent", None)
+    return False
+
+def function_name_of(func_item_node, code_bytes) -> str:
+    """Returns the function/method identifier name (unqualified)."""
+    ident = find_child_of_type(func_item_node, "identifier")
+    return node_text(code_bytes, ident) if ident else "<anon>"
+
+def extract_callee_name_and_path(call_node, code_bytes):
+    """
+    Returns (name_str, full_path_bytes, node_for_location) where:
+      - name_str: the rightmost identifier (e.g., 'invoke', 'program_invoke_signed')
+      - full_path_bytes: b'module::...::name' if available (or None)
+      - node_for_location: the node to use for line/col (identifier/field_identifier/scoped_identifier)
+    """
+    func = None
+    for ch in call_node.children:
+        if ch.type in ('identifier', 'scoped_identifier', 'field_expression'):
+            func = ch
+            break
+    if func is None:
+        return None, None, None
+
+    if func.type == 'identifier':
+        name = node_text(code_bytes, func)
+        return name, None, func
+
+    if func.type == 'scoped_identifier':
+        full = node_text(code_bytes, func).encode('utf8', errors='ignore')
+        tail = full.split(b'::')[-1] if full else b''
+        return tail.decode('utf8', errors='ignore'), full, func
+
+    if func.type == 'field_expression':
+        field_id = find_child_of_type(func, 'field_identifier')
+        if field_id is None:
+            return None, None, None
+        name = node_text(code_bytes, field_id)
+        return name, None, field_id
+
+    return None, None, None
+
+def is_cpi_entrypoint_name(name: str) -> bool:
+    if not name:
+        return False
+    for rx in CPI_ENTRYPOINT_NAME_PATTERNS:
+        if rx.match(name):
+            return True
+    return False
+
+def classify_call_expr_direct_cpi(call_node, code_bytes):
+    """
+    Return ('direct_cpi', marker_node, reason) if this call is a direct CPI boundary.
+    Else None.
+    """
+    name, full_path, marker = extract_callee_name_and_path(call_node, code_bytes)
+    if not name:
+        return None
+    if is_cpi_entrypoint_name(name):
+        if full_path and any(h in full_path for h in CPI_ENTRYPOINT_MODULE_HINTS):
+            return ('direct_cpi', marker, 'entrypoint+module_hint')
+        return ('direct_cpi', marker, 'entrypoint_name')
+    return None
+
+def qualified_name_of_function(func_item_node, code_bytes, file_module_path: str = "") -> str:
+    """
+    Build a canonical qualified name:
+      file_module_path  +  nested mod_items  +  function name
+
+    Why:
+      - The same symbol gets the same qname across files.
+      - Matches common call-site style (e.g., token_ops::tokens::foo).
+    """
+    ident = find_child_of_type(func_item_node, "identifier")
+    fname = node_text(code_bytes, ident) if ident else "<anon>"
+
+    # Collect nested `mod` names inside the same file
+    mod_parts = []
+    cur = getattr(func_item_node, "parent", None)
+    while cur is not None:
+        if cur.type == "mod_item":
+            mid = find_child_of_type(cur, "identifier")
+            if mid:
+                mod_parts.append(node_text(code_bytes, mid))
+        cur = getattr(cur, "parent", None)
+    mod_parts.reverse()  # outer-most first
+
+    prefix = [file_module_path] if file_module_path else []
+    parts = [p for p in prefix + mod_parts + [fname] if p]
+    return "::".join(parts)
 
 def read_rust_code(file_path):
     """Reads Rust code and returns (str, bytes)."""
     with open(file_path, 'r', encoding='utf-8') as f:
         code = f.read()
     return code, code.encode('utf8')
+
+def collect_local_mod_names(root, code_bytes):
+    """
+    Return the set of `mod` identifiers defined in this same file.
+    Used to detect relative module paths like `withdraw_utils::foo`
+    and prefix them with the file module path.
+    """
+    mods = set()
+    stack = [root]
+    while stack:
+        n = stack.pop()
+        if n.type == "mod_item":
+            mid = find_child_of_type(n, "identifier")
+            if mid:
+                mods.add(node_text(code_bytes, mid))
+        stack.extend(n.children)
+    return mods
 
 def collect_ast_lines(node, indent=""):
     """Collects all AST nodes as indented text lines."""
@@ -93,14 +496,6 @@ def find_child_of_type(node, kind):
         if ch.type == kind:
             return ch
     return None
-
-def find_all_children_of_type(node, kind):
-    out = []
-    for ch in node.children:
-        if ch.type == kind:
-            out.append(ch)
-    return out
-
 
 def _find_arguments_node(call_node):
     for ch in call_node.children:
@@ -344,55 +739,6 @@ class ScopeInfo:
             s = s.parent
         return False
 
-def _is_expr_cpi_ctx_like(expr_text: str) -> bool:
-    # textual hints that this expression constructs or derives a CpiContext
-    return ("CpiContext::new" in expr_text) or ("with_signer" in expr_text)
-
-def _collect_let_identifier_and_init(node, code_bytes):
-    """
-    Extract `let <ident> = <expr>;` returning (ident_name, init_node, init_text)
-    """
-    name = None
-    init_node = node.child_by_field_name("value")
-    # pattern
-    pat = node.child_by_field_name("pattern")
-    if pat and pat.type == "identifier":
-        name = node_text(code_bytes, pat)
-    else:
-        # fallback: first identifier child
-        for ch in node.children:
-            if ch.type == "identifier":
-                name = node_text(code_bytes, ch)
-                break
-    init_text = node_text(code_bytes, init_node) if init_node else ""
-    return name, init_node, init_text
-
-def _base_identifier_of_expr(n, code_bytes):
-    """Find base identifier of an expression (e.g., ctx in &mut ctx.accounts or ctx.with_signer(...))."""
-    if n is None:
-        return None
-    t = n.type
-    if t == "identifier":
-        return node_text(code_bytes, n)
-    if t in ("parenthesized_expression", "unary_expression", "reference_expression"):
-        for ch in n.children:
-            res = _base_identifier_of_expr(ch, code_bytes)
-            if res:
-                return res
-        return None
-    if t == "field_expression":
-        receiver = n.child_by_field_name("argument") or (n.children[0] if n.children else None)
-        return _base_identifier_of_expr(receiver, code_bytes)
-    if t == "call_expression":
-        callee = n.child_by_field_name("function")
-        return _base_identifier_of_expr(callee, code_bytes)
-    if t in ("scoped_identifier", "qualified_type", "generic_type"):
-        child = n.children[0] if n.children else None
-        return _base_identifier_of_expr(child, code_bytes)
-    if n.children:
-        return _base_identifier_of_expr(n.children[0], code_bytes)
-    return None
-
 # ------------------------------------------------------------
 # CPI detection
 # ------------------------------------------------------------
@@ -506,95 +852,85 @@ def classify_call_expr(call_node, code_bytes, scope_info: ScopeInfo):
 
     return None
 
-def walk_calls_and_collect(node, code_str, code_bytes, hits, scope_info: ScopeInfo):
-    """Recursively traverse the AST and collect CPI hits with scope tracking."""
-    # Enter new scope on blocks and function items
-    opened_scope_here = False
-    if node.type in ("block", "function_item", "impl_item", "closure_expression"):
-        scope_info = ScopeInfo(parent=scope_info)
-        opened_scope_here = True
-
-    # Track CpiContext-like lets within this scope
-    if node.type in ("let_declaration", "let_declaration_statement", "let_declaration"):
-        name, init_node, init_text = _collect_let_identifier_and_init(node, code_bytes)
-        if name:
-            # Direct construction / chaining
-            if _is_expr_cpi_ctx_like(init_text):
-                scope_info.cpi_ctx_vars.add(name)
-            else:
-                # e.g., let x = ctx.with_signer(...);
-                base = _base_identifier_of_expr(init_node, code_bytes)
-                if base and scope_info.resolve_is_cpi_ctx(base):
-                    scope_info.cpi_ctx_vars.add(name)
-
-    if node.type == 'call_expression':
-        res = classify_call_expr(node, code_bytes, scope_info)
-        if res is not None:
-            kind, marker_node = res
-            line, col = get_line_and_col(marker_node)
-            callee_text = node_text(code_bytes, marker_node)
-            code_line = get_line_str(code_str, line)
-            hits.append({
-                'line': line,
-                'col': col,
-                'kind': kind,
-                'callee': callee_text,
-                'code': code_line
-            })
-
-    # Recurse
-    for ch in node.children:
-        walk_calls_and_collect(ch, code_str, code_bytes, hits, scope_info)
-
 # ------------------------------------------------------------
 # File processing
 # ------------------------------------------------------------
+def process_repository(input_paths):
+    rust_files = find_rust_files(input_paths)
+    if not rust_files:
+        print("❗ No .rs files found to process.")
+        sys.exit(1)
 
-def process_file(file_path, output_dir):
-    """Parses a Rust file, writes AST, and returns CPI hits and totals."""
-    print(f"🔎 Processing file: {file_path}")
-    code_str, code_bytes = read_rust_code(file_path)
-    tree = parser.parse(code_bytes)
-    root = tree.root_node
+    output_dir = "output_results"
+    os.makedirs(output_dir, exist_ok=True)
 
-    # Write AST to .txt file
-    ast_lines = collect_ast_lines(root)
-    ast_file_name = os.path.basename(file_path).replace('.rs', '_ast.txt')
-    ast_output_path = os.path.join(output_dir, ast_file_name)
-    with open(ast_output_path, 'w', encoding='utf-8') as ast_file:
-        ast_file.write('\n'.join(ast_lines))
-    print(f"✅ AST written to {ast_output_path}")
+    # ---- REPO PASS 1: per-file scans and repo-wide accumulation ----
+    per_file_direct_and_legacy = {}  # file_path -> hits (direct + legacy)
+    per_file_ast_name = {}           # file_path -> ast file name
 
-    # Collect CPI hits
-    hits = []
-    walk_calls_and_collect(root, code_str, code_bytes, hits, ScopeInfo(parent=None))
+    # repo accumulators
+    repo_wrapper_fn_qnames = set()
+    repo_wrapper_method_names = set()
+    repo_edges_fn = []
+    repo_edges_meth = []
+    repo_func_meta = {}  # qname -> meta
 
-    # Sort hits by position
-    hits.sort(key=lambda h: (h['line'], h['col']))
+    for file_path in rust_files:
+        res = file_pass1_scan(file_path, output_dir)
 
-    # Totals for this file
-    counts = {}
-    for h in hits:
-        k = h['kind']
-        counts[k] = counts.get(k, 0) + 1
+        per_file_direct_and_legacy[file_path] = res['hits_direct_and_legacy']
+        per_file_ast_name[file_path] = res['ast_file']
 
-    total_cpi = (
-        counts.get('invoke', 0)
-        + counts.get('invoke_signed', 0)
-        + counts.get('method_invoke', 0)
-        + counts.get('method_invoke_signed', 0)
-        + counts.get('anchor_cpi_helper', 0)
-        + counts.get('anchor_cpi_helper_wrapped', 0)
+        repo_wrapper_fn_qnames |= set(res['wrapper_fn_qnames_local'])
+        repo_wrapper_method_names |= set(res['wrapper_method_names_local'])
+        repo_edges_fn.extend(res['edges_fn'])
+        repo_edges_meth.extend(res['edges_meth'])
+        # merge func_meta
+        for q, meta in res['func_meta'].items():
+            repo_func_meta[q] = meta
+
+    # ---- REPO WRAPPER PROPAGATION (fixpoint) ----
+    repo_wrapper_fn_qnames, repo_wrapper_method_names = propagate_wrappers_repo_wide(
+        repo_wrapper_fn_qnames, repo_wrapper_method_names,
+        repo_edges_fn, repo_edges_meth,
+        repo_func_meta
     )
 
-    return {
-        'ast_file': ast_file_name,
-        'hits': hits,
-        'totals': {
-            **counts,
-            'total_cpi': total_cpi
+    # ---- REPO PASS 2: tag wrapper_cpi callsites using global wrapper sets ----
+    summary = {}
+    grand_totals = {}
+    for file_path in rust_files:
+        wrapper_hits = file_pass2_tag_wrappers(file_path, repo_wrapper_fn_qnames, repo_wrapper_method_names)
+
+        # combine hits: direct+legacy (from pass1) + wrapper (now)
+        hits = list(per_file_direct_and_legacy[file_path]) + list(wrapper_hits)
+        hits.sort(key=lambda h: (h['line'], h['col']))
+
+        # totals
+        counts = {}
+        for h in hits:
+            k = h['kind']
+            counts[k] = counts.get(k, 0) + 1
+
+        # clean total: do NOT count legacy invoke kinds to avoid double-count
+        total_cpi = (
+            counts.get('direct_cpi', 0)
+            + counts.get('wrapper_cpi', 0)
+            + counts.get('anchor_cpi_helper', 0)
+            + counts.get('anchor_cpi_helper_wrapped', 0)
+        )
+
+        result = {
+            'ast_file': per_file_ast_name[file_path],
+            'hits': hits,
+            'totals': {**counts, 'total_cpi': total_cpi},
         }
-    }
+        summary[file_path] = result
+
+        for k, v in result['totals'].items():
+            grand_totals[k] = grand_totals.get(k, 0) + v
+
+    return summary, grand_totals, output_dir
 
 def find_rust_files(paths):
     """Finds all .rs files in provided paths (files or directories)."""
@@ -619,27 +955,8 @@ def main():
         sys.exit(1)
 
     input_paths = sys.argv[1:]
-    rust_files = find_rust_files(input_paths)
+    summary, grand_totals, output_dir = process_repository(input_paths)
 
-    if not rust_files:
-        print("❗ No .rs files found to process.")
-        sys.exit(1)
-
-    output_dir = "output_results"
-    os.makedirs(output_dir, exist_ok=True)
-
-    summary = {}
-    grand_totals = {}
-
-    # Process each Rust file
-    for file_path in rust_files:
-        result = process_file(file_path, output_dir)
-        summary[file_path] = result
-        # accumulate global totals
-        for k, v in result['totals'].items():
-            grand_totals[k] = grand_totals.get(k, 0) + v
-
-    # Write the summary JSON with all CPI data
     summary_path = os.path.join(output_dir, 'cpi_summary.json')
     with open(summary_path, 'w', encoding='utf-8') as json_file:
         json.dump({
