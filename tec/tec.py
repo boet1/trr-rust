@@ -60,6 +60,44 @@ CPI_ENTRYPOINT_MODULE_HINTS = {
 # ------------------------------------------------------------
 # Helpers
 # ------------------------------------------------------------
+
+def _qualify_bare_ident_local(name: str, caller_q: str, file_module_path: str, local_mods: set, local_qnames: set) -> str:
+
+    candidates = []
+    if caller_q:
+        prefix = caller_q.rsplit("::", 1)[0]
+        candidates.append(f"{prefix}::{name}")
+    if file_module_path:
+        candidates.append(f"{file_module_path}::{name}")
+        for lm in local_mods:
+            candidates.append(f"{file_module_path}::{lm}::{name}")
+    for q in candidates:
+        if q in local_qnames:
+            return q
+    return name
+
+
+def _qualify_bare_ident_repo(name: str, caller_q: str, file_module_path: str, local_mods: set, repo_func_meta: dict) -> str:
+    candidates = []
+    if caller_q:
+        prefix = caller_q.rsplit("::", 1)[0]
+        candidates.append(f"{prefix}::{name}")
+    if file_module_path:
+        candidates.append(f"{file_module_path}::{name}")
+        for lm in local_mods:
+            candidates.append(f"{file_module_path}::{lm}::{name}")
+
+    for q in candidates:
+        if q in repo_func_meta:
+            return q
+
+    matches = [q for q, m in repo_func_meta.items() if m.get('name') == name]
+    if len(matches) == 1:
+        return matches[0]
+
+    return name
+
+
 def file_module_path_from(file_path: str) -> str:
     """
     Derive a stable, short module prefix from the file path:
@@ -80,7 +118,7 @@ def file_module_path_from(file_path: str) -> str:
         return "" if parent in ("src", "") else parent
     return name
     
-def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_names_global):
+def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_names_global,func_meta_by_qname_global):
     """
     Second pass per file: tag callsites that target repo-wide wrappers as 'wrapper_cpi'.
     Returns list of wrapper hits for this file.
@@ -92,16 +130,31 @@ def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_
     file_module_path = file_module_path_from(file_path)
     local_mods = collect_local_mod_names(root, code_bytes)
 
+    # Collect local function qnames (not strictly required here, but useful for debugging)
+    local_func_qnames = set()
+    def _scan_local_qnames(node):
+        stack = [node]
+        while stack:
+            n = stack.pop()
+            if n.type == "function_item":
+                q = qualified_name_of_function(n, code_bytes, file_module_path)
+                local_func_qnames.add(q)
+            stack.extend(n.children)
+    _scan_local_qnames(root)
+
     wrapper_hits = []
 
-    # Iterate all call expressions, tag by method name or function qname/tail
-    stack = [root]
-    while stack:
-        n = stack.pop()
+    def _walk(n, current_func_q=None):
+        # Track the current function qualified name
+        if n.type == "function_item":
+            current_func_q = qualified_name_of_function(n, code_bytes, file_module_path)
+
         if n.type == 'call_expression':
             name, full_path, marker = extract_callee_name_and_path(n, code_bytes)
             if name and marker:
                 is_method = (marker.type == 'field_identifier')
+
+                # ---- Method call case: obj.method(...)
                 if is_method:
                     if name in wrapper_method_names_global:
                         line, col = get_line_and_col(marker)
@@ -114,14 +167,25 @@ def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_
                             'reason': f'via_wrapper_method:{name}',
                             'code': code_line
                         })
+
+                # ---- Function/scoped call case: fn(...), module::fn(...)
                 else:
-                    # function or scoped (ONLY exact qualified-name match)
-                    callee_key = full_path.decode('utf8', errors='ignore') if full_path else name
-                   
-                    if full_path is not None and "::" in callee_key and file_module_path:
-                        first_seg = callee_key.split("::", 1)[0]
-                        if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
-                            callee_key = f"{file_module_path}::{callee_key}"
+                    if full_path is not None:
+                        # We have a module path; normalize relative module paths inside the same file
+                        callee_key = full_path.decode('utf8', errors='ignore')
+                        if "::" in callee_key and file_module_path:
+                            first_seg = callee_key.split("::", 1)[0]
+                            if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
+                                callee_key = f"{file_module_path}::{callee_key}"
+                    else:
+                        # Bare identifier: qualify using repo-wide metadata so it can match wrapper qnames
+                        callee_key = _qualify_bare_ident_repo(
+                            name=name,
+                            caller_q=current_func_q,
+                            file_module_path=file_module_path,
+                            local_mods=local_mods,
+                            repo_func_meta=func_meta_by_qname_global
+                        )
 
                     if callee_key in wrapper_fn_qnames_global:
                         line, col = get_line_and_col(marker)
@@ -134,8 +198,11 @@ def file_pass2_tag_wrappers(file_path, wrapper_fn_qnames_global, wrapper_method_
                             'reason': f'via_wrapper_fn:{callee_key}',
                             'code': code_line
                         })
-        stack.extend(n.children)
 
+        for ch in n.children:
+            _walk(ch, current_func_q)
+
+    _walk(root, None)
     return wrapper_hits
 
 
@@ -295,6 +362,7 @@ def collect_functions_calls_and_edges(root, code_str, code_bytes, file_module_pa
     func_nodes, calls_by_func = {}, {}
     func_meta = {}
     edges_fn, edges_meth = [], []
+    local_func_qnames = set()
 
     def _walk(n, current_func_q=None):
         nonlocal func_nodes, calls_by_func, func_meta, edges_fn, edges_meth
@@ -306,6 +374,7 @@ def collect_functions_calls_and_edges(root, code_str, code_bytes, file_module_pa
                 'is_method': is_method_function(n),
                 'name': function_name_of(n, code_bytes),
             }
+            local_func_qnames.add(q)
             current_func_q = q
 
         if n.type == "call_expression" and current_func_q is not None:
@@ -317,15 +386,21 @@ def collect_functions_calls_and_edges(root, code_str, code_bytes, file_module_pa
                     # method call: obj.name(...)
                     edges_meth.append((current_func_q, name))
                 else:
-                    # function call: identifier or scoped_identifier
-                    callee_key = full_path.decode('utf8', errors='ignore') if full_path else name
+                    if full_path is not None:
+                        callee_key = full_path.decode('utf8', errors='ignore')
+                        if "::" in callee_key and file_module_path:
+                            first_seg = callee_key.split("::", 1)[0]
+                            if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
+                                callee_key = f"{file_module_path}::{callee_key}"
 
-                    # if the callee path starts with a local `mod` name, prefix with file_module_path
-                    if full_path is not None and "::" in callee_key and file_module_path:
-                        first_seg = callee_key.split("::", 1)[0]
-                        if first_seg in local_mods and not callee_key.startswith(file_module_path + "::"):
-                            callee_key = f"{file_module_path}::{callee_key}"
-
+                    else:
+                        callee_key = _qualify_bare_ident_local(
+                            name=name,
+                            caller_q=current_func_q,
+                            file_module_path=file_module_path,
+                            local_mods=local_mods,
+                            local_qnames=local_func_qnames
+                        )
 
                     edges_fn.append((current_func_q, callee_key))
 
@@ -895,12 +970,12 @@ def process_repository(input_paths):
         repo_edges_fn, repo_edges_meth,
         repo_func_meta
     )
-
+    print(repo_wrapper_fn_qnames)
     # ---- REPO PASS 2: tag wrapper_cpi callsites using global wrapper sets ----
     summary = {}
     grand_totals = {}
     for file_path in rust_files:
-        wrapper_hits = file_pass2_tag_wrappers(file_path, repo_wrapper_fn_qnames, repo_wrapper_method_names)
+        wrapper_hits = file_pass2_tag_wrappers(file_path, repo_wrapper_fn_qnames, repo_wrapper_method_names,repo_func_meta)
 
         # combine hits: direct+legacy (from pass1) + wrapper (now)
         hits = list(per_file_direct_and_legacy[file_path]) + list(wrapper_hits)
