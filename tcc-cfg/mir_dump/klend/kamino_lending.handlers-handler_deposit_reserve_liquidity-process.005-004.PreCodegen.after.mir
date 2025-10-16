@@ -1,0 +1,1675 @@
+// MIR for `handlers::handler_deposit_reserve_liquidity::process` after PreCodegen
+
+fn handlers::handler_deposit_reserve_liquidity::process(_1: anchor_lang::context::Context<'_, '_, '_, '_, handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>>, _2: u64) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug liquidity_amount => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _5: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _6: &state::nested_accounts::DepositReserveLiquidityAccounts<'_>;
+    let _7: &state::nested_accounts::DepositReserveLiquidityAccounts<'_>;
+    let _8: state::nested_accounts::DepositReserveLiquidityAccounts<'_>;
+    let mut _9: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _10: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _11: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _12: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _13: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _14: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _15: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _16: &std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _17: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _18: &std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _19: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _20: &std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _21: anchor_lang::prelude::Signer<'_>;
+    let mut _22: &anchor_lang::prelude::Signer<'_>;
+    let mut _23: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _24: &std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _25: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _26: &std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _27: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _28: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _29: isize;
+    let _30: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _31: !;
+    let mut _32: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _33: ();
+    let _34: anchor_lang::prelude::Clock;
+    let mut _35: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _36: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _37: isize;
+    let _38: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _39: !;
+    let mut _40: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let _41: anchor_lang::prelude::Clock;
+    let mut _43: std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _44: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::reserve::Reserve>>;
+    let mut _45: std::result::Result<std::cell::RefMut<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _46: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _47: isize;
+    let mut _49: !;
+    let mut _50: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _53: std::cell::Ref<'_, state::lending_market::LendingMarket>;
+    let mut _54: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::Ref<'_, state::lending_market::LendingMarket>>;
+    let mut _55: std::result::Result<std::cell::Ref<'_, state::lending_market::LendingMarket>, anchor_lang::error::Error>;
+    let mut _56: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _57: isize;
+    let mut _59: !;
+    let mut _60: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _63: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let _65: [&[u8]; 3];
+    let mut _66: &[u8];
+    let mut _67: &[u8];
+    let _68: &[u8];
+    let mut _69: &[u8];
+    let _70: &[u8];
+    let mut _71: &[u8];
+    let _72: &[u8];
+    let mut _73: &anchor_lang::prelude::Pubkey;
+    let mut _74: &[u8];
+    let mut _75: &[u8; 1];
+    let _76: &[u8; 1];
+    let _77: [u8; 1];
+    let mut _78: u8;
+    let mut _79: u64;
+    let mut _80: &state::lending_market::LendingMarket;
+    let mut _81: &std::cell::Ref<'_, state::lending_market::LendingMarket>;
+    let _82: ();
+    let mut _83: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _84: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _85: &mut state::reserve::Reserve;
+    let mut _86: &mut state::reserve::Reserve;
+    let mut _87: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _88: &anchor_lang::prelude::Clock;
+    let _89: &anchor_lang::prelude::Clock;
+    let mut _90: std::option::Option<utils::prices::GetPriceResult>;
+    let mut _91: u16;
+    let mut _92: &state::lending_market::LendingMarket;
+    let mut _93: &std::cell::Ref<'_, state::lending_market::LendingMarket>;
+    let mut _94: isize;
+    let mut _96: !;
+    let mut _97: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _100: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, u64>;
+    let mut _101: std::result::Result<u64, anchor_lang::error::Error>;
+    let mut _102: &anchor_lang::prelude::AccountInfo<'_>;
+    let _103: &anchor_lang::prelude::AccountInfo<'_>;
+    let _104: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _105: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _106: isize;
+    let mut _108: !;
+    let mut _109: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _112: &state::reserve::Reserve;
+    let mut _113: &std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _116: state::types::DepositLiquidityResult;
+    let mut _117: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, state::types::DepositLiquidityResult>;
+    let mut _118: std::result::Result<state::types::DepositLiquidityResult, anchor_lang::error::Error>;
+    let mut _119: &mut state::reserve::Reserve;
+    let mut _120: &mut state::reserve::Reserve;
+    let mut _121: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _122: &anchor_lang::prelude::Clock;
+    let _123: &anchor_lang::prelude::Clock;
+    let mut _124: u64;
+    let mut _125: isize;
+    let mut _127: !;
+    let mut _128: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _130: ();
+    let mut _131: &str;
+    let _132: &str;
+    let mut _133: &std::string::String;
+    let _134: &std::string::String;
+    let _135: std::string::String;
+    let mut _137: std::fmt::Arguments<'_>;
+    let mut _138: &[&str];
+    let mut _139: &[&str; 2];
+    let _140: &[&str; 2];
+    let _141: [&str; 2];
+    let mut _142: &[core::fmt::rt::Argument<'_>];
+    let mut _143: &[core::fmt::rt::Argument<'_>; 2];
+    let _144: &[core::fmt::rt::Argument<'_>; 2];
+    let _145: [core::fmt::rt::Argument<'_>; 2];
+    let mut _146: core::fmt::rt::Argument<'_>;
+    let mut _147: &anchor_lang::prelude::Pubkey;
+    let _148: &anchor_lang::prelude::Pubkey;
+    let _149: anchor_lang::prelude::Pubkey;
+    let mut _150: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _151: core::fmt::rt::Argument<'_>;
+    let mut _152: &u64;
+    let _153: &u64;
+    let _154: ();
+    let mut _155: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _156: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _157: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _158: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _159: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _160: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _161: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _162: &anchor_lang::prelude::Signer<'_>;
+    let mut _163: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _164: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _165: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _166: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _167: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _168: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _169: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _170: &anchor_lang::prelude::Program<'_, anchor_spl::token::Token>;
+    let mut _171: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _172: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _173: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _174: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _175: &[&[u8]];
+    let mut _176: &[&[u8]; 3];
+    let mut _177: u64;
+    let mut _178: u8;
+    let mut _179: &anchor_spl::token_2022::spl_token_2022::state::Mint;
+    let mut _180: &anchor_spl::token_interface::Mint;
+    let _181: &anchor_spl::token_interface::Mint;
+    let mut _182: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _183: u64;
+    let mut _184: isize;
+    let mut _186: !;
+    let mut _187: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _189: ();
+    let mut _190: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _191: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _192: u64;
+    let mut _193: std::result::Result<u64, anchor_lang::error::Error>;
+    let mut _194: &anchor_lang::prelude::AccountInfo<'_>;
+    let _195: &anchor_lang::prelude::AccountInfo<'_>;
+    let _196: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _197: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _198: u64;
+    let mut _199: &state::reserve::Reserve;
+    let mut _200: &std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _201: u64;
+    let mut _202: u64;
+    let mut _203: state::types::LendingAction;
+    let mut _204: u64;
+    let mut _205: isize;
+    let mut _207: !;
+    let mut _208: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _210: ();
+    let mut _212: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _213: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _214: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _215: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _216: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _217: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _218: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _219: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _220: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _221: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _222: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _223: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _224: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _225: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _226: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _227: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _228: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _229: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _230: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _231: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _232: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _233: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _234: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _235: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _236: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _237: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _238: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _239: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _240: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _241: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _242: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _243: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _244: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>;
+    let mut _245: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _246: bool;
+    let mut _247: bool;
+    let mut _248: bool;
+    let mut _249: bool;
+    let mut _250: bool;
+    let mut _251: bool;
+    let mut _252: bool;
+    let mut _253: bool;
+    let mut _254: bool;
+    let mut _255: isize;
+    let mut _256: isize;
+    let mut _257: isize;
+    let mut _258: isize;
+    let mut _259: isize;
+    let mut _260: isize;
+    let mut _261: isize;
+    let mut _262: isize;
+    let mut _263: isize;
+    let mut _264: isize;
+    let mut _265: isize;
+    let mut _266: isize;
+    let mut _267: isize;
+    let mut _268: isize;
+    let mut _269: isize;
+    let mut _270: isize;
+    let mut _271: isize;
+    let mut _272: isize;
+    let mut _273: isize;
+    let mut _274: isize;
+    let mut _275: isize;
+    let mut _276: isize;
+    let mut _277: isize;
+    let mut _278: isize;
+    let mut _279: isize;
+    let mut _280: isize;
+    let mut _281: isize;
+    let mut _282: isize;
+    let mut _283: isize;
+    let mut _284: isize;
+    let mut _285: isize;
+    let mut _286: isize;
+    let mut _287: isize;
+    let mut _288: isize;
+    let mut _289: isize;
+    let mut _290: isize;
+    let mut _291: isize;
+    let mut _292: isize;
+    let mut _293: isize;
+    let mut _294: isize;
+    let mut _295: isize;
+    let mut _296: isize;
+    let mut _297: isize;
+    let mut _298: isize;
+    let mut _299: isize;
+    let mut _300: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _301: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _302: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _303: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _304: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _305: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _306: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _307: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    scope 1 {
+        debug residual => _30;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _33;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug clock => _34;
+        let _42: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+        let _48: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _51: std::cell::RefMut<'_, state::reserve::Reserve>;
+        scope 10 {
+            debug reserve => _42;
+            let _52: &std::cell::Ref<'_, state::lending_market::LendingMarket>;
+            let _58: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _61: std::cell::Ref<'_, state::lending_market::LendingMarket>;
+            scope 15 {
+                debug lending_market => _52;
+                let _62: anchor_lang::prelude::Pubkey;
+                scope 20 {
+                    debug lending_market_key => _62;
+                    let _64: &[&[u8]; 3];
+                    scope 21 {
+                        debug authority_signer_seeds => _64;
+                        let _95: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                        let _98: ();
+                        let _99: u64;
+                        let _107: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                        let _110: u64;
+                        scope 22 {
+                            debug residual => _95;
+                            scope 23 {
+                            }
+                        }
+                        scope 24 {
+                            debug val => _98;
+                            scope 25 {
+                            }
+                        }
+                        scope 26 {
+                            debug initial_reserve_token_balance => _99;
+                            let _111: u64;
+                            scope 31 {
+                                debug initial_reserve_available_liquidity => _111;
+                                let _114: u64;
+                                let _115: u64;
+                                let _126: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                let _129: state::types::DepositLiquidityResult;
+                                scope 32 {
+                                    debug liquidity_amount => _114;
+                                    debug collateral_amount => _115;
+                                    let _136: std::string::String;
+                                    let _185: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                    let _188: ();
+                                    let _206: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                    let _209: ();
+                                    let mut _211: &[&str; 2];
+                                    scope 37 {
+                                        debug res => _136;
+                                    }
+                                    scope 38 {
+                                        debug residual => _185;
+                                        scope 39 {
+                                        }
+                                    }
+                                    scope 40 {
+                                        debug val => _188;
+                                        scope 41 {
+                                        }
+                                    }
+                                    scope 42 {
+                                        debug residual => _206;
+                                        scope 43 {
+                                        }
+                                    }
+                                    scope 44 {
+                                        debug val => _209;
+                                        scope 45 {
+                                        }
+                                    }
+                                }
+                                scope 33 {
+                                    debug residual => _126;
+                                    scope 34 {
+                                    }
+                                }
+                                scope 35 {
+                                    debug val => _129;
+                                    scope 36 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 27 {
+                            debug residual => _107;
+                            scope 28 {
+                            }
+                        }
+                        scope 29 {
+                            debug val => _110;
+                            scope 30 {
+                            }
+                        }
+                    }
+                }
+            }
+            scope 16 {
+                debug residual => _58;
+                scope 17 {
+                }
+            }
+            scope 18 {
+                debug val => _61;
+                scope 19 {
+                }
+            }
+        }
+        scope 11 {
+            debug residual => _48;
+            scope 12 {
+            }
+        }
+        scope 13 {
+            debug val => _51;
+            scope 14 {
+            }
+        }
+    }
+    scope 6 {
+        debug residual => _38;
+        scope 7 {
+        }
+    }
+    scope 8 {
+        debug val => _41;
+        scope 9 {
+        }
+    }
+
+    bb0: {
+        _254 = const false;
+        _253 = const false;
+        _252 = const false;
+        _251 = const false;
+        _250 = const false;
+        _249 = const false;
+        _248 = const false;
+        _247 = const false;
+        _246 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _212 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _10 = &((*_212).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _9 = <anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket> as Clone>::clone(move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _213 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _12 = &((*_213).3: anchor_lang::prelude::AccountInfo<'_>);
+        _11 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _12) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _214 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _14 = &((*_214).1: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _13 = <anchor_lang::prelude::AccountLoader<'_, reserve::Reserve> as Clone>::clone(move _14) -> [return: bb3, unwind: bb116];
+    }
+
+    bb3: {
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _215 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _16 = &((*_215).4: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _15 = <Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>> as Clone>::clone(move _16) -> [return: bb4, unwind: bb116];
+    }
+
+    bb4: {
+        StorageDead(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _216 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _18 = &((*_216).5: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _17 = <Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>> as Clone>::clone(move _18) -> [return: bb5, unwind: bb115];
+    }
+
+    bb5: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _217 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _20 = &((*_217).6: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _19 = <Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>> as Clone>::clone(move _20) -> [return: bb6, unwind: bb114];
+    }
+
+    bb6: {
+        StorageDead(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _218 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _22 = &((*_218).0: anchor_lang::prelude::Signer<'_>);
+        _21 = <anchor_lang::prelude::Signer<'_> as Clone>::clone(move _22) -> [return: bb7, unwind: bb113];
+    }
+
+    bb7: {
+        StorageDead(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _219 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _24 = &((*_219).7: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _23 = <Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>> as Clone>::clone(move _24) -> [return: bb8, unwind: bb113];
+    }
+
+    bb8: {
+        StorageDead(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _220 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _26 = &((*_220).8: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _25 = <Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>> as Clone>::clone(move _26) -> [return: bb9, unwind: bb112];
+    }
+
+    bb9: {
+        StorageDead(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _221 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _28 = &((*_221).10: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>);
+        _27 = <anchor_lang::prelude::Interface<'_, TokenInterface> as Clone>::clone(move _28) -> [return: bb10, unwind: bb111];
+    }
+
+    bb10: {
+        StorageDead(_28);
+        _8 = nested_accounts::DepositReserveLiquidityAccounts::<'_> { user_source_liquidity: move _23, user_destination_collateral: move _25, reserve: move _13, reserve_liquidity_mint: move _15, reserve_liquidity_supply: move _17, reserve_collateral_mint: move _19, lending_market: move _9, lending_market_authority: move _11, owner: move _21, liquidity_token_program: move _27 };
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_9);
+        _7 = &_8;
+        _6 = &(*_7);
+        _5 = deposit_reserve_liquidity_checks(move _6) -> [return: bb11, unwind: bb110];
+    }
+
+    bb11: {
+        StorageDead(_6);
+        _4 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _5) -> [return: bb12, unwind: bb110];
+    }
+
+    bb12: {
+        StorageDead(_5);
+        _29 = discriminant(_4);
+        switchInt(move _29) -> [0: bb13, 1: bb15, otherwise: bb14];
+    }
+
+    bb13: {
+        StorageLive(_33);
+        _33 = ((_4 as Continue).0: ());
+        _3 = _33;
+        StorageDead(_33);
+        _255 = discriminant(_4);
+        drop(_8) -> [return: bb17, unwind: bb117];
+    }
+
+    bb14: {
+        unreachable;
+    }
+
+    bb15: {
+        StorageLive(_30);
+        _30 = move ((_4 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_32);
+        _32 = move _30;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _32) -> [return: bb16, unwind: bb144];
+    }
+
+    bb16: {
+        StorageDead(_32);
+        StorageDead(_30);
+        _289 = discriminant(_4);
+        drop(_8) -> [return: bb103, unwind: bb117];
+    }
+
+    bb17: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        _35 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _36) -> [return: bb19, unwind: bb117];
+    }
+
+    bb19: {
+        StorageDead(_36);
+        _37 = discriminant(_35);
+        switchInt(move _37) -> [0: bb20, 1: bb21, otherwise: bb14];
+    }
+
+    bb20: {
+        StorageLive(_41);
+        _41 = move ((_35 as Continue).0: anchor_lang::prelude::Clock);
+        _34 = move _41;
+        StorageDead(_41);
+        _257 = discriminant(_35);
+        StorageDead(_35);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        _222 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _46 = &((*_222).1: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _45 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load_mut(move _46) -> [return: bb23, unwind continue];
+    }
+
+    bb21: {
+        StorageLive(_38);
+        _38 = move ((_35 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_40);
+        _40 = move _38;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _40) -> [return: bb22, unwind: bb143];
+    }
+
+    bb22: {
+        StorageDead(_40);
+        StorageDead(_38);
+        _287 = discriminant(_35);
+        StorageDead(_35);
+        goto -> bb102;
+    }
+
+    bb23: {
+        StorageDead(_46);
+        _44 = <std::result::Result<RefMut<'_, reserve::Reserve>, anchor_lang::error::Error> as Try>::branch(move _45) -> [return: bb24, unwind: bb117];
+    }
+
+    bb24: {
+        StorageDead(_45);
+        _47 = discriminant(_44);
+        switchInt(move _47) -> [0: bb25, 1: bb26, otherwise: bb14];
+    }
+
+    bb25: {
+        StorageLive(_51);
+        _51 = move ((_44 as Continue).0: std::cell::RefMut<'_, state::reserve::Reserve>);
+        _43 = move _51;
+        StorageDead(_51);
+        _42 = &mut _43;
+        _259 = discriminant(_44);
+        StorageDead(_44);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        _223 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _56 = &((*_223).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _55 = anchor_lang::prelude::AccountLoader::<'_, state::lending_market::LendingMarket>::load(move _56) -> [return: bb28, unwind: bb109];
+    }
+
+    bb26: {
+        StorageLive(_48);
+        _48 = move ((_44 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_50);
+        _50 = move _48;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _50) -> [return: bb27, unwind: bb142];
+    }
+
+    bb27: {
+        StorageDead(_50);
+        StorageDead(_48);
+        _285 = discriminant(_44);
+        StorageDead(_44);
+        goto -> bb101;
+    }
+
+    bb28: {
+        StorageDead(_56);
+        _54 = <std::result::Result<Ref<'_, state::lending_market::LendingMarket>, anchor_lang::error::Error> as Try>::branch(move _55) -> [return: bb29, unwind: bb109];
+    }
+
+    bb29: {
+        StorageDead(_55);
+        _57 = discriminant(_54);
+        switchInt(move _57) -> [0: bb30, 1: bb31, otherwise: bb14];
+    }
+
+    bb30: {
+        StorageLive(_61);
+        _61 = move ((_54 as Continue).0: std::cell::Ref<'_, state::lending_market::LendingMarket>);
+        _53 = move _61;
+        StorageDead(_61);
+        _52 = &_53;
+        _261 = discriminant(_54);
+        StorageDead(_54);
+        StorageLive(_62);
+        StorageLive(_63);
+        _224 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _63 = &((*_224).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _62 = <anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket> as anchor_lang::Key>::key(move _63) -> [return: bb33, unwind: bb108];
+    }
+
+    bb31: {
+        StorageLive(_58);
+        _58 = move ((_54 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_60);
+        _60 = move _58;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _60) -> [return: bb32, unwind: bb141];
+    }
+
+    bb32: {
+        StorageDead(_60);
+        StorageDead(_58);
+        _283 = discriminant(_54);
+        StorageDead(_54);
+        goto -> bb100;
+    }
+
+    bb33: {
+        StorageDead(_63);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        _68 = const _;
+        _67 = &(*_68);
+        _66 = _67;
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        _73 = &_62;
+        _72 = <anchor_lang::prelude::Pubkey as AsRef<[u8]>>::as_ref(move _73) -> [return: bb34, unwind: bb108];
+    }
+
+    bb34: {
+        _71 = &(*_72);
+        StorageDead(_73);
+        _70 = <[u8] as AsRef<[u8]>>::as_ref(move _71) -> [return: bb35, unwind: bb108];
+    }
+
+    bb35: {
+        _69 = &(*_70);
+        StorageDead(_71);
+        StorageLive(_74);
+        StorageLive(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _81 = &(*_52);
+        _80 = <Ref<'_, state::lending_market::LendingMarket> as Deref>::deref(move _81) -> [return: bb36, unwind: bb108];
+    }
+
+    bb36: {
+        StorageDead(_81);
+        _79 = ((*_80).1: u64);
+        _78 = move _79 as u8 (IntToInt);
+        StorageDead(_79);
+        _77 = [move _78];
+        StorageDead(_78);
+        _76 = &_77;
+        _75 = &(*_76);
+        _74 = move _75 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_75);
+        _65 = [move _66, move _69, move _74];
+        StorageDead(_74);
+        StorageDead(_69);
+        StorageDead(_66);
+        _64 = &_65;
+        StorageDead(_80);
+        StorageDead(_76);
+        StorageDead(_72);
+        StorageDead(_70);
+        StorageDead(_68);
+        StorageDead(_67);
+        StorageLive(_82);
+        StorageLive(_83);
+        StorageLive(_84);
+        StorageLive(_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        _87 = &mut (*_42);
+        _86 = <RefMut<'_, reserve::Reserve> as DerefMut>::deref_mut(move _87) -> [return: bb37, unwind: bb108];
+    }
+
+    bb37: {
+        _85 = &mut (*_86);
+        StorageDead(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        _89 = &_34;
+        _88 = &(*_89);
+        StorageLive(_90);
+        _90 = std::option::Option::<prices::GetPriceResult>::None;
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        _93 = &(*_52);
+        _92 = <Ref<'_, state::lending_market::LendingMarket> as Deref>::deref(move _93) -> [return: bb38, unwind: bb108];
+    }
+
+    bb38: {
+        StorageDead(_93);
+        _91 = ((*_92).5: u16);
+        _84 = lending_operations::refresh_reserve(move _85, move _88, move _90, move _91) -> [return: bb39, unwind: bb108];
+    }
+
+    bb39: {
+        StorageDead(_91);
+        StorageDead(_90);
+        StorageDead(_88);
+        StorageDead(_85);
+        _83 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _84) -> [return: bb40, unwind: bb108];
+    }
+
+    bb40: {
+        StorageDead(_84);
+        _94 = discriminant(_83);
+        switchInt(move _94) -> [0: bb41, 1: bb42, otherwise: bb14];
+    }
+
+    bb41: {
+        StorageLive(_98);
+        _98 = ((_83 as Continue).0: ());
+        _82 = _98;
+        StorageDead(_98);
+        _263 = discriminant(_83);
+        StorageDead(_92);
+        StorageDead(_89);
+        StorageDead(_86);
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        _225 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _226 = deref_copy ((*_225).5: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _300 = (((_226.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _105 = &(*_300);
+        _104 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _105) -> [return: bb44, unwind: bb108];
+    }
+
+    bb42: {
+        StorageLive(_95);
+        _95 = move ((_83 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_97);
+        _97 = move _95;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _97) -> [return: bb43, unwind: bb140];
+    }
+
+    bb43: {
+        StorageDead(_97);
+        StorageDead(_95);
+        _281 = discriminant(_83);
+        StorageDead(_92);
+        StorageDead(_89);
+        StorageDead(_86);
+        StorageDead(_83);
+        StorageDead(_82);
+        goto -> bb99;
+    }
+
+    bb44: {
+        StorageDead(_105);
+        _103 = &_104;
+        _102 = &(*_103);
+        _101 = amount(move _102) -> [return: bb45, unwind: bb107];
+    }
+
+    bb45: {
+        StorageDead(_102);
+        _100 = <std::result::Result<u64, anchor_lang::error::Error> as Try>::branch(move _101) -> [return: bb46, unwind: bb107];
+    }
+
+    bb46: {
+        StorageDead(_101);
+        _106 = discriminant(_100);
+        switchInt(move _106) -> [0: bb47, 1: bb48, otherwise: bb14];
+    }
+
+    bb47: {
+        StorageLive(_110);
+        _110 = ((_100 as Continue).0: u64);
+        _99 = _110;
+        StorageDead(_110);
+        _265 = discriminant(_100);
+        drop(_104) -> [return: bb50, unwind: bb108];
+    }
+
+    bb48: {
+        StorageLive(_107);
+        _107 = move ((_100 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_109);
+        _109 = move _107;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _109) -> [return: bb49, unwind: bb139];
+    }
+
+    bb49: {
+        StorageDead(_109);
+        StorageDead(_107);
+        _279 = discriminant(_100);
+        drop(_104) -> [return: bb97, unwind: bb108];
+    }
+
+    bb50: {
+        StorageDead(_104);
+        StorageDead(_103);
+        StorageDead(_100);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        _113 = &(*_42);
+        _112 = <RefMut<'_, reserve::Reserve> as Deref>::deref(move _113) -> [return: bb51, unwind: bb108];
+    }
+
+    bb51: {
+        StorageDead(_113);
+        _111 = (((*_112).5: state::reserve::ReserveLiquidity).3: u64);
+        StorageDead(_112);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        _121 = &mut (*_42);
+        _120 = <RefMut<'_, reserve::Reserve> as DerefMut>::deref_mut(move _121) -> [return: bb52, unwind: bb108];
+    }
+
+    bb52: {
+        _119 = &mut (*_120);
+        StorageDead(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = &_34;
+        _122 = &(*_123);
+        StorageLive(_124);
+        _124 = _2;
+        _118 = lending_operations::deposit_reserve_liquidity(move _119, move _122, move _124) -> [return: bb53, unwind: bb108];
+    }
+
+    bb53: {
+        StorageDead(_124);
+        StorageDead(_122);
+        StorageDead(_119);
+        _117 = <std::result::Result<state::types::DepositLiquidityResult, anchor_lang::error::Error> as Try>::branch(move _118) -> [return: bb54, unwind: bb108];
+    }
+
+    bb54: {
+        StorageDead(_118);
+        _125 = discriminant(_117);
+        switchInt(move _125) -> [0: bb55, 1: bb56, otherwise: bb14];
+    }
+
+    bb55: {
+        StorageLive(_129);
+        _129 = move ((_117 as Continue).0: state::types::DepositLiquidityResult);
+        _116 = move _129;
+        StorageDead(_129);
+        StorageLive(_114);
+        _114 = (_116.0: u64);
+        StorageLive(_115);
+        _115 = (_116.1: u64);
+        _267 = discriminant(_117);
+        StorageDead(_123);
+        StorageDead(_120);
+        StorageDead(_117);
+        StorageDead(_116);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        StorageLive(_133);
+        StorageLive(_134);
+        StorageLive(_135);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        StorageLive(_140);
+        _211 = const _;
+        _140 = &(*_211);
+        _139 = &(*_140);
+        _138 = move _139 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_139);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        _227 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _150 = &((*_227).1: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _149 = <anchor_lang::prelude::AccountLoader<'_, reserve::Reserve> as anchor_lang::Key>::key(move _150) -> [return: bb58, unwind: bb108];
+    }
+
+    bb56: {
+        StorageLive(_126);
+        _126 = move ((_117 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_128);
+        _128 = move _126;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _128) -> [return: bb57, unwind: bb138];
+    }
+
+    bb57: {
+        StorageDead(_128);
+        StorageDead(_126);
+        _277 = discriminant(_117);
+        StorageDead(_123);
+        StorageDead(_120);
+        StorageDead(_117);
+        StorageDead(_116);
+        goto -> bb96;
+    }
+
+    bb58: {
+        StorageDead(_150);
+        _148 = &_149;
+        _147 = &(*_148);
+        _146 = core::fmt::rt::Argument::<'_>::new_display::<anchor_lang::prelude::Pubkey>(move _147) -> [return: bb59, unwind: bb108];
+    }
+
+    bb59: {
+        StorageDead(_147);
+        StorageLive(_151);
+        StorageLive(_152);
+        StorageLive(_153);
+        _153 = &_114;
+        _152 = &(*_153);
+        _151 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _152) -> [return: bb60, unwind: bb108];
+    }
+
+    bb60: {
+        StorageDead(_152);
+        _145 = [move _146, move _151];
+        StorageDead(_151);
+        StorageDead(_146);
+        _144 = &_145;
+        _143 = &(*_144);
+        _142 = move _143 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_143);
+        _137 = Arguments::<'_>::new_v1(move _138, move _142) -> [return: bb61, unwind: bb108];
+    }
+
+    bb61: {
+        StorageDead(_142);
+        StorageDead(_138);
+        _136 = format(move _137) -> [return: bb62, unwind: bb108];
+    }
+
+    bb62: {
+        StorageDead(_137);
+        StorageDead(_153);
+        StorageDead(_149);
+        StorageDead(_148);
+        StorageDead(_145);
+        StorageDead(_144);
+        StorageDead(_140);
+        _135 = move _136;
+        StorageDead(_136);
+        _134 = &_135;
+        _133 = &(*_134);
+        _132 = <std::string::String as Deref>::deref(move _133) -> [return: bb63, unwind: bb106];
+    }
+
+    bb63: {
+        _131 = &(*_132);
+        StorageDead(_133);
+        _130 = solana_program::log::sol_log(move _131) -> [return: bb64, unwind: bb106];
+    }
+
+    bb64: {
+        StorageDead(_131);
+        drop(_135) -> [return: bb65, unwind: bb108];
+    }
+
+    bb65: {
+        StorageDead(_135);
+        StorageDead(_134);
+        StorageDead(_132);
+        StorageDead(_130);
+        StorageLive(_154);
+        StorageLive(_155);
+        StorageLive(_156);
+        StorageLive(_157);
+        StorageLive(_158);
+        _228 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _229 = deref_copy ((*_228).7: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _301 = (((_229.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _158 = &(*_301);
+        _157 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _158) -> [return: bb66, unwind: bb108];
+    }
+
+    bb66: {
+        _254 = const true;
+        StorageDead(_158);
+        StorageLive(_159);
+        StorageLive(_160);
+        _230 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _231 = deref_copy ((*_230).5: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _302 = (((_231.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _160 = &(*_302);
+        _159 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _160) -> [return: bb67, unwind: bb137];
+    }
+
+    bb67: {
+        _253 = const true;
+        StorageDead(_160);
+        StorageLive(_161);
+        StorageLive(_162);
+        _232 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _162 = &((*_232).0: anchor_lang::prelude::Signer<'_>);
+        _161 = <anchor_lang::prelude::Signer<'_> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _162) -> [return: bb68, unwind: bb135];
+    }
+
+    bb68: {
+        _252 = const true;
+        StorageDead(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        _233 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _234 = deref_copy ((*_233).4: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _303 = (((_234.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>);
+        _164 = &(*_303);
+        _163 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _164) -> [return: bb69, unwind: bb133];
+    }
+
+    bb69: {
+        _251 = const true;
+        StorageDead(_164);
+        StorageLive(_165);
+        StorageLive(_166);
+        _235 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _166 = &((*_235).10: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>);
+        _165 = <anchor_lang::prelude::Interface<'_, TokenInterface> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _166) -> [return: bb70, unwind: bb131];
+    }
+
+    bb70: {
+        _250 = const true;
+        StorageDead(_166);
+        StorageLive(_167);
+        StorageLive(_168);
+        _236 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _237 = deref_copy ((*_236).6: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _304 = (((_237.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>);
+        _168 = &(*_304);
+        _167 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _168) -> [return: bb71, unwind: bb129];
+    }
+
+    bb71: {
+        _249 = const true;
+        StorageDead(_168);
+        StorageLive(_169);
+        StorageLive(_170);
+        _238 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _170 = &((*_238).9: anchor_lang::prelude::Program<'_, anchor_spl::token::Token>);
+        _169 = <anchor_lang::prelude::Program<'_, Token> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _170) -> [return: bb72, unwind: bb127];
+    }
+
+    bb72: {
+        _248 = const true;
+        StorageDead(_170);
+        StorageLive(_171);
+        StorageLive(_172);
+        _239 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _240 = deref_copy ((*_239).8: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _305 = (((_240.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _172 = &(*_305);
+        _171 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _172) -> [return: bb73, unwind: bb125];
+    }
+
+    bb73: {
+        _247 = const true;
+        StorageDead(_172);
+        StorageLive(_173);
+        StorageLive(_174);
+        _241 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _174 = &((*_241).3: anchor_lang::prelude::AccountInfo<'_>);
+        _173 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _174) -> [return: bb74, unwind: bb123];
+    }
+
+    bb74: {
+        _246 = const true;
+        StorageDead(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        _176 = &(*_64);
+        _175 = move _176 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_176);
+        StorageLive(_177);
+        _177 = _114;
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        StorageLive(_182);
+        _242 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _243 = deref_copy ((*_242).4: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _306 = (((_243.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>);
+        _182 = &(*_306);
+        _181 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint> as Deref>::deref(move _182) -> [return: bb75, unwind: bb121];
+    }
+
+    bb75: {
+        _180 = &(*_181);
+        _179 = <anchor_spl::token_interface::Mint as Deref>::deref(move _180) -> [return: bb76, unwind: bb121];
+    }
+
+    bb76: {
+        StorageDead(_182);
+        StorageDead(_180);
+        _178 = ((*_179).2: u8);
+        StorageLive(_183);
+        _183 = _115;
+        _254 = const false;
+        _253 = const false;
+        _252 = const false;
+        _251 = const false;
+        _250 = const false;
+        _249 = const false;
+        _248 = const false;
+        _247 = const false;
+        _246 = const false;
+        _156 = deposit_reserve_liquidity_transfer(move _157, move _159, move _161, move _163, move _165, move _167, move _169, move _171, move _173, move _175, move _177, move _178, move _183) -> [return: bb77, unwind: bb121];
+    }
+
+    bb77: {
+        StorageDead(_183);
+        StorageDead(_178);
+        StorageDead(_177);
+        StorageDead(_175);
+        _246 = const false;
+        StorageDead(_173);
+        _247 = const false;
+        StorageDead(_171);
+        _248 = const false;
+        StorageDead(_169);
+        _249 = const false;
+        StorageDead(_167);
+        _250 = const false;
+        StorageDead(_165);
+        _251 = const false;
+        StorageDead(_163);
+        _252 = const false;
+        StorageDead(_161);
+        _253 = const false;
+        StorageDead(_159);
+        _254 = const false;
+        StorageDead(_157);
+        _155 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _156) -> [return: bb78, unwind: bb108];
+    }
+
+    bb78: {
+        StorageDead(_156);
+        _184 = discriminant(_155);
+        switchInt(move _184) -> [0: bb79, 1: bb80, otherwise: bb14];
+    }
+
+    bb79: {
+        StorageLive(_188);
+        _188 = ((_155 as Continue).0: ());
+        _154 = _188;
+        StorageDead(_188);
+        _269 = discriminant(_155);
+        StorageDead(_181);
+        StorageDead(_179);
+        StorageDead(_155);
+        StorageDead(_154);
+        StorageLive(_189);
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        StorageLive(_195);
+        StorageLive(_196);
+        StorageLive(_197);
+        _244 = deref_copy (_1.1: &mut handlers::handler_deposit_reserve_liquidity::DepositReserveLiquidity<'_>);
+        _245 = deref_copy ((*_244).5: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _307 = (((_245.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _197 = &(*_307);
+        _196 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _197) -> [return: bb82, unwind: bb108];
+    }
+
+    bb80: {
+        StorageLive(_185);
+        _185 = move ((_155 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_187);
+        _187 = move _185;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _187) -> [return: bb81, unwind: bb119];
+    }
+
+    bb81: {
+        StorageDead(_187);
+        StorageDead(_185);
+        _275 = discriminant(_155);
+        StorageDead(_181);
+        StorageDead(_179);
+        StorageDead(_155);
+        StorageDead(_154);
+        goto -> bb95;
+    }
+
+    bb82: {
+        StorageDead(_197);
+        _195 = &_196;
+        _194 = &(*_195);
+        _193 = amount(move _194) -> [return: bb83, unwind: bb105];
+    }
+
+    bb83: {
+        StorageDead(_194);
+        _192 = std::result::Result::<u64, anchor_lang::error::Error>::unwrap(move _193) -> [return: bb84, unwind: bb105];
+    }
+
+    bb84: {
+        StorageDead(_193);
+        StorageLive(_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        _200 = &(*_42);
+        _199 = <RefMut<'_, reserve::Reserve> as Deref>::deref(move _200) -> [return: bb85, unwind: bb105];
+    }
+
+    bb85: {
+        StorageDead(_200);
+        _198 = (((*_199).5: state::reserve::ReserveLiquidity).3: u64);
+        StorageLive(_201);
+        _201 = _99;
+        StorageLive(_202);
+        _202 = _111;
+        StorageLive(_203);
+        StorageLive(_204);
+        _204 = _114;
+        _203 = state::types::LendingAction::Additive(move _204);
+        StorageDead(_204);
+        _191 = post_transfer_vault_balance_liquidity_reserve_checks(move _192, move _198, move _201, move _202, move _203) -> [return: bb86, unwind: bb105];
+    }
+
+    bb86: {
+        StorageDead(_203);
+        StorageDead(_202);
+        StorageDead(_201);
+        StorageDead(_198);
+        StorageDead(_192);
+        _190 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _191) -> [return: bb87, unwind: bb105];
+    }
+
+    bb87: {
+        StorageDead(_191);
+        _205 = discriminant(_190);
+        switchInt(move _205) -> [0: bb88, 1: bb89, otherwise: bb14];
+    }
+
+    bb88: {
+        StorageLive(_209);
+        _209 = ((_190 as Continue).0: ());
+        _189 = _209;
+        StorageDead(_209);
+        _271 = discriminant(_190);
+        StorageDead(_199);
+        drop(_196) -> [return: bb91, unwind: bb108];
+    }
+
+    bb89: {
+        StorageLive(_206);
+        _206 = move ((_190 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_208);
+        _208 = move _206;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _208) -> [return: bb90, unwind: bb118];
+    }
+
+    bb90: {
+        StorageDead(_208);
+        StorageDead(_206);
+        _273 = discriminant(_190);
+        StorageDead(_199);
+        drop(_196) -> [return: bb94, unwind: bb108];
+    }
+
+    bb91: {
+        StorageDead(_196);
+        StorageDead(_195);
+        StorageDead(_190);
+        StorageDead(_189);
+        StorageLive(_210);
+        _210 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _210);
+        StorageDead(_210);
+        StorageDead(_115);
+        StorageDead(_114);
+        StorageDead(_111);
+        StorageDead(_99);
+        StorageDead(_77);
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageDead(_62);
+        drop(_53) -> [return: bb92, unwind: bb109];
+    }
+
+    bb92: {
+        StorageDead(_53);
+        StorageDead(_52);
+        drop(_43) -> [return: bb93, unwind: bb117];
+    }
+
+    bb93: {
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_34);
+        goto -> bb104;
+    }
+
+    bb94: {
+        StorageDead(_196);
+        StorageDead(_195);
+        StorageDead(_190);
+        StorageDead(_189);
+        goto -> bb95;
+    }
+
+    bb95: {
+        StorageDead(_115);
+        StorageDead(_114);
+        goto -> bb96;
+    }
+
+    bb96: {
+        StorageDead(_111);
+        goto -> bb98;
+    }
+
+    bb97: {
+        StorageDead(_104);
+        StorageDead(_103);
+        StorageDead(_100);
+        goto -> bb98;
+    }
+
+    bb98: {
+        StorageDead(_99);
+        goto -> bb99;
+    }
+
+    bb99: {
+        StorageDead(_77);
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageDead(_62);
+        drop(_53) -> [return: bb100, unwind: bb109];
+    }
+
+    bb100: {
+        StorageDead(_53);
+        StorageDead(_52);
+        drop(_43) -> [return: bb101, unwind: bb117];
+    }
+
+    bb101: {
+        StorageDead(_43);
+        StorageDead(_42);
+        goto -> bb102;
+    }
+
+    bb102: {
+        StorageDead(_34);
+        goto -> bb104;
+    }
+
+    bb103: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb104;
+    }
+
+    bb104: {
+        return;
+    }
+
+    bb105 (cleanup): {
+        drop(_196) -> [return: bb108, unwind terminate(cleanup)];
+    }
+
+    bb106 (cleanup): {
+        drop(_135) -> [return: bb108, unwind terminate(cleanup)];
+    }
+
+    bb107 (cleanup): {
+        drop(_104) -> [return: bb108, unwind terminate(cleanup)];
+    }
+
+    bb108 (cleanup): {
+        drop(_53) -> [return: bb109, unwind terminate(cleanup)];
+    }
+
+    bb109 (cleanup): {
+        drop(_43) -> [return: bb117, unwind terminate(cleanup)];
+    }
+
+    bb110 (cleanup): {
+        drop(_8) -> [return: bb117, unwind terminate(cleanup)];
+    }
+
+    bb111 (cleanup): {
+        drop(_25) -> [return: bb112, unwind terminate(cleanup)];
+    }
+
+    bb112 (cleanup): {
+        drop(_23) -> [return: bb113, unwind terminate(cleanup)];
+    }
+
+    bb113 (cleanup): {
+        drop(_19) -> [return: bb114, unwind terminate(cleanup)];
+    }
+
+    bb114 (cleanup): {
+        drop(_17) -> [return: bb115, unwind terminate(cleanup)];
+    }
+
+    bb115 (cleanup): {
+        drop(_15) -> [return: bb116, unwind terminate(cleanup)];
+    }
+
+    bb116 (cleanup): {
+        drop(_11) -> [return: bb117, unwind terminate(cleanup)];
+    }
+
+    bb117 (cleanup): {
+        resume;
+    }
+
+    bb118 (cleanup): {
+        _291 = discriminant(_190);
+        goto -> bb105;
+    }
+
+    bb119 (cleanup): {
+        _292 = discriminant(_155);
+        goto -> bb108;
+    }
+
+    bb120 (cleanup): {
+        drop(_173) -> [return: bb123, unwind terminate(cleanup)];
+    }
+
+    bb121 (cleanup): {
+        switchInt(_246) -> [0: bb123, otherwise: bb120];
+    }
+
+    bb122 (cleanup): {
+        drop(_171) -> [return: bb125, unwind terminate(cleanup)];
+    }
+
+    bb123 (cleanup): {
+        switchInt(_247) -> [0: bb125, otherwise: bb122];
+    }
+
+    bb124 (cleanup): {
+        drop(_169) -> [return: bb127, unwind terminate(cleanup)];
+    }
+
+    bb125 (cleanup): {
+        switchInt(_248) -> [0: bb127, otherwise: bb124];
+    }
+
+    bb126 (cleanup): {
+        drop(_167) -> [return: bb129, unwind terminate(cleanup)];
+    }
+
+    bb127 (cleanup): {
+        switchInt(_249) -> [0: bb129, otherwise: bb126];
+    }
+
+    bb128 (cleanup): {
+        drop(_165) -> [return: bb131, unwind terminate(cleanup)];
+    }
+
+    bb129 (cleanup): {
+        switchInt(_250) -> [0: bb131, otherwise: bb128];
+    }
+
+    bb130 (cleanup): {
+        drop(_163) -> [return: bb133, unwind terminate(cleanup)];
+    }
+
+    bb131 (cleanup): {
+        switchInt(_251) -> [0: bb133, otherwise: bb130];
+    }
+
+    bb132 (cleanup): {
+        drop(_161) -> [return: bb135, unwind terminate(cleanup)];
+    }
+
+    bb133 (cleanup): {
+        switchInt(_252) -> [0: bb135, otherwise: bb132];
+    }
+
+    bb134 (cleanup): {
+        drop(_159) -> [return: bb137, unwind terminate(cleanup)];
+    }
+
+    bb135 (cleanup): {
+        switchInt(_253) -> [0: bb137, otherwise: bb134];
+    }
+
+    bb136 (cleanup): {
+        drop(_157) -> [return: bb108, unwind terminate(cleanup)];
+    }
+
+    bb137 (cleanup): {
+        switchInt(_254) -> [0: bb108, otherwise: bb136];
+    }
+
+    bb138 (cleanup): {
+        _293 = discriminant(_117);
+        goto -> bb108;
+    }
+
+    bb139 (cleanup): {
+        _294 = discriminant(_100);
+        goto -> bb107;
+    }
+
+    bb140 (cleanup): {
+        _295 = discriminant(_83);
+        goto -> bb108;
+    }
+
+    bb141 (cleanup): {
+        _296 = discriminant(_54);
+        goto -> bb109;
+    }
+
+    bb142 (cleanup): {
+        _297 = discriminant(_44);
+        goto -> bb117;
+    }
+
+    bb143 (cleanup): {
+        _298 = discriminant(_35);
+        goto -> bb117;
+    }
+
+    bb144 (cleanup): {
+        _299 = discriminant(_4);
+        goto -> bb110;
+    }
+}

@@ -1,0 +1,51 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::add_spot_position::{closure#0}` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::add_spot_position::{closure#0}(_1: &mut {closure@programs/drift/src/state/user.rs:215:23: 215:47}, _2: (usize, &SpotPosition)) -> bool {
+    let mut _0: bool;
+    let _3: usize;
+    let _4: &state::user::SpotPosition;
+    let mut _5: bool;
+    let mut _6: usize;
+    let mut _7: &state::user::SpotPosition;
+    scope 1 {
+        debug index => _3;
+        debug spot_position => _4;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = (_2.0: usize);
+        StorageLive(_4);
+        _4 = (_2.1: &state::user::SpotPosition);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _3;
+        _5 = Ne(move _6, const 0_usize);
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = &(*_4);
+        _0 = SpotPosition::is_available(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _0 = const false;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

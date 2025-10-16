@@ -1,0 +1,328 @@
+// MIR for `determine_spot_fulfillment_methods` before PreCodegen
+
+fn determine_spot_fulfillment_methods(_1: &Order, _2: &[(anchor_lang::prelude::Pubkey, usize, u64)], _3: Option<u64>, _4: bool) -> std::result::Result<Vec<SpotFulfillmentMethod>, error::ErrorCode> {
+    debug order => _1;
+    debug maker_orders_info => _2;
+    debug limit_price => _3;
+    debug external_fulfillment_params_available => _4;
+    let mut _0: std::result::Result<std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>, error::ErrorCode>;
+    let mut _5: std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let _6: ();
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: !;
+    let _10: ();
+    let mut _11: &mut std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let mut _12: state::fulfillment::SpotFulfillmentMethod;
+    let mut _13: std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let mut _15: &controller::position::PositionDirection;
+    let _16: ();
+    let mut _17: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _18: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _19: &[(anchor_lang::prelude::Pubkey, usize, u64)];
+    let mut _21: ();
+    let _22: ();
+    let mut _23: std::option::Option<&(anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _24: &mut std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _25: &mut std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _26: isize;
+    let mut _27: !;
+    let mut _32: isize;
+    let mut _34: controller::position::PositionDirection;
+    let mut _35: u64;
+    let mut _36: u64;
+    let _37: ();
+    let mut _38: bool;
+    let mut _39: !;
+    let _40: ();
+    let mut _41: &mut std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let mut _42: state::fulfillment::SpotFulfillmentMethod;
+    let mut _43: anchor_lang::prelude::Pubkey;
+    let mut _44: u16;
+    let mut _45: usize;
+    let mut _46: bool;
+    let mut _47: usize;
+    let mut _48: &std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let mut _49: !;
+    let mut _50: std::vec::Vec<state::fulfillment::SpotFulfillmentMethod>;
+    let mut _51: &(anchor_lang::prelude::Pubkey, usize, u64);
+    let mut _52: &(anchor_lang::prelude::Pubkey, usize, u64);
+    let mut _53: &(anchor_lang::prelude::Pubkey, usize, u64);
+    scope 1 {
+        debug fulfillment_methods => _5;
+        let _14: controller::position::PositionDirection;
+        scope 2 {
+            debug maker_direction => _14;
+            let mut _20: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+            scope 3 {
+                debug iter => _20;
+                let _28: &anchor_lang::prelude::Pubkey;
+                let _29: &usize;
+                let _30: &u64;
+                scope 4 {
+                    debug maker_key => _28;
+                    debug maker_order_index => _29;
+                    debug maker_price => _30;
+                    let _31: bool;
+                    let _33: u64;
+                    scope 5 {
+                        debug taker_crosses_maker => _31;
+                    }
+                    scope 6 {
+                        debug taker_price => _33;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _5 = Vec::<SpotFulfillmentMethod>::with_capacity(const 8_usize) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).19: bool);
+        switchInt(move _7) -> [0: bb2, otherwise: bb5];
+    }
+
+    bb2: {
+        StorageLive(_8);
+        _8 = _4;
+        switchInt(move _8) -> [0: bb5, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &mut _5;
+        StorageLive(_12);
+        _12 = SpotFulfillmentMethod::ExternalMarket;
+        _10 = Vec::<SpotFulfillmentMethod>::push(move _11, move _12) -> [return: bb4, unwind: bb27];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageLive(_13);
+        _13 = move _5;
+        _0 = std::result::Result::<Vec<SpotFulfillmentMethod>, error::ErrorCode>::Ok(move _13);
+        StorageDead(_13);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb26;
+    }
+
+    bb5: {
+        _6 = const ();
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &((*_1).17: controller::position::PositionDirection);
+        _14 = controller::position::PositionDirection::opposite(move _15) -> [return: bb6, unwind: bb27];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_2);
+        _18 = core::slice::<impl [(anchor_lang::prelude::Pubkey, usize, u64)]>::iter(move _19) -> [return: bb7, unwind: bb27];
+    }
+
+    bb7: {
+        StorageDead(_19);
+        _17 = <std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)> as IntoIterator>::into_iter(move _18) -> [return: bb8, unwind: bb27];
+    }
+
+    bb8: {
+        StorageDead(_18);
+        StorageLive(_20);
+        _20 = move _17;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &mut _20;
+        _24 = &mut (*_25);
+        _23 = <std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)> as Iterator>::next(move _24) -> [return: bb10, unwind: bb27];
+    }
+
+    bb10: {
+        StorageDead(_24);
+        _26 = discriminant(_23);
+        switchInt(move _26) -> [0: bb13, 1: bb11, otherwise: bb12];
+    }
+
+    bb11: {
+        StorageLive(_28);
+        _51 = deref_copy ((_23 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _28 = &((*_51).0: anchor_lang::prelude::Pubkey);
+        StorageLive(_29);
+        _52 = deref_copy ((_23 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _29 = &((*_52).1: usize);
+        StorageLive(_30);
+        _53 = deref_copy ((_23 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _30 = &((*_53).2: u64);
+        StorageLive(_31);
+        _32 = discriminant(_3);
+        switchInt(move _32) -> [0: bb14, 1: bb15, otherwise: bb12];
+    }
+
+    bb12: {
+        unreachable;
+    }
+
+    bb13: {
+        _16 = const ();
+        goto -> bb25;
+    }
+
+    bb14: {
+        _31 = const false;
+        goto -> bb17;
+    }
+
+    bb15: {
+        StorageLive(_33);
+        _33 = ((_3 as Some).0: u64);
+        StorageLive(_34);
+        _34 = _14;
+        StorageLive(_35);
+        _35 = (*_30);
+        StorageLive(_36);
+        _36 = _33;
+        _31 = do_orders_cross(move _34, move _35, move _36) -> [return: bb16, unwind: bb27];
+    }
+
+    bb16: {
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_33);
+        goto -> bb17;
+    }
+
+    bb17: {
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = _31;
+        switchInt(move _38) -> [0: bb18, otherwise: bb19];
+    }
+
+    bb18: {
+        _16 = const ();
+        StorageDead(_38);
+        StorageDead(_37);
+        goto -> bb24;
+    }
+
+    bb19: {
+        _37 = const ();
+        StorageDead(_38);
+        StorageDead(_37);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = &mut _5;
+        StorageLive(_42);
+        StorageLive(_43);
+        _43 = (*_28);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = (*_29);
+        _44 = move _45 as u16 (IntToInt);
+        StorageDead(_45);
+        _42 = SpotFulfillmentMethod::Match(move _43, move _44);
+        StorageDead(_44);
+        StorageDead(_43);
+        _40 = Vec::<SpotFulfillmentMethod>::push(move _41, move _42) -> [return: bb20, unwind: bb27];
+    }
+
+    bb20: {
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        _48 = &_5;
+        _47 = Vec::<SpotFulfillmentMethod>::len(move _48) -> [return: bb21, unwind: bb27];
+    }
+
+    bb21: {
+        StorageDead(_48);
+        _46 = Gt(move _47, const 6_usize);
+        switchInt(move _46) -> [0: bb23, otherwise: bb22];
+    }
+
+    bb22: {
+        StorageDead(_47);
+        _16 = const ();
+        StorageDead(_46);
+        goto -> bb24;
+    }
+
+    bb23: {
+        StorageDead(_47);
+        _22 = const ();
+        StorageDead(_46);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        _21 = const ();
+        goto -> bb9;
+    }
+
+    bb24: {
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        goto -> bb25;
+    }
+
+    bb25: {
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_50);
+        _50 = move _5;
+        _0 = std::result::Result::<Vec<SpotFulfillmentMethod>, error::ErrorCode>::Ok(move _50);
+        StorageDead(_50);
+        StorageDead(_14);
+        StorageDead(_5);
+        goto -> bb26;
+    }
+
+    bb26: {
+        return;
+    }
+
+    bb27 (cleanup): {
+        drop(_5) -> [return: bb28, unwind terminate(cleanup)];
+    }
+
+    bb28 (cleanup): {
+        resume;
+    }
+}

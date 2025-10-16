@@ -1,0 +1,236 @@
+// MIR for `find_bids_and_asks_from_users::{closure#0}` before PreCodegen
+
+fn find_bids_and_asks_from_users::{closure#0}(_1: &mut {closure@programs/drift/src/math/orders.rs:1236:28: 1236:94}, _2: u64, _3: u64, _4: controller::position::PositionDirection) -> () {
+    debug base_asset_amount => _2;
+    debug price => _3;
+    debug direction => _4;
+    debug bids => (*((*_1).0: &mut std::vec::Vec<math::orders::Level>));
+    debug asks => (*((*_1).1: &mut std::vec::Vec<math::orders::Level>));
+    let mut _0: ();
+    let _5: &mut std::vec::Vec<math::orders::Level>;
+    let mut _6: isize;
+    let mut _7: &mut std::vec::Vec<math::orders::Level>;
+    let mut _9: std::result::Result<usize, usize>;
+    let mut _10: &[math::orders::Level];
+    let _11: &[math::orders::Level];
+    let mut _12: &std::vec::Vec<math::orders::Level>;
+    let mut _13: {closure@programs/drift/src/math/orders.rs:1241:51: 1241:58};
+    let mut _14: &controller::position::PositionDirection;
+    let mut _15: &u64;
+    let mut _16: isize;
+    let mut _19: bool;
+    let mut _20: usize;
+    let mut _21: usize;
+    let mut _22: &std::vec::Vec<math::orders::Level>;
+    let _23: ();
+    let mut _24: bool;
+    let mut _25: usize;
+    let mut _26: &std::vec::Vec<math::orders::Level>;
+    let mut _27: usize;
+    let mut _28: &std::vec::Vec<math::orders::Level>;
+    let _29: std::option::Option<math::orders::Level>;
+    let mut _30: &mut std::vec::Vec<math::orders::Level>;
+    let _31: ();
+    let mut _32: &mut std::vec::Vec<math::orders::Level>;
+    let mut _33: usize;
+    let mut _34: math::orders::Level;
+    let mut _35: u64;
+    let mut _36: u64;
+    let mut _37: &mut std::vec::Vec<math::orders::Level>;
+    let mut _38: &mut std::vec::Vec<math::orders::Level>;
+    scope 1 {
+        debug orders => _5;
+        let _8: usize;
+        let _17: usize;
+        let _18: usize;
+        scope 2 {
+            debug index => _8;
+        }
+        scope 3 {
+            debug index => _17;
+        }
+        scope 4 {
+            debug index => _18;
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _6 = discriminant(_4);
+        switchInt(move _6) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_7);
+        _37 = deref_copy ((*_1).1: &mut std::vec::Vec<math::orders::Level>);
+        _7 = &mut (*_37);
+        _5 = &mut (*_7);
+        StorageDead(_7);
+        goto -> bb4;
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        _38 = deref_copy ((*_1).0: &mut std::vec::Vec<math::orders::Level>);
+        _5 = &mut (*_38);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &(*_5);
+        _11 = <Vec<Level> as Deref>::deref(move _12) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _10 = &(*_11);
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &_4;
+        StorageLive(_15);
+        _15 = &_3;
+        _13 = {closure@programs/drift/src/math/orders.rs:1241:51: 1241:58} { direction: move _14, price: move _15 };
+        StorageDead(_15);
+        StorageDead(_14);
+        _9 = core::slice::<impl [Level]>::binary_search_by::<'_, {closure@programs/drift/src/math/orders.rs:1241:51: 1241:58}>(move _10, move _13) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_10);
+        _16 = discriminant(_9);
+        switchInt(move _16) -> [0: bb8, 1: bb7, otherwise: bb2];
+    }
+
+    bb7: {
+        StorageLive(_18);
+        _18 = ((_9 as Err).0: usize);
+        _8 = _18;
+        StorageDead(_18);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageLive(_17);
+        _17 = ((_9 as Ok).0: usize);
+        _8 = _17;
+        StorageDead(_17);
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _8;
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &(*_5);
+        _21 = Vec::<Level>::capacity(move _22) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_22);
+        _19 = Lt(move _20, move _21);
+        switchInt(move _19) -> [0: bb19, otherwise: bb11];
+    }
+
+    bb11: {
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &(*_5);
+        _25 = Vec::<Level>::len(move _26) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &(*_5);
+        _27 = Vec::<Level>::capacity(move _28) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_28);
+        _24 = Eq(move _25, move _27);
+        switchInt(move _24) -> [0: bb16, otherwise: bb14];
+    }
+
+    bb14: {
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = &mut (*_5);
+        _29 = Vec::<Level>::pop(move _30) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_30);
+        StorageDead(_29);
+        _23 = const ();
+        goto -> bb17;
+    }
+
+    bb16: {
+        StorageDead(_27);
+        StorageDead(_25);
+        _23 = const ();
+        goto -> bb17;
+    }
+
+    bb17: {
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = &mut (*_5);
+        StorageLive(_33);
+        _33 = _8;
+        StorageLive(_34);
+        StorageLive(_35);
+        _35 = _3;
+        StorageLive(_36);
+        _36 = _2;
+        _34 = Level { price: move _35, base_asset_amount: move _36 };
+        StorageDead(_36);
+        StorageDead(_35);
+        _31 = Vec::<Level>::insert(move _32, move _33, move _34) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_31);
+        _0 = const ();
+        goto -> bb20;
+    }
+
+    bb19: {
+        StorageDead(_21);
+        StorageDead(_20);
+        _0 = const ();
+        goto -> bb20;
+    }
+
+    bb20: {
+        StorageDead(_19);
+        StorageDead(_8);
+        StorageDead(_5);
+        return;
+    }
+}

@@ -1,0 +1,32 @@
+// MIR for `sub_from_withdrawal_accum` after PreCodegen
+
+fn sub_from_withdrawal_accum(_1: &mut reserve::WithdrawalCaps, _2: u64, _3: u64) -> std::result::Result<(), LendingError> {
+    debug caps => _1;
+    debug requested_amount => _2;
+    debug curr_timestamp => _3;
+    let mut _0: std::result::Result<(), LendingError>;
+    let mut _4: &mut state::reserve::WithdrawalCaps;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+
+    bb0: {
+        StorageLive(_4);
+        _4 = &mut (*_1);
+        StorageLive(_5);
+        _5 = _2;
+        StorageLive(_6);
+        _6 = _3;
+        StorageLive(_7);
+        _7 = WithdrawalCapAction::Remove;
+        _0 = check_and_update_withdrawal_caps(move _4, move _5, move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        return;
+    }
+}

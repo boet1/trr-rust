@@ -1,0 +1,4287 @@
+// MIR for `_liquidate_obligation` after PreCodegen
+
+fn _liquidate_obligation(_1: &Pubkey, _2: u64, _3: &AccountInfo<'_>, _4: &AccountInfo<'_>, _5: &AccountInfo<'_>, _6: &AccountInfo<'_>, _7: &AccountInfo<'_>, _8: &AccountInfo<'_>, _9: &AccountInfo<'_>, _10: &AccountInfo<'_>, _11: &AccountInfo<'_>, _12: &AccountInfo<'_>, _13: &Clock, _14: &AccountInfo<'_>) -> Result<(u64, Bonus), ProgramError> {
+    debug program_id => _1;
+    debug liquidity_amount => _2;
+    debug source_liquidity_info => _3;
+    debug destination_collateral_info => _4;
+    debug repay_reserve_info => _5;
+    debug repay_reserve_liquidity_supply_info => _6;
+    debug withdraw_reserve_info => _7;
+    debug withdraw_reserve_collateral_supply_info => _8;
+    debug obligation_info => _9;
+    debug lending_market_info => _10;
+    debug lending_market_authority_info => _11;
+    debug user_transfer_authority_info => _12;
+    debug clock => _13;
+    debug token_program_id => _14;
+    let mut _0: std::result::Result<(u64, solend_sdk::state::Bonus), solana_program::program_error::ProgramError>;
+    let _15: std::boxed::Box<solend_sdk::state::LendingMarket>;
+    let mut _16: solend_sdk::state::LendingMarket;
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::LendingMarket>;
+    let mut _18: std::result::Result<solend_sdk::state::LendingMarket, solana_program::program_error::ProgramError>;
+    let mut _19: &[u8];
+    let _20: &&mut [u8];
+    let mut _21: &std::cell::Ref<'_, &mut [u8]>;
+    let _22: &std::cell::Ref<'_, &mut [u8]>;
+    let _23: std::cell::Ref<'_, &mut [u8]>;
+    let mut _24: &std::cell::RefCell<&mut [u8]>;
+    let _25: &std::cell::RefCell<&mut [u8]>;
+    let mut _26: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _27: isize;
+    let _28: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _29: !;
+    let mut _30: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _31: solend_sdk::state::LendingMarket;
+    let _32: ();
+    let mut _33: bool;
+    let mut _34: &&solana_program::pubkey::Pubkey;
+    let mut _35: &&solana_program::pubkey::Pubkey;
+    let mut _36: !;
+    let _37: ();
+    let mut _38: &str;
+    let _39: &str;
+    let mut _40: solana_program::program_error::ProgramError;
+    let mut _41: solend_sdk::error::LendingError;
+    let _42: ();
+    let mut _43: bool;
+    let mut _44: &&solana_program::pubkey::Pubkey;
+    let _45: &solana_program::pubkey::Pubkey;
+    let mut _46: &&solana_program::pubkey::Pubkey;
+    let mut _47: !;
+    let _48: ();
+    let mut _49: &str;
+    let _50: &str;
+    let mut _51: solana_program::program_error::ProgramError;
+    let mut _52: solend_sdk::error::LendingError;
+    let mut _54: solend_sdk::state::Reserve;
+    let mut _55: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::Reserve>;
+    let mut _56: std::result::Result<solend_sdk::state::Reserve, solana_program::program_error::ProgramError>;
+    let mut _57: &[u8];
+    let _58: &&mut [u8];
+    let mut _59: &std::cell::Ref<'_, &mut [u8]>;
+    let _60: &std::cell::Ref<'_, &mut [u8]>;
+    let _61: std::cell::Ref<'_, &mut [u8]>;
+    let mut _62: &std::cell::RefCell<&mut [u8]>;
+    let _63: &std::cell::RefCell<&mut [u8]>;
+    let mut _64: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _65: isize;
+    let mut _67: !;
+    let mut _68: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _70: ();
+    let mut _71: bool;
+    let mut _72: &&solana_program::pubkey::Pubkey;
+    let mut _73: &&solana_program::pubkey::Pubkey;
+    let mut _74: !;
+    let _75: ();
+    let mut _76: &str;
+    let _77: &str;
+    let mut _78: solana_program::program_error::ProgramError;
+    let mut _79: solend_sdk::error::LendingError;
+    let _80: ();
+    let mut _81: bool;
+    let mut _82: &&solana_program::pubkey::Pubkey;
+    let _83: &solana_program::pubkey::Pubkey;
+    let mut _84: &&solana_program::pubkey::Pubkey;
+    let mut _85: !;
+    let _86: ();
+    let mut _87: &str;
+    let _88: &str;
+    let mut _89: solana_program::program_error::ProgramError;
+    let mut _90: solend_sdk::error::LendingError;
+    let _91: ();
+    let mut _92: bool;
+    let mut _93: &&solana_program::pubkey::Pubkey;
+    let _94: &solana_program::pubkey::Pubkey;
+    let mut _95: &&solana_program::pubkey::Pubkey;
+    let mut _96: !;
+    let _97: ();
+    let mut _98: &str;
+    let _99: &str;
+    let mut _100: solana_program::program_error::ProgramError;
+    let mut _101: solend_sdk::error::LendingError;
+    let _102: ();
+    let mut _103: bool;
+    let mut _104: &&solana_program::pubkey::Pubkey;
+    let _105: &solana_program::pubkey::Pubkey;
+    let mut _106: &&solana_program::pubkey::Pubkey;
+    let mut _107: !;
+    let _108: ();
+    let mut _109: &str;
+    let _110: &str;
+    let mut _111: solana_program::program_error::ProgramError;
+    let mut _112: solend_sdk::error::LendingError;
+    let _113: ();
+    let mut _114: bool;
+    let mut _115: &&solana_program::pubkey::Pubkey;
+    let _116: &solana_program::pubkey::Pubkey;
+    let mut _117: &&solana_program::pubkey::Pubkey;
+    let mut _118: !;
+    let _119: ();
+    let mut _120: &str;
+    let _121: &str;
+    let mut _122: solana_program::program_error::ProgramError;
+    let mut _123: solend_sdk::error::LendingError;
+    let _124: ();
+    let mut _125: bool;
+    let mut _126: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, bool>;
+    let mut _127: std::result::Result<bool, solana_program::program_error::ProgramError>;
+    let mut _128: &solend_sdk::state::LastUpdate;
+    let mut _129: u64;
+    let mut _130: isize;
+    let mut _132: !;
+    let mut _133: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _135: !;
+    let _136: ();
+    let mut _137: &str;
+    let _138: &str;
+    let mut _139: solana_program::program_error::ProgramError;
+    let mut _140: solend_sdk::error::LendingError;
+    let mut _142: solend_sdk::state::Reserve;
+    let mut _143: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::Reserve>;
+    let mut _144: std::result::Result<solend_sdk::state::Reserve, solana_program::program_error::ProgramError>;
+    let mut _145: &[u8];
+    let _146: &&mut [u8];
+    let mut _147: &std::cell::Ref<'_, &mut [u8]>;
+    let _148: &std::cell::Ref<'_, &mut [u8]>;
+    let _149: std::cell::Ref<'_, &mut [u8]>;
+    let mut _150: &std::cell::RefCell<&mut [u8]>;
+    let _151: &std::cell::RefCell<&mut [u8]>;
+    let mut _152: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _153: isize;
+    let mut _155: !;
+    let mut _156: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _158: ();
+    let mut _159: bool;
+    let mut _160: &&solana_program::pubkey::Pubkey;
+    let mut _161: &&solana_program::pubkey::Pubkey;
+    let mut _162: !;
+    let _163: ();
+    let mut _164: &str;
+    let _165: &str;
+    let mut _166: solana_program::program_error::ProgramError;
+    let mut _167: solend_sdk::error::LendingError;
+    let _168: ();
+    let mut _169: bool;
+    let mut _170: &&solana_program::pubkey::Pubkey;
+    let _171: &solana_program::pubkey::Pubkey;
+    let mut _172: &&solana_program::pubkey::Pubkey;
+    let mut _173: !;
+    let _174: ();
+    let mut _175: &str;
+    let _176: &str;
+    let mut _177: solana_program::program_error::ProgramError;
+    let mut _178: solend_sdk::error::LendingError;
+    let _179: ();
+    let mut _180: bool;
+    let mut _181: &&solana_program::pubkey::Pubkey;
+    let _182: &solana_program::pubkey::Pubkey;
+    let mut _183: &&solana_program::pubkey::Pubkey;
+    let mut _184: !;
+    let _185: ();
+    let mut _186: &str;
+    let _187: &str;
+    let mut _188: solana_program::program_error::ProgramError;
+    let mut _189: solend_sdk::error::LendingError;
+    let _190: ();
+    let mut _191: bool;
+    let mut _192: &&solana_program::pubkey::Pubkey;
+    let _193: &solana_program::pubkey::Pubkey;
+    let mut _194: &&solana_program::pubkey::Pubkey;
+    let mut _195: !;
+    let _196: ();
+    let mut _197: &str;
+    let _198: &str;
+    let mut _199: solana_program::program_error::ProgramError;
+    let mut _200: solend_sdk::error::LendingError;
+    let _201: ();
+    let mut _202: bool;
+    let mut _203: &&solana_program::pubkey::Pubkey;
+    let _204: &solana_program::pubkey::Pubkey;
+    let mut _205: &&solana_program::pubkey::Pubkey;
+    let mut _206: !;
+    let _207: ();
+    let mut _208: &str;
+    let _209: &str;
+    let mut _210: solana_program::program_error::ProgramError;
+    let mut _211: solend_sdk::error::LendingError;
+    let _212: ();
+    let mut _213: bool;
+    let mut _214: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, bool>;
+    let mut _215: std::result::Result<bool, solana_program::program_error::ProgramError>;
+    let mut _216: &solend_sdk::state::LastUpdate;
+    let mut _217: u64;
+    let mut _218: isize;
+    let mut _220: !;
+    let mut _221: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _223: !;
+    let _224: ();
+    let mut _225: &str;
+    let _226: &str;
+    let mut _227: solana_program::program_error::ProgramError;
+    let mut _228: solend_sdk::error::LendingError;
+    let mut _230: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::Obligation>;
+    let mut _231: std::result::Result<solend_sdk::state::Obligation, solana_program::program_error::ProgramError>;
+    let mut _232: &[u8];
+    let _233: &&mut [u8];
+    let mut _234: &std::cell::Ref<'_, &mut [u8]>;
+    let _235: &std::cell::Ref<'_, &mut [u8]>;
+    let _236: std::cell::Ref<'_, &mut [u8]>;
+    let mut _237: &std::cell::RefCell<&mut [u8]>;
+    let _238: &std::cell::RefCell<&mut [u8]>;
+    let mut _239: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _240: isize;
+    let mut _242: !;
+    let mut _243: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _245: ();
+    let mut _246: bool;
+    let mut _247: &&solana_program::pubkey::Pubkey;
+    let mut _248: &&solana_program::pubkey::Pubkey;
+    let mut _249: !;
+    let _250: ();
+    let mut _251: &str;
+    let _252: &str;
+    let mut _253: solana_program::program_error::ProgramError;
+    let mut _254: solend_sdk::error::LendingError;
+    let _255: ();
+    let mut _256: bool;
+    let mut _257: &&solana_program::pubkey::Pubkey;
+    let _258: &solana_program::pubkey::Pubkey;
+    let mut _259: &&solana_program::pubkey::Pubkey;
+    let mut _260: !;
+    let _261: ();
+    let mut _262: &str;
+    let _263: &str;
+    let mut _264: solana_program::program_error::ProgramError;
+    let mut _265: solend_sdk::error::LendingError;
+    let _266: ();
+    let mut _267: bool;
+    let mut _268: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, bool>;
+    let mut _269: std::result::Result<bool, solana_program::program_error::ProgramError>;
+    let mut _270: &solend_sdk::state::LastUpdate;
+    let mut _271: u64;
+    let mut _272: isize;
+    let mut _274: !;
+    let mut _275: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _277: !;
+    let _278: ();
+    let mut _279: &str;
+    let _280: &str;
+    let mut _281: solana_program::program_error::ProgramError;
+    let mut _282: solend_sdk::error::LendingError;
+    let _283: ();
+    let mut _284: bool;
+    let mut _285: &solend_sdk::math::Decimal;
+    let mut _286: &solend_sdk::math::Decimal;
+    let _287: solend_sdk::math::Decimal;
+    let mut _288: !;
+    let _289: ();
+    let mut _290: &str;
+    let _291: &str;
+    let mut _292: solana_program::program_error::ProgramError;
+    let mut _293: solend_sdk::error::LendingError;
+    let _294: ();
+    let mut _295: bool;
+    let mut _296: &solend_sdk::math::Decimal;
+    let mut _297: &solend_sdk::math::Decimal;
+    let _298: solend_sdk::math::Decimal;
+    let mut _299: !;
+    let _300: ();
+    let mut _301: &str;
+    let _302: &str;
+    let mut _303: solana_program::program_error::ProgramError;
+    let mut _304: solend_sdk::error::LendingError;
+    let _305: ();
+    let mut _306: bool;
+    let mut _307: &solend_sdk::math::Decimal;
+    let mut _308: &solend_sdk::math::Decimal;
+    let mut _309: bool;
+    let mut _310: !;
+    let _311: ();
+    let mut _312: &str;
+    let _313: &str;
+    let mut _314: solana_program::program_error::ProgramError;
+    let mut _315: solend_sdk::error::LendingError;
+    let _316: ();
+    let mut _317: isize;
+    let mut _319: bool;
+    let mut _320: &solana_program::pubkey::Pubkey;
+    let mut _321: &solana_program::pubkey::Pubkey;
+    let mut _322: !;
+    let _323: ();
+    let mut _324: &str;
+    let _325: &str;
+    let mut _326: solana_program::program_error::ProgramError;
+    let mut _327: solend_sdk::error::LendingError;
+    let mut _330: (&solend_sdk::state::ObligationLiquidity, usize);
+    let mut _331: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, (&solend_sdk::state::ObligationLiquidity, usize)>;
+    let mut _332: std::result::Result<(&solend_sdk::state::ObligationLiquidity, usize), solana_program::program_error::ProgramError>;
+    let mut _333: &solend_sdk::state::Obligation;
+    let mut _334: solana_program::pubkey::Pubkey;
+    let mut _335: isize;
+    let mut _337: !;
+    let mut _338: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _340: ();
+    let mut _341: bool;
+    let mut _342: &solend_sdk::math::Decimal;
+    let mut _343: &solend_sdk::math::Decimal;
+    let _344: solend_sdk::math::Decimal;
+    let mut _345: !;
+    let _346: ();
+    let mut _347: &str;
+    let _348: &str;
+    let mut _349: solana_program::program_error::ProgramError;
+    let mut _350: solend_sdk::error::LendingError;
+    let _351: ();
+    let mut _352: bool;
+    let mut _353: usize;
+    let mut _354: !;
+    let _355: ();
+    let mut _356: &str;
+    let _357: &str;
+    let mut _358: solana_program::program_error::ProgramError;
+    let mut _359: solend_sdk::error::LendingError;
+    let mut _362: (&solend_sdk::state::ObligationCollateral, usize);
+    let mut _363: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, (&solend_sdk::state::ObligationCollateral, usize)>;
+    let mut _364: std::result::Result<(&solend_sdk::state::ObligationCollateral, usize), solana_program::program_error::ProgramError>;
+    let mut _365: &solend_sdk::state::Obligation;
+    let mut _366: solana_program::pubkey::Pubkey;
+    let mut _367: isize;
+    let mut _369: !;
+    let mut _370: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _372: ();
+    let mut _373: bool;
+    let mut _374: &solend_sdk::math::Decimal;
+    let mut _375: &solend_sdk::math::Decimal;
+    let _376: solend_sdk::math::Decimal;
+    let mut _377: !;
+    let _378: ();
+    let mut _379: &str;
+    let _380: &str;
+    let mut _381: solana_program::program_error::ProgramError;
+    let mut _382: solend_sdk::error::LendingError;
+    let _384: [&[u8]; 2];
+    let mut _385: &[u8];
+    let mut _386: &solana_program::pubkey::Pubkey;
+    let mut _387: &[u8];
+    let mut _388: &[u8; 1];
+    let _389: &[u8; 1];
+    let _390: [u8; 1];
+    let mut _391: u8;
+    let mut _393: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::pubkey::PubkeyError>, solana_program::pubkey::Pubkey>;
+    let mut _394: std::result::Result<solana_program::pubkey::Pubkey, solana_program::pubkey::PubkeyError>;
+    let mut _395: &[&[u8]];
+    let mut _396: &[&[u8]; 2];
+    let mut _397: &solana_program::pubkey::Pubkey;
+    let mut _398: isize;
+    let mut _400: !;
+    let mut _401: std::result::Result<std::convert::Infallible, solana_program::pubkey::PubkeyError>;
+    let _403: ();
+    let mut _404: bool;
+    let mut _405: &&solana_program::pubkey::Pubkey;
+    let _406: &solana_program::pubkey::Pubkey;
+    let mut _407: &&solana_program::pubkey::Pubkey;
+    let mut _408: !;
+    let _409: ();
+    let mut _410: &str;
+    let _411: &str;
+    let mut _412: solana_program::program_error::ProgramError;
+    let mut _413: solend_sdk::error::LendingError;
+    let mut _415: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::Bonus>;
+    let mut _416: std::result::Result<solend_sdk::state::Bonus, solana_program::program_error::ProgramError>;
+    let mut _417: &solend_sdk::state::Reserve;
+    let mut _418: &solend_sdk::state::Obligation;
+    let _419: &solend_sdk::state::Obligation;
+    let mut _420: isize;
+    let mut _422: !;
+    let mut _423: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _428: solend_sdk::state::CalculateLiquidationResult;
+    let mut _429: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::CalculateLiquidationResult>;
+    let mut _430: std::result::Result<solend_sdk::state::CalculateLiquidationResult, solana_program::program_error::ProgramError>;
+    let mut _431: &solend_sdk::state::Reserve;
+    let mut _432: u64;
+    let mut _433: &solend_sdk::state::Obligation;
+    let _434: &solend_sdk::state::Obligation;
+    let mut _435: &solend_sdk::state::ObligationLiquidity;
+    let mut _436: &solend_sdk::state::ObligationCollateral;
+    let mut _437: &solend_sdk::state::Bonus;
+    let _438: &solend_sdk::state::Bonus;
+    let mut _439: isize;
+    let mut _441: !;
+    let mut _442: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _444: ();
+    let mut _445: bool;
+    let mut _446: u64;
+    let mut _447: !;
+    let _448: ();
+    let mut _449: &str;
+    let _450: &str;
+    let mut _451: solana_program::program_error::ProgramError;
+    let mut _452: solend_sdk::error::LendingError;
+    let _453: ();
+    let mut _454: bool;
+    let mut _455: u64;
+    let mut _456: !;
+    let _457: ();
+    let mut _458: &str;
+    let _459: &str;
+    let mut _460: solana_program::program_error::ProgramError;
+    let mut _461: solend_sdk::error::LendingError;
+    let _462: ();
+    let mut _463: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _464: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _465: &mut solend_sdk::state::ReserveLiquidity;
+    let mut _466: u64;
+    let mut _467: solend_sdk::math::Decimal;
+    let mut _468: isize;
+    let mut _470: !;
+    let mut _471: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _473: ();
+    let mut _474: &mut solend_sdk::state::LastUpdate;
+    let _475: ();
+    let mut _476: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _477: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _478: solend_sdk::state::Reserve;
+    let mut _479: &mut [u8];
+    let mut _480: &mut &mut [u8];
+    let mut _481: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _482: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _483: std::cell::RefMut<'_, &mut [u8]>;
+    let mut _484: &std::cell::RefCell<&mut [u8]>;
+    let _485: &std::cell::RefCell<&mut [u8]>;
+    let mut _486: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _487: isize;
+    let mut _489: !;
+    let mut _490: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _492: ();
+    let mut _493: bool;
+    let mut _494: u64;
+    let mut _495: u64;
+    let mut _496: solend_sdk::math::Decimal;
+    let mut _497: solend_sdk::math::Decimal;
+    let mut _498: solend_sdk::math::Decimal;
+    let _499: ();
+    let mut _500: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _501: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _502: solend_sdk::state::Reserve;
+    let mut _503: &mut [u8];
+    let mut _504: &mut &mut [u8];
+    let mut _505: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _506: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _507: std::cell::RefMut<'_, &mut [u8]>;
+    let mut _508: &std::cell::RefCell<&mut [u8]>;
+    let _509: &std::cell::RefCell<&mut [u8]>;
+    let mut _510: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _511: isize;
+    let mut _513: !;
+    let mut _514: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _516: ();
+    let mut _517: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _518: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _519: &mut solend_sdk::state::Obligation;
+    let mut _520: solend_sdk::math::Decimal;
+    let mut _521: usize;
+    let mut _522: isize;
+    let mut _524: !;
+    let mut _525: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _527: ();
+    let mut _528: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _529: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _530: &mut solend_sdk::state::Obligation;
+    let mut _531: u64;
+    let mut _532: usize;
+    let mut _533: isize;
+    let mut _535: !;
+    let mut _536: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _538: ();
+    let mut _539: &mut solend_sdk::state::LastUpdate;
+    let _540: ();
+    let mut _541: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _542: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _543: solend_sdk::state::Obligation;
+    let mut _544: &mut [u8];
+    let mut _545: &mut &mut [u8];
+    let mut _546: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _547: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _548: std::cell::RefMut<'_, &mut [u8]>;
+    let mut _549: &std::cell::RefCell<&mut [u8]>;
+    let _550: &std::cell::RefCell<&mut [u8]>;
+    let mut _551: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _552: isize;
+    let mut _554: !;
+    let mut _555: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _557: ();
+    let mut _558: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _559: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _560: processor::TokenTransferParams<'_, '_>;
+    let mut _561: solana_program::account_info::AccountInfo<'_>;
+    let mut _562: &solana_program::account_info::AccountInfo<'_>;
+    let mut _563: solana_program::account_info::AccountInfo<'_>;
+    let mut _564: &solana_program::account_info::AccountInfo<'_>;
+    let mut _565: u64;
+    let mut _566: solana_program::account_info::AccountInfo<'_>;
+    let mut _567: &solana_program::account_info::AccountInfo<'_>;
+    let mut _568: &[&[u8]];
+    let mut _569: &[&[u8]; 0];
+    let _570: &[&[u8]; 0];
+    let _571: [&[u8]; 0];
+    let mut _572: solana_program::account_info::AccountInfo<'_>;
+    let mut _573: &solana_program::account_info::AccountInfo<'_>;
+    let mut _574: isize;
+    let mut _576: !;
+    let mut _577: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _579: ();
+    let mut _580: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _581: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _582: processor::TokenTransferParams<'_, '_>;
+    let mut _583: solana_program::account_info::AccountInfo<'_>;
+    let mut _584: &solana_program::account_info::AccountInfo<'_>;
+    let mut _585: solana_program::account_info::AccountInfo<'_>;
+    let mut _586: &solana_program::account_info::AccountInfo<'_>;
+    let mut _587: u64;
+    let mut _588: solana_program::account_info::AccountInfo<'_>;
+    let mut _589: &solana_program::account_info::AccountInfo<'_>;
+    let mut _590: &[&[u8]];
+    let mut _591: &[&[u8]; 2];
+    let mut _592: solana_program::account_info::AccountInfo<'_>;
+    let mut _593: &solana_program::account_info::AccountInfo<'_>;
+    let mut _594: isize;
+    let mut _596: !;
+    let mut _597: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _599: (u64, solend_sdk::state::Bonus);
+    let mut _600: u64;
+    let mut _601: solend_sdk::state::Bonus;
+    let mut _603: &mut [u8];
+    let mut _604: &mut [u8];
+    let mut _605: &mut [u8];
+    let mut _606: &mut [u8];
+    let mut _607: &solana_program::pubkey::Pubkey;
+    let mut _608: &solana_program::pubkey::Pubkey;
+    let mut _609: &solana_program::pubkey::Pubkey;
+    let mut _610: &solana_program::pubkey::Pubkey;
+    let mut _611: &mut [u8];
+    let mut _612: &mut [u8];
+    let mut _613: &mut [u8];
+    let mut _614: bool;
+    let mut _615: bool;
+    let mut _616: bool;
+    let mut _617: bool;
+    let mut _618: bool;
+    let mut _619: bool;
+    let mut _620: bool;
+    let mut _621: bool;
+    let mut _622: isize;
+    let mut _623: isize;
+    let mut _624: isize;
+    let mut _625: isize;
+    let mut _626: isize;
+    let mut _627: isize;
+    let mut _628: isize;
+    let mut _629: isize;
+    let mut _630: isize;
+    let mut _631: isize;
+    let mut _632: isize;
+    let mut _633: isize;
+    let mut _634: isize;
+    let mut _635: isize;
+    let mut _636: isize;
+    let mut _637: isize;
+    let mut _638: isize;
+    let mut _639: isize;
+    let mut _640: isize;
+    let mut _641: isize;
+    let mut _642: isize;
+    let mut _643: isize;
+    let mut _644: isize;
+    let mut _645: isize;
+    let mut _646: isize;
+    let mut _647: isize;
+    let mut _648: isize;
+    let mut _649: isize;
+    let mut _650: isize;
+    let mut _651: isize;
+    let mut _652: isize;
+    let mut _653: isize;
+    let mut _654: isize;
+    let mut _655: isize;
+    let mut _656: isize;
+    let mut _657: isize;
+    let mut _658: isize;
+    let mut _659: isize;
+    let mut _660: isize;
+    let mut _661: isize;
+    let mut _662: isize;
+    let mut _663: isize;
+    let mut _664: isize;
+    let mut _665: isize;
+    let mut _666: isize;
+    let mut _667: isize;
+    let mut _668: isize;
+    let mut _669: isize;
+    let mut _670: isize;
+    let mut _671: isize;
+    let mut _672: isize;
+    let mut _673: isize;
+    let mut _674: isize;
+    let mut _675: isize;
+    let mut _676: isize;
+    let mut _677: isize;
+    let mut _678: isize;
+    let mut _679: isize;
+    let mut _680: isize;
+    let mut _681: isize;
+    let mut _682: isize;
+    let mut _683: isize;
+    let mut _684: isize;
+    let mut _685: isize;
+    let mut _686: isize;
+    let mut _687: isize;
+    let mut _688: isize;
+    let mut _689: isize;
+    let mut _690: isize;
+    let mut _691: isize;
+    let mut _692: isize;
+    let mut _693: isize;
+    let mut _694: isize;
+    let mut _695: isize;
+    let mut _696: isize;
+    let mut _697: isize;
+    let mut _698: isize;
+    let mut _699: isize;
+    let mut _700: isize;
+    let mut _701: isize;
+    let mut _702: isize;
+    let mut _703: isize;
+    let mut _704: isize;
+    let mut _705: isize;
+    let mut _706: isize;
+    let mut _707: isize;
+    let mut _708: isize;
+    let mut _709: isize;
+    let mut _710: isize;
+    let mut _711: isize;
+    let mut _712: isize;
+    let mut _713: isize;
+    let mut _714: isize;
+    let mut _715: isize;
+    let mut _716: isize;
+    let mut _717: isize;
+    let mut _718: isize;
+    let mut _719: isize;
+    let mut _720: isize;
+    let mut _721: isize;
+    let mut _722: isize;
+    let mut _723: *const solend_sdk::state::LendingMarket;
+    let mut _724: *const solend_sdk::state::Reserve;
+    let mut _725: *const solend_sdk::state::Reserve;
+    let mut _726: *const solend_sdk::state::Reserve;
+    let mut _727: *const solend_sdk::state::Reserve;
+    let mut _728: *const solend_sdk::state::Reserve;
+    let mut _729: *const solend_sdk::state::Reserve;
+    let mut _730: *const solend_sdk::state::Reserve;
+    let mut _731: *const solend_sdk::state::Reserve;
+    let mut _732: *const solend_sdk::state::Reserve;
+    let mut _733: *const solend_sdk::state::Reserve;
+    let mut _734: *const solend_sdk::state::LendingMarket;
+    let mut _735: *const solend_sdk::state::LendingMarket;
+    let mut _736: *const solend_sdk::state::LendingMarket;
+    let mut _737: *const solend_sdk::state::LendingMarket;
+    let mut _738: *const solend_sdk::state::Reserve;
+    let mut _739: *const solend_sdk::state::Reserve;
+    let mut _740: *const solend_sdk::state::Reserve;
+    let mut _741: *const solend_sdk::state::Reserve;
+    let mut _742: *const solend_sdk::state::Reserve;
+    let mut _743: *const solend_sdk::state::Reserve;
+    let mut _744: *const solend_sdk::state::Reserve;
+    let mut _745: *const solend_sdk::state::Reserve;
+    scope 1 {
+        debug lending_market => _15;
+        let mut _53: std::boxed::Box<solend_sdk::state::Reserve>;
+        let _66: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+        let _69: solend_sdk::state::Reserve;
+        scope 6 {
+            debug repay_reserve => _53;
+            let _131: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+            let _134: bool;
+            let mut _141: std::boxed::Box<solend_sdk::state::Reserve>;
+            let _154: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+            let _157: solend_sdk::state::Reserve;
+            scope 11 {
+                debug residual => _131;
+                scope 12 {
+                }
+            }
+            scope 13 {
+                debug val => _134;
+                scope 14 {
+                }
+            }
+            scope 15 {
+                debug withdraw_reserve => _141;
+                let _219: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                let _222: bool;
+                let mut _229: solend_sdk::state::Obligation;
+                let _241: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                let _244: solend_sdk::state::Obligation;
+                scope 20 {
+                    debug residual => _219;
+                    scope 21 {
+                    }
+                }
+                scope 22 {
+                    debug val => _222;
+                    scope 23 {
+                    }
+                }
+                scope 24 {
+                    debug obligation => _229;
+                    let _273: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                    let _276: bool;
+                    let _328: &solend_sdk::state::ObligationLiquidity;
+                    let _329: usize;
+                    let _336: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                    let _339: (&solend_sdk::state::ObligationLiquidity, usize);
+                    scope 29 {
+                        debug residual => _273;
+                        scope 30 {
+                        }
+                    }
+                    scope 31 {
+                        debug val => _276;
+                        scope 32 {
+                        }
+                    }
+                    scope 33 {
+                        debug liquidator => _318;
+                        let _318: solana_program::pubkey::Pubkey;
+                        let mut _776: *const ();
+                        let mut _777: usize;
+                        let mut _778: usize;
+                        let mut _779: usize;
+                        let mut _780: usize;
+                        let mut _781: bool;
+                    }
+                    scope 34 {
+                        debug liquidity => _328;
+                        debug liquidity_index => _329;
+                        let _360: &solend_sdk::state::ObligationCollateral;
+                        let _361: usize;
+                        let _368: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                        let _371: (&solend_sdk::state::ObligationCollateral, usize);
+                        scope 39 {
+                            debug collateral => _360;
+                            debug collateral_index => _361;
+                            let _383: &[&[u8]; 2];
+                            let mut _770: *const ();
+                            let mut _771: usize;
+                            let mut _772: usize;
+                            let mut _773: usize;
+                            let mut _774: usize;
+                            let mut _775: bool;
+                            scope 44 {
+                                debug authority_signer_seeds => _383;
+                                let _392: solana_program::pubkey::Pubkey;
+                                let _399: std::result::Result<std::convert::Infallible, solana_program::pubkey::PubkeyError>;
+                                let _402: solana_program::pubkey::Pubkey;
+                                scope 45 {
+                                    debug lending_market_authority_pubkey => _392;
+                                    let _414: solend_sdk::state::Bonus;
+                                    let _421: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                    let _424: solend_sdk::state::Bonus;
+                                    scope 50 {
+                                        debug bonus => _414;
+                                        let _425: solend_sdk::math::Decimal;
+                                        let _426: u64;
+                                        let _427: u64;
+                                        let _440: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                        let _443: solend_sdk::state::CalculateLiquidationResult;
+                                        scope 55 {
+                                            debug settle_amount => _425;
+                                            debug repay_amount => _426;
+                                            debug withdraw_amount => _427;
+                                            let _469: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _472: ();
+                                            let _488: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _491: ();
+                                            let _512: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _515: ();
+                                            let _523: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _526: ();
+                                            let _534: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _537: ();
+                                            let _553: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _556: ();
+                                            let _575: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _578: ();
+                                            let _595: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                            let _598: ();
+                                            let mut _602: &[&[u8]; 0];
+                                            let mut _746: *const ();
+                                            let mut _747: usize;
+                                            let mut _748: usize;
+                                            let mut _749: usize;
+                                            let mut _750: usize;
+                                            let mut _751: bool;
+                                            let mut _752: *const ();
+                                            let mut _753: usize;
+                                            let mut _754: usize;
+                                            let mut _755: usize;
+                                            let mut _756: usize;
+                                            let mut _757: bool;
+                                            let mut _758: *const ();
+                                            let mut _759: usize;
+                                            let mut _760: usize;
+                                            let mut _761: usize;
+                                            let mut _762: usize;
+                                            let mut _763: bool;
+                                            let mut _764: *const ();
+                                            let mut _765: usize;
+                                            let mut _766: usize;
+                                            let mut _767: usize;
+                                            let mut _768: usize;
+                                            let mut _769: bool;
+                                            scope 60 {
+                                                debug residual => _469;
+                                                scope 61 {
+                                                }
+                                            }
+                                            scope 62 {
+                                                debug val => _472;
+                                                scope 63 {
+                                                }
+                                            }
+                                            scope 64 {
+                                                debug residual => _488;
+                                                scope 65 {
+                                                }
+                                            }
+                                            scope 66 {
+                                                debug val => _491;
+                                                scope 67 {
+                                                }
+                                            }
+                                            scope 68 {
+                                                debug residual => _512;
+                                                scope 69 {
+                                                }
+                                            }
+                                            scope 70 {
+                                                debug val => _515;
+                                                scope 71 {
+                                                }
+                                            }
+                                            scope 72 {
+                                                debug residual => _523;
+                                                scope 73 {
+                                                }
+                                            }
+                                            scope 74 {
+                                                debug val => _526;
+                                                scope 75 {
+                                                }
+                                            }
+                                            scope 76 {
+                                                debug residual => _534;
+                                                scope 77 {
+                                                }
+                                            }
+                                            scope 78 {
+                                                debug val => _537;
+                                                scope 79 {
+                                                }
+                                            }
+                                            scope 80 {
+                                                debug residual => _553;
+                                                scope 81 {
+                                                }
+                                            }
+                                            scope 82 {
+                                                debug val => _556;
+                                                scope 83 {
+                                                }
+                                            }
+                                            scope 84 {
+                                                debug residual => _575;
+                                                scope 85 {
+                                                }
+                                            }
+                                            scope 86 {
+                                                debug val => _578;
+                                                scope 87 {
+                                                }
+                                            }
+                                            scope 88 {
+                                                debug residual => _595;
+                                                scope 89 {
+                                                }
+                                            }
+                                            scope 90 {
+                                                debug val => _598;
+                                                scope 91 {
+                                                }
+                                            }
+                                        }
+                                        scope 56 {
+                                            debug residual => _440;
+                                            scope 57 {
+                                            }
+                                        }
+                                        scope 58 {
+                                            debug val => _443;
+                                            scope 59 {
+                                            }
+                                        }
+                                    }
+                                    scope 51 {
+                                        debug residual => _421;
+                                        scope 52 {
+                                        }
+                                    }
+                                    scope 53 {
+                                        debug val => _424;
+                                        scope 54 {
+                                        }
+                                    }
+                                }
+                                scope 46 {
+                                    debug residual => _399;
+                                    scope 47 {
+                                    }
+                                }
+                                scope 48 {
+                                    debug val => _402;
+                                    scope 49 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 40 {
+                            debug residual => _368;
+                            scope 41 {
+                            }
+                        }
+                        scope 42 {
+                            debug val => _371;
+                            scope 43 {
+                            }
+                        }
+                    }
+                    scope 35 {
+                        debug residual => _336;
+                        scope 36 {
+                        }
+                    }
+                    scope 37 {
+                        debug val => _339;
+                        scope 38 {
+                        }
+                    }
+                }
+                scope 25 {
+                    debug residual => _241;
+                    scope 26 {
+                    }
+                }
+                scope 27 {
+                    debug val => _244;
+                    scope 28 {
+                    }
+                }
+            }
+            scope 16 {
+                debug residual => _154;
+                scope 17 {
+                }
+            }
+            scope 18 {
+                debug val => _157;
+                scope 19 {
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _66;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _69;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _28;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _31;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        _614 = const false;
+        _615 = const false;
+        _621 = const false;
+        _620 = const false;
+        _619 = const false;
+        _618 = const false;
+        _617 = const false;
+        _616 = const false;
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &((*_10).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _25 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _26) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _24 = &(*_25);
+        StorageDead(_26);
+        _23 = RefCell::<&mut [u8]>::borrow(move _24) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_24);
+        _22 = &_23;
+        _21 = &(*_22);
+        _20 = <Ref<'_, &mut [u8]> as Deref>::deref(move _21) -> [return: bb3, unwind: bb322];
+    }
+
+    bb3: {
+        _603 = deref_copy (*_20);
+        _19 = &(*_603);
+        StorageDead(_21);
+        _18 = <LendingMarket as Pack>::unpack(move _19) -> [return: bb4, unwind: bb322];
+    }
+
+    bb4: {
+        StorageDead(_19);
+        _17 = <Result<LendingMarket, ProgramError> as Try>::branch(move _18) -> [return: bb5, unwind: bb322];
+    }
+
+    bb5: {
+        _620 = const true;
+        _621 = const true;
+        StorageDead(_18);
+        _27 = discriminant(_17);
+        switchInt(move _27) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_31);
+        _31 = move ((_17 as Continue).0: solend_sdk::state::LendingMarket);
+        _16 = move _31;
+        StorageDead(_31);
+        _15 = Box::<LendingMarket>::new(move _16) -> [return: bb10, unwind: bb354];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_28);
+        _28 = move ((_17 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_30);
+        _30 = move _28;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _30) -> [return: bb9, unwind: bb354];
+    }
+
+    bb9: {
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_16);
+        _702 = discriminant(_17);
+        drop(_23) -> [return: bb303, unwind: bb323];
+    }
+
+    bb10: {
+        StorageDead(_16);
+        _622 = discriminant(_17);
+        drop(_23) -> [return: bb11, unwind: bb321];
+    }
+
+    bb11: {
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_20);
+        _620 = const false;
+        _621 = const false;
+        StorageDead(_17);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = &((*_10).3: &solana_program::pubkey::Pubkey);
+        StorageLive(_35);
+        _35 = &_1;
+        _33 = <&Pubkey as PartialEq>::ne(move _34, move _35) -> [return: bb12, unwind: bb321];
+    }
+
+    bb12: {
+        switchInt(move _33) -> [0: bb16, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = const "Lending market provided is not owned by the lending program";
+        _38 = &(*_39);
+        _37 = solana_program::log::sol_log(move _38) -> [return: bb14, unwind: bb321];
+    }
+
+    bb14: {
+        StorageDead(_38);
+        StorageDead(_39);
+        StorageDead(_37);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = solend_sdk::error::LendingError::InvalidAccountOwner;
+        _40 = <LendingError as Into<ProgramError>>::into(move _41) -> [return: bb15, unwind: bb321];
+    }
+
+    bb15: {
+        StorageDead(_41);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _40);
+        StorageDead(_40);
+        StorageDead(_33);
+        StorageDead(_32);
+        goto -> bb302;
+    }
+
+    bb16: {
+        StorageDead(_35);
+        StorageDead(_34);
+        _32 = const ();
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _723 = (((_15.0: std::ptr::Unique<solend_sdk::state::LendingMarket>).0: std::ptr::NonNull<solend_sdk::state::LendingMarket>).0: *const solend_sdk::state::LendingMarket);
+        _45 = &((*_723).4: solana_program::pubkey::Pubkey);
+        _44 = &_45;
+        StorageLive(_46);
+        _46 = &((*_14).0: &solana_program::pubkey::Pubkey);
+        _43 = <&Pubkey as PartialEq>::ne(move _44, move _46) -> [return: bb17, unwind: bb321];
+    }
+
+    bb17: {
+        switchInt(move _43) -> [0: bb21, otherwise: bb18];
+    }
+
+    bb18: {
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = const "Lending market token program does not match the token program provided";
+        _49 = &(*_50);
+        _48 = solana_program::log::sol_log(move _49) -> [return: bb19, unwind: bb321];
+    }
+
+    bb19: {
+        StorageDead(_49);
+        StorageDead(_50);
+        StorageDead(_48);
+        StorageLive(_51);
+        StorageLive(_52);
+        _52 = InvalidTokenProgram;
+        _51 = <LendingError as Into<ProgramError>>::into(move _52) -> [return: bb20, unwind: bb321];
+    }
+
+    bb20: {
+        StorageDead(_52);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _51);
+        StorageDead(_51);
+        StorageDead(_43);
+        StorageDead(_42);
+        goto -> bb302;
+    }
+
+    bb21: {
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageDead(_44);
+        _42 = const ();
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = &((*_5).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _63 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _64) -> [return: bb22, unwind: bb321];
+    }
+
+    bb22: {
+        _62 = &(*_63);
+        StorageDead(_64);
+        _61 = RefCell::<&mut [u8]>::borrow(move _62) -> [return: bb23, unwind: bb321];
+    }
+
+    bb23: {
+        StorageDead(_62);
+        _60 = &_61;
+        _59 = &(*_60);
+        _58 = <Ref<'_, &mut [u8]> as Deref>::deref(move _59) -> [return: bb24, unwind: bb320];
+    }
+
+    bb24: {
+        _604 = deref_copy (*_58);
+        _57 = &(*_604);
+        StorageDead(_59);
+        _56 = <Reserve as Pack>::unpack(move _57) -> [return: bb25, unwind: bb320];
+    }
+
+    bb25: {
+        StorageDead(_57);
+        _55 = <Result<Reserve, ProgramError> as Try>::branch(move _56) -> [return: bb26, unwind: bb320];
+    }
+
+    bb26: {
+        _618 = const true;
+        _619 = const true;
+        StorageDead(_56);
+        _65 = discriminant(_55);
+        switchInt(move _65) -> [0: bb27, 1: bb28, otherwise: bb7];
+    }
+
+    bb27: {
+        StorageLive(_69);
+        _69 = move ((_55 as Continue).0: solend_sdk::state::Reserve);
+        _54 = move _69;
+        StorageDead(_69);
+        _53 = Box::<Reserve>::new(move _54) -> [return: bb30, unwind: bb353];
+    }
+
+    bb28: {
+        StorageLive(_66);
+        _66 = move ((_55 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_68);
+        _68 = move _66;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _68) -> [return: bb29, unwind: bb353];
+    }
+
+    bb29: {
+        StorageDead(_68);
+        StorageDead(_66);
+        StorageDead(_54);
+        _700 = discriminant(_55);
+        drop(_61) -> [return: bb300, unwind: bb321];
+    }
+
+    bb30: {
+        StorageDead(_54);
+        _624 = discriminant(_55);
+        drop(_61) -> [return: bb31, unwind: bb319];
+    }
+
+    bb31: {
+        StorageDead(_63);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageDead(_58);
+        _618 = const false;
+        _619 = const false;
+        StorageDead(_55);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = &((*_5).3: &solana_program::pubkey::Pubkey);
+        StorageLive(_73);
+        _73 = &_1;
+        _71 = <&Pubkey as PartialEq>::ne(move _72, move _73) -> [return: bb32, unwind: bb319];
+    }
+
+    bb32: {
+        switchInt(move _71) -> [0: bb36, otherwise: bb33];
+    }
+
+    bb33: {
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageLive(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        _77 = const "Repay reserve provided is not owned by the lending program";
+        _76 = &(*_77);
+        _75 = solana_program::log::sol_log(move _76) -> [return: bb34, unwind: bb319];
+    }
+
+    bb34: {
+        StorageDead(_76);
+        StorageDead(_77);
+        StorageDead(_75);
+        StorageLive(_78);
+        StorageLive(_79);
+        _79 = solend_sdk::error::LendingError::InvalidAccountOwner;
+        _78 = <LendingError as Into<ProgramError>>::into(move _79) -> [return: bb35, unwind: bb319];
+    }
+
+    bb35: {
+        StorageDead(_79);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _78);
+        StorageDead(_78);
+        StorageDead(_71);
+        StorageDead(_70);
+        goto -> bb299;
+    }
+
+    bb36: {
+        StorageDead(_73);
+        StorageDead(_72);
+        _70 = const ();
+        StorageDead(_71);
+        StorageDead(_70);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        _724 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _83 = &((*_724).2: solana_program::pubkey::Pubkey);
+        _82 = &_83;
+        StorageLive(_84);
+        _84 = &((*_10).0: &solana_program::pubkey::Pubkey);
+        _81 = <&Pubkey as PartialEq>::ne(move _82, move _84) -> [return: bb37, unwind: bb319];
+    }
+
+    bb37: {
+        switchInt(move _81) -> [0: bb41, otherwise: bb38];
+    }
+
+    bb38: {
+        StorageDead(_84);
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        _88 = const "Repay reserve lending market does not match the lending market provided";
+        _87 = &(*_88);
+        _86 = solana_program::log::sol_log(move _87) -> [return: bb39, unwind: bb319];
+    }
+
+    bb39: {
+        StorageDead(_87);
+        StorageDead(_88);
+        StorageDead(_86);
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = InvalidAccountInput;
+        _89 = <LendingError as Into<ProgramError>>::into(move _90) -> [return: bb40, unwind: bb319];
+    }
+
+    bb40: {
+        StorageDead(_90);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _89);
+        StorageDead(_89);
+        StorageDead(_81);
+        StorageDead(_80);
+        goto -> bb299;
+    }
+
+    bb41: {
+        StorageDead(_84);
+        StorageDead(_83);
+        StorageDead(_82);
+        _80 = const ();
+        StorageDead(_81);
+        StorageDead(_80);
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        _725 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _94 = &(((*_725).3: solend_sdk::state::ReserveLiquidity).2: solana_program::pubkey::Pubkey);
+        _93 = &_94;
+        StorageLive(_95);
+        _95 = &((*_6).0: &solana_program::pubkey::Pubkey);
+        _92 = <&Pubkey as PartialEq>::ne(move _93, move _95) -> [return: bb42, unwind: bb319];
+    }
+
+    bb42: {
+        switchInt(move _92) -> [0: bb46, otherwise: bb43];
+    }
+
+    bb43: {
+        StorageDead(_95);
+        StorageDead(_94);
+        StorageDead(_93);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        _99 = const "Repay reserve liquidity supply does not match the repay reserve liquidity supply provided";
+        _98 = &(*_99);
+        _97 = solana_program::log::sol_log(move _98) -> [return: bb44, unwind: bb319];
+    }
+
+    bb44: {
+        StorageDead(_98);
+        StorageDead(_99);
+        StorageDead(_97);
+        StorageLive(_100);
+        StorageLive(_101);
+        _101 = InvalidAccountInput;
+        _100 = <LendingError as Into<ProgramError>>::into(move _101) -> [return: bb45, unwind: bb319];
+    }
+
+    bb45: {
+        StorageDead(_101);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _100);
+        StorageDead(_100);
+        StorageDead(_92);
+        StorageDead(_91);
+        goto -> bb299;
+    }
+
+    bb46: {
+        StorageDead(_95);
+        StorageDead(_94);
+        StorageDead(_93);
+        _91 = const ();
+        StorageDead(_92);
+        StorageDead(_91);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        _726 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _105 = &(((*_726).3: solend_sdk::state::ReserveLiquidity).2: solana_program::pubkey::Pubkey);
+        _104 = &_105;
+        StorageLive(_106);
+        _106 = &((*_3).0: &solana_program::pubkey::Pubkey);
+        _103 = <&Pubkey as PartialEq>::eq(move _104, move _106) -> [return: bb47, unwind: bb319];
+    }
+
+    bb47: {
+        switchInt(move _103) -> [0: bb51, otherwise: bb48];
+    }
+
+    bb48: {
+        StorageDead(_106);
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        _110 = const "Repay reserve liquidity supply cannot be used as the source liquidity provided";
+        _109 = &(*_110);
+        _108 = solana_program::log::sol_log(move _109) -> [return: bb49, unwind: bb319];
+    }
+
+    bb49: {
+        StorageDead(_109);
+        StorageDead(_110);
+        StorageDead(_108);
+        StorageLive(_111);
+        StorageLive(_112);
+        _112 = InvalidAccountInput;
+        _111 = <LendingError as Into<ProgramError>>::into(move _112) -> [return: bb50, unwind: bb319];
+    }
+
+    bb50: {
+        StorageDead(_112);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _111);
+        StorageDead(_111);
+        StorageDead(_103);
+        StorageDead(_102);
+        goto -> bb299;
+    }
+
+    bb51: {
+        StorageDead(_106);
+        StorageDead(_105);
+        StorageDead(_104);
+        _102 = const ();
+        StorageDead(_103);
+        StorageDead(_102);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        StorageLive(_116);
+        _727 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _116 = &(((*_727).4: solend_sdk::state::ReserveCollateral).2: solana_program::pubkey::Pubkey);
+        _115 = &_116;
+        StorageLive(_117);
+        _117 = &((*_4).0: &solana_program::pubkey::Pubkey);
+        _114 = <&Pubkey as PartialEq>::eq(move _115, move _117) -> [return: bb52, unwind: bb319];
+    }
+
+    bb52: {
+        switchInt(move _114) -> [0: bb56, otherwise: bb53];
+    }
+
+    bb53: {
+        StorageDead(_117);
+        StorageDead(_116);
+        StorageDead(_115);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        _121 = const "Repay reserve collateral supply cannot be used as the destination collateral provided";
+        _120 = &(*_121);
+        _119 = solana_program::log::sol_log(move _120) -> [return: bb54, unwind: bb319];
+    }
+
+    bb54: {
+        StorageDead(_120);
+        StorageDead(_121);
+        StorageDead(_119);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = InvalidAccountInput;
+        _122 = <LendingError as Into<ProgramError>>::into(move _123) -> [return: bb55, unwind: bb319];
+    }
+
+    bb55: {
+        StorageDead(_123);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _122);
+        StorageDead(_122);
+        StorageDead(_114);
+        StorageDead(_113);
+        goto -> bb299;
+    }
+
+    bb56: {
+        StorageDead(_117);
+        StorageDead(_116);
+        StorageDead(_115);
+        _113 = const ();
+        StorageDead(_114);
+        StorageDead(_113);
+        StorageLive(_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        StorageLive(_127);
+        StorageLive(_128);
+        _728 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _128 = &((*_728).1: solend_sdk::state::LastUpdate);
+        StorageLive(_129);
+        _129 = ((*_13).0: u64);
+        _127 = LastUpdate::is_stale(move _128, move _129) -> [return: bb57, unwind: bb319];
+    }
+
+    bb57: {
+        StorageDead(_129);
+        StorageDead(_128);
+        _126 = <Result<bool, ProgramError> as Try>::branch(move _127) -> [return: bb58, unwind: bb319];
+    }
+
+    bb58: {
+        StorageDead(_127);
+        _130 = discriminant(_126);
+        switchInt(move _130) -> [0: bb59, 1: bb60, otherwise: bb7];
+    }
+
+    bb59: {
+        StorageLive(_134);
+        _134 = ((_126 as Continue).0: bool);
+        _125 = _134;
+        StorageDead(_134);
+        switchInt(move _125) -> [0: bb325, otherwise: bb324];
+    }
+
+    bb60: {
+        StorageLive(_131);
+        _131 = move ((_126 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_133);
+        _133 = move _131;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _133) -> [return: bb61, unwind: bb352];
+    }
+
+    bb61: {
+        StorageDead(_133);
+        StorageDead(_131);
+        _698 = discriminant(_126);
+        StorageDead(_126);
+        goto -> bb298;
+    }
+
+    bb62: {
+        StorageDead(_137);
+        StorageDead(_138);
+        StorageDead(_136);
+        StorageLive(_139);
+        StorageLive(_140);
+        _140 = ReserveStale;
+        _139 = <LendingError as Into<ProgramError>>::into(move _140) -> [return: bb63, unwind: bb319];
+    }
+
+    bb63: {
+        StorageDead(_140);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _139);
+        StorageDead(_139);
+        goto -> bb298;
+    }
+
+    bb64: {
+        _150 = &(*_151);
+        StorageDead(_152);
+        _149 = RefCell::<&mut [u8]>::borrow(move _150) -> [return: bb65, unwind: bb319];
+    }
+
+    bb65: {
+        StorageDead(_150);
+        _148 = &_149;
+        _147 = &(*_148);
+        _146 = <Ref<'_, &mut [u8]> as Deref>::deref(move _147) -> [return: bb66, unwind: bb318];
+    }
+
+    bb66: {
+        _605 = deref_copy (*_146);
+        _145 = &(*_605);
+        StorageDead(_147);
+        _144 = <Reserve as Pack>::unpack(move _145) -> [return: bb67, unwind: bb318];
+    }
+
+    bb67: {
+        StorageDead(_145);
+        _143 = <Result<Reserve, ProgramError> as Try>::branch(move _144) -> [return: bb68, unwind: bb318];
+    }
+
+    bb68: {
+        _616 = const true;
+        _617 = const true;
+        StorageDead(_144);
+        _153 = discriminant(_143);
+        switchInt(move _153) -> [0: bb69, 1: bb70, otherwise: bb7];
+    }
+
+    bb69: {
+        StorageLive(_157);
+        _157 = move ((_143 as Continue).0: solend_sdk::state::Reserve);
+        _142 = move _157;
+        StorageDead(_157);
+        _141 = Box::<Reserve>::new(move _142) -> [return: bb72, unwind: bb351];
+    }
+
+    bb70: {
+        StorageLive(_154);
+        _154 = move ((_143 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_156);
+        _156 = move _154;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _156) -> [return: bb71, unwind: bb351];
+    }
+
+    bb71: {
+        StorageDead(_156);
+        StorageDead(_154);
+        StorageDead(_142);
+        _696 = discriminant(_143);
+        drop(_149) -> [return: bb296, unwind: bb319];
+    }
+
+    bb72: {
+        StorageDead(_142);
+        _630 = discriminant(_143);
+        drop(_149) -> [return: bb73, unwind: bb317];
+    }
+
+    bb73: {
+        StorageDead(_151);
+        StorageDead(_149);
+        StorageDead(_148);
+        StorageDead(_146);
+        _616 = const false;
+        _617 = const false;
+        StorageDead(_143);
+        StorageLive(_158);
+        StorageLive(_159);
+        StorageLive(_160);
+        _160 = &((*_7).3: &solana_program::pubkey::Pubkey);
+        StorageLive(_161);
+        _161 = &_1;
+        _159 = <&Pubkey as PartialEq>::ne(move _160, move _161) -> [return: bb74, unwind: bb317];
+    }
+
+    bb74: {
+        switchInt(move _159) -> [0: bb78, otherwise: bb75];
+    }
+
+    bb75: {
+        StorageDead(_161);
+        StorageDead(_160);
+        StorageLive(_163);
+        StorageLive(_164);
+        StorageLive(_165);
+        _165 = const "Withdraw reserve provided is not owned by the lending program";
+        _164 = &(*_165);
+        _163 = solana_program::log::sol_log(move _164) -> [return: bb76, unwind: bb317];
+    }
+
+    bb76: {
+        StorageDead(_164);
+        StorageDead(_165);
+        StorageDead(_163);
+        StorageLive(_166);
+        StorageLive(_167);
+        _167 = solend_sdk::error::LendingError::InvalidAccountOwner;
+        _166 = <LendingError as Into<ProgramError>>::into(move _167) -> [return: bb77, unwind: bb317];
+    }
+
+    bb77: {
+        StorageDead(_167);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _166);
+        StorageDead(_166);
+        StorageDead(_159);
+        StorageDead(_158);
+        goto -> bb295;
+    }
+
+    bb78: {
+        StorageDead(_161);
+        StorageDead(_160);
+        _158 = const ();
+        StorageDead(_159);
+        StorageDead(_158);
+        StorageLive(_168);
+        StorageLive(_169);
+        StorageLive(_170);
+        StorageLive(_171);
+        _729 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _171 = &((*_729).2: solana_program::pubkey::Pubkey);
+        _170 = &_171;
+        StorageLive(_172);
+        _172 = &((*_10).0: &solana_program::pubkey::Pubkey);
+        _169 = <&Pubkey as PartialEq>::ne(move _170, move _172) -> [return: bb79, unwind: bb317];
+    }
+
+    bb79: {
+        switchInt(move _169) -> [0: bb83, otherwise: bb80];
+    }
+
+    bb80: {
+        StorageDead(_172);
+        StorageDead(_171);
+        StorageDead(_170);
+        StorageLive(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        _176 = const "Withdraw reserve lending market does not match the lending market provided";
+        _175 = &(*_176);
+        _174 = solana_program::log::sol_log(move _175) -> [return: bb81, unwind: bb317];
+    }
+
+    bb81: {
+        StorageDead(_175);
+        StorageDead(_176);
+        StorageDead(_174);
+        StorageLive(_177);
+        StorageLive(_178);
+        _178 = InvalidAccountInput;
+        _177 = <LendingError as Into<ProgramError>>::into(move _178) -> [return: bb82, unwind: bb317];
+    }
+
+    bb82: {
+        StorageDead(_178);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _177);
+        StorageDead(_177);
+        StorageDead(_169);
+        StorageDead(_168);
+        goto -> bb295;
+    }
+
+    bb83: {
+        StorageDead(_172);
+        StorageDead(_171);
+        StorageDead(_170);
+        _168 = const ();
+        StorageDead(_169);
+        StorageDead(_168);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        StorageLive(_182);
+        _730 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _182 = &(((*_730).4: solend_sdk::state::ReserveCollateral).2: solana_program::pubkey::Pubkey);
+        _181 = &_182;
+        StorageLive(_183);
+        _183 = &((*_8).0: &solana_program::pubkey::Pubkey);
+        _180 = <&Pubkey as PartialEq>::ne(move _181, move _183) -> [return: bb84, unwind: bb317];
+    }
+
+    bb84: {
+        switchInt(move _180) -> [0: bb88, otherwise: bb85];
+    }
+
+    bb85: {
+        StorageDead(_183);
+        StorageDead(_182);
+        StorageDead(_181);
+        StorageLive(_185);
+        StorageLive(_186);
+        StorageLive(_187);
+        _187 = const "Withdraw reserve collateral supply does not match the withdraw reserve collateral supply provided";
+        _186 = &(*_187);
+        _185 = solana_program::log::sol_log(move _186) -> [return: bb86, unwind: bb317];
+    }
+
+    bb86: {
+        StorageDead(_186);
+        StorageDead(_187);
+        StorageDead(_185);
+        StorageLive(_188);
+        StorageLive(_189);
+        _189 = InvalidAccountInput;
+        _188 = <LendingError as Into<ProgramError>>::into(move _189) -> [return: bb87, unwind: bb317];
+    }
+
+    bb87: {
+        StorageDead(_189);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _188);
+        StorageDead(_188);
+        StorageDead(_180);
+        StorageDead(_179);
+        goto -> bb295;
+    }
+
+    bb88: {
+        StorageDead(_183);
+        StorageDead(_182);
+        StorageDead(_181);
+        _179 = const ();
+        StorageDead(_180);
+        StorageDead(_179);
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        _731 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _193 = &(((*_731).3: solend_sdk::state::ReserveLiquidity).2: solana_program::pubkey::Pubkey);
+        _192 = &_193;
+        StorageLive(_194);
+        _194 = &((*_3).0: &solana_program::pubkey::Pubkey);
+        _191 = <&Pubkey as PartialEq>::eq(move _192, move _194) -> [return: bb89, unwind: bb317];
+    }
+
+    bb89: {
+        switchInt(move _191) -> [0: bb93, otherwise: bb90];
+    }
+
+    bb90: {
+        StorageDead(_194);
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageLive(_196);
+        StorageLive(_197);
+        StorageLive(_198);
+        _198 = const "Withdraw reserve liquidity supply cannot be used as the source liquidity provided";
+        _197 = &(*_198);
+        _196 = solana_program::log::sol_log(move _197) -> [return: bb91, unwind: bb317];
+    }
+
+    bb91: {
+        StorageDead(_197);
+        StorageDead(_198);
+        StorageDead(_196);
+        StorageLive(_199);
+        StorageLive(_200);
+        _200 = InvalidAccountInput;
+        _199 = <LendingError as Into<ProgramError>>::into(move _200) -> [return: bb92, unwind: bb317];
+    }
+
+    bb92: {
+        StorageDead(_200);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _199);
+        StorageDead(_199);
+        StorageDead(_191);
+        StorageDead(_190);
+        goto -> bb295;
+    }
+
+    bb93: {
+        StorageDead(_194);
+        StorageDead(_193);
+        StorageDead(_192);
+        _190 = const ();
+        StorageDead(_191);
+        StorageDead(_190);
+        StorageLive(_201);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        _732 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _204 = &(((*_732).4: solend_sdk::state::ReserveCollateral).2: solana_program::pubkey::Pubkey);
+        _203 = &_204;
+        StorageLive(_205);
+        _205 = &((*_4).0: &solana_program::pubkey::Pubkey);
+        _202 = <&Pubkey as PartialEq>::eq(move _203, move _205) -> [return: bb94, unwind: bb317];
+    }
+
+    bb94: {
+        switchInt(move _202) -> [0: bb98, otherwise: bb95];
+    }
+
+    bb95: {
+        StorageDead(_205);
+        StorageDead(_204);
+        StorageDead(_203);
+        StorageLive(_207);
+        StorageLive(_208);
+        StorageLive(_209);
+        _209 = const "Withdraw reserve collateral supply cannot be used as the destination collateral provided";
+        _208 = &(*_209);
+        _207 = solana_program::log::sol_log(move _208) -> [return: bb96, unwind: bb317];
+    }
+
+    bb96: {
+        StorageDead(_208);
+        StorageDead(_209);
+        StorageDead(_207);
+        StorageLive(_210);
+        StorageLive(_211);
+        _211 = InvalidAccountInput;
+        _210 = <LendingError as Into<ProgramError>>::into(move _211) -> [return: bb97, unwind: bb317];
+    }
+
+    bb97: {
+        StorageDead(_211);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _210);
+        StorageDead(_210);
+        StorageDead(_202);
+        StorageDead(_201);
+        goto -> bb295;
+    }
+
+    bb98: {
+        StorageDead(_205);
+        StorageDead(_204);
+        StorageDead(_203);
+        _201 = const ();
+        StorageDead(_202);
+        StorageDead(_201);
+        StorageLive(_212);
+        StorageLive(_213);
+        StorageLive(_214);
+        StorageLive(_215);
+        StorageLive(_216);
+        _733 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _216 = &((*_733).1: solend_sdk::state::LastUpdate);
+        StorageLive(_217);
+        _217 = ((*_13).0: u64);
+        _215 = LastUpdate::is_stale(move _216, move _217) -> [return: bb99, unwind: bb317];
+    }
+
+    bb99: {
+        StorageDead(_217);
+        StorageDead(_216);
+        _214 = <Result<bool, ProgramError> as Try>::branch(move _215) -> [return: bb100, unwind: bb317];
+    }
+
+    bb100: {
+        StorageDead(_215);
+        _218 = discriminant(_214);
+        switchInt(move _218) -> [0: bb101, 1: bb102, otherwise: bb7];
+    }
+
+    bb101: {
+        StorageLive(_222);
+        _222 = ((_214 as Continue).0: bool);
+        _213 = _222;
+        StorageDead(_222);
+        switchInt(move _213) -> [0: bb327, otherwise: bb326];
+    }
+
+    bb102: {
+        StorageLive(_219);
+        _219 = move ((_214 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_221);
+        _221 = move _219;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _221) -> [return: bb103, unwind: bb350];
+    }
+
+    bb103: {
+        StorageDead(_221);
+        StorageDead(_219);
+        _694 = discriminant(_214);
+        StorageDead(_214);
+        goto -> bb294;
+    }
+
+    bb104: {
+        StorageDead(_225);
+        StorageDead(_226);
+        StorageDead(_224);
+        StorageLive(_227);
+        StorageLive(_228);
+        _228 = ReserveStale;
+        _227 = <LendingError as Into<ProgramError>>::into(move _228) -> [return: bb105, unwind: bb317];
+    }
+
+    bb105: {
+        StorageDead(_228);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _227);
+        StorageDead(_227);
+        goto -> bb294;
+    }
+
+    bb106: {
+        _237 = &(*_238);
+        StorageDead(_239);
+        _236 = RefCell::<&mut [u8]>::borrow(move _237) -> [return: bb107, unwind: bb317];
+    }
+
+    bb107: {
+        StorageDead(_237);
+        _235 = &_236;
+        _234 = &(*_235);
+        _233 = <Ref<'_, &mut [u8]> as Deref>::deref(move _234) -> [return: bb108, unwind: bb316];
+    }
+
+    bb108: {
+        _606 = deref_copy (*_233);
+        _232 = &(*_606);
+        StorageDead(_234);
+        _231 = <Obligation as Pack>::unpack(move _232) -> [return: bb109, unwind: bb316];
+    }
+
+    bb109: {
+        StorageDead(_232);
+        _230 = <Result<Obligation, ProgramError> as Try>::branch(move _231) -> [return: bb110, unwind: bb316];
+    }
+
+    bb110: {
+        StorageDead(_231);
+        _240 = discriminant(_230);
+        switchInt(move _240) -> [0: bb111, 1: bb112, otherwise: bb7];
+    }
+
+    bb111: {
+        StorageLive(_244);
+        _244 = move ((_230 as Continue).0: solend_sdk::state::Obligation);
+        _614 = const true;
+        _229 = move _244;
+        StorageDead(_244);
+        _636 = discriminant(_230);
+        drop(_236) -> [return: bb114, unwind: bb348];
+    }
+
+    bb112: {
+        StorageLive(_241);
+        _241 = move ((_230 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_243);
+        _243 = move _241;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _243) -> [return: bb113, unwind: bb349];
+    }
+
+    bb113: {
+        StorageDead(_243);
+        StorageDead(_241);
+        _692 = discriminant(_230);
+        drop(_236) -> [return: bb292, unwind: bb317];
+    }
+
+    bb114: {
+        StorageDead(_238);
+        StorageDead(_236);
+        StorageDead(_235);
+        StorageDead(_233);
+        StorageDead(_230);
+        StorageLive(_245);
+        StorageLive(_246);
+        StorageLive(_247);
+        _247 = &((*_9).3: &solana_program::pubkey::Pubkey);
+        StorageLive(_248);
+        _248 = &_1;
+        _246 = <&Pubkey as PartialEq>::ne(move _247, move _248) -> [return: bb115, unwind: bb348];
+    }
+
+    bb115: {
+        switchInt(move _246) -> [0: bb119, otherwise: bb116];
+    }
+
+    bb116: {
+        StorageDead(_248);
+        StorageDead(_247);
+        StorageLive(_250);
+        StorageLive(_251);
+        StorageLive(_252);
+        _252 = const "Obligation provided is not owned by the lending program";
+        _251 = &(*_252);
+        _250 = solana_program::log::sol_log(move _251) -> [return: bb117, unwind: bb348];
+    }
+
+    bb117: {
+        StorageDead(_251);
+        StorageDead(_252);
+        StorageDead(_250);
+        StorageLive(_253);
+        StorageLive(_254);
+        _254 = solend_sdk::error::LendingError::InvalidAccountOwner;
+        _253 = <LendingError as Into<ProgramError>>::into(move _254) -> [return: bb118, unwind: bb348];
+    }
+
+    bb118: {
+        StorageDead(_254);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _253);
+        StorageDead(_253);
+        StorageDead(_246);
+        StorageDead(_245);
+        goto -> bb331;
+    }
+
+    bb119: {
+        StorageDead(_248);
+        StorageDead(_247);
+        _245 = const ();
+        StorageDead(_246);
+        StorageDead(_245);
+        StorageLive(_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        StorageLive(_258);
+        _258 = &(_229.2: solana_program::pubkey::Pubkey);
+        _257 = &_258;
+        StorageLive(_259);
+        _259 = &((*_10).0: &solana_program::pubkey::Pubkey);
+        _256 = <&Pubkey as PartialEq>::ne(move _257, move _259) -> [return: bb120, unwind: bb348];
+    }
+
+    bb120: {
+        switchInt(move _256) -> [0: bb124, otherwise: bb121];
+    }
+
+    bb121: {
+        StorageDead(_259);
+        StorageDead(_258);
+        StorageDead(_257);
+        StorageLive(_261);
+        StorageLive(_262);
+        StorageLive(_263);
+        _263 = const "Obligation lending market does not match the lending market provided";
+        _262 = &(*_263);
+        _261 = solana_program::log::sol_log(move _262) -> [return: bb122, unwind: bb348];
+    }
+
+    bb122: {
+        StorageDead(_262);
+        StorageDead(_263);
+        StorageDead(_261);
+        StorageLive(_264);
+        StorageLive(_265);
+        _265 = InvalidAccountInput;
+        _264 = <LendingError as Into<ProgramError>>::into(move _265) -> [return: bb123, unwind: bb348];
+    }
+
+    bb123: {
+        StorageDead(_265);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _264);
+        StorageDead(_264);
+        StorageDead(_256);
+        StorageDead(_255);
+        goto -> bb331;
+    }
+
+    bb124: {
+        StorageDead(_259);
+        StorageDead(_258);
+        StorageDead(_257);
+        _255 = const ();
+        StorageDead(_256);
+        StorageDead(_255);
+        StorageLive(_266);
+        StorageLive(_267);
+        StorageLive(_268);
+        StorageLive(_269);
+        StorageLive(_270);
+        _270 = &(_229.1: solend_sdk::state::LastUpdate);
+        StorageLive(_271);
+        _271 = ((*_13).0: u64);
+        _269 = LastUpdate::is_stale(move _270, move _271) -> [return: bb125, unwind: bb348];
+    }
+
+    bb125: {
+        StorageDead(_271);
+        StorageDead(_270);
+        _268 = <Result<bool, ProgramError> as Try>::branch(move _269) -> [return: bb126, unwind: bb348];
+    }
+
+    bb126: {
+        StorageDead(_269);
+        _272 = discriminant(_268);
+        switchInt(move _272) -> [0: bb127, 1: bb128, otherwise: bb7];
+    }
+
+    bb127: {
+        StorageLive(_276);
+        _276 = ((_268 as Continue).0: bool);
+        _267 = _276;
+        StorageDead(_276);
+        switchInt(move _267) -> [0: bb329, otherwise: bb328];
+    }
+
+    bb128: {
+        StorageLive(_273);
+        _273 = move ((_268 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_275);
+        _275 = move _273;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _275) -> [return: bb129, unwind: bb346];
+    }
+
+    bb129: {
+        StorageDead(_275);
+        StorageDead(_273);
+        _690 = discriminant(_268);
+        StorageDead(_268);
+        goto -> bb291;
+    }
+
+    bb130: {
+        StorageDead(_279);
+        StorageDead(_280);
+        StorageDead(_278);
+        StorageLive(_281);
+        StorageLive(_282);
+        _282 = ObligationStale;
+        _281 = <LendingError as Into<ProgramError>>::into(move _282) -> [return: bb131, unwind: bb348];
+    }
+
+    bb131: {
+        StorageDead(_282);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _281);
+        StorageDead(_281);
+        goto -> bb291;
+    }
+
+    bb132: {
+        _286 = &_287;
+        _284 = <Decimal as PartialEq>::eq(move _285, move _286) -> [return: bb133, unwind: bb348];
+    }
+
+    bb133: {
+        switchInt(move _284) -> [0: bb137, otherwise: bb134];
+    }
+
+    bb134: {
+        StorageDead(_287);
+        StorageDead(_286);
+        StorageDead(_285);
+        StorageLive(_289);
+        StorageLive(_290);
+        StorageLive(_291);
+        _291 = const "Obligation deposited value is zero";
+        _290 = &(*_291);
+        _289 = solana_program::log::sol_log(move _290) -> [return: bb135, unwind: bb348];
+    }
+
+    bb135: {
+        StorageDead(_290);
+        StorageDead(_291);
+        StorageDead(_289);
+        StorageLive(_292);
+        StorageLive(_293);
+        _293 = ObligationDepositsZero;
+        _292 = <LendingError as Into<ProgramError>>::into(move _293) -> [return: bb136, unwind: bb348];
+    }
+
+    bb136: {
+        StorageDead(_293);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _292);
+        StorageDead(_292);
+        StorageDead(_284);
+        StorageDead(_283);
+        goto -> bb331;
+    }
+
+    bb137: {
+        StorageDead(_287);
+        StorageDead(_286);
+        StorageDead(_285);
+        _283 = const ();
+        StorageDead(_284);
+        StorageDead(_283);
+        StorageLive(_294);
+        StorageLive(_295);
+        StorageLive(_296);
+        _296 = &(_229.7: solend_sdk::math::Decimal);
+        StorageLive(_297);
+        StorageLive(_298);
+        _298 = Decimal::zero() -> [return: bb138, unwind: bb348];
+    }
+
+    bb138: {
+        _297 = &_298;
+        _295 = <Decimal as PartialEq>::eq(move _296, move _297) -> [return: bb139, unwind: bb348];
+    }
+
+    bb139: {
+        switchInt(move _295) -> [0: bb143, otherwise: bb140];
+    }
+
+    bb140: {
+        StorageDead(_298);
+        StorageDead(_297);
+        StorageDead(_296);
+        StorageLive(_300);
+        StorageLive(_301);
+        StorageLive(_302);
+        _302 = const "Obligation borrowed value is zero";
+        _301 = &(*_302);
+        _300 = solana_program::log::sol_log(move _301) -> [return: bb141, unwind: bb348];
+    }
+
+    bb141: {
+        StorageDead(_301);
+        StorageDead(_302);
+        StorageDead(_300);
+        StorageLive(_303);
+        StorageLive(_304);
+        _304 = ObligationBorrowsZero;
+        _303 = <LendingError as Into<ProgramError>>::into(move _304) -> [return: bb142, unwind: bb348];
+    }
+
+    bb142: {
+        StorageDead(_304);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _303);
+        StorageDead(_303);
+        StorageDead(_295);
+        StorageDead(_294);
+        goto -> bb331;
+    }
+
+    bb143: {
+        StorageDead(_298);
+        StorageDead(_297);
+        StorageDead(_296);
+        _294 = const ();
+        StorageDead(_295);
+        StorageDead(_294);
+        StorageLive(_305);
+        StorageLive(_306);
+        StorageLive(_307);
+        _307 = &(_229.7: solend_sdk::math::Decimal);
+        StorageLive(_308);
+        _308 = &(_229.11: solend_sdk::math::Decimal);
+        _306 = <Decimal as PartialOrd>::lt(move _307, move _308) -> [return: bb144, unwind: bb348];
+    }
+
+    bb144: {
+        switchInt(move _306) -> [0: bb149, otherwise: bb145];
+    }
+
+    bb145: {
+        StorageDead(_308);
+        StorageDead(_307);
+        StorageLive(_309);
+        _309 = (_229.14: bool);
+        switchInt(move _309) -> [0: bb146, otherwise: bb150];
+    }
+
+    bb146: {
+        StorageLive(_311);
+        StorageLive(_312);
+        StorageLive(_313);
+        _313 = const "Obligation must be unhealthy or marked as closeable to be liquidated";
+        _312 = &(*_313);
+        _311 = solana_program::log::sol_log(move _312) -> [return: bb147, unwind: bb348];
+    }
+
+    bb147: {
+        StorageDead(_312);
+        StorageDead(_313);
+        StorageDead(_311);
+        StorageLive(_314);
+        StorageLive(_315);
+        _315 = ObligationHealthy;
+        _314 = <LendingError as Into<ProgramError>>::into(move _315) -> [return: bb148, unwind: bb348];
+    }
+
+    bb148: {
+        StorageDead(_315);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _314);
+        StorageDead(_314);
+        StorageDead(_309);
+        StorageDead(_306);
+        StorageDead(_305);
+        goto -> bb331;
+    }
+
+    bb149: {
+        StorageDead(_308);
+        StorageDead(_307);
+        goto -> bb150;
+    }
+
+    bb150: {
+        _305 = const ();
+        StorageDead(_309);
+        StorageDead(_306);
+        StorageDead(_305);
+        StorageLive(_316);
+        _734 = (((_15.0: std::ptr::Unique<solend_sdk::state::LendingMarket>).0: std::ptr::NonNull<solend_sdk::state::LendingMarket>).0: *const solend_sdk::state::LendingMarket);
+        _735 = (((_15.0: std::ptr::Unique<solend_sdk::state::LendingMarket>).0: std::ptr::NonNull<solend_sdk::state::LendingMarket>).0: *const solend_sdk::state::LendingMarket);
+        _317 = discriminant(((*_735).8: std::option::Option<solana_program::pubkey::Pubkey>));
+        switchInt(move _317) -> [1: bb152, otherwise: bb151];
+    }
+
+    bb151: {
+        _316 = const ();
+        goto -> bb158;
+    }
+
+    bb152: {
+        StorageLive(_318);
+        _736 = (((_15.0: std::ptr::Unique<solend_sdk::state::LendingMarket>).0: std::ptr::NonNull<solend_sdk::state::LendingMarket>).0: *const solend_sdk::state::LendingMarket);
+        _776 = _736 as *const () (PtrToPtr);
+        _777 = _776 as usize (Transmute);
+        _778 = AlignOf(solend_sdk::state::LendingMarket);
+        _779 = Sub(_778, const 1_usize);
+        _780 = BitAnd(_777, _779);
+        _781 = Eq(_780, const 0_usize);
+        assert(_781, "misaligned pointer dereference: address must be a multiple of {} but is {}", _778, _777) -> [success: bb360, unwind unreachable];
+    }
+
+    bb153: {
+        switchInt(move _319) -> [0: bb157, otherwise: bb154];
+    }
+
+    bb154: {
+        StorageDead(_321);
+        StorageDead(_320);
+        StorageLive(_323);
+        StorageLive(_324);
+        StorageLive(_325);
+        _325 = const "Liquidator is not whitelisted";
+        _324 = &(*_325);
+        _323 = solana_program::log::sol_log(move _324) -> [return: bb155, unwind: bb348];
+    }
+
+    bb155: {
+        StorageDead(_324);
+        StorageDead(_325);
+        StorageDead(_323);
+        StorageLive(_326);
+        StorageLive(_327);
+        _327 = NotWhitelistedLiquidator;
+        _326 = <LendingError as Into<ProgramError>>::into(move _327) -> [return: bb156, unwind: bb348];
+    }
+
+    bb156: {
+        StorageDead(_327);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _326);
+        StorageDead(_326);
+        StorageDead(_319);
+        StorageDead(_318);
+        StorageDead(_316);
+        goto -> bb331;
+    }
+
+    bb157: {
+        StorageDead(_321);
+        StorageDead(_320);
+        _316 = const ();
+        StorageDead(_319);
+        StorageDead(_318);
+        goto -> bb158;
+    }
+
+    bb158: {
+        StorageDead(_316);
+        StorageLive(_330);
+        StorageLive(_331);
+        StorageLive(_332);
+        StorageLive(_333);
+        _333 = &_229;
+        StorageLive(_334);
+        _608 = deref_copy ((*_5).0: &solana_program::pubkey::Pubkey);
+        _334 = (*_608);
+        _332 = Obligation::find_liquidity_in_borrows(move _333, move _334) -> [return: bb159, unwind: bb348];
+    }
+
+    bb159: {
+        StorageDead(_334);
+        StorageDead(_333);
+        _331 = <Result<(&ObligationLiquidity, usize), ProgramError> as Try>::branch(move _332) -> [return: bb160, unwind: bb348];
+    }
+
+    bb160: {
+        StorageDead(_332);
+        _335 = discriminant(_331);
+        switchInt(move _335) -> [0: bb161, 1: bb162, otherwise: bb7];
+    }
+
+    bb161: {
+        StorageLive(_339);
+        _339 = ((_331 as Continue).0: (&solend_sdk::state::ObligationLiquidity, usize));
+        _330 = _339;
+        StorageDead(_339);
+        StorageLive(_328);
+        _328 = (_330.0: &solend_sdk::state::ObligationLiquidity);
+        StorageLive(_329);
+        _329 = (_330.1: usize);
+        _642 = discriminant(_331);
+        StorageDead(_331);
+        StorageDead(_330);
+        StorageLive(_340);
+        StorageLive(_341);
+        StorageLive(_342);
+        _342 = &((*_328).3: solend_sdk::math::Decimal);
+        StorageLive(_343);
+        StorageLive(_344);
+        _344 = Decimal::zero() -> [return: bb164, unwind: bb348];
+    }
+
+    bb162: {
+        StorageLive(_336);
+        _336 = move ((_331 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_338);
+        _338 = move _336;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _338) -> [return: bb163, unwind: bb345];
+    }
+
+    bb163: {
+        StorageDead(_338);
+        StorageDead(_336);
+        _688 = discriminant(_331);
+        StorageDead(_331);
+        StorageDead(_330);
+        goto -> bb331;
+    }
+
+    bb164: {
+        _343 = &_344;
+        _341 = <Decimal as PartialEq>::eq(move _342, move _343) -> [return: bb165, unwind: bb348];
+    }
+
+    bb165: {
+        switchInt(move _341) -> [0: bb169, otherwise: bb166];
+    }
+
+    bb166: {
+        StorageDead(_344);
+        StorageDead(_343);
+        StorageDead(_342);
+        StorageLive(_346);
+        StorageLive(_347);
+        StorageLive(_348);
+        _348 = const "Obligation borrow value is zero";
+        _347 = &(*_348);
+        _346 = solana_program::log::sol_log(move _347) -> [return: bb167, unwind: bb348];
+    }
+
+    bb167: {
+        StorageDead(_347);
+        StorageDead(_348);
+        StorageDead(_346);
+        StorageLive(_349);
+        StorageLive(_350);
+        _350 = ObligationLiquidityEmpty;
+        _349 = <LendingError as Into<ProgramError>>::into(move _350) -> [return: bb168, unwind: bb348];
+    }
+
+    bb168: {
+        StorageDead(_350);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _349);
+        StorageDead(_349);
+        StorageDead(_341);
+        StorageDead(_340);
+        goto -> bb290;
+    }
+
+    bb169: {
+        StorageDead(_344);
+        StorageDead(_343);
+        StorageDead(_342);
+        _340 = const ();
+        StorageDead(_341);
+        StorageDead(_340);
+        StorageLive(_351);
+        StorageLive(_352);
+        StorageLive(_353);
+        _353 = _329;
+        _352 = Ne(move _353, const 0_usize);
+        switchInt(move _352) -> [0: bb171, otherwise: bb170];
+    }
+
+    bb170: {
+        StorageDead(_353);
+        StorageLive(_355);
+        StorageLive(_356);
+        StorageLive(_357);
+        _357 = const "Obligation borrow is not the first liquidity in the borrows list";
+        _356 = &(*_357);
+        _355 = solana_program::log::sol_log(move _356) -> [return: bb172, unwind: bb348];
+    }
+
+    bb171: {
+        StorageDead(_353);
+        _351 = const ();
+        StorageDead(_352);
+        StorageDead(_351);
+        StorageLive(_362);
+        StorageLive(_363);
+        StorageLive(_364);
+        StorageLive(_365);
+        _365 = &_229;
+        StorageLive(_366);
+        _609 = deref_copy ((*_7).0: &solana_program::pubkey::Pubkey);
+        _366 = (*_609);
+        _364 = Obligation::find_collateral_in_deposits(move _365, move _366) -> [return: bb174, unwind: bb348];
+    }
+
+    bb172: {
+        StorageDead(_356);
+        StorageDead(_357);
+        StorageDead(_355);
+        StorageLive(_358);
+        StorageLive(_359);
+        _359 = InvalidAccountInput;
+        _358 = <LendingError as Into<ProgramError>>::into(move _359) -> [return: bb173, unwind: bb348];
+    }
+
+    bb173: {
+        StorageDead(_359);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _358);
+        StorageDead(_358);
+        StorageDead(_352);
+        StorageDead(_351);
+        goto -> bb290;
+    }
+
+    bb174: {
+        StorageDead(_366);
+        StorageDead(_365);
+        _363 = <Result<(&ObligationCollateral, usize), ProgramError> as Try>::branch(move _364) -> [return: bb175, unwind: bb348];
+    }
+
+    bb175: {
+        StorageDead(_364);
+        _367 = discriminant(_363);
+        switchInt(move _367) -> [0: bb176, 1: bb177, otherwise: bb7];
+    }
+
+    bb176: {
+        StorageLive(_371);
+        _371 = ((_363 as Continue).0: (&solend_sdk::state::ObligationCollateral, usize));
+        _362 = _371;
+        StorageDead(_371);
+        StorageLive(_360);
+        _360 = (_362.0: &solend_sdk::state::ObligationCollateral);
+        StorageLive(_361);
+        _361 = (_362.1: usize);
+        _644 = discriminant(_363);
+        StorageDead(_363);
+        StorageDead(_362);
+        StorageLive(_372);
+        StorageLive(_373);
+        StorageLive(_374);
+        _374 = &((*_360).2: solend_sdk::math::Decimal);
+        StorageLive(_375);
+        StorageLive(_376);
+        _376 = Decimal::zero() -> [return: bb179, unwind: bb348];
+    }
+
+    bb177: {
+        StorageLive(_368);
+        _368 = move ((_363 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_370);
+        _370 = move _368;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _370) -> [return: bb178, unwind: bb344];
+    }
+
+    bb178: {
+        StorageDead(_370);
+        StorageDead(_368);
+        _686 = discriminant(_363);
+        StorageDead(_363);
+        StorageDead(_362);
+        goto -> bb290;
+    }
+
+    bb179: {
+        _375 = &_376;
+        _373 = <Decimal as PartialEq>::eq(move _374, move _375) -> [return: bb180, unwind: bb348];
+    }
+
+    bb180: {
+        switchInt(move _373) -> [0: bb184, otherwise: bb181];
+    }
+
+    bb181: {
+        StorageDead(_376);
+        StorageDead(_375);
+        StorageDead(_374);
+        StorageLive(_378);
+        StorageLive(_379);
+        StorageLive(_380);
+        _380 = const "Obligation deposit value is zero";
+        _379 = &(*_380);
+        _378 = solana_program::log::sol_log(move _379) -> [return: bb182, unwind: bb348];
+    }
+
+    bb182: {
+        StorageDead(_379);
+        StorageDead(_380);
+        StorageDead(_378);
+        StorageLive(_381);
+        StorageLive(_382);
+        _382 = ObligationCollateralEmpty;
+        _381 = <LendingError as Into<ProgramError>>::into(move _382) -> [return: bb183, unwind: bb348];
+    }
+
+    bb183: {
+        StorageDead(_382);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _381);
+        StorageDead(_381);
+        StorageDead(_373);
+        StorageDead(_372);
+        goto -> bb289;
+    }
+
+    bb184: {
+        StorageDead(_376);
+        StorageDead(_375);
+        StorageDead(_374);
+        _372 = const ();
+        StorageDead(_373);
+        StorageDead(_372);
+        StorageLive(_383);
+        StorageLive(_384);
+        StorageLive(_385);
+        StorageLive(_386);
+        _610 = deref_copy ((*_10).0: &solana_program::pubkey::Pubkey);
+        _386 = &(*_610);
+        _385 = <Pubkey as AsRef<[u8]>>::as_ref(move _386) -> [return: bb185, unwind: bb348];
+    }
+
+    bb185: {
+        StorageDead(_386);
+        StorageLive(_387);
+        StorageLive(_388);
+        StorageLive(_389);
+        StorageLive(_390);
+        StorageLive(_391);
+        _737 = (((_15.0: std::ptr::Unique<solend_sdk::state::LendingMarket>).0: std::ptr::NonNull<solend_sdk::state::LendingMarket>).0: *const solend_sdk::state::LendingMarket);
+        _770 = _737 as *const () (PtrToPtr);
+        _771 = _770 as usize (Transmute);
+        _772 = AlignOf(solend_sdk::state::LendingMarket);
+        _773 = Sub(_772, const 1_usize);
+        _774 = BitAnd(_771, _773);
+        _775 = Eq(_774, const 0_usize);
+        assert(_775, "misaligned pointer dereference: address must be a multiple of {} but is {}", _772, _771) -> [success: bb359, unwind unreachable];
+    }
+
+    bb186: {
+        StorageDead(_397);
+        StorageDead(_395);
+        _393 = <Result<Pubkey, PubkeyError> as Try>::branch(move _394) -> [return: bb187, unwind: bb348];
+    }
+
+    bb187: {
+        StorageDead(_394);
+        _398 = discriminant(_393);
+        switchInt(move _398) -> [0: bb188, 1: bb189, otherwise: bb7];
+    }
+
+    bb188: {
+        StorageLive(_402);
+        _402 = ((_393 as Continue).0: solana_program::pubkey::Pubkey);
+        _392 = _402;
+        StorageDead(_402);
+        StorageDead(_393);
+        StorageLive(_403);
+        StorageLive(_404);
+        StorageLive(_405);
+        StorageLive(_406);
+        _406 = &_392;
+        _405 = &_406;
+        StorageLive(_407);
+        _407 = &((*_11).0: &solana_program::pubkey::Pubkey);
+        _404 = <&Pubkey as PartialEq>::ne(move _405, move _407) -> [return: bb191, unwind: bb348];
+    }
+
+    bb189: {
+        StorageLive(_399);
+        _399 = move ((_393 as Break).0: std::result::Result<std::convert::Infallible, solana_program::pubkey::PubkeyError>);
+        StorageLive(_401);
+        _401 = move _399;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, PubkeyError>>>::from_residual(move _401) -> [return: bb190, unwind: bb348];
+    }
+
+    bb190: {
+        StorageDead(_401);
+        StorageDead(_399);
+        StorageDead(_393);
+        goto -> bb288;
+    }
+
+    bb191: {
+        switchInt(move _404) -> [0: bb195, otherwise: bb192];
+    }
+
+    bb192: {
+        StorageDead(_407);
+        StorageDead(_406);
+        StorageDead(_405);
+        StorageLive(_409);
+        StorageLive(_410);
+        StorageLive(_411);
+        _411 = const "Derived lending market authority does not match the lending market authority provided";
+        _410 = &(*_411);
+        _409 = solana_program::log::sol_log(move _410) -> [return: bb193, unwind: bb348];
+    }
+
+    bb193: {
+        StorageDead(_410);
+        StorageDead(_411);
+        StorageDead(_409);
+        StorageLive(_412);
+        StorageLive(_413);
+        _413 = InvalidMarketAuthority;
+        _412 = <LendingError as Into<ProgramError>>::into(move _413) -> [return: bb194, unwind: bb348];
+    }
+
+    bb194: {
+        StorageDead(_413);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _412);
+        StorageDead(_412);
+        StorageDead(_404);
+        StorageDead(_403);
+        goto -> bb288;
+    }
+
+    bb195: {
+        StorageDead(_407);
+        StorageDead(_406);
+        StorageDead(_405);
+        _403 = const ();
+        StorageDead(_404);
+        StorageDead(_403);
+        StorageLive(_414);
+        StorageLive(_415);
+        StorageLive(_416);
+        StorageLive(_417);
+        _738 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _417 = &(*_738);
+        StorageLive(_418);
+        StorageLive(_419);
+        _419 = &_229;
+        _418 = &(*_419);
+        _416 = Reserve::calculate_bonus(move _417, move _418) -> [return: bb196, unwind: bb348];
+    }
+
+    bb196: {
+        StorageDead(_418);
+        StorageDead(_417);
+        _415 = <Result<Bonus, ProgramError> as Try>::branch(move _416) -> [return: bb197, unwind: bb348];
+    }
+
+    bb197: {
+        StorageDead(_416);
+        _420 = discriminant(_415);
+        switchInt(move _420) -> [0: bb198, 1: bb199, otherwise: bb7];
+    }
+
+    bb198: {
+        StorageLive(_424);
+        _424 = move ((_415 as Continue).0: solend_sdk::state::Bonus);
+        _414 = move _424;
+        StorageDead(_424);
+        _646 = discriminant(_415);
+        StorageDead(_419);
+        StorageDead(_415);
+        StorageLive(_428);
+        StorageLive(_429);
+        StorageLive(_430);
+        StorageLive(_431);
+        _739 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _431 = &(*_739);
+        StorageLive(_432);
+        _432 = _2;
+        StorageLive(_433);
+        StorageLive(_434);
+        _434 = &_229;
+        _433 = &(*_434);
+        StorageLive(_435);
+        _435 = &(*_328);
+        StorageLive(_436);
+        _436 = &(*_360);
+        StorageLive(_437);
+        StorageLive(_438);
+        _438 = &_414;
+        _437 = &(*_438);
+        _430 = Reserve::calculate_liquidation(move _431, move _432, move _433, move _435, move _436, move _437) -> [return: bb201, unwind: bb348];
+    }
+
+    bb199: {
+        StorageLive(_421);
+        _421 = move ((_415 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_423);
+        _423 = move _421;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _423) -> [return: bb200, unwind: bb343];
+    }
+
+    bb200: {
+        StorageDead(_423);
+        StorageDead(_421);
+        _684 = discriminant(_415);
+        StorageDead(_419);
+        StorageDead(_415);
+        goto -> bb287;
+    }
+
+    bb201: {
+        StorageDead(_437);
+        StorageDead(_436);
+        StorageDead(_435);
+        StorageDead(_433);
+        StorageDead(_432);
+        StorageDead(_431);
+        _429 = <Result<CalculateLiquidationResult, ProgramError> as Try>::branch(move _430) -> [return: bb202, unwind: bb348];
+    }
+
+    bb202: {
+        StorageDead(_430);
+        _439 = discriminant(_429);
+        switchInt(move _439) -> [0: bb203, 1: bb204, otherwise: bb7];
+    }
+
+    bb203: {
+        StorageLive(_443);
+        _443 = move ((_429 as Continue).0: solend_sdk::state::CalculateLiquidationResult);
+        _428 = move _443;
+        StorageDead(_443);
+        StorageLive(_425);
+        _425 = (_428.0: solend_sdk::math::Decimal);
+        StorageLive(_426);
+        _426 = (_428.1: u64);
+        StorageLive(_427);
+        _427 = (_428.2: u64);
+        _648 = discriminant(_429);
+        StorageDead(_438);
+        StorageDead(_434);
+        StorageDead(_429);
+        StorageDead(_428);
+        StorageLive(_444);
+        StorageLive(_445);
+        StorageLive(_446);
+        _446 = _426;
+        _445 = Eq(move _446, const 0_u64);
+        switchInt(move _445) -> [0: bb209, otherwise: bb206];
+    }
+
+    bb204: {
+        StorageLive(_440);
+        _440 = move ((_429 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_442);
+        _442 = move _440;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _442) -> [return: bb205, unwind: bb342];
+    }
+
+    bb205: {
+        StorageDead(_442);
+        StorageDead(_440);
+        _682 = discriminant(_429);
+        StorageDead(_438);
+        StorageDead(_434);
+        StorageDead(_429);
+        StorageDead(_428);
+        goto -> bb287;
+    }
+
+    bb206: {
+        StorageDead(_446);
+        StorageLive(_448);
+        StorageLive(_449);
+        StorageLive(_450);
+        _450 = const "Liquidation is too small to transfer liquidity";
+        _449 = &(*_450);
+        _448 = solana_program::log::sol_log(move _449) -> [return: bb207, unwind: bb348];
+    }
+
+    bb207: {
+        StorageDead(_449);
+        StorageDead(_450);
+        StorageDead(_448);
+        StorageLive(_451);
+        StorageLive(_452);
+        _452 = LiquidationTooSmall;
+        _451 = <LendingError as Into<ProgramError>>::into(move _452) -> [return: bb208, unwind: bb348];
+    }
+
+    bb208: {
+        StorageDead(_452);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _451);
+        StorageDead(_451);
+        StorageDead(_445);
+        StorageDead(_444);
+        goto -> bb286;
+    }
+
+    bb209: {
+        StorageDead(_446);
+        _444 = const ();
+        StorageDead(_445);
+        StorageDead(_444);
+        StorageLive(_453);
+        StorageLive(_454);
+        StorageLive(_455);
+        _455 = _427;
+        _454 = Eq(move _455, const 0_u64);
+        switchInt(move _454) -> [0: bb211, otherwise: bb210];
+    }
+
+    bb210: {
+        StorageDead(_455);
+        StorageLive(_457);
+        StorageLive(_458);
+        StorageLive(_459);
+        _459 = const "Liquidation is too small to receive collateral";
+        _458 = &(*_459);
+        _457 = solana_program::log::sol_log(move _458) -> [return: bb212, unwind: bb348];
+    }
+
+    bb211: {
+        StorageDead(_455);
+        _453 = const ();
+        StorageDead(_454);
+        StorageDead(_453);
+        StorageLive(_462);
+        StorageLive(_463);
+        StorageLive(_464);
+        StorageLive(_465);
+        _740 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _465 = &mut ((*_740).3: solend_sdk::state::ReserveLiquidity);
+        StorageLive(_466);
+        _466 = _426;
+        StorageLive(_467);
+        _467 = _425;
+        _464 = ReserveLiquidity::repay(move _465, move _466, move _467) -> [return: bb214, unwind: bb348];
+    }
+
+    bb212: {
+        StorageDead(_458);
+        StorageDead(_459);
+        StorageDead(_457);
+        StorageLive(_460);
+        StorageLive(_461);
+        _461 = LiquidationTooSmall;
+        _460 = <LendingError as Into<ProgramError>>::into(move _461) -> [return: bb213, unwind: bb348];
+    }
+
+    bb213: {
+        StorageDead(_461);
+        _0 = Result::<(u64, Bonus), ProgramError>::Err(move _460);
+        StorageDead(_460);
+        StorageDead(_454);
+        StorageDead(_453);
+        goto -> bb286;
+    }
+
+    bb214: {
+        StorageDead(_467);
+        StorageDead(_466);
+        StorageDead(_465);
+        _463 = <Result<(), ProgramError> as Try>::branch(move _464) -> [return: bb215, unwind: bb348];
+    }
+
+    bb215: {
+        StorageDead(_464);
+        _468 = discriminant(_463);
+        switchInt(move _468) -> [0: bb216, 1: bb217, otherwise: bb7];
+    }
+
+    bb216: {
+        StorageLive(_472);
+        _472 = ((_463 as Continue).0: ());
+        _462 = _472;
+        StorageDead(_472);
+        _650 = discriminant(_463);
+        StorageDead(_463);
+        StorageDead(_462);
+        StorageLive(_473);
+        StorageLive(_474);
+        _741 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _474 = &mut ((*_741).1: solend_sdk::state::LastUpdate);
+        _473 = LastUpdate::mark_stale(move _474) -> [return: bb219, unwind: bb348];
+    }
+
+    bb217: {
+        StorageLive(_469);
+        _469 = move ((_463 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_471);
+        _471 = move _469;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _471) -> [return: bb218, unwind: bb341];
+    }
+
+    bb218: {
+        StorageDead(_471);
+        StorageDead(_469);
+        _680 = discriminant(_463);
+        StorageDead(_463);
+        StorageDead(_462);
+        goto -> bb286;
+    }
+
+    bb219: {
+        StorageDead(_474);
+        StorageDead(_473);
+        StorageLive(_475);
+        StorageLive(_476);
+        StorageLive(_477);
+        StorageLive(_478);
+        _742 = (((_53.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _764 = _742 as *const () (PtrToPtr);
+        _765 = _764 as usize (Transmute);
+        _766 = AlignOf(solend_sdk::state::Reserve);
+        _767 = Sub(_766, const 1_usize);
+        _768 = BitAnd(_765, _767);
+        _769 = Eq(_768, const 0_usize);
+        assert(_769, "misaligned pointer dereference: address must be a multiple of {} but is {}", _766, _765) -> [success: bb358, unwind unreachable];
+    }
+
+    bb220: {
+        _484 = &(*_485);
+        StorageDead(_486);
+        _483 = RefCell::<&mut [u8]>::borrow_mut(move _484) -> [return: bb221, unwind: bb348];
+    }
+
+    bb221: {
+        StorageDead(_484);
+        _482 = &mut _483;
+        _481 = &mut (*_482);
+        _480 = <RefMut<'_, &mut [u8]> as DerefMut>::deref_mut(move _481) -> [return: bb222, unwind: bb315];
+    }
+
+    bb222: {
+        _611 = deref_copy (*_480);
+        _479 = &mut (*_611);
+        StorageDead(_481);
+        _477 = <Reserve as Pack>::pack(move _478, move _479) -> [return: bb223, unwind: bb315];
+    }
+
+    bb223: {
+        StorageDead(_479);
+        StorageDead(_478);
+        _476 = <Result<(), ProgramError> as Try>::branch(move _477) -> [return: bb224, unwind: bb315];
+    }
+
+    bb224: {
+        StorageDead(_477);
+        _487 = discriminant(_476);
+        switchInt(move _487) -> [0: bb225, 1: bb226, otherwise: bb7];
+    }
+
+    bb225: {
+        StorageLive(_491);
+        _491 = ((_476 as Continue).0: ());
+        _475 = _491;
+        StorageDead(_491);
+        _652 = discriminant(_476);
+        drop(_483) -> [return: bb228, unwind: bb348];
+    }
+
+    bb226: {
+        StorageLive(_488);
+        _488 = move ((_476 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_490);
+        _490 = move _488;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _490) -> [return: bb227, unwind: bb340];
+    }
+
+    bb227: {
+        StorageDead(_490);
+        StorageDead(_488);
+        _678 = discriminant(_476);
+        drop(_483) -> [return: bb285, unwind: bb348];
+    }
+
+    bb228: {
+        StorageDead(_485);
+        StorageDead(_483);
+        StorageDead(_482);
+        StorageDead(_480);
+        StorageDead(_476);
+        StorageDead(_475);
+        StorageLive(_492);
+        StorageLive(_493);
+        StorageLive(_494);
+        _494 = _427;
+        StorageLive(_495);
+        _495 = ((*_360).1: u64);
+        _493 = Eq(move _494, move _495);
+        switchInt(move _493) -> [0: bb240, otherwise: bb229];
+    }
+
+    bb229: {
+        StorageDead(_495);
+        StorageDead(_494);
+        StorageLive(_496);
+        StorageLive(_497);
+        _743 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _758 = _743 as *const () (PtrToPtr);
+        _759 = _758 as usize (Transmute);
+        _760 = AlignOf(solend_sdk::state::Reserve);
+        _761 = Sub(_760, const 1_usize);
+        _762 = BitAnd(_759, _761);
+        _763 = Eq(_762, const 0_usize);
+        assert(_763, "misaligned pointer dereference: address must be a multiple of {} but is {}", _760, _759) -> [success: bb357, unwind unreachable];
+    }
+
+    bb230: {
+        StorageDead(_498);
+        StorageDead(_497);
+        _744 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _752 = _744 as *const () (PtrToPtr);
+        _753 = _752 as usize (Transmute);
+        _754 = AlignOf(solend_sdk::state::Reserve);
+        _755 = Sub(_754, const 1_usize);
+        _756 = BitAnd(_753, _755);
+        _757 = Eq(_756, const 0_usize);
+        assert(_757, "misaligned pointer dereference: address must be a multiple of {} but is {}", _754, _753) -> [success: bb356, unwind unreachable];
+    }
+
+    bb231: {
+        _508 = &(*_509);
+        StorageDead(_510);
+        _507 = RefCell::<&mut [u8]>::borrow_mut(move _508) -> [return: bb232, unwind: bb348];
+    }
+
+    bb232: {
+        StorageDead(_508);
+        _506 = &mut _507;
+        _505 = &mut (*_506);
+        _504 = <RefMut<'_, &mut [u8]> as DerefMut>::deref_mut(move _505) -> [return: bb233, unwind: bb314];
+    }
+
+    bb233: {
+        _612 = deref_copy (*_504);
+        _503 = &mut (*_612);
+        StorageDead(_505);
+        _501 = <Reserve as Pack>::pack(move _502, move _503) -> [return: bb234, unwind: bb314];
+    }
+
+    bb234: {
+        StorageDead(_503);
+        StorageDead(_502);
+        _500 = <Result<(), ProgramError> as Try>::branch(move _501) -> [return: bb235, unwind: bb314];
+    }
+
+    bb235: {
+        StorageDead(_501);
+        _511 = discriminant(_500);
+        switchInt(move _511) -> [0: bb236, 1: bb237, otherwise: bb7];
+    }
+
+    bb236: {
+        StorageLive(_515);
+        _515 = ((_500 as Continue).0: ());
+        _499 = _515;
+        StorageDead(_515);
+        _654 = discriminant(_500);
+        drop(_507) -> [return: bb239, unwind: bb348];
+    }
+
+    bb237: {
+        StorageLive(_512);
+        _512 = move ((_500 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_514);
+        _514 = move _512;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _514) -> [return: bb238, unwind: bb339];
+    }
+
+    bb238: {
+        StorageDead(_514);
+        StorageDead(_512);
+        _676 = discriminant(_500);
+        drop(_507) -> [return: bb284, unwind: bb348];
+    }
+
+    bb239: {
+        StorageDead(_509);
+        StorageDead(_507);
+        StorageDead(_506);
+        StorageDead(_504);
+        StorageDead(_500);
+        StorageDead(_499);
+        _492 = const ();
+        goto -> bb241;
+    }
+
+    bb240: {
+        StorageDead(_495);
+        StorageDead(_494);
+        _492 = const ();
+        goto -> bb241;
+    }
+
+    bb241: {
+        StorageDead(_493);
+        StorageDead(_492);
+        StorageLive(_516);
+        StorageLive(_517);
+        StorageLive(_518);
+        StorageLive(_519);
+        _519 = &mut _229;
+        StorageLive(_520);
+        _520 = _425;
+        StorageLive(_521);
+        _521 = _329;
+        _518 = Obligation::repay(move _519, move _520, move _521) -> [return: bb242, unwind: bb348];
+    }
+
+    bb242: {
+        StorageDead(_521);
+        StorageDead(_520);
+        StorageDead(_519);
+        _517 = <Result<(), ProgramError> as Try>::branch(move _518) -> [return: bb243, unwind: bb348];
+    }
+
+    bb243: {
+        StorageDead(_518);
+        _522 = discriminant(_517);
+        switchInt(move _522) -> [0: bb244, 1: bb245, otherwise: bb7];
+    }
+
+    bb244: {
+        StorageLive(_526);
+        _526 = ((_517 as Continue).0: ());
+        _516 = _526;
+        StorageDead(_526);
+        _656 = discriminant(_517);
+        StorageDead(_517);
+        StorageDead(_516);
+        StorageLive(_527);
+        StorageLive(_528);
+        StorageLive(_529);
+        StorageLive(_530);
+        _530 = &mut _229;
+        StorageLive(_531);
+        _531 = _427;
+        StorageLive(_532);
+        _532 = _361;
+        _529 = Obligation::withdraw(move _530, move _531, move _532) -> [return: bb247, unwind: bb348];
+    }
+
+    bb245: {
+        StorageLive(_523);
+        _523 = move ((_517 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_525);
+        _525 = move _523;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _525) -> [return: bb246, unwind: bb338];
+    }
+
+    bb246: {
+        StorageDead(_525);
+        StorageDead(_523);
+        _674 = discriminant(_517);
+        StorageDead(_517);
+        StorageDead(_516);
+        goto -> bb286;
+    }
+
+    bb247: {
+        StorageDead(_532);
+        StorageDead(_531);
+        StorageDead(_530);
+        _528 = <Result<(), ProgramError> as Try>::branch(move _529) -> [return: bb248, unwind: bb348];
+    }
+
+    bb248: {
+        StorageDead(_529);
+        _533 = discriminant(_528);
+        switchInt(move _533) -> [0: bb249, 1: bb250, otherwise: bb7];
+    }
+
+    bb249: {
+        StorageLive(_537);
+        _537 = ((_528 as Continue).0: ());
+        _527 = _537;
+        StorageDead(_537);
+        _658 = discriminant(_528);
+        StorageDead(_528);
+        StorageDead(_527);
+        StorageLive(_538);
+        StorageLive(_539);
+        _539 = &mut (_229.1: solend_sdk::state::LastUpdate);
+        _538 = LastUpdate::mark_stale(move _539) -> [return: bb252, unwind: bb348];
+    }
+
+    bb250: {
+        StorageLive(_534);
+        _534 = move ((_528 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_536);
+        _536 = move _534;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _536) -> [return: bb251, unwind: bb337];
+    }
+
+    bb251: {
+        StorageDead(_536);
+        StorageDead(_534);
+        _672 = discriminant(_528);
+        StorageDead(_528);
+        StorageDead(_527);
+        goto -> bb286;
+    }
+
+    bb252: {
+        StorageDead(_539);
+        StorageDead(_538);
+        StorageLive(_540);
+        StorageLive(_541);
+        StorageLive(_542);
+        StorageLive(_543);
+        _614 = const false;
+        _615 = const true;
+        _543 = move _229;
+        StorageLive(_544);
+        StorageLive(_545);
+        StorageLive(_546);
+        StorageLive(_547);
+        StorageLive(_548);
+        StorageLive(_549);
+        StorageLive(_550);
+        StorageLive(_551);
+        _551 = &((*_9).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _550 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _551) -> [return: bb253, unwind: bb313];
+    }
+
+    bb253: {
+        _549 = &(*_550);
+        StorageDead(_551);
+        _548 = RefCell::<&mut [u8]>::borrow_mut(move _549) -> [return: bb254, unwind: bb313];
+    }
+
+    bb254: {
+        StorageDead(_549);
+        _547 = &mut _548;
+        _546 = &mut (*_547);
+        _545 = <RefMut<'_, &mut [u8]> as DerefMut>::deref_mut(move _546) -> [return: bb255, unwind: bb336];
+    }
+
+    bb255: {
+        _613 = deref_copy (*_545);
+        _544 = &mut (*_613);
+        StorageDead(_546);
+        _615 = const false;
+        _542 = <Obligation as Pack>::pack(move _543, move _544) -> [return: bb256, unwind: bb336];
+    }
+
+    bb256: {
+        StorageDead(_544);
+        _615 = const false;
+        StorageDead(_543);
+        _541 = <Result<(), ProgramError> as Try>::branch(move _542) -> [return: bb257, unwind: bb312];
+    }
+
+    bb257: {
+        StorageDead(_542);
+        _552 = discriminant(_541);
+        switchInt(move _552) -> [0: bb258, 1: bb259, otherwise: bb7];
+    }
+
+    bb258: {
+        StorageLive(_556);
+        _556 = ((_541 as Continue).0: ());
+        _540 = _556;
+        StorageDead(_556);
+        _660 = discriminant(_541);
+        drop(_548) -> [return: bb261, unwind: bb348];
+    }
+
+    bb259: {
+        StorageLive(_553);
+        _553 = move ((_541 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_555);
+        _555 = move _553;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _555) -> [return: bb260, unwind: bb334];
+    }
+
+    bb260: {
+        StorageDead(_555);
+        StorageDead(_553);
+        _670 = discriminant(_541);
+        drop(_548) -> [return: bb283, unwind: bb348];
+    }
+
+    bb261: {
+        StorageDead(_550);
+        StorageDead(_548);
+        StorageDead(_547);
+        StorageDead(_545);
+        StorageDead(_541);
+        StorageDead(_540);
+        StorageLive(_557);
+        StorageLive(_558);
+        StorageLive(_559);
+        StorageLive(_560);
+        StorageLive(_561);
+        StorageLive(_562);
+        _562 = &(*_3);
+        _561 = <AccountInfo<'_> as Clone>::clone(move _562) -> [return: bb262, unwind: bb348];
+    }
+
+    bb262: {
+        StorageDead(_562);
+        StorageLive(_563);
+        StorageLive(_564);
+        _564 = &(*_6);
+        _563 = <AccountInfo<'_> as Clone>::clone(move _564) -> [return: bb263, unwind: bb311];
+    }
+
+    bb263: {
+        StorageDead(_564);
+        StorageLive(_565);
+        _565 = _426;
+        StorageLive(_566);
+        StorageLive(_567);
+        _567 = &(*_12);
+        _566 = <AccountInfo<'_> as Clone>::clone(move _567) -> [return: bb264, unwind: bb310];
+    }
+
+    bb264: {
+        StorageDead(_567);
+        StorageLive(_568);
+        StorageLive(_569);
+        StorageLive(_570);
+        _602 = const _;
+        _570 = &(*_602);
+        _569 = &(*_570);
+        _568 = move _569 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_569);
+        StorageLive(_572);
+        StorageLive(_573);
+        _573 = &(*_14);
+        _572 = <AccountInfo<'_> as Clone>::clone(move _573) -> [return: bb265, unwind: bb309];
+    }
+
+    bb265: {
+        StorageDead(_573);
+        _560 = TokenTransferParams::<'_, '_> { source: move _561, destination: move _563, amount: move _565, authority: move _566, authority_signer_seeds: move _568, token_program: move _572 };
+        StorageDead(_572);
+        StorageDead(_568);
+        StorageDead(_566);
+        StorageDead(_565);
+        StorageDead(_563);
+        StorageDead(_561);
+        _559 = spl_token_transfer(move _560) -> [return: bb266, unwind: bb348];
+    }
+
+    bb266: {
+        StorageDead(_560);
+        _558 = <Result<(), ProgramError> as Try>::branch(move _559) -> [return: bb267, unwind: bb348];
+    }
+
+    bb267: {
+        StorageDead(_559);
+        _574 = discriminant(_558);
+        switchInt(move _574) -> [0: bb268, 1: bb269, otherwise: bb7];
+    }
+
+    bb268: {
+        StorageLive(_578);
+        _578 = ((_558 as Continue).0: ());
+        _557 = _578;
+        StorageDead(_578);
+        _662 = discriminant(_558);
+        StorageDead(_570);
+        StorageDead(_558);
+        StorageDead(_557);
+        StorageLive(_579);
+        StorageLive(_580);
+        StorageLive(_581);
+        StorageLive(_582);
+        StorageLive(_583);
+        StorageLive(_584);
+        _584 = &(*_8);
+        _583 = <AccountInfo<'_> as Clone>::clone(move _584) -> [return: bb271, unwind: bb348];
+    }
+
+    bb269: {
+        StorageLive(_575);
+        _575 = move ((_558 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_577);
+        _577 = move _575;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _577) -> [return: bb270, unwind: bb333];
+    }
+
+    bb270: {
+        StorageDead(_577);
+        StorageDead(_575);
+        _668 = discriminant(_558);
+        StorageDead(_570);
+        StorageDead(_558);
+        StorageDead(_557);
+        goto -> bb286;
+    }
+
+    bb271: {
+        StorageDead(_584);
+        StorageLive(_585);
+        StorageLive(_586);
+        _586 = &(*_4);
+        _585 = <AccountInfo<'_> as Clone>::clone(move _586) -> [return: bb272, unwind: bb308];
+    }
+
+    bb272: {
+        StorageDead(_586);
+        StorageLive(_587);
+        _587 = _427;
+        StorageLive(_588);
+        StorageLive(_589);
+        _589 = &(*_11);
+        _588 = <AccountInfo<'_> as Clone>::clone(move _589) -> [return: bb273, unwind: bb307];
+    }
+
+    bb273: {
+        StorageDead(_589);
+        StorageLive(_590);
+        StorageLive(_591);
+        _591 = &(*_383);
+        _590 = move _591 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_591);
+        StorageLive(_592);
+        StorageLive(_593);
+        _593 = &(*_14);
+        _592 = <AccountInfo<'_> as Clone>::clone(move _593) -> [return: bb274, unwind: bb306];
+    }
+
+    bb274: {
+        StorageDead(_593);
+        _582 = TokenTransferParams::<'_, '_> { source: move _583, destination: move _585, amount: move _587, authority: move _588, authority_signer_seeds: move _590, token_program: move _592 };
+        StorageDead(_592);
+        StorageDead(_590);
+        StorageDead(_588);
+        StorageDead(_587);
+        StorageDead(_585);
+        StorageDead(_583);
+        _581 = spl_token_transfer(move _582) -> [return: bb275, unwind: bb348];
+    }
+
+    bb275: {
+        StorageDead(_582);
+        _580 = <Result<(), ProgramError> as Try>::branch(move _581) -> [return: bb276, unwind: bb348];
+    }
+
+    bb276: {
+        StorageDead(_581);
+        _594 = discriminant(_580);
+        switchInt(move _594) -> [0: bb277, 1: bb278, otherwise: bb7];
+    }
+
+    bb277: {
+        StorageLive(_598);
+        _598 = ((_580 as Continue).0: ());
+        _579 = _598;
+        StorageDead(_598);
+        _664 = discriminant(_580);
+        StorageDead(_580);
+        StorageDead(_579);
+        StorageLive(_599);
+        StorageLive(_600);
+        _600 = _427;
+        StorageLive(_601);
+        _601 = move _414;
+        _599 = (move _600, move _601);
+        StorageDead(_601);
+        StorageDead(_600);
+        _0 = Result::<(u64, Bonus), ProgramError>::Ok(move _599);
+        StorageDead(_599);
+        StorageDead(_427);
+        StorageDead(_426);
+        StorageDead(_425);
+        StorageDead(_414);
+        StorageDead(_392);
+        StorageDead(_390);
+        StorageDead(_384);
+        StorageDead(_383);
+        StorageDead(_361);
+        StorageDead(_360);
+        StorageDead(_329);
+        StorageDead(_328);
+        _614 = const false;
+        StorageDead(_229);
+        drop(_141) -> [return: bb280, unwind: bb319];
+    }
+
+    bb278: {
+        StorageLive(_595);
+        _595 = move ((_580 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_597);
+        _597 = move _595;
+        _0 = <Result<(u64, Bonus), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _597) -> [return: bb279, unwind: bb332];
+    }
+
+    bb279: {
+        StorageDead(_597);
+        StorageDead(_595);
+        _666 = discriminant(_580);
+        StorageDead(_580);
+        StorageDead(_579);
+        goto -> bb286;
+    }
+
+    bb280: {
+        StorageDead(_141);
+        drop(_53) -> [return: bb281, unwind: bb321];
+    }
+
+    bb281: {
+        StorageDead(_53);
+        drop(_15) -> [return: bb282, unwind: bb323];
+    }
+
+    bb282: {
+        StorageDead(_15);
+        goto -> bb305;
+    }
+
+    bb283: {
+        StorageDead(_550);
+        StorageDead(_548);
+        StorageDead(_547);
+        StorageDead(_545);
+        StorageDead(_541);
+        StorageDead(_540);
+        goto -> bb286;
+    }
+
+    bb284: {
+        StorageDead(_509);
+        StorageDead(_507);
+        StorageDead(_506);
+        StorageDead(_504);
+        StorageDead(_500);
+        StorageDead(_499);
+        StorageDead(_493);
+        StorageDead(_492);
+        goto -> bb286;
+    }
+
+    bb285: {
+        StorageDead(_485);
+        StorageDead(_483);
+        StorageDead(_482);
+        StorageDead(_480);
+        StorageDead(_476);
+        StorageDead(_475);
+        goto -> bb286;
+    }
+
+    bb286: {
+        StorageDead(_427);
+        StorageDead(_426);
+        StorageDead(_425);
+        goto -> bb287;
+    }
+
+    bb287: {
+        StorageDead(_414);
+        goto -> bb288;
+    }
+
+    bb288: {
+        StorageDead(_392);
+        StorageDead(_390);
+        StorageDead(_384);
+        StorageDead(_383);
+        goto -> bb289;
+    }
+
+    bb289: {
+        StorageDead(_361);
+        StorageDead(_360);
+        goto -> bb290;
+    }
+
+    bb290: {
+        StorageDead(_329);
+        StorageDead(_328);
+        goto -> bb331;
+    }
+
+    bb291: {
+        StorageDead(_267);
+        StorageDead(_266);
+        goto -> bb331;
+    }
+
+    bb292: {
+        StorageDead(_238);
+        StorageDead(_236);
+        StorageDead(_235);
+        StorageDead(_233);
+        StorageDead(_230);
+        goto -> bb293;
+    }
+
+    bb293: {
+        _614 = const false;
+        StorageDead(_229);
+        goto -> bb295;
+    }
+
+    bb294: {
+        StorageDead(_213);
+        StorageDead(_212);
+        goto -> bb295;
+    }
+
+    bb295: {
+        drop(_141) -> [return: bb297, unwind: bb319];
+    }
+
+    bb296: {
+        StorageDead(_151);
+        StorageDead(_149);
+        StorageDead(_148);
+        StorageDead(_146);
+        _616 = const false;
+        _617 = const false;
+        StorageDead(_143);
+        goto -> bb297;
+    }
+
+    bb297: {
+        StorageDead(_141);
+        goto -> bb299;
+    }
+
+    bb298: {
+        StorageDead(_125);
+        StorageDead(_124);
+        goto -> bb299;
+    }
+
+    bb299: {
+        drop(_53) -> [return: bb301, unwind: bb321];
+    }
+
+    bb300: {
+        StorageDead(_63);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageDead(_58);
+        _618 = const false;
+        _619 = const false;
+        StorageDead(_55);
+        goto -> bb301;
+    }
+
+    bb301: {
+        StorageDead(_53);
+        goto -> bb302;
+    }
+
+    bb302: {
+        drop(_15) -> [return: bb304, unwind: bb323];
+    }
+
+    bb303: {
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_20);
+        _620 = const false;
+        _621 = const false;
+        StorageDead(_17);
+        goto -> bb304;
+    }
+
+    bb304: {
+        StorageDead(_15);
+        goto -> bb305;
+    }
+
+    bb305: {
+        return;
+    }
+
+    bb306 (cleanup): {
+        drop(_588) -> [return: bb307, unwind terminate(cleanup)];
+    }
+
+    bb307 (cleanup): {
+        drop(_585) -> [return: bb308, unwind terminate(cleanup)];
+    }
+
+    bb308 (cleanup): {
+        drop(_583) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb309 (cleanup): {
+        drop(_566) -> [return: bb310, unwind terminate(cleanup)];
+    }
+
+    bb310 (cleanup): {
+        drop(_563) -> [return: bb311, unwind terminate(cleanup)];
+    }
+
+    bb311 (cleanup): {
+        drop(_561) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb312 (cleanup): {
+        drop(_548) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb313 (cleanup): {
+        drop(_543) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb314 (cleanup): {
+        drop(_507) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb315 (cleanup): {
+        drop(_483) -> [return: bb348, unwind terminate(cleanup)];
+    }
+
+    bb316 (cleanup): {
+        drop(_236) -> [return: bb317, unwind terminate(cleanup)];
+    }
+
+    bb317 (cleanup): {
+        drop(_141) -> [return: bb319, unwind terminate(cleanup)];
+    }
+
+    bb318 (cleanup): {
+        drop(_149) -> [return: bb319, unwind terminate(cleanup)];
+    }
+
+    bb319 (cleanup): {
+        drop(_53) -> [return: bb321, unwind terminate(cleanup)];
+    }
+
+    bb320 (cleanup): {
+        drop(_61) -> [return: bb321, unwind terminate(cleanup)];
+    }
+
+    bb321 (cleanup): {
+        drop(_15) -> [return: bb323, unwind terminate(cleanup)];
+    }
+
+    bb322 (cleanup): {
+        drop(_23) -> [return: bb323, unwind terminate(cleanup)];
+    }
+
+    bb323 (cleanup): {
+        resume;
+    }
+
+    bb324: {
+        _626 = discriminant(_126);
+        StorageDead(_126);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        _138 = const "Repay reserve is stale and must be refreshed in the current slot";
+        _137 = &(*_138);
+        _136 = solana_program::log::sol_log(move _137) -> [return: bb62, unwind: bb319];
+    }
+
+    bb325: {
+        _628 = discriminant(_126);
+        StorageDead(_126);
+        _124 = const ();
+        StorageDead(_125);
+        StorageDead(_124);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        _152 = &((*_7).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _151 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _152) -> [return: bb64, unwind: bb319];
+    }
+
+    bb326: {
+        _632 = discriminant(_214);
+        StorageDead(_214);
+        StorageLive(_224);
+        StorageLive(_225);
+        StorageLive(_226);
+        _226 = const "Withdraw reserve is stale and must be refreshed in the current slot";
+        _225 = &(*_226);
+        _224 = solana_program::log::sol_log(move _225) -> [return: bb104, unwind: bb317];
+    }
+
+    bb327: {
+        _634 = discriminant(_214);
+        StorageDead(_214);
+        _212 = const ();
+        StorageDead(_213);
+        StorageDead(_212);
+        StorageLive(_229);
+        StorageLive(_230);
+        StorageLive(_231);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        StorageLive(_238);
+        StorageLive(_239);
+        _239 = &((*_9).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _238 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _239) -> [return: bb106, unwind: bb317];
+    }
+
+    bb328: {
+        _638 = discriminant(_268);
+        StorageDead(_268);
+        StorageLive(_278);
+        StorageLive(_279);
+        StorageLive(_280);
+        _280 = const "Obligation is stale and must be refreshed in the current slot";
+        _279 = &(*_280);
+        _278 = solana_program::log::sol_log(move _279) -> [return: bb130, unwind: bb348];
+    }
+
+    bb329: {
+        _640 = discriminant(_268);
+        StorageDead(_268);
+        _266 = const ();
+        StorageDead(_267);
+        StorageDead(_266);
+        StorageLive(_283);
+        StorageLive(_284);
+        StorageLive(_285);
+        _285 = &(_229.6: solend_sdk::math::Decimal);
+        StorageLive(_286);
+        StorageLive(_287);
+        _287 = Decimal::zero() -> [return: bb132, unwind: bb348];
+    }
+
+    bb330: {
+        drop(_229) -> [return: bb293, unwind: bb317];
+    }
+
+    bb331: {
+        switchInt(_614) -> [0: bb293, otherwise: bb330];
+    }
+
+    bb332 (cleanup): {
+        _704 = discriminant(_580);
+        goto -> bb348;
+    }
+
+    bb333 (cleanup): {
+        _705 = discriminant(_558);
+        goto -> bb348;
+    }
+
+    bb334 (cleanup): {
+        _706 = discriminant(_541);
+        goto -> bb312;
+    }
+
+    bb335 (cleanup): {
+        drop(_543) -> [return: bb312, unwind terminate(cleanup)];
+    }
+
+    bb336 (cleanup): {
+        switchInt(_615) -> [0: bb312, otherwise: bb335];
+    }
+
+    bb337 (cleanup): {
+        _707 = discriminant(_528);
+        goto -> bb348;
+    }
+
+    bb338 (cleanup): {
+        _708 = discriminant(_517);
+        goto -> bb348;
+    }
+
+    bb339 (cleanup): {
+        _709 = discriminant(_500);
+        goto -> bb314;
+    }
+
+    bb340 (cleanup): {
+        _710 = discriminant(_476);
+        goto -> bb315;
+    }
+
+    bb341 (cleanup): {
+        _711 = discriminant(_463);
+        goto -> bb348;
+    }
+
+    bb342 (cleanup): {
+        _712 = discriminant(_429);
+        goto -> bb348;
+    }
+
+    bb343 (cleanup): {
+        _713 = discriminant(_415);
+        goto -> bb348;
+    }
+
+    bb344 (cleanup): {
+        _714 = discriminant(_363);
+        goto -> bb348;
+    }
+
+    bb345 (cleanup): {
+        _715 = discriminant(_331);
+        goto -> bb348;
+    }
+
+    bb346 (cleanup): {
+        _716 = discriminant(_268);
+        goto -> bb348;
+    }
+
+    bb347 (cleanup): {
+        drop(_229) -> [return: bb317, unwind terminate(cleanup)];
+    }
+
+    bb348 (cleanup): {
+        switchInt(_614) -> [0: bb317, otherwise: bb347];
+    }
+
+    bb349 (cleanup): {
+        _717 = discriminant(_230);
+        goto -> bb316;
+    }
+
+    bb350 (cleanup): {
+        _718 = discriminant(_214);
+        goto -> bb317;
+    }
+
+    bb351 (cleanup): {
+        _719 = discriminant(_143);
+        goto -> bb318;
+    }
+
+    bb352 (cleanup): {
+        _720 = discriminant(_126);
+        goto -> bb319;
+    }
+
+    bb353 (cleanup): {
+        _721 = discriminant(_55);
+        goto -> bb320;
+    }
+
+    bb354 (cleanup): {
+        _722 = discriminant(_17);
+        goto -> bb322;
+    }
+
+    bb355: {
+        _502 = move (*_745);
+        StorageLive(_503);
+        StorageLive(_504);
+        StorageLive(_505);
+        StorageLive(_506);
+        StorageLive(_507);
+        StorageLive(_508);
+        StorageLive(_509);
+        StorageLive(_510);
+        _510 = &((*_7).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _509 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _510) -> [return: bb231, unwind: bb348];
+    }
+
+    bb356: {
+        ((*_744).7: solend_sdk::math::Decimal) = move _496;
+        StorageDead(_496);
+        StorageLive(_499);
+        StorageLive(_500);
+        StorageLive(_501);
+        StorageLive(_502);
+        _745 = (((_141.0: std::ptr::Unique<solend_sdk::state::Reserve>).0: std::ptr::NonNull<solend_sdk::state::Reserve>).0: *const solend_sdk::state::Reserve);
+        _746 = _745 as *const () (PtrToPtr);
+        _747 = _746 as usize (Transmute);
+        _748 = AlignOf(solend_sdk::state::Reserve);
+        _749 = Sub(_748, const 1_usize);
+        _750 = BitAnd(_747, _749);
+        _751 = Eq(_750, const 0_usize);
+        assert(_751, "misaligned pointer dereference: address must be a multiple of {} but is {}", _748, _747) -> [success: bb355, unwind unreachable];
+    }
+
+    bb357: {
+        _497 = ((*_743).7: solend_sdk::math::Decimal);
+        StorageLive(_498);
+        _498 = ((*_360).2: solend_sdk::math::Decimal);
+        _496 = <Decimal as SaturatingSub>::saturating_sub(move _497, move _498) -> [return: bb230, unwind: bb348];
+    }
+
+    bb358: {
+        _478 = move (*_742);
+        StorageLive(_479);
+        StorageLive(_480);
+        StorageLive(_481);
+        StorageLive(_482);
+        StorageLive(_483);
+        StorageLive(_484);
+        StorageLive(_485);
+        StorageLive(_486);
+        _486 = &((*_5).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _485 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _486) -> [return: bb220, unwind: bb348];
+    }
+
+    bb359: {
+        _391 = ((*_737).1: u8);
+        _390 = [move _391];
+        StorageDead(_391);
+        _389 = &_390;
+        _388 = &(*_389);
+        _387 = move _388 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_388);
+        _384 = [move _385, move _387];
+        StorageDead(_387);
+        StorageDead(_385);
+        _383 = &_384;
+        StorageDead(_389);
+        StorageLive(_392);
+        StorageLive(_393);
+        StorageLive(_394);
+        StorageLive(_395);
+        StorageLive(_396);
+        _396 = &(*_383);
+        _395 = move _396 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_396);
+        StorageLive(_397);
+        _397 = &(*_1);
+        _394 = Pubkey::create_program_address(move _395, move _397) -> [return: bb186, unwind: bb348];
+    }
+
+    bb360: {
+        _318 = ((((*_736).8: std::option::Option<solana_program::pubkey::Pubkey>) as Some).0: solana_program::pubkey::Pubkey);
+        StorageLive(_319);
+        StorageLive(_320);
+        _320 = &_318;
+        StorageLive(_321);
+        _607 = deref_copy ((*_12).0: &solana_program::pubkey::Pubkey);
+        _321 = &(*_607);
+        _319 = <Pubkey as PartialEq>::ne(move _320, move _321) -> [return: bb153, unwind: bb348];
+    }
+}

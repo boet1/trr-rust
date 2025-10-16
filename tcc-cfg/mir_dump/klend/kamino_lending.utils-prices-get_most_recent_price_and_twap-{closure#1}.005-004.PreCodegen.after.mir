@@ -1,0 +1,43 @@
+// MIR for `get_most_recent_price_and_twap::{closure#1}` after PreCodegen
+
+fn get_most_recent_price_and_twap::{closure#1}(_1: {closure@programs\klend\src\utils\prices\mod.rs:73:46: 73:49}, _2: &anchor_lang::prelude::AccountInfo<'_>) -> std::option::Option<TimestampedPriceWithTwap> {
+    debug a => _2;
+    debug switchboard_price_twap_info_opt => (*(_1.0: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>));
+    debug clock => (*(_1.1: &anchor_lang::prelude::Clock));
+    let mut _0: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _3: std::result::Result<utils::prices::types::TimestampedPriceWithTwap, anchor_lang::error::Error>;
+    let mut _4: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _5: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _6: &anchor_lang::prelude::Clock;
+    let mut _7: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _8: &anchor_lang::prelude::Clock;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_2);
+        StorageLive(_5);
+        _7 = deref_copy (_1.0: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>);
+        _5 = (*_7);
+        StorageLive(_6);
+        _8 = deref_copy (_1.1: &anchor_lang::prelude::Clock);
+        _6 = &(*_8);
+        _3 = get_switchboard_price_and_twap(move _4, move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = std::result::Result::<TimestampedPriceWithTwap, anchor_lang::error::Error>::ok(move _3) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        return;
+    }
+
+    bb3 (cleanup): {
+        resume;
+    }
+}

@@ -1,0 +1,4077 @@
+// MIR for `if_staker::handle_end_insurance_fund_swap` before PreCodegen
+
+fn if_staker::handle_end_insurance_fund_swap(_1: anchor_lang::context::Context<'_, '_, '_, '_, if_staker::InsuranceFundSwap<'_>>, _2: u16, _3: u16) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug in_market_index => _2;
+    debug out_market_index => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: &std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _7: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _8: isize;
+    let mut _10: !;
+    let mut _11: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _16: std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _17: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _18: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _22: instructions::optional_accounts::AccountMaps<'_>;
+    let mut _23: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, instructions::optional_accounts::AccountMaps<'_>>;
+    let mut _24: std::result::Result<instructions::optional_accounts::AccountMaps<'_>, error::ErrorCode>;
+    let mut _25: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _26: &std::collections::BTreeSet<u16>;
+    let _27: &std::collections::BTreeSet<u16>;
+    let _28: std::collections::BTreeSet<u16>;
+    let mut _29: &std::collections::BTreeSet<u16>;
+    let _30: &std::collections::BTreeSet<u16>;
+    let _31: std::collections::BTreeSet<u16>;
+    let mut _32: std::vec::Vec<u16>;
+    let mut _33: std::boxed::Box<[u16]>;
+    let mut _34: std::boxed::Box<[u16; 2]>;
+    let mut _35: usize;
+    let mut _36: usize;
+    let mut _37: *mut u8;
+    let mut _38: std::boxed::Box<[u16; 2]>;
+    let mut _39: u16;
+    let mut _40: u16;
+    let mut _41: u64;
+    let mut _42: std::option::Option<state::state::OracleGuardRails>;
+    let mut _43: state::state::OracleGuardRails;
+    let mut _44: &state::state::State;
+    let mut _45: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _46: isize;
+    let mut _48: !;
+    let mut _49: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _52: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::option::Option<anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>>>;
+    let mut _53: std::result::Result<std::option::Option<anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>>, error::ErrorCode>;
+    let mut _54: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _55: isize;
+    let mut _57: !;
+    let mut _58: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _61: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>>;
+    let mut _62: std::result::Result<std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>, error::ErrorCode>;
+    let mut _63: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _64: isize;
+    let mut _66: !;
+    let mut _67: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _70: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>>;
+    let mut _71: std::result::Result<std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>, error::ErrorCode>;
+    let mut _72: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _73: isize;
+    let mut _75: !;
+    let mut _76: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _79: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _80: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _81: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _82: &u16;
+    let _83: &u16;
+    let mut _84: isize;
+    let mut _86: !;
+    let mut _87: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _89: ();
+    let mut _90: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _91: isize;
+    let _93: ();
+    let mut _94: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _95: std::result::Result<(), error::ErrorCode>;
+    let mut _96: bool;
+    let mut _97: &anchor_lang::prelude::Pubkey;
+    let _98: anchor_lang::prelude::Pubkey;
+    let mut _99: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _100: &anchor_lang::prelude::Pubkey;
+    let _101: &state::spot_market::SpotMarket;
+    let mut _102: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _103: ();
+    let _105: ();
+    let mut _106: &str;
+    let _107: &str;
+    let mut _108: &std::string::String;
+    let _109: &std::string::String;
+    let _110: std::string::String;
+    let mut _112: std::fmt::Arguments<'_>;
+    let mut _113: &[&str];
+    let mut _114: &[&str; 2];
+    let _115: &[&str; 2];
+    let _116: [&str; 2];
+    let mut _117: &[core::fmt::rt::Argument<'_>];
+    let mut _118: &[core::fmt::rt::Argument<'_>; 1];
+    let _119: &[core::fmt::rt::Argument<'_>; 1];
+    let _120: [core::fmt::rt::Argument<'_>; 1];
+    let mut _121: core::fmt::rt::Argument<'_>;
+    let mut _122: &error::ErrorCode;
+    let _123: &error::ErrorCode;
+    let _124: ();
+    let mut _125: &str;
+    let _126: &str;
+    let mut _127: error::ErrorCode;
+    let mut _128: isize;
+    let mut _130: !;
+    let mut _131: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _133: ();
+    let mut _134: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _135: std::result::Result<(), error::ErrorCode>;
+    let mut _136: bool;
+    let mut _137: u64;
+    let mut _138: &state::spot_market::SpotMarket;
+    let mut _139: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _140: ();
+    let _142: ();
+    let mut _143: &str;
+    let _144: &str;
+    let mut _145: &std::string::String;
+    let _146: &std::string::String;
+    let _147: std::string::String;
+    let mut _149: std::fmt::Arguments<'_>;
+    let mut _150: &[&str];
+    let mut _151: &[&str; 2];
+    let _152: &[&str; 2];
+    let _153: [&str; 2];
+    let mut _154: &[core::fmt::rt::Argument<'_>];
+    let mut _155: &[core::fmt::rt::Argument<'_>; 1];
+    let _156: &[core::fmt::rt::Argument<'_>; 1];
+    let _157: [core::fmt::rt::Argument<'_>; 1];
+    let mut _158: core::fmt::rt::Argument<'_>;
+    let mut _159: &error::ErrorCode;
+    let _160: &error::ErrorCode;
+    let _161: ();
+    let mut _162: &str;
+    let _163: &str;
+    let mut _164: error::ErrorCode;
+    let mut _165: isize;
+    let mut _167: !;
+    let mut _168: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _171: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _172: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _173: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _174: &u16;
+    let _175: &u16;
+    let mut _176: isize;
+    let mut _178: !;
+    let mut _179: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _181: ();
+    let mut _182: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _183: isize;
+    let _185: ();
+    let mut _186: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _187: std::result::Result<(), error::ErrorCode>;
+    let mut _188: bool;
+    let mut _189: &anchor_lang::prelude::Pubkey;
+    let _190: anchor_lang::prelude::Pubkey;
+    let mut _191: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+    let mut _192: &anchor_lang::prelude::Pubkey;
+    let _193: &state::spot_market::SpotMarket;
+    let mut _194: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _195: ();
+    let _197: ();
+    let mut _198: &str;
+    let _199: &str;
+    let mut _200: &std::string::String;
+    let _201: &std::string::String;
+    let _202: std::string::String;
+    let mut _204: std::fmt::Arguments<'_>;
+    let mut _205: &[&str];
+    let mut _206: &[&str; 2];
+    let _207: &[&str; 2];
+    let _208: [&str; 2];
+    let mut _209: &[core::fmt::rt::Argument<'_>];
+    let mut _210: &[core::fmt::rt::Argument<'_>; 1];
+    let _211: &[core::fmt::rt::Argument<'_>; 1];
+    let _212: [core::fmt::rt::Argument<'_>; 1];
+    let mut _213: core::fmt::rt::Argument<'_>;
+    let mut _214: &error::ErrorCode;
+    let _215: &error::ErrorCode;
+    let _216: ();
+    let mut _217: &str;
+    let _218: &str;
+    let mut _219: error::ErrorCode;
+    let mut _220: isize;
+    let mut _222: !;
+    let mut _223: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _228: &state::spot_market::SpotMarket;
+    let mut _229: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let _230: ();
+    let mut _231: bool;
+    let mut _232: u64;
+    let mut _233: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _234: &anchor_spl::token_interface::TokenAccount;
+    let _235: &anchor_spl::token_interface::TokenAccount;
+    let mut _236: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _237: u64;
+    let mut _238: &state::spot_market::SpotMarket;
+    let mut _239: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _241: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _242: std::result::Result<u64, error::ErrorCode>;
+    let mut _243: u64;
+    let mut _244: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _245: &anchor_spl::token_interface::TokenAccount;
+    let _246: &anchor_spl::token_interface::TokenAccount;
+    let mut _247: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _248: u64;
+    let mut _249: &state::spot_market::SpotMarket;
+    let mut _250: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _251: isize;
+    let mut _253: !;
+    let mut _254: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _256: ();
+    let mut _257: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _258: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _259: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let _260: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _261: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _262: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _263: &anchor_lang::prelude::AccountInfo<'_>;
+    let _264: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _265: &anchor_lang::prelude::Signer<'_>;
+    let _266: &anchor_lang::prelude::Signer<'_>;
+    let mut _267: u64;
+    let mut _268: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let _269: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _270: std::option::Option<&mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>;
+    let mut _271: bool;
+    let mut _272: &state::spot_market::SpotMarket;
+    let _273: &state::spot_market::SpotMarket;
+    let mut _274: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _275: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _276: isize;
+    let mut _278: !;
+    let mut _279: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _281: ();
+    let mut _282: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _283: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _284: &mut anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _285: isize;
+    let mut _287: !;
+    let mut _288: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _290: ();
+    let mut _291: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _292: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _293: &mut anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _294: isize;
+    let mut _296: !;
+    let mut _297: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _299: u64;
+    let mut _300: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _301: std::result::Result<u64, error::ErrorCode>;
+    let mut _302: u64;
+    let mut _303: u64;
+    let mut _304: isize;
+    let mut _306: !;
+    let mut _307: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _309: &mut state::spot_market::SpotMarket;
+    let mut _310: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _311: &mut state::spot_market::SpotMarket;
+    let mut _312: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let _316: ();
+    let mut _317: bool;
+    let mut _318: u64;
+    let mut _319: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _320: &anchor_spl::token_interface::TokenAccount;
+    let _321: &anchor_spl::token_interface::TokenAccount;
+    let mut _322: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _323: u64;
+    let mut _324: &state::spot_market::SpotMarket;
+    let mut _325: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _326: u64;
+    let mut _327: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _328: std::result::Result<u64, error::ErrorCode>;
+    let mut _329: u64;
+    let mut _330: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _331: &anchor_spl::token_interface::TokenAccount;
+    let _332: &anchor_spl::token_interface::TokenAccount;
+    let mut _333: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _334: u64;
+    let mut _335: &state::spot_market::SpotMarket;
+    let mut _336: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _337: isize;
+    let mut _339: !;
+    let mut _340: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _342: ();
+    let mut _343: isize;
+    let _345: ();
+    let mut _346: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _347: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _348: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let _349: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _350: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _351: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _352: &anchor_lang::prelude::AccountInfo<'_>;
+    let _353: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _354: &anchor_lang::prelude::Signer<'_>;
+    let _355: &anchor_lang::prelude::Signer<'_>;
+    let mut _356: u64;
+    let mut _357: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let _358: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _359: std::option::Option<&mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>;
+    let mut _360: bool;
+    let mut _361: &state::spot_market::SpotMarket;
+    let _362: &state::spot_market::SpotMarket;
+    let mut _363: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _364: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _365: isize;
+    let mut _367: !;
+    let mut _368: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _370: ();
+    let mut _371: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _372: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _373: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let _374: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _375: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _376: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _377: &anchor_lang::prelude::AccountInfo<'_>;
+    let _378: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _379: &anchor_lang::prelude::Signer<'_>;
+    let _380: &anchor_lang::prelude::Signer<'_>;
+    let mut _381: u64;
+    let mut _382: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let _383: &std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+    let mut _384: std::option::Option<&mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>;
+    let mut _385: bool;
+    let mut _386: &state::spot_market::SpotMarket;
+    let _387: &state::spot_market::SpotMarket;
+    let mut _388: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _389: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _390: isize;
+    let mut _392: !;
+    let mut _393: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _395: ();
+    let mut _396: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _397: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _398: &mut anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _399: isize;
+    let mut _401: !;
+    let mut _402: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _404: ();
+    let mut _405: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _406: std::result::Result<(), error::ErrorCode>;
+    let mut _407: bool;
+    let mut _408: u64;
+    let mut _409: ();
+    let _411: ();
+    let mut _412: &str;
+    let _413: &str;
+    let mut _414: &std::string::String;
+    let _415: &std::string::String;
+    let _416: std::string::String;
+    let mut _418: std::fmt::Arguments<'_>;
+    let mut _419: &[&str];
+    let mut _420: &[&str; 2];
+    let _421: &[&str; 2];
+    let _422: [&str; 2];
+    let mut _423: &[core::fmt::rt::Argument<'_>];
+    let mut _424: &[core::fmt::rt::Argument<'_>; 1];
+    let _425: &[core::fmt::rt::Argument<'_>; 1];
+    let _426: [core::fmt::rt::Argument<'_>; 1];
+    let mut _427: core::fmt::rt::Argument<'_>;
+    let mut _428: &error::ErrorCode;
+    let _429: &error::ErrorCode;
+    let _430: ();
+    let mut _431: &str;
+    let _432: &str;
+    let mut _433: error::ErrorCode;
+    let mut _434: isize;
+    let mut _436: !;
+    let mut _437: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _439: &mut state::spot_market::SpotMarket;
+    let mut _440: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _441: &mut state::spot_market::SpotMarket;
+    let mut _442: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let _443: ();
+    let mut _444: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _445: std::result::Result<(), error::ErrorCode>;
+    let mut _446: bool;
+    let mut _447: u64;
+    let mut _448: &state::spot_market::SpotMarket;
+    let mut _449: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _450: bool;
+    let mut _451: u64;
+    let mut _452: &state::spot_market::SpotMarket;
+    let mut _453: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _454: ();
+    let _456: ();
+    let mut _457: &str;
+    let _458: &str;
+    let mut _459: &std::string::String;
+    let _460: &std::string::String;
+    let _461: std::string::String;
+    let mut _463: std::fmt::Arguments<'_>;
+    let mut _464: &[&str];
+    let mut _465: &[&str; 2];
+    let _466: &[&str; 2];
+    let _467: [&str; 2];
+    let mut _468: &[core::fmt::rt::Argument<'_>];
+    let mut _469: &[core::fmt::rt::Argument<'_>; 1];
+    let _470: &[core::fmt::rt::Argument<'_>; 1];
+    let _471: [core::fmt::rt::Argument<'_>; 1];
+    let mut _472: core::fmt::rt::Argument<'_>;
+    let mut _473: &error::ErrorCode;
+    let _474: &error::ErrorCode;
+    let _475: ();
+    let mut _476: &str;
+    let _477: &str;
+    let mut _478: error::ErrorCode;
+    let mut _479: isize;
+    let mut _481: !;
+    let mut _482: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _484: ();
+    let mut _485: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _486: std::result::Result<(), error::ErrorCode>;
+    let mut _487: bool;
+    let mut _488: u64;
+    let mut _489: &state::spot_market::SpotMarket;
+    let mut _490: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _491: bool;
+    let mut _492: u64;
+    let mut _493: &state::spot_market::SpotMarket;
+    let mut _494: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _495: ();
+    let _497: ();
+    let mut _498: &str;
+    let _499: &str;
+    let mut _500: &std::string::String;
+    let _501: &std::string::String;
+    let _502: std::string::String;
+    let mut _504: std::fmt::Arguments<'_>;
+    let mut _505: &[&str];
+    let mut _506: &[&str; 2];
+    let _507: &[&str; 2];
+    let _508: [&str; 2];
+    let mut _509: &[core::fmt::rt::Argument<'_>];
+    let mut _510: &[core::fmt::rt::Argument<'_>; 1];
+    let _511: &[core::fmt::rt::Argument<'_>; 1];
+    let _512: [core::fmt::rt::Argument<'_>; 1];
+    let mut _513: core::fmt::rt::Argument<'_>;
+    let mut _514: &error::ErrorCode;
+    let _515: &error::ErrorCode;
+    let _516: ();
+    let mut _517: &str;
+    let _518: &str;
+    let mut _519: error::ErrorCode;
+    let mut _520: isize;
+    let mut _522: !;
+    let mut _523: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _526: &state::oracle::OraclePriceData;
+    let mut _527: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &state::oracle::OraclePriceData>;
+    let mut _528: std::result::Result<&state::oracle::OraclePriceData, error::ErrorCode>;
+    let mut _529: &mut state::oracle_map::OracleMap<'_>;
+    let mut _530: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _531: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _532: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _533: &state::spot_market::SpotMarket;
+    let _534: &state::spot_market::SpotMarket;
+    let mut _535: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _536: isize;
+    let mut _538: !;
+    let mut _539: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _542: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>>;
+    let mut _543: std::result::Result<std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>, anchor_lang::error::Error>;
+    let mut _544: &anchor_lang::prelude::AccountLoader<'_, state::if_rebalance_config::IfRebalanceConfig>;
+    let mut _545: isize;
+    let mut _547: !;
+    let mut _548: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _550: ();
+    let mut _551: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _552: std::result::Result<(), error::ErrorCode>;
+    let mut _553: &mut state::if_rebalance_config::IfRebalanceConfig;
+    let mut _554: &mut state::if_rebalance_config::IfRebalanceConfig;
+    let mut _555: &mut std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>;
+    let mut _556: &mut std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>;
+    let mut _557: u64;
+    let mut _558: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _559: &anchor_spl::token_interface::TokenAccount;
+    let _560: &anchor_spl::token_interface::TokenAccount;
+    let mut _561: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _562: u64;
+    let mut _563: &anchor_spl::token_2022::spl_token_2022::state::Account;
+    let mut _564: &anchor_spl::token_interface::TokenAccount;
+    let _565: &anchor_spl::token_interface::TokenAccount;
+    let mut _566: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _567: &mut state::spot_market::SpotMarket;
+    let mut _568: &mut state::spot_market::SpotMarket;
+    let mut _569: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _570: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _571: &mut state::spot_market::SpotMarket;
+    let mut _572: &mut state::spot_market::SpotMarket;
+    let mut _573: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _574: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _575: u64;
+    let mut _576: u64;
+    let mut _577: u64;
+    let mut _578: i64;
+    let mut _579: i64;
+    let mut _580: isize;
+    let mut _582: !;
+    let mut _583: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _585: ();
+    let mut _592: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _593: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _594: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _595: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _596: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _597: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _598: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _599: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _600: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _601: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _602: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _603: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _604: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _605: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _606: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _607: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _608: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _609: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _610: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _611: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _612: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _613: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _614: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _615: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _616: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _617: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _618: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _619: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _620: &mut instructions::if_staker::InsuranceFundSwap<'_>;
+    let mut _621: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+    let mut _622: isize;
+    let mut _623: isize;
+    let mut _624: isize;
+    let mut _625: isize;
+    let mut _626: isize;
+    let mut _627: isize;
+    let mut _628: isize;
+    let mut _629: isize;
+    let mut _630: isize;
+    let mut _631: isize;
+    let mut _632: isize;
+    let mut _633: isize;
+    let mut _634: isize;
+    let mut _635: isize;
+    let mut _636: isize;
+    let mut _637: isize;
+    let mut _638: isize;
+    let mut _639: isize;
+    let mut _640: isize;
+    let mut _641: isize;
+    let mut _642: isize;
+    let mut _643: isize;
+    let mut _644: isize;
+    let mut _645: isize;
+    let mut _646: isize;
+    let mut _647: isize;
+    let mut _648: isize;
+    let mut _649: isize;
+    let mut _650: isize;
+    let mut _651: isize;
+    let mut _652: isize;
+    let mut _653: isize;
+    let mut _654: isize;
+    let mut _655: isize;
+    let mut _656: isize;
+    let mut _657: isize;
+    let mut _658: isize;
+    let mut _659: isize;
+    let mut _660: isize;
+    let mut _661: isize;
+    let mut _662: isize;
+    let mut _663: isize;
+    let mut _664: isize;
+    let mut _665: isize;
+    let mut _666: isize;
+    let mut _667: isize;
+    let mut _668: isize;
+    let mut _669: isize;
+    let mut _670: isize;
+    let mut _671: isize;
+    let mut _672: isize;
+    let mut _673: isize;
+    let mut _674: isize;
+    let mut _675: isize;
+    let mut _676: isize;
+    let mut _677: isize;
+    let mut _678: *const [u16; 2];
+    let mut _679: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _680: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _681: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _682: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _683: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _684: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _685: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _686: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _687: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _688: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _689: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _690: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _691: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _692: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _693: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _694: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    scope 1 {
+        debug state => _4;
+        let _5: anchor_lang::prelude::Clock;
+        let _9: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+        let _12: anchor_lang::prelude::Clock;
+        scope 2 {
+            debug clock => _5;
+            let _13: u64;
+            scope 7 {
+                debug slot => _13;
+                let _14: i64;
+                scope 8 {
+                    debug now => _14;
+                    let _15: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+                    scope 9 {
+                        debug remaining_accounts => _15;
+                        let _19: state::perp_market_map::PerpMarketMap<'_>;
+                        let _20: state::spot_market_map::SpotMarketMap<'_>;
+                        let mut _21: state::oracle_map::OracleMap<'_>;
+                        let _47: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _50: instructions::optional_accounts::AccountMaps<'_>;
+                        let mut _695: *const ();
+                        let mut _696: usize;
+                        let mut _697: usize;
+                        let mut _698: usize;
+                        let mut _699: usize;
+                        let mut _700: bool;
+                        scope 10 {
+                            debug perp_market_map => _19;
+                            debug spot_market_map => _20;
+                            debug oracle_map => _21;
+                            let _51: std::option::Option<anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>>;
+                            let _56: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _59: std::option::Option<anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>>;
+                            scope 16 {
+                                debug out_token_program => _51;
+                                let _60: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+                                let _65: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _68: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+                                scope 21 {
+                                    debug in_mint => _60;
+                                    let _69: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+                                    let _74: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _77: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>;
+                                    scope 26 {
+                                        debug out_mint => _69;
+                                        let mut _78: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        let _85: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _88: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        scope 31 {
+                                            debug in_spot_market => _78;
+                                            let _141: error::ErrorCode;
+                                            let _166: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _169: ();
+                                            let mut _170: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                            let _177: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _180: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                            scope 36 {
+                                                debug in_mint => _92;
+                                                let _92: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+                                                let _104: error::ErrorCode;
+                                                let _129: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                let _132: ();
+                                                scope 37 {
+                                                    debug error_code => _104;
+                                                    let _111: std::string::String;
+                                                    let mut _591: &[&str; 2];
+                                                    scope 38 {
+                                                        debug res => _111;
+                                                    }
+                                                }
+                                                scope 39 {
+                                                    debug residual => _129;
+                                                    scope 40 {
+                                                    }
+                                                }
+                                                scope 41 {
+                                                    debug val => _132;
+                                                    scope 42 {
+                                                    }
+                                                }
+                                            }
+                                            scope 43 {
+                                                debug error_code => _141;
+                                                let _148: std::string::String;
+                                                let mut _590: &[&str; 2];
+                                                scope 44 {
+                                                    debug res => _148;
+                                                }
+                                            }
+                                            scope 45 {
+                                                debug residual => _166;
+                                                scope 46 {
+                                                }
+                                            }
+                                            scope 47 {
+                                                debug val => _169;
+                                                scope 48 {
+                                                }
+                                            }
+                                            scope 49 {
+                                                debug out_spot_market => _170;
+                                                let _225: &mut std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+                                                scope 54 {
+                                                    debug out_mint => _184;
+                                                    let _184: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>;
+                                                    let _196: error::ErrorCode;
+                                                    let _221: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                    let _224: ();
+                                                    scope 55 {
+                                                        debug error_code => _196;
+                                                        let _203: std::string::String;
+                                                        let mut _589: &[&str; 2];
+                                                        scope 56 {
+                                                            debug res => _203;
+                                                        }
+                                                    }
+                                                    scope 57 {
+                                                        debug residual => _221;
+                                                        scope 58 {
+                                                        }
+                                                    }
+                                                    scope 59 {
+                                                        debug val => _224;
+                                                        scope 60 {
+                                                        }
+                                                    }
+                                                }
+                                                scope 61 {
+                                                    debug in_vault => _225;
+                                                    let _226: &mut std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+                                                    scope 62 {
+                                                        debug in_token_account => _226;
+                                                        let mut _227: u64;
+                                                        scope 63 {
+                                                            debug amount_in => _227;
+                                                            let _240: u64;
+                                                            let _252: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                            let _255: u64;
+                                                            let _313: &mut std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+                                                            scope 64 {
+                                                                debug residual => _240;
+                                                                let _277: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                let _280: ();
+                                                                let _286: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                let _289: ();
+                                                                let _295: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                let _298: ();
+                                                                let _305: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                let _308: u64;
+                                                                scope 69 {
+                                                                    debug residual => _277;
+                                                                    scope 70 {
+                                                                    }
+                                                                }
+                                                                scope 71 {
+                                                                    debug val => _280;
+                                                                    scope 72 {
+                                                                    }
+                                                                }
+                                                                scope 73 {
+                                                                    debug residual => _286;
+                                                                    scope 74 {
+                                                                    }
+                                                                }
+                                                                scope 75 {
+                                                                    debug val => _289;
+                                                                    scope 76 {
+                                                                    }
+                                                                }
+                                                                scope 77 {
+                                                                    debug residual => _295;
+                                                                    scope 78 {
+                                                                    }
+                                                                }
+                                                                scope 79 {
+                                                                    debug val => _298;
+                                                                    scope 80 {
+                                                                    }
+                                                                }
+                                                                scope 81 {
+                                                                    debug residual => _305;
+                                                                    scope 82 {
+                                                                    }
+                                                                }
+                                                                scope 83 {
+                                                                    debug val => _308;
+                                                                    scope 84 {
+                                                                    }
+                                                                }
+                                                            }
+                                                            scope 65 {
+                                                                debug residual => _252;
+                                                                scope 66 {
+                                                                }
+                                                            }
+                                                            scope 67 {
+                                                                debug val => _255;
+                                                                scope 68 {
+                                                                }
+                                                            }
+                                                            scope 85 {
+                                                                debug out_vault => _313;
+                                                                let _314: &mut std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>;
+                                                                scope 86 {
+                                                                    debug out_token_account => _314;
+                                                                    let mut _315: u64;
+                                                                    scope 87 {
+                                                                        debug amount_out => _315;
+                                                                        let _338: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                        let _341: u64;
+                                                                        let _391: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                        let _394: ();
+                                                                        let _400: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                        let _403: ();
+                                                                        let _410: error::ErrorCode;
+                                                                        let _435: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                        let _438: ();
+                                                                        let _455: error::ErrorCode;
+                                                                        let _480: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                        let _483: ();
+                                                                        let _496: error::ErrorCode;
+                                                                        let _521: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                        let _524: ();
+                                                                        let _525: i64;
+                                                                        let _537: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                        let _540: &state::oracle::OraclePriceData;
+                                                                        scope 88 {
+                                                                            debug residual => _338;
+                                                                            scope 89 {
+                                                                            }
+                                                                        }
+                                                                        scope 90 {
+                                                                            debug val => _341;
+                                                                            scope 91 {
+                                                                            }
+                                                                        }
+                                                                        scope 92 {
+                                                                            debug token_interface => _344;
+                                                                            let _344: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+                                                                            let _366: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                            let _369: ();
+                                                                            scope 93 {
+                                                                                debug residual => _366;
+                                                                                scope 94 {
+                                                                                }
+                                                                            }
+                                                                            scope 95 {
+                                                                                debug val => _369;
+                                                                                scope 96 {
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        scope 97 {
+                                                                            debug residual => _391;
+                                                                            scope 98 {
+                                                                            }
+                                                                        }
+                                                                        scope 99 {
+                                                                            debug val => _394;
+                                                                            scope 100 {
+                                                                            }
+                                                                        }
+                                                                        scope 101 {
+                                                                            debug residual => _400;
+                                                                            scope 102 {
+                                                                            }
+                                                                        }
+                                                                        scope 103 {
+                                                                            debug val => _403;
+                                                                            scope 104 {
+                                                                            }
+                                                                        }
+                                                                        scope 105 {
+                                                                            debug error_code => _410;
+                                                                            let _417: std::string::String;
+                                                                            let mut _588: &[&str; 2];
+                                                                            scope 106 {
+                                                                                debug res => _417;
+                                                                            }
+                                                                        }
+                                                                        scope 107 {
+                                                                            debug residual => _435;
+                                                                            scope 108 {
+                                                                            }
+                                                                        }
+                                                                        scope 109 {
+                                                                            debug val => _438;
+                                                                            scope 110 {
+                                                                            }
+                                                                        }
+                                                                        scope 111 {
+                                                                            debug error_code => _455;
+                                                                            let _462: std::string::String;
+                                                                            let mut _587: &[&str; 2];
+                                                                            scope 112 {
+                                                                                debug res => _462;
+                                                                            }
+                                                                        }
+                                                                        scope 113 {
+                                                                            debug residual => _480;
+                                                                            scope 114 {
+                                                                            }
+                                                                        }
+                                                                        scope 115 {
+                                                                            debug val => _483;
+                                                                            scope 116 {
+                                                                            }
+                                                                        }
+                                                                        scope 117 {
+                                                                            debug error_code => _496;
+                                                                            let _503: std::string::String;
+                                                                            let mut _586: &[&str; 2];
+                                                                            scope 118 {
+                                                                                debug res => _503;
+                                                                            }
+                                                                        }
+                                                                        scope 119 {
+                                                                            debug residual => _521;
+                                                                            scope 120 {
+                                                                            }
+                                                                        }
+                                                                        scope 121 {
+                                                                            debug val => _524;
+                                                                            scope 122 {
+                                                                            }
+                                                                        }
+                                                                        scope 123 {
+                                                                            debug out_oracle_price => _525;
+                                                                            let mut _541: std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>;
+                                                                            let _546: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                            let _549: std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>;
+                                                                            scope 128 {
+                                                                                debug if_rebalance_config => _541;
+                                                                                let _581: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                                                let _584: ();
+                                                                                scope 133 {
+                                                                                    debug residual => _581;
+                                                                                    scope 134 {
+                                                                                    }
+                                                                                }
+                                                                                scope 135 {
+                                                                                    debug val => _584;
+                                                                                    scope 136 {
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            scope 129 {
+                                                                                debug residual => _546;
+                                                                                scope 130 {
+                                                                                }
+                                                                            }
+                                                                            scope 131 {
+                                                                                debug val => _549;
+                                                                                scope 132 {
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        scope 124 {
+                                                                            debug residual => _537;
+                                                                            scope 125 {
+                                                                            }
+                                                                        }
+                                                                        scope 126 {
+                                                                            debug val => _540;
+                                                                            scope 127 {
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            scope 50 {
+                                                debug residual => _177;
+                                                scope 51 {
+                                                }
+                                            }
+                                            scope 52 {
+                                                debug val => _180;
+                                                scope 53 {
+                                                }
+                                            }
+                                        }
+                                        scope 32 {
+                                            debug residual => _85;
+                                            scope 33 {
+                                            }
+                                        }
+                                        scope 34 {
+                                            debug val => _88;
+                                            scope 35 {
+                                            }
+                                        }
+                                    }
+                                    scope 27 {
+                                        debug residual => _74;
+                                        scope 28 {
+                                        }
+                                    }
+                                    scope 29 {
+                                        debug val => _77;
+                                        scope 30 {
+                                        }
+                                    }
+                                }
+                                scope 22 {
+                                    debug residual => _65;
+                                    scope 23 {
+                                    }
+                                }
+                                scope 24 {
+                                    debug val => _68;
+                                    scope 25 {
+                                    }
+                                }
+                            }
+                            scope 17 {
+                                debug residual => _56;
+                                scope 18 {
+                                }
+                            }
+                            scope 19 {
+                                debug val => _59;
+                                scope 20 {
+                                }
+                            }
+                        }
+                        scope 11 {
+                        }
+                        scope 12 {
+                            debug residual => _47;
+                            scope 13 {
+                            }
+                        }
+                        scope 14 {
+                            debug val => _50;
+                            scope 15 {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        scope 3 {
+            debug residual => _9;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _12;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        _592 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _4 = &((*_592).0: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _7) -> [return: bb2, unwind: bb310];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _8 = discriminant(_6);
+        switchInt(move _8) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_12);
+        _12 = move ((_6 as Continue).0: anchor_lang::prelude::Clock);
+        _5 = move _12;
+        StorageDead(_12);
+        _622 = discriminant(_6);
+        StorageDead(_6);
+        StorageLive(_13);
+        _13 = (_5.0: u64);
+        StorageLive(_14);
+        _14 = (_5.4: i64);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _593 = deref_copy (_1.2: &[anchor_lang::prelude::AccountInfo<'_>]);
+        _18 = &(*_593);
+        _17 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_9);
+        _9 = move ((_6 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_11);
+        _11 = move _9;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _11) -> [return: bb6, unwind: bb321];
+    }
+
+    bb6: {
+        StorageDead(_11);
+        StorageDead(_9);
+        _664 = discriminant(_6);
+        StorageDead(_6);
+        goto -> bb293;
+    }
+
+    bb7: {
+        StorageDead(_18);
+        _16 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::peekable(move _17) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        _15 = &mut _16;
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &mut (*_15);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = BTreeSet::<u16>::new() -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        _27 = &_28;
+        _26 = &(*_27);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _35 = SizeOf([u16; 2]);
+        _36 = AlignOf([u16; 2]);
+        _37 = alloc::alloc::exchange_malloc(move _35, move _36) -> [return: bb10, unwind: bb309];
+    }
+
+    bb10: {
+        StorageLive(_38);
+        _38 = ShallowInitBox(move _37, [u16; 2]);
+        StorageLive(_39);
+        _39 = _2;
+        StorageLive(_40);
+        _40 = _3;
+        _678 = (((_38.0: std::ptr::Unique<[u16; 2]>).0: std::ptr::NonNull<[u16; 2]>).0: *const [u16; 2]);
+        _695 = _678 as *const () (PtrToPtr);
+        _696 = _695 as usize (Transmute);
+        _697 = AlignOf([u16; 2]);
+        _698 = Sub(_697, const 1_usize);
+        _699 = BitAnd(_696, _698);
+        _700 = Eq(_699, const 0_usize);
+        assert(_700, "misaligned pointer dereference: address must be a multiple of {} but is {}", _697, _696) -> [success: bb322, unwind unreachable];
+    }
+
+    bb11: {
+        StorageDead(_33);
+        _31 = get_writable_spot_market_set_from_many(move _32) -> [return: bb12, unwind: bb309];
+    }
+
+    bb12: {
+        StorageDead(_32);
+        _30 = &_31;
+        _29 = &(*_30);
+        StorageLive(_41);
+        _41 = (_5.0: u64);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _594 = deref_copy (*_4);
+        _679 = (((_594.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _45 = &(*_679);
+        _44 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _45) -> [return: bb13, unwind: bb308];
+    }
+
+    bb13: {
+        StorageDead(_45);
+        _43 = ((*_44).7: state::state::OracleGuardRails);
+        _42 = Option::<state::state::OracleGuardRails>::Some(move _43);
+        StorageDead(_43);
+        _24 = load_maps(move _25, move _26, move _29, move _41, move _42) -> [return: bb14, unwind: bb308];
+    }
+
+    bb14: {
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_29);
+        StorageDead(_26);
+        StorageDead(_25);
+        _23 = <std::result::Result<AccountMaps<'_>, error::ErrorCode> as Try>::branch(move _24) -> [return: bb15, unwind: bb308];
+    }
+
+    bb15: {
+        StorageDead(_24);
+        _46 = discriminant(_23);
+        switchInt(move _46) -> [0: bb16, 1: bb17, otherwise: bb4];
+    }
+
+    bb16: {
+        StorageLive(_50);
+        _50 = move ((_23 as Continue).0: instructions::optional_accounts::AccountMaps<'_>);
+        _22 = move _50;
+        StorageDead(_50);
+        StorageLive(_19);
+        _19 = move (_22.0: state::perp_market_map::PerpMarketMap<'_>);
+        StorageLive(_20);
+        _20 = move (_22.1: state::spot_market_map::SpotMarketMap<'_>);
+        StorageLive(_21);
+        _21 = move (_22.2: state::oracle_map::OracleMap<'_>);
+        _626 = discriminant(_23);
+        StorageDead(_44);
+        drop(_31) -> [return: bb19, unwind: bb304];
+    }
+
+    bb17: {
+        StorageLive(_47);
+        _47 = ((_23 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_49);
+        _49 = _47;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _49) -> [return: bb18, unwind: bb320];
+    }
+
+    bb18: {
+        StorageDead(_49);
+        StorageDead(_47);
+        _624 = discriminant(_23);
+        StorageDead(_44);
+        drop(_31) -> [return: bb290, unwind: bb309];
+    }
+
+    bb19: {
+        StorageDead(_31);
+        StorageDead(_30);
+        drop(_28) -> [return: bb20, unwind: bb305];
+    }
+
+    bb20: {
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = &mut (*_15);
+        _53 = get_token_interface(move _54) -> [return: bb21, unwind: bb305];
+    }
+
+    bb21: {
+        StorageDead(_54);
+        _52 = <std::result::Result<Option<anchor_lang::prelude::Interface<'_, TokenInterface>>, error::ErrorCode> as Try>::branch(move _53) -> [return: bb22, unwind: bb305];
+    }
+
+    bb22: {
+        StorageDead(_53);
+        _55 = discriminant(_52);
+        switchInt(move _55) -> [0: bb23, 1: bb24, otherwise: bb4];
+    }
+
+    bb23: {
+        StorageLive(_59);
+        _59 = move ((_52 as Continue).0: std::option::Option<anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>>);
+        _51 = move _59;
+        StorageDead(_59);
+        StorageDead(_52);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = &mut (*_15);
+        _62 = get_token_mint(move _63) -> [return: bb26, unwind: bb305];
+    }
+
+    bb24: {
+        StorageLive(_56);
+        _56 = ((_52 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_58);
+        _58 = _56;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _58) -> [return: bb25, unwind: bb305];
+    }
+
+    bb25: {
+        StorageDead(_58);
+        StorageDead(_56);
+        StorageDead(_52);
+        goto -> bb286;
+    }
+
+    bb26: {
+        StorageDead(_63);
+        _61 = <std::result::Result<Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>, error::ErrorCode> as Try>::branch(move _62) -> [return: bb27, unwind: bb305];
+    }
+
+    bb27: {
+        StorageDead(_62);
+        _64 = discriminant(_61);
+        switchInt(move _64) -> [0: bb28, 1: bb29, otherwise: bb4];
+    }
+
+    bb28: {
+        StorageLive(_68);
+        _68 = move ((_61 as Continue).0: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _60 = move _68;
+        StorageDead(_68);
+        StorageDead(_61);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = &mut (*_15);
+        _71 = get_token_mint(move _72) -> [return: bb31, unwind: bb305];
+    }
+
+    bb29: {
+        StorageLive(_65);
+        _65 = ((_61 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_67);
+        _67 = _65;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _67) -> [return: bb30, unwind: bb305];
+    }
+
+    bb30: {
+        StorageDead(_67);
+        StorageDead(_65);
+        StorageDead(_61);
+        goto -> bb285;
+    }
+
+    bb31: {
+        StorageDead(_72);
+        _70 = <std::result::Result<Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>, error::ErrorCode> as Try>::branch(move _71) -> [return: bb32, unwind: bb305];
+    }
+
+    bb32: {
+        StorageDead(_71);
+        _73 = discriminant(_70);
+        switchInt(move _73) -> [0: bb33, 1: bb34, otherwise: bb4];
+    }
+
+    bb33: {
+        StorageLive(_77);
+        _77 = move ((_70 as Continue).0: std::option::Option<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>>);
+        _69 = move _77;
+        StorageDead(_77);
+        StorageDead(_70);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _81 = &_20;
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = &_2;
+        _82 = &(*_83);
+        _80 = SpotMarketMap::<'_>::get_ref_mut(move _81, move _82) -> [return: bb36, unwind: bb305];
+    }
+
+    bb34: {
+        StorageLive(_74);
+        _74 = ((_70 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_76);
+        _76 = _74;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _76) -> [return: bb35, unwind: bb305];
+    }
+
+    bb35: {
+        StorageDead(_76);
+        StorageDead(_74);
+        StorageDead(_70);
+        goto -> bb284;
+    }
+
+    bb36: {
+        StorageDead(_82);
+        StorageDead(_81);
+        _79 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _80) -> [return: bb37, unwind: bb305];
+    }
+
+    bb37: {
+        StorageDead(_80);
+        _84 = discriminant(_79);
+        switchInt(move _84) -> [0: bb38, 1: bb39, otherwise: bb4];
+    }
+
+    bb38: {
+        StorageLive(_88);
+        _88 = move ((_79 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _78 = move _88;
+        StorageDead(_88);
+        _630 = discriminant(_79);
+        StorageDead(_83);
+        StorageDead(_79);
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = &_60;
+        _91 = discriminant((*_90));
+        switchInt(move _91) -> [1: bb41, otherwise: bb59];
+    }
+
+    bb39: {
+        StorageLive(_85);
+        _85 = ((_79 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_87);
+        _87 = _85;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _87) -> [return: bb40, unwind: bb319];
+    }
+
+    bb40: {
+        StorageDead(_87);
+        StorageDead(_85);
+        _628 = discriminant(_79);
+        StorageDead(_83);
+        StorageDead(_79);
+        goto -> bb283;
+    }
+
+    bb41: {
+        StorageLive(_92);
+        _92 = &(((*_90) as Some).0: anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>);
+        StorageLive(_93);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        _99 = &(*_92);
+        _98 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint> as anchor_lang::Key>::key(move _99) -> [return: bb42, unwind: bb303];
+    }
+
+    bb42: {
+        _97 = &_98;
+        StorageDead(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        _102 = &_78;
+        _101 = <RefMut<'_, SpotMarket> as Deref>::deref(move _102) -> [return: bb43, unwind: bb303];
+    }
+
+    bb43: {
+        StorageDead(_102);
+        _100 = &((*_101).2: anchor_lang::prelude::Pubkey);
+        _96 = <anchor_lang::prelude::Pubkey as PartialEq>::eq(move _97, move _100) -> [return: bb44, unwind: bb303];
+    }
+
+    bb44: {
+        switchInt(move _96) -> [0: bb46, otherwise: bb45];
+    }
+
+    bb45: {
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_98);
+        StorageDead(_97);
+        StorageLive(_103);
+        _103 = ();
+        _95 = std::result::Result::<(), error::ErrorCode>::Ok(move _103);
+        StorageDead(_103);
+        goto -> bb54;
+    }
+
+    bb46: {
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_98);
+        StorageDead(_97);
+        StorageLive(_104);
+        _104 = error::ErrorCode::InvalidSwap;
+        StorageLive(_105);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        _591 = const _;
+        _115 = &(*_591);
+        _114 = &(*_115);
+        _113 = move _114 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_114);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = &_104;
+        _122 = &(*_123);
+        _121 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _122) -> [return: bb47, unwind: bb303];
+    }
+
+    bb47: {
+        StorageDead(_122);
+        _120 = [move _121];
+        StorageDead(_121);
+        _119 = &_120;
+        _118 = &(*_119);
+        _117 = move _118 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_118);
+        _112 = Arguments::<'_>::new_v1(move _113, move _117) -> [return: bb48, unwind: bb303];
+    }
+
+    bb48: {
+        StorageDead(_117);
+        StorageDead(_113);
+        _111 = format(move _112) -> [return: bb49, unwind: bb303];
+    }
+
+    bb49: {
+        StorageDead(_112);
+        StorageDead(_123);
+        StorageDead(_120);
+        StorageDead(_119);
+        StorageDead(_115);
+        _110 = move _111;
+        StorageDead(_111);
+        _109 = &_110;
+        _108 = &(*_109);
+        _107 = <String as Deref>::deref(move _108) -> [return: bb50, unwind: bb302];
+    }
+
+    bb50: {
+        _106 = &(*_107);
+        StorageDead(_108);
+        _105 = solana_program::log::sol_log(move _106) -> [return: bb51, unwind: bb302];
+    }
+
+    bb51: {
+        StorageDead(_106);
+        drop(_110) -> [return: bb52, unwind: bb303];
+    }
+
+    bb52: {
+        StorageDead(_110);
+        StorageDead(_109);
+        StorageDead(_107);
+        StorageDead(_105);
+        StorageLive(_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        _126 = const "in_spot_market.mint mismatch";
+        _125 = &(*_126);
+        _124 = solana_program::log::sol_log(move _125) -> [return: bb53, unwind: bb303];
+    }
+
+    bb53: {
+        StorageDead(_125);
+        StorageDead(_126);
+        StorageDead(_124);
+        StorageLive(_127);
+        _127 = _104;
+        _95 = std::result::Result::<(), error::ErrorCode>::Err(move _127);
+        StorageDead(_127);
+        StorageDead(_104);
+        goto -> bb54;
+    }
+
+    bb54: {
+        StorageDead(_96);
+        _94 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _95) -> [return: bb55, unwind: bb303];
+    }
+
+    bb55: {
+        StorageDead(_95);
+        _128 = discriminant(_94);
+        switchInt(move _128) -> [0: bb56, 1: bb57, otherwise: bb4];
+    }
+
+    bb56: {
+        StorageLive(_132);
+        _132 = ((_94 as Continue).0: ());
+        _93 = _132;
+        StorageDead(_132);
+        StorageDead(_94);
+        StorageDead(_93);
+        _89 = const ();
+        StorageDead(_92);
+        goto -> bb60;
+    }
+
+    bb57: {
+        StorageLive(_129);
+        _129 = ((_94 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_131);
+        _131 = _129;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _131) -> [return: bb58, unwind: bb303];
+    }
+
+    bb58: {
+        StorageDead(_131);
+        StorageDead(_129);
+        StorageDead(_94);
+        StorageDead(_93);
+        StorageDead(_92);
+        StorageDead(_90);
+        StorageDead(_89);
+        goto -> bb282;
+    }
+
+    bb59: {
+        _89 = const ();
+        goto -> bb60;
+    }
+
+    bb60: {
+        StorageDead(_90);
+        StorageDead(_89);
+        StorageLive(_133);
+        StorageLive(_134);
+        StorageLive(_135);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        _139 = &_78;
+        _138 = <RefMut<'_, SpotMarket> as Deref>::deref(move _139) -> [return: bb61, unwind: bb303];
+    }
+
+    bb61: {
+        StorageDead(_139);
+        _137 = ((*_138).51: u64);
+        _136 = Ne(move _137, const 0_u64);
+        switchInt(move _136) -> [0: bb63, otherwise: bb62];
+    }
+
+    bb62: {
+        StorageDead(_138);
+        StorageDead(_137);
+        StorageLive(_140);
+        _140 = ();
+        _135 = std::result::Result::<(), error::ErrorCode>::Ok(move _140);
+        StorageDead(_140);
+        goto -> bb71;
+    }
+
+    bb63: {
+        StorageDead(_138);
+        StorageDead(_137);
+        StorageLive(_141);
+        _141 = error::ErrorCode::InvalidSwap;
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        _590 = const _;
+        _152 = &(*_590);
+        _151 = &(*_152);
+        _150 = move _151 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_151);
+        StorageLive(_154);
+        StorageLive(_155);
+        StorageLive(_156);
+        StorageLive(_157);
+        StorageLive(_158);
+        StorageLive(_159);
+        StorageLive(_160);
+        _160 = &_141;
+        _159 = &(*_160);
+        _158 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _159) -> [return: bb64, unwind: bb303];
+    }
+
+    bb64: {
+        StorageDead(_159);
+        _157 = [move _158];
+        StorageDead(_158);
+        _156 = &_157;
+        _155 = &(*_156);
+        _154 = move _155 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_155);
+        _149 = Arguments::<'_>::new_v1(move _150, move _154) -> [return: bb65, unwind: bb303];
+    }
+
+    bb65: {
+        StorageDead(_154);
+        StorageDead(_150);
+        _148 = format(move _149) -> [return: bb66, unwind: bb303];
+    }
+
+    bb66: {
+        StorageDead(_149);
+        StorageDead(_160);
+        StorageDead(_157);
+        StorageDead(_156);
+        StorageDead(_152);
+        _147 = move _148;
+        StorageDead(_148);
+        _146 = &_147;
+        _145 = &(*_146);
+        _144 = <String as Deref>::deref(move _145) -> [return: bb67, unwind: bb301];
+    }
+
+    bb67: {
+        _143 = &(*_144);
+        StorageDead(_145);
+        _142 = solana_program::log::sol_log(move _143) -> [return: bb68, unwind: bb301];
+    }
+
+    bb68: {
+        StorageDead(_143);
+        drop(_147) -> [return: bb69, unwind: bb303];
+    }
+
+    bb69: {
+        StorageDead(_147);
+        StorageDead(_146);
+        StorageDead(_144);
+        StorageDead(_142);
+        StorageLive(_161);
+        StorageLive(_162);
+        StorageLive(_163);
+        _163 = const "the in_spot_market must have a flash loan amount set";
+        _162 = &(*_163);
+        _161 = solana_program::log::sol_log(move _162) -> [return: bb70, unwind: bb303];
+    }
+
+    bb70: {
+        StorageDead(_162);
+        StorageDead(_163);
+        StorageDead(_161);
+        StorageLive(_164);
+        _164 = _141;
+        _135 = std::result::Result::<(), error::ErrorCode>::Err(move _164);
+        StorageDead(_164);
+        StorageDead(_141);
+        goto -> bb71;
+    }
+
+    bb71: {
+        StorageDead(_136);
+        _134 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _135) -> [return: bb72, unwind: bb303];
+    }
+
+    bb72: {
+        StorageDead(_135);
+        _165 = discriminant(_134);
+        switchInt(move _165) -> [0: bb73, 1: bb74, otherwise: bb4];
+    }
+
+    bb73: {
+        StorageLive(_169);
+        _169 = ((_134 as Continue).0: ());
+        _133 = _169;
+        StorageDead(_169);
+        StorageDead(_134);
+        StorageDead(_133);
+        StorageLive(_170);
+        StorageLive(_171);
+        StorageLive(_172);
+        StorageLive(_173);
+        _173 = &_20;
+        StorageLive(_174);
+        StorageLive(_175);
+        _175 = &_3;
+        _174 = &(*_175);
+        _172 = SpotMarketMap::<'_>::get_ref_mut(move _173, move _174) -> [return: bb76, unwind: bb303];
+    }
+
+    bb74: {
+        StorageLive(_166);
+        _166 = ((_134 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_168);
+        _168 = _166;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _168) -> [return: bb75, unwind: bb303];
+    }
+
+    bb75: {
+        StorageDead(_168);
+        StorageDead(_166);
+        StorageDead(_134);
+        StorageDead(_133);
+        goto -> bb282;
+    }
+
+    bb76: {
+        StorageDead(_174);
+        StorageDead(_173);
+        _171 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _172) -> [return: bb77, unwind: bb303];
+    }
+
+    bb77: {
+        StorageDead(_172);
+        _176 = discriminant(_171);
+        switchInt(move _176) -> [0: bb78, 1: bb79, otherwise: bb4];
+    }
+
+    bb78: {
+        StorageLive(_180);
+        _180 = move ((_171 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _170 = move _180;
+        StorageDead(_180);
+        _634 = discriminant(_171);
+        StorageDead(_175);
+        StorageDead(_171);
+        StorageLive(_181);
+        StorageLive(_182);
+        _182 = &_69;
+        _183 = discriminant((*_182));
+        switchInt(move _183) -> [1: bb81, otherwise: bb99];
+    }
+
+    bb79: {
+        StorageLive(_177);
+        _177 = ((_171 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_179);
+        _179 = _177;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _179) -> [return: bb80, unwind: bb318];
+    }
+
+    bb80: {
+        StorageDead(_179);
+        StorageDead(_177);
+        _632 = discriminant(_171);
+        StorageDead(_175);
+        StorageDead(_171);
+        goto -> bb281;
+    }
+
+    bb81: {
+        StorageLive(_184);
+        _184 = &(((*_182) as Some).0: anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint>);
+        StorageLive(_185);
+        StorageLive(_186);
+        StorageLive(_187);
+        StorageLive(_188);
+        StorageLive(_189);
+        StorageLive(_190);
+        StorageLive(_191);
+        _191 = &(*_184);
+        _190 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::Mint> as anchor_lang::Key>::key(move _191) -> [return: bb82, unwind: bb300];
+    }
+
+    bb82: {
+        _189 = &_190;
+        StorageDead(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        _194 = &_170;
+        _193 = <RefMut<'_, SpotMarket> as Deref>::deref(move _194) -> [return: bb83, unwind: bb300];
+    }
+
+    bb83: {
+        StorageDead(_194);
+        _192 = &((*_193).2: anchor_lang::prelude::Pubkey);
+        _188 = <anchor_lang::prelude::Pubkey as PartialEq>::eq(move _189, move _192) -> [return: bb84, unwind: bb300];
+    }
+
+    bb84: {
+        switchInt(move _188) -> [0: bb86, otherwise: bb85];
+    }
+
+    bb85: {
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageDead(_190);
+        StorageDead(_189);
+        StorageLive(_195);
+        _195 = ();
+        _187 = std::result::Result::<(), error::ErrorCode>::Ok(move _195);
+        StorageDead(_195);
+        goto -> bb94;
+    }
+
+    bb86: {
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageDead(_190);
+        StorageDead(_189);
+        StorageLive(_196);
+        _196 = error::ErrorCode::InvalidSwap;
+        StorageLive(_197);
+        StorageLive(_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        StorageLive(_201);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        StorageLive(_205);
+        StorageLive(_206);
+        StorageLive(_207);
+        _589 = const _;
+        _207 = &(*_589);
+        _206 = &(*_207);
+        _205 = move _206 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_206);
+        StorageLive(_209);
+        StorageLive(_210);
+        StorageLive(_211);
+        StorageLive(_212);
+        StorageLive(_213);
+        StorageLive(_214);
+        StorageLive(_215);
+        _215 = &_196;
+        _214 = &(*_215);
+        _213 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _214) -> [return: bb87, unwind: bb300];
+    }
+
+    bb87: {
+        StorageDead(_214);
+        _212 = [move _213];
+        StorageDead(_213);
+        _211 = &_212;
+        _210 = &(*_211);
+        _209 = move _210 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_210);
+        _204 = Arguments::<'_>::new_v1(move _205, move _209) -> [return: bb88, unwind: bb300];
+    }
+
+    bb88: {
+        StorageDead(_209);
+        StorageDead(_205);
+        _203 = format(move _204) -> [return: bb89, unwind: bb300];
+    }
+
+    bb89: {
+        StorageDead(_204);
+        StorageDead(_215);
+        StorageDead(_212);
+        StorageDead(_211);
+        StorageDead(_207);
+        _202 = move _203;
+        StorageDead(_203);
+        _201 = &_202;
+        _200 = &(*_201);
+        _199 = <String as Deref>::deref(move _200) -> [return: bb90, unwind: bb299];
+    }
+
+    bb90: {
+        _198 = &(*_199);
+        StorageDead(_200);
+        _197 = solana_program::log::sol_log(move _198) -> [return: bb91, unwind: bb299];
+    }
+
+    bb91: {
+        StorageDead(_198);
+        drop(_202) -> [return: bb92, unwind: bb300];
+    }
+
+    bb92: {
+        StorageDead(_202);
+        StorageDead(_201);
+        StorageDead(_199);
+        StorageDead(_197);
+        StorageLive(_216);
+        StorageLive(_217);
+        StorageLive(_218);
+        _218 = const "out_spot_market.mint mismatch";
+        _217 = &(*_218);
+        _216 = solana_program::log::sol_log(move _217) -> [return: bb93, unwind: bb300];
+    }
+
+    bb93: {
+        StorageDead(_217);
+        StorageDead(_218);
+        StorageDead(_216);
+        StorageLive(_219);
+        _219 = _196;
+        _187 = std::result::Result::<(), error::ErrorCode>::Err(move _219);
+        StorageDead(_219);
+        StorageDead(_196);
+        goto -> bb94;
+    }
+
+    bb94: {
+        StorageDead(_188);
+        _186 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _187) -> [return: bb95, unwind: bb300];
+    }
+
+    bb95: {
+        StorageDead(_187);
+        _220 = discriminant(_186);
+        switchInt(move _220) -> [0: bb96, 1: bb97, otherwise: bb4];
+    }
+
+    bb96: {
+        StorageLive(_224);
+        _224 = ((_186 as Continue).0: ());
+        _185 = _224;
+        StorageDead(_224);
+        StorageDead(_186);
+        StorageDead(_185);
+        _181 = const ();
+        StorageDead(_184);
+        goto -> bb100;
+    }
+
+    bb97: {
+        StorageLive(_221);
+        _221 = ((_186 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_223);
+        _223 = _221;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _223) -> [return: bb98, unwind: bb300];
+    }
+
+    bb98: {
+        StorageDead(_223);
+        StorageDead(_221);
+        StorageDead(_186);
+        StorageDead(_185);
+        StorageDead(_184);
+        StorageDead(_182);
+        StorageDead(_181);
+        goto -> bb280;
+    }
+
+    bb99: {
+        _181 = const ();
+        goto -> bb100;
+    }
+
+    bb100: {
+        StorageDead(_182);
+        StorageDead(_181);
+        StorageLive(_225);
+        _595 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _225 = &mut ((*_595).3: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        StorageLive(_226);
+        _596 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _226 = &mut ((*_596).5: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        StorageLive(_227);
+        StorageLive(_228);
+        StorageLive(_229);
+        _229 = &_78;
+        _228 = <RefMut<'_, SpotMarket> as Deref>::deref(move _229) -> [return: bb101, unwind: bb300];
+    }
+
+    bb101: {
+        StorageDead(_229);
+        _227 = ((*_228).51: u64);
+        StorageDead(_228);
+        StorageLive(_230);
+        StorageLive(_231);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        _597 = deref_copy (*_226);
+        _680 = (((_597.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _236 = &(*_680);
+        _235 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _236) -> [return: bb102, unwind: bb300];
+    }
+
+    bb102: {
+        _234 = &(*_235);
+        _233 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _234) -> [return: bb103, unwind: bb300];
+    }
+
+    bb103: {
+        StorageDead(_236);
+        StorageDead(_234);
+        _232 = ((*_233).2: u64);
+        StorageLive(_237);
+        StorageLive(_238);
+        StorageLive(_239);
+        _239 = &_78;
+        _238 = <RefMut<'_, SpotMarket> as Deref>::deref(move _239) -> [return: bb104, unwind: bb300];
+    }
+
+    bb104: {
+        StorageDead(_239);
+        _237 = ((*_238).52: u64);
+        _231 = Gt(move _232, move _237);
+        switchInt(move _231) -> [0: bb140, otherwise: bb105];
+    }
+
+    bb105: {
+        StorageDead(_238);
+        StorageDead(_237);
+        StorageDead(_235);
+        StorageDead(_233);
+        StorageDead(_232);
+        StorageLive(_240);
+        StorageLive(_241);
+        StorageLive(_242);
+        StorageLive(_243);
+        StorageLive(_244);
+        StorageLive(_245);
+        StorageLive(_246);
+        StorageLive(_247);
+        _598 = deref_copy (*_226);
+        _681 = (((_598.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _247 = &(*_681);
+        _246 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _247) -> [return: bb106, unwind: bb300];
+    }
+
+    bb106: {
+        _245 = &(*_246);
+        _244 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _245) -> [return: bb107, unwind: bb300];
+    }
+
+    bb107: {
+        StorageDead(_247);
+        StorageDead(_245);
+        _243 = ((*_244).2: u64);
+        StorageLive(_248);
+        StorageLive(_249);
+        StorageLive(_250);
+        _250 = &_78;
+        _249 = <RefMut<'_, SpotMarket> as Deref>::deref(move _250) -> [return: bb108, unwind: bb300];
+    }
+
+    bb108: {
+        StorageDead(_250);
+        _248 = ((*_249).52: u64);
+        _242 = <u64 as SafeMath>::safe_sub(move _243, move _248) -> [return: bb109, unwind: bb300];
+    }
+
+    bb109: {
+        StorageDead(_248);
+        StorageDead(_243);
+        _241 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _242) -> [return: bb110, unwind: bb300];
+    }
+
+    bb110: {
+        StorageDead(_242);
+        _251 = discriminant(_241);
+        switchInt(move _251) -> [0: bb111, 1: bb112, otherwise: bb4];
+    }
+
+    bb111: {
+        StorageLive(_255);
+        _255 = ((_241 as Continue).0: u64);
+        _240 = _255;
+        StorageDead(_255);
+        StorageDead(_249);
+        StorageDead(_246);
+        StorageDead(_244);
+        StorageDead(_241);
+        StorageLive(_256);
+        StorageLive(_257);
+        StorageLive(_258);
+        StorageLive(_259);
+        StorageLive(_260);
+        _599 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _260 = &((*_599).7: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>);
+        _259 = &(*_260);
+        StorageLive(_261);
+        _600 = deref_copy (*_226);
+        _682 = (((_600.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _261 = &(*_682);
+        StorageLive(_262);
+        _601 = deref_copy (*_225);
+        _683 = (((_601.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _262 = &(*_683);
+        StorageLive(_263);
+        StorageLive(_264);
+        StorageLive(_265);
+        StorageLive(_266);
+        _602 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _266 = &((*_602).1: anchor_lang::prelude::Signer<'_>);
+        _265 = &(*_266);
+        _264 = <anchor_lang::prelude::Signer<'_> as Deref>::deref(move _265) -> [return: bb114, unwind: bb300];
+    }
+
+    bb112: {
+        StorageLive(_252);
+        _252 = ((_241 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_254);
+        _254 = _252;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _254) -> [return: bb113, unwind: bb300];
+    }
+
+    bb113: {
+        StorageDead(_254);
+        StorageDead(_252);
+        StorageDead(_249);
+        StorageDead(_246);
+        StorageDead(_244);
+        StorageDead(_241);
+        goto -> bb278;
+    }
+
+    bb114: {
+        _263 = &(*_264);
+        StorageDead(_265);
+        StorageLive(_267);
+        _267 = _240;
+        StorageLive(_268);
+        StorageLive(_269);
+        _269 = &_60;
+        _268 = &(*_269);
+        StorageLive(_270);
+        StorageLive(_271);
+        StorageLive(_272);
+        StorageLive(_273);
+        StorageLive(_274);
+        _274 = &_78;
+        _273 = <RefMut<'_, SpotMarket> as Deref>::deref(move _274) -> [return: bb115, unwind: bb300];
+    }
+
+    bb115: {
+        _272 = &(*_273);
+        StorageDead(_274);
+        _271 = SpotMarket::has_transfer_hook(move _272) -> [return: bb116, unwind: bb300];
+    }
+
+    bb116: {
+        switchInt(move _271) -> [0: bb118, otherwise: bb117];
+    }
+
+    bb117: {
+        StorageDead(_273);
+        StorageDead(_272);
+        StorageLive(_275);
+        _275 = &mut (*_15);
+        _270 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::Some(move _275);
+        StorageDead(_275);
+        goto -> bb119;
+    }
+
+    bb118: {
+        StorageDead(_273);
+        StorageDead(_272);
+        _270 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::None;
+        goto -> bb119;
+    }
+
+    bb119: {
+        StorageDead(_271);
+        _258 = receive(move _259, move _261, move _262, move _263, move _267, move _268, move _270) -> [return: bb120, unwind: bb300];
+    }
+
+    bb120: {
+        StorageDead(_270);
+        StorageDead(_268);
+        StorageDead(_267);
+        StorageDead(_263);
+        StorageDead(_262);
+        StorageDead(_261);
+        StorageDead(_259);
+        _257 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _258) -> [return: bb121, unwind: bb300];
+    }
+
+    bb121: {
+        StorageDead(_258);
+        _276 = discriminant(_257);
+        switchInt(move _276) -> [0: bb122, 1: bb123, otherwise: bb4];
+    }
+
+    bb122: {
+        StorageLive(_280);
+        _280 = ((_257 as Continue).0: ());
+        _256 = _280;
+        StorageDead(_280);
+        _636 = discriminant(_257);
+        StorageDead(_269);
+        StorageDead(_266);
+        StorageDead(_264);
+        StorageDead(_260);
+        StorageDead(_257);
+        StorageDead(_256);
+        StorageLive(_281);
+        StorageLive(_282);
+        StorageLive(_283);
+        StorageLive(_284);
+        _603 = deref_copy (*_226);
+        _684 = (((_603.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _284 = &mut (*_684);
+        _283 = anchor_lang::prelude::InterfaceAccount::<'_, anchor_spl::token_interface::TokenAccount>::reload(move _284) -> [return: bb125, unwind: bb300];
+    }
+
+    bb123: {
+        StorageLive(_277);
+        _277 = move ((_257 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_279);
+        _279 = move _277;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _279) -> [return: bb124, unwind: bb317];
+    }
+
+    bb124: {
+        StorageDead(_279);
+        StorageDead(_277);
+        _662 = discriminant(_257);
+        StorageDead(_269);
+        StorageDead(_266);
+        StorageDead(_264);
+        StorageDead(_260);
+        StorageDead(_257);
+        StorageDead(_256);
+        goto -> bb278;
+    }
+
+    bb125: {
+        StorageDead(_284);
+        _282 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _283) -> [return: bb126, unwind: bb300];
+    }
+
+    bb126: {
+        StorageDead(_283);
+        _285 = discriminant(_282);
+        switchInt(move _285) -> [0: bb127, 1: bb128, otherwise: bb4];
+    }
+
+    bb127: {
+        StorageLive(_289);
+        _289 = ((_282 as Continue).0: ());
+        _281 = _289;
+        StorageDead(_289);
+        _638 = discriminant(_282);
+        StorageDead(_282);
+        StorageDead(_281);
+        StorageLive(_290);
+        StorageLive(_291);
+        StorageLive(_292);
+        StorageLive(_293);
+        _604 = deref_copy (*_225);
+        _685 = (((_604.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _293 = &mut (*_685);
+        _292 = anchor_lang::prelude::InterfaceAccount::<'_, anchor_spl::token_interface::TokenAccount>::reload(move _293) -> [return: bb130, unwind: bb300];
+    }
+
+    bb128: {
+        StorageLive(_286);
+        _286 = move ((_282 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_288);
+        _288 = move _286;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _288) -> [return: bb129, unwind: bb316];
+    }
+
+    bb129: {
+        StorageDead(_288);
+        StorageDead(_286);
+        _660 = discriminant(_282);
+        StorageDead(_282);
+        StorageDead(_281);
+        goto -> bb278;
+    }
+
+    bb130: {
+        StorageDead(_293);
+        _291 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _292) -> [return: bb131, unwind: bb300];
+    }
+
+    bb131: {
+        StorageDead(_292);
+        _294 = discriminant(_291);
+        switchInt(move _294) -> [0: bb132, 1: bb133, otherwise: bb4];
+    }
+
+    bb132: {
+        StorageLive(_298);
+        _298 = ((_291 as Continue).0: ());
+        _290 = _298;
+        StorageDead(_298);
+        _640 = discriminant(_291);
+        StorageDead(_291);
+        StorageDead(_290);
+        StorageLive(_299);
+        StorageLive(_300);
+        StorageLive(_301);
+        StorageLive(_302);
+        _302 = _227;
+        StorageLive(_303);
+        _303 = _240;
+        _301 = <u64 as SafeMath>::safe_sub(move _302, move _303) -> [return: bb135, unwind: bb300];
+    }
+
+    bb133: {
+        StorageLive(_295);
+        _295 = move ((_291 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_297);
+        _297 = move _295;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _297) -> [return: bb134, unwind: bb315];
+    }
+
+    bb134: {
+        StorageDead(_297);
+        StorageDead(_295);
+        _658 = discriminant(_291);
+        StorageDead(_291);
+        StorageDead(_290);
+        goto -> bb278;
+    }
+
+    bb135: {
+        StorageDead(_303);
+        StorageDead(_302);
+        _300 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _301) -> [return: bb136, unwind: bb300];
+    }
+
+    bb136: {
+        StorageDead(_301);
+        _304 = discriminant(_300);
+        switchInt(move _304) -> [0: bb137, 1: bb138, otherwise: bb4];
+    }
+
+    bb137: {
+        StorageLive(_308);
+        _308 = ((_300 as Continue).0: u64);
+        _299 = _308;
+        StorageDead(_308);
+        _227 = move _299;
+        StorageDead(_299);
+        StorageDead(_300);
+        _230 = const ();
+        StorageDead(_240);
+        goto -> bb141;
+    }
+
+    bb138: {
+        StorageLive(_305);
+        _305 = ((_300 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_307);
+        _307 = _305;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _307) -> [return: bb139, unwind: bb300];
+    }
+
+    bb139: {
+        StorageDead(_307);
+        StorageDead(_305);
+        StorageDead(_299);
+        StorageDead(_300);
+        goto -> bb278;
+    }
+
+    bb140: {
+        StorageDead(_238);
+        StorageDead(_237);
+        StorageDead(_235);
+        StorageDead(_233);
+        StorageDead(_232);
+        _230 = const ();
+        goto -> bb141;
+    }
+
+    bb141: {
+        StorageDead(_231);
+        StorageDead(_230);
+        StorageLive(_309);
+        StorageLive(_310);
+        _310 = &mut _78;
+        _309 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _310) -> [return: bb142, unwind: bb300];
+    }
+
+    bb142: {
+        StorageDead(_310);
+        ((*_309).52: u64) = const 0_u64;
+        StorageDead(_309);
+        StorageLive(_311);
+        StorageLive(_312);
+        _312 = &mut _78;
+        _311 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _312) -> [return: bb143, unwind: bb300];
+    }
+
+    bb143: {
+        StorageDead(_312);
+        ((*_311).51: u64) = const 0_u64;
+        StorageDead(_311);
+        StorageLive(_313);
+        _605 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _313 = &mut ((*_605).2: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        StorageLive(_314);
+        _606 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _314 = &mut ((*_606).4: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        StorageLive(_315);
+        _315 = const 0_u64;
+        StorageLive(_316);
+        StorageLive(_317);
+        StorageLive(_318);
+        StorageLive(_319);
+        StorageLive(_320);
+        StorageLive(_321);
+        StorageLive(_322);
+        _607 = deref_copy (*_314);
+        _686 = (((_607.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _322 = &(*_686);
+        _321 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _322) -> [return: bb144, unwind: bb300];
+    }
+
+    bb144: {
+        _320 = &(*_321);
+        _319 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _320) -> [return: bb145, unwind: bb300];
+    }
+
+    bb145: {
+        StorageDead(_322);
+        StorageDead(_320);
+        _318 = ((*_319).2: u64);
+        StorageLive(_323);
+        StorageLive(_324);
+        StorageLive(_325);
+        _325 = &_170;
+        _324 = <RefMut<'_, SpotMarket> as Deref>::deref(move _325) -> [return: bb146, unwind: bb300];
+    }
+
+    bb146: {
+        StorageDead(_325);
+        _323 = ((*_324).52: u64);
+        _317 = Gt(move _318, move _323);
+        switchInt(move _317) -> [0: bb186, otherwise: bb147];
+    }
+
+    bb147: {
+        StorageDead(_324);
+        StorageDead(_323);
+        StorageDead(_321);
+        StorageDead(_319);
+        StorageDead(_318);
+        StorageLive(_326);
+        StorageLive(_327);
+        StorageLive(_328);
+        StorageLive(_329);
+        StorageLive(_330);
+        StorageLive(_331);
+        StorageLive(_332);
+        StorageLive(_333);
+        _608 = deref_copy (*_314);
+        _687 = (((_608.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _333 = &(*_687);
+        _332 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _333) -> [return: bb148, unwind: bb300];
+    }
+
+    bb148: {
+        _331 = &(*_332);
+        _330 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _331) -> [return: bb149, unwind: bb300];
+    }
+
+    bb149: {
+        StorageDead(_333);
+        StorageDead(_331);
+        _329 = ((*_330).2: u64);
+        StorageLive(_334);
+        StorageLive(_335);
+        StorageLive(_336);
+        _336 = &_170;
+        _335 = <RefMut<'_, SpotMarket> as Deref>::deref(move _336) -> [return: bb150, unwind: bb300];
+    }
+
+    bb150: {
+        StorageDead(_336);
+        _334 = ((*_335).52: u64);
+        _328 = <u64 as SafeMath>::safe_sub(move _329, move _334) -> [return: bb151, unwind: bb300];
+    }
+
+    bb151: {
+        StorageDead(_334);
+        StorageDead(_329);
+        _327 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _328) -> [return: bb152, unwind: bb300];
+    }
+
+    bb152: {
+        StorageDead(_328);
+        _337 = discriminant(_327);
+        switchInt(move _337) -> [0: bb153, 1: bb154, otherwise: bb4];
+    }
+
+    bb153: {
+        StorageLive(_341);
+        _341 = ((_327 as Continue).0: u64);
+        _326 = _341;
+        StorageDead(_341);
+        _315 = move _326;
+        StorageDead(_326);
+        StorageDead(_335);
+        StorageDead(_332);
+        StorageDead(_330);
+        StorageDead(_327);
+        StorageLive(_342);
+        _343 = discriminant(_51);
+        switchInt(move _343) -> [1: bb157, otherwise: bb156];
+    }
+
+    bb154: {
+        StorageLive(_338);
+        _338 = ((_327 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_340);
+        _340 = _338;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _340) -> [return: bb155, unwind: bb300];
+    }
+
+    bb155: {
+        StorageDead(_340);
+        StorageDead(_338);
+        StorageDead(_326);
+        StorageDead(_335);
+        StorageDead(_332);
+        StorageDead(_330);
+        StorageDead(_327);
+        goto -> bb276;
+    }
+
+    bb156: {
+        StorageLive(_370);
+        StorageLive(_371);
+        StorageLive(_372);
+        StorageLive(_373);
+        StorageLive(_374);
+        _609 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _374 = &((*_609).7: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>);
+        _373 = &(*_374);
+        StorageLive(_375);
+        _610 = deref_copy (*_314);
+        _688 = (((_610.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _375 = &(*_688);
+        StorageLive(_376);
+        _611 = deref_copy (*_313);
+        _689 = (((_611.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _376 = &(*_689);
+        StorageLive(_377);
+        StorageLive(_378);
+        StorageLive(_379);
+        StorageLive(_380);
+        _612 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _380 = &((*_612).1: anchor_lang::prelude::Signer<'_>);
+        _379 = &(*_380);
+        _378 = <anchor_lang::prelude::Signer<'_> as Deref>::deref(move _379) -> [return: bb169, unwind: bb300];
+    }
+
+    bb157: {
+        StorageLive(_344);
+        _344 = move ((_51 as Some).0: anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>);
+        StorageLive(_345);
+        StorageLive(_346);
+        StorageLive(_347);
+        StorageLive(_348);
+        StorageLive(_349);
+        _349 = &_344;
+        _348 = &(*_349);
+        StorageLive(_350);
+        _613 = deref_copy (*_314);
+        _690 = (((_613.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _350 = &(*_690);
+        StorageLive(_351);
+        _614 = deref_copy (*_313);
+        _691 = (((_614.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _351 = &(*_691);
+        StorageLive(_352);
+        StorageLive(_353);
+        StorageLive(_354);
+        StorageLive(_355);
+        _615 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _355 = &((*_615).1: anchor_lang::prelude::Signer<'_>);
+        _354 = &(*_355);
+        _353 = <anchor_lang::prelude::Signer<'_> as Deref>::deref(move _354) -> [return: bb158, unwind: bb300];
+    }
+
+    bb158: {
+        _352 = &(*_353);
+        StorageDead(_354);
+        StorageLive(_356);
+        _356 = _315;
+        StorageLive(_357);
+        StorageLive(_358);
+        _358 = &_69;
+        _357 = &(*_358);
+        StorageLive(_359);
+        StorageLive(_360);
+        StorageLive(_361);
+        StorageLive(_362);
+        StorageLive(_363);
+        _363 = &_170;
+        _362 = <RefMut<'_, SpotMarket> as Deref>::deref(move _363) -> [return: bb159, unwind: bb300];
+    }
+
+    bb159: {
+        _361 = &(*_362);
+        StorageDead(_363);
+        _360 = SpotMarket::has_transfer_hook(move _361) -> [return: bb160, unwind: bb300];
+    }
+
+    bb160: {
+        switchInt(move _360) -> [0: bb162, otherwise: bb161];
+    }
+
+    bb161: {
+        StorageDead(_362);
+        StorageDead(_361);
+        StorageLive(_364);
+        _364 = &mut (*_15);
+        _359 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::Some(move _364);
+        StorageDead(_364);
+        goto -> bb163;
+    }
+
+    bb162: {
+        StorageDead(_362);
+        StorageDead(_361);
+        _359 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::None;
+        goto -> bb163;
+    }
+
+    bb163: {
+        StorageDead(_360);
+        _347 = receive(move _348, move _350, move _351, move _352, move _356, move _357, move _359) -> [return: bb164, unwind: bb300];
+    }
+
+    bb164: {
+        StorageDead(_359);
+        StorageDead(_357);
+        StorageDead(_356);
+        StorageDead(_352);
+        StorageDead(_351);
+        StorageDead(_350);
+        StorageDead(_348);
+        _346 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _347) -> [return: bb165, unwind: bb300];
+    }
+
+    bb165: {
+        StorageDead(_347);
+        _365 = discriminant(_346);
+        switchInt(move _365) -> [0: bb166, 1: bb167, otherwise: bb4];
+    }
+
+    bb166: {
+        StorageLive(_369);
+        _369 = ((_346 as Continue).0: ());
+        _345 = _369;
+        StorageDead(_369);
+        _642 = discriminant(_346);
+        StorageDead(_358);
+        StorageDead(_355);
+        StorageDead(_353);
+        StorageDead(_349);
+        StorageDead(_346);
+        StorageDead(_345);
+        _342 = const ();
+        StorageDead(_344);
+        goto -> bb180;
+    }
+
+    bb167: {
+        StorageLive(_366);
+        _366 = move ((_346 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_368);
+        _368 = move _366;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _368) -> [return: bb168, unwind: bb314];
+    }
+
+    bb168: {
+        StorageDead(_368);
+        StorageDead(_366);
+        _656 = discriminant(_346);
+        StorageDead(_358);
+        StorageDead(_355);
+        StorageDead(_353);
+        StorageDead(_349);
+        StorageDead(_346);
+        StorageDead(_345);
+        StorageDead(_344);
+        goto -> bb275;
+    }
+
+    bb169: {
+        _377 = &(*_378);
+        StorageDead(_379);
+        StorageLive(_381);
+        _381 = _315;
+        StorageLive(_382);
+        StorageLive(_383);
+        _383 = &_69;
+        _382 = &(*_383);
+        StorageLive(_384);
+        StorageLive(_385);
+        StorageLive(_386);
+        StorageLive(_387);
+        StorageLive(_388);
+        _388 = &_170;
+        _387 = <RefMut<'_, SpotMarket> as Deref>::deref(move _388) -> [return: bb170, unwind: bb300];
+    }
+
+    bb170: {
+        _386 = &(*_387);
+        StorageDead(_388);
+        _385 = SpotMarket::has_transfer_hook(move _386) -> [return: bb171, unwind: bb300];
+    }
+
+    bb171: {
+        switchInt(move _385) -> [0: bb173, otherwise: bb172];
+    }
+
+    bb172: {
+        StorageDead(_387);
+        StorageDead(_386);
+        StorageLive(_389);
+        _389 = &mut (*_15);
+        _384 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::Some(move _389);
+        StorageDead(_389);
+        goto -> bb174;
+    }
+
+    bb173: {
+        StorageDead(_387);
+        StorageDead(_386);
+        _384 = Option::<&mut Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>::None;
+        goto -> bb174;
+    }
+
+    bb174: {
+        StorageDead(_385);
+        _372 = receive(move _373, move _375, move _376, move _377, move _381, move _382, move _384) -> [return: bb175, unwind: bb300];
+    }
+
+    bb175: {
+        StorageDead(_384);
+        StorageDead(_382);
+        StorageDead(_381);
+        StorageDead(_377);
+        StorageDead(_376);
+        StorageDead(_375);
+        StorageDead(_373);
+        _371 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _372) -> [return: bb176, unwind: bb300];
+    }
+
+    bb176: {
+        StorageDead(_372);
+        _390 = discriminant(_371);
+        switchInt(move _390) -> [0: bb177, 1: bb178, otherwise: bb4];
+    }
+
+    bb177: {
+        StorageLive(_394);
+        _394 = ((_371 as Continue).0: ());
+        _370 = _394;
+        StorageDead(_394);
+        _644 = discriminant(_371);
+        StorageDead(_383);
+        StorageDead(_380);
+        StorageDead(_378);
+        StorageDead(_374);
+        StorageDead(_371);
+        StorageDead(_370);
+        _342 = const ();
+        goto -> bb180;
+    }
+
+    bb178: {
+        StorageLive(_391);
+        _391 = move ((_371 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_393);
+        _393 = move _391;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _393) -> [return: bb179, unwind: bb313];
+    }
+
+    bb179: {
+        StorageDead(_393);
+        StorageDead(_391);
+        _654 = discriminant(_371);
+        StorageDead(_383);
+        StorageDead(_380);
+        StorageDead(_378);
+        StorageDead(_374);
+        StorageDead(_371);
+        StorageDead(_370);
+        goto -> bb275;
+    }
+
+    bb180: {
+        StorageDead(_342);
+        StorageLive(_395);
+        StorageLive(_396);
+        StorageLive(_397);
+        StorageLive(_398);
+        _616 = deref_copy (*_313);
+        _692 = (((_616.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _398 = &mut (*_692);
+        _397 = anchor_lang::prelude::InterfaceAccount::<'_, anchor_spl::token_interface::TokenAccount>::reload(move _398) -> [return: bb181, unwind: bb300];
+    }
+
+    bb181: {
+        StorageDead(_398);
+        _396 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _397) -> [return: bb182, unwind: bb300];
+    }
+
+    bb182: {
+        StorageDead(_397);
+        _399 = discriminant(_396);
+        switchInt(move _399) -> [0: bb183, 1: bb184, otherwise: bb4];
+    }
+
+    bb183: {
+        StorageLive(_403);
+        _403 = ((_396 as Continue).0: ());
+        _395 = _403;
+        StorageDead(_403);
+        _646 = discriminant(_396);
+        StorageDead(_396);
+        StorageDead(_395);
+        _316 = const ();
+        goto -> bb187;
+    }
+
+    bb184: {
+        StorageLive(_400);
+        _400 = move ((_396 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_402);
+        _402 = move _400;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _402) -> [return: bb185, unwind: bb312];
+    }
+
+    bb185: {
+        StorageDead(_402);
+        StorageDead(_400);
+        _652 = discriminant(_396);
+        StorageDead(_396);
+        StorageDead(_395);
+        goto -> bb276;
+    }
+
+    bb186: {
+        StorageDead(_324);
+        StorageDead(_323);
+        StorageDead(_321);
+        StorageDead(_319);
+        StorageDead(_318);
+        _316 = const ();
+        goto -> bb187;
+    }
+
+    bb187: {
+        StorageDead(_317);
+        StorageDead(_316);
+        StorageLive(_404);
+        StorageLive(_405);
+        StorageLive(_406);
+        StorageLive(_407);
+        StorageLive(_408);
+        _408 = _315;
+        _407 = Ne(move _408, const 0_u64);
+        switchInt(move _407) -> [0: bb189, otherwise: bb188];
+    }
+
+    bb188: {
+        StorageDead(_408);
+        StorageLive(_409);
+        _409 = ();
+        _406 = std::result::Result::<(), error::ErrorCode>::Ok(move _409);
+        StorageDead(_409);
+        goto -> bb197;
+    }
+
+    bb189: {
+        StorageDead(_408);
+        StorageLive(_410);
+        _410 = error::ErrorCode::InvalidSwap;
+        StorageLive(_411);
+        StorageLive(_412);
+        StorageLive(_413);
+        StorageLive(_414);
+        StorageLive(_415);
+        StorageLive(_416);
+        StorageLive(_417);
+        StorageLive(_418);
+        StorageLive(_419);
+        StorageLive(_420);
+        StorageLive(_421);
+        _588 = const _;
+        _421 = &(*_588);
+        _420 = &(*_421);
+        _419 = move _420 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_420);
+        StorageLive(_423);
+        StorageLive(_424);
+        StorageLive(_425);
+        StorageLive(_426);
+        StorageLive(_427);
+        StorageLive(_428);
+        StorageLive(_429);
+        _429 = &_410;
+        _428 = &(*_429);
+        _427 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _428) -> [return: bb190, unwind: bb300];
+    }
+
+    bb190: {
+        StorageDead(_428);
+        _426 = [move _427];
+        StorageDead(_427);
+        _425 = &_426;
+        _424 = &(*_425);
+        _423 = move _424 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_424);
+        _418 = Arguments::<'_>::new_v1(move _419, move _423) -> [return: bb191, unwind: bb300];
+    }
+
+    bb191: {
+        StorageDead(_423);
+        StorageDead(_419);
+        _417 = format(move _418) -> [return: bb192, unwind: bb300];
+    }
+
+    bb192: {
+        StorageDead(_418);
+        StorageDead(_429);
+        StorageDead(_426);
+        StorageDead(_425);
+        StorageDead(_421);
+        _416 = move _417;
+        StorageDead(_417);
+        _415 = &_416;
+        _414 = &(*_415);
+        _413 = <String as Deref>::deref(move _414) -> [return: bb193, unwind: bb298];
+    }
+
+    bb193: {
+        _412 = &(*_413);
+        StorageDead(_414);
+        _411 = solana_program::log::sol_log(move _412) -> [return: bb194, unwind: bb298];
+    }
+
+    bb194: {
+        StorageDead(_412);
+        drop(_416) -> [return: bb195, unwind: bb300];
+    }
+
+    bb195: {
+        StorageDead(_416);
+        StorageDead(_415);
+        StorageDead(_413);
+        StorageDead(_411);
+        StorageLive(_430);
+        StorageLive(_431);
+        StorageLive(_432);
+        _432 = const "amount_out must be greater than 0";
+        _431 = &(*_432);
+        _430 = solana_program::log::sol_log(move _431) -> [return: bb196, unwind: bb300];
+    }
+
+    bb196: {
+        StorageDead(_431);
+        StorageDead(_432);
+        StorageDead(_430);
+        StorageLive(_433);
+        _433 = _410;
+        _406 = std::result::Result::<(), error::ErrorCode>::Err(move _433);
+        StorageDead(_433);
+        StorageDead(_410);
+        goto -> bb197;
+    }
+
+    bb197: {
+        StorageDead(_407);
+        _405 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _406) -> [return: bb198, unwind: bb300];
+    }
+
+    bb198: {
+        StorageDead(_406);
+        _434 = discriminant(_405);
+        switchInt(move _434) -> [0: bb199, 1: bb200, otherwise: bb4];
+    }
+
+    bb199: {
+        StorageLive(_438);
+        _438 = ((_405 as Continue).0: ());
+        _404 = _438;
+        StorageDead(_438);
+        StorageDead(_405);
+        StorageDead(_404);
+        StorageLive(_439);
+        StorageLive(_440);
+        _440 = &mut _170;
+        _439 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _440) -> [return: bb202, unwind: bb300];
+    }
+
+    bb200: {
+        StorageLive(_435);
+        _435 = ((_405 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_437);
+        _437 = _435;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _437) -> [return: bb201, unwind: bb300];
+    }
+
+    bb201: {
+        StorageDead(_437);
+        StorageDead(_435);
+        StorageDead(_405);
+        StorageDead(_404);
+        goto -> bb277;
+    }
+
+    bb202: {
+        StorageDead(_440);
+        ((*_439).52: u64) = const 0_u64;
+        StorageDead(_439);
+        StorageLive(_441);
+        StorageLive(_442);
+        _442 = &mut _170;
+        _441 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _442) -> [return: bb203, unwind: bb300];
+    }
+
+    bb203: {
+        StorageDead(_442);
+        ((*_441).51: u64) = const 0_u64;
+        StorageDead(_441);
+        StorageLive(_443);
+        StorageLive(_444);
+        StorageLive(_445);
+        StorageLive(_446);
+        StorageLive(_447);
+        StorageLive(_448);
+        StorageLive(_449);
+        _449 = &_170;
+        _448 = <RefMut<'_, SpotMarket> as Deref>::deref(move _449) -> [return: bb204, unwind: bb300];
+    }
+
+    bb204: {
+        StorageDead(_449);
+        _447 = ((*_448).52: u64);
+        _446 = Eq(move _447, const 0_u64);
+        switchInt(move _446) -> [0: bb209, otherwise: bb205];
+    }
+
+    bb205: {
+        StorageDead(_448);
+        StorageDead(_447);
+        StorageLive(_450);
+        StorageLive(_451);
+        StorageLive(_452);
+        StorageLive(_453);
+        _453 = &_170;
+        _452 = <RefMut<'_, SpotMarket> as Deref>::deref(move _453) -> [return: bb206, unwind: bb300];
+    }
+
+    bb206: {
+        StorageDead(_453);
+        _451 = ((*_452).51: u64);
+        _450 = Eq(move _451, const 0_u64);
+        switchInt(move _450) -> [0: bb208, otherwise: bb207];
+    }
+
+    bb207: {
+        StorageDead(_452);
+        StorageDead(_451);
+        StorageLive(_454);
+        _454 = ();
+        _445 = std::result::Result::<(), error::ErrorCode>::Ok(move _454);
+        StorageDead(_454);
+        goto -> bb218;
+    }
+
+    bb208: {
+        StorageDead(_452);
+        StorageDead(_451);
+        goto -> bb210;
+    }
+
+    bb209: {
+        StorageDead(_448);
+        StorageDead(_447);
+        goto -> bb210;
+    }
+
+    bb210: {
+        StorageLive(_455);
+        _455 = error::ErrorCode::InvalidSwap;
+        StorageLive(_456);
+        StorageLive(_457);
+        StorageLive(_458);
+        StorageLive(_459);
+        StorageLive(_460);
+        StorageLive(_461);
+        StorageLive(_462);
+        StorageLive(_463);
+        StorageLive(_464);
+        StorageLive(_465);
+        StorageLive(_466);
+        _587 = const _;
+        _466 = &(*_587);
+        _465 = &(*_466);
+        _464 = move _465 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_465);
+        StorageLive(_468);
+        StorageLive(_469);
+        StorageLive(_470);
+        StorageLive(_471);
+        StorageLive(_472);
+        StorageLive(_473);
+        StorageLive(_474);
+        _474 = &_455;
+        _473 = &(*_474);
+        _472 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _473) -> [return: bb211, unwind: bb300];
+    }
+
+    bb211: {
+        StorageDead(_473);
+        _471 = [move _472];
+        StorageDead(_472);
+        _470 = &_471;
+        _469 = &(*_470);
+        _468 = move _469 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_469);
+        _463 = Arguments::<'_>::new_v1(move _464, move _468) -> [return: bb212, unwind: bb300];
+    }
+
+    bb212: {
+        StorageDead(_468);
+        StorageDead(_464);
+        _462 = format(move _463) -> [return: bb213, unwind: bb300];
+    }
+
+    bb213: {
+        StorageDead(_463);
+        StorageDead(_474);
+        StorageDead(_471);
+        StorageDead(_470);
+        StorageDead(_466);
+        _461 = move _462;
+        StorageDead(_462);
+        _460 = &_461;
+        _459 = &(*_460);
+        _458 = <String as Deref>::deref(move _459) -> [return: bb214, unwind: bb297];
+    }
+
+    bb214: {
+        _457 = &(*_458);
+        StorageDead(_459);
+        _456 = solana_program::log::sol_log(move _457) -> [return: bb215, unwind: bb297];
+    }
+
+    bb215: {
+        StorageDead(_457);
+        drop(_461) -> [return: bb216, unwind: bb300];
+    }
+
+    bb216: {
+        StorageDead(_461);
+        StorageDead(_460);
+        StorageDead(_458);
+        StorageDead(_456);
+        StorageLive(_475);
+        StorageLive(_476);
+        StorageLive(_477);
+        _477 = const "end_swap ended in invalid state";
+        _476 = &(*_477);
+        _475 = solana_program::log::sol_log(move _476) -> [return: bb217, unwind: bb300];
+    }
+
+    bb217: {
+        StorageDead(_476);
+        StorageDead(_477);
+        StorageDead(_475);
+        StorageLive(_478);
+        _478 = _455;
+        _445 = std::result::Result::<(), error::ErrorCode>::Err(move _478);
+        StorageDead(_478);
+        StorageDead(_455);
+        goto -> bb218;
+    }
+
+    bb218: {
+        StorageDead(_450);
+        StorageDead(_446);
+        _444 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _445) -> [return: bb219, unwind: bb300];
+    }
+
+    bb219: {
+        StorageDead(_445);
+        _479 = discriminant(_444);
+        switchInt(move _479) -> [0: bb220, 1: bb221, otherwise: bb4];
+    }
+
+    bb220: {
+        StorageLive(_483);
+        _483 = ((_444 as Continue).0: ());
+        _443 = _483;
+        StorageDead(_483);
+        StorageDead(_444);
+        StorageDead(_443);
+        StorageLive(_484);
+        StorageLive(_485);
+        StorageLive(_486);
+        StorageLive(_487);
+        StorageLive(_488);
+        StorageLive(_489);
+        StorageLive(_490);
+        _490 = &_78;
+        _489 = <RefMut<'_, SpotMarket> as Deref>::deref(move _490) -> [return: bb223, unwind: bb300];
+    }
+
+    bb221: {
+        StorageLive(_480);
+        _480 = ((_444 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_482);
+        _482 = _480;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _482) -> [return: bb222, unwind: bb300];
+    }
+
+    bb222: {
+        StorageDead(_482);
+        StorageDead(_480);
+        StorageDead(_444);
+        StorageDead(_443);
+        goto -> bb277;
+    }
+
+    bb223: {
+        StorageDead(_490);
+        _488 = ((*_489).52: u64);
+        _487 = Eq(move _488, const 0_u64);
+        switchInt(move _487) -> [0: bb228, otherwise: bb224];
+    }
+
+    bb224: {
+        StorageDead(_489);
+        StorageDead(_488);
+        StorageLive(_491);
+        StorageLive(_492);
+        StorageLive(_493);
+        StorageLive(_494);
+        _494 = &_78;
+        _493 = <RefMut<'_, SpotMarket> as Deref>::deref(move _494) -> [return: bb225, unwind: bb300];
+    }
+
+    bb225: {
+        StorageDead(_494);
+        _492 = ((*_493).51: u64);
+        _491 = Eq(move _492, const 0_u64);
+        switchInt(move _491) -> [0: bb227, otherwise: bb226];
+    }
+
+    bb226: {
+        StorageDead(_493);
+        StorageDead(_492);
+        StorageLive(_495);
+        _495 = ();
+        _486 = std::result::Result::<(), error::ErrorCode>::Ok(move _495);
+        StorageDead(_495);
+        goto -> bb237;
+    }
+
+    bb227: {
+        StorageDead(_493);
+        StorageDead(_492);
+        goto -> bb229;
+    }
+
+    bb228: {
+        StorageDead(_489);
+        StorageDead(_488);
+        goto -> bb229;
+    }
+
+    bb229: {
+        StorageLive(_496);
+        _496 = error::ErrorCode::InvalidSwap;
+        StorageLive(_497);
+        StorageLive(_498);
+        StorageLive(_499);
+        StorageLive(_500);
+        StorageLive(_501);
+        StorageLive(_502);
+        StorageLive(_503);
+        StorageLive(_504);
+        StorageLive(_505);
+        StorageLive(_506);
+        StorageLive(_507);
+        _586 = const _;
+        _507 = &(*_586);
+        _506 = &(*_507);
+        _505 = move _506 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_506);
+        StorageLive(_509);
+        StorageLive(_510);
+        StorageLive(_511);
+        StorageLive(_512);
+        StorageLive(_513);
+        StorageLive(_514);
+        StorageLive(_515);
+        _515 = &_496;
+        _514 = &(*_515);
+        _513 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _514) -> [return: bb230, unwind: bb300];
+    }
+
+    bb230: {
+        StorageDead(_514);
+        _512 = [move _513];
+        StorageDead(_513);
+        _511 = &_512;
+        _510 = &(*_511);
+        _509 = move _510 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_510);
+        _504 = Arguments::<'_>::new_v1(move _505, move _509) -> [return: bb231, unwind: bb300];
+    }
+
+    bb231: {
+        StorageDead(_509);
+        StorageDead(_505);
+        _503 = format(move _504) -> [return: bb232, unwind: bb300];
+    }
+
+    bb232: {
+        StorageDead(_504);
+        StorageDead(_515);
+        StorageDead(_512);
+        StorageDead(_511);
+        StorageDead(_507);
+        _502 = move _503;
+        StorageDead(_503);
+        _501 = &_502;
+        _500 = &(*_501);
+        _499 = <String as Deref>::deref(move _500) -> [return: bb233, unwind: bb296];
+    }
+
+    bb233: {
+        _498 = &(*_499);
+        StorageDead(_500);
+        _497 = solana_program::log::sol_log(move _498) -> [return: bb234, unwind: bb296];
+    }
+
+    bb234: {
+        StorageDead(_498);
+        drop(_502) -> [return: bb235, unwind: bb300];
+    }
+
+    bb235: {
+        StorageDead(_502);
+        StorageDead(_501);
+        StorageDead(_499);
+        StorageDead(_497);
+        StorageLive(_516);
+        StorageLive(_517);
+        StorageLive(_518);
+        _518 = const "end_swap ended in invalid state";
+        _517 = &(*_518);
+        _516 = solana_program::log::sol_log(move _517) -> [return: bb236, unwind: bb300];
+    }
+
+    bb236: {
+        StorageDead(_517);
+        StorageDead(_518);
+        StorageDead(_516);
+        StorageLive(_519);
+        _519 = _496;
+        _486 = std::result::Result::<(), error::ErrorCode>::Err(move _519);
+        StorageDead(_519);
+        StorageDead(_496);
+        goto -> bb237;
+    }
+
+    bb237: {
+        StorageDead(_491);
+        StorageDead(_487);
+        _485 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _486) -> [return: bb238, unwind: bb300];
+    }
+
+    bb238: {
+        StorageDead(_486);
+        _520 = discriminant(_485);
+        switchInt(move _520) -> [0: bb239, 1: bb240, otherwise: bb4];
+    }
+
+    bb239: {
+        StorageLive(_524);
+        _524 = ((_485 as Continue).0: ());
+        _484 = _524;
+        StorageDead(_524);
+        StorageDead(_485);
+        StorageDead(_484);
+        StorageLive(_525);
+        StorageLive(_526);
+        StorageLive(_527);
+        StorageLive(_528);
+        StorageLive(_529);
+        _529 = &mut _21;
+        StorageLive(_530);
+        StorageLive(_531);
+        StorageLive(_532);
+        StorageLive(_533);
+        StorageLive(_534);
+        StorageLive(_535);
+        _535 = &_170;
+        _534 = <RefMut<'_, SpotMarket> as Deref>::deref(move _535) -> [return: bb242, unwind: bb300];
+    }
+
+    bb240: {
+        StorageLive(_521);
+        _521 = ((_485 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_523);
+        _523 = _521;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _523) -> [return: bb241, unwind: bb300];
+    }
+
+    bb241: {
+        StorageDead(_523);
+        StorageDead(_521);
+        StorageDead(_485);
+        StorageDead(_484);
+        goto -> bb277;
+    }
+
+    bb242: {
+        _533 = &(*_534);
+        StorageDead(_535);
+        _532 = SpotMarket::oracle_id(move _533) -> [return: bb243, unwind: bb300];
+    }
+
+    bb243: {
+        StorageDead(_533);
+        _531 = &_532;
+        _530 = &(*_531);
+        _528 = OracleMap::<'_>::get_price_data(move _529, move _530) -> [return: bb244, unwind: bb300];
+    }
+
+    bb244: {
+        StorageDead(_530);
+        StorageDead(_529);
+        _527 = <std::result::Result<&OraclePriceData, error::ErrorCode> as Try>::branch(move _528) -> [return: bb245, unwind: bb300];
+    }
+
+    bb245: {
+        StorageDead(_528);
+        _536 = discriminant(_527);
+        switchInt(move _536) -> [0: bb246, 1: bb247, otherwise: bb4];
+    }
+
+    bb246: {
+        StorageLive(_540);
+        _540 = ((_527 as Continue).0: &state::oracle::OraclePriceData);
+        _526 = _540;
+        StorageDead(_540);
+        _525 = ((*_526).0: i64);
+        StorageDead(_534);
+        StorageDead(_532);
+        StorageDead(_531);
+        StorageDead(_527);
+        StorageDead(_526);
+        StorageLive(_541);
+        StorageLive(_542);
+        StorageLive(_543);
+        StorageLive(_544);
+        _617 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _544 = &((*_617).6: anchor_lang::prelude::AccountLoader<'_, state::if_rebalance_config::IfRebalanceConfig>);
+        _543 = anchor_lang::prelude::AccountLoader::<'_, IfRebalanceConfig>::load_mut(move _544) -> [return: bb249, unwind: bb300];
+    }
+
+    bb247: {
+        StorageLive(_537);
+        _537 = ((_527 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_539);
+        _539 = _537;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _539) -> [return: bb248, unwind: bb300];
+    }
+
+    bb248: {
+        StorageDead(_539);
+        StorageDead(_537);
+        StorageDead(_534);
+        StorageDead(_532);
+        StorageDead(_531);
+        StorageDead(_527);
+        StorageDead(_526);
+        goto -> bb274;
+    }
+
+    bb249: {
+        StorageDead(_544);
+        _542 = <std::result::Result<RefMut<'_, IfRebalanceConfig>, anchor_lang::error::Error> as Try>::branch(move _543) -> [return: bb250, unwind: bb300];
+    }
+
+    bb250: {
+        StorageDead(_543);
+        _545 = discriminant(_542);
+        switchInt(move _545) -> [0: bb251, 1: bb252, otherwise: bb4];
+    }
+
+    bb251: {
+        StorageLive(_549);
+        _549 = move ((_542 as Continue).0: std::cell::RefMut<'_, state::if_rebalance_config::IfRebalanceConfig>);
+        _541 = move _549;
+        StorageDead(_549);
+        _648 = discriminant(_542);
+        StorageDead(_542);
+        StorageLive(_550);
+        StorageLive(_551);
+        StorageLive(_552);
+        StorageLive(_553);
+        StorageLive(_554);
+        StorageLive(_555);
+        StorageLive(_556);
+        _556 = &mut _541;
+        _555 = &mut (*_556);
+        _554 = <RefMut<'_, IfRebalanceConfig> as DerefMut>::deref_mut(move _555) -> [return: bb254, unwind: bb295];
+    }
+
+    bb252: {
+        StorageLive(_546);
+        _546 = move ((_542 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_548);
+        _548 = move _546;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _548) -> [return: bb253, unwind: bb311];
+    }
+
+    bb253: {
+        StorageDead(_548);
+        StorageDead(_546);
+        _650 = discriminant(_542);
+        StorageDead(_542);
+        goto -> bb273;
+    }
+
+    bb254: {
+        _553 = &mut (*_554);
+        StorageDead(_555);
+        StorageLive(_557);
+        StorageLive(_558);
+        StorageLive(_559);
+        StorageLive(_560);
+        StorageLive(_561);
+        _618 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _619 = deref_copy ((*_618).3: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _693 = (((_619.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _561 = &(*_693);
+        _560 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _561) -> [return: bb255, unwind: bb295];
+    }
+
+    bb255: {
+        _559 = &(*_560);
+        _558 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _559) -> [return: bb256, unwind: bb295];
+    }
+
+    bb256: {
+        StorageDead(_561);
+        StorageDead(_559);
+        _557 = ((*_558).2: u64);
+        StorageLive(_562);
+        StorageLive(_563);
+        StorageLive(_564);
+        StorageLive(_565);
+        StorageLive(_566);
+        _620 = deref_copy (_1.1: &mut instructions::if_staker::InsuranceFundSwap<'_>);
+        _621 = deref_copy ((*_620).2: std::boxed::Box<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>);
+        _694 = (((_621.0: std::ptr::Unique<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: std::ptr::NonNull<anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>>).0: *const anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>);
+        _566 = &(*_694);
+        _565 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as Deref>::deref(move _566) -> [return: bb257, unwind: bb295];
+    }
+
+    bb257: {
+        _564 = &(*_565);
+        _563 = <anchor_spl::token_interface::TokenAccount as Deref>::deref(move _564) -> [return: bb258, unwind: bb295];
+    }
+
+    bb258: {
+        StorageDead(_566);
+        StorageDead(_564);
+        _562 = ((*_563).2: u64);
+        StorageLive(_567);
+        StorageLive(_568);
+        StorageLive(_569);
+        StorageLive(_570);
+        _570 = &mut _78;
+        _569 = &mut (*_570);
+        _568 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _569) -> [return: bb259, unwind: bb295];
+    }
+
+    bb259: {
+        _567 = &mut (*_568);
+        StorageDead(_569);
+        StorageLive(_571);
+        StorageLive(_572);
+        StorageLive(_573);
+        StorageLive(_574);
+        _574 = &mut _170;
+        _573 = &mut (*_574);
+        _572 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _573) -> [return: bb260, unwind: bb295];
+    }
+
+    bb260: {
+        _571 = &mut (*_572);
+        StorageDead(_573);
+        StorageLive(_575);
+        _575 = _227;
+        StorageLive(_576);
+        _576 = _315;
+        StorageLive(_577);
+        StorageLive(_578);
+        _578 = _525;
+        _577 = core::num::<impl i64>::unsigned_abs(move _578) -> [return: bb261, unwind: bb295];
+    }
+
+    bb261: {
+        StorageDead(_578);
+        StorageLive(_579);
+        _579 = _14;
+        _552 = handle_if_end_swap(move _553, move _557, move _562, move _567, move _571, move _575, move _576, move _577, move _579) -> [return: bb262, unwind: bb295];
+    }
+
+    bb262: {
+        StorageDead(_579);
+        StorageDead(_577);
+        StorageDead(_576);
+        StorageDead(_575);
+        StorageDead(_571);
+        StorageDead(_567);
+        StorageDead(_562);
+        StorageDead(_557);
+        StorageDead(_553);
+        _551 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _552) -> [return: bb263, unwind: bb295];
+    }
+
+    bb263: {
+        StorageDead(_552);
+        _580 = discriminant(_551);
+        switchInt(move _580) -> [0: bb264, 1: bb265, otherwise: bb4];
+    }
+
+    bb264: {
+        StorageLive(_584);
+        _584 = ((_551 as Continue).0: ());
+        _550 = _584;
+        StorageDead(_584);
+        StorageDead(_574);
+        StorageDead(_572);
+        StorageDead(_570);
+        StorageDead(_568);
+        StorageDead(_565);
+        StorageDead(_563);
+        StorageDead(_560);
+        StorageDead(_558);
+        StorageDead(_556);
+        StorageDead(_554);
+        StorageDead(_551);
+        StorageDead(_550);
+        StorageLive(_585);
+        _585 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _585);
+        StorageDead(_585);
+        drop(_541) -> [return: bb267, unwind: bb300];
+    }
+
+    bb265: {
+        StorageLive(_581);
+        _581 = ((_551 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_583);
+        _583 = _581;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _583) -> [return: bb266, unwind: bb295];
+    }
+
+    bb266: {
+        StorageDead(_583);
+        StorageDead(_581);
+        StorageDead(_574);
+        StorageDead(_572);
+        StorageDead(_570);
+        StorageDead(_568);
+        StorageDead(_565);
+        StorageDead(_563);
+        StorageDead(_560);
+        StorageDead(_558);
+        StorageDead(_556);
+        StorageDead(_554);
+        StorageDead(_551);
+        StorageDead(_550);
+        drop(_541) -> [return: bb273, unwind: bb300];
+    }
+
+    bb267: {
+        StorageDead(_541);
+        StorageDead(_525);
+        StorageDead(_315);
+        StorageDead(_314);
+        StorageDead(_313);
+        StorageDead(_227);
+        StorageDead(_226);
+        StorageDead(_225);
+        drop(_170) -> [return: bb268, unwind: bb303];
+    }
+
+    bb268: {
+        StorageDead(_170);
+        drop(_78) -> [return: bb269, unwind: bb305];
+    }
+
+    bb269: {
+        StorageDead(_78);
+        StorageDead(_69);
+        StorageDead(_60);
+        StorageDead(_51);
+        drop(_21) -> [return: bb270, unwind: bb306];
+    }
+
+    bb270: {
+        StorageDead(_21);
+        drop(_20) -> [return: bb271, unwind: bb307];
+    }
+
+    bb271: {
+        StorageDead(_20);
+        drop(_19) -> [return: bb272, unwind: bb310];
+    }
+
+    bb272: {
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb294;
+    }
+
+    bb273: {
+        StorageDead(_541);
+        goto -> bb274;
+    }
+
+    bb274: {
+        StorageDead(_525);
+        goto -> bb277;
+    }
+
+    bb275: {
+        StorageDead(_342);
+        goto -> bb276;
+    }
+
+    bb276: {
+        StorageDead(_317);
+        StorageDead(_316);
+        goto -> bb277;
+    }
+
+    bb277: {
+        StorageDead(_315);
+        StorageDead(_314);
+        StorageDead(_313);
+        goto -> bb279;
+    }
+
+    bb278: {
+        StorageDead(_240);
+        StorageDead(_231);
+        StorageDead(_230);
+        goto -> bb279;
+    }
+
+    bb279: {
+        StorageDead(_227);
+        StorageDead(_226);
+        StorageDead(_225);
+        goto -> bb280;
+    }
+
+    bb280: {
+        drop(_170) -> [return: bb281, unwind: bb303];
+    }
+
+    bb281: {
+        StorageDead(_170);
+        goto -> bb282;
+    }
+
+    bb282: {
+        drop(_78) -> [return: bb283, unwind: bb305];
+    }
+
+    bb283: {
+        StorageDead(_78);
+        goto -> bb284;
+    }
+
+    bb284: {
+        StorageDead(_69);
+        goto -> bb285;
+    }
+
+    bb285: {
+        StorageDead(_60);
+        goto -> bb286;
+    }
+
+    bb286: {
+        StorageDead(_51);
+        drop(_21) -> [return: bb287, unwind: bb306];
+    }
+
+    bb287: {
+        StorageDead(_21);
+        drop(_20) -> [return: bb288, unwind: bb307];
+    }
+
+    bb288: {
+        StorageDead(_20);
+        drop(_19) -> [return: bb289, unwind: bb310];
+    }
+
+    bb289: {
+        StorageDead(_19);
+        goto -> bb292;
+    }
+
+    bb290: {
+        StorageDead(_31);
+        StorageDead(_30);
+        drop(_28) -> [return: bb291, unwind: bb310];
+    }
+
+    bb291: {
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_23);
+        StorageDead(_22);
+        goto -> bb292;
+    }
+
+    bb292: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb293;
+    }
+
+    bb293: {
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb294;
+    }
+
+    bb294: {
+        return;
+    }
+
+    bb295 (cleanup): {
+        drop(_541) -> [return: bb300, unwind terminate(cleanup)];
+    }
+
+    bb296 (cleanup): {
+        drop(_502) -> [return: bb300, unwind terminate(cleanup)];
+    }
+
+    bb297 (cleanup): {
+        drop(_461) -> [return: bb300, unwind terminate(cleanup)];
+    }
+
+    bb298 (cleanup): {
+        drop(_416) -> [return: bb300, unwind terminate(cleanup)];
+    }
+
+    bb299 (cleanup): {
+        drop(_202) -> [return: bb300, unwind terminate(cleanup)];
+    }
+
+    bb300 (cleanup): {
+        drop(_170) -> [return: bb303, unwind terminate(cleanup)];
+    }
+
+    bb301 (cleanup): {
+        drop(_147) -> [return: bb303, unwind terminate(cleanup)];
+    }
+
+    bb302 (cleanup): {
+        drop(_110) -> [return: bb303, unwind terminate(cleanup)];
+    }
+
+    bb303 (cleanup): {
+        drop(_78) -> [return: bb305, unwind terminate(cleanup)];
+    }
+
+    bb304 (cleanup): {
+        drop(_28) -> [return: bb305, unwind terminate(cleanup)];
+    }
+
+    bb305 (cleanup): {
+        drop(_21) -> [return: bb306, unwind terminate(cleanup)];
+    }
+
+    bb306 (cleanup): {
+        drop(_20) -> [return: bb307, unwind terminate(cleanup)];
+    }
+
+    bb307 (cleanup): {
+        drop(_19) -> [return: bb310, unwind terminate(cleanup)];
+    }
+
+    bb308 (cleanup): {
+        drop(_31) -> [return: bb309, unwind terminate(cleanup)];
+    }
+
+    bb309 (cleanup): {
+        drop(_28) -> [return: bb310, unwind terminate(cleanup)];
+    }
+
+    bb310 (cleanup): {
+        resume;
+    }
+
+    bb311 (cleanup): {
+        _666 = discriminant(_542);
+        goto -> bb300;
+    }
+
+    bb312 (cleanup): {
+        _667 = discriminant(_396);
+        goto -> bb300;
+    }
+
+    bb313 (cleanup): {
+        _668 = discriminant(_371);
+        goto -> bb300;
+    }
+
+    bb314 (cleanup): {
+        _669 = discriminant(_346);
+        goto -> bb300;
+    }
+
+    bb315 (cleanup): {
+        _670 = discriminant(_291);
+        goto -> bb300;
+    }
+
+    bb316 (cleanup): {
+        _671 = discriminant(_282);
+        goto -> bb300;
+    }
+
+    bb317 (cleanup): {
+        _672 = discriminant(_257);
+        goto -> bb300;
+    }
+
+    bb318 (cleanup): {
+        _673 = discriminant(_171);
+        goto -> bb303;
+    }
+
+    bb319 (cleanup): {
+        _674 = discriminant(_79);
+        goto -> bb305;
+    }
+
+    bb320 (cleanup): {
+        _676 = discriminant(_23);
+        goto -> bb308;
+    }
+
+    bb321 (cleanup): {
+        _677 = discriminant(_6);
+        goto -> bb310;
+    }
+
+    bb322: {
+        (*_678) = [move _39, move _40];
+        StorageDead(_40);
+        StorageDead(_39);
+        _34 = move _38;
+        _33 = move _34 as std::boxed::Box<[u16]> (PointerCoercion(Unsize));
+        StorageDead(_38);
+        StorageDead(_34);
+        _32 = std::slice::<impl [u16]>::into_vec::<std::alloc::Global>(move _33) -> [return: bb11, unwind: bb309];
+    }
+}

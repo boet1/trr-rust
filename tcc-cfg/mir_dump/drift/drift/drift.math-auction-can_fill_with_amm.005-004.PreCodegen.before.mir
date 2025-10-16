@@ -1,0 +1,190 @@
+// MIR for `can_fill_with_amm` before PreCodegen
+
+fn can_fill_with_amm(_1: AMMAvailability, _2: Option<i64>, _3: &Order, _4: u8, _5: u64, _6: FillMode) -> std::result::Result<bool, error::ErrorCode> {
+    debug amm_availability => _1;
+    debug valid_oracle_price => _2;
+    debug order => _3;
+    debug min_auction_duration => _4;
+    debug slot => _5;
+    debug fill_mode => _6;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: &state::perp_market::AMMAvailability;
+    let mut _10: &state::perp_market::AMMAvailability;
+    let _11: state::perp_market::AMMAvailability;
+    let mut _12: bool;
+    let mut _13: &std::option::Option<i64>;
+    let mut _14: bool;
+    let mut _15: &state::perp_market::AMMAvailability;
+    let mut _16: &state::perp_market::AMMAvailability;
+    let _17: state::perp_market::AMMAvailability;
+    let mut _18: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _19: std::result::Result<bool, error::ErrorCode>;
+    let mut _20: &state::user::Order;
+    let mut _21: u8;
+    let mut _22: u64;
+    let mut _23: state::fill_mode::FillMode;
+    let mut _24: isize;
+    let _25: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _26: !;
+    let mut _27: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _28: bool;
+    let mut _29: &state::perp_market::AMMAvailability;
+    let mut _30: &state::perp_market::AMMAvailability;
+    scope 1 {
+        debug residual => _25;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _28;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &_1;
+        StorageLive(_10);
+        _30 = const _;
+        _10 = &(*_30);
+        _8 = <AMMAvailability as PartialEq>::ne(move _9, move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _8) -> [0: bb6, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &_2;
+        _12 = Option::<i64>::is_some(move _13) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        switchInt(move _12) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &_1;
+        StorageLive(_16);
+        _29 = const _;
+        _16 = &(*_29);
+        _14 = <AMMAvailability as PartialEq>::eq(move _15, move _16) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        goto -> bb7;
+    }
+
+    bb6: {
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb7;
+    }
+
+    bb7: {
+        _7 = const false;
+        goto -> bb18;
+    }
+
+    bb8: {
+        switchInt(move _14) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_16);
+        StorageDead(_15);
+        _7 = const true;
+        goto -> bb17;
+    }
+
+    bb10: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = &(*_3);
+        StorageLive(_21);
+        _21 = _4;
+        StorageLive(_22);
+        _22 = _5;
+        StorageLive(_23);
+        _23 = _6;
+        _19 = is_amm_available_liquidity_source(move _20, move _21, move _22, move _23) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        _18 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _19) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_19);
+        _24 = discriminant(_18);
+        switchInt(move _24) -> [0: bb13, 1: bb15, otherwise: bb14];
+    }
+
+    bb13: {
+        StorageLive(_28);
+        _28 = ((_18 as Continue).0: bool);
+        _7 = _28;
+        StorageDead(_28);
+        StorageDead(_18);
+        goto -> bb17;
+    }
+
+    bb14: {
+        unreachable;
+    }
+
+    bb15: {
+        StorageLive(_25);
+        _25 = ((_18 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_27);
+        _27 = _25;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _27) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_18);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb19;
+    }
+
+    bb17: {
+        StorageDead(_14);
+        goto -> bb18;
+    }
+
+    bb18: {
+        StorageDead(_12);
+        StorageDead(_8);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _7);
+        StorageDead(_7);
+        goto -> bb19;
+    }
+
+    bb19: {
+        return;
+    }
+}

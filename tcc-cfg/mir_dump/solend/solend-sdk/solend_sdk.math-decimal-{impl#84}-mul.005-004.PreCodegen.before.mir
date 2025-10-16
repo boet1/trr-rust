@@ -1,0 +1,72 @@
+// MIR for `decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:377:3: 377:49>::mul` before PreCodegen
+
+fn decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:377:3: 377:49>::mul(_1: U192, _2: U192) -> U192 {
+    debug self => _1;
+    debug other => _2;
+    let mut _0: math::decimal::U192;
+    let _3: math::decimal::U192;
+    let mut _4: math::decimal::U192;
+    let mut _7: (math::decimal::U192, bool);
+    let mut _8: math::decimal::U192;
+    let mut _9: math::decimal::U192;
+    let _10: ();
+    let mut _11: bool;
+    let mut _12: !;
+    let _13: !;
+    scope 1 {
+        debug bignum => _3;
+        let _5: math::decimal::U192;
+        let _6: bool;
+        scope 2 {
+            debug result => _5;
+            debug overflow => _6;
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _2;
+        _3 = <U192 as Into<U192>>::into(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _1;
+        StorageLive(_9);
+        _9 = _3;
+        _7 = U192::overflowing_mul(move _8, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_5);
+        _5 = (_7.0: math::decimal::U192);
+        StorageLive(_6);
+        _6 = (_7.1: bool);
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _6;
+        switchInt(move _11) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _13 = begin_panic::<&str>(const "arithmetic operation overflow") -> unwind continue;
+    }
+
+    bb4: {
+        _10 = const ();
+        StorageDead(_11);
+        StorageDead(_10);
+        _0 = _5;
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_3);
+        return;
+    }
+}

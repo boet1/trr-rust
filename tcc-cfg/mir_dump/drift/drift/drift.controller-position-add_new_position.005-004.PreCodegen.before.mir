@@ -1,0 +1,211 @@
+// MIR for `add_new_position` before PreCodegen
+
+fn add_new_position(_1: &mut [PerpPosition; 8], _2: u16) -> std::result::Result<usize, error::ErrorCode> {
+    debug user_positions => _1;
+    debug market_index => _2;
+    let mut _0: std::result::Result<usize, error::ErrorCode>;
+    let _3: usize;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, usize>;
+    let mut _5: std::result::Result<usize, error::ErrorCode>;
+    let mut _6: std::option::Option<usize>;
+    let mut _7: &mut std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _8: std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _9: &[state::user::PerpPosition];
+    let mut _10: &[state::user::PerpPosition; 8];
+    let mut _11: {closure@programs/drift/src/controller/position.rs:49:19: 49:36};
+    let mut _12: error::ErrorCode;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _17: usize;
+    let _20: usize;
+    let mut _21: usize;
+    let mut _22: bool;
+    let mut _23: bool;
+    let mut _24: u16;
+    let mut _25: u16;
+    let mut _27: u16;
+    let mut _28: u16;
+    let mut _29: state::user::PerpPosition;
+    let mut _30: state::user::PerpPosition;
+    let _31: usize;
+    let mut _32: usize;
+    let mut _33: bool;
+    let mut _34: usize;
+    scope 1 {
+        debug new_position_index => _3;
+        let _18: u16;
+        let _19: &state::user::PerpPosition;
+        scope 6 {
+            debug max_margin_ratio => _18;
+            let _26: state::user::PerpPosition;
+            scope 8 {
+                debug new_market_position => _26;
+            }
+        }
+        scope 7 {
+            debug old_position => _19;
+        }
+    }
+    scope 2 {
+        debug residual => _14;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _17;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_1);
+        _9 = move _10 as &[state::user::PerpPosition] (PointerCoercion(Unsize));
+        StorageDead(_10);
+        _8 = core::slice::<impl [PerpPosition]>::iter(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _7 = &mut _8;
+        StorageDead(_9);
+        StorageLive(_11);
+        _11 = {closure@programs/drift/src/controller/position.rs:49:19: 49:36};
+        _6 = <std::slice::Iter<'_, PerpPosition> as Iterator>::position::<{closure@programs/drift/src/controller/position.rs:49:19: 49:36}>(move _7, move _11) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageDead(_7);
+        StorageLive(_12);
+        _12 = error::ErrorCode::MaxNumberOfPositions;
+        _5 = Option::<usize>::ok_or::<error::ErrorCode>(move _6, move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        StorageDead(_6);
+        _4 = <std::result::Result<usize, error::ErrorCode> as Try>::branch(move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_5);
+        _13 = discriminant(_4);
+        switchInt(move _13) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_17);
+        _17 = ((_4 as Continue).0: usize);
+        _3 = _17;
+        StorageDead(_17);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _3;
+        _21 = Len((*_1));
+        _22 = Lt(_20, _21);
+        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _20) -> [success: bb9, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_14);
+        _14 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_16);
+        _16 = _14;
+        _0 = <std::result::Result<usize, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _16) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb15;
+    }
+
+    bb9: {
+        _19 = &(*_1)[_20];
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = ((*_19).13: u16);
+        StorageLive(_25);
+        _25 = _2;
+        _23 = Eq(move _24, move _25);
+        switchInt(move _23) -> [0: bb11, otherwise: bb10];
+    }
+
+    bb10: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _18 = ((*_19).12: u16);
+        goto -> bb12;
+    }
+
+    bb11: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _18 = const 0_u16;
+        goto -> bb12;
+    }
+
+    bb12: {
+        StorageDead(_23);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = _2;
+        StorageLive(_28);
+        _28 = _18;
+        StorageLive(_29);
+        _29 = <PerpPosition as Default>::default() -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        _26 = PerpPosition { last_cumulative_funding_rate: (_29.0: i64), base_asset_amount: (_29.1: i64), quote_asset_amount: (_29.2: i64), quote_break_even_amount: (_29.3: i64), quote_entry_amount: (_29.4: i64), open_bids: (_29.5: i64), open_asks: (_29.6: i64), settled_pnl: (_29.7: i64), lp_shares: (_29.8: u64), last_base_asset_amount_per_lp: (_29.9: i64), last_quote_asset_amount_per_lp: (_29.10: i64), padding: (_29.11: [u8; 2]), max_margin_ratio: move _28, market_index: move _27, open_orders: (_29.14: u8), per_lp_base: (_29.15: i8) };
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_29);
+        StorageLive(_30);
+        _30 = _26;
+        StorageLive(_31);
+        _31 = _3;
+        _32 = Len((*_1));
+        _33 = Lt(_31, _32);
+        assert(move _33, "index out of bounds: the length is {} but the index is {}", move _32, _31) -> [success: bb14, unwind continue];
+    }
+
+    bb14: {
+        (*_1)[_31] = move _30;
+        StorageDead(_30);
+        StorageDead(_31);
+        StorageLive(_34);
+        _34 = _3;
+        _0 = std::result::Result::<usize, error::ErrorCode>::Ok(move _34);
+        StorageDead(_34);
+        StorageDead(_26);
+        StorageDead(_18);
+        StorageDead(_3);
+        goto -> bb15;
+    }
+
+    bb15: {
+        return;
+    }
+}

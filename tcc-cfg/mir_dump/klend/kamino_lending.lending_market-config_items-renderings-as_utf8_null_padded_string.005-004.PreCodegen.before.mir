@@ -1,0 +1,59 @@
+// MIR for `as_utf8_null_padded_string` before PreCodegen
+
+fn as_utf8_null_padded_string(_1: &[u8; N], _2: &mut Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+    debug value => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let _3: &str;
+    let mut _4: &str;
+    let _5: &str;
+    let mut _6: std::result::Result<&str, std::str::Utf8Error>;
+    let mut _7: &[u8];
+    let mut _8: &[u8; N];
+    let mut _9: &str;
+    let mut _10: &mut std::fmt::Formatter<'_>;
+    scope 1 {
+        debug str => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(*_1);
+        _7 = move _8 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_8);
+        _6 = from_utf8(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        _5 = std::result::Result::<&str, Utf8Error>::unwrap(move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _4 = &(*_5);
+        StorageDead(_6);
+        _3 = core::str::<impl str>::trim_end_matches::<'_, char>(move _4, const '\0') -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageLive(_9);
+        _9 = &(*_3);
+        StorageLive(_10);
+        _10 = &mut (*_2);
+        _0 = <str as std::fmt::Display>::fmt(move _9, move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_3);
+        return;
+    }
+}

@@ -1,0 +1,130 @@
+// MIR for `calculate_fill_for_matched_orders` after PreCodegen
+
+fn calculate_fill_for_matched_orders(_1: u64, _2: u64, _3: u64, _4: u32, _5: controller::position::PositionDirection) -> std::result::Result<(u64, u64), error::ErrorCode> {
+    debug maker_base_asset_amount => _1;
+    debug maker_price => _2;
+    debug taker_base_asset_amount => _3;
+    debug base_decimals => _4;
+    debug maker_direction => _5;
+    let mut _0: std::result::Result<(u64, u64), error::ErrorCode>;
+    let _6: u64;
+    let mut _7: u64;
+    let mut _8: u64;
+    let mut _10: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _11: std::result::Result<u64, error::ErrorCode>;
+    let mut _12: u64;
+    let mut _13: u64;
+    let mut _14: u32;
+    let mut _15: controller::position::PositionDirection;
+    let mut _16: isize;
+    let mut _18: !;
+    let mut _19: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _21: (u64, u64);
+    let mut _22: u64;
+    let mut _23: u64;
+    scope 1 {
+        debug base_asset_amount => _6;
+        let _9: u64;
+        let _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _20: u64;
+        scope 2 {
+            debug quote_asset_amount => _9;
+        }
+        scope 3 {
+            debug residual => _17;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _20;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _1;
+        StorageLive(_8);
+        _8 = _3;
+        _6 = std::cmp::min::<u64>(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _6;
+        StorageLive(_13);
+        _13 = _2;
+        StorageLive(_14);
+        _14 = _4;
+        StorageLive(_15);
+        _15 = _5;
+        _11 = calculate_quote_asset_amount_for_maker_order(move _12, move _13, move _14, move _15) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        _10 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        _16 = discriminant(_10);
+        switchInt(move _16) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_20);
+        _20 = ((_10 as Continue).0: u64);
+        _9 = _20;
+        StorageDead(_20);
+        StorageDead(_10);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = _6;
+        StorageLive(_23);
+        _23 = _9;
+        _21 = (move _22, move _23);
+        StorageDead(_23);
+        StorageDead(_22);
+        _0 = std::result::Result::<(u64, u64), error::ErrorCode>::Ok(move _21);
+        StorageDead(_21);
+        StorageDead(_9);
+        StorageDead(_6);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_17);
+        _17 = ((_10 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_19);
+        _19 = _17;
+        _0 = <std::result::Result<(u64, u64), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _19) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_6);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+}

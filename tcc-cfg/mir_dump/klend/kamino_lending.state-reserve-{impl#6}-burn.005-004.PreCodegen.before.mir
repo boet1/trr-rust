@@ -1,0 +1,109 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:806:1: 806:23>::burn` before PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:806:1: 806:23>::burn(_1: &mut ReserveCollateral, _2: u64) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug self => _1;
+    debug collateral_amount => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _3: u64;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>, u64>;
+    let mut _5: std::result::Result<u64, LendingError>;
+    let mut _6: std::option::Option<u64>;
+    let mut _7: u64;
+    let mut _8: u64;
+    let mut _9: {closure@programs\klend\src\state\reserve.rs:837:25: 837:27};
+    let mut _10: &u64;
+    let mut _11: &u64;
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, LendingError>;
+    let _16: u64;
+    let mut _17: ();
+    scope 1 {
+        debug residual => _13;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _16;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).1: u64);
+        StorageLive(_8);
+        _8 = _2;
+        _6 = core::num::<impl u64>::checked_sub(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_1).1: u64);
+        StorageLive(_11);
+        _11 = &_2;
+        _9 = {closure@programs\klend\src\state\reserve.rs:837:25: 837:27} { self: move _10, collateral_amount: move _11 };
+        StorageDead(_11);
+        StorageDead(_10);
+        _5 = std::option::Option::<u64>::ok_or_else::<LendingError, {closure@programs\klend\src\state\reserve.rs:837:25: 837:27}>(move _6, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_6);
+        _4 = <std::result::Result<u64, LendingError> as Try>::branch(move _5) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _12 = discriminant(_4);
+        switchInt(move _12) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_16);
+        _16 = ((_4 as Continue).0: u64);
+        _3 = _16;
+        StorageDead(_16);
+        ((*_1).1: u64) = move _3;
+        StorageDead(_3);
+        StorageDead(_4);
+        StorageLive(_17);
+        _17 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _17);
+        StorageDead(_17);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_13);
+        _13 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_15);
+        _15 = _13;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _15) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_3);
+        StorageDead(_4);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+}

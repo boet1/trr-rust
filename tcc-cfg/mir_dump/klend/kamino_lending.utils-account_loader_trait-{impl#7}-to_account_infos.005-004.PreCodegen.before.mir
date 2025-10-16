@@ -1,0 +1,82 @@
+// MIR for `account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:206:1: 206:86>::to_account_infos` before PreCodegen
+
+fn account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:206:1: 206:86>::to_account_infos(_1: &account_loader_trait::FatAccountLoader<'_, T>) -> Vec<anchor_lang::prelude::AccountInfo<'_>> {
+    debug self => _1;
+    let mut _0: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _2: std::boxed::Box<[anchor_lang::prelude::AccountInfo<'_>]>;
+    let mut _3: std::boxed::Box<[anchor_lang::prelude::AccountInfo<'_>; 1]>;
+    let mut _4: usize;
+    let mut _5: usize;
+    let mut _6: *mut u8;
+    let mut _7: std::boxed::Box<[anchor_lang::prelude::AccountInfo<'_>; 1]>;
+    let mut _8: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _9: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _10: &mut std::boxed::Box<[anchor_lang::prelude::AccountInfo<'_>; 1]>;
+    let mut _11: ();
+    let mut _12: *const [anchor_lang::prelude::AccountInfo<'_>; 1];
+    let mut _13: *const ();
+    let mut _14: usize;
+    let mut _15: usize;
+    let mut _16: usize;
+    let mut _17: usize;
+    let mut _18: bool;
+    scope 1 {
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _4 = SizeOf([anchor_lang::prelude::AccountInfo<'_>; 1]);
+        _5 = AlignOf([anchor_lang::prelude::AccountInfo<'_>; 1]);
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_7);
+        _7 = ShallowInitBox(move _6, [anchor_lang::prelude::AccountInfo<'_>; 1]);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_1).0: anchor_lang::prelude::AccountInfo<'_>);
+        _8 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _9) -> [return: bb2, unwind: bb5];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _12 = (((_7.0: std::ptr::Unique<[anchor_lang::prelude::AccountInfo<'_>; 1]>).0: std::ptr::NonNull<[anchor_lang::prelude::AccountInfo<'_>; 1]>).0: *const [anchor_lang::prelude::AccountInfo<'_>; 1]);
+        _13 = _12 as *const () (PtrToPtr);
+        _14 = _13 as usize (Transmute);
+        _15 = AlignOf([anchor_lang::prelude::AccountInfo<'_>; 1]);
+        _16 = Sub(_15, const 1_usize);
+        _17 = BitAnd(_14, _16);
+        _18 = Eq(_17, const 0_usize);
+        assert(_18, "misaligned pointer dereference: address must be a multiple of {} but is {}", _15, _14) -> [success: bb6, unwind unreachable];
+    }
+
+    bb3: {
+        StorageDead(_2);
+        return;
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+
+    bb5 (cleanup): {
+        _10 = &mut _7;
+        _11 = <Box<[anchor_lang::prelude::AccountInfo<'_>; 1]> as Drop>::drop(move _10) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb6: {
+        (*_12) = [move _8];
+        StorageDead(_8);
+        _3 = move _7;
+        _2 = move _3 as std::boxed::Box<[anchor_lang::prelude::AccountInfo<'_>]> (PointerCoercion(Unsize));
+        StorageDead(_7);
+        StorageDead(_3);
+        _0 = std::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb3, unwind: bb4];
+    }
+
+    bb7 (cleanup): {
+        goto -> bb4;
+    }
+}

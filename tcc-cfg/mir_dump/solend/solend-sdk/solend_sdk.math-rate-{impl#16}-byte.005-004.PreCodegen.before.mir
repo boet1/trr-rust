@@ -1,0 +1,79 @@
+// MIR for `rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::byte` before PreCodegen
+
+fn rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::byte(_1: &U128, _2: usize) -> u8 {
+    debug self => _1;
+    debug index => _2;
+    let mut _0: u8;
+    let _3: &[u64; 2];
+    let mut _4: u64;
+    let mut _5: u64;
+    let _6: usize;
+    let mut _7: usize;
+    let mut _8: bool;
+    let mut _9: usize;
+    let mut _10: bool;
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: bool;
+    let mut _15: (usize, bool);
+    let mut _16: bool;
+    scope 1 {
+        debug arr => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = &((*_1).0: [u64; 2]);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _2;
+        _8 = Eq(const 8_usize, const 0_usize);
+        assert(!move _8, "attempt to divide `{}` by zero", _7) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = Div(move _7, const 8_usize);
+        StorageDead(_7);
+        _9 = Len((*_3));
+        _10 = Lt(_6, _9);
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _6) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _5 = (*_3)[_6];
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _2;
+        _14 = Eq(const 8_usize, const 0_usize);
+        assert(!move _14, "attempt to calculate the remainder of `{}` with a divisor of zero", _13) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = Rem(move _13, const 8_usize);
+        StorageDead(_13);
+        _15 = CheckedMul(_12, const 8_usize);
+        assert(!move (_15.1: bool), "attempt to compute `{} * {}`, which would overflow", move _12, const 8_usize) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _11 = move (_15.0: usize);
+        StorageDead(_12);
+        _16 = Lt(_11, const 64_usize);
+        assert(move _16, "attempt to shift right by `{}`, which would overflow", _11) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        _4 = Shr(move _5, move _11);
+        StorageDead(_11);
+        StorageDead(_5);
+        _0 = move _4 as u8 (IntToInt);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_6);
+        return;
+    }
+}

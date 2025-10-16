@@ -1,0 +1,969 @@
+// MIR for `settle_funding_payments` before PreCodegen
+
+fn settle_funding_payments(_1: &mut User, _2: &anchor_lang::prelude::Pubkey, _3: &PerpMarketMap<'_>, _4: i64) -> std::result::Result<(), error::ErrorCode> {
+    debug user => _1;
+    debug user_key => _2;
+    debug perp_market_map => _3;
+    debug now => _4;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _5: ();
+    let mut _6: std::ops::Range<usize>;
+    let mut _7: std::ops::Range<usize>;
+    let mut _8: usize;
+    let mut _9: &[state::user::PerpPosition];
+    let mut _10: &[state::user::PerpPosition; 8];
+    let mut _11: std::ops::Range<usize>;
+    let mut _12: ();
+    let _13: ();
+    let mut _14: std::option::Option<usize>;
+    let mut _15: &mut std::ops::Range<usize>;
+    let mut _16: &mut std::ops::Range<usize>;
+    let mut _17: isize;
+    let mut _18: !;
+    let _20: ();
+    let mut _21: bool;
+    let mut _22: i64;
+    let _23: usize;
+    let mut _24: usize;
+    let mut _25: bool;
+    let mut _26: !;
+    let mut _28: std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _29: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::perp_market::PerpMarket>>;
+    let mut _30: std::result::Result<std::cell::RefMut<'_, state::perp_market::PerpMarket>, error::ErrorCode>;
+    let mut _31: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _32: &u16;
+    let _33: &u16;
+    let _34: usize;
+    let mut _35: usize;
+    let mut _36: bool;
+    let mut _37: isize;
+    let mut _39: !;
+    let mut _40: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _43: &state::perp_market::AMM;
+    let _44: &state::perp_market::PerpMarket;
+    let mut _45: &std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _47: bool;
+    let mut _48: i64;
+    let _49: usize;
+    let mut _50: usize;
+    let mut _51: bool;
+    let mut _52: bool;
+    let mut _53: i128;
+    let mut _54: i128;
+    let mut _55: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _56: std::result::Result<i128, error::ErrorCode>;
+    let mut _57: i64;
+    let _58: usize;
+    let mut _59: usize;
+    let mut _60: bool;
+    let mut _61: isize;
+    let mut _63: !;
+    let mut _64: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _67: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _68: std::result::Result<i64, error::ErrorCode>;
+    let mut _69: i128;
+    let mut _70: &state::user::PerpPosition;
+    let _71: &state::user::PerpPosition;
+    let _72: usize;
+    let mut _73: usize;
+    let mut _74: bool;
+    let mut _75: isize;
+    let mut _77: !;
+    let mut _78: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _80: ();
+    let mut _81: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _82: std::result::Result<(), error::ErrorCode>;
+    let mut _83: &mut state::user::User;
+    let mut _84: i64;
+    let mut _85: isize;
+    let mut _87: !;
+    let mut _88: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _91: usize;
+    let mut _92: usize;
+    let mut _93: bool;
+    let _94: ();
+    let _95: ();
+    let mut _96: &[&[u8]];
+    let mut _97: &[&[u8]; 1];
+    let _98: &[&[u8]; 1];
+    let _99: [&[u8]; 1];
+    let mut _100: &[u8];
+    let _101: &[u8];
+    let mut _102: &std::vec::Vec<u8>;
+    let _103: &std::vec::Vec<u8>;
+    let _104: std::vec::Vec<u8>;
+    let mut _105: &state::events::FundingPaymentRecord;
+    let _106: &state::events::FundingPaymentRecord;
+    let _107: state::events::FundingPaymentRecord;
+    let mut _108: i64;
+    let mut _109: anchor_lang::prelude::Pubkey;
+    let mut _110: anchor_lang::prelude::Pubkey;
+    let mut _111: u16;
+    let mut _112: i64;
+    let mut _113: i64;
+    let mut _114: i128;
+    let mut _115: i128;
+    let mut _116: i64;
+    let mut _117: i64;
+    let mut _118: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _119: std::result::Result<i64, error::ErrorCode>;
+    let mut _120: i128;
+    let mut _121: isize;
+    let mut _123: !;
+    let mut _124: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _126: ();
+    let mut _127: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _128: std::result::Result<(), error::ErrorCode>;
+    let mut _129: &mut state::user::PerpPosition;
+    let mut _130: &mut state::perp_market::PerpMarket;
+    let mut _131: &mut state::perp_market::PerpMarket;
+    let mut _132: &mut std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _133: i64;
+    let mut _134: isize;
+    let mut _136: !;
+    let mut _137: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _139: i64;
+    let mut _140: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _141: std::result::Result<i64, error::ErrorCode>;
+    let mut _142: i64;
+    let mut _143: &state::perp_market::PerpMarket;
+    let mut _144: &std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _145: i64;
+    let mut _146: isize;
+    let mut _148: !;
+    let mut _149: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _151: &mut state::perp_market::PerpMarket;
+    let mut _152: &mut std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _153: ();
+    let mut _154: isize;
+    let mut _155: isize;
+    let mut _156: isize;
+    let mut _157: isize;
+    let mut _158: isize;
+    scope 1 {
+        debug iter => _11;
+        let _19: usize;
+        scope 2 {
+            debug position_index => _19;
+            let _27: &mut std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+            let _38: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _41: std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+            scope 3 {
+                debug market => _27;
+                let _42: &state::perp_market::AMM;
+                scope 8 {
+                    debug amm => _42;
+                    let _46: i128;
+                    scope 9 {
+                        debug amm_cumulative_funding_rate => _46;
+                        let _62: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _65: i128;
+                        let _66: i64;
+                        let _76: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _79: i64;
+                        scope 10 {
+                            debug residual => _62;
+                            scope 11 {
+                            }
+                        }
+                        scope 12 {
+                            debug val => _65;
+                            scope 13 {
+                            }
+                        }
+                        scope 14 {
+                            debug market_funding_payment => _66;
+                            let _86: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _89: ();
+                            let _90: &mut state::user::PerpPosition;
+                            scope 19 {
+                                debug residual => _86;
+                                scope 20 {
+                                }
+                            }
+                            scope 21 {
+                                debug val => _89;
+                                scope 22 {
+                                }
+                            }
+                            scope 23 {
+                                debug market_position => _90;
+                                let _122: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _125: i64;
+                                let _135: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _138: ();
+                                let _147: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _150: i64;
+                                scope 24 {
+                                    debug residual => _122;
+                                    scope 25 {
+                                    }
+                                }
+                                scope 26 {
+                                    debug val => _125;
+                                    scope 27 {
+                                    }
+                                }
+                                scope 28 {
+                                    debug residual => _135;
+                                    scope 29 {
+                                    }
+                                }
+                                scope 30 {
+                                    debug val => _138;
+                                    scope 31 {
+                                    }
+                                }
+                                scope 32 {
+                                    debug residual => _147;
+                                    scope 33 {
+                                    }
+                                }
+                                scope 34 {
+                                    debug val => _150;
+                                    scope 35 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 15 {
+                            debug residual => _76;
+                            scope 16 {
+                            }
+                        }
+                        scope 17 {
+                            debug val => _79;
+                            scope 18 {
+                            }
+                        }
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _38;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _41;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_1).4: [state::user::PerpPosition; 8]);
+        _9 = move _10 as &[state::user::PerpPosition] (PointerCoercion(Unsize));
+        StorageDead(_10);
+        _8 = core::slice::<impl [PerpPosition]>::len(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        _7 = std::ops::Range::<usize> { start: const 0_usize, end: move _8 };
+        StorageDead(_8);
+        _6 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageLive(_11);
+        _11 = move _6;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &mut _11;
+        _15 = &mut (*_16);
+        _14 = <std::ops::Range<usize> as Iterator>::next(move _15) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_15);
+        _17 = discriminant(_14);
+        switchInt(move _17) -> [0: bb7, 1: bb5, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_19);
+        _19 = ((_14 as Some).0: usize);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = _19;
+        _24 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _25 = Lt(_23, _24);
+        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _23) -> [success: bb8, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        _5 = const ();
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_153);
+        _153 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _153);
+        StorageDead(_153);
+        goto -> bb70;
+    }
+
+    bb8: {
+        _22 = (((*_1).4: [state::user::PerpPosition; 8])[_23].1: i64);
+        _21 = Eq(move _22, const 0_i64);
+        switchInt(move _21) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb3;
+    }
+
+    bb10: {
+        StorageDead(_23);
+        StorageDead(_22);
+        _20 = const ();
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = &(*_3);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = _19;
+        _35 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _36 = Lt(_34, _35);
+        assert(move _36, "index out of bounds: the length is {} but the index is {}", move _35, _34) -> [success: bb11, unwind continue];
+    }
+
+    bb11: {
+        _33 = &(((*_1).4: [state::user::PerpPosition; 8])[_34].13: u16);
+        _32 = &(*_33);
+        _30 = PerpMarketMap::<'_>::get_ref_mut(move _31, move _32) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_32);
+        StorageDead(_31);
+        _29 = <std::result::Result<RefMut<'_, PerpMarket>, error::ErrorCode> as Try>::branch(move _30) -> [return: bb13, unwind: bb73];
+    }
+
+    bb13: {
+        StorageDead(_30);
+        _37 = discriminant(_29);
+        switchInt(move _37) -> [0: bb14, 1: bb15, otherwise: bb6];
+    }
+
+    bb14: {
+        StorageLive(_41);
+        _41 = move ((_29 as Continue).0: std::cell::RefMut<'_, state::perp_market::PerpMarket>);
+        _28 = move _41;
+        StorageDead(_41);
+        _27 = &mut _28;
+        _156 = discriminant(_29);
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_29);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = &(*_27);
+        _44 = <RefMut<'_, PerpMarket> as Deref>::deref(move _45) -> [return: bb17, unwind: bb72];
+    }
+
+    bb15: {
+        StorageLive(_38);
+        _38 = ((_29 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_40);
+        _40 = _38;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _40) -> [return: bb16, unwind: bb74];
+    }
+
+    bb16: {
+        StorageDead(_40);
+        StorageDead(_38);
+        _154 = discriminant(_29);
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_29);
+        goto -> bb69;
+    }
+
+    bb17: {
+        StorageDead(_45);
+        _43 = &((*_44).1: state::perp_market::AMM);
+        _42 = &(*_43);
+        StorageDead(_43);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = _19;
+        _50 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _51 = Lt(_49, _50);
+        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> [success: bb18, unwind: bb72];
+    }
+
+    bb18: {
+        _48 = (((*_1).4: [state::user::PerpPosition; 8])[_49].1: i64);
+        _47 = Gt(move _48, const 0_i64);
+        switchInt(move _47) -> [0: bb20, otherwise: bb19];
+    }
+
+    bb19: {
+        StorageDead(_49);
+        StorageDead(_48);
+        _46 = ((*_42).34: i128);
+        goto -> bb21;
+    }
+
+    bb20: {
+        StorageDead(_49);
+        StorageDead(_48);
+        _46 = ((*_42).35: i128);
+        goto -> bb21;
+    }
+
+    bb21: {
+        StorageDead(_47);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = _46;
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = _19;
+        _59 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _60 = Lt(_58, _59);
+        assert(move _60, "index out of bounds: the length is {} but the index is {}", move _59, _58) -> [success: bb22, unwind: bb72];
+    }
+
+    bb22: {
+        _57 = (((*_1).4: [state::user::PerpPosition; 8])[_58].0: i64);
+        _56 = <i64 as Cast>::cast::<i128>(move _57) -> [return: bb23, unwind: bb72];
+    }
+
+    bb23: {
+        StorageDead(_57);
+        _55 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _56) -> [return: bb24, unwind: bb72];
+    }
+
+    bb24: {
+        StorageDead(_56);
+        _61 = discriminant(_55);
+        switchInt(move _61) -> [0: bb25, 1: bb26, otherwise: bb6];
+    }
+
+    bb25: {
+        StorageLive(_65);
+        _65 = ((_55 as Continue).0: i128);
+        _54 = _65;
+        StorageDead(_65);
+        _52 = Ne(move _53, move _54);
+        switchInt(move _52) -> [0: bb29, otherwise: bb28];
+    }
+
+    bb26: {
+        StorageLive(_62);
+        _62 = ((_55 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_64);
+        _64 = _62;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _64) -> [return: bb27, unwind: bb72];
+    }
+
+    bb27: {
+        StorageDead(_64);
+        StorageDead(_62);
+        StorageDead(_58);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        goto -> bb68;
+    }
+
+    bb28: {
+        StorageDead(_58);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        _69 = _46;
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = _19;
+        _73 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _74 = Lt(_72, _73);
+        assert(move _74, "index out of bounds: the length is {} but the index is {}", move _73, _72) -> [success: bb30, unwind: bb72];
+    }
+
+    bb29: {
+        StorageDead(_58);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        _13 = const ();
+        goto -> bb64;
+    }
+
+    bb30: {
+        _71 = &((*_1).4: [state::user::PerpPosition; 8])[_72];
+        _70 = &(*_71);
+        _68 = calculate_funding_payment(move _69, move _70) -> [return: bb31, unwind: bb72];
+    }
+
+    bb31: {
+        StorageDead(_70);
+        StorageDead(_69);
+        _67 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _68) -> [return: bb32, unwind: bb72];
+    }
+
+    bb32: {
+        StorageDead(_68);
+        _75 = discriminant(_67);
+        switchInt(move _75) -> [0: bb33, 1: bb34, otherwise: bb6];
+    }
+
+    bb33: {
+        StorageLive(_79);
+        _79 = ((_67 as Continue).0: i64);
+        _66 = _79;
+        StorageDead(_79);
+        StorageDead(_72);
+        StorageDead(_71);
+        StorageDead(_67);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = &mut (*_1);
+        StorageLive(_84);
+        _84 = _66;
+        _82 = User::update_cumulative_perp_funding(move _83, move _84) -> [return: bb36, unwind: bb72];
+    }
+
+    bb34: {
+        StorageLive(_76);
+        _76 = ((_67 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_78);
+        _78 = _76;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _78) -> [return: bb35, unwind: bb72];
+    }
+
+    bb35: {
+        StorageDead(_78);
+        StorageDead(_76);
+        StorageDead(_72);
+        StorageDead(_71);
+        StorageDead(_67);
+        goto -> bb67;
+    }
+
+    bb36: {
+        StorageDead(_84);
+        StorageDead(_83);
+        _81 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _82) -> [return: bb37, unwind: bb72];
+    }
+
+    bb37: {
+        StorageDead(_82);
+        _85 = discriminant(_81);
+        switchInt(move _85) -> [0: bb38, 1: bb39, otherwise: bb6];
+    }
+
+    bb38: {
+        StorageLive(_89);
+        _89 = ((_81 as Continue).0: ());
+        _80 = _89;
+        StorageDead(_89);
+        StorageDead(_81);
+        StorageDead(_80);
+        StorageLive(_90);
+        StorageLive(_91);
+        _91 = _19;
+        _92 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _93 = Lt(_91, _92);
+        assert(move _93, "index out of bounds: the length is {} but the index is {}", move _92, _91) -> [success: bb41, unwind: bb72];
+    }
+
+    bb39: {
+        StorageLive(_86);
+        _86 = ((_81 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_88);
+        _88 = _86;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _88) -> [return: bb40, unwind: bb72];
+    }
+
+    bb40: {
+        StorageDead(_88);
+        StorageDead(_86);
+        StorageDead(_81);
+        StorageDead(_80);
+        goto -> bb67;
+    }
+
+    bb41: {
+        _90 = &mut ((*_1).4: [state::user::PerpPosition; 8])[_91];
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        _108 = _4;
+        StorageLive(_109);
+        _109 = ((*_1).0: anchor_lang::prelude::Pubkey);
+        StorageLive(_110);
+        _110 = (*_2);
+        StorageLive(_111);
+        _111 = ((*_90).13: u16);
+        StorageLive(_112);
+        _112 = _66;
+        StorageLive(_113);
+        _113 = ((*_90).0: i64);
+        StorageLive(_114);
+        _114 = ((*_42).34: i128);
+        StorageLive(_115);
+        _115 = ((*_42).35: i128);
+        StorageLive(_116);
+        _116 = ((*_90).1: i64);
+        _107 = FundingPaymentRecord { ts: move _108, user_authority: move _109, user: move _110, market_index: move _111, funding_payment: move _112, base_asset_amount: move _116, user_last_cumulative_funding: move _113, amm_cumulative_funding_long: move _114, amm_cumulative_funding_short: move _115 };
+        StorageDead(_116);
+        StorageDead(_115);
+        StorageDead(_114);
+        StorageDead(_113);
+        StorageDead(_112);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_109);
+        StorageDead(_108);
+        _106 = &_107;
+        _105 = &(*_106);
+        _104 = <FundingPaymentRecord as anchor_lang::Event>::data(move _105) -> [return: bb42, unwind: bb72];
+    }
+
+    bb42: {
+        StorageDead(_105);
+        _103 = &_104;
+        _102 = &(*_103);
+        _101 = <Vec<u8> as Deref>::deref(move _102) -> [return: bb43, unwind: bb71];
+    }
+
+    bb43: {
+        _100 = &(*_101);
+        StorageDead(_102);
+        _99 = [move _100];
+        StorageDead(_100);
+        _98 = &_99;
+        _97 = &(*_98);
+        _96 = move _97 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_97);
+        _95 = solana_program::log::sol_log_data(move _96) -> [return: bb44, unwind: bb71];
+    }
+
+    bb44: {
+        StorageDead(_96);
+        drop(_104) -> [return: bb45, unwind: bb72];
+    }
+
+    bb45: {
+        StorageDead(_107);
+        StorageDead(_106);
+        StorageDead(_104);
+        StorageDead(_103);
+        StorageDead(_101);
+        StorageDead(_99);
+        StorageDead(_98);
+        StorageDead(_95);
+        _94 = const ();
+        StorageDead(_94);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        _120 = _46;
+        _119 = <i128 as Cast>::cast::<i64>(move _120) -> [return: bb46, unwind: bb72];
+    }
+
+    bb46: {
+        StorageDead(_120);
+        _118 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _119) -> [return: bb47, unwind: bb72];
+    }
+
+    bb47: {
+        StorageDead(_119);
+        _121 = discriminant(_118);
+        switchInt(move _121) -> [0: bb48, 1: bb49, otherwise: bb6];
+    }
+
+    bb48: {
+        StorageLive(_125);
+        _125 = ((_118 as Continue).0: i64);
+        _117 = _125;
+        StorageDead(_125);
+        ((*_90).0: i64) = move _117;
+        StorageDead(_117);
+        StorageDead(_118);
+        StorageLive(_126);
+        StorageLive(_127);
+        StorageLive(_128);
+        StorageLive(_129);
+        _129 = &mut (*_90);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        _132 = &mut (*_27);
+        _131 = <RefMut<'_, PerpMarket> as DerefMut>::deref_mut(move _132) -> [return: bb51, unwind: bb72];
+    }
+
+    bb49: {
+        StorageLive(_122);
+        _122 = ((_118 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_124);
+        _124 = _122;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _124) -> [return: bb50, unwind: bb72];
+    }
+
+    bb50: {
+        StorageDead(_124);
+        StorageDead(_122);
+        StorageDead(_117);
+        StorageDead(_118);
+        goto -> bb66;
+    }
+
+    bb51: {
+        _130 = &mut (*_131);
+        StorageDead(_132);
+        StorageLive(_133);
+        _133 = _66;
+        _128 = update_quote_asset_and_break_even_amount(move _129, move _130, move _133) -> [return: bb52, unwind: bb72];
+    }
+
+    bb52: {
+        StorageDead(_133);
+        StorageDead(_130);
+        StorageDead(_129);
+        _127 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _128) -> [return: bb53, unwind: bb72];
+    }
+
+    bb53: {
+        StorageDead(_128);
+        _134 = discriminant(_127);
+        switchInt(move _134) -> [0: bb54, 1: bb55, otherwise: bb6];
+    }
+
+    bb54: {
+        StorageLive(_138);
+        _138 = ((_127 as Continue).0: ());
+        _126 = _138;
+        StorageDead(_138);
+        StorageDead(_131);
+        StorageDead(_127);
+        StorageDead(_126);
+        StorageLive(_139);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        _144 = &(*_27);
+        _143 = <RefMut<'_, PerpMarket> as Deref>::deref(move _144) -> [return: bb57, unwind: bb72];
+    }
+
+    bb55: {
+        StorageLive(_135);
+        _135 = ((_127 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_137);
+        _137 = _135;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _137) -> [return: bb56, unwind: bb72];
+    }
+
+    bb56: {
+        StorageDead(_137);
+        StorageDead(_135);
+        StorageDead(_131);
+        StorageDead(_127);
+        StorageDead(_126);
+        goto -> bb66;
+    }
+
+    bb57: {
+        StorageDead(_144);
+        _142 = (((*_143).1: state::perp_market::AMM).80: i64);
+        StorageLive(_145);
+        _145 = _66;
+        _141 = <i64 as SafeMath>::safe_sub(move _142, move _145) -> [return: bb58, unwind: bb72];
+    }
+
+    bb58: {
+        StorageDead(_145);
+        StorageDead(_142);
+        _140 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _141) -> [return: bb59, unwind: bb72];
+    }
+
+    bb59: {
+        StorageDead(_141);
+        _146 = discriminant(_140);
+        switchInt(move _146) -> [0: bb60, 1: bb61, otherwise: bb6];
+    }
+
+    bb60: {
+        StorageLive(_150);
+        _150 = ((_140 as Continue).0: i64);
+        _139 = _150;
+        StorageDead(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        _152 = &mut (*_27);
+        _151 = <RefMut<'_, PerpMarket> as DerefMut>::deref_mut(move _152) -> [return: bb63, unwind: bb72];
+    }
+
+    bb61: {
+        StorageLive(_147);
+        _147 = ((_140 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_149);
+        _149 = _147;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _149) -> [return: bb62, unwind: bb72];
+    }
+
+    bb62: {
+        StorageDead(_149);
+        StorageDead(_147);
+        StorageDead(_139);
+        StorageDead(_143);
+        StorageDead(_140);
+        goto -> bb66;
+    }
+
+    bb63: {
+        StorageDead(_152);
+        (((*_151).1: state::perp_market::AMM).80: i64) = move _139;
+        StorageDead(_139);
+        StorageDead(_151);
+        StorageDead(_143);
+        StorageDead(_140);
+        _13 = const ();
+        StorageDead(_91);
+        StorageDead(_90);
+        StorageDead(_66);
+        goto -> bb64;
+    }
+
+    bb64: {
+        StorageDead(_52);
+        StorageDead(_46);
+        StorageDead(_44);
+        StorageDead(_42);
+        drop(_28) -> [return: bb65, unwind: bb73];
+    }
+
+    bb65: {
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        _12 = const ();
+        goto -> bb3;
+    }
+
+    bb66: {
+        StorageDead(_91);
+        StorageDead(_90);
+        goto -> bb67;
+    }
+
+    bb67: {
+        StorageDead(_66);
+        goto -> bb68;
+    }
+
+    bb68: {
+        StorageDead(_52);
+        StorageDead(_46);
+        StorageDead(_44);
+        StorageDead(_42);
+        drop(_28) -> [return: bb69, unwind: bb73];
+    }
+
+    bb69: {
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb70;
+    }
+
+    bb70: {
+        return;
+    }
+
+    bb71 (cleanup): {
+        drop(_104) -> [return: bb72, unwind terminate(cleanup)];
+    }
+
+    bb72 (cleanup): {
+        drop(_28) -> [return: bb73, unwind terminate(cleanup)];
+    }
+
+    bb73 (cleanup): {
+        resume;
+    }
+
+    bb74 (cleanup): {
+        _158 = discriminant(_29);
+        goto -> bb73;
+    }
+}

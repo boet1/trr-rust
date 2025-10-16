@@ -1,0 +1,103 @@
+// MIR for `obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::get_deposit_asset_tiers::{closure#0}` before PreCodegen
+
+fn obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::get_deposit_asset_tiers::{closure#0}(_1: &mut {closure@programs\klend\src\state\obligation.rs:444:25: 444:43}, _2: (usize, &obligation::ObligationCollateral)) -> std::option::Option<reserve::AssetTier> {
+    debug self => (*((*_1).0: &state::obligation::Obligation));
+    let mut _0: std::option::Option<state::reserve::AssetTier>;
+    let _3: usize;
+    let _4: &state::obligation::ObligationCollateral;
+    let mut _5: bool;
+    let mut _6: &state::obligation::ObligationCollateral;
+    let mut _7: bool;
+    let mut _8: u64;
+    let mut _9: state::reserve::AssetTier;
+    let mut _10: std::result::Result<state::reserve::AssetTier, num_enum::TryFromPrimitiveError<state::reserve::AssetTier>>;
+    let mut _11: u8;
+    let _12: usize;
+    let mut _13: usize;
+    let mut _14: bool;
+    let mut _15: &state::obligation::Obligation;
+    let mut _16: &state::obligation::Obligation;
+    scope 1 {
+        debug index => _3;
+        debug deposit => _4;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = (_2.0: usize);
+        StorageLive(_4);
+        _4 = (_2.1: &state::obligation::ObligationCollateral);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_4);
+        _5 = obligation::ObligationCollateral::is_active(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _5) -> [0: bb8, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = ((*_4).1: u64);
+        _7 = Gt(move _8, const 0_u64);
+        switchInt(move _7) -> [0: bb7, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _3;
+        _15 = deref_copy ((*_1).0: &state::obligation::Obligation);
+        _13 = Len(((*_15).12: [u8; 8]));
+        _14 = Lt(_12, _13);
+        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _16 = deref_copy ((*_1).0: &state::obligation::Obligation);
+        _11 = ((*_16).12: [u8; 8])[_12];
+        _10 = <reserve::AssetTier as TryFrom<u8>>::try_from(move _11) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_11);
+        _9 = std::result::Result::<reserve::AssetTier, TryFromPrimitiveError<reserve::AssetTier>>::unwrap(move _10) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_10);
+        _0 = std::option::Option::<reserve::AssetTier>::Some(move _9);
+        StorageDead(_9);
+        StorageDead(_12);
+        goto -> bb10;
+    }
+
+    bb7: {
+        StorageDead(_8);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_6);
+        goto -> bb9;
+    }
+
+    bb9: {
+        _0 = std::option::Option::<reserve::AssetTier>::None;
+        goto -> bb10;
+    }
+
+    bb10: {
+        StorageDead(_7);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

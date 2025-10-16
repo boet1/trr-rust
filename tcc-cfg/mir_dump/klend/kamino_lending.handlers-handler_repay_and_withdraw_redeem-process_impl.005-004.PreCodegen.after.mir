@@ -1,0 +1,2511 @@
+// MIR for `handlers::handler_repay_and_withdraw_redeem::process_impl` after PreCodegen
+
+fn handlers::handler_repay_and_withdraw_redeem::process_impl(_1: &handlers::handler_repay_obligation_liquidity::RepayObligationLiquidity<'_>, _2: &handlers::handler_withdraw_obligation_collateral_and_redeem_reserve_collateral::WithdrawObligationCollateralAndRedeemReserveCollateral<'_>, _3: &[anchor_lang::prelude::AccountInfo<'_>], _4: &anchor_lang::prelude::Pubkey, _5: u64, _6: u64) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug repay_accounts => _1;
+    debug withdraw_accounts => _2;
+    debug remaining_accounts => _3;
+    debug program_id => _4;
+    debug repay_amount => _5;
+    debug withdraw_collateral_amount => _6;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _7: anchor_lang::prelude::Pubkey;
+    let mut _8: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _10: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _13: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _14: isize;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _20: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::Ref<'_, state::lending_market::LendingMarket>>;
+    let mut _21: std::result::Result<std::cell::Ref<'_, state::lending_market::LendingMarket>, anchor_lang::error::Error>;
+    let mut _22: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _23: isize;
+    let mut _25: !;
+    let mut _26: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _33: ();
+    let mut _35: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::Ref<'_, state::obligation::Obligation>>;
+    let mut _36: std::result::Result<std::cell::Ref<'_, state::obligation::Obligation>, anchor_lang::error::Error>;
+    let mut _37: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _38: isize;
+    let mut _40: !;
+    let mut _41: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _43: usize;
+    let mut _44: &state::obligation::Obligation;
+    let _45: &state::obligation::Obligation;
+    let mut _46: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _47: usize;
+    let mut _48: &state::obligation::Obligation;
+    let _49: &state::obligation::Obligation;
+    let mut _50: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _51: anchor_lang::prelude::Pubkey;
+    let mut _52: &state::obligation::Obligation;
+    let mut _53: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _54: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _55: &state::obligation::Obligation;
+    let _56: &state::obligation::Obligation;
+    let mut _57: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _58: bool;
+    let mut _59: &state::obligation::Obligation;
+    let _60: &state::obligation::Obligation;
+    let mut _61: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let _62: ();
+    let mut _63: std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _65: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _66: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _67: usize;
+    let _68: ();
+    let mut _69: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _70: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _71: &handlers::handler_repay_obligation_liquidity::RepayObligationLiquidity<'_>;
+    let mut _72: std::iter::Take<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _73: u64;
+    let mut _74: isize;
+    let mut _76: !;
+    let mut _77: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _81: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::Ref<'_, state::obligation::Obligation>>;
+    let mut _82: std::result::Result<std::cell::Ref<'_, state::obligation::Obligation>, anchor_lang::error::Error>;
+    let mut _83: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _84: isize;
+    let mut _86: !;
+    let mut _87: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _90: &state::obligation::Obligation;
+    let _91: &state::obligation::Obligation;
+    let mut _92: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let _93: ();
+    let mut _94: std::cell::Ref<'_, state::obligation::Obligation>;
+    let _95: ();
+    let mut _96: bool;
+    let mut _97: usize;
+    let mut _98: usize;
+    let mut _99: bool;
+    let mut _100: &anchor_lang::prelude::Pubkey;
+    let mut _101: &anchor_lang::prelude::Pubkey;
+    let mut _103: std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _104: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::reserve::Reserve>>;
+    let mut _105: std::result::Result<std::cell::RefMut<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _106: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _107: isize;
+    let mut _109: !;
+    let mut _110: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _112: ();
+    let mut _113: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _114: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _115: &mut state::reserve::Reserve;
+    let mut _116: &mut state::reserve::Reserve;
+    let mut _117: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _118: &anchor_lang::prelude::Clock;
+    let _119: &anchor_lang::prelude::Clock;
+    let mut _120: std::option::Option<utils::prices::GetPriceResult>;
+    let mut _121: u16;
+    let mut _122: &state::lending_market::LendingMarket;
+    let mut _123: &std::cell::Ref<'_, state::lending_market::LendingMarket>;
+    let mut _124: isize;
+    let mut _126: !;
+    let mut _127: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _131: bool;
+    let mut _132: usize;
+    let mut _133: usize;
+    let mut _134: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _136: bool;
+    let mut _137: (anchor_lang::prelude::Pubkey, u8);
+    let mut _138: anchor_lang::prelude::Pubkey;
+    let mut _139: anchor_lang::prelude::Pubkey;
+    let mut _141: std::iter::Flatten<std::iter::Scan<std::iter::Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>, bool, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60}>>;
+    let mut _142: std::iter::Scan<std::iter::Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>, bool, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60}>;
+    let mut _143: std::iter::Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _144: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _145: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _146: {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60};
+    let mut _147: &anchor_lang::prelude::Pubkey;
+    let mut _148: &anchor_lang::prelude::Pubkey;
+    let _149: ();
+    let mut _150: &mut [anchor_lang::prelude::AccountInfo<'_>];
+    let mut _151: &mut [anchor_lang::prelude::AccountInfo<'_>];
+    let mut _152: &mut std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _154: &anchor_lang::prelude::Pubkey;
+    let mut _155: &mut handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _156: &mut handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _157: handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _158: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _159: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _160: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _161: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _162: &[anchor_lang::prelude::AccountInfo<'_>];
+    let _163: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _164: &std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _165: handlers::handler_refresh_obligation::RefreshObligationBumps;
+    let _166: ();
+    let mut _167: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _168: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _169: anchor_lang::context::Context<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>>;
+    let mut _170: state::types::MaxReservesAsCollateralCheck;
+    let mut _171: isize;
+    let mut _173: !;
+    let mut _174: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _177: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, bool>;
+    let mut _178: std::result::Result<bool, anchor_lang::error::Error>;
+    let mut _179: &handlers::handler_withdraw_obligation_collateral_and_redeem_reserve_collateral::WithdrawObligationCollateralAndRedeemReserveCollateral<'_>;
+    let mut _180: u64;
+    let mut _181: state::types::LtvMaxWithdrawalCheck;
+    let mut _182: isize;
+    let mut _184: !;
+    let mut _185: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _187: ();
+    let mut _188: bool;
+    let mut _191: (u64, bool);
+    let mut _193: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::Ref<'_, state::obligation::Obligation>>;
+    let mut _194: std::result::Result<std::cell::Ref<'_, state::obligation::Obligation>, anchor_lang::error::Error>;
+    let mut _195: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _196: isize;
+    let mut _198: !;
+    let mut _199: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _202: std::result::Result<&state::obligation::ObligationCollateral, anchor_lang::error::Error>;
+    let mut _203: &state::obligation::Obligation;
+    let _204: &state::obligation::Obligation;
+    let mut _205: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _206: anchor_lang::prelude::Pubkey;
+    let mut _207: {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:179:28: 179:40};
+    let mut _209: &std::result::Result<(&state::obligation::ObligationLiquidity, usize), anchor_lang::error::Error>;
+    let _210: std::result::Result<(&state::obligation::ObligationLiquidity, usize), anchor_lang::error::Error>;
+    let mut _211: &state::obligation::Obligation;
+    let _212: &state::obligation::Obligation;
+    let mut _213: &std::cell::Ref<'_, state::obligation::Obligation>;
+    let mut _214: anchor_lang::prelude::Pubkey;
+    let mut _215: u64;
+    let mut _216: bool;
+    let mut _218: u64;
+    let _219: ();
+    let mut _220: bool;
+    let mut _221: bool;
+    let mut _223: std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _224: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::reserve::Reserve>>;
+    let mut _225: std::result::Result<std::cell::RefMut<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _226: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _227: isize;
+    let mut _229: !;
+    let mut _230: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _232: ();
+    let mut _233: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _234: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _235: &mut state::reserve::Reserve;
+    let mut _236: &mut state::reserve::Reserve;
+    let mut _237: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _238: &anchor_lang::prelude::Clock;
+    let _239: &anchor_lang::prelude::Clock;
+    let mut _240: std::option::Option<utils::prices::GetPriceResult>;
+    let mut _241: u16;
+    let mut _242: &state::lending_market::LendingMarket;
+    let mut _243: &std::cell::Ref<'_, state::lending_market::LendingMarket>;
+    let mut _244: isize;
+    let mut _246: !;
+    let mut _247: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _250: bool;
+    let mut _252: std::option::Option<usize>;
+    let mut _253: &mut std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _254: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _255: &[anchor_lang::prelude::AccountInfo<'_>];
+    let _256: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _257: &std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _258: {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:204:27: 204:36};
+    let mut _259: &anchor_lang::prelude::Pubkey;
+    let _260: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _261: &mut std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _262: usize;
+    let mut _264: &anchor_lang::prelude::Pubkey;
+    let mut _265: &mut handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _266: &mut handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _267: handlers::handler_refresh_obligation::RefreshObligation<'_>;
+    let mut _268: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _269: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _270: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _271: &anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>;
+    let mut _272: &[anchor_lang::prelude::AccountInfo<'_>];
+    let _273: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _274: &std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _275: handlers::handler_refresh_obligation::RefreshObligationBumps;
+    let _276: ();
+    let mut _277: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _278: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _279: anchor_lang::context::Context<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>>;
+    let mut _280: state::types::MaxReservesAsCollateralCheck;
+    let mut _281: isize;
+    let mut _283: !;
+    let mut _284: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _287: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::obligation::Obligation>>;
+    let mut _288: std::result::Result<std::cell::RefMut<'_, state::obligation::Obligation>, anchor_lang::error::Error>;
+    let mut _289: &anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>;
+    let mut _290: isize;
+    let mut _292: !;
+    let mut _293: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _295: ();
+    let mut _296: &mut state::last_update::LastUpdate;
+    let mut _297: &mut state::obligation::Obligation;
+    let mut _298: &mut std::cell::RefMut<'_, state::obligation::Obligation>;
+    let mut _300: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::reserve::Reserve>>;
+    let mut _301: std::result::Result<std::cell::RefMut<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _302: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _303: isize;
+    let mut _305: !;
+    let mut _306: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _308: ();
+    let mut _309: &mut state::last_update::LastUpdate;
+    let mut _310: &mut state::reserve::Reserve;
+    let mut _311: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+    let _312: ();
+    let mut _313: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _314: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _315: &state::obligation::Obligation;
+    let _316: &state::obligation::Obligation;
+    let mut _317: &std::cell::RefMut<'_, state::obligation::Obligation>;
+    let _318: &std::cell::RefMut<'_, state::obligation::Obligation>;
+    let mut _319: &state::reserve::Reserve;
+    let _320: &state::reserve::Reserve;
+    let mut _321: &std::cell::RefMut<'_, state::reserve::Reserve>;
+    let _322: &std::cell::RefMut<'_, state::reserve::Reserve>;
+    let mut _323: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _324: isize;
+    let mut _326: !;
+    let mut _327: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _329: ();
+    let mut _330: bool;
+    let mut _331: bool;
+    let mut _332: bool;
+    let mut _333: isize;
+    let mut _334: isize;
+    let mut _335: isize;
+    let mut _336: isize;
+    let mut _337: isize;
+    let mut _338: isize;
+    let mut _339: isize;
+    let mut _340: isize;
+    let mut _341: isize;
+    let mut _342: isize;
+    let mut _343: isize;
+    let mut _344: isize;
+    let mut _345: isize;
+    let mut _346: isize;
+    let mut _347: isize;
+    let mut _348: isize;
+    let mut _349: isize;
+    let mut _350: isize;
+    let mut _351: isize;
+    let mut _352: isize;
+    let mut _353: isize;
+    let mut _354: isize;
+    let mut _355: isize;
+    let mut _356: isize;
+    let mut _357: isize;
+    let mut _358: isize;
+    let mut _359: isize;
+    let mut _360: isize;
+    let mut _361: isize;
+    let mut _362: isize;
+    let mut _363: isize;
+    let mut _364: isize;
+    let mut _365: isize;
+    let mut _366: isize;
+    let mut _367: isize;
+    let mut _368: isize;
+    let mut _369: isize;
+    let mut _370: isize;
+    let mut _371: isize;
+    let mut _372: isize;
+    let mut _373: isize;
+    let mut _374: isize;
+    let mut _375: isize;
+    let mut _376: isize;
+    let mut _377: isize;
+    let mut _378: isize;
+    let mut _379: isize;
+    let mut _380: isize;
+    let mut _381: isize;
+    let mut _382: isize;
+    let mut _383: isize;
+    let mut _384: isize;
+    let mut _385: isize;
+    let mut _386: isize;
+    let mut _387: isize;
+    let mut _388: isize;
+    let mut _389: isize;
+    let mut _390: isize;
+    let mut _391: isize;
+    let mut _392: isize;
+    let mut _393: isize;
+    let mut _394: isize;
+    let mut _395: isize;
+    let mut _396: isize;
+    let mut _397: isize;
+    let mut _398: isize;
+    let mut _399: isize;
+    let mut _400: isize;
+    let mut _401: isize;
+    let mut _402: isize;
+    let mut _403: isize;
+    let mut _404: isize;
+    let mut _405: isize;
+    let mut _406: isize;
+    let mut _407: isize;
+    let mut _408: isize;
+    let mut _409: isize;
+    let mut _410: isize;
+    let mut _411: isize;
+    let mut _412: isize;
+    scope 1 {
+        debug repay_reserve_key => _7;
+        let _9: anchor_lang::prelude::Pubkey;
+        scope 2 {
+            debug withdraw_reserve_key => _9;
+            let _11: anchor_lang::prelude::Clock;
+            let _15: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+            let _18: anchor_lang::prelude::Clock;
+            scope 3 {
+                debug clock => _11;
+                let _19: std::cell::Ref<'_, state::lending_market::LendingMarket>;
+                let _24: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                let _27: std::cell::Ref<'_, state::lending_market::LendingMarket>;
+                scope 8 {
+                    debug lending_market => _19;
+                    let _28: usize;
+                    scope 13 {
+                        debug previous_borrow_count => _28;
+                        let _29: usize;
+                        scope 14 {
+                            debug deposit_count => _29;
+                            let _30: anchor_lang::prelude::Pubkey;
+                            scope 15 {
+                                debug referrer => _30;
+                                let _31: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                scope 16 {
+                                    debug initial_ltv => _31;
+                                    let _32: bool;
+                                    scope 17 {
+                                        debug has_referrer => _32;
+                                        let _34: std::cell::Ref<'_, state::obligation::Obligation>;
+                                        let _39: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                        let _42: std::cell::Ref<'_, state::obligation::Obligation>;
+                                        let _79: usize;
+                                        let _80: std::cell::Ref<'_, state::obligation::Obligation>;
+                                        let _85: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                        let _88: std::cell::Ref<'_, state::obligation::Obligation>;
+                                        scope 18 {
+                                            debug obligation => _34;
+                                            let _64: std::iter::Take<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+                                            scope 23 {
+                                                debug deposit_reserves_iter => _64;
+                                                let _75: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                let _78: ();
+                                                scope 24 {
+                                                    debug residual => _75;
+                                                    scope 25 {
+                                                    }
+                                                }
+                                                scope 26 {
+                                                    debug val => _78;
+                                                    scope 27 {
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        scope 19 {
+                                            debug residual => _39;
+                                            scope 20 {
+                                            }
+                                        }
+                                        scope 21 {
+                                            debug val => _42;
+                                            scope 22 {
+                                            }
+                                        }
+                                        scope 28 {
+                                            debug borrow_count_post_repay => _79;
+                                            let mut _129: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+                                            let _130: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+                                            let _135: anchor_lang::prelude::Pubkey;
+                                            scope 44 {
+                                                debug remaining_accounts_post_repay => _129;
+                                                let _176: bool;
+                                                let _183: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                let _186: bool;
+                                                scope 53 {
+                                                    debug obligation_was_closed => _176;
+                                                    let _189: u64;
+                                                    let _190: bool;
+                                                    let _192: std::cell::Ref<'_, state::obligation::Obligation>;
+                                                    let _197: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                    let _200: std::cell::Ref<'_, state::obligation::Obligation>;
+                                                    scope 58 {
+                                                        debug final_deposit_amount => _189;
+                                                        debug withdraw_reserve_key_is_repay_reserve => _190;
+                                                        let _217: bool;
+                                                        scope 66 {
+                                                            debug is_full_withdrawal => _217;
+                                                            let _222: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                            let _228: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                            let _231: std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                            let _249: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+                                                            let _251: usize;
+                                                            scope 67 {
+                                                                debug withdraw_reserve => _222;
+                                                                let _245: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                let _248: ();
+                                                                scope 72 {
+                                                                    debug residual => _245;
+                                                                    scope 73 {
+                                                                    }
+                                                                }
+                                                                scope 74 {
+                                                                    debug val => _248;
+                                                                    scope 75 {
+                                                                    }
+                                                                }
+                                                            }
+                                                            scope 68 {
+                                                                debug residual => _228;
+                                                                scope 69 {
+                                                                }
+                                                            }
+                                                            scope 70 {
+                                                                debug val => _231;
+                                                                scope 71 {
+                                                                }
+                                                            }
+                                                            scope 76 {
+                                                                debug remaining_accounts_post_withdrawal => _249;
+                                                                let _263: anchor_lang::context::Context<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>>;
+                                                                scope 78 {
+                                                                    debug refresh_obligation_ctx => _263;
+                                                                    let _282: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                    let _285: ();
+                                                                    let mut _286: std::cell::RefMut<'_, state::obligation::Obligation>;
+                                                                    let _291: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                    let _294: std::cell::RefMut<'_, state::obligation::Obligation>;
+                                                                    scope 79 {
+                                                                        debug residual => _282;
+                                                                        scope 80 {
+                                                                        }
+                                                                    }
+                                                                    scope 81 {
+                                                                        debug val => _285;
+                                                                        scope 82 {
+                                                                        }
+                                                                    }
+                                                                    scope 83 {
+                                                                        debug obligation => _286;
+                                                                        let mut _299: std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                                        let _304: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                        let _307: std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                                        scope 88 {
+                                                                            debug withdraw_reserve => _299;
+                                                                            let _325: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                                            let _328: ();
+                                                                            scope 93 {
+                                                                                debug residual => _325;
+                                                                                scope 94 {
+                                                                                }
+                                                                            }
+                                                                            scope 95 {
+                                                                                debug val => _328;
+                                                                                scope 96 {
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        scope 89 {
+                                                                            debug residual => _304;
+                                                                            scope 90 {
+                                                                            }
+                                                                        }
+                                                                        scope 91 {
+                                                                            debug val => _307;
+                                                                            scope 92 {
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    scope 84 {
+                                                                        debug residual => _291;
+                                                                        scope 85 {
+                                                                        }
+                                                                    }
+                                                                    scope 86 {
+                                                                        debug val => _294;
+                                                                        scope 87 {
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                            scope 77 {
+                                                                debug withdraw_reserve_index => _251;
+                                                            }
+                                                        }
+                                                    }
+                                                    scope 59 {
+                                                        debug obligation => _192;
+                                                        let _201: u64;
+                                                        scope 64 {
+                                                            debug final_deposit_amount => _201;
+                                                            let _208: bool;
+                                                            scope 65 {
+                                                                debug withdraw_reserve_key_is_repay_reserve => _208;
+                                                            }
+                                                        }
+                                                    }
+                                                    scope 60 {
+                                                        debug residual => _197;
+                                                        scope 61 {
+                                                        }
+                                                    }
+                                                    scope 62 {
+                                                        debug val => _200;
+                                                        scope 63 {
+                                                        }
+                                                    }
+                                                }
+                                                scope 54 {
+                                                    debug residual => _183;
+                                                    scope 55 {
+                                                    }
+                                                }
+                                                scope 56 {
+                                                    debug val => _186;
+                                                    scope 57 {
+                                                    }
+                                                }
+                                            }
+                                            scope 45 {
+                                                debug remaining_accounts => _130;
+                                                let _153: anchor_lang::context::Context<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>>;
+                                                scope 48 {
+                                                    debug refresh_obligation_ctx => _153;
+                                                    let _172: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                    let _175: ();
+                                                    scope 49 {
+                                                        debug residual => _172;
+                                                        scope 50 {
+                                                        }
+                                                    }
+                                                    scope 51 {
+                                                        debug val => _175;
+                                                        scope 52 {
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            scope 46 {
+                                                debug referrer_to_skip => _135;
+                                                let mut _140: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+                                                scope 47 {
+                                                    debug reserves_iter => _140;
+                                                }
+                                            }
+                                        }
+                                        scope 29 {
+                                            debug obligation => _80;
+                                            let _89: usize;
+                                            scope 34 {
+                                                debug borrow_count_post_repay => _89;
+                                                let _102: &mut std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                let _108: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                let _111: std::cell::RefMut<'_, state::reserve::Reserve>;
+                                                scope 35 {
+                                                    debug repay_reserve => _102;
+                                                    let _125: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                    let _128: ();
+                                                    scope 40 {
+                                                        debug residual => _125;
+                                                        scope 41 {
+                                                        }
+                                                    }
+                                                    scope 42 {
+                                                        debug val => _128;
+                                                        scope 43 {
+                                                        }
+                                                    }
+                                                }
+                                                scope 36 {
+                                                    debug residual => _108;
+                                                    scope 37 {
+                                                    }
+                                                }
+                                                scope 38 {
+                                                    debug val => _111;
+                                                    scope 39 {
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        scope 30 {
+                                            debug residual => _85;
+                                            scope 31 {
+                                            }
+                                        }
+                                        scope 32 {
+                                            debug val => _88;
+                                            scope 33 {
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                scope 9 {
+                    debug residual => _24;
+                    scope 10 {
+                    }
+                }
+                scope 11 {
+                    debug val => _27;
+                    scope 12 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _15;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _18;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _332 = const false;
+        _331 = const false;
+        _330 = const false;
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &((*_1).3: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _7 = <anchor_lang::prelude::AccountLoader<'_, reserve::Reserve> as anchor_lang::Key>::key(move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_2).4: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _9 = <anchor_lang::prelude::AccountLoader<'_, reserve::Reserve> as anchor_lang::Key>::key(move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _13) -> [return: bb4, unwind: bb195];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        _14 = discriminant(_12);
+        switchInt(move _14) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_18);
+        _18 = move ((_12 as Continue).0: anchor_lang::prelude::Clock);
+        _11 = move _18;
+        StorageDead(_18);
+        _333 = discriminant(_12);
+        StorageDead(_12);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &((*_1).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _21 = anchor_lang::prelude::AccountLoader::<'_, state::lending_market::LendingMarket>::load(move _22) -> [return: bb9, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_15);
+        _15 = move ((_12 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_17);
+        _17 = move _15;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _17) -> [return: bb8, unwind: bb219];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageDead(_15);
+        _395 = discriminant(_12);
+        StorageDead(_12);
+        goto -> bb183;
+    }
+
+    bb9: {
+        StorageDead(_22);
+        _20 = <std::result::Result<Ref<'_, state::lending_market::LendingMarket>, anchor_lang::error::Error> as Try>::branch(move _21) -> [return: bb10, unwind: bb195];
+    }
+
+    bb10: {
+        StorageDead(_21);
+        _23 = discriminant(_20);
+        switchInt(move _23) -> [0: bb11, 1: bb12, otherwise: bb6];
+    }
+
+    bb11: {
+        StorageLive(_27);
+        _27 = move ((_20 as Continue).0: std::cell::Ref<'_, state::lending_market::LendingMarket>);
+        _19 = move _27;
+        StorageDead(_27);
+        _335 = discriminant(_20);
+        StorageDead(_20);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        _37 = &((*_2).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _36 = anchor_lang::prelude::AccountLoader::<'_, obligation::Obligation>::load(move _37) -> [return: bb14, unwind: bb194];
+    }
+
+    bb12: {
+        StorageLive(_24);
+        _24 = move ((_20 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_26);
+        _26 = move _24;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _26) -> [return: bb13, unwind: bb218];
+    }
+
+    bb13: {
+        StorageDead(_26);
+        StorageDead(_24);
+        _393 = discriminant(_20);
+        StorageDead(_20);
+        goto -> bb182;
+    }
+
+    bb14: {
+        StorageDead(_37);
+        _35 = <std::result::Result<Ref<'_, obligation::Obligation>, anchor_lang::error::Error> as Try>::branch(move _36) -> [return: bb15, unwind: bb194];
+    }
+
+    bb15: {
+        StorageDead(_36);
+        _38 = discriminant(_35);
+        switchInt(move _38) -> [0: bb16, 1: bb17, otherwise: bb6];
+    }
+
+    bb16: {
+        StorageLive(_42);
+        _42 = move ((_35 as Continue).0: std::cell::Ref<'_, state::obligation::Obligation>);
+        _332 = const true;
+        _34 = move _42;
+        StorageDead(_42);
+        _337 = discriminant(_35);
+        StorageDead(_35);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        _46 = &_34;
+        _45 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _46) -> [return: bb19, unwind: bb216];
+    }
+
+    bb17: {
+        StorageLive(_39);
+        _39 = move ((_35 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_41);
+        _41 = move _39;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _41) -> [return: bb18, unwind: bb217];
+    }
+
+    bb18: {
+        StorageDead(_41);
+        StorageDead(_39);
+        _391 = discriminant(_35);
+        StorageDead(_35);
+        goto -> bb180;
+    }
+
+    bb19: {
+        _44 = &(*_45);
+        StorageDead(_46);
+        _43 = obligation::Obligation::active_deposits_count(move _44) -> [return: bb20, unwind: bb216];
+    }
+
+    bb20: {
+        StorageDead(_44);
+        _29 = move _43;
+        StorageDead(_43);
+        StorageDead(_45);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = &_34;
+        _49 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _50) -> [return: bb21, unwind: bb216];
+    }
+
+    bb21: {
+        _48 = &(*_49);
+        StorageDead(_50);
+        _47 = obligation::Obligation::active_borrows_count(move _48) -> [return: bb22, unwind: bb216];
+    }
+
+    bb22: {
+        StorageDead(_48);
+        _28 = move _47;
+        StorageDead(_47);
+        StorageDead(_49);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &_34;
+        _52 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _53) -> [return: bb23, unwind: bb216];
+    }
+
+    bb23: {
+        StorageDead(_53);
+        _51 = ((*_52).17: anchor_lang::prelude::Pubkey);
+        _30 = move _51;
+        StorageDead(_51);
+        StorageDead(_52);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        _57 = &_34;
+        _56 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _57) -> [return: bb24, unwind: bb216];
+    }
+
+    bb24: {
+        _55 = &(*_56);
+        StorageDead(_57);
+        _54 = obligation::Obligation::loan_to_value(move _55) -> [return: bb25, unwind: bb216];
+    }
+
+    bb25: {
+        StorageDead(_55);
+        _31 = move _54;
+        StorageDead(_54);
+        StorageDead(_56);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = &_34;
+        _60 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _61) -> [return: bb26, unwind: bb216];
+    }
+
+    bb26: {
+        _59 = &(*_60);
+        StorageDead(_61);
+        _58 = obligation::Obligation::has_referrer(move _59) -> [return: bb27, unwind: bb216];
+    }
+
+    bb27: {
+        StorageDead(_59);
+        _32 = move _58;
+        StorageDead(_58);
+        StorageDead(_60);
+        StorageLive(_62);
+        StorageLive(_63);
+        _332 = const false;
+        _63 = move _34;
+        _62 = std::mem::drop::<Ref<'_, obligation::Obligation>>(move _63) -> [return: bb28, unwind: bb216];
+    }
+
+    bb28: {
+        StorageDead(_63);
+        StorageDead(_62);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        _66 = &(*_3);
+        _65 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _66) -> [return: bb29, unwind: bb216];
+    }
+
+    bb29: {
+        StorageDead(_66);
+        StorageLive(_67);
+        _67 = _29;
+        _64 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::take(move _65, move _67) -> [return: bb30, unwind: bb216];
+    }
+
+    bb30: {
+        StorageDead(_67);
+        StorageDead(_65);
+        StorageLive(_68);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        _71 = &(*_1);
+        StorageLive(_72);
+        _72 = move _64;
+        StorageLive(_73);
+        _73 = _5;
+        _70 = handlers::handler_repay_obligation_liquidity::process_impl::<'_, '_, std::iter::Take<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>>(move _71, move _72, move _73) -> [return: bb31, unwind: bb216];
+    }
+
+    bb31: {
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageDead(_71);
+        _69 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _70) -> [return: bb32, unwind: bb216];
+    }
+
+    bb32: {
+        StorageDead(_70);
+        _74 = discriminant(_69);
+        switchInt(move _74) -> [0: bb33, 1: bb34, otherwise: bb6];
+    }
+
+    bb33: {
+        StorageLive(_78);
+        _78 = ((_69 as Continue).0: ());
+        _68 = _78;
+        StorageDead(_78);
+        _339 = discriminant(_69);
+        StorageDead(_69);
+        StorageDead(_68);
+        _33 = const ();
+        StorageDead(_64);
+        _332 = const false;
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = &((*_1).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _82 = anchor_lang::prelude::AccountLoader::<'_, obligation::Obligation>::load(move _83) -> [return: bb36, unwind: bb194];
+    }
+
+    bb34: {
+        StorageLive(_75);
+        _75 = move ((_69 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_77);
+        _77 = move _75;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _77) -> [return: bb35, unwind: bb214];
+    }
+
+    bb35: {
+        StorageDead(_77);
+        StorageDead(_75);
+        _389 = discriminant(_69);
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_64);
+        goto -> bb180;
+    }
+
+    bb36: {
+        StorageDead(_83);
+        _81 = <std::result::Result<Ref<'_, obligation::Obligation>, anchor_lang::error::Error> as Try>::branch(move _82) -> [return: bb37, unwind: bb194];
+    }
+
+    bb37: {
+        StorageDead(_82);
+        _84 = discriminant(_81);
+        switchInt(move _84) -> [0: bb38, 1: bb39, otherwise: bb6];
+    }
+
+    bb38: {
+        StorageLive(_88);
+        _88 = move ((_81 as Continue).0: std::cell::Ref<'_, state::obligation::Obligation>);
+        _331 = const true;
+        _80 = move _88;
+        StorageDead(_88);
+        _341 = discriminant(_81);
+        StorageDead(_81);
+        StorageLive(_89);
+        StorageLive(_90);
+        StorageLive(_91);
+        StorageLive(_92);
+        _92 = &_80;
+        _91 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _92) -> [return: bb41, unwind: bb212];
+    }
+
+    bb39: {
+        StorageLive(_85);
+        _85 = move ((_81 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_87);
+        _87 = move _85;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _87) -> [return: bb40, unwind: bb213];
+    }
+
+    bb40: {
+        StorageDead(_87);
+        StorageDead(_85);
+        _387 = discriminant(_81);
+        StorageDead(_81);
+        goto -> bb178;
+    }
+
+    bb41: {
+        _90 = &(*_91);
+        StorageDead(_92);
+        _89 = obligation::Obligation::active_borrows_count(move _90) -> [return: bb42, unwind: bb212];
+    }
+
+    bb42: {
+        StorageDead(_90);
+        StorageDead(_91);
+        StorageLive(_93);
+        StorageLive(_94);
+        _331 = const false;
+        _94 = move _80;
+        _93 = std::mem::drop::<Ref<'_, obligation::Obligation>>(move _94) -> [return: bb43, unwind: bb212];
+    }
+
+    bb43: {
+        StorageDead(_94);
+        StorageDead(_93);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        _97 = _89;
+        StorageLive(_98);
+        _98 = _28;
+        _96 = Eq(move _97, move _98);
+        switchInt(move _96) -> [0: bb45, otherwise: bb44];
+    }
+
+    bb44: {
+        StorageDead(_98);
+        StorageDead(_97);
+        goto -> bb47;
+    }
+
+    bb45: {
+        StorageDead(_98);
+        StorageDead(_97);
+        StorageLive(_99);
+        StorageLive(_100);
+        _100 = &_7;
+        StorageLive(_101);
+        _101 = &_9;
+        _99 = <anchor_lang::prelude::Pubkey as PartialEq>::eq(move _100, move _101) -> [return: bb46, unwind: bb212];
+    }
+
+    bb46: {
+        switchInt(move _99) -> [0: bb61, otherwise: bb47];
+    }
+
+    bb47: {
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        _106 = &((*_1).3: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _105 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load_mut(move _106) -> [return: bb48, unwind: bb212];
+    }
+
+    bb48: {
+        StorageDead(_106);
+        _104 = <std::result::Result<RefMut<'_, reserve::Reserve>, anchor_lang::error::Error> as Try>::branch(move _105) -> [return: bb49, unwind: bb212];
+    }
+
+    bb49: {
+        StorageDead(_105);
+        _107 = discriminant(_104);
+        switchInt(move _107) -> [0: bb50, 1: bb51, otherwise: bb6];
+    }
+
+    bb50: {
+        StorageLive(_111);
+        _111 = move ((_104 as Continue).0: std::cell::RefMut<'_, state::reserve::Reserve>);
+        _103 = move _111;
+        StorageDead(_111);
+        _102 = &mut _103;
+        _343 = discriminant(_104);
+        StorageDead(_104);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        StorageLive(_116);
+        StorageLive(_117);
+        _117 = &mut (*_102);
+        _116 = <RefMut<'_, reserve::Reserve> as DerefMut>::deref_mut(move _117) -> [return: bb53, unwind: bb193];
+    }
+
+    bb51: {
+        StorageLive(_108);
+        _108 = move ((_104 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_110);
+        _110 = move _108;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _110) -> [return: bb52, unwind: bb210];
+    }
+
+    bb52: {
+        StorageDead(_110);
+        StorageDead(_108);
+        _385 = discriminant(_104);
+        StorageDead(_104);
+        goto -> bb177;
+    }
+
+    bb53: {
+        _115 = &mut (*_116);
+        StorageDead(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        _119 = &_11;
+        _118 = &(*_119);
+        StorageLive(_120);
+        _120 = std::option::Option::<prices::GetPriceResult>::None;
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = &_19;
+        _122 = <Ref<'_, state::lending_market::LendingMarket> as Deref>::deref(move _123) -> [return: bb54, unwind: bb193];
+    }
+
+    bb54: {
+        StorageDead(_123);
+        _121 = ((*_122).5: u16);
+        _114 = lending_operations::refresh_reserve(move _115, move _118, move _120, move _121) -> [return: bb55, unwind: bb193];
+    }
+
+    bb55: {
+        StorageDead(_121);
+        StorageDead(_120);
+        StorageDead(_118);
+        StorageDead(_115);
+        _113 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _114) -> [return: bb56, unwind: bb193];
+    }
+
+    bb56: {
+        StorageDead(_114);
+        _124 = discriminant(_113);
+        switchInt(move _124) -> [0: bb57, 1: bb58, otherwise: bb6];
+    }
+
+    bb57: {
+        StorageLive(_128);
+        _128 = ((_113 as Continue).0: ());
+        _112 = _128;
+        StorageDead(_128);
+        _345 = discriminant(_113);
+        StorageDead(_122);
+        StorageDead(_119);
+        StorageDead(_116);
+        StorageDead(_113);
+        StorageDead(_112);
+        _95 = const ();
+        drop(_103) -> [return: bb60, unwind: bb212];
+    }
+
+    bb58: {
+        StorageLive(_125);
+        _125 = move ((_113 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_127);
+        _127 = move _125;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _127) -> [return: bb59, unwind: bb209];
+    }
+
+    bb59: {
+        StorageDead(_127);
+        StorageDead(_125);
+        _383 = discriminant(_113);
+        StorageDead(_122);
+        StorageDead(_119);
+        StorageDead(_116);
+        StorageDead(_113);
+        StorageDead(_112);
+        drop(_103) -> [return: bb177, unwind: bb212];
+    }
+
+    bb60: {
+        StorageDead(_103);
+        StorageDead(_102);
+        goto -> bb62;
+    }
+
+    bb61: {
+        StorageDead(_101);
+        StorageDead(_100);
+        _95 = const ();
+        goto -> bb62;
+    }
+
+    bb62: {
+        StorageDead(_99);
+        StorageDead(_96);
+        StorageDead(_95);
+        _79 = _89;
+        StorageDead(_89);
+        _331 = const false;
+        StorageDead(_80);
+        StorageLive(_129);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        _132 = _28;
+        StorageLive(_133);
+        _133 = _79;
+        _131 = Eq(move _132, move _133);
+        switchInt(move _131) -> [0: bb65, otherwise: bb63];
+    }
+
+    bb63: {
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageLive(_134);
+        _134 = &(*_3);
+        _130 = std::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::to_vec(move _134) -> [return: bb64, unwind: bb194];
+    }
+
+    bb64: {
+        StorageDead(_134);
+        goto -> bb77;
+    }
+
+    bb65: {
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageLive(_135);
+        StorageLive(_136);
+        _136 = _32;
+        switchInt(move _136) -> [0: bb68, otherwise: bb66];
+    }
+
+    bb66: {
+        StorageLive(_137);
+        StorageLive(_138);
+        _138 = _30;
+        StorageLive(_139);
+        _139 = _7;
+        _137 = referrer_token_state(move _138, move _139) -> [return: bb67, unwind: bb194];
+    }
+
+    bb67: {
+        StorageDead(_139);
+        StorageDead(_138);
+        _135 = (_137.0: anchor_lang::prelude::Pubkey);
+        StorageDead(_137);
+        goto -> bb69;
+    }
+
+    bb68: {
+        _135 = <anchor_lang::prelude::Pubkey as Default>::default() -> [return: bb220, unwind: bb194];
+    }
+
+    bb69: {
+        StorageDead(_136);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        StorageLive(_145);
+        _145 = &(*_3);
+        _144 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _145) -> [return: bb70, unwind: bb194];
+    }
+
+    bb70: {
+        StorageDead(_145);
+        _143 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::rev(move _144) -> [return: bb71, unwind: bb194];
+    }
+
+    bb71: {
+        StorageDead(_144);
+        StorageLive(_146);
+        StorageLive(_147);
+        _147 = &_7;
+        StorageLive(_148);
+        _148 = &_135;
+        _146 = {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60} { repay_reserve_key: move _147, referrer_to_skip: move _148 };
+        StorageDead(_148);
+        StorageDead(_147);
+        _142 = <Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>> as Iterator>::scan::<bool, std::option::Option<anchor_lang::prelude::AccountInfo<'_>>, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60}>(move _143, const false, move _146) -> [return: bb72, unwind: bb194];
+    }
+
+    bb72: {
+        StorageDead(_146);
+        StorageDead(_143);
+        _141 = <Scan<Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>, bool, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60}> as Iterator>::flatten(move _142) -> [return: bb73, unwind: bb194];
+    }
+
+    bb73: {
+        StorageDead(_142);
+        _140 = <Flatten<Scan<Rev<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>, bool, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:128:30: 128:60}>> as Iterator>::collect::<Vec<anchor_lang::prelude::AccountInfo<'_>>>(move _141) -> [return: bb74, unwind: bb194];
+    }
+
+    bb74: {
+        StorageDead(_141);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        _152 = &mut _140;
+        _151 = <Vec<anchor_lang::prelude::AccountInfo<'_>> as DerefMut>::deref_mut(move _152) -> [return: bb75, unwind: bb192];
+    }
+
+    bb75: {
+        _150 = &mut (*_151);
+        StorageDead(_152);
+        _149 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::reverse(move _150) -> [return: bb76, unwind: bb192];
+    }
+
+    bb76: {
+        StorageDead(_150);
+        StorageDead(_151);
+        StorageDead(_149);
+        _130 = move _140;
+        StorageDead(_140);
+        StorageDead(_135);
+        goto -> bb77;
+    }
+
+    bb77: {
+        StorageDead(_131);
+        StorageLive(_153);
+        StorageLive(_154);
+        _154 = &(*_4);
+        StorageLive(_155);
+        StorageLive(_156);
+        StorageLive(_157);
+        StorageLive(_158);
+        StorageLive(_159);
+        _159 = &((*_1).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _158 = <anchor_lang::prelude::AccountLoader<'_, obligation::Obligation> as Clone>::clone(move _159) -> [return: bb78, unwind: bb191];
+    }
+
+    bb78: {
+        StorageDead(_159);
+        StorageLive(_160);
+        StorageLive(_161);
+        _161 = &((*_1).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _160 = <anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket> as Clone>::clone(move _161) -> [return: bb79, unwind: bb191];
+    }
+
+    bb79: {
+        StorageDead(_161);
+        _157 = handlers::handler_refresh_obligation::RefreshObligation::<'_> { lending_market: move _160, obligation: move _158 };
+        StorageDead(_160);
+        StorageDead(_158);
+        _156 = &mut _157;
+        _155 = &mut (*_156);
+        StorageLive(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        _164 = &_130;
+        _163 = Vec::<anchor_lang::prelude::AccountInfo<'_>>::as_slice(move _164) -> [return: bb80, unwind: bb191];
+    }
+
+    bb80: {
+        _162 = &(*_163);
+        StorageDead(_164);
+        StorageLive(_165);
+        _165 = handlers::handler_refresh_obligation::RefreshObligationBumps;
+        _153 = anchor_lang::context::Context::<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>> { program_id: move _154, accounts: move _155, remaining_accounts: move _162, bumps: move _165 };
+        StorageDead(_165);
+        StorageDead(_162);
+        StorageDead(_155);
+        StorageDead(_154);
+        StorageDead(_163);
+        StorageDead(_156);
+        StorageLive(_166);
+        StorageLive(_167);
+        StorageLive(_168);
+        StorageLive(_169);
+        _169 = move _153;
+        StorageLive(_170);
+        _170 = state::types::MaxReservesAsCollateralCheck::Perform;
+        _168 = handlers::handler_refresh_obligation::process(move _169, move _170) -> [return: bb81, unwind: bb191];
+    }
+
+    bb81: {
+        StorageDead(_170);
+        StorageDead(_169);
+        _167 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _168) -> [return: bb82, unwind: bb191];
+    }
+
+    bb82: {
+        StorageDead(_168);
+        _171 = discriminant(_167);
+        switchInt(move _171) -> [0: bb83, 1: bb84, otherwise: bb6];
+    }
+
+    bb83: {
+        StorageLive(_175);
+        _175 = ((_167 as Continue).0: ());
+        _166 = _175;
+        StorageDead(_175);
+        _347 = discriminant(_167);
+        StorageDead(_167);
+        StorageDead(_166);
+        _330 = const true;
+        _129 = move _130;
+        StorageDead(_157);
+        StorageDead(_153);
+        StorageDead(_130);
+        StorageLive(_176);
+        StorageLive(_177);
+        StorageLive(_178);
+        StorageLive(_179);
+        _179 = &(*_2);
+        StorageLive(_180);
+        _180 = _6;
+        StorageLive(_181);
+        _181 = state::types::LtvMaxWithdrawalCheck::LiquidationThreshold;
+        _178 = handlers::handler_withdraw_obligation_collateral_and_redeem_reserve_collateral::process_impl(move _179, move _180, move _181) -> [return: bb86, unwind: bb207];
+    }
+
+    bb84: {
+        StorageLive(_172);
+        _172 = move ((_167 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_174);
+        _174 = move _172;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _174) -> [return: bb85, unwind: bb208];
+    }
+
+    bb85: {
+        StorageDead(_174);
+        StorageDead(_172);
+        _381 = discriminant(_167);
+        StorageDead(_167);
+        StorageDead(_166);
+        StorageDead(_157);
+        StorageDead(_153);
+        drop(_130) -> [return: bb175, unwind: bb194];
+    }
+
+    bb86: {
+        StorageDead(_181);
+        StorageDead(_180);
+        StorageDead(_179);
+        _177 = <std::result::Result<bool, anchor_lang::error::Error> as Try>::branch(move _178) -> [return: bb87, unwind: bb207];
+    }
+
+    bb87: {
+        StorageDead(_178);
+        _182 = discriminant(_177);
+        switchInt(move _182) -> [0: bb88, 1: bb89, otherwise: bb6];
+    }
+
+    bb88: {
+        StorageLive(_186);
+        _186 = ((_177 as Continue).0: bool);
+        _176 = _186;
+        StorageDead(_186);
+        _349 = discriminant(_177);
+        StorageDead(_177);
+        StorageLive(_187);
+        StorageLive(_188);
+        _188 = _176;
+        switchInt(move _188) -> [0: bb91, otherwise: bb163];
+    }
+
+    bb89: {
+        StorageLive(_183);
+        _183 = move ((_177 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_185);
+        _185 = move _183;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _185) -> [return: bb90, unwind: bb205];
+    }
+
+    bb90: {
+        StorageDead(_185);
+        StorageDead(_183);
+        _379 = discriminant(_177);
+        StorageDead(_177);
+        goto -> bb174;
+    }
+
+    bb91: {
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        StorageLive(_195);
+        _195 = &((*_2).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _194 = anchor_lang::prelude::AccountLoader::<'_, obligation::Obligation>::load(move _195) -> [return: bb92, unwind: bb207];
+    }
+
+    bb92: {
+        StorageDead(_195);
+        _193 = <std::result::Result<Ref<'_, obligation::Obligation>, anchor_lang::error::Error> as Try>::branch(move _194) -> [return: bb93, unwind: bb207];
+    }
+
+    bb93: {
+        StorageDead(_194);
+        _196 = discriminant(_193);
+        switchInt(move _196) -> [0: bb94, 1: bb95, otherwise: bb6];
+    }
+
+    bb94: {
+        StorageLive(_200);
+        _200 = move ((_193 as Continue).0: std::cell::Ref<'_, state::obligation::Obligation>);
+        _192 = move _200;
+        StorageDead(_200);
+        _351 = discriminant(_193);
+        StorageDead(_193);
+        StorageLive(_201);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        StorageLive(_205);
+        _205 = &_192;
+        _204 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _205) -> [return: bb97, unwind: bb190];
+    }
+
+    bb95: {
+        StorageLive(_197);
+        _197 = move ((_193 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_199);
+        _199 = move _197;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _199) -> [return: bb96, unwind: bb204];
+    }
+
+    bb96: {
+        StorageDead(_199);
+        StorageDead(_197);
+        _377 = discriminant(_193);
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageDead(_191);
+        goto -> bb173;
+    }
+
+    bb97: {
+        _203 = &(*_204);
+        StorageDead(_205);
+        StorageLive(_206);
+        _206 = _9;
+        _202 = obligation::Obligation::find_collateral_in_deposits(move _203, move _206) -> [return: bb98, unwind: bb190];
+    }
+
+    bb98: {
+        StorageDead(_206);
+        StorageDead(_203);
+        StorageLive(_207);
+        _207 = {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:179:28: 179:40};
+        _201 = std::result::Result::<&obligation::ObligationCollateral, anchor_lang::error::Error>::map_or::<u64, {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:179:28: 179:40}>(move _202, const 0_u64, move _207) -> [return: bb99, unwind: bb190];
+    }
+
+    bb99: {
+        StorageDead(_207);
+        StorageDead(_202);
+        StorageDead(_204);
+        StorageLive(_208);
+        StorageLive(_209);
+        StorageLive(_210);
+        StorageLive(_211);
+        StorageLive(_212);
+        StorageLive(_213);
+        _213 = &_192;
+        _212 = <Ref<'_, obligation::Obligation> as Deref>::deref(move _213) -> [return: bb100, unwind: bb190];
+    }
+
+    bb100: {
+        _211 = &(*_212);
+        StorageDead(_213);
+        StorageLive(_214);
+        _214 = _9;
+        _210 = obligation::Obligation::find_liquidity_in_borrows(move _211, move _214) -> [return: bb101, unwind: bb190];
+    }
+
+    bb101: {
+        _209 = &_210;
+        StorageDead(_214);
+        StorageDead(_211);
+        _208 = std::result::Result::<(&obligation::ObligationLiquidity, usize), anchor_lang::error::Error>::is_ok(move _209) -> [return: bb102, unwind: bb189];
+    }
+
+    bb102: {
+        StorageDead(_209);
+        drop(_210) -> [return: bb103, unwind: bb190];
+    }
+
+    bb103: {
+        StorageDead(_212);
+        StorageDead(_210);
+        StorageLive(_215);
+        _215 = _201;
+        StorageLive(_216);
+        _216 = _208;
+        _191 = (move _215, move _216);
+        StorageDead(_216);
+        StorageDead(_215);
+        StorageDead(_208);
+        StorageDead(_201);
+        drop(_192) -> [return: bb104, unwind: bb207];
+    }
+
+    bb104: {
+        StorageDead(_192);
+        StorageLive(_189);
+        _189 = (_191.0: u64);
+        StorageLive(_190);
+        _190 = (_191.1: bool);
+        StorageDead(_191);
+        StorageLive(_217);
+        StorageLive(_218);
+        _218 = _189;
+        _217 = Eq(move _218, const 0_u64);
+        StorageDead(_218);
+        StorageLive(_219);
+        StorageLive(_220);
+        _220 = _217;
+        switchInt(move _220) -> [0: bb106, otherwise: bb105];
+    }
+
+    bb105: {
+        StorageLive(_221);
+        _221 = _190;
+        switchInt(move _221) -> [0: bb120, otherwise: bb106];
+    }
+
+    bb106: {
+        StorageLive(_222);
+        StorageLive(_223);
+        StorageLive(_224);
+        StorageLive(_225);
+        StorageLive(_226);
+        _226 = &((*_2).4: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _225 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load_mut(move _226) -> [return: bb107, unwind: bb207];
+    }
+
+    bb107: {
+        StorageDead(_226);
+        _224 = <std::result::Result<RefMut<'_, reserve::Reserve>, anchor_lang::error::Error> as Try>::branch(move _225) -> [return: bb108, unwind: bb207];
+    }
+
+    bb108: {
+        StorageDead(_225);
+        _227 = discriminant(_224);
+        switchInt(move _227) -> [0: bb109, 1: bb110, otherwise: bb6];
+    }
+
+    bb109: {
+        StorageLive(_231);
+        _231 = move ((_224 as Continue).0: std::cell::RefMut<'_, state::reserve::Reserve>);
+        _223 = move _231;
+        StorageDead(_231);
+        _222 = &mut _223;
+        _353 = discriminant(_224);
+        StorageDead(_224);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        _237 = &mut (*_222);
+        _236 = <RefMut<'_, reserve::Reserve> as DerefMut>::deref_mut(move _237) -> [return: bb112, unwind: bb188];
+    }
+
+    bb110: {
+        StorageLive(_228);
+        _228 = move ((_224 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_230);
+        _230 = move _228;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _230) -> [return: bb111, unwind: bb203];
+    }
+
+    bb111: {
+        StorageDead(_230);
+        StorageDead(_228);
+        _375 = discriminant(_224);
+        StorageDead(_224);
+        goto -> bb171;
+    }
+
+    bb112: {
+        _235 = &mut (*_236);
+        StorageDead(_237);
+        StorageLive(_238);
+        StorageLive(_239);
+        _239 = &_11;
+        _238 = &(*_239);
+        StorageLive(_240);
+        _240 = std::option::Option::<prices::GetPriceResult>::None;
+        StorageLive(_241);
+        StorageLive(_242);
+        StorageLive(_243);
+        _243 = &_19;
+        _242 = <Ref<'_, state::lending_market::LendingMarket> as Deref>::deref(move _243) -> [return: bb113, unwind: bb188];
+    }
+
+    bb113: {
+        StorageDead(_243);
+        _241 = ((*_242).5: u16);
+        _234 = lending_operations::refresh_reserve(move _235, move _238, move _240, move _241) -> [return: bb114, unwind: bb188];
+    }
+
+    bb114: {
+        StorageDead(_241);
+        StorageDead(_240);
+        StorageDead(_238);
+        StorageDead(_235);
+        _233 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _234) -> [return: bb115, unwind: bb188];
+    }
+
+    bb115: {
+        StorageDead(_234);
+        _244 = discriminant(_233);
+        switchInt(move _244) -> [0: bb116, 1: bb117, otherwise: bb6];
+    }
+
+    bb116: {
+        StorageLive(_248);
+        _248 = ((_233 as Continue).0: ());
+        _232 = _248;
+        StorageDead(_248);
+        _355 = discriminant(_233);
+        StorageDead(_242);
+        StorageDead(_239);
+        StorageDead(_236);
+        StorageDead(_233);
+        StorageDead(_232);
+        _219 = const ();
+        drop(_223) -> [return: bb119, unwind: bb207];
+    }
+
+    bb117: {
+        StorageLive(_245);
+        _245 = move ((_233 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_247);
+        _247 = move _245;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _247) -> [return: bb118, unwind: bb202];
+    }
+
+    bb118: {
+        StorageDead(_247);
+        StorageDead(_245);
+        _373 = discriminant(_233);
+        StorageDead(_242);
+        StorageDead(_239);
+        StorageDead(_236);
+        StorageDead(_233);
+        StorageDead(_232);
+        drop(_223) -> [return: bb171, unwind: bb207];
+    }
+
+    bb119: {
+        StorageDead(_223);
+        StorageDead(_222);
+        goto -> bb121;
+    }
+
+    bb120: {
+        _219 = const ();
+        goto -> bb121;
+    }
+
+    bb121: {
+        StorageDead(_221);
+        StorageDead(_220);
+        StorageDead(_219);
+        StorageLive(_249);
+        StorageLive(_250);
+        _250 = _217;
+        switchInt(move _250) -> [0: bb129, otherwise: bb122];
+    }
+
+    bb122: {
+        StorageLive(_251);
+        StorageLive(_252);
+        StorageLive(_253);
+        StorageLive(_254);
+        StorageLive(_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        _257 = &_129;
+        _256 = <Vec<anchor_lang::prelude::AccountInfo<'_>> as Deref>::deref(move _257) -> [return: bb123, unwind: bb207];
+    }
+
+    bb123: {
+        _255 = &(*_256);
+        StorageDead(_257);
+        _254 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _255) -> [return: bb124, unwind: bb207];
+    }
+
+    bb124: {
+        _253 = &mut _254;
+        StorageDead(_255);
+        StorageLive(_258);
+        StorageLive(_259);
+        _259 = &_9;
+        _258 = {closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:204:27: 204:36} { withdraw_reserve_key: move _259 };
+        StorageDead(_259);
+        _252 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::position::<{closure@programs\klend\src\handlers\handler_repay_and_withdraw_redeem.rs:204:27: 204:36}>(move _253, move _258) -> [return: bb125, unwind: bb207];
+    }
+
+    bb125: {
+        StorageDead(_258);
+        StorageDead(_253);
+        _251 = std::option::Option::<usize>::unwrap(move _252) -> [return: bb126, unwind: bb207];
+    }
+
+    bb126: {
+        StorageDead(_252);
+        StorageDead(_256);
+        StorageDead(_254);
+        StorageLive(_260);
+        StorageLive(_261);
+        _261 = &mut _129;
+        StorageLive(_262);
+        _262 = _251;
+        _260 = Vec::<anchor_lang::prelude::AccountInfo<'_>>::remove(move _261, move _262) -> [return: bb127, unwind: bb207];
+    }
+
+    bb127: {
+        StorageDead(_262);
+        StorageDead(_261);
+        drop(_260) -> [return: bb128, unwind: bb207];
+    }
+
+    bb128: {
+        StorageDead(_260);
+        _330 = const false;
+        _249 = move _129;
+        StorageDead(_251);
+        goto -> bb130;
+    }
+
+    bb129: {
+        _330 = const false;
+        _249 = move _129;
+        goto -> bb130;
+    }
+
+    bb130: {
+        StorageDead(_250);
+        StorageLive(_263);
+        StorageLive(_264);
+        _264 = &(*_4);
+        StorageLive(_265);
+        StorageLive(_266);
+        StorageLive(_267);
+        StorageLive(_268);
+        StorageLive(_269);
+        _269 = &((*_1).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _268 = <anchor_lang::prelude::AccountLoader<'_, obligation::Obligation> as Clone>::clone(move _269) -> [return: bb131, unwind: bb187];
+    }
+
+    bb131: {
+        StorageDead(_269);
+        StorageLive(_270);
+        StorageLive(_271);
+        _271 = &((*_1).2: anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket>);
+        _270 = <anchor_lang::prelude::AccountLoader<'_, state::lending_market::LendingMarket> as Clone>::clone(move _271) -> [return: bb132, unwind: bb187];
+    }
+
+    bb132: {
+        StorageDead(_271);
+        _267 = handlers::handler_refresh_obligation::RefreshObligation::<'_> { lending_market: move _270, obligation: move _268 };
+        StorageDead(_270);
+        StorageDead(_268);
+        _266 = &mut _267;
+        _265 = &mut (*_266);
+        StorageLive(_272);
+        StorageLive(_273);
+        StorageLive(_274);
+        _274 = &_249;
+        _273 = Vec::<anchor_lang::prelude::AccountInfo<'_>>::as_slice(move _274) -> [return: bb133, unwind: bb187];
+    }
+
+    bb133: {
+        _272 = &(*_273);
+        StorageDead(_274);
+        StorageLive(_275);
+        _275 = handlers::handler_refresh_obligation::RefreshObligationBumps;
+        _263 = anchor_lang::context::Context::<'_, '_, '_, '_, handlers::handler_refresh_obligation::RefreshObligation<'_>> { program_id: move _264, accounts: move _265, remaining_accounts: move _272, bumps: move _275 };
+        StorageDead(_275);
+        StorageDead(_272);
+        StorageDead(_265);
+        StorageDead(_264);
+        StorageDead(_273);
+        StorageDead(_266);
+        StorageLive(_276);
+        StorageLive(_277);
+        StorageLive(_278);
+        StorageLive(_279);
+        _279 = move _263;
+        StorageLive(_280);
+        _280 = state::types::MaxReservesAsCollateralCheck::Perform;
+        _278 = handlers::handler_refresh_obligation::process(move _279, move _280) -> [return: bb134, unwind: bb187];
+    }
+
+    bb134: {
+        StorageDead(_280);
+        StorageDead(_279);
+        _277 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _278) -> [return: bb135, unwind: bb187];
+    }
+
+    bb135: {
+        StorageDead(_278);
+        _281 = discriminant(_277);
+        switchInt(move _281) -> [0: bb136, 1: bb137, otherwise: bb6];
+    }
+
+    bb136: {
+        StorageLive(_285);
+        _285 = ((_277 as Continue).0: ());
+        _276 = _285;
+        StorageDead(_285);
+        _357 = discriminant(_277);
+        StorageDead(_277);
+        StorageDead(_276);
+        StorageLive(_286);
+        StorageLive(_287);
+        StorageLive(_288);
+        StorageLive(_289);
+        _289 = &((*_2).1: anchor_lang::prelude::AccountLoader<'_, state::obligation::Obligation>);
+        _288 = anchor_lang::prelude::AccountLoader::<'_, obligation::Obligation>::load_mut(move _289) -> [return: bb139, unwind: bb187];
+    }
+
+    bb137: {
+        StorageLive(_282);
+        _282 = move ((_277 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_284);
+        _284 = move _282;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _284) -> [return: bb138, unwind: bb201];
+    }
+
+    bb138: {
+        StorageDead(_284);
+        StorageDead(_282);
+        _371 = discriminant(_277);
+        StorageDead(_277);
+        StorageDead(_276);
+        goto -> bb169;
+    }
+
+    bb139: {
+        StorageDead(_289);
+        _287 = <std::result::Result<RefMut<'_, obligation::Obligation>, anchor_lang::error::Error> as Try>::branch(move _288) -> [return: bb140, unwind: bb187];
+    }
+
+    bb140: {
+        StorageDead(_288);
+        _290 = discriminant(_287);
+        switchInt(move _290) -> [0: bb141, 1: bb142, otherwise: bb6];
+    }
+
+    bb141: {
+        StorageLive(_294);
+        _294 = move ((_287 as Continue).0: std::cell::RefMut<'_, state::obligation::Obligation>);
+        _286 = move _294;
+        StorageDead(_294);
+        _359 = discriminant(_287);
+        StorageDead(_287);
+        StorageLive(_295);
+        StorageLive(_296);
+        StorageLive(_297);
+        StorageLive(_298);
+        _298 = &mut _286;
+        _297 = <RefMut<'_, obligation::Obligation> as DerefMut>::deref_mut(move _298) -> [return: bb144, unwind: bb186];
+    }
+
+    bb142: {
+        StorageLive(_291);
+        _291 = move ((_287 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_293);
+        _293 = move _291;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _293) -> [return: bb143, unwind: bb200];
+    }
+
+    bb143: {
+        StorageDead(_293);
+        StorageDead(_291);
+        _369 = discriminant(_287);
+        StorageDead(_287);
+        goto -> bb168;
+    }
+
+    bb144: {
+        StorageDead(_298);
+        _296 = &mut ((*_297).1: state::last_update::LastUpdate);
+        _295 = last_update::LastUpdate::mark_stale(move _296) -> [return: bb145, unwind: bb186];
+    }
+
+    bb145: {
+        StorageDead(_296);
+        StorageDead(_297);
+        StorageDead(_295);
+        StorageLive(_299);
+        StorageLive(_300);
+        StorageLive(_301);
+        StorageLive(_302);
+        _302 = &((*_2).4: anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>);
+        _301 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load_mut(move _302) -> [return: bb146, unwind: bb186];
+    }
+
+    bb146: {
+        StorageDead(_302);
+        _300 = <std::result::Result<RefMut<'_, reserve::Reserve>, anchor_lang::error::Error> as Try>::branch(move _301) -> [return: bb147, unwind: bb186];
+    }
+
+    bb147: {
+        StorageDead(_301);
+        _303 = discriminant(_300);
+        switchInt(move _303) -> [0: bb148, 1: bb149, otherwise: bb6];
+    }
+
+    bb148: {
+        StorageLive(_307);
+        _307 = move ((_300 as Continue).0: std::cell::RefMut<'_, state::reserve::Reserve>);
+        _299 = move _307;
+        StorageDead(_307);
+        _361 = discriminant(_300);
+        StorageDead(_300);
+        StorageLive(_308);
+        StorageLive(_309);
+        StorageLive(_310);
+        StorageLive(_311);
+        _311 = &mut _299;
+        _310 = <RefMut<'_, reserve::Reserve> as DerefMut>::deref_mut(move _311) -> [return: bb151, unwind: bb185];
+    }
+
+    bb149: {
+        StorageLive(_304);
+        _304 = move ((_300 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_306);
+        _306 = move _304;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _306) -> [return: bb150, unwind: bb199];
+    }
+
+    bb150: {
+        StorageDead(_306);
+        StorageDead(_304);
+        _367 = discriminant(_300);
+        StorageDead(_300);
+        goto -> bb167;
+    }
+
+    bb151: {
+        StorageDead(_311);
+        _309 = &mut ((*_310).1: state::last_update::LastUpdate);
+        _308 = last_update::LastUpdate::mark_stale(move _309) -> [return: bb152, unwind: bb185];
+    }
+
+    bb152: {
+        StorageDead(_309);
+        StorageDead(_310);
+        StorageDead(_308);
+        StorageLive(_312);
+        StorageLive(_313);
+        StorageLive(_314);
+        StorageLive(_315);
+        StorageLive(_316);
+        StorageLive(_317);
+        StorageLive(_318);
+        _318 = &_286;
+        _317 = &(*_318);
+        _316 = <RefMut<'_, obligation::Obligation> as Deref>::deref(move _317) -> [return: bb153, unwind: bb185];
+    }
+
+    bb153: {
+        _315 = &(*_316);
+        StorageDead(_317);
+        StorageLive(_319);
+        StorageLive(_320);
+        StorageLive(_321);
+        StorageLive(_322);
+        _322 = &_299;
+        _321 = &(*_322);
+        _320 = <RefMut<'_, reserve::Reserve> as Deref>::deref(move _321) -> [return: bb154, unwind: bb185];
+    }
+
+    bb154: {
+        _319 = &(*_320);
+        StorageDead(_321);
+        StorageLive(_323);
+        _323 = _31;
+        _314 = post_repay_and_withdraw_obligation_enforcements(move _315, move _319, move _323) -> [return: bb155, unwind: bb185];
+    }
+
+    bb155: {
+        StorageDead(_323);
+        StorageDead(_319);
+        StorageDead(_315);
+        _313 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _314) -> [return: bb156, unwind: bb185];
+    }
+
+    bb156: {
+        StorageDead(_314);
+        _324 = discriminant(_313);
+        switchInt(move _324) -> [0: bb157, 1: bb158, otherwise: bb6];
+    }
+
+    bb157: {
+        StorageLive(_328);
+        _328 = ((_313 as Continue).0: ());
+        _312 = _328;
+        StorageDead(_328);
+        _363 = discriminant(_313);
+        StorageDead(_322);
+        StorageDead(_320);
+        StorageDead(_318);
+        StorageDead(_316);
+        StorageDead(_313);
+        StorageDead(_312);
+        _187 = const ();
+        drop(_299) -> [return: bb160, unwind: bb186];
+    }
+
+    bb158: {
+        StorageLive(_325);
+        _325 = move ((_313 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_327);
+        _327 = move _325;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _327) -> [return: bb159, unwind: bb198];
+    }
+
+    bb159: {
+        StorageDead(_327);
+        StorageDead(_325);
+        _365 = discriminant(_313);
+        StorageDead(_322);
+        StorageDead(_320);
+        StorageDead(_318);
+        StorageDead(_316);
+        StorageDead(_313);
+        StorageDead(_312);
+        drop(_299) -> [return: bb167, unwind: bb186];
+    }
+
+    bb160: {
+        StorageDead(_299);
+        drop(_286) -> [return: bb161, unwind: bb187];
+    }
+
+    bb161: {
+        StorageDead(_286);
+        StorageDead(_267);
+        StorageDead(_263);
+        drop(_249) -> [return: bb162, unwind: bb207];
+    }
+
+    bb162: {
+        StorageDead(_249);
+        StorageDead(_217);
+        StorageDead(_190);
+        StorageDead(_189);
+        goto -> bb164;
+    }
+
+    bb163: {
+        _187 = const ();
+        goto -> bb164;
+    }
+
+    bb164: {
+        StorageDead(_188);
+        StorageDead(_187);
+        StorageLive(_329);
+        _329 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _329);
+        StorageDead(_329);
+        StorageDead(_176);
+        switchInt(_330) -> [0: bb165, otherwise: bb196];
+    }
+
+    bb165: {
+        _330 = const false;
+        StorageDead(_129);
+        StorageDead(_79);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        drop(_19) -> [return: bb166, unwind: bb195];
+    }
+
+    bb166: {
+        StorageDead(_19);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_7);
+        goto -> bb184;
+    }
+
+    bb167: {
+        StorageDead(_299);
+        drop(_286) -> [return: bb168, unwind: bb187];
+    }
+
+    bb168: {
+        StorageDead(_286);
+        goto -> bb169;
+    }
+
+    bb169: {
+        StorageDead(_267);
+        StorageDead(_263);
+        drop(_249) -> [return: bb170, unwind: bb207];
+    }
+
+    bb170: {
+        StorageDead(_249);
+        goto -> bb172;
+    }
+
+    bb171: {
+        StorageDead(_223);
+        StorageDead(_222);
+        StorageDead(_221);
+        StorageDead(_220);
+        StorageDead(_219);
+        goto -> bb172;
+    }
+
+    bb172: {
+        StorageDead(_217);
+        StorageDead(_190);
+        StorageDead(_189);
+        goto -> bb173;
+    }
+
+    bb173: {
+        StorageDead(_188);
+        StorageDead(_187);
+        goto -> bb174;
+    }
+
+    bb174: {
+        StorageDead(_176);
+        switchInt(_330) -> [0: bb176, otherwise: bb197];
+    }
+
+    bb175: {
+        StorageDead(_130);
+        goto -> bb176;
+    }
+
+    bb176: {
+        _330 = const false;
+        StorageDead(_129);
+        goto -> bb179;
+    }
+
+    bb177: {
+        StorageDead(_103);
+        StorageDead(_102);
+        StorageDead(_99);
+        StorageDead(_96);
+        StorageDead(_95);
+        StorageDead(_89);
+        goto -> bb178;
+    }
+
+    bb178: {
+        _331 = const false;
+        StorageDead(_80);
+        goto -> bb179;
+    }
+
+    bb179: {
+        StorageDead(_79);
+        goto -> bb181;
+    }
+
+    bb180: {
+        _332 = const false;
+        StorageDead(_34);
+        StorageDead(_33);
+        goto -> bb181;
+    }
+
+    bb181: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        drop(_19) -> [return: bb182, unwind: bb195];
+    }
+
+    bb182: {
+        StorageDead(_19);
+        goto -> bb183;
+    }
+
+    bb183: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_7);
+        goto -> bb184;
+    }
+
+    bb184: {
+        return;
+    }
+
+    bb185 (cleanup): {
+        drop(_299) -> [return: bb186, unwind terminate(cleanup)];
+    }
+
+    bb186 (cleanup): {
+        drop(_286) -> [return: bb187, unwind terminate(cleanup)];
+    }
+
+    bb187 (cleanup): {
+        drop(_249) -> [return: bb207, unwind terminate(cleanup)];
+    }
+
+    bb188 (cleanup): {
+        drop(_223) -> [return: bb207, unwind terminate(cleanup)];
+    }
+
+    bb189 (cleanup): {
+        drop(_210) -> [return: bb190, unwind terminate(cleanup)];
+    }
+
+    bb190 (cleanup): {
+        drop(_192) -> [return: bb207, unwind terminate(cleanup)];
+    }
+
+    bb191 (cleanup): {
+        drop(_130) -> [return: bb194, unwind terminate(cleanup)];
+    }
+
+    bb192 (cleanup): {
+        drop(_140) -> [return: bb194, unwind terminate(cleanup)];
+    }
+
+    bb193 (cleanup): {
+        drop(_103) -> [return: bb212, unwind terminate(cleanup)];
+    }
+
+    bb194 (cleanup): {
+        drop(_19) -> [return: bb195, unwind terminate(cleanup)];
+    }
+
+    bb195 (cleanup): {
+        resume;
+    }
+
+    bb196: {
+        drop(_129) -> [return: bb165, unwind: bb194];
+    }
+
+    bb197: {
+        drop(_129) -> [return: bb176, unwind: bb194];
+    }
+
+    bb198 (cleanup): {
+        _397 = discriminant(_313);
+        goto -> bb185;
+    }
+
+    bb199 (cleanup): {
+        _398 = discriminant(_300);
+        goto -> bb186;
+    }
+
+    bb200 (cleanup): {
+        _399 = discriminant(_287);
+        goto -> bb187;
+    }
+
+    bb201 (cleanup): {
+        _400 = discriminant(_277);
+        goto -> bb187;
+    }
+
+    bb202 (cleanup): {
+        _401 = discriminant(_233);
+        goto -> bb188;
+    }
+
+    bb203 (cleanup): {
+        _402 = discriminant(_224);
+        goto -> bb207;
+    }
+
+    bb204 (cleanup): {
+        _403 = discriminant(_193);
+        goto -> bb207;
+    }
+
+    bb205 (cleanup): {
+        _404 = discriminant(_177);
+        goto -> bb207;
+    }
+
+    bb206 (cleanup): {
+        drop(_129) -> [return: bb194, unwind terminate(cleanup)];
+    }
+
+    bb207 (cleanup): {
+        switchInt(_330) -> [0: bb194, otherwise: bb206];
+    }
+
+    bb208 (cleanup): {
+        _405 = discriminant(_167);
+        goto -> bb191;
+    }
+
+    bb209 (cleanup): {
+        _406 = discriminant(_113);
+        goto -> bb193;
+    }
+
+    bb210 (cleanup): {
+        _407 = discriminant(_104);
+        goto -> bb212;
+    }
+
+    bb211 (cleanup): {
+        drop(_80) -> [return: bb194, unwind terminate(cleanup)];
+    }
+
+    bb212 (cleanup): {
+        switchInt(_331) -> [0: bb194, otherwise: bb211];
+    }
+
+    bb213 (cleanup): {
+        _408 = discriminant(_81);
+        goto -> bb194;
+    }
+
+    bb214 (cleanup): {
+        _409 = discriminant(_69);
+        goto -> bb216;
+    }
+
+    bb215 (cleanup): {
+        drop(_34) -> [return: bb194, unwind terminate(cleanup)];
+    }
+
+    bb216 (cleanup): {
+        switchInt(_332) -> [0: bb194, otherwise: bb215];
+    }
+
+    bb217 (cleanup): {
+        _410 = discriminant(_35);
+        goto -> bb194;
+    }
+
+    bb218 (cleanup): {
+        _411 = discriminant(_20);
+        goto -> bb195;
+    }
+
+    bb219 (cleanup): {
+        _412 = discriminant(_12);
+        goto -> bb195;
+    }
+
+    bb220: {
+        goto -> bb69;
+    }
+}

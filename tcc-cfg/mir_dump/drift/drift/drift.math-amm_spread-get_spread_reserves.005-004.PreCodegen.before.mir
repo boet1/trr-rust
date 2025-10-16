@@ -1,0 +1,75 @@
+// MIR for `get_spread_reserves` before PreCodegen
+
+fn get_spread_reserves(_1: &AMM, _2: controller::position::PositionDirection) -> std::result::Result<(u128, u128), error::ErrorCode> {
+    debug amm => _1;
+    debug direction => _2;
+    let mut _0: std::result::Result<(u128, u128), error::ErrorCode>;
+    let _3: u128;
+    let _4: u128;
+    let mut _5: (u128, u128);
+    let mut _6: isize;
+    let mut _7: u128;
+    let mut _8: u128;
+    let mut _9: u128;
+    let mut _10: u128;
+    let mut _11: (u128, u128);
+    let mut _12: u128;
+    let mut _13: u128;
+    scope 1 {
+        debug base_asset_reserve => _3;
+        debug quote_asset_reserve => _4;
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _6 = discriminant(_2);
+        switchInt(move _6) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_9);
+        _9 = ((*_1).39: u128);
+        StorageLive(_10);
+        _10 = ((*_1).40: u128);
+        _5 = (move _9, move _10);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb4;
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_7);
+        _7 = ((*_1).37: u128);
+        StorageLive(_8);
+        _8 = ((*_1).38: u128);
+        _5 = (move _7, move _8);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageLive(_3);
+        _3 = (_5.0: u128);
+        StorageLive(_4);
+        _4 = (_5.1: u128);
+        StorageDead(_5);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _3;
+        StorageLive(_13);
+        _13 = _4;
+        _11 = (move _12, move _13);
+        StorageDead(_13);
+        StorageDead(_12);
+        _0 = std::result::Result::<(u128, u128), error::ErrorCode>::Ok(move _11);
+        StorageDead(_11);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

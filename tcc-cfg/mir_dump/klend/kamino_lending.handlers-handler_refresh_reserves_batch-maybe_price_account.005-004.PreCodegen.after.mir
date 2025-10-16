@@ -1,0 +1,179 @@
+// MIR for `maybe_price_account` after PreCodegen
+
+fn maybe_price_account(_1: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>) -> std::result::Result<std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, anchor_lang::error::Error> {
+    debug price_account => _1;
+    let mut _0: std::result::Result<std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, anchor_lang::error::Error>;
+    let mut _2: isize;
+    let mut _4: bool;
+    let mut _5: &&anchor_lang::prelude::Pubkey;
+    let mut _6: &&anchor_lang::prelude::Pubkey;
+    let _7: &anchor_lang::prelude::Pubkey;
+    let _8: &anchor_lang::prelude::Pubkey;
+    let mut _9: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _10: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _11: &anchor_lang::prelude::AccountInfo<'_>;
+    let _12: ();
+    let mut _13: &str;
+    let _14: &str;
+    let mut _15: anchor_lang::error::Error;
+    let mut _16: anchor_lang::error::AnchorError;
+    let mut _17: std::string::String;
+    let mut _18: &LendingError;
+    let _19: LendingError;
+    let mut _20: u32;
+    let mut _21: LendingError;
+    let mut _22: std::string::String;
+    let mut _23: &LendingError;
+    let _24: LendingError;
+    let mut _25: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _26: anchor_lang::error::ErrorOrigin;
+    let mut _27: anchor_lang::error::Source;
+    let mut _28: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _29: &LendingError;
+    let mut _30: &LendingError;
+    scope 1 {
+        debug price_account => _3;
+        let _3: &anchor_lang::prelude::AccountInfo<'_>;
+    }
+
+    bb0: {
+        _2 = discriminant(_1);
+        switchInt(move _2) -> [1: bb1, otherwise: bb6];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        _3 = ((_1 as Some).0: &anchor_lang::prelude::AccountInfo<'_>);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &((*_3).0: &anchor_lang::prelude::Pubkey);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const {alloc279: &anchor_lang::prelude::Pubkey};
+        _7 = &(*_8);
+        _6 = &_7;
+        _4 = <&anchor_lang::prelude::Pubkey as PartialEq>::eq(move _5, move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _4) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_9);
+        _9 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::None;
+        _0 = std::result::Result::<std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, anchor_lang::error::Error>::Ok(move _9);
+        StorageDead(_9);
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &(*_3);
+        _10 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::Some(move _11);
+        StorageDead(_11);
+        _0 = std::result::Result::<std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, anchor_lang::error::Error>::Ok(move _10);
+        StorageDead(_10);
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb12;
+    }
+
+    bb6: {
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = const "Missing price account";
+        _13 = &(*_14);
+        _12 = solana_program::log::sol_log(move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _30 = const _;
+        _18 = &(*_30);
+        _17 = LendingError::name(move _18) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_18);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = LendingError::InvalidAccountInput;
+        _20 = <LendingError as Into<u32>>::into(move _21) -> [return: bb9, unwind: bb13];
+    }
+
+    bb9: {
+        StorageDead(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _29 = const _;
+        _23 = &(*_29);
+        _22 = <LendingError as ToString>::to_string(move _23) -> [return: bb10, unwind: bb13];
+    }
+
+    bb10: {
+        StorageDead(_23);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\handlers\\handler_refresh_reserves_batch.rs", line: const 22_u32 };
+        _26 = anchor_lang::error::ErrorOrigin::Source(move _27);
+        StorageDead(_27);
+        _25 = std::option::Option::<ErrorOrigin>::Some(move _26);
+        StorageDead(_26);
+        StorageLive(_28);
+        _28 = std::option::Option::<ComparedValues>::None;
+        _16 = anchor_lang::error::AnchorError { error_name: move _17, error_code_number: move _20, error_msg: move _22, error_origin: move _25, compared_values: move _28 };
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_17);
+        _15 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _16) -> [return: bb11, unwind: bb14];
+    }
+
+    bb11: {
+        StorageDead(_16);
+        _0 = std::result::Result::<std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, anchor_lang::error::Error>::Err(move _15);
+        StorageDead(_15);
+        goto -> bb12;
+    }
+
+    bb12: {
+        return;
+    }
+
+    bb13 (cleanup): {
+        drop(_17) -> [return: bb14, unwind terminate(cleanup)];
+    }
+
+    bb14 (cleanup): {
+        resume;
+    }
+}
+
+alloc279 (static: ID, size: 32, align: 1) {
+    0x00 │ 04 b2 ac b1 12 58 cc e3 68 2c 41 8b a8 72 ff 3d │ .....X..h,A..r.=
+    0x10 │ f9 11 02 71 2f 15 af 12 b6 be 69 b3 43 5b 00 08 │ ...q/.....i.C[..
+}

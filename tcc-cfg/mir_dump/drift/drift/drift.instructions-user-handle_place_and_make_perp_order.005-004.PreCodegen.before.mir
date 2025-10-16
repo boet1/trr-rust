@@ -1,0 +1,1916 @@
+// MIR for `instructions::user::handle_place_and_make_perp_order` before PreCodegen
+
+fn instructions::user::handle_place_and_make_perp_order(_1: anchor_lang::context::Context<'_, '_, '_, '_, instructions::user::PlaceAndMake<'_>>, _2: order_params::OrderParams, _3: u32) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug params => _2;
+    debug taker_order_id => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: ();
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _6: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _7: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let _8: &std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _9: isize;
+    let _10: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _11: !;
+    let mut _12: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _13: ();
+    let _14: &anchor_lang::prelude::Clock;
+    let _15: anchor_lang::prelude::Clock;
+    let mut _16: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _17: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _18: isize;
+    let _19: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _20: !;
+    let mut _21: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let _22: anchor_lang::prelude::Clock;
+    let mut _25: std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _26: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _27: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _31: instructions::optional_accounts::AccountMaps<'_>;
+    let mut _32: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, instructions::optional_accounts::AccountMaps<'_>>;
+    let mut _33: std::result::Result<instructions::optional_accounts::AccountMaps<'_>, error::ErrorCode>;
+    let mut _34: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _35: &std::collections::BTreeSet<u16>;
+    let _36: &std::collections::BTreeSet<u16>;
+    let _37: std::collections::BTreeSet<u16>;
+    let mut _38: u16;
+    let mut _39: &std::collections::BTreeSet<u16>;
+    let _40: &std::collections::BTreeSet<u16>;
+    let _41: std::collections::BTreeSet<u16>;
+    let mut _42: u64;
+    let mut _43: anchor_lang::prelude::Clock;
+    let mut _44: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _45: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _46: isize;
+    let mut _48: !;
+    let mut _49: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _51: std::option::Option<state::state::OracleGuardRails>;
+    let mut _52: state::state::OracleGuardRails;
+    let mut _53: &state::state::State;
+    let mut _54: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _55: isize;
+    let mut _57: !;
+    let mut _58: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _60: ();
+    let mut _61: bool;
+    let mut _62: &state::order_params::OrderParams;
+    let mut _63: bool;
+    let mut _64: &state::order_params::PostOnlyParam;
+    let mut _65: &state::order_params::PostOnlyParam;
+    let _66: state::order_params::PostOnlyParam;
+    let mut _67: bool;
+    let mut _68: &state::user::OrderType;
+    let mut _69: &state::user::OrderType;
+    let _70: state::user::OrderType;
+    let mut _71: !;
+    let _72: ();
+    let mut _73: &str;
+    let _74: &str;
+    let mut _75: anchor_lang::error::Error;
+    let mut _76: error::ErrorCode;
+    let mut _77: &{closure@programs/drift/src/error.rs:647:9: 647:11};
+    let _78: {closure@programs/drift/src/error.rs:647:9: 647:11};
+    let mut _79: ();
+    let _80: i128;
+    let mut _81: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _82: std::result::Result<i128, error::ErrorCode>;
+    let mut _83: u16;
+    let mut _84: &state::perp_market_map::PerpMarketMap<'_>;
+    let _85: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _86: &mut state::oracle_map::OracleMap<'_>;
+    let mut _87: &mut state::oracle_map::OracleMap<'_>;
+    let mut _88: &state::state::State;
+    let _89: &state::state::State;
+    let mut _90: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _91: &anchor_lang::prelude::Clock;
+    let mut _92: isize;
+    let mut _94: !;
+    let mut _95: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _98: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _100: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::user::User>>;
+    let mut _101: std::result::Result<std::cell::RefMut<'_, state::user::User>, error::ErrorCode>;
+    let mut _102: std::result::Result<std::cell::RefMut<'_, state::user::User>, anchor_lang::error::Error>;
+    let mut _103: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _104: {closure@programs/drift/src/macros.rs:58:44: 58:47};
+    let mut _105: isize;
+    let mut _107: !;
+    let mut _108: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _110: ();
+    let mut _111: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _112: std::result::Result<(), error::ErrorCode>;
+    let mut _113: &state::state::State;
+    let _114: &state::state::State;
+    let mut _115: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _116: &mut state::user::User;
+    let mut _117: &mut state::user::User;
+    let mut _118: &mut std::cell::RefMut<'_, state::user::User>;
+    let mut _119: &mut std::cell::RefMut<'_, state::user::User>;
+    let mut _120: anchor_lang::prelude::Pubkey;
+    let mut _121: &state::perp_market_map::PerpMarketMap<'_>;
+    let _122: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _123: &state::spot_market_map::SpotMarketMap<'_>;
+    let _124: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _125: &mut state::oracle_map::OracleMap<'_>;
+    let mut _126: &mut state::oracle_map::OracleMap<'_>;
+    let mut _127: &std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+    let _128: &std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+    let _129: std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+    let mut _130: &anchor_lang::prelude::Clock;
+    let mut _131: state::order_params::OrderParams;
+    let mut _132: state::order_params::PlaceOrderOptions;
+    let mut _133: isize;
+    let mut _135: !;
+    let mut _136: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _140: (u32, anchor_lang::prelude::Pubkey);
+    let mut _141: u32;
+    let mut _142: &state::user::User;
+    let _143: &state::user::User;
+    let mut _144: &std::cell::RefMut<'_, state::user::User>;
+    let mut _145: anchor_lang::prelude::Pubkey;
+    let mut _146: &state::user::User;
+    let mut _147: &std::cell::RefMut<'_, state::user::User>;
+    let _148: ();
+    let mut _149: std::cell::RefMut<'_, state::user::User>;
+    let mut _152: (state::user_map::UserMap<'_>, state::user_map::UserStatsMap<'_>);
+    let mut _153: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (state::user_map::UserMap<'_>, state::user_map::UserStatsMap<'_>)>;
+    let mut _154: std::result::Result<(state::user_map::UserMap<'_>, state::user_map::UserStatsMap<'_>), error::ErrorCode>;
+    let mut _155: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _156: isize;
+    let mut _158: !;
+    let mut _159: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _161: ();
+    let mut _162: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _163: std::result::Result<(), error::ErrorCode>;
+    let mut _164: &mut state::user_map::UserMap<'_>;
+    let mut _165: anchor_lang::prelude::Pubkey;
+    let mut _166: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _167: anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _168: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _169: isize;
+    let mut _171: !;
+    let mut _172: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _174: ();
+    let mut _175: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _176: std::result::Result<(), error::ErrorCode>;
+    let mut _177: &mut state::user_map::UserStatsMap<'_>;
+    let mut _178: anchor_lang::prelude::Pubkey;
+    let mut _179: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _180: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _181: isize;
+    let mut _183: !;
+    let mut _184: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _186: (u64, u64);
+    let mut _187: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (u64, u64)>;
+    let mut _188: std::result::Result<(u64, u64), error::ErrorCode>;
+    let mut _189: u32;
+    let mut _190: &state::state::State;
+    let _191: &state::state::State;
+    let mut _192: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _193: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let _194: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _195: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let _196: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _197: &state::spot_market_map::SpotMarketMap<'_>;
+    let _198: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _199: &state::perp_market_map::PerpMarketMap<'_>;
+    let _200: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _201: &mut state::oracle_map::OracleMap<'_>;
+    let mut _202: &mut state::oracle_map::OracleMap<'_>;
+    let mut _203: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let _204: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let _205: anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _206: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _207: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let _208: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let _209: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _210: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _211: &state::user_map::UserMap<'_>;
+    let _212: &state::user_map::UserMap<'_>;
+    let mut _213: &state::user_map::UserStatsMap<'_>;
+    let _214: &state::user_map::UserStatsMap<'_>;
+    let mut _215: std::option::Option<u32>;
+    let mut _216: u32;
+    let mut _217: &anchor_lang::prelude::Clock;
+    let mut _218: state::fill_mode::FillMode;
+    let mut _219: isize;
+    let mut _221: !;
+    let mut _222: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _225: &mut std::slice::Iter<'_, state::user::Order>;
+    let mut _226: std::slice::Iter<'_, state::user::Order>;
+    let mut _227: &[state::user::Order];
+    let mut _228: &[state::user::Order; 32];
+    let _229: &state::user::User;
+    let mut _230: &std::cell::Ref<'_, state::user::User>;
+    let _231: std::cell::Ref<'_, state::user::User>;
+    let mut _232: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::Ref<'_, state::user::User>>;
+    let mut _233: std::result::Result<std::cell::Ref<'_, state::user::User>, error::ErrorCode>;
+    let mut _234: std::result::Result<std::cell::Ref<'_, state::user::User>, anchor_lang::error::Error>;
+    let mut _235: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _236: {closure@programs/drift/src/macros.rs:70:40: 70:43};
+    let mut _237: isize;
+    let mut _239: !;
+    let mut _240: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _242: {closure@programs/drift/src/instructions/user.rs:2471:14: 2471:21};
+    let mut _243: &u32;
+    let _244: ();
+    let mut _245: bool;
+    let _246: ();
+    let mut _247: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _248: std::result::Result<(), error::ErrorCode>;
+    let mut _249: u32;
+    let mut _250: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let _251: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _252: &state::perp_market_map::PerpMarketMap<'_>;
+    let _253: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _254: &state::spot_market_map::SpotMarketMap<'_>;
+    let _255: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _256: &mut state::oracle_map::OracleMap<'_>;
+    let mut _257: &mut state::oracle_map::OracleMap<'_>;
+    let mut _258: &anchor_lang::prelude::Clock;
+    let mut _259: isize;
+    let mut _261: !;
+    let mut _262: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _264: ();
+    let mut _269: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _270: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _271: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _272: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _273: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _274: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _275: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _276: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _277: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _278: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _279: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _280: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _281: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _282: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _283: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _284: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _285: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _286: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _287: &mut instructions::user::PlaceAndMake<'_>;
+    let mut _288: bool;
+    let mut _289: bool;
+    let mut _290: bool;
+    let mut _291: bool;
+    let mut _292: isize;
+    let mut _293: isize;
+    let mut _294: isize;
+    let mut _295: isize;
+    let mut _296: isize;
+    let mut _297: isize;
+    let mut _298: isize;
+    let mut _299: isize;
+    let mut _300: isize;
+    let mut _301: isize;
+    let mut _302: isize;
+    let mut _303: isize;
+    let mut _304: isize;
+    let mut _305: isize;
+    let mut _306: isize;
+    let mut _307: isize;
+    let mut _308: isize;
+    let mut _309: isize;
+    let mut _310: isize;
+    let mut _311: isize;
+    let mut _312: isize;
+    let mut _313: isize;
+    let mut _314: isize;
+    let mut _315: isize;
+    let mut _316: isize;
+    let mut _317: isize;
+    let mut _318: isize;
+    let mut _319: isize;
+    let mut _320: isize;
+    let mut _321: isize;
+    let mut _322: isize;
+    let mut _323: isize;
+    let mut _324: isize;
+    let mut _325: isize;
+    let mut _326: isize;
+    let mut _327: isize;
+    let mut _328: isize;
+    let mut _329: isize;
+    let mut _330: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _331: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _332: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _333: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _334: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    scope 1 {
+        debug residual => _10;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _13;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug clock => _14;
+        let _23: &std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+        scope 10 {
+            debug state => _23;
+            let _24: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+            scope 11 {
+                debug remaining_accounts_iter => _24;
+                let _28: state::perp_market_map::PerpMarketMap<'_>;
+                let _29: state::spot_market_map::SpotMarketMap<'_>;
+                let mut _30: state::oracle_map::OracleMap<'_>;
+                let _47: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+                let _50: anchor_lang::prelude::Clock;
+                let _56: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _59: instructions::optional_accounts::AccountMaps<'_>;
+                scope 12 {
+                    debug perp_market_map => _28;
+                    debug spot_market_map => _29;
+                    debug oracle_map => _30;
+                    let _93: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _96: i128;
+                    let _97: anchor_lang::prelude::Pubkey;
+                    let mut _265: &{closure@programs/drift/src/error.rs:647:9: 647:11};
+                    let mut _267: &state::user::OrderType;
+                    let mut _268: &state::order_params::PostOnlyParam;
+                    scope 21 {
+                        debug residual => _93;
+                        scope 22 {
+                        }
+                    }
+                    scope 23 {
+                        debug val => _96;
+                        scope 24 {
+                        }
+                    }
+                    scope 25 {
+                        debug user_key => _97;
+                        let mut _99: std::cell::RefMut<'_, state::user::User>;
+                        let _106: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _109: std::cell::RefMut<'_, state::user::User>;
+                        scope 26 {
+                            debug user => _99;
+                            let _134: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _137: ();
+                            let _138: u32;
+                            let _139: anchor_lang::prelude::Pubkey;
+                            let mut _266: &std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+                            scope 31 {
+                                debug residual => _134;
+                                scope 32 {
+                                }
+                            }
+                            scope 33 {
+                                debug val => _137;
+                                scope 34 {
+                                }
+                            }
+                            scope 35 {
+                                debug order_id => _138;
+                                debug authority => _139;
+                                let mut _150: state::user_map::UserMap<'_>;
+                                let mut _151: state::user_map::UserStatsMap<'_>;
+                                let _157: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _160: (state::user_map::UserMap<'_>, state::user_map::UserStatsMap<'_>);
+                                scope 36 {
+                                    debug makers_and_referrer => _150;
+                                    debug makers_and_referrer_stats => _151;
+                                    let _170: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _173: ();
+                                    let _182: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _185: ();
+                                    let _220: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _223: (u64, u64);
+                                    let _224: bool;
+                                    let _238: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _241: std::cell::Ref<'_, state::user::User>;
+                                    scope 41 {
+                                        debug residual => _170;
+                                        scope 42 {
+                                        }
+                                    }
+                                    scope 43 {
+                                        debug val => _173;
+                                        scope 44 {
+                                        }
+                                    }
+                                    scope 45 {
+                                        debug residual => _182;
+                                        scope 46 {
+                                        }
+                                    }
+                                    scope 47 {
+                                        debug val => _185;
+                                        scope 48 {
+                                        }
+                                    }
+                                    scope 49 {
+                                        debug residual => _220;
+                                        scope 50 {
+                                        }
+                                    }
+                                    scope 51 {
+                                        debug val => _223;
+                                        scope 52 {
+                                        }
+                                    }
+                                    scope 53 {
+                                        debug order_exists => _224;
+                                        let _260: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _263: ();
+                                        scope 58 {
+                                            debug residual => _260;
+                                            scope 59 {
+                                            }
+                                        }
+                                        scope 60 {
+                                            debug val => _263;
+                                            scope 61 {
+                                            }
+                                        }
+                                    }
+                                    scope 54 {
+                                        debug residual => _238;
+                                        scope 55 {
+                                        }
+                                    }
+                                    scope 56 {
+                                        debug val => _241;
+                                        scope 57 {
+                                        }
+                                    }
+                                }
+                                scope 37 {
+                                    debug residual => _157;
+                                    scope 38 {
+                                    }
+                                }
+                                scope 39 {
+                                    debug val => _160;
+                                    scope 40 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 27 {
+                            debug residual => _106;
+                            scope 28 {
+                            }
+                        }
+                        scope 29 {
+                            debug val => _109;
+                            scope 30 {
+                            }
+                        }
+                    }
+                }
+                scope 13 {
+                    debug residual => _47;
+                    scope 14 {
+                    }
+                }
+                scope 15 {
+                    debug val => _50;
+                    scope 16 {
+                    }
+                }
+                scope 17 {
+                    debug residual => _56;
+                    scope 18 {
+                    }
+                }
+                scope 19 {
+                    debug val => _59;
+                    scope 20 {
+                    }
+                }
+            }
+        }
+    }
+    scope 6 {
+        debug residual => _19;
+        scope 7 {
+        }
+    }
+    scope 8 {
+        debug val => _22;
+        scope 9 {
+        }
+    }
+
+    bb0: {
+        _288 = const false;
+        _290 = const false;
+        _289 = const false;
+        _291 = const false;
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _269 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _8 = &((*_269).0: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>);
+        _270 = deref_copy (*_8);
+        _330 = (((_270.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _7 = &(*_330);
+        _6 = constraints::fill_not_paused(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        _5 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _6) -> [return: bb2, unwind: bb138];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _9 = discriminant(_5);
+        switchInt(move _9) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _13 = ((_5 as Continue).0: ());
+        _4 = _13;
+        StorageDead(_13);
+        _292 = discriminant(_5);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_10);
+        _10 = move ((_5 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_12);
+        _12 = move _10;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _12) -> [return: bb6, unwind: bb151];
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_10);
+        _318 = discriminant(_5);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb128;
+    }
+
+    bb7: {
+        _16 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _17) -> [return: bb8, unwind: bb138];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        _18 = discriminant(_16);
+        switchInt(move _18) -> [0: bb9, 1: bb10, otherwise: bb4];
+    }
+
+    bb9: {
+        StorageLive(_22);
+        _22 = move ((_16 as Continue).0: anchor_lang::prelude::Clock);
+        _15 = move _22;
+        StorageDead(_22);
+        _14 = &_15;
+        _294 = discriminant(_16);
+        StorageDead(_16);
+        StorageLive(_23);
+        _271 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _23 = &((*_271).0: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _272 = deref_copy (_1.2: &[anchor_lang::prelude::AccountInfo<'_>]);
+        _27 = &(*_272);
+        _26 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _27) -> [return: bb12, unwind continue];
+    }
+
+    bb10: {
+        StorageLive(_19);
+        _19 = move ((_16 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_21);
+        _21 = move _19;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _21) -> [return: bb11, unwind: bb150];
+    }
+
+    bb11: {
+        StorageDead(_21);
+        StorageDead(_19);
+        _316 = discriminant(_16);
+        StorageDead(_16);
+        goto -> bb127;
+    }
+
+    bb12: {
+        StorageDead(_27);
+        _25 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::peekable(move _26) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_26);
+        _24 = &mut _25;
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = &mut (*_24);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = (_2.6: u16);
+        _37 = get_writable_perp_market_set(move _38) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_38);
+        _36 = &_37;
+        _35 = &(*_36);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = BTreeSet::<u16>::new() -> [return: bb15, unwind: bb137];
+    }
+
+    bb15: {
+        _40 = &_41;
+        _39 = &(*_40);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb16, unwind: bb136];
+    }
+
+    bb16: {
+        _44 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _45) -> [return: bb17, unwind: bb136];
+    }
+
+    bb17: {
+        _289 = const true;
+        _290 = const true;
+        StorageDead(_45);
+        _46 = discriminant(_44);
+        switchInt(move _46) -> [0: bb18, 1: bb19, otherwise: bb4];
+    }
+
+    bb18: {
+        StorageLive(_50);
+        _50 = move ((_44 as Continue).0: anchor_lang::prelude::Clock);
+        _43 = move _50;
+        StorageDead(_50);
+        _42 = (_43.0: u64);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _273 = deref_copy (*_23);
+        _331 = (((_273.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _54 = &(*_331);
+        _53 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _54) -> [return: bb21, unwind: bb149];
+    }
+
+    bb19: {
+        StorageLive(_47);
+        _47 = move ((_44 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_49);
+        _49 = move _47;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _49) -> [return: bb20, unwind: bb149];
+    }
+
+    bb20: {
+        StorageDead(_49);
+        StorageDead(_47);
+        StorageDead(_42);
+        StorageDead(_39);
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_33);
+        goto -> bb142;
+    }
+
+    bb21: {
+        StorageDead(_54);
+        _52 = ((*_53).7: state::state::OracleGuardRails);
+        _51 = Option::<state::state::OracleGuardRails>::Some(move _52);
+        StorageDead(_52);
+        _33 = load_maps(move _34, move _35, move _39, move _42, move _51) -> [return: bb22, unwind: bb149];
+    }
+
+    bb22: {
+        StorageDead(_51);
+        StorageDead(_42);
+        StorageDead(_39);
+        StorageDead(_35);
+        StorageDead(_34);
+        _32 = <std::result::Result<AccountMaps<'_>, error::ErrorCode> as Try>::branch(move _33) -> [return: bb23, unwind: bb149];
+    }
+
+    bb23: {
+        StorageDead(_33);
+        _55 = discriminant(_32);
+        switchInt(move _55) -> [0: bb24, 1: bb25, otherwise: bb4];
+    }
+
+    bb24: {
+        StorageLive(_59);
+        _59 = move ((_32 as Continue).0: instructions::optional_accounts::AccountMaps<'_>);
+        _31 = move _59;
+        StorageDead(_59);
+        StorageLive(_28);
+        _28 = move (_31.0: state::perp_market_map::PerpMarketMap<'_>);
+        StorageLive(_29);
+        _29 = move (_31.1: state::spot_market_map::SpotMarketMap<'_>);
+        StorageLive(_30);
+        _30 = move (_31.2: state::oracle_map::OracleMap<'_>);
+        _298 = discriminant(_32);
+        StorageDead(_53);
+        _300 = discriminant(_44);
+        _289 = const false;
+        _290 = const false;
+        StorageDead(_44);
+        StorageDead(_43);
+        drop(_41) -> [return: bb27, unwind: bb132];
+    }
+
+    bb25: {
+        StorageLive(_56);
+        _56 = ((_32 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_58);
+        _58 = _56;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _58) -> [return: bb26, unwind: bb148];
+    }
+
+    bb26: {
+        StorageDead(_58);
+        StorageDead(_56);
+        _296 = discriminant(_32);
+        StorageDead(_53);
+        goto -> bb142;
+    }
+
+    bb27: {
+        StorageDead(_41);
+        StorageDead(_40);
+        drop(_37) -> [return: bb28, unwind: bb133];
+    }
+
+    bb28: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        _62 = &_2;
+        _61 = order_params::OrderParams::is_immediate_or_cancel(move _62) -> [return: bb29, unwind: bb133];
+    }
+
+    bb29: {
+        switchInt(move _61) -> [0: bb31, otherwise: bb30];
+    }
+
+    bb30: {
+        StorageDead(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = &(_2.8: state::order_params::PostOnlyParam);
+        StorageLive(_65);
+        _268 = const _;
+        _65 = &(*_268);
+        _63 = <PostOnlyParam as PartialEq>::eq(move _64, move _65) -> [return: bb32, unwind: bb133];
+    }
+
+    bb31: {
+        StorageDead(_62);
+        goto -> bb33;
+    }
+
+    bb32: {
+        switchInt(move _63) -> [0: bb34, otherwise: bb33];
+    }
+
+    bb33: {
+        StorageDead(_65);
+        StorageDead(_64);
+        goto -> bb36;
+    }
+
+    bb34: {
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageLive(_67);
+        StorageLive(_68);
+        _68 = &(_2.0: state::user::OrderType);
+        StorageLive(_69);
+        _267 = const _;
+        _69 = &(*_267);
+        _67 = <state::user::OrderType as PartialEq>::ne(move _68, move _69) -> [return: bb35, unwind: bb133];
+    }
+
+    bb35: {
+        switchInt(move _67) -> [0: bb40, otherwise: bb36];
+    }
+
+    bb36: {
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        _74 = const "place_and_make must use IOC post only limit order";
+        _73 = &(*_74);
+        _72 = solana_program::log::sol_log(move _73) -> [return: bb37, unwind: bb133];
+    }
+
+    bb37: {
+        StorageDead(_73);
+        StorageDead(_74);
+        StorageDead(_72);
+        StorageLive(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        _265 = const _;
+        _77 = &(*_265);
+        StorageLive(_79);
+        _79 = ();
+        _76 = <{closure@programs/drift/src/error.rs:647:9: 647:11} as Fn<()>>::call(move _77, move _79) -> [return: bb38, unwind: bb133];
+    }
+
+    bb38: {
+        StorageDead(_79);
+        StorageDead(_77);
+        _75 = <error::ErrorCode as Into<anchor_lang::error::Error>>::into(move _76) -> [return: bb39, unwind: bb133];
+    }
+
+    bb39: {
+        StorageDead(_76);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _75);
+        StorageDead(_75);
+        StorageDead(_67);
+        StorageDead(_63);
+        StorageDead(_61);
+        StorageDead(_60);
+        goto -> bb120;
+    }
+
+    bb40: {
+        StorageDead(_69);
+        StorageDead(_68);
+        _60 = const ();
+        StorageDead(_67);
+        StorageDead(_63);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = (_2.6: u16);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = &_28;
+        _84 = &(*_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        _87 = &mut _30;
+        _86 = &mut (*_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        _274 = deref_copy (*_23);
+        _332 = (((_274.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _90 = &(*_332);
+        _89 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _90) -> [return: bb41, unwind: bb133];
+    }
+
+    bb41: {
+        _88 = &(*_89);
+        StorageDead(_90);
+        StorageLive(_91);
+        _91 = &(*_14);
+        _82 = update_amm(move _83, move _84, move _86, move _88, move _91) -> [return: bb42, unwind: bb133];
+    }
+
+    bb42: {
+        StorageDead(_91);
+        StorageDead(_88);
+        StorageDead(_86);
+        StorageDead(_84);
+        StorageDead(_83);
+        _81 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _82) -> [return: bb43, unwind: bb133];
+    }
+
+    bb43: {
+        StorageDead(_82);
+        _92 = discriminant(_81);
+        switchInt(move _92) -> [0: bb44, 1: bb45, otherwise: bb4];
+    }
+
+    bb44: {
+        StorageLive(_96);
+        _96 = ((_81 as Continue).0: i128);
+        _80 = _96;
+        StorageDead(_96);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_85);
+        StorageDead(_81);
+        StorageDead(_80);
+        StorageLive(_97);
+        StorageLive(_98);
+        _275 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _98 = &((*_275).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _97 = <anchor_lang::prelude::AccountLoader<'_, User> as anchor_lang::Key>::key(move _98) -> [return: bb47, unwind: bb133];
+    }
+
+    bb45: {
+        StorageLive(_93);
+        _93 = ((_81 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_95);
+        _95 = _93;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _95) -> [return: bb46, unwind: bb133];
+    }
+
+    bb46: {
+        StorageDead(_95);
+        StorageDead(_93);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_85);
+        StorageDead(_81);
+        StorageDead(_80);
+        goto -> bb120;
+    }
+
+    bb47: {
+        StorageDead(_98);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        _276 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _103 = &((*_276).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _102 = anchor_lang::prelude::AccountLoader::<'_, User>::load_mut(move _103) -> [return: bb48, unwind: bb133];
+    }
+
+    bb48: {
+        StorageDead(_103);
+        StorageLive(_104);
+        _104 = {closure@programs/drift/src/macros.rs:58:44: 58:47};
+        _101 = std::result::Result::<RefMut<'_, User>, anchor_lang::error::Error>::map_err::<error::ErrorCode, {closure@programs/drift/src/macros.rs:58:44: 58:47}>(move _102, move _104) -> [return: bb49, unwind: bb133];
+    }
+
+    bb49: {
+        StorageDead(_104);
+        StorageDead(_102);
+        _100 = <std::result::Result<RefMut<'_, User>, error::ErrorCode> as Try>::branch(move _101) -> [return: bb50, unwind: bb133];
+    }
+
+    bb50: {
+        StorageDead(_101);
+        _105 = discriminant(_100);
+        switchInt(move _105) -> [0: bb51, 1: bb52, otherwise: bb4];
+    }
+
+    bb51: {
+        StorageLive(_109);
+        _109 = move ((_100 as Continue).0: std::cell::RefMut<'_, state::user::User>);
+        _288 = const true;
+        _99 = move _109;
+        StorageDead(_109);
+        _304 = discriminant(_100);
+        StorageDead(_100);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        _277 = deref_copy (*_23);
+        _333 = (((_277.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _115 = &(*_333);
+        _114 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _115) -> [return: bb54, unwind: bb146];
+    }
+
+    bb52: {
+        StorageLive(_106);
+        _106 = ((_100 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_108);
+        _108 = _106;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _108) -> [return: bb53, unwind: bb147];
+    }
+
+    bb53: {
+        StorageDead(_108);
+        StorageDead(_106);
+        _302 = discriminant(_100);
+        StorageDead(_100);
+        goto -> bb119;
+    }
+
+    bb54: {
+        _113 = &(*_114);
+        StorageDead(_115);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        _119 = &mut _99;
+        _118 = &mut (*_119);
+        _117 = <RefMut<'_, User> as DerefMut>::deref_mut(move _118) -> [return: bb55, unwind: bb146];
+    }
+
+    bb55: {
+        _116 = &mut (*_117);
+        StorageDead(_118);
+        StorageLive(_120);
+        _120 = _97;
+        StorageLive(_121);
+        StorageLive(_122);
+        _122 = &_28;
+        _121 = &(*_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        _124 = &_29;
+        _123 = &(*_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        _126 = &mut _30;
+        _125 = &mut (*_126);
+        StorageLive(_127);
+        StorageLive(_128);
+        _266 = const _;
+        _128 = &(*_266);
+        _127 = &(*_128);
+        StorageLive(_130);
+        _130 = &(*_14);
+        StorageLive(_131);
+        _131 = _2;
+        StorageLive(_132);
+        _132 = <PlaceOrderOptions as Default>::default() -> [return: bb56, unwind: bb146];
+    }
+
+    bb56: {
+        _112 = controller::orders::place_perp_order(move _113, move _116, move _120, move _121, move _123, move _125, move _127, move _130, move _131, move _132) -> [return: bb57, unwind: bb146];
+    }
+
+    bb57: {
+        StorageDead(_132);
+        StorageDead(_131);
+        StorageDead(_130);
+        StorageDead(_127);
+        StorageDead(_125);
+        StorageDead(_123);
+        StorageDead(_121);
+        StorageDead(_120);
+        StorageDead(_116);
+        StorageDead(_113);
+        _111 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _112) -> [return: bb58, unwind: bb146];
+    }
+
+    bb58: {
+        StorageDead(_112);
+        _133 = discriminant(_111);
+        switchInt(move _133) -> [0: bb59, 1: bb60, otherwise: bb4];
+    }
+
+    bb59: {
+        StorageLive(_137);
+        _137 = ((_111 as Continue).0: ());
+        _110 = _137;
+        StorageDead(_137);
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_124);
+        StorageDead(_122);
+        StorageDead(_119);
+        StorageDead(_117);
+        StorageDead(_114);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        _144 = &_99;
+        _143 = <RefMut<'_, User> as Deref>::deref(move _144) -> [return: bb62, unwind: bb146];
+    }
+
+    bb60: {
+        StorageLive(_134);
+        _134 = ((_111 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_136);
+        _136 = _134;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _136) -> [return: bb61, unwind: bb146];
+    }
+
+    bb61: {
+        StorageDead(_136);
+        StorageDead(_134);
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_124);
+        StorageDead(_122);
+        StorageDead(_119);
+        StorageDead(_117);
+        StorageDead(_114);
+        StorageDead(_111);
+        StorageDead(_110);
+        goto -> bb141;
+    }
+
+    bb62: {
+        _142 = &(*_143);
+        StorageDead(_144);
+        _141 = User::get_last_order_id(move _142) -> [return: bb63, unwind: bb146];
+    }
+
+    bb63: {
+        StorageDead(_142);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        _147 = &_99;
+        _146 = <RefMut<'_, User> as Deref>::deref(move _147) -> [return: bb64, unwind: bb146];
+    }
+
+    bb64: {
+        StorageDead(_147);
+        _145 = ((*_146).0: anchor_lang::prelude::Pubkey);
+        _140 = (move _141, move _145);
+        StorageDead(_145);
+        StorageDead(_141);
+        StorageLive(_138);
+        _138 = (_140.0: u32);
+        StorageLive(_139);
+        _139 = (_140.1: anchor_lang::prelude::Pubkey);
+        StorageDead(_146);
+        StorageDead(_143);
+        StorageDead(_140);
+        StorageLive(_148);
+        StorageLive(_149);
+        _288 = const false;
+        _149 = move _99;
+        _148 = std::mem::drop::<RefMut<'_, User>>(move _149) -> [return: bb65, unwind: bb146];
+    }
+
+    bb65: {
+        StorageDead(_149);
+        StorageDead(_148);
+        StorageLive(_152);
+        StorageLive(_153);
+        StorageLive(_154);
+        StorageLive(_155);
+        _155 = &mut (*_24);
+        _154 = load_user_maps::<'_, '_>(move _155, const true) -> [return: bb66, unwind: bb146];
+    }
+
+    bb66: {
+        StorageDead(_155);
+        _153 = <std::result::Result<(UserMap<'_>, UserStatsMap<'_>), error::ErrorCode> as Try>::branch(move _154) -> [return: bb67, unwind: bb146];
+    }
+
+    bb67: {
+        StorageDead(_154);
+        _156 = discriminant(_153);
+        switchInt(move _156) -> [0: bb68, 1: bb69, otherwise: bb4];
+    }
+
+    bb68: {
+        StorageLive(_160);
+        _160 = move ((_153 as Continue).0: (state::user_map::UserMap<'_>, state::user_map::UserStatsMap<'_>));
+        _152 = move _160;
+        StorageDead(_160);
+        StorageLive(_150);
+        _150 = move (_152.0: state::user_map::UserMap<'_>);
+        StorageLive(_151);
+        _151 = move (_152.1: state::user_map::UserStatsMap<'_>);
+        _308 = discriminant(_153);
+        StorageDead(_153);
+        StorageDead(_152);
+        StorageLive(_161);
+        StorageLive(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        _164 = &mut _150;
+        StorageLive(_165);
+        StorageLive(_166);
+        _278 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _166 = &((*_278).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _165 = <anchor_lang::prelude::AccountLoader<'_, User> as anchor_lang::Key>::key(move _166) -> [return: bb71, unwind: bb130];
+    }
+
+    bb69: {
+        StorageLive(_157);
+        _157 = ((_153 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_159);
+        _159 = _157;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _159) -> [return: bb70, unwind: bb144];
+    }
+
+    bb70: {
+        StorageDead(_159);
+        StorageDead(_157);
+        _306 = discriminant(_153);
+        StorageDead(_153);
+        StorageDead(_152);
+        goto -> bb118;
+    }
+
+    bb71: {
+        StorageDead(_166);
+        StorageLive(_167);
+        StorageLive(_168);
+        _279 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _168 = &((*_279).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _167 = <anchor_lang::prelude::AccountLoader<'_, User> as Clone>::clone(move _168) -> [return: bb72, unwind: bb130];
+    }
+
+    bb72: {
+        StorageDead(_168);
+        _163 = UserMap::<'_>::insert(move _164, move _165, move _167) -> [return: bb73, unwind: bb130];
+    }
+
+    bb73: {
+        StorageDead(_167);
+        StorageDead(_165);
+        StorageDead(_164);
+        _162 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _163) -> [return: bb74, unwind: bb130];
+    }
+
+    bb74: {
+        StorageDead(_163);
+        _169 = discriminant(_162);
+        switchInt(move _169) -> [0: bb75, 1: bb76, otherwise: bb4];
+    }
+
+    bb75: {
+        StorageLive(_173);
+        _173 = ((_162 as Continue).0: ());
+        _161 = _173;
+        StorageDead(_173);
+        StorageDead(_162);
+        StorageDead(_161);
+        StorageLive(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        StorageLive(_177);
+        _177 = &mut _151;
+        StorageLive(_178);
+        _178 = _139;
+        StorageLive(_179);
+        StorageLive(_180);
+        _280 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _180 = &((*_280).2: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>);
+        _179 = <anchor_lang::prelude::AccountLoader<'_, UserStats> as Clone>::clone(move _180) -> [return: bb78, unwind: bb130];
+    }
+
+    bb76: {
+        StorageLive(_170);
+        _170 = ((_162 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_172);
+        _172 = _170;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _172) -> [return: bb77, unwind: bb130];
+    }
+
+    bb77: {
+        StorageDead(_172);
+        StorageDead(_170);
+        StorageDead(_162);
+        StorageDead(_161);
+        goto -> bb115;
+    }
+
+    bb78: {
+        StorageDead(_180);
+        _176 = UserStatsMap::<'_>::insert(move _177, move _178, move _179) -> [return: bb79, unwind: bb130];
+    }
+
+    bb79: {
+        StorageDead(_179);
+        StorageDead(_178);
+        StorageDead(_177);
+        _175 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _176) -> [return: bb80, unwind: bb130];
+    }
+
+    bb80: {
+        StorageDead(_176);
+        _181 = discriminant(_175);
+        switchInt(move _181) -> [0: bb81, 1: bb82, otherwise: bb4];
+    }
+
+    bb81: {
+        StorageLive(_185);
+        _185 = ((_175 as Continue).0: ());
+        _174 = _185;
+        StorageDead(_185);
+        StorageDead(_175);
+        StorageDead(_174);
+        StorageLive(_186);
+        StorageLive(_187);
+        StorageLive(_188);
+        StorageLive(_189);
+        _189 = _3;
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        _281 = deref_copy (*_23);
+        _334 = (((_281.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _192 = &(*_334);
+        _191 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _192) -> [return: bb84, unwind: bb130];
+    }
+
+    bb82: {
+        StorageLive(_182);
+        _182 = ((_175 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_184);
+        _184 = _182;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _184) -> [return: bb83, unwind: bb130];
+    }
+
+    bb83: {
+        StorageDead(_184);
+        StorageDead(_182);
+        StorageDead(_175);
+        StorageDead(_174);
+        goto -> bb115;
+    }
+
+    bb84: {
+        _190 = &(*_191);
+        StorageDead(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        _282 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _194 = &((*_282).3: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _193 = &(*_194);
+        StorageLive(_195);
+        StorageLive(_196);
+        _283 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _196 = &((*_283).4: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>);
+        _195 = &(*_196);
+        StorageLive(_197);
+        StorageLive(_198);
+        _198 = &_29;
+        _197 = &(*_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        _200 = &_28;
+        _199 = &(*_200);
+        StorageLive(_201);
+        StorageLive(_202);
+        _202 = &mut _30;
+        _201 = &mut (*_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        StorageLive(_205);
+        StorageLive(_206);
+        _284 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _206 = &((*_284).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _205 = <anchor_lang::prelude::AccountLoader<'_, User> as Clone>::clone(move _206) -> [return: bb85, unwind: bb130];
+    }
+
+    bb85: {
+        StorageDead(_206);
+        _204 = &_205;
+        _203 = &(*_204);
+        StorageLive(_207);
+        StorageLive(_208);
+        StorageLive(_209);
+        StorageLive(_210);
+        _285 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _210 = &((*_285).2: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>);
+        _209 = <anchor_lang::prelude::AccountLoader<'_, UserStats> as Clone>::clone(move _210) -> [return: bb86, unwind: bb130];
+    }
+
+    bb86: {
+        StorageDead(_210);
+        _208 = &_209;
+        _207 = &(*_208);
+        StorageLive(_211);
+        StorageLive(_212);
+        _212 = &_150;
+        _211 = &(*_212);
+        StorageLive(_213);
+        StorageLive(_214);
+        _214 = &_151;
+        _213 = &(*_214);
+        StorageLive(_215);
+        StorageLive(_216);
+        _216 = _138;
+        _215 = Option::<u32>::Some(move _216);
+        StorageDead(_216);
+        StorageLive(_217);
+        _217 = &(*_14);
+        StorageLive(_218);
+        _218 = FillMode::PlaceAndMake;
+        _188 = controller::orders::fill_perp_order(move _189, move _190, move _193, move _195, move _197, move _199, move _201, move _203, move _207, move _211, move _213, move _215, move _217, move _218) -> [return: bb87, unwind: bb130];
+    }
+
+    bb87: {
+        StorageDead(_218);
+        StorageDead(_217);
+        StorageDead(_215);
+        StorageDead(_213);
+        StorageDead(_211);
+        StorageDead(_207);
+        StorageDead(_203);
+        StorageDead(_201);
+        StorageDead(_199);
+        StorageDead(_197);
+        StorageDead(_195);
+        StorageDead(_193);
+        StorageDead(_190);
+        StorageDead(_189);
+        _187 = <std::result::Result<(u64, u64), error::ErrorCode> as Try>::branch(move _188) -> [return: bb88, unwind: bb130];
+    }
+
+    bb88: {
+        StorageDead(_188);
+        _219 = discriminant(_187);
+        switchInt(move _219) -> [0: bb89, 1: bb90, otherwise: bb4];
+    }
+
+    bb89: {
+        StorageLive(_223);
+        _223 = ((_187 as Continue).0: (u64, u64));
+        _186 = _223;
+        StorageDead(_223);
+        StorageDead(_214);
+        StorageDead(_212);
+        StorageDead(_209);
+        StorageDead(_208);
+        StorageDead(_205);
+        StorageDead(_204);
+        StorageDead(_202);
+        StorageDead(_200);
+        StorageDead(_198);
+        StorageDead(_196);
+        StorageDead(_194);
+        StorageDead(_191);
+        StorageDead(_187);
+        StorageDead(_186);
+        StorageLive(_224);
+        StorageLive(_225);
+        StorageLive(_226);
+        StorageLive(_227);
+        StorageLive(_228);
+        StorageLive(_229);
+        StorageLive(_230);
+        StorageLive(_231);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        _286 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _235 = &((*_286).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _234 = anchor_lang::prelude::AccountLoader::<'_, User>::load(move _235) -> [return: bb92, unwind: bb130];
+    }
+
+    bb90: {
+        StorageLive(_220);
+        _220 = ((_187 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_222);
+        _222 = _220;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _222) -> [return: bb91, unwind: bb130];
+    }
+
+    bb91: {
+        StorageDead(_222);
+        StorageDead(_220);
+        StorageDead(_214);
+        StorageDead(_212);
+        StorageDead(_209);
+        StorageDead(_208);
+        StorageDead(_205);
+        StorageDead(_204);
+        StorageDead(_202);
+        StorageDead(_200);
+        StorageDead(_198);
+        StorageDead(_196);
+        StorageDead(_194);
+        StorageDead(_191);
+        StorageDead(_187);
+        StorageDead(_186);
+        goto -> bb115;
+    }
+
+    bb92: {
+        StorageDead(_235);
+        StorageLive(_236);
+        _236 = {closure@programs/drift/src/macros.rs:70:40: 70:43};
+        _233 = std::result::Result::<Ref<'_, User>, anchor_lang::error::Error>::map_err::<error::ErrorCode, {closure@programs/drift/src/macros.rs:70:40: 70:43}>(move _234, move _236) -> [return: bb93, unwind: bb130];
+    }
+
+    bb93: {
+        StorageDead(_236);
+        StorageDead(_234);
+        _232 = <std::result::Result<Ref<'_, User>, error::ErrorCode> as Try>::branch(move _233) -> [return: bb94, unwind: bb130];
+    }
+
+    bb94: {
+        _291 = const true;
+        StorageDead(_233);
+        _237 = discriminant(_232);
+        switchInt(move _237) -> [0: bb95, 1: bb96, otherwise: bb4];
+    }
+
+    bb95: {
+        StorageLive(_241);
+        _241 = move ((_232 as Continue).0: std::cell::Ref<'_, state::user::User>);
+        _231 = move _241;
+        StorageDead(_241);
+        _230 = &_231;
+        _229 = <Ref<'_, User> as Deref>::deref(move _230) -> [return: bb98, unwind: bb129];
+    }
+
+    bb96: {
+        StorageLive(_238);
+        _238 = ((_232 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_240);
+        _240 = _238;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _240) -> [return: bb97, unwind: bb143];
+    }
+
+    bb97: {
+        StorageDead(_240);
+        StorageDead(_238);
+        StorageDead(_230);
+        StorageDead(_228);
+        StorageDead(_227);
+        StorageDead(_225);
+        _310 = discriminant(_232);
+        _291 = const false;
+        StorageDead(_232);
+        StorageDead(_231);
+        StorageDead(_229);
+        StorageDead(_226);
+        goto -> bb114;
+    }
+
+    bb98: {
+        StorageDead(_230);
+        _228 = &((*_229).5: [state::user::Order; 32]);
+        _227 = move _228 as &[state::user::Order] (PointerCoercion(Unsize));
+        StorageDead(_228);
+        _226 = core::slice::<impl [Order]>::iter(move _227) -> [return: bb99, unwind: bb129];
+    }
+
+    bb99: {
+        _225 = &mut _226;
+        StorageDead(_227);
+        StorageLive(_242);
+        StorageLive(_243);
+        _243 = &_138;
+        _242 = {closure@programs/drift/src/instructions/user.rs:2471:14: 2471:21} { order_id: move _243 };
+        StorageDead(_243);
+        _224 = <std::slice::Iter<'_, Order> as Iterator>::any::<{closure@programs/drift/src/instructions/user.rs:2471:14: 2471:21}>(move _225, move _242) -> [return: bb100, unwind: bb129];
+    }
+
+    bb100: {
+        StorageDead(_242);
+        StorageDead(_225);
+        drop(_231) -> [return: bb139, unwind: bb143];
+    }
+
+    bb101: {
+        StorageLive(_246);
+        StorageLive(_247);
+        StorageLive(_248);
+        StorageLive(_249);
+        _249 = _138;
+        StorageLive(_250);
+        StorageLive(_251);
+        _287 = deref_copy (_1.1: &mut instructions::user::PlaceAndMake<'_>);
+        _251 = &((*_287).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _250 = &(*_251);
+        StorageLive(_252);
+        StorageLive(_253);
+        _253 = &_28;
+        _252 = &(*_253);
+        StorageLive(_254);
+        StorageLive(_255);
+        _255 = &_29;
+        _254 = &(*_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        _257 = &mut _30;
+        _256 = &mut (*_257);
+        StorageLive(_258);
+        _258 = &(*_14);
+        _248 = cancel_order_by_order_id(move _249, move _250, move _252, move _254, move _256, move _258) -> [return: bb102, unwind: bb130];
+    }
+
+    bb102: {
+        StorageDead(_258);
+        StorageDead(_256);
+        StorageDead(_254);
+        StorageDead(_252);
+        StorageDead(_250);
+        StorageDead(_249);
+        _247 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _248) -> [return: bb103, unwind: bb130];
+    }
+
+    bb103: {
+        StorageDead(_248);
+        _259 = discriminant(_247);
+        switchInt(move _259) -> [0: bb104, 1: bb105, otherwise: bb4];
+    }
+
+    bb104: {
+        StorageLive(_263);
+        _263 = ((_247 as Continue).0: ());
+        _246 = _263;
+        StorageDead(_263);
+        StorageDead(_257);
+        StorageDead(_255);
+        StorageDead(_253);
+        StorageDead(_251);
+        StorageDead(_247);
+        StorageDead(_246);
+        _244 = const ();
+        goto -> bb108;
+    }
+
+    bb105: {
+        StorageLive(_260);
+        _260 = ((_247 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_262);
+        _262 = _260;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _262) -> [return: bb106, unwind: bb130];
+    }
+
+    bb106: {
+        StorageDead(_262);
+        StorageDead(_260);
+        StorageDead(_257);
+        StorageDead(_255);
+        StorageDead(_253);
+        StorageDead(_251);
+        StorageDead(_247);
+        StorageDead(_246);
+        StorageDead(_245);
+        StorageDead(_244);
+        goto -> bb114;
+    }
+
+    bb107: {
+        _244 = const ();
+        goto -> bb108;
+    }
+
+    bb108: {
+        StorageDead(_245);
+        StorageDead(_244);
+        StorageLive(_264);
+        _264 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _264);
+        StorageDead(_264);
+        StorageDead(_224);
+        drop(_151) -> [return: bb109, unwind: bb131];
+    }
+
+    bb109: {
+        StorageDead(_151);
+        drop(_150) -> [return: bb110, unwind: bb146];
+    }
+
+    bb110: {
+        StorageDead(_150);
+        StorageDead(_139);
+        StorageDead(_138);
+        _288 = const false;
+        StorageDead(_99);
+        StorageDead(_97);
+        drop(_30) -> [return: bb111, unwind: bb134];
+    }
+
+    bb111: {
+        StorageDead(_30);
+        drop(_29) -> [return: bb112, unwind: bb135];
+    }
+
+    bb112: {
+        StorageDead(_29);
+        drop(_28) -> [return: bb113, unwind: bb138];
+    }
+
+    bb113: {
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb128;
+    }
+
+    bb114: {
+        StorageDead(_224);
+        goto -> bb115;
+    }
+
+    bb115: {
+        drop(_151) -> [return: bb116, unwind: bb131];
+    }
+
+    bb116: {
+        StorageDead(_151);
+        drop(_150) -> [return: bb117, unwind: bb146];
+    }
+
+    bb117: {
+        StorageDead(_150);
+        goto -> bb118;
+    }
+
+    bb118: {
+        StorageDead(_139);
+        StorageDead(_138);
+        goto -> bb141;
+    }
+
+    bb119: {
+        _288 = const false;
+        StorageDead(_99);
+        StorageDead(_97);
+        goto -> bb120;
+    }
+
+    bb120: {
+        drop(_30) -> [return: bb121, unwind: bb134];
+    }
+
+    bb121: {
+        StorageDead(_30);
+        drop(_29) -> [return: bb122, unwind: bb135];
+    }
+
+    bb122: {
+        StorageDead(_29);
+        drop(_28) -> [return: bb123, unwind: bb138];
+    }
+
+    bb123: {
+        StorageDead(_28);
+        goto -> bb126;
+    }
+
+    bb124: {
+        StorageDead(_41);
+        StorageDead(_40);
+        drop(_37) -> [return: bb125, unwind: bb138];
+    }
+
+    bb125: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_32);
+        StorageDead(_31);
+        goto -> bb126;
+    }
+
+    bb126: {
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        goto -> bb127;
+    }
+
+    bb127: {
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb128;
+    }
+
+    bb128: {
+        return;
+    }
+
+    bb129 (cleanup): {
+        drop(_231) -> [return: bb143, unwind terminate(cleanup)];
+    }
+
+    bb130 (cleanup): {
+        drop(_151) -> [return: bb131, unwind terminate(cleanup)];
+    }
+
+    bb131 (cleanup): {
+        drop(_150) -> [return: bb146, unwind terminate(cleanup)];
+    }
+
+    bb132 (cleanup): {
+        drop(_37) -> [return: bb133, unwind terminate(cleanup)];
+    }
+
+    bb133 (cleanup): {
+        drop(_30) -> [return: bb134, unwind terminate(cleanup)];
+    }
+
+    bb134 (cleanup): {
+        drop(_29) -> [return: bb135, unwind terminate(cleanup)];
+    }
+
+    bb135 (cleanup): {
+        drop(_28) -> [return: bb138, unwind terminate(cleanup)];
+    }
+
+    bb136 (cleanup): {
+        drop(_41) -> [return: bb137, unwind terminate(cleanup)];
+    }
+
+    bb137 (cleanup): {
+        drop(_37) -> [return: bb138, unwind terminate(cleanup)];
+    }
+
+    bb138 (cleanup): {
+        resume;
+    }
+
+    bb139: {
+        _312 = discriminant(_232);
+        _291 = const false;
+        StorageDead(_232);
+        StorageDead(_231);
+        StorageDead(_229);
+        StorageDead(_226);
+        StorageLive(_244);
+        StorageLive(_245);
+        _245 = _224;
+        switchInt(move _245) -> [0: bb107, otherwise: bb101];
+    }
+
+    bb140: {
+        drop(_99) -> [return: bb119, unwind: bb133];
+    }
+
+    bb141: {
+        switchInt(_288) -> [0: bb119, otherwise: bb140];
+    }
+
+    bb142: {
+        _314 = discriminant(_44);
+        _289 = const false;
+        _290 = const false;
+        StorageDead(_44);
+        StorageDead(_43);
+        drop(_41) -> [return: bb124, unwind: bb137];
+    }
+
+    bb143 (cleanup): {
+        _320 = discriminant(_232);
+        goto -> bb130;
+    }
+
+    bb144 (cleanup): {
+        _322 = discriminant(_153);
+        goto -> bb146;
+    }
+
+    bb145 (cleanup): {
+        drop(_99) -> [return: bb133, unwind terminate(cleanup)];
+    }
+
+    bb146 (cleanup): {
+        switchInt(_288) -> [0: bb133, otherwise: bb145];
+    }
+
+    bb147 (cleanup): {
+        _323 = discriminant(_100);
+        goto -> bb133;
+    }
+
+    bb148 (cleanup): {
+        _326 = discriminant(_32);
+        goto -> bb149;
+    }
+
+    bb149 (cleanup): {
+        _327 = discriminant(_44);
+        goto -> bb136;
+    }
+
+    bb150 (cleanup): {
+        _328 = discriminant(_16);
+        goto -> bb138;
+    }
+
+    bb151 (cleanup): {
+        _329 = discriminant(_5);
+        goto -> bb138;
+    }
+}

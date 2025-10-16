@@ -1,0 +1,614 @@
+// MIR for `math::orders::validate_fill_price` after PreCodegen
+
+fn math::orders::validate_fill_price(_1: u64, _2: u64, _3: u64, _4: controller::position::PositionDirection, _5: u64, _6: bool) -> std::result::Result<(), error::ErrorCode> {
+    debug quote_asset_amount => _1;
+    debug base_asset_amount => _2;
+    debug base_precision => _3;
+    debug order_direction => _4;
+    debug order_limit_price => _5;
+    debug is_taker => _6;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _7: u64;
+    let mut _8: bool;
+    let mut _9: isize;
+    let mut _10: u64;
+    let mut _11: u64;
+    let mut _13: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _14: std::result::Result<u64, error::ErrorCode>;
+    let mut _15: u64;
+    let mut _16: u64;
+    let mut _17: u64;
+    let mut _18: isize;
+    let mut _20: !;
+    let mut _21: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _23: ();
+    let mut _24: bool;
+    let mut _25: &controller::position::PositionDirection;
+    let mut _26: &controller::position::PositionDirection;
+    let _27: controller::position::PositionDirection;
+    let mut _28: bool;
+    let mut _29: u64;
+    let mut _30: u64;
+    let mut _31: !;
+    let _32: ();
+    let mut _33: &str;
+    let _34: &str;
+    let mut _35: &std::string::String;
+    let _36: &std::string::String;
+    let _37: std::string::String;
+    let mut _39: std::fmt::Arguments<'_>;
+    let mut _40: &[&str];
+    let mut _41: &[&str; 5];
+    let _42: &[&str; 5];
+    let _43: [&str; 5];
+    let mut _44: &[core::fmt::rt::Argument<'_>];
+    let mut _45: &[core::fmt::rt::Argument<'_>; 5];
+    let _46: &[core::fmt::rt::Argument<'_>; 5];
+    let _47: [core::fmt::rt::Argument<'_>; 5];
+    let mut _48: core::fmt::rt::Argument<'_>;
+    let mut _49: &u64;
+    let _50: &u64;
+    let mut _51: core::fmt::rt::Argument<'_>;
+    let mut _52: &u64;
+    let _53: &u64;
+    let mut _54: core::fmt::rt::Argument<'_>;
+    let mut _55: &u64;
+    let _56: &u64;
+    let mut _57: core::fmt::rt::Argument<'_>;
+    let mut _58: &u64;
+    let _59: &u64;
+    let mut _60: core::fmt::rt::Argument<'_>;
+    let mut _61: &bool;
+    let _62: &bool;
+    let mut _63: error::ErrorCode;
+    let _64: ();
+    let mut _65: bool;
+    let mut _66: &controller::position::PositionDirection;
+    let mut _67: &controller::position::PositionDirection;
+    let _68: controller::position::PositionDirection;
+    let mut _69: bool;
+    let mut _70: u64;
+    let mut _71: u64;
+    let mut _72: !;
+    let _73: ();
+    let mut _74: &str;
+    let _75: &str;
+    let mut _76: &std::string::String;
+    let _77: &std::string::String;
+    let _78: std::string::String;
+    let mut _80: std::fmt::Arguments<'_>;
+    let mut _81: &[&str];
+    let mut _82: &[&str; 5];
+    let _83: &[&str; 5];
+    let _84: [&str; 5];
+    let mut _85: &[core::fmt::rt::Argument<'_>];
+    let mut _86: &[core::fmt::rt::Argument<'_>; 5];
+    let _87: &[core::fmt::rt::Argument<'_>; 5];
+    let _88: [core::fmt::rt::Argument<'_>; 5];
+    let mut _89: core::fmt::rt::Argument<'_>;
+    let mut _90: &u64;
+    let _91: &u64;
+    let mut _92: core::fmt::rt::Argument<'_>;
+    let mut _93: &u64;
+    let _94: &u64;
+    let mut _95: core::fmt::rt::Argument<'_>;
+    let mut _96: &u64;
+    let _97: &u64;
+    let mut _98: core::fmt::rt::Argument<'_>;
+    let mut _99: &u64;
+    let _100: &u64;
+    let mut _101: core::fmt::rt::Argument<'_>;
+    let mut _102: &bool;
+    let _103: &bool;
+    let mut _104: error::ErrorCode;
+    let mut _105: ();
+    scope 1 {
+        debug rounded_quote_asset_amount => _7;
+        let _12: u64;
+        let _19: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _22: u64;
+        scope 2 {
+            debug fill_price => _12;
+            let _38: std::string::String;
+            let _79: std::string::String;
+            let mut _106: &[&str; 5];
+            let mut _107: &[&str; 5];
+            let mut _108: &controller::position::PositionDirection;
+            let mut _109: &controller::position::PositionDirection;
+            scope 7 {
+                debug res => _38;
+            }
+            scope 8 {
+                debug res => _79;
+            }
+        }
+        scope 3 {
+            debug residual => _19;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _22;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _6;
+        switchInt(move _8) -> [0: bb7, otherwise: bb1];
+    }
+
+    bb1: {
+        _9 = discriminant(_4);
+        switchInt(move _9) -> [0: bb4, 1: bb2, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_11);
+        _11 = _1;
+        _7 = core::num::<impl u64>::saturating_add(move _11, const 1_u64) -> [return: bb6, unwind continue];
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_10);
+        _10 = _1;
+        _7 = core::num::<impl u64>::saturating_sub(move _10, const 1_u64) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_10);
+        goto -> bb8;
+    }
+
+    bb6: {
+        StorageDead(_11);
+        goto -> bb8;
+    }
+
+    bb7: {
+        _7 = _1;
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_8);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _7;
+        StorageLive(_16);
+        _16 = _2;
+        StorageLive(_17);
+        _17 = _3;
+        _14 = math::orders::calculate_fill_price(move _15, move _16, move _17) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        _13 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _14) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_14);
+        _18 = discriminant(_13);
+        switchInt(move _18) -> [0: bb11, 1: bb12, otherwise: bb3];
+    }
+
+    bb11: {
+        StorageLive(_22);
+        _22 = ((_13 as Continue).0: u64);
+        _12 = _22;
+        StorageDead(_22);
+        StorageDead(_13);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &_4;
+        StorageLive(_26);
+        _109 = const _;
+        _26 = &(*_109);
+        _24 = <controller::position::PositionDirection as PartialEq>::eq(move _25, move _26) -> [return: bb14, unwind continue];
+    }
+
+    bb12: {
+        StorageLive(_19);
+        _19 = ((_13 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_21);
+        _21 = _19;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _21) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_21);
+        StorageDead(_19);
+        StorageDead(_13);
+        goto -> bb46;
+    }
+
+    bb14: {
+        switchInt(move _24) -> [0: bb28, otherwise: bb15];
+    }
+
+    bb15: {
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _12;
+        StorageLive(_30);
+        _30 = _5;
+        _28 = Gt(move _29, move _30);
+        switchInt(move _28) -> [0: bb27, otherwise: bb16];
+    }
+
+    bb16: {
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _106 = const _;
+        _42 = &(*_106);
+        _41 = &(*_42);
+        _40 = move _41 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_41);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = &_12;
+        _49 = &(*_50);
+        _48 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _49) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_49);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &_1;
+        _52 = &(*_53);
+        _51 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _52) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_52);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        _56 = &_2;
+        _55 = &(*_56);
+        _54 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _55) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_55);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        _59 = &_5;
+        _58 = &(*_59);
+        _57 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _58) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_58);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        _62 = &_6;
+        _61 = &(*_62);
+        _60 = core::fmt::rt::Argument::<'_>::new_display::<bool>(move _61) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        StorageDead(_61);
+        _47 = [move _48, move _51, move _54, move _57, move _60];
+        StorageDead(_60);
+        StorageDead(_57);
+        StorageDead(_54);
+        StorageDead(_51);
+        StorageDead(_48);
+        _46 = &_47;
+        _45 = &(*_46);
+        _44 = move _45 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_45);
+        _39 = Arguments::<'_>::new_v1(move _40, move _44) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_44);
+        StorageDead(_40);
+        _38 = format(move _39) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_39);
+        StorageDead(_62);
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_53);
+        StorageDead(_50);
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageDead(_42);
+        _37 = move _38;
+        StorageDead(_38);
+        _36 = &_37;
+        _35 = &(*_36);
+        _34 = <String as Deref>::deref(move _35) -> [return: bb24, unwind: bb49];
+    }
+
+    bb24: {
+        _33 = &(*_34);
+        StorageDead(_35);
+        _32 = solana_program::log::sol_log(move _33) -> [return: bb25, unwind: bb49];
+    }
+
+    bb25: {
+        StorageDead(_33);
+        drop(_37) -> [return: bb26, unwind: bb50];
+    }
+
+    bb26: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_34);
+        StorageDead(_32);
+        StorageLive(_63);
+        _63 = error::ErrorCode::InvalidOrderFillPrice;
+        _0 = std::result::Result::<(), error::ErrorCode>::Err(move _63);
+        StorageDead(_63);
+        StorageDead(_28);
+        StorageDead(_24);
+        StorageDead(_23);
+        goto -> bb46;
+    }
+
+    bb27: {
+        StorageDead(_30);
+        StorageDead(_29);
+        goto -> bb29;
+    }
+
+    bb28: {
+        StorageDead(_26);
+        StorageDead(_25);
+        goto -> bb29;
+    }
+
+    bb29: {
+        _23 = const ();
+        StorageDead(_28);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        _66 = &_4;
+        StorageLive(_67);
+        _108 = const _;
+        _67 = &(*_108);
+        _65 = <controller::position::PositionDirection as PartialEq>::eq(move _66, move _67) -> [return: bb30, unwind continue];
+    }
+
+    bb30: {
+        switchInt(move _65) -> [0: bb44, otherwise: bb31];
+    }
+
+    bb31: {
+        StorageDead(_67);
+        StorageDead(_66);
+        StorageLive(_69);
+        StorageLive(_70);
+        _70 = _12;
+        StorageLive(_71);
+        _71 = _5;
+        _69 = Lt(move _70, move _71);
+        switchInt(move _69) -> [0: bb43, otherwise: bb32];
+    }
+
+    bb32: {
+        StorageDead(_71);
+        StorageDead(_70);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        _107 = const _;
+        _83 = &(*_107);
+        _82 = &(*_83);
+        _81 = move _82 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_82);
+        StorageLive(_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        StorageLive(_91);
+        _91 = &_12;
+        _90 = &(*_91);
+        _89 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _90) -> [return: bb33, unwind continue];
+    }
+
+    bb33: {
+        StorageDead(_90);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        _94 = &_1;
+        _93 = &(*_94);
+        _92 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _93) -> [return: bb34, unwind continue];
+    }
+
+    bb34: {
+        StorageDead(_93);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        _97 = &_2;
+        _96 = &(*_97);
+        _95 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _96) -> [return: bb35, unwind continue];
+    }
+
+    bb35: {
+        StorageDead(_96);
+        StorageLive(_98);
+        StorageLive(_99);
+        StorageLive(_100);
+        _100 = &_5;
+        _99 = &(*_100);
+        _98 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _99) -> [return: bb36, unwind continue];
+    }
+
+    bb36: {
+        StorageDead(_99);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        _103 = &_6;
+        _102 = &(*_103);
+        _101 = core::fmt::rt::Argument::<'_>::new_display::<bool>(move _102) -> [return: bb37, unwind continue];
+    }
+
+    bb37: {
+        StorageDead(_102);
+        _88 = [move _89, move _92, move _95, move _98, move _101];
+        StorageDead(_101);
+        StorageDead(_98);
+        StorageDead(_95);
+        StorageDead(_92);
+        StorageDead(_89);
+        _87 = &_88;
+        _86 = &(*_87);
+        _85 = move _86 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_86);
+        _80 = Arguments::<'_>::new_v1(move _81, move _85) -> [return: bb38, unwind continue];
+    }
+
+    bb38: {
+        StorageDead(_85);
+        StorageDead(_81);
+        _79 = format(move _80) -> [return: bb39, unwind continue];
+    }
+
+    bb39: {
+        StorageDead(_80);
+        StorageDead(_103);
+        StorageDead(_100);
+        StorageDead(_97);
+        StorageDead(_94);
+        StorageDead(_91);
+        StorageDead(_88);
+        StorageDead(_87);
+        StorageDead(_83);
+        _78 = move _79;
+        StorageDead(_79);
+        _77 = &_78;
+        _76 = &(*_77);
+        _75 = <String as Deref>::deref(move _76) -> [return: bb40, unwind: bb48];
+    }
+
+    bb40: {
+        _74 = &(*_75);
+        StorageDead(_76);
+        _73 = solana_program::log::sol_log(move _74) -> [return: bb41, unwind: bb48];
+    }
+
+    bb41: {
+        StorageDead(_74);
+        drop(_78) -> [return: bb42, unwind: bb50];
+    }
+
+    bb42: {
+        StorageDead(_78);
+        StorageDead(_77);
+        StorageDead(_75);
+        StorageDead(_73);
+        StorageLive(_104);
+        _104 = error::ErrorCode::InvalidOrderFillPrice;
+        _0 = std::result::Result::<(), error::ErrorCode>::Err(move _104);
+        StorageDead(_104);
+        StorageDead(_69);
+        StorageDead(_65);
+        StorageDead(_64);
+        goto -> bb46;
+    }
+
+    bb43: {
+        StorageDead(_71);
+        StorageDead(_70);
+        goto -> bb45;
+    }
+
+    bb44: {
+        StorageDead(_67);
+        StorageDead(_66);
+        goto -> bb45;
+    }
+
+    bb45: {
+        _64 = const ();
+        StorageDead(_69);
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageLive(_105);
+        _105 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _105);
+        StorageDead(_105);
+        StorageDead(_12);
+        StorageDead(_7);
+        goto -> bb47;
+    }
+
+    bb46: {
+        StorageDead(_12);
+        StorageDead(_7);
+        goto -> bb47;
+    }
+
+    bb47: {
+        return;
+    }
+
+    bb48 (cleanup): {
+        drop(_78) -> [return: bb50, unwind terminate(cleanup)];
+    }
+
+    bb49 (cleanup): {
+        drop(_37) -> [return: bb50, unwind terminate(cleanup)];
+    }
+
+    bb50 (cleanup): {
+        resume;
+    }
+}

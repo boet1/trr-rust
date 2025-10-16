@@ -1,0 +1,62 @@
+// MIR for `meets_settle_pnl_maintenance_margin_requirement` before PreCodegen
+
+fn meets_settle_pnl_maintenance_margin_requirement(_1: &User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>) -> std::result::Result<bool, error::ErrorCode> {
+    debug user => _1;
+    debug perp_market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let mut _5: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _6: &state::user::User;
+    let mut _7: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _8: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _9: &mut state::oracle_map::OracleMap<'_>;
+    let mut _10: state::margin_calculation::MarginContext;
+    let mut _11: state::margin_calculation::MarginContext;
+    let mut _12: math::margin::MarginRequirementType;
+    let mut _13: {closure@programs/drift/src/math/margin.rs:751:10: 751:16};
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        _7 = &(*_2);
+        StorageLive(_8);
+        _8 = &(*_3);
+        StorageLive(_9);
+        _9 = &mut (*_4);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = math::margin::MarginRequirementType::Maintenance;
+        _11 = MarginContext::standard(move _12) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_12);
+        _10 = MarginContext::strict(move _11, const true) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        _5 = math::margin::calculate_margin_requirement_and_total_collateral_and_liability_info(move _6, move _7, move _8, move _9, move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_13);
+        _13 = {closure@programs/drift/src/math/margin.rs:751:10: 751:16};
+        _0 = std::result::Result::<MarginCalculation, error::ErrorCode>::map::<bool, {closure@programs/drift/src/math/margin.rs:751:10: 751:16}>(move _5, move _13) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        StorageDead(_5);
+        return;
+    }
+}

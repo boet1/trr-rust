@@ -1,0 +1,119 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:669:1: 669:22>::total_supply` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:669:1: 669:22>::total_supply(_1: &ReserveLiquidity) -> Result<decimal::Decimal, ProgramError> {
+    debug self => _1;
+    let mut _0: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _2: math::decimal::Decimal;
+    let mut _3: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::decimal::Decimal>;
+    let mut _4: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _5: math::decimal::Decimal;
+    let mut _6: u64;
+    let mut _7: math::decimal::Decimal;
+    let mut _8: isize;
+    let _9: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _10: !;
+    let mut _11: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _12: math::decimal::Decimal;
+    let mut _13: math::decimal::Decimal;
+    let mut _14: bool;
+    let mut _15: isize;
+    let mut _16: isize;
+    let mut _17: isize;
+    let mut _18: isize;
+    let mut _19: isize;
+    scope 1 {
+        debug residual => _9;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _12;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        _14 = const false;
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_1).5: u64);
+        _5 = <decimal::Decimal as From<u64>>::from(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = ((*_1).6: math::decimal::Decimal);
+        _4 = <decimal::Decimal as common::TryAdd>::try_add(move _5, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_5);
+        _3 = <Result<decimal::Decimal, ProgramError> as Try>::branch(move _4) -> [return: bb3, unwind: bb10];
+    }
+
+    bb3: {
+        _14 = const true;
+        StorageDead(_4);
+        _8 = discriminant(_3);
+        switchInt(move _8) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_12);
+        _12 = ((_3 as Continue).0: math::decimal::Decimal);
+        _2 = _12;
+        StorageDead(_12);
+        StorageLive(_13);
+        _13 = ((*_1).8: math::decimal::Decimal);
+        _0 = <decimal::Decimal as common::TrySub>::try_sub(move _2, move _13) -> [return: bb8, unwind: bb11];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_9);
+        _9 = move ((_3 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_11);
+        _11 = move _9;
+        _0 = <Result<decimal::Decimal, ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _11) -> [return: bb7, unwind: bb11];
+    }
+
+    bb7: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_2);
+        _17 = discriminant(_3);
+        _14 = const false;
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_13);
+        StorageDead(_2);
+        _15 = discriminant(_3);
+        _14 = const false;
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11 (cleanup): {
+        _19 = discriminant(_3);
+        goto -> bb10;
+    }
+}

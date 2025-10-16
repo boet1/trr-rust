@@ -1,0 +1,188 @@
+// MIR for `instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_bytes32` before PreCodegen
+
+fn instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_bytes32(_1: &[u8]) -> Result<(&[u8; 32], &[u8]), ProgramError> {
+    debug input => _1;
+    let mut _0: std::result::Result<(&[u8; 32], &[u8]), solana_program::program_error::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: &[u8];
+    let mut _6: !;
+    let _7: ();
+    let mut _8: &str;
+    let _9: &str;
+    let mut _10: solana_program::program_error::ProgramError;
+    let mut _11: error::LendingError;
+    let _12: &[u8];
+    let _13: &[u8];
+    let mut _14: (&[u8], &[u8]);
+    let mut _15: &[u8];
+    let mut _16: (&[u8; 32], &[u8]);
+    let mut _17: &[u8; 32];
+    let _18: &[u8; 32];
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, &[u8; 32]>;
+    let mut _20: std::result::Result<&[u8; 32], error::LendingError>;
+    let mut _21: std::result::Result<&[u8; 32], std::array::TryFromSliceError>;
+    let mut _22: &[u8];
+    let mut _23: {closure@token-lending\sdk\src\instruction.rs:847:26: 847:29};
+    let mut _24: isize;
+    let mut _26: !;
+    let mut _27: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _29: &[u8];
+    scope 1 {
+        debug bytes => _12;
+        debug rest => _13;
+        let _25: std::result::Result<std::convert::Infallible, error::LendingError>;
+        let _28: &[u8; 32];
+        scope 2 {
+            debug residual => _25;
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug val => _28;
+            scope 5 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = core::slice::<impl [u8]>::len(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _3 = Lt(move _4, const 32_usize);
+        switchInt(move _3) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = const "32 bytes cannot be unpacked";
+        _8 = &(*_9);
+        _7 = solana_program::log::sol_log(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = LendingError::InstructionUnpackError;
+        _10 = <LendingError as Into<ProgramError>>::into(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        _0 = Result::<(&[u8; 32], &[u8]), ProgramError>::Err(move _10);
+        StorageDead(_10);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb14;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &(*_1);
+        _14 = core::slice::<impl [u8]>::split_at(move _15, const 32_usize) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageLive(_12);
+        _12 = (_14.0: &[u8]);
+        StorageLive(_13);
+        _13 = (_14.1: &[u8]);
+        StorageDead(_14);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &(*_12);
+        _21 = <&[u8] as TryInto<&[u8; 32]>>::try_into(move _22) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_22);
+        StorageLive(_23);
+        _23 = {closure@token-lending\sdk\src\instruction.rs:847:26: 847:29};
+        _20 = Result::<&[u8; 32], TryFromSliceError>::map_err::<LendingError, {closure@token-lending\sdk\src\instruction.rs:847:26: 847:29}>(move _21, move _23) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_23);
+        StorageDead(_21);
+        _19 = <Result<&[u8; 32], LendingError> as Try>::branch(move _20) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        _24 = discriminant(_19);
+        switchInt(move _24) -> [0: bb10, 1: bb12, otherwise: bb11];
+    }
+
+    bb10: {
+        StorageLive(_28);
+        _28 = ((_19 as Continue).0: &[u8; 32]);
+        _18 = _28;
+        StorageDead(_28);
+        _17 = &(*_18);
+        StorageLive(_29);
+        _29 = &(*_13);
+        _16 = (move _17, move _29);
+        StorageDead(_29);
+        StorageDead(_17);
+        _0 = Result::<(&[u8; 32], &[u8]), ProgramError>::Ok(move _16);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_19);
+        StorageDead(_18);
+        goto -> bb14;
+    }
+
+    bb11: {
+        unreachable;
+    }
+
+    bb12: {
+        StorageLive(_25);
+        _25 = move ((_19 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_27);
+        _27 = move _25;
+        _0 = <Result<(&[u8; 32], &[u8]), ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_19);
+        StorageDead(_18);
+        goto -> bb14;
+    }
+
+    bb14: {
+        return;
+    }
+}

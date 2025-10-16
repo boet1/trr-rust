@@ -1,0 +1,47 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:801:1: 801:18>::is_borrow` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:801:1: 801:18>::is_borrow(_1: &SpotPosition) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: bool;
+    let mut _3: u64;
+    let mut _4: &state::spot_market::SpotBalanceType;
+    let mut _5: &state::spot_market::SpotBalanceType;
+    let _6: state::spot_market::SpotBalanceType;
+    let mut _7: &state::spot_market::SpotBalanceType;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = ((*_1).0: u64);
+        _2 = Gt(move _3, const 0_u64);
+        switchInt(move _2) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageLive(_4);
+        _4 = &((*_1).5: state::spot_market::SpotBalanceType);
+        StorageLive(_5);
+        _7 = const _;
+        _5 = &(*_7);
+        _0 = <SpotBalanceType as PartialEq>::eq(move _4, move _5) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        _0 = const false;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_2);
+        return;
+    }
+}

@@ -1,0 +1,161 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::calculate_repay` before PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::calculate_repay(_1: &reserve::Reserve, _2: u64, _3: decimal::Decimal) -> Result<CalculateRepayResult, ProgramError> {
+    debug self => _1;
+    debug amount_to_repay => _2;
+    debug borrowed_amount => _3;
+    let mut _0: std::result::Result<state::reserve::CalculateRepayResult, solana_program::program_error::ProgramError>;
+    let _4: math::decimal::Decimal;
+    let mut _5: bool;
+    let mut _6: u64;
+    let mut _7: math::decimal::Decimal;
+    let mut _8: u64;
+    let mut _9: math::decimal::Decimal;
+    let mut _11: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, u64>;
+    let mut _12: std::result::Result<u64, solana_program::program_error::ProgramError>;
+    let mut _13: &math::decimal::Decimal;
+    let mut _14: isize;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _19: state::reserve::CalculateRepayResult;
+    let mut _20: math::decimal::Decimal;
+    let mut _21: u64;
+    let mut _22: isize;
+    let mut _23: isize;
+    let mut _24: isize;
+    let mut _25: isize;
+    let mut _26: isize;
+    scope 1 {
+        debug settle_amount => _4;
+        let _10: u64;
+        let _15: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+        let _18: u64;
+        scope 2 {
+            debug repay_amount => _10;
+        }
+        scope 3 {
+            debug residual => _15;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _18;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _2;
+        _5 = Eq(move _6, const _);
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        _4 = _3;
+        goto -> bb5;
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _2;
+        _7 = <decimal::Decimal as From<u64>>::from(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageLive(_9);
+        _9 = _3;
+        _4 = <decimal::Decimal as Ord>::min(move _7, move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_7);
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &_4;
+        _12 = decimal::Decimal::try_ceil_u64(move _13) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        _11 = <Result<u64, ProgramError> as Try>::branch(move _12) -> [return: bb7, unwind: bb13];
+    }
+
+    bb7: {
+        StorageDead(_12);
+        _14 = discriminant(_11);
+        switchInt(move _14) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_18);
+        _18 = ((_11 as Continue).0: u64);
+        _10 = _18;
+        StorageDead(_18);
+        _22 = discriminant(_11);
+        StorageDead(_11);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _4;
+        StorageLive(_21);
+        _21 = _10;
+        _19 = CalculateRepayResult { settle_amount: move _20, repay_amount: move _21 };
+        StorageDead(_21);
+        StorageDead(_20);
+        _0 = Result::<CalculateRepayResult, ProgramError>::Ok(move _19);
+        StorageDead(_19);
+        StorageDead(_10);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_15);
+        _15 = move ((_11 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_17);
+        _17 = move _15;
+        _0 = <Result<CalculateRepayResult, ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _17) -> [return: bb11, unwind: bb14];
+    }
+
+    bb11: {
+        StorageDead(_17);
+        StorageDead(_15);
+        _24 = discriminant(_11);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb12: {
+        return;
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+
+    bb14 (cleanup): {
+        _26 = discriminant(_11);
+        goto -> bb13;
+    }
+}

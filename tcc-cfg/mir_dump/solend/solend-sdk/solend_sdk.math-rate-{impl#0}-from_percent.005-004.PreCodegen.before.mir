@@ -1,0 +1,36 @@
+// MIR for `rate::<impl at token-lending\sdk\src\math\rate.rs:38:1: 38:10>::from_percent` before PreCodegen
+
+fn rate::<impl at token-lending\sdk\src\math\rate.rs:38:1: 38:10>::from_percent(_1: u8) -> rate::Rate {
+    debug percent => _1;
+    let mut _0: math::rate::Rate;
+    let mut _2: math::rate::U128;
+    let mut _3: u64;
+    let mut _4: u64;
+    let mut _5: u8;
+    let mut _6: (u64, bool);
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _1;
+        _4 = move _5 as u64 (IntToInt);
+        StorageDead(_5);
+        _6 = CheckedMul(_4, const _);
+        assert(!move (_6.1: bool), "attempt to compute `{} * {}`, which would overflow", move _4, const _) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = move (_6.0: u64);
+        StorageDead(_4);
+        _2 = <U128 as From<u64>>::from(move _3) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        _0 = rate::Rate(move _2);
+        StorageDead(_2);
+        return;
+    }
+}

@@ -1,0 +1,91 @@
+// MIR for `rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:40:1: 40:17>::new` after PreCodegen
+
+fn rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:40:1: 40:17>::new(_1: rate_limiter::RateLimiterConfig, _2: u64) -> rate_limiter::RateLimiter {
+    debug config => _1;
+    debug cur_slot => _2;
+    let mut _0: state::rate_limiter::RateLimiter;
+    let _3: u64;
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: u64;
+    let mut _8: u64;
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: (u64, bool);
+    let mut _12: state::rate_limiter::RateLimiterConfig;
+    let mut _13: math::decimal::Decimal;
+    let mut _14: u64;
+    let mut _15: math::decimal::Decimal;
+    scope 1 {
+        debug slot_start => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = (_1.0: u64);
+        _4 = Ne(move _5, const 0_u64);
+        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _2;
+        StorageLive(_8);
+        _8 = (_1.0: u64);
+        _9 = Eq(_8, const 0_u64);
+        assert(!move _9, "attempt to divide `{}` by zero", _7) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _6 = Div(move _7, move _8);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_10);
+        _10 = (_1.0: u64);
+        _11 = CheckedMul(_6, _10);
+        assert(!move (_11.1: bool), "attempt to compute `{} * {}`, which would overflow", move _6, move _10) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _3 = move (_11.0: u64);
+        StorageDead(_10);
+        StorageDead(_6);
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_5);
+        _3 = _2;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageLive(_12);
+        _12 = _1;
+        StorageLive(_13);
+        _13 = decimal::Decimal::zero() -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageLive(_14);
+        _14 = _3;
+        StorageLive(_15);
+        _15 = decimal::Decimal::zero() -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        _0 = rate_limiter::RateLimiter { config: move _12, prev_qty: move _13, window_start: move _14, cur_qty: move _15 };
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_3);
+        return;
+    }
+}

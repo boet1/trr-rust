@@ -1,0 +1,179 @@
+// MIR for `as_u8_enum` after PreCodegen
+
+fn as_u8_enum(_1: &u8, _2: &mut Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+    debug repr => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let mut _3: std::result::Result<E, <E as std::convert::TryFrom<u8>>::Error>;
+    let mut _4: u8;
+    let mut _5: isize;
+    let _6: E;
+    let mut _7: &E;
+    let mut _8: &mut std::fmt::Formatter<'_>;
+    let mut _9: &mut std::fmt::Formatter<'_>;
+    let mut _10: std::fmt::Arguments<'_>;
+    let mut _11: &[&str];
+    let mut _12: &[&str; 3];
+    let _13: &[&str; 3];
+    let _14: [&str; 3];
+    let mut _15: &[core::fmt::rt::Argument<'_>];
+    let mut _16: &[core::fmt::rt::Argument<'_>; 2];
+    let _17: &[core::fmt::rt::Argument<'_>; 2];
+    let _18: [core::fmt::rt::Argument<'_>; 2];
+    let mut _19: core::fmt::rt::Argument<'_>;
+    let mut _20: &&str;
+    let _21: &&str;
+    let _22: &str;
+    let mut _23: core::fmt::rt::Argument<'_>;
+    let mut _24: &&u8;
+    let _25: &&u8;
+    let mut _26: &[&str; 3];
+    let mut _27: bool;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    scope 1 {
+        debug value => _6;
+    }
+
+    bb0: {
+        _27 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (*_1);
+        _27 = const true;
+        _3 = <E as TryFrom<u8>>::try_from(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _5 = discriminant(_3);
+        switchInt(move _5) -> [0: bb4, 1: bb2, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_9);
+        _9 = &mut (*_2);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _26 = const _;
+        _13 = &(*_26);
+        _12 = &(*_13);
+        _11 = move _12 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = std::any::type_name::<E>() -> [return: bb7, unwind: bb18];
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_6);
+        _6 = move ((_3 as Ok).0: E);
+        StorageLive(_7);
+        _7 = &_6;
+        StorageLive(_8);
+        _8 = &mut (*_2);
+        _0 = <E as std::fmt::Debug>::fmt(move _7, move _8) -> [return: bb5, unwind: bb12];
+    }
+
+    bb5: {
+        StorageDead(_8);
+        StorageDead(_7);
+        drop(_6) -> [return: bb6, unwind: bb18];
+    }
+
+    bb6: {
+        StorageDead(_6);
+        goto -> bb16;
+    }
+
+    bb7: {
+        _21 = &_22;
+        _20 = &(*_21);
+        _19 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _20) -> [return: bb8, unwind: bb18];
+    }
+
+    bb8: {
+        StorageDead(_20);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &_1;
+        _24 = &(*_25);
+        _23 = core::fmt::rt::Argument::<'_>::new_display::<&u8>(move _24) -> [return: bb9, unwind: bb18];
+    }
+
+    bb9: {
+        StorageDead(_24);
+        _18 = [move _19, move _23];
+        StorageDead(_23);
+        StorageDead(_19);
+        _17 = &_18;
+        _16 = &(*_17);
+        _15 = move _16 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_16);
+        _10 = Arguments::<'_>::new_v1(move _11, move _15) -> [return: bb10, unwind: bb18];
+    }
+
+    bb10: {
+        StorageDead(_15);
+        StorageDead(_11);
+        _0 = Formatter::<'_>::write_fmt(move _9, move _10) -> [return: bb11, unwind: bb18];
+    }
+
+    bb11: {
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_13);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb12 (cleanup): {
+        drop(_6) -> [return: bb18, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+
+    bb14: {
+        _27 = const false;
+        StorageDead(_3);
+        return;
+    }
+
+    bb15: {
+        drop(_3) -> [return: bb14, unwind: bb13];
+    }
+
+    bb16: {
+        _28 = discriminant(_3);
+        switchInt(move _28) -> [0: bb14, otherwise: bb15];
+    }
+
+    bb17 (cleanup): {
+        drop(_3) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb18 (cleanup): {
+        _30 = discriminant(_3);
+        switchInt(move _30) -> [0: bb13, otherwise: bb17];
+    }
+}

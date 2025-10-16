@@ -1,0 +1,51 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::checked_pow` before PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::checked_pow(_1: U192, _2: U192) -> Option<U192> {
+    debug self => _1;
+    debug expon => _2;
+    let mut _0: std::option::Option<math::bn::U192>;
+    let mut _3: (math::bn::U192, bool);
+    let mut _4: math::bn::U192;
+    let mut _5: math::bn::U192;
+    let _6: math::bn::U192;
+    let mut _7: math::bn::U192;
+    scope 1 {
+        debug val => _6;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _1;
+        StorageLive(_5);
+        _5 = _2;
+        _3 = U192::overflowing_pow(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        switchInt((_3.1: bool)) -> [0: bb2, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_6);
+        _6 = (_3.0: math::bn::U192);
+        StorageLive(_7);
+        _7 = _6;
+        _0 = Option::<U192>::Some(move _7);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb4;
+    }
+
+    bb3: {
+        _0 = Option::<U192>::None;
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_3);
+        return;
+    }
+}

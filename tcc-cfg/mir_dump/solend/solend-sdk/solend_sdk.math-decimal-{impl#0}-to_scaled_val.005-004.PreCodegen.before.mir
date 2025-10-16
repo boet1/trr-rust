@@ -1,0 +1,91 @@
+// MIR for `decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::to_scaled_val` before PreCodegen
+
+fn decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::to_scaled_val(_1: &decimal::Decimal) -> Result<u128, ProgramError> {
+    debug self => _1;
+    let mut _0: std::result::Result<u128, solana_program::program_error::ProgramError>;
+    let mut _2: u128;
+    let mut _3: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, u128>;
+    let mut _4: std::result::Result<u128, error::LendingError>;
+    let mut _5: std::result::Result<u128, &str>;
+    let mut _6: math::decimal::U192;
+    let mut _7: {closure@token-lending\sdk\src\math\decimal.rs:71:43: 71:46};
+    let mut _8: isize;
+    let _9: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _10: !;
+    let mut _11: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _12: u128;
+    scope 1 {
+        debug residual => _9;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _12;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_1).0: math::decimal::U192);
+        _5 = <u128 as TryFrom<U192>>::try_from(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = {closure@token-lending\sdk\src\math\decimal.rs:71:43: 71:46};
+        _4 = Result::<u128, &str>::map_err::<LendingError, {closure@token-lending\sdk\src\math\decimal.rs:71:43: 71:46}>(move _5, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_5);
+        _3 = <Result<u128, LendingError> as Try>::branch(move _4) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        _8 = discriminant(_3);
+        switchInt(move _8) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_12);
+        _12 = ((_3 as Continue).0: u128);
+        _2 = _12;
+        StorageDead(_12);
+        _0 = Result::<u128, ProgramError>::Ok(move _2);
+        StorageDead(_2);
+        StorageDead(_3);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_9);
+        _9 = move ((_3 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_11);
+        _11 = move _9;
+        _0 = <Result<u128, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _11) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_2);
+        StorageDead(_3);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+}

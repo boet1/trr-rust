@@ -1,0 +1,414 @@
+// MIR for `get_margin_calculation_for_disable_high_leverage_mode` after PreCodegen
+
+fn get_margin_calculation_for_disable_high_leverage_mode(_1: &mut User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>) -> std::result::Result<MarginCalculation, error::ErrorCode> {
+    debug user => _1;
+    debug perp_market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    let mut _0: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let _5: u32;
+    let _7: ();
+    let mut _8: std::iter::Enumerate<std::slice::IterMut<'_, state::user::PerpPosition>>;
+    let mut _9: std::iter::Enumerate<std::slice::IterMut<'_, state::user::PerpPosition>>;
+    let mut _10: std::slice::IterMut<'_, state::user::PerpPosition>;
+    let mut _11: &mut [state::user::PerpPosition];
+    let mut _12: &mut [state::user::PerpPosition; 8];
+    let mut _14: ();
+    let _15: ();
+    let mut _16: std::option::Option<(usize, &mut state::user::PerpPosition)>;
+    let mut _17: &mut std::iter::Enumerate<std::slice::IterMut<'_, state::user::PerpPosition>>;
+    let mut _18: &mut std::iter::Enumerate<std::slice::IterMut<'_, state::user::PerpPosition>>;
+    let mut _19: isize;
+    let mut _20: !;
+    let _23: ();
+    let mut _24: bool;
+    let mut _25: u16;
+    let mut _26: !;
+    let _27: std::option::Option<u16>;
+    let mut _28: &mut std::collections::BTreeMap<usize, u16>;
+    let mut _29: usize;
+    let mut _30: u16;
+    let mut _32: bool;
+    let mut _34: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginCalculation>;
+    let mut _35: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _36: &state::user::User;
+    let mut _37: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _38: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _39: &mut state::oracle_map::OracleMap<'_>;
+    let mut _40: state::margin_calculation::MarginContext;
+    let mut _41: state::margin_calculation::MarginContext;
+    let mut _42: math::margin::MarginRequirementType;
+    let mut _43: u32;
+    let mut _44: isize;
+    let mut _46: !;
+    let mut _47: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _49: u32;
+    let _50: ();
+    let mut _51: std::collections::btree_map::Iter<'_, usize, u16>;
+    let mut _52: std::collections::btree_map::Iter<'_, usize, u16>;
+    let mut _53: &std::collections::BTreeMap<usize, u16>;
+    let _55: ();
+    let mut _56: std::option::Option<(&usize, &u16)>;
+    let mut _57: &mut std::collections::btree_map::Iter<'_, usize, u16>;
+    let mut _58: &mut std::collections::btree_map::Iter<'_, usize, u16>;
+    let mut _59: isize;
+    let mut _60: !;
+    let mut _63: u16;
+    let _64: usize;
+    let mut _65: usize;
+    let mut _66: bool;
+    let mut _67: state::margin_calculation::MarginCalculation;
+    scope 1 {
+        debug custom_margin_ratio_before => _5;
+        let mut _6: std::collections::BTreeMap<usize, u16>;
+        scope 2 {
+            debug perp_position_max_margin_ratio_map => _6;
+            let mut _13: std::iter::Enumerate<std::slice::IterMut<'_, state::user::PerpPosition>>;
+            let _31: u32;
+            scope 3 {
+                debug iter => _13;
+                let _21: usize;
+                let _22: &mut state::user::PerpPosition;
+                scope 4 {
+                    debug index => _21;
+                    debug position => _22;
+                }
+            }
+            scope 5 {
+                debug margin_buffer => _31;
+                let _33: state::margin_calculation::MarginCalculation;
+                let _45: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _48: state::margin_calculation::MarginCalculation;
+                scope 6 {
+                    debug margin_calc => _33;
+                    let mut _54: std::collections::btree_map::Iter<'_, usize, u16>;
+                    scope 11 {
+                        debug iter => _54;
+                        let _61: &usize;
+                        let _62: &u16;
+                        scope 12 {
+                            debug index => _61;
+                            debug perp_position_max_margin_ratio => _62;
+                        }
+                    }
+                }
+                scope 7 {
+                    debug residual => _45;
+                    scope 8 {
+                    }
+                }
+                scope 9 {
+                    debug val => _48;
+                    scope 10 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _5 = ((*_1).16: u32);
+        StorageLive(_6);
+        _6 = BTreeMap::<usize, u16>::new() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &mut ((*_1).4: [state::user::PerpPosition; 8]);
+        _11 = move _12 as &mut [state::user::PerpPosition] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        _10 = core::slice::<impl [PerpPosition]>::iter_mut(move _11) -> [return: bb2, unwind: bb31];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        _9 = <std::slice::IterMut<'_, PerpPosition> as Iterator>::enumerate(move _10) -> [return: bb3, unwind: bb31];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _8 = <Enumerate<std::slice::IterMut<'_, PerpPosition>> as IntoIterator>::into_iter(move _9) -> [return: bb4, unwind: bb31];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageLive(_13);
+        _13 = move _8;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &mut _13;
+        _17 = &mut (*_18);
+        _16 = <Enumerate<std::slice::IterMut<'_, PerpPosition>> as Iterator>::next(move _17) -> [return: bb6, unwind: bb31];
+    }
+
+    bb6: {
+        StorageDead(_17);
+        _19 = discriminant(_16);
+        switchInt(move _19) -> [0: bb9, 1: bb7, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_21);
+        _21 = (((_16 as Some).0: (usize, &mut state::user::PerpPosition)).0: usize);
+        StorageLive(_22);
+        _22 = move (((_16 as Some).0: (usize, &mut state::user::PerpPosition)).1: &mut state::user::PerpPosition);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = ((*_22).12: u16);
+        _24 = Eq(move _25, const 0_u16);
+        switchInt(move _24) -> [0: bb11, otherwise: bb10];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        _7 = const ();
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_31);
+        _32 = Eq(const 100_u32, const 0_u32);
+        assert(!move _32, "attempt to divide `{}` by zero", const _) -> [success: bb13, unwind: bb31];
+    }
+
+    bb10: {
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb5;
+    }
+
+    bb11: {
+        StorageDead(_25);
+        _23 = const ();
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &mut _6;
+        StorageLive(_29);
+        _29 = _21;
+        StorageLive(_30);
+        _30 = ((*_22).12: u16);
+        _27 = BTreeMap::<usize, u16>::insert(move _28, move _29, move _30) -> [return: bb12, unwind: bb31];
+    }
+
+    bb12: {
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_27);
+        ((*_22).12: u16) = const 0_u16;
+        _15 = const ();
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_15);
+        _14 = const ();
+        goto -> bb5;
+    }
+
+    bb13: {
+        _31 = Div(const _, const 100_u32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = &(*_1);
+        StorageLive(_37);
+        _37 = &(*_2);
+        StorageLive(_38);
+        _38 = &(*_3);
+        StorageLive(_39);
+        _39 = &mut (*_4);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = math::margin::MarginRequirementType::Initial;
+        _41 = MarginContext::standard(move _42) -> [return: bb14, unwind: bb31];
+    }
+
+    bb14: {
+        StorageDead(_42);
+        StorageLive(_43);
+        _43 = _31;
+        _40 = MarginContext::margin_buffer(move _41, move _43) -> [return: bb15, unwind: bb31];
+    }
+
+    bb15: {
+        StorageDead(_43);
+        StorageDead(_41);
+        _35 = math::margin::calculate_margin_requirement_and_total_collateral_and_liability_info(move _36, move _37, move _38, move _39, move _40) -> [return: bb16, unwind: bb31];
+    }
+
+    bb16: {
+        StorageDead(_40);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_37);
+        StorageDead(_36);
+        _34 = <std::result::Result<MarginCalculation, error::ErrorCode> as Try>::branch(move _35) -> [return: bb17, unwind: bb31];
+    }
+
+    bb17: {
+        StorageDead(_35);
+        _44 = discriminant(_34);
+        switchInt(move _44) -> [0: bb18, 1: bb19, otherwise: bb8];
+    }
+
+    bb18: {
+        StorageLive(_48);
+        _48 = ((_34 as Continue).0: state::margin_calculation::MarginCalculation);
+        _33 = _48;
+        StorageDead(_48);
+        StorageDead(_34);
+        StorageLive(_49);
+        _49 = _5;
+        ((*_1).16: u32) = move _49;
+        StorageDead(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &_6;
+        _52 = BTreeMap::<usize, u16>::iter(move _53) -> [return: bb21, unwind: bb31];
+    }
+
+    bb19: {
+        StorageLive(_45);
+        _45 = ((_34 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_47);
+        _47 = _45;
+        _0 = <std::result::Result<MarginCalculation, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _47) -> [return: bb20, unwind: bb31];
+    }
+
+    bb20: {
+        StorageDead(_47);
+        StorageDead(_45);
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_31);
+        drop(_6) -> [return: bb29, unwind: bb32];
+    }
+
+    bb21: {
+        StorageDead(_53);
+        _51 = <std::collections::btree_map::Iter<'_, usize, u16> as IntoIterator>::into_iter(move _52) -> [return: bb22, unwind: bb31];
+    }
+
+    bb22: {
+        StorageDead(_52);
+        StorageLive(_54);
+        _54 = move _51;
+        goto -> bb23;
+    }
+
+    bb23: {
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = &mut _54;
+        _57 = &mut (*_58);
+        _56 = <std::collections::btree_map::Iter<'_, usize, u16> as Iterator>::next(move _57) -> [return: bb24, unwind: bb31];
+    }
+
+    bb24: {
+        StorageDead(_57);
+        _59 = discriminant(_56);
+        switchInt(move _59) -> [0: bb26, 1: bb25, otherwise: bb8];
+    }
+
+    bb25: {
+        StorageLive(_61);
+        _61 = (((_56 as Some).0: (&usize, &u16)).0: &usize);
+        StorageLive(_62);
+        _62 = (((_56 as Some).0: (&usize, &u16)).1: &u16);
+        StorageLive(_63);
+        _63 = (*_62);
+        StorageLive(_64);
+        _64 = (*_61);
+        _65 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _66 = Lt(_64, _65);
+        assert(move _66, "index out of bounds: the length is {} but the index is {}", move _65, _64) -> [success: bb27, unwind: bb31];
+    }
+
+    bb26: {
+        _50 = const ();
+        StorageDead(_58);
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_51);
+        StorageDead(_50);
+        StorageLive(_67);
+        _67 = _33;
+        _0 = std::result::Result::<MarginCalculation, error::ErrorCode>::Ok(move _67);
+        StorageDead(_67);
+        StorageDead(_33);
+        StorageDead(_31);
+        drop(_6) -> [return: bb28, unwind: bb32];
+    }
+
+    bb27: {
+        (((*_1).4: [state::user::PerpPosition; 8])[_64].12: u16) = move _63;
+        StorageDead(_63);
+        StorageDead(_64);
+        _55 = const ();
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageDead(_58);
+        StorageDead(_56);
+        StorageDead(_55);
+        _14 = const ();
+        goto -> bb23;
+    }
+
+    bb28: {
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb30;
+    }
+
+    bb29: {
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb30;
+    }
+
+    bb30: {
+        return;
+    }
+
+    bb31 (cleanup): {
+        drop(_6) -> [return: bb32, unwind terminate(cleanup)];
+    }
+
+    bb32 (cleanup): {
+        resume;
+    }
+}

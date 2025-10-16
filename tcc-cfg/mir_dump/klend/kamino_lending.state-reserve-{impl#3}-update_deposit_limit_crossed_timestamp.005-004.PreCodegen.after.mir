@@ -1,0 +1,65 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::update_deposit_limit_crossed_timestamp` after PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::update_deposit_limit_crossed_timestamp(_1: &mut reserve::Reserve, _2: u64) -> () {
+    debug self => _1;
+    debug timestamp => _2;
+    let mut _0: ();
+    let mut _3: bool;
+    let mut _4: &state::reserve::Reserve;
+    let mut _5: bool;
+    let mut _6: u64;
+    let mut _7: u64;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = reserve::Reserve::deposit_limit_crossed(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb6, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = (((*_1).5: state::reserve::ReserveLiquidity).8: u64);
+        _5 = Eq(move _6, const 0_u64);
+        switchInt(move _5) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = _2;
+        (((*_1).5: state::reserve::ReserveLiquidity).8: u64) = move _7;
+        StorageDead(_7);
+        _0 = const ();
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_6);
+        _0 = const ();
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        goto -> bb7;
+    }
+
+    bb6: {
+        StorageDead(_4);
+        (((*_1).5: state::reserve::ReserveLiquidity).8: u64) = const 0_u64;
+        _0 = const ();
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_3);
+        return;
+    }
+}

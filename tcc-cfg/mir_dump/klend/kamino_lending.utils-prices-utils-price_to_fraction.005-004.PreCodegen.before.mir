@@ -1,0 +1,105 @@
+// MIR for `price_to_fraction` before PreCodegen
+
+fn price_to_fraction(_1: prices::types::Price<T>) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug price => _1;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _2: T;
+    let _3: u32;
+    let mut _5: T;
+    let mut _7: u32;
+    let mut _9: utils::fraction::uint_types::U256;
+    let mut _11: utils::fraction::BigFraction;
+    let mut _12: utils::fraction::uint_types::U128;
+    let mut _13: std::result::Result<fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, LendingError>;
+    let mut _14: utils::fraction::BigFraction;
+    let mut _15: &str;
+    let _16: &str;
+    scope 1 {
+        debug value => _2;
+        debug exp => _3;
+        let _4: utils::fraction::uint_types::U256;
+        scope 2 {
+            debug value => _4;
+            let _6: utils::fraction::uint_types::U128;
+            scope 3 {
+                debug decimal => _6;
+                let _8: utils::fraction::BigFraction;
+                scope 4 {
+                    debug value_bf => _8;
+                    let _10: utils::fraction::BigFraction;
+                    scope 5 {
+                        debug price_bf => _10;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = (_1.0: T);
+        StorageLive(_3);
+        _3 = (_1.1: u32);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        _4 = <T as Into<uint_types::U256>>::into(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _3;
+        _6 = prices::utils::ten_pow(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _4;
+        _8 = utils::fraction::BigFraction::from_num::<uint_types::U256>(move _9) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _8;
+        StorageLive(_12);
+        _12 = _6;
+        _10 = <utils::fraction::BigFraction as std::ops::Div<uint_types::U128>>::div(move _11, move _12) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _10;
+        _13 = <utils::fraction::BigFraction as TryInto<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>>::try_into(move _14) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = const "Failed to convert Price stored on BigFraction to Fraction";
+        _15 = &(*_16);
+        _0 = std::result::Result::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, LendingError>::expect(move _13, move _15) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_16);
+        return;
+    }
+}

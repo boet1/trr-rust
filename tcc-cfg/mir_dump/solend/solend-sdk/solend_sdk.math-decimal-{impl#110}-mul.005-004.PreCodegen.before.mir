@@ -1,0 +1,67 @@
+// MIR for `decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:444:3: 444:57>::mul` before PreCodegen
+
+fn decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:444:3: 444:57>::mul(_1: U192, _2: &usize) -> U192 {
+    debug self => _1;
+    debug other => _2;
+    let mut _0: math::decimal::U192;
+    let _3: math::decimal::U192;
+    let _4: u64;
+    let mut _5: (math::decimal::U192, u64);
+    let mut _6: math::decimal::U192;
+    let mut _7: u64;
+    let mut _8: usize;
+    let _9: ();
+    let mut _10: bool;
+    let mut _11: u64;
+    let mut _12: !;
+    let _13: !;
+    scope 1 {
+        debug result => _3;
+        debug carry => _4;
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _1;
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = (*_2);
+        _7 = move _8 as u64 (IntToInt);
+        StorageDead(_8);
+        _5 = U192::overflowing_mul_u64(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_3);
+        _3 = (_5.0: math::decimal::U192);
+        StorageLive(_4);
+        _4 = (_5.1: u64);
+        StorageDead(_5);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _4;
+        _10 = Gt(move _11, const 0_u64);
+        switchInt(move _10) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageLive(_13);
+        _13 = begin_panic::<&str>(const "arithmetic operation overflow") -> unwind continue;
+    }
+
+    bb3: {
+        StorageDead(_11);
+        _9 = const ();
+        StorageDead(_10);
+        StorageDead(_9);
+        _0 = _3;
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

@@ -1,0 +1,880 @@
+// MIR for `keeper::handle_place_signed_msg_taker_order` before PreCodegen
+
+fn keeper::handle_place_signed_msg_taker_order(_1: anchor_lang::context::Context<'_, '_, '_, '_, keeper::PlaceSignedMsgTakerOrder<'_>>, _2: Vec<u8>, _3: bool) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug signed_msg_order_params_message_bytes => _2;
+    debug is_delegate_signer => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: &std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _6: std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _7: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _11: instructions::optional_accounts::AccountMaps<'_>;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, instructions::optional_accounts::AccountMaps<'_>>;
+    let mut _13: std::result::Result<instructions::optional_accounts::AccountMaps<'_>, error::ErrorCode>;
+    let mut _14: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _15: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _16: &std::collections::BTreeSet<u16>;
+    let _17: &std::collections::BTreeSet<u16>;
+    let _18: std::collections::BTreeSet<u16>;
+    let mut _19: &std::collections::BTreeSet<u16>;
+    let _20: &std::collections::BTreeSet<u16>;
+    let _21: std::collections::BTreeSet<u16>;
+    let mut _22: u64;
+    let mut _23: anchor_lang::prelude::Clock;
+    let mut _24: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _25: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _26: isize;
+    let mut _28: !;
+    let mut _29: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _31: std::option::Option<state::state::OracleGuardRails>;
+    let mut _32: state::state::OracleGuardRails;
+    let mut _33: &state::state::State;
+    let mut _34: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _35: isize;
+    let mut _37: !;
+    let mut _38: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _41: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>>;
+    let mut _42: std::result::Result<std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>, error::ErrorCode>;
+    let mut _43: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _44: &mut std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+    let mut _45: isize;
+    let mut _47: !;
+    let mut _48: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _51: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _53: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::user::User>>;
+    let mut _54: std::result::Result<std::cell::RefMut<'_, state::user::User>, error::ErrorCode>;
+    let mut _55: std::result::Result<std::cell::RefMut<'_, state::user::User>, anchor_lang::error::Error>;
+    let mut _56: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _57: {closure@programs/drift/src/macros.rs:58:44: 58:47};
+    let mut _58: isize;
+    let mut _60: !;
+    let mut _61: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _64: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>>;
+    let mut _65: std::result::Result<state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>, error::ErrorCode>;
+    let mut _66: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _67: isize;
+    let mut _69: !;
+    let mut _70: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _72: ();
+    let mut _73: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _74: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _75: anchor_lang::prelude::Pubkey;
+    let mut _76: &mut std::cell::RefMut<'_, state::user::User>;
+    let mut _77: &mut std::cell::RefMut<'_, state::user::User>;
+    let mut _78: &mut state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>;
+    let mut _79: &mut state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>;
+    let mut _80: std::vec::Vec<u8>;
+    let mut _81: &anchor_lang::prelude::AccountInfo<'_>;
+    let _82: &anchor_lang::prelude::AccountInfo<'_>;
+    let _83: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _84: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _85: &state::perp_market_map::PerpMarketMap<'_>;
+    let _86: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _87: &state::spot_market_map::SpotMarketMap<'_>;
+    let _88: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _89: &mut state::oracle_map::OracleMap<'_>;
+    let mut _90: &mut state::oracle_map::OracleMap<'_>;
+    let mut _91: std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+    let mut _92: &state::state::State;
+    let _93: &state::state::State;
+    let mut _94: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _95: bool;
+    let mut _96: isize;
+    let mut _98: !;
+    let mut _99: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _101: ();
+    let mut _102: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>;
+    let mut _103: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _104: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _105: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>;
+    let mut _106: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>;
+    let mut _107: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>;
+    let mut _108: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>;
+    let mut _109: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _110: bool;
+    let mut _111: bool;
+    let mut _112: bool;
+    let mut _113: bool;
+    let mut _114: isize;
+    let mut _115: isize;
+    let mut _116: isize;
+    let mut _117: isize;
+    let mut _118: isize;
+    let mut _119: isize;
+    let mut _120: isize;
+    let mut _121: isize;
+    let mut _122: isize;
+    let mut _123: isize;
+    let mut _124: isize;
+    let mut _125: isize;
+    let mut _126: isize;
+    let mut _127: isize;
+    let mut _128: isize;
+    let mut _129: isize;
+    let mut _130: isize;
+    let mut _131: isize;
+    let mut _132: isize;
+    let mut _133: isize;
+    let mut _134: isize;
+    let mut _135: isize;
+    let mut _136: isize;
+    let mut _137: isize;
+    let mut _138: isize;
+    let mut _139: isize;
+    let mut _140: isize;
+    let mut _141: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _142: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    scope 1 {
+        debug state => _4;
+        let mut _5: std::iter::Peekable<std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>>>;
+        scope 2 {
+            debug remaining_accounts => _5;
+            let _8: state::perp_market_map::PerpMarketMap<'_>;
+            let _9: state::spot_market_map::SpotMarketMap<'_>;
+            let mut _10: state::oracle_map::OracleMap<'_>;
+            let _27: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+            let _30: anchor_lang::prelude::Clock;
+            let _36: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _39: instructions::optional_accounts::AccountMaps<'_>;
+            scope 3 {
+                debug perp_market_map => _8;
+                debug spot_market_map => _9;
+                debug oracle_map => _10;
+                let _40: std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+                let _46: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _49: std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>;
+                scope 12 {
+                    debug high_leverage_mode_config => _40;
+                    let _50: anchor_lang::prelude::Pubkey;
+                    scope 17 {
+                        debug taker_key => _50;
+                        let mut _52: std::cell::RefMut<'_, state::user::User>;
+                        let _59: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _62: std::cell::RefMut<'_, state::user::User>;
+                        scope 18 {
+                            debug taker => _52;
+                            let mut _63: state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>;
+                            let _68: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _71: state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>;
+                            scope 23 {
+                                debug signed_msg_taker => _63;
+                                let _97: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                let _100: ();
+                                scope 28 {
+                                    debug residual => _97;
+                                    scope 29 {
+                                    }
+                                }
+                                scope 30 {
+                                    debug val => _100;
+                                    scope 31 {
+                                    }
+                                }
+                            }
+                            scope 24 {
+                                debug residual => _68;
+                                scope 25 {
+                                }
+                            }
+                            scope 26 {
+                                debug val => _71;
+                                scope 27 {
+                                }
+                            }
+                        }
+                        scope 19 {
+                            debug residual => _59;
+                            scope 20 {
+                            }
+                        }
+                        scope 21 {
+                            debug val => _62;
+                            scope 22 {
+                            }
+                        }
+                    }
+                }
+                scope 13 {
+                    debug residual => _46;
+                    scope 14 {
+                    }
+                }
+                scope 15 {
+                    debug val => _49;
+                    scope 16 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _27;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _30;
+                scope 7 {
+                }
+            }
+            scope 8 {
+                debug residual => _36;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _39;
+                scope 11 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _112 = const false;
+        _113 = const false;
+        _111 = const false;
+        _110 = const false;
+        _112 = const true;
+        StorageLive(_4);
+        _102 = deref_copy (_1.1: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>);
+        _4 = &((*_102).0: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _103 = deref_copy (_1.2: &[anchor_lang::prelude::AccountInfo<'_>]);
+        _7 = &(*_103);
+        _6 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::iter(move _7) -> [return: bb1, unwind: bb81];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        _5 = <std::slice::Iter<'_, anchor_lang::prelude::AccountInfo<'_>> as Iterator>::peekable(move _6) -> [return: bb2, unwind: bb81];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &mut _5;
+        _14 = &mut (*_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = BTreeSet::<u16>::new() -> [return: bb3, unwind: bb81];
+    }
+
+    bb3: {
+        _17 = &_18;
+        _16 = &(*_17);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = BTreeSet::<u16>::new() -> [return: bb4, unwind: bb69];
+    }
+
+    bb4: {
+        _20 = &_21;
+        _19 = &(*_20);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb5, unwind: bb68];
+    }
+
+    bb5: {
+        _24 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _25) -> [return: bb6, unwind: bb68];
+    }
+
+    bb6: {
+        _110 = const true;
+        _111 = const true;
+        StorageDead(_25);
+        _26 = discriminant(_24);
+        switchInt(move _26) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_30);
+        _30 = move ((_24 as Continue).0: anchor_lang::prelude::Clock);
+        _23 = move _30;
+        StorageDead(_30);
+        _22 = (_23.0: u64);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _104 = deref_copy (*_4);
+        _141 = (((_104.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _34 = &(*_141);
+        _33 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _34) -> [return: bb11, unwind: bb79];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_27);
+        _27 = move ((_24 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_29);
+        _29 = move _27;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _29) -> [return: bb10, unwind: bb79];
+    }
+
+    bb10: {
+        StorageDead(_29);
+        StorageDead(_27);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb71;
+    }
+
+    bb11: {
+        StorageDead(_34);
+        _32 = ((*_33).7: state::state::OracleGuardRails);
+        _31 = Option::<state::state::OracleGuardRails>::Some(move _32);
+        StorageDead(_32);
+        _13 = load_maps(move _14, move _16, move _19, move _22, move _31) -> [return: bb12, unwind: bb79];
+    }
+
+    bb12: {
+        StorageDead(_31);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_14);
+        _12 = <std::result::Result<AccountMaps<'_>, error::ErrorCode> as Try>::branch(move _13) -> [return: bb13, unwind: bb79];
+    }
+
+    bb13: {
+        StorageDead(_13);
+        _35 = discriminant(_12);
+        switchInt(move _35) -> [0: bb14, 1: bb15, otherwise: bb8];
+    }
+
+    bb14: {
+        StorageLive(_39);
+        _39 = move ((_12 as Continue).0: instructions::optional_accounts::AccountMaps<'_>);
+        _11 = move _39;
+        StorageDead(_39);
+        StorageLive(_8);
+        _8 = move (_11.0: state::perp_market_map::PerpMarketMap<'_>);
+        StorageLive(_9);
+        _9 = move (_11.1: state::spot_market_map::SpotMarketMap<'_>);
+        StorageLive(_10);
+        _10 = move (_11.2: state::oracle_map::OracleMap<'_>);
+        _116 = discriminant(_12);
+        StorageDead(_33);
+        _118 = discriminant(_24);
+        _110 = const false;
+        _111 = const false;
+        StorageDead(_24);
+        StorageDead(_23);
+        drop(_21) -> [return: bb17, unwind: bb64];
+    }
+
+    bb15: {
+        StorageLive(_36);
+        _36 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_38);
+        _38 = _36;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _38) -> [return: bb16, unwind: bb78];
+    }
+
+    bb16: {
+        StorageDead(_38);
+        StorageDead(_36);
+        _114 = discriminant(_12);
+        StorageDead(_33);
+        goto -> bb71;
+    }
+
+    bb17: {
+        StorageDead(_21);
+        StorageDead(_20);
+        drop(_18) -> [return: bb18, unwind: bb65];
+    }
+
+    bb18: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        _44 = &mut _5;
+        _43 = &mut (*_44);
+        _42 = get_high_leverage_mode_config(move _43) -> [return: bb19, unwind: bb65];
+    }
+
+    bb19: {
+        StorageDead(_43);
+        _41 = <std::result::Result<Option<anchor_lang::prelude::AccountLoader<'_, HighLeverageModeConfig>>, error::ErrorCode> as Try>::branch(move _42) -> [return: bb20, unwind: bb65];
+    }
+
+    bb20: {
+        StorageDead(_42);
+        _45 = discriminant(_41);
+        switchInt(move _45) -> [0: bb21, 1: bb22, otherwise: bb8];
+    }
+
+    bb21: {
+        StorageLive(_49);
+        _49 = move ((_41 as Continue).0: std::option::Option<anchor_lang::prelude::AccountLoader<'_, state::high_leverage_mode_config::HighLeverageModeConfig>>);
+        _40 = move _49;
+        StorageDead(_49);
+        StorageDead(_44);
+        StorageDead(_41);
+        StorageLive(_50);
+        StorageLive(_51);
+        _105 = deref_copy (_1.1: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>);
+        _51 = &((*_105).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _50 = <anchor_lang::prelude::AccountLoader<'_, User> as anchor_lang::Key>::key(move _51) -> [return: bb24, unwind: bb65];
+    }
+
+    bb22: {
+        StorageLive(_46);
+        _46 = ((_41 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_48);
+        _48 = _46;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _48) -> [return: bb23, unwind: bb65];
+    }
+
+    bb23: {
+        StorageDead(_48);
+        StorageDead(_46);
+        StorageDead(_44);
+        StorageDead(_41);
+        goto -> bb52;
+    }
+
+    bb24: {
+        StorageDead(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        _106 = deref_copy (_1.1: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>);
+        _56 = &((*_106).1: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _55 = anchor_lang::prelude::AccountLoader::<'_, User>::load_mut(move _56) -> [return: bb25, unwind: bb65];
+    }
+
+    bb25: {
+        StorageDead(_56);
+        StorageLive(_57);
+        _57 = {closure@programs/drift/src/macros.rs:58:44: 58:47};
+        _54 = std::result::Result::<RefMut<'_, User>, anchor_lang::error::Error>::map_err::<error::ErrorCode, {closure@programs/drift/src/macros.rs:58:44: 58:47}>(move _55, move _57) -> [return: bb26, unwind: bb65];
+    }
+
+    bb26: {
+        StorageDead(_57);
+        StorageDead(_55);
+        _53 = <std::result::Result<RefMut<'_, User>, error::ErrorCode> as Try>::branch(move _54) -> [return: bb27, unwind: bb65];
+    }
+
+    bb27: {
+        StorageDead(_54);
+        _58 = discriminant(_53);
+        switchInt(move _58) -> [0: bb28, 1: bb29, otherwise: bb8];
+    }
+
+    bb28: {
+        StorageLive(_62);
+        _62 = move ((_53 as Continue).0: std::cell::RefMut<'_, state::user::User>);
+        _52 = move _62;
+        StorageDead(_62);
+        _122 = discriminant(_53);
+        StorageDead(_53);
+        StorageLive(_63);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        _107 = deref_copy (_1.1: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>);
+        _66 = &((*_107).3: anchor_lang::prelude::AccountInfo<'_>);
+        _65 = <anchor_lang::prelude::AccountInfo<'_> as SignedMsgUserOrdersLoader<'_>>::load_mut(move _66) -> [return: bb31, unwind: bb63];
+    }
+
+    bb29: {
+        StorageLive(_59);
+        _59 = ((_53 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_61);
+        _61 = _59;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _61) -> [return: bb30, unwind: bb77];
+    }
+
+    bb30: {
+        StorageDead(_61);
+        StorageDead(_59);
+        _120 = discriminant(_53);
+        StorageDead(_53);
+        goto -> bb51;
+    }
+
+    bb31: {
+        StorageDead(_66);
+        _64 = <std::result::Result<SignedMsgUserOrdersZeroCopyMut<'_>, error::ErrorCode> as Try>::branch(move _65) -> [return: bb32, unwind: bb63];
+    }
+
+    bb32: {
+        StorageDead(_65);
+        _67 = discriminant(_64);
+        switchInt(move _67) -> [0: bb33, 1: bb34, otherwise: bb8];
+    }
+
+    bb33: {
+        StorageLive(_71);
+        _71 = move ((_64 as Continue).0: state::signed_msg_user::SignedMsgUserOrdersZeroCopyMut<'_>);
+        _63 = move _71;
+        StorageDead(_71);
+        _126 = discriminant(_64);
+        StorageDead(_64);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        _75 = _50;
+        StorageLive(_76);
+        StorageLive(_77);
+        _77 = &mut _52;
+        _76 = &mut (*_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        _79 = &mut _63;
+        _78 = &mut (*_79);
+        StorageLive(_80);
+        _112 = const false;
+        _113 = const true;
+        _80 = move _2;
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        StorageLive(_84);
+        _108 = deref_copy (_1.1: &mut instructions::keeper::PlaceSignedMsgTakerOrder<'_>);
+        _84 = &((*_108).5: anchor_lang::prelude::AccountInfo<'_>);
+        _83 = <anchor_lang::prelude::AccountInfo<'_> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _84) -> [return: bb36, unwind: bb61];
+    }
+
+    bb34: {
+        StorageLive(_68);
+        _68 = ((_64 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_70);
+        _70 = _68;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _70) -> [return: bb35, unwind: bb76];
+    }
+
+    bb35: {
+        StorageDead(_70);
+        StorageDead(_68);
+        _124 = discriminant(_64);
+        StorageDead(_64);
+        goto -> bb50;
+    }
+
+    bb36: {
+        StorageDead(_84);
+        _82 = &_83;
+        _81 = &(*_82);
+        StorageLive(_85);
+        StorageLive(_86);
+        _86 = &_8;
+        _85 = &(*_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        _88 = &_9;
+        _87 = &(*_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = &mut _10;
+        _89 = &mut (*_90);
+        StorageLive(_91);
+        _91 = move _40;
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        _109 = deref_copy (*_4);
+        _142 = (((_109.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _94 = &(*_142);
+        _93 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _94) -> [return: bb37, unwind: bb75];
+    }
+
+    bb37: {
+        _92 = &(*_93);
+        StorageDead(_94);
+        StorageLive(_95);
+        _95 = _3;
+        _113 = const false;
+        _74 = keeper::place_signed_msg_taker_order::<'_, '_>(move _75, move _76, move _78, move _80, move _81, move _85, move _87, move _89, move _91, move _92, move _95) -> [return: bb38, unwind: bb75];
+    }
+
+    bb38: {
+        StorageDead(_95);
+        StorageDead(_92);
+        StorageDead(_91);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_85);
+        StorageDead(_81);
+        _113 = const false;
+        StorageDead(_80);
+        StorageDead(_78);
+        StorageDead(_76);
+        StorageDead(_75);
+        _73 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _74) -> [return: bb39, unwind: bb60];
+    }
+
+    bb39: {
+        StorageDead(_74);
+        _96 = discriminant(_73);
+        switchInt(move _96) -> [0: bb40, 1: bb41, otherwise: bb8];
+    }
+
+    bb40: {
+        StorageLive(_100);
+        _100 = ((_73 as Continue).0: ());
+        _72 = _100;
+        StorageDead(_100);
+        _128 = discriminant(_73);
+        StorageDead(_93);
+        StorageDead(_90);
+        StorageDead(_88);
+        StorageDead(_86);
+        drop(_83) -> [return: bb43, unwind: bb62];
+    }
+
+    bb41: {
+        StorageLive(_97);
+        _97 = move ((_73 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_99);
+        _99 = move _97;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _99) -> [return: bb42, unwind: bb73];
+    }
+
+    bb42: {
+        StorageDead(_99);
+        StorageDead(_97);
+        _130 = discriminant(_73);
+        StorageDead(_93);
+        StorageDead(_90);
+        StorageDead(_88);
+        StorageDead(_86);
+        drop(_83) -> [return: bb49, unwind: bb62];
+    }
+
+    bb43: {
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageDead(_79);
+        StorageDead(_77);
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageLive(_101);
+        _101 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _101);
+        StorageDead(_101);
+        drop(_63) -> [return: bb44, unwind: bb63];
+    }
+
+    bb44: {
+        StorageDead(_63);
+        drop(_52) -> [return: bb45, unwind: bb65];
+    }
+
+    bb45: {
+        StorageDead(_52);
+        StorageDead(_50);
+        StorageDead(_40);
+        drop(_10) -> [return: bb46, unwind: bb66];
+    }
+
+    bb46: {
+        StorageDead(_10);
+        drop(_9) -> [return: bb47, unwind: bb67];
+    }
+
+    bb47: {
+        StorageDead(_9);
+        drop(_8) -> [return: bb48, unwind: bb81];
+    }
+
+    bb48: {
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb59;
+    }
+
+    bb49: {
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageDead(_79);
+        StorageDead(_77);
+        StorageDead(_73);
+        StorageDead(_72);
+        drop(_63) -> [return: bb50, unwind: bb63];
+    }
+
+    bb50: {
+        StorageDead(_63);
+        drop(_52) -> [return: bb51, unwind: bb65];
+    }
+
+    bb51: {
+        StorageDead(_52);
+        StorageDead(_50);
+        goto -> bb52;
+    }
+
+    bb52: {
+        StorageDead(_40);
+        drop(_10) -> [return: bb53, unwind: bb66];
+    }
+
+    bb53: {
+        StorageDead(_10);
+        drop(_9) -> [return: bb54, unwind: bb67];
+    }
+
+    bb54: {
+        StorageDead(_9);
+        drop(_8) -> [return: bb55, unwind: bb81];
+    }
+
+    bb55: {
+        StorageDead(_8);
+        goto -> bb58;
+    }
+
+    bb56: {
+        StorageDead(_21);
+        StorageDead(_20);
+        drop(_18) -> [return: bb57, unwind: bb81];
+    }
+
+    bb57: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb58;
+    }
+
+    bb58: {
+        StorageDead(_5);
+        StorageDead(_4);
+        switchInt(_112) -> [0: bb59, otherwise: bb72];
+    }
+
+    bb59: {
+        return;
+    }
+
+    bb60 (cleanup): {
+        drop(_83) -> [return: bb62, unwind terminate(cleanup)];
+    }
+
+    bb61 (cleanup): {
+        drop(_80) -> [return: bb62, unwind terminate(cleanup)];
+    }
+
+    bb62 (cleanup): {
+        drop(_63) -> [return: bb63, unwind terminate(cleanup)];
+    }
+
+    bb63 (cleanup): {
+        drop(_52) -> [return: bb65, unwind terminate(cleanup)];
+    }
+
+    bb64 (cleanup): {
+        drop(_18) -> [return: bb65, unwind terminate(cleanup)];
+    }
+
+    bb65 (cleanup): {
+        drop(_10) -> [return: bb66, unwind terminate(cleanup)];
+    }
+
+    bb66 (cleanup): {
+        drop(_9) -> [return: bb67, unwind terminate(cleanup)];
+    }
+
+    bb67 (cleanup): {
+        drop(_8) -> [return: bb81, unwind terminate(cleanup)];
+    }
+
+    bb68 (cleanup): {
+        drop(_21) -> [return: bb69, unwind terminate(cleanup)];
+    }
+
+    bb69 (cleanup): {
+        drop(_18) -> [return: bb81, unwind terminate(cleanup)];
+    }
+
+    bb70 (cleanup): {
+        resume;
+    }
+
+    bb71: {
+        _132 = discriminant(_24);
+        _110 = const false;
+        _111 = const false;
+        StorageDead(_24);
+        StorageDead(_23);
+        drop(_21) -> [return: bb56, unwind: bb69];
+    }
+
+    bb72: {
+        drop(_2) -> [return: bb59, unwind: bb70];
+    }
+
+    bb73 (cleanup): {
+        _134 = discriminant(_73);
+        goto -> bb60;
+    }
+
+    bb74 (cleanup): {
+        drop(_80) -> [return: bb60, unwind terminate(cleanup)];
+    }
+
+    bb75 (cleanup): {
+        switchInt(_113) -> [0: bb60, otherwise: bb74];
+    }
+
+    bb76 (cleanup): {
+        _135 = discriminant(_64);
+        goto -> bb63;
+    }
+
+    bb77 (cleanup): {
+        _136 = discriminant(_53);
+        goto -> bb65;
+    }
+
+    bb78 (cleanup): {
+        _139 = discriminant(_12);
+        goto -> bb79;
+    }
+
+    bb79 (cleanup): {
+        _140 = discriminant(_24);
+        goto -> bb68;
+    }
+
+    bb80 (cleanup): {
+        drop(_2) -> [return: bb70, unwind terminate(cleanup)];
+    }
+
+    bb81 (cleanup): {
+        switchInt(_112) -> [0: bb70, otherwise: bb80];
+    }
+}

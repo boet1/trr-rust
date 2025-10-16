@@ -1,0 +1,132 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::force_get_perp_position_mut` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::force_get_perp_position_mut(_1: &mut User, _2: u16) -> std::result::Result<&mut PerpPosition, error::ErrorCode> {
+    debug self => _1;
+    debug market_index => _2;
+    let mut _0: std::result::Result<&mut state::user::PerpPosition, error::ErrorCode>;
+    let _3: usize;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, usize>;
+    let mut _5: std::result::Result<usize, error::ErrorCode>;
+    let mut _6: std::result::Result<usize, error::ErrorCode>;
+    let mut _7: &[state::user::PerpPosition; 8];
+    let _8: &[state::user::PerpPosition; 8];
+    let mut _9: u16;
+    let mut _10: {closure@programs/drift/src/state/user.rs:256:22: 256:25};
+    let mut _11: &mut &mut state::user::User;
+    let mut _12: &u16;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _17: usize;
+    let mut _18: &mut state::user::PerpPosition;
+    let mut _19: &mut state::user::PerpPosition;
+    let _20: usize;
+    let mut _21: usize;
+    let mut _22: bool;
+    scope 1 {
+        debug position_index => _3;
+    }
+    scope 2 {
+        debug residual => _14;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _17;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &((*_1).4: [state::user::PerpPosition; 8]);
+        _7 = &(*_8);
+        StorageLive(_9);
+        _9 = _2;
+        _6 = get_position_index(move _7, move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &mut _1;
+        StorageLive(_12);
+        _12 = &_2;
+        _10 = {closure@programs/drift/src/state/user.rs:256:22: 256:25} { self: move _11, market_index: move _12 };
+        StorageDead(_12);
+        StorageDead(_11);
+        _5 = std::result::Result::<usize, error::ErrorCode>::or_else::<error::ErrorCode, {closure@programs/drift/src/state/user.rs:256:22: 256:25}>(move _6, move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        StorageDead(_6);
+        _4 = <std::result::Result<usize, error::ErrorCode> as Try>::branch(move _5) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _13 = discriminant(_4);
+        switchInt(move _13) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_17);
+        _17 = ((_4 as Continue).0: usize);
+        _3 = _17;
+        StorageDead(_17);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _3;
+        _21 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _22 = Lt(_20, _21);
+        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _20) -> [success: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_14);
+        _14 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_16);
+        _16 = _14;
+        _0 = <std::result::Result<&mut PerpPosition, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _16) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb8: {
+        _19 = &mut ((*_1).4: [state::user::PerpPosition; 8])[_20];
+        _18 = &mut (*_19);
+        _0 = std::result::Result::<&mut PerpPosition, error::ErrorCode>::Ok(move _18);
+        StorageDead(_18);
+        StorageDead(_3);
+        StorageDead(_20);
+        StorageDead(_19);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+}

@@ -1,0 +1,30 @@
+// MIR for `set_field_directly` after PreCodegen
+
+fn set_field_directly(_1: &mut T, _2: T) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug field => _1;
+    debug new_value => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _3: T;
+    let mut _4: ();
+
+    bb0: {
+        StorageLive(_3);
+        _3 = move _2;
+        drop((*_1)) -> [return: bb1, unwind: bb2];
+    }
+
+    bb1: {
+        (*_1) = move _3;
+        StorageDead(_3);
+        StorageLive(_4);
+        _4 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _4);
+        StorageDead(_4);
+        return;
+    }
+
+    bb2 (cleanup): {
+        (*_1) = move _3;
+        resume;
+    }
+}

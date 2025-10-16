@@ -1,0 +1,307 @@
+// MIR for `max_liquidatable_borrowed_amount` after PreCodegen
+
+fn max_liquidatable_borrowed_amount(_1: &obligation::Obligation, _2: u8, _3: u64, _4: &obligation::ObligationLiquidity, _5: FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, _6: u8, _7: state::types::LiquidationReason) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug obligation => _1;
+    debug liquidation_max_debt_close_factor_pct => _2;
+    debug market_max_liquidatable_debt_value_at_once => _3;
+    debug liquidity => _4;
+    debug user_ltv => _5;
+    debug insolvency_risk_ltv_pct => _6;
+    debug liquidation_reason => _7;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _8: ();
+    let mut _9: isize;
+    let mut _11: !;
+    let _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
+    let mut _17: state::order_operations::OpportunityType;
+    let mut _18: &state::obligation::ObligationOrder;
+    let mut _19: u8;
+    let mut _20: &state::obligation::ObligationOrder;
+    let mut _21: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _22: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _23: &state::obligation::ObligationLiquidity;
+    let _24: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _25: &state::obligation::ObligationLiquidity;
+    let mut _27: &state::obligation::Obligation;
+    let mut _29: bool;
+    let mut _30: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _31: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _32: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _33: u8;
+    let mut _34: u8;
+    let mut _36: u64;
+    let mut _38: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _39: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _41: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _42: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _43: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _44: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _46: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _47: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _48: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _49: &state::obligation::ObligationLiquidity;
+    let mut _50: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    scope 1 {
+        debug obligation_order_index => _10;
+        let _10: usize;
+        let _12: &state::obligation::ObligationOrder;
+        scope 2 {
+            debug obligation_order => _12;
+            let _16: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            scope 3 {
+                debug order_size_amount => _16;
+            }
+        }
+    }
+    scope 4 {
+        debug obligation_debt_for_liquidity_mv => _24;
+        let _26: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        scope 5 {
+            debug total_obligation_debt_mv => _26;
+            let _28: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            scope 6 {
+                debug liquidation_max_debt_close_factor_rate => _28;
+                let _35: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                scope 7 {
+                    debug market_max_liquidatable_debt_value_at_once => _35;
+                    let _37: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                    scope 8 {
+                        debug calculated_liquidatable_mv => _37;
+                        let _40: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                        scope 9 {
+                            debug max_liquidatable_mv => _40;
+                            let _45: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                            scope 10 {
+                                debug max_liquidation_ratio => _45;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_8);
+        _9 = discriminant(_7);
+        switchInt(move _9) -> [3: bb1, otherwise: bb11];
+    }
+
+    bb1: {
+        StorageLive(_10);
+        _10 = ((_7 as ObligationOrder).0: usize);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _10;
+        _14 = Len(((*_1).25: [state::obligation::ObligationOrder; 2]));
+        _15 = Lt(_13, _14);
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _12 = &((*_1).25: [state::obligation::ObligationOrder; 2])[_13];
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &(*_12);
+        _17 = obligation::ObligationOrder::opportunity_type(move _18) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_18);
+        _19 = discriminant(_17);
+        switchInt(move _19) -> [0: bb6, 1: bb4, otherwise: bb5];
+    }
+
+    bb4: {
+        _16 = const _;
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_20);
+        _20 = &(*_12);
+        _16 = obligation::ObligationOrder::opportunity_parameter(move _20) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_20);
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageLive(_21);
+        _21 = _16;
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = &(*_4);
+        _22 = obligation::ObligationLiquidity::borrowed_amount(move _23) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_23);
+        _0 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _21, move _22) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_8);
+        goto -> bb27;
+    }
+
+    bb11: {
+        _8 = const ();
+        StorageDead(_8);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &(*_4);
+        _24 = obligation::ObligationLiquidity::market_value(move _25) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &(*_1);
+        _26 = obligation::Obligation::get_borrowed_assets_market_value(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = &_5;
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = _6;
+        _32 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::from_percent::<u8>(move _33) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        _31 = &_32;
+        StorageDead(_33);
+        _29 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as PartialOrd>::gt(move _30, move _31) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        switchInt(move _29) -> [0: bb17, otherwise: bb16];
+    }
+
+    bb16: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        _28 = const _;
+        goto -> bb19;
+    }
+
+    bb17: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageLive(_34);
+        _34 = _2;
+        _28 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::from_percent::<u8>(move _34) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_34);
+        goto -> bb19;
+    }
+
+    bb19: {
+        StorageDead(_29);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = _3;
+        _35 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_num::<u64>(move _36) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = _26;
+        StorageLive(_39);
+        _39 = _28;
+        _37 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Mul>::mul(move _38, move _39) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = _37;
+        StorageLive(_43);
+        _43 = _24;
+        _41 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _42, move _43) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageLive(_44);
+        _44 = _35;
+        _40 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _41, move _44) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_44);
+        StorageDead(_41);
+        StorageLive(_45);
+        StorageLive(_46);
+        _46 = _40;
+        StorageLive(_47);
+        _47 = _24;
+        _45 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Div>::div(move _46, move _47) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = &(*_4);
+        _48 = obligation::ObligationLiquidity::borrowed_amount(move _49) -> [return: bb25, unwind continue];
+    }
+
+    bb25: {
+        StorageDead(_49);
+        StorageLive(_50);
+        _50 = _45;
+        _0 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Mul>::mul(move _48, move _50) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_50);
+        StorageDead(_48);
+        StorageDead(_45);
+        StorageDead(_40);
+        StorageDead(_37);
+        StorageDead(_35);
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_24);
+        goto -> bb27;
+    }
+
+    bb27: {
+        return;
+    }
+}

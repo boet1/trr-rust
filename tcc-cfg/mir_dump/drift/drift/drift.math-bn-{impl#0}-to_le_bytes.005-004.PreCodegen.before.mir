@@ -1,0 +1,103 @@
+// MIR for `bn::<impl at programs/drift/src/math/bn.rs:20:1: 20:10>::to_le_bytes` before PreCodegen
+
+fn bn::<impl at programs/drift/src/math/bn.rs:20:1: 20:10>::to_le_bytes(_1: U256) -> [u8; 32] {
+    debug self => _1;
+    let mut _0: [u8; 32];
+    let mut _2: std::vec::Vec<u8>;
+    let mut _3: usize;
+    let _4: ();
+    let mut _5: &math::bn::U256;
+    let mut _6: &mut [u8];
+    let mut _7: &mut [u8];
+    let mut _8: &mut std::vec::Vec<u8>;
+    let _10: ();
+    let mut _11: &mut [u8];
+    let mut _12: &mut [u8; 32];
+    let mut _13: &[u8];
+    let _14: &[u8];
+    let mut _15: &std::vec::Vec<u8>;
+    scope 1 {
+        debug buf => _2;
+        let mut _9: [u8; 32];
+        scope 2 {
+            debug bytes => _9;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = std::mem::size_of::<U256>() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _2 = Vec::<u8>::with_capacity(move _3) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &_1;
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &mut _2;
+        _7 = <Vec<u8> as BorrowMut<[u8]>>::borrow_mut(move _8) -> [return: bb3, unwind: bb8];
+    }
+
+    bb3: {
+        _6 = &mut (*_7);
+        StorageDead(_8);
+        _4 = U256::to_little_endian(move _5, move _6) -> [return: bb4, unwind: bb8];
+    }
+
+    bb4: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageLive(_9);
+        _9 = [const 0_u8; 32];
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &mut _9;
+        _11 = move _12 as &mut [u8] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &_2;
+        _14 = Vec::<u8>::as_slice(move _15) -> [return: bb5, unwind: bb8];
+    }
+
+    bb5: {
+        _13 = &(*_14);
+        StorageDead(_15);
+        _10 = core::slice::<impl [u8]>::copy_from_slice(move _11, move _13) -> [return: bb6, unwind: bb8];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_14);
+        StorageDead(_10);
+        _0 = _9;
+        StorageDead(_9);
+        drop(_2) -> [return: bb7, unwind: bb9];
+    }
+
+    bb7: {
+        StorageDead(_2);
+        return;
+    }
+
+    bb8 (cleanup): {
+        drop(_2) -> [return: bb9, unwind terminate(cleanup)];
+    }
+
+    bb9 (cleanup): {
+        resume;
+    }
+}

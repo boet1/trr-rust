@@ -1,0 +1,215 @@
+// MIR for `rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:40:1: 40:17>::_update` after PreCodegen
+
+fn rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:40:1: 40:17>::_update(_1: &mut rate_limiter::RateLimiter, _2: u64) -> Result<(), ProgramError> {
+    debug self => _1;
+    debug cur_slot => _2;
+    let mut _0: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: !;
+    let _8: ();
+    let mut _9: &str;
+    let _10: &str;
+    let mut _11: solana_program::program_error::ProgramError;
+    let mut _12: error::LendingError;
+    let _13: u64;
+    let mut _14: u64;
+    let mut _15: u64;
+    let mut _16: u64;
+    let mut _17: bool;
+    let mut _18: u64;
+    let mut _19: (u64, bool);
+    let _20: ();
+    let mut _21: std::cmp::Ordering;
+    let mut _22: &u64;
+    let mut _23: &u64;
+    let _24: &u64;
+    let _25: u64;
+    let mut _26: u64;
+    let mut _27: u64;
+    let mut _28: (u64, bool);
+    let mut _29: i8;
+    let mut _30: math::decimal::Decimal;
+    let mut _31: u64;
+    let mut _32: math::decimal::Decimal;
+    let mut _33: math::decimal::Decimal;
+    let mut _34: u64;
+    let mut _35: math::decimal::Decimal;
+    let mut _36: ();
+    scope 1 {
+        debug cur_slot_start => _13;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        StorageLive(_6);
+        _6 = ((*_1).2: u64);
+        _4 = Lt(move _5, move _6);
+        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const "Current slot is less than window start, which is impossible";
+        _9 = &(*_10);
+        _8 = solana_program::log::sol_log(move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = LendingError::InvalidAccountInput;
+        _11 = <LendingError as Into<ProgramError>>::into(move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        _0 = Result::<(), ProgramError>::Err(move _11);
+        StorageDead(_11);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb17;
+    }
+
+    bb4: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _2;
+        StorageLive(_16);
+        _16 = (((*_1).0: state::rate_limiter::RateLimiterConfig).0: u64);
+        _17 = Eq(_16, const 0_u64);
+        assert(!move _17, "attempt to divide `{}` by zero", _15) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        _14 = Div(move _15, move _16);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageLive(_18);
+        _18 = (((*_1).0: state::rate_limiter::RateLimiterConfig).0: u64);
+        _19 = CheckedMul(_14, _18);
+        assert(!move (_19.1: bool), "attempt to compute `{} * {}`, which would overflow", move _14, move _18) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _13 = move (_19.0: u64);
+        StorageDead(_18);
+        StorageDead(_14);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &_13;
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = ((*_1).2: u64);
+        StorageLive(_27);
+        _27 = (((*_1).0: state::rate_limiter::RateLimiterConfig).0: u64);
+        _28 = CheckedAdd(_26, _27);
+        assert(!move (_28.1: bool), "attempt to compute `{} + {}`, which would overflow", move _26, move _27) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _25 = move (_28.0: u64);
+        StorageDead(_27);
+        StorageDead(_26);
+        _24 = &_25;
+        _23 = &(*_24);
+        _21 = <u64 as Ord>::cmp(move _22, move _23) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_23);
+        StorageDead(_22);
+        _29 = discriminant(_21);
+        switchInt(move _29) -> [255: bb11, 0: bb12, 1: bb9, otherwise: bb10];
+    }
+
+    bb9: {
+        StorageLive(_33);
+        _33 = decimal::Decimal::zero() -> [return: bb14, unwind continue];
+    }
+
+    bb10: {
+        unreachable;
+    }
+
+    bb11: {
+        _20 = ();
+        goto -> bb16;
+    }
+
+    bb12: {
+        StorageLive(_30);
+        _30 = ((*_1).3: math::decimal::Decimal);
+        ((*_1).1: math::decimal::Decimal) = move _30;
+        StorageDead(_30);
+        StorageLive(_31);
+        _31 = _13;
+        ((*_1).2: u64) = move _31;
+        StorageDead(_31);
+        StorageLive(_32);
+        _32 = decimal::Decimal::zero() -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        ((*_1).3: math::decimal::Decimal) = move _32;
+        StorageDead(_32);
+        _20 = const ();
+        goto -> bb16;
+    }
+
+    bb14: {
+        ((*_1).1: math::decimal::Decimal) = move _33;
+        StorageDead(_33);
+        StorageLive(_34);
+        _34 = _13;
+        ((*_1).2: u64) = move _34;
+        StorageDead(_34);
+        StorageLive(_35);
+        _35 = decimal::Decimal::zero() -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        ((*_1).3: math::decimal::Decimal) = move _35;
+        StorageDead(_35);
+        _20 = const ();
+        goto -> bb16;
+    }
+
+    bb16: {
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageLive(_36);
+        _36 = ();
+        _0 = Result::<(), ProgramError>::Ok(move _36);
+        StorageDead(_36);
+        StorageDead(_13);
+        goto -> bb17;
+    }
+
+    bb17: {
+        return;
+    }
+}

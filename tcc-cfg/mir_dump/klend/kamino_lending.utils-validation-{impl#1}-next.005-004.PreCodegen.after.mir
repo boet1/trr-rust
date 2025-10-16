@@ -1,0 +1,201 @@
+// MIR for `validation::<impl at programs\klend\src\utils\validation.rs:64:1: 64:76>::next` after PreCodegen
+
+fn validation::<impl at programs\klend\src\utils\validation.rs:64:1: 64:76>::next(_1: &mut LengthCheckingZipIterator<L, R>) -> std::option::Option<std::result::Result<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>> {
+    debug self => _1;
+    let mut _0: std::option::Option<std::result::Result<(<L as std::iter::Iterator>::Item, <R as std::iter::Iterator>::Item), utils::validation::LengthMismatchError>>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: !;
+    let mut _5: (std::option::Option<<L as std::iter::Iterator>::Item>, std::option::Option<<R as std::iter::Iterator>::Item>);
+    let mut _6: std::option::Option<<L as std::iter::Iterator>::Item>;
+    let mut _7: &mut L;
+    let mut _8: std::option::Option<<R as std::iter::Iterator>::Item>;
+    let mut _9: &mut R;
+    let mut _10: isize;
+    let mut _11: isize;
+    let mut _12: isize;
+    let _13: <L as std::iter::Iterator>::Item;
+    let _14: <R as std::iter::Iterator>::Item;
+    let mut _15: std::result::Result<(<L as std::iter::Iterator>::Item, <R as std::iter::Iterator>::Item), utils::validation::LengthMismatchError>;
+    let mut _16: (<L as std::iter::Iterator>::Item, <R as std::iter::Iterator>::Item);
+    let mut _17: <L as std::iter::Iterator>::Item;
+    let mut _18: <R as std::iter::Iterator>::Item;
+    let _19: (std::option::Option<<L as std::iter::Iterator>::Item>, std::option::Option<<R as std::iter::Iterator>::Item>);
+    let mut _20: std::result::Result<(<L as std::iter::Iterator>::Item, <R as std::iter::Iterator>::Item), utils::validation::LengthMismatchError>;
+    let mut _21: utils::validation::LengthMismatchError;
+    let mut _22: bool;
+    let mut _23: bool;
+    let mut _24: bool;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: isize;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    let mut _31: isize;
+    let mut _32: isize;
+    scope 1 {
+        debug left => _13;
+        debug right => _14;
+    }
+    scope 2 {
+        debug _different => _19;
+    }
+
+    bb0: {
+        _22 = const false;
+        _25 = const false;
+        _26 = const false;
+        _23 = const false;
+        _24 = const false;
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = ((*_1).2: bool);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _0 = std::option::Option::<std::result::Result<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>>::None;
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb11;
+    }
+
+    bb2: {
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &mut ((*_1).0: L);
+        _6 = <L as Iterator>::next(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &mut ((*_1).1: R);
+        _8 = <R as Iterator>::next(move _9) -> [return: bb4, unwind: bb12];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        _22 = const true;
+        _23 = const true;
+        _24 = const true;
+        _25 = const true;
+        _26 = const true;
+        _5 = (move _6, move _8);
+        StorageDead(_8);
+        StorageDead(_6);
+        _12 = discriminant((_5.0: std::option::Option<<L as std::iter::Iterator>::Item>));
+        switchInt(move _12) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        _10 = discriminant((_5.1: std::option::Option<<R as std::iter::Iterator>::Item>));
+        switchInt(move _10) -> [0: bb8, otherwise: bb6];
+    }
+
+    bb6: {
+        StorageLive(_19);
+        _22 = const false;
+        _23 = const false;
+        _24 = const false;
+        _25 = const false;
+        _26 = const false;
+        _19 = move _5;
+        ((*_1).2: bool) = const true;
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = LengthMismatchError;
+        _20 = std::result::Result::<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>::Err(move _21);
+        StorageDead(_21);
+        _0 = std::option::Option::<std::result::Result<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>>::Some(move _20);
+        StorageDead(_20);
+        drop(_19) -> [return: bb10, unwind: bb13];
+    }
+
+    bb7: {
+        _11 = discriminant((_5.1: std::option::Option<<R as std::iter::Iterator>::Item>));
+        switchInt(move _11) -> [1: bb9, otherwise: bb6];
+    }
+
+    bb8: {
+        _0 = std::option::Option::<std::result::Result<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>>::None;
+        goto -> bb18;
+    }
+
+    bb9: {
+        StorageLive(_13);
+        _13 = move (((_5.0: std::option::Option<<L as std::iter::Iterator>::Item>) as Some).0: <L as std::iter::Iterator>::Item);
+        StorageLive(_14);
+        _14 = move (((_5.1: std::option::Option<<R as std::iter::Iterator>::Item>) as Some).0: <R as std::iter::Iterator>::Item);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = move _13;
+        StorageLive(_18);
+        _18 = move _14;
+        _16 = (move _17, move _18);
+        StorageDead(_18);
+        StorageDead(_17);
+        _15 = std::result::Result::<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>::Ok(move _16);
+        StorageDead(_16);
+        _0 = std::option::Option::<std::result::Result<(<L as Iterator>::Item, <R as Iterator>::Item), LengthMismatchError>>::Some(move _15);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb18;
+    }
+
+    bb10: {
+        StorageDead(_19);
+        goto -> bb18;
+    }
+
+    bb11: {
+        return;
+    }
+
+    bb12 (cleanup): {
+        drop(_6) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+
+    bb14: {
+        _23 = const false;
+        _22 = const false;
+        _22 = const false;
+        _23 = const false;
+        _24 = const false;
+        _25 = const false;
+        _26 = const false;
+        StorageDead(_5);
+        goto -> bb11;
+    }
+
+    bb15: {
+        _29 = discriminant((_5.1: std::option::Option<<R as std::iter::Iterator>::Item>));
+        goto -> bb14;
+    }
+
+    bb16: {
+        _25 = const false;
+        switchInt(_23) -> [0: bb14, otherwise: bb15];
+    }
+
+    bb17: {
+        _31 = discriminant((_5.0: std::option::Option<<L as std::iter::Iterator>::Item>));
+        goto -> bb16;
+    }
+
+    bb18: {
+        switchInt(_25) -> [0: bb16, otherwise: bb17];
+    }
+}

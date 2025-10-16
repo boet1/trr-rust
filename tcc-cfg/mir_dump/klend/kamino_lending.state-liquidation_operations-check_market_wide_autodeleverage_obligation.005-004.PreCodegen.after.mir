@@ -1,0 +1,262 @@
+// MIR for `check_market_wide_autodeleverage_obligation` after PreCodegen
+
+fn check_market_wide_autodeleverage_obligation(_1: &state::types::LiquidationCheckInputs<'_>) -> std::option::Option<state::types::LiquidationParams> {
+    let mut _0: std::option::Option<state::types::LiquidationParams>;
+    let _2: &state::lending_market::LendingMarket;
+    let _3: &state::reserve::Reserve;
+    let _4: &state::reserve::Reserve;
+    let _5: &state::obligation::Obligation;
+    let _6: u64;
+    let _7: ();
+    let mut _8: bool;
+    let mut _9: &state::lending_market::LendingMarket;
+    let mut _10: !;
+    let _11: ();
+    let mut _12: bool;
+    let mut _13: &state::reserve::ReserveConfig;
+    let mut _15: std::option::Option<u64>;
+    let mut _16: &state::reserve::Reserve;
+    let mut _17: u64;
+    let mut _18: {closure@programs\klend\src\state\liquidation_operations.rs:530:19: 530:52};
+    let mut _19: &state::reserve::Reserve;
+    let mut _20: &state::obligation::Obligation;
+    let mut _21: bool;
+    let mut _22: &std::option::Option<state::types::LiquidationParams>;
+    let mut _23: !;
+    let _24: ();
+    let mut _25: bool;
+    let mut _26: &state::reserve::ReserveConfig;
+    let mut _28: std::option::Option<u64>;
+    let mut _29: &state::reserve::Reserve;
+    let mut _30: u64;
+    let mut _31: {closure@programs\klend\src\state\liquidation_operations.rs:547:19: 547:52};
+    let mut _32: &state::reserve::Reserve;
+    let mut _33: &state::obligation::Obligation;
+    let mut _34: bool;
+    let mut _35: &std::option::Option<state::types::LiquidationParams>;
+    let mut _36: !;
+    scope 1 {
+        debug lending_market => _2;
+        debug collateral_reserve => _3;
+        debug debt_reserve => _4;
+        debug obligation => _5;
+        debug timestamp => _6;
+        let _14: std::option::Option<state::types::LiquidationParams>;
+        let _27: std::option::Option<state::types::LiquidationParams>;
+        scope 2 {
+            debug params => _14;
+        }
+        scope 3 {
+            debug params => _27;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = ((*_1).0: &state::lending_market::LendingMarket);
+        StorageLive(_3);
+        _3 = ((*_1).1: &state::reserve::Reserve);
+        StorageLive(_4);
+        _4 = ((*_1).2: &state::reserve::Reserve);
+        StorageLive(_5);
+        _5 = ((*_1).3: &state::obligation::Obligation);
+        StorageLive(_6);
+        _6 = ((*_1).4: u64);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &(*_2);
+        _8 = state::lending_market::LendingMarket::is_autodeleverage_enabled(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _8) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _7 = const ();
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &((*_3).9: state::reserve::ReserveConfig);
+        _12 = reserve::ReserveConfig::is_autodeleverage_enabled(move _13) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        _0 = std::option::Option::<state::types::LiquidationParams>::None;
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb22;
+    }
+
+    bb4: {
+        switchInt(move _12) -> [0: bb11, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &(*_3);
+        StorageLive(_17);
+        _17 = _6;
+        _15 = get_secs_since_autodeleverage_obligation_collateral_deposit_limit_crossed(move _16, move _17) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_3);
+        StorageLive(_20);
+        _20 = &(*_5);
+        _18 = {closure@programs\klend\src\state\liquidation_operations.rs:530:19: 530:52} { collateral_reserve: move _19, obligation: move _20 };
+        StorageDead(_20);
+        StorageDead(_19);
+        _14 = std::option::Option::<u64>::and_then::<state::types::LiquidationParams, {closure@programs\klend\src\state\liquidation_operations.rs:530:19: 530:52}>(move _15, move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageDead(_15);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &_14;
+        _21 = std::option::Option::<state::types::LiquidationParams>::is_some(move _22) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        switchInt(move _21) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_22);
+        _0 = move _14;
+        StorageDead(_21);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb22;
+    }
+
+    bb10: {
+        StorageDead(_22);
+        _11 = const ();
+        StorageDead(_21);
+        StorageDead(_14);
+        goto -> bb12;
+    }
+
+    bb11: {
+        StorageDead(_13);
+        _11 = const ();
+        goto -> bb12;
+    }
+
+    bb12: {
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &((*_4).9: state::reserve::ReserveConfig);
+        _25 = reserve::ReserveConfig::is_autodeleverage_enabled(move _26) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        switchInt(move _25) -> [0: bb20, otherwise: bb14];
+    }
+
+    bb14: {
+        StorageDead(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = &(*_4);
+        StorageLive(_30);
+        _30 = _6;
+        _28 = get_secs_since_autodeleverage_obligation_debt_borrow_limit_crossed(move _29, move _30) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = &(*_4);
+        StorageLive(_33);
+        _33 = &(*_5);
+        _31 = {closure@programs\klend\src\state\liquidation_operations.rs:547:19: 547:52} { debt_reserve: move _32, obligation: move _33 };
+        StorageDead(_33);
+        StorageDead(_32);
+        _27 = std::option::Option::<u64>::and_then::<state::types::LiquidationParams, {closure@programs\klend\src\state\liquidation_operations.rs:547:19: 547:52}>(move _28, move _31) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_31);
+        StorageDead(_28);
+        StorageLive(_34);
+        StorageLive(_35);
+        _35 = &_27;
+        _34 = std::option::Option::<state::types::LiquidationParams>::is_some(move _35) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        switchInt(move _34) -> [0: bb19, otherwise: bb18];
+    }
+
+    bb18: {
+        StorageDead(_35);
+        _0 = move _27;
+        StorageDead(_34);
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_24);
+        goto -> bb22;
+    }
+
+    bb19: {
+        StorageDead(_35);
+        _24 = const ();
+        StorageDead(_34);
+        StorageDead(_27);
+        goto -> bb21;
+    }
+
+    bb20: {
+        StorageDead(_26);
+        _24 = const ();
+        goto -> bb21;
+    }
+
+    bb21: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _0 = std::option::Option::<state::types::LiquidationParams>::None;
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb23;
+    }
+
+    bb22: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb23;
+    }
+
+    bb23: {
+        return;
+    }
+}

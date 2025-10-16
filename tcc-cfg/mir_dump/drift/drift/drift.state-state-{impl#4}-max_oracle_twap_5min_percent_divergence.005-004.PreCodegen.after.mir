@@ -1,0 +1,28 @@
+// MIR for `state::state::<impl at programs/drift/src/state/state.rs:155:1: 155:22>::max_oracle_twap_5min_percent_divergence` after PreCodegen
+
+fn state::state::<impl at programs/drift/src/state/state.rs:155:1: 155:22>::max_oracle_twap_5min_percent_divergence(_1: &state::state::OracleGuardRails) -> u64 {
+    debug self => _1;
+    let mut _0: u64;
+    let mut _2: u64;
+    let mut _3: u64;
+    let mut _4: bool;
+
+    bb0: {
+        StorageLive(_2);
+        _2 = (((*_1).0: state::state::PriceDivergenceGuardRails).1: u64);
+        StorageLive(_3);
+        _4 = Eq(const 2_u64, const 0_u64);
+        assert(!move _4, "attempt to divide `{}` by zero", const _) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = Div(const _, const 2_u64);
+        _0 = <u64 as Ord>::max(move _2, move _3) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}

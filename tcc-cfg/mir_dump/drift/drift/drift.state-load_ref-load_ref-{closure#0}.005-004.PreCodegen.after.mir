@@ -1,0 +1,60 @@
+// MIR for `load_ref::{closure#0}` after PreCodegen
+
+fn load_ref::{closure#0}(_1: {closure@programs/drift/src/state/load_ref.rs:18:23: 18:29}, _2: &&mut [u8]) -> &T {
+    debug data => _2;
+    let mut _0: &T;
+    let _3: &T;
+    let mut _4: &[u8];
+    let _5: &[u8];
+    let _6: &[u8];
+    let mut _7: &[u8];
+    let mut _8: std::ops::Range<usize>;
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: (usize, bool);
+    let mut _12: &mut [u8];
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _12 = deref_copy (*_2);
+        _7 = &(*_12);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _11 = CheckedAdd(_10, const 8_usize);
+        assert(!move (_11.1: bool), "attempt to compute `{} + {}`, which would overflow", move _10, const 8_usize) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _9 = move (_11.0: usize);
+        StorageDead(_10);
+        _8 = std::ops::Range::<usize> { start: const 8_usize, end: move _9 };
+        StorageDead(_9);
+        _6 = <[u8] as Index<std::ops::Range<usize>>>::index(move _7, move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        _5 = &(*_6);
+        _4 = &(*_5);
+        _3 = bytemuck::from_bytes::<T>(move _4) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        _0 = &(*_3);
+        StorageDead(_4);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_3);
+        return;
+    }
+}

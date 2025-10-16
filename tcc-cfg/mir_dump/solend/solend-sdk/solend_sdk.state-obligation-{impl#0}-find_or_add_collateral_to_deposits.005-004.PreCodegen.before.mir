@@ -1,0 +1,313 @@
+// MIR for `obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::find_or_add_collateral_to_deposits` before PreCodegen
+
+fn obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::find_or_add_collateral_to_deposits(_1: &mut obligation::Obligation, _2: Pubkey) -> Result<&mut obligation::ObligationCollateral, ProgramError> {
+    debug self => _1;
+    debug deposit_reserve => _2;
+    let mut _0: std::result::Result<&mut state::obligation::ObligationCollateral, solana_program::program_error::ProgramError>;
+    let _3: ();
+    let mut _4: std::option::Option<usize>;
+    let mut _5: &state::obligation::Obligation;
+    let mut _6: solana_program::pubkey::Pubkey;
+    let mut _7: isize;
+    let mut _9: !;
+    let mut _10: &mut state::obligation::ObligationCollateral;
+    let mut _11: &mut state::obligation::ObligationCollateral;
+    let mut _12: &mut state::obligation::ObligationCollateral;
+    let mut _13: &mut std::vec::Vec<state::obligation::ObligationCollateral>;
+    let mut _14: usize;
+    let _15: ();
+    let mut _16: bool;
+    let mut _17: usize;
+    let mut _18: usize;
+    let mut _19: &std::vec::Vec<state::obligation::ObligationCollateral>;
+    let mut _20: usize;
+    let mut _21: &std::vec::Vec<state::obligation::ObligationLiquidity>;
+    let mut _22: (usize, bool);
+    let mut _23: !;
+    let _24: ();
+    let mut _25: &str;
+    let _26: &str;
+    let mut _27: &std::string::String;
+    let _28: &std::string::String;
+    let _29: std::string::String;
+    let _30: std::string::String;
+    let mut _31: std::fmt::Arguments<'_>;
+    let mut _32: &[&str];
+    let mut _33: &[&str; 2];
+    let _34: &[&str; 2];
+    let _35: [&str; 2];
+    let mut _36: &[core::fmt::rt::Argument<'_>];
+    let mut _37: &[core::fmt::rt::Argument<'_>; 1];
+    let _38: &[core::fmt::rt::Argument<'_>; 1];
+    let _39: [core::fmt::rt::Argument<'_>; 1];
+    let mut _40: core::fmt::rt::Argument<'_>;
+    let mut _41: &usize;
+    let _42: &usize;
+    let _43: usize;
+    let mut _44: solana_program::program_error::ProgramError;
+    let mut _45: error::LendingError;
+    let _46: state::obligation::ObligationCollateral;
+    let mut _47: solana_program::pubkey::Pubkey;
+    let _48: ();
+    let mut _49: &mut std::vec::Vec<state::obligation::ObligationCollateral>;
+    let mut _50: state::obligation::ObligationCollateral;
+    let mut _51: &mut state::obligation::ObligationCollateral;
+    let mut _52: &mut state::obligation::ObligationCollateral;
+    let mut _53: std::option::Option<&mut state::obligation::ObligationCollateral>;
+    let mut _54: &mut [state::obligation::ObligationCollateral];
+    let mut _55: &mut [state::obligation::ObligationCollateral];
+    let mut _56: &mut std::vec::Vec<state::obligation::ObligationCollateral>;
+    let mut _57: &usize;
+    let mut _58: &[&str; 2];
+    scope 1 {
+        debug collateral_index => _8;
+        let _8: usize;
+    }
+    scope 2 {
+        debug res => _30;
+    }
+    scope 3 {
+        debug collateral => _46;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        StorageLive(_6);
+        _6 = _2;
+        _4 = obligation::Obligation::_find_collateral_index_in_deposits(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _7 = discriminant(_4);
+        switchInt(move _7) -> [1: bb2, otherwise: bb4];
+    }
+
+    bb2: {
+        StorageLive(_8);
+        _8 = ((_4 as Some).0: usize);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut ((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>);
+        StorageLive(_14);
+        _14 = _8;
+        _12 = <Vec<obligation::ObligationCollateral> as IndexMut<usize>>::index_mut(move _13, move _14) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_14);
+        StorageDead(_13);
+        _11 = &mut (*_12);
+        _10 = &mut (*_11);
+        _0 = Result::<&mut obligation::ObligationCollateral, ProgramError>::Ok(move _10);
+        StorageDead(_10);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb22;
+    }
+
+    bb4: {
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>);
+        _18 = Vec::<obligation::ObligationCollateral>::len(move _19) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>);
+        _20 = Vec::<obligation::ObligationLiquidity>::len(move _21) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_21);
+        _22 = CheckedAdd(_18, _20);
+        assert(!move (_22.1: bool), "attempt to compute `{} + {}`, which would overflow", move _18, move _20) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _17 = move (_22.0: usize);
+        StorageDead(_20);
+        StorageDead(_18);
+        _16 = Ge(move _17, const _);
+        switchInt(move _16) -> [0: bb16, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _58 = const _;
+        _34 = &(*_58);
+        _33 = &(*_34);
+        _32 = move _33 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_33);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _57 = const _;
+        _42 = &(*_57);
+        _41 = &(*_42);
+        _40 = core::fmt::rt::Argument::<'_>::new_display::<usize>(move _41) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_41);
+        _39 = [move _40];
+        StorageDead(_40);
+        _38 = &_39;
+        _37 = &(*_38);
+        _36 = move _37 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_37);
+        _31 = Arguments::<'_>::new_v1(move _32, move _36) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_36);
+        StorageDead(_32);
+        _30 = format(move _31) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_31);
+        StorageDead(_42);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_34);
+        _29 = move _30;
+        StorageDead(_30);
+        _28 = &_29;
+        _27 = &(*_28);
+        _26 = <String as Deref>::deref(move _27) -> [return: bb12, unwind: bb23];
+    }
+
+    bb12: {
+        _25 = &(*_26);
+        StorageDead(_27);
+        _24 = solana_program::log::sol_log(move _25) -> [return: bb13, unwind: bb23];
+    }
+
+    bb13: {
+        StorageDead(_25);
+        drop(_29) -> [return: bb14, unwind: bb24];
+    }
+
+    bb14: {
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = LendingError::ObligationReserveLimit;
+        _44 = <LendingError as Into<ProgramError>>::into(move _45) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_45);
+        _0 = Result::<&mut obligation::ObligationCollateral, ProgramError>::Err(move _44);
+        StorageDead(_44);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb22;
+    }
+
+    bb16: {
+        StorageDead(_17);
+        _15 = const ();
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageLive(_46);
+        StorageLive(_47);
+        _47 = _2;
+        _46 = obligation::ObligationCollateral::new(move _47) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = &mut ((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>);
+        StorageLive(_50);
+        _50 = move _46;
+        _48 = Vec::<obligation::ObligationCollateral>::push(move _49, move _50) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_50);
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        _56 = &mut ((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>);
+        _55 = <Vec<obligation::ObligationCollateral> as DerefMut>::deref_mut(move _56) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        _54 = &mut (*_55);
+        StorageDead(_56);
+        _53 = core::slice::<impl [obligation::ObligationCollateral]>::last_mut(move _54) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_54);
+        _52 = Option::<&mut obligation::ObligationCollateral>::unwrap(move _53) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        _51 = &mut (*_52);
+        StorageDead(_53);
+        _0 = Result::<&mut obligation::ObligationCollateral, ProgramError>::Ok(move _51);
+        StorageDead(_51);
+        StorageDead(_46);
+        StorageDead(_55);
+        StorageDead(_52);
+        goto -> bb22;
+    }
+
+    bb22: {
+        return;
+    }
+
+    bb23 (cleanup): {
+        drop(_29) -> [return: bb24, unwind terminate(cleanup)];
+    }
+
+    bb24 (cleanup): {
+        resume;
+    }
+}

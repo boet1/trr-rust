@@ -1,0 +1,105 @@
+// MIR for `uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::is_zero` after PreCodegen
+
+fn uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::is_zero(_1: &uint_types::U256) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: !;
+    let _3: &[u64; 4];
+    let _5: ();
+    let mut _6: ();
+    let mut _7: bool;
+    let mut _8: usize;
+    let mut _9: bool;
+    let mut _10: u64;
+    let _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
+    let mut _14: !;
+    let mut _15: (usize, bool);
+    let mut _16: !;
+    let _17: ();
+    let mut _18: !;
+    scope 1 {
+        debug arr => _3;
+        let mut _4: usize;
+        scope 2 {
+            debug i => _4;
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = &((*_1).0: [u64; 4]);
+        StorageLive(_4);
+        _4 = const 0_usize;
+        StorageLive(_5);
+        goto -> bb1;
+    }
+
+    bb1: {
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _4;
+        _7 = Lt(move _8, const 4_usize);
+        switchInt(move _7) -> [0: bb7, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _4;
+        _12 = Len((*_3));
+        _13 = Lt(_11, _12);
+        assert(move _13, "index out of bounds: the length is {} but the index is {}", move _12, _11) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _10 = (*_3)[_11];
+        _9 = Ne(move _10, const 0_u64);
+        switchInt(move _9) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_10);
+        _0 = const false;
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb5: {
+        StorageDead(_11);
+        StorageDead(_10);
+        _15 = CheckedAdd(_4, const 1_usize);
+        assert(!move (_15.1: bool), "attempt to compute `{} + {}`, which would overflow", _4, const 1_usize) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _4 = move (_15.0: usize);
+        _6 = const ();
+        StorageDead(_9);
+        StorageDead(_7);
+        goto -> bb1;
+    }
+
+    bb7: {
+        StorageDead(_8);
+        StorageLive(_17);
+        _5 = const ();
+        StorageDead(_17);
+        StorageDead(_7);
+        StorageDead(_5);
+        _0 = const true;
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

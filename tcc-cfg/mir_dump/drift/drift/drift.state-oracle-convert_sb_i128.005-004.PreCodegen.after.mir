@@ -1,0 +1,93 @@
+// MIR for `convert_sb_i128` after PreCodegen
+
+fn convert_sb_i128(_1: &i128) -> std::result::Result<i128, error::ErrorCode> {
+    debug switchboard_i128 => _1;
+    let mut _0: std::result::Result<i128, error::ErrorCode>;
+    let _2: u128;
+    let mut _3: bool;
+    let mut _4: u128;
+    let mut _5: i128;
+    let mut _6: i128;
+    let mut _7: u128;
+    let mut _8: u128;
+    let mut _9: bool;
+    let mut _10: i128;
+    let mut _11: i128;
+    let mut _12: u128;
+    let mut _13: u128;
+    let mut _14: bool;
+    scope 1 {
+        debug switchboard_precision => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = core::num::<impl u128>::pow(const 10_u128, const _) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _2;
+        _3 = Gt(move _4, const _);
+        switchInt(move _3) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_5);
+        _5 = (*_1);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _2;
+        _9 = Eq(const _, const 0_u128);
+        assert(!move _9, "attempt to divide `{}` by zero", _8) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _7 = Div(move _8, const _);
+        StorageDead(_8);
+        _6 = move _7 as i128 (IntToInt);
+        StorageDead(_7);
+        _0 = <i128 as SafeMath>::safe_div(move _5, move _6) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageLive(_10);
+        _10 = (*_1);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _2;
+        _14 = Eq(_13, const 0_u128);
+        assert(!move _14, "attempt to divide `{}` by zero", const _) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _12 = Div(const _, move _13);
+        StorageDead(_13);
+        _11 = move _12 as i128 (IntToInt);
+        StorageDead(_12);
+        _0 = <i128 as SafeMath>::safe_mul(move _10, move _11) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}

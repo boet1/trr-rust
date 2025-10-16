@@ -1,0 +1,53 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_quote_spot_position_mut` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_quote_spot_position_mut(_1: &mut User) -> &mut SpotPosition {
+    debug self => _1;
+    let mut _0: &mut state::user::SpotPosition;
+    let mut _2: &mut state::user::SpotPosition;
+    let mut _3: &mut state::user::SpotPosition;
+    let mut _4: std::result::Result<&mut state::user::SpotPosition, error::ErrorCode>;
+    let mut _5: &mut state::user::User;
+    let mut _6: isize;
+    let _7: &mut state::user::SpotPosition;
+    let mut _8: !;
+    scope 1 {
+        debug position => _7;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &mut (*_1);
+        _4 = User::get_spot_position_mut(move _5, const _) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _6 = discriminant(_4);
+        switchInt(move _6) -> [0: bb4, 1: bb2, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_8);
+        _8 = panic(const "internal error: entered unreachable code") -> unwind continue;
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_7);
+        _7 = move ((_4 as Ok).0: &mut state::user::SpotPosition);
+        _3 = &mut (*_7);
+        StorageDead(_7);
+        _2 = &mut (*_3);
+        _0 = &mut (*_2);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}

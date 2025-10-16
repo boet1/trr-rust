@@ -1,0 +1,48 @@
+// MIR for `state::oracle::<impl at programs/drift/src/state/oracle.rs:594:1: 594:23>::max` after PreCodegen
+
+fn state::oracle::<impl at programs/drift/src/state/oracle.rs:594:1: 594:23>::max(_1: &StrictOraclePrice) -> i64 {
+    debug self => _1;
+    let mut _0: i64;
+    let mut _2: isize;
+    let _3: i64;
+    let mut _4: i64;
+    let mut _5: i64;
+    scope 1 {
+        debug twap => _3;
+    }
+
+    bb0: {
+        _2 = discriminant(((*_1).1: std::option::Option<i64>));
+        switchInt(move _2) -> [0: bb1, 1: bb3, otherwise: bb2];
+    }
+
+    bb1: {
+        _0 = ((*_1).0: i64);
+        goto -> bb5;
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_3);
+        _3 = ((((*_1).1: std::option::Option<i64>) as Some).0: i64);
+        StorageLive(_4);
+        _4 = ((*_1).0: i64);
+        StorageLive(_5);
+        _5 = _3;
+        _0 = <i64 as Ord>::max(move _4, move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb5;
+    }
+
+    bb5: {
+        return;
+    }
+}

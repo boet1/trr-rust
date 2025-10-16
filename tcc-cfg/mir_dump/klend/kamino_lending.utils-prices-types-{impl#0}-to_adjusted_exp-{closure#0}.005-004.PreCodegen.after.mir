@@ -1,0 +1,103 @@
+// MIR for `prices::types::<impl at programs\klend\src\utils\prices\types.rs:24:1: 26:42>::to_adjusted_exp::{closure#0}` after PreCodegen
+
+fn prices::types::<impl at programs\klend\src\utils\prices\types.rs:24:1: 26:42>::to_adjusted_exp::{closure#0}(_1: {closure@programs\klend\src\utils\prices\types.rs:52:28: 52:35}, _2: uint_types::U256) -> std::option::Option<prices::types::Price<T>> {
+    debug value => _2;
+    debug target_exp => (*(_1.0: &u32));
+    let mut _0: std::option::Option<utils::prices::types::Price<T>>;
+    let mut _3: utils::prices::types::Price<T>;
+    let mut _4: T;
+    let mut _5: std::ops::ControlFlow<std::option::Option<std::convert::Infallible>, T>;
+    let mut _6: std::option::Option<T>;
+    let mut _7: std::result::Result<T, <T as std::convert::TryFrom<utils::fraction::uint_types::U256>>::Error>;
+    let mut _8: utils::fraction::uint_types::U256;
+    let mut _9: isize;
+    let _10: std::option::Option<std::convert::Infallible>;
+    let mut _11: !;
+    let mut _12: std::option::Option<std::convert::Infallible>;
+    let _13: T;
+    let mut _14: u32;
+    let mut _15: &u32;
+    scope 1 {
+        debug residual => _10;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _13;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _2;
+        _7 = <T as TryFrom<uint_types::U256>>::try_from(move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        _6 = std::result::Result::<T, <T as TryFrom<uint_types::U256>>::Error>::ok(move _7) -> [return: bb2, unwind: bb9];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _5 = <std::option::Option<T> as Try>::branch(move _6) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        _9 = discriminant(_5);
+        switchInt(move _9) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_13);
+        _13 = ((_5 as Continue).0: T);
+        _4 = _13;
+        StorageDead(_13);
+        StorageLive(_14);
+        _15 = deref_copy (_1.0: &u32);
+        _14 = (*_15);
+        _3 = prices::types::Price::<T> { value: move _4, exp: move _14 };
+        StorageDead(_14);
+        StorageDead(_4);
+        _0 = std::option::Option::<prices::types::Price<T>>::Some(move _3);
+        StorageDead(_3);
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_10);
+        _10 = ((_5 as Break).0: std::option::Option<std::convert::Infallible>);
+        StorageLive(_12);
+        _12 = _10;
+        _0 = <std::option::Option<prices::types::Price<T>> as FromResidual<std::option::Option<Infallible>>>::from_residual(move _12) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        resume;
+    }
+}

@@ -1,0 +1,17 @@
+// MIR for `default_array` before PreCodegen
+
+fn default_array() -> [T; N] {
+    let mut _0: [T; N];
+    let mut _1: T;
+
+    bb0: {
+        StorageLive(_1);
+        _1 = <T as Default>::default() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = [move _1; N];
+        StorageDead(_1);
+        return;
+    }
+}

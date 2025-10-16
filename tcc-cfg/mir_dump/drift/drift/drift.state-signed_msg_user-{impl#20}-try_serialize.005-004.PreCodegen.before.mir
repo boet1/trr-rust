@@ -1,0 +1,170 @@
+// MIR for `signed_msg_user::<impl at programs/drift/src/state/signed_msg_user.rs:50:1: 50:11>::try_serialize` before PreCodegen
+
+fn signed_msg_user::<impl at programs/drift/src/state/signed_msg_user.rs:50:1: 50:11>::try_serialize(_1: &SignedMsgUserOrders, _2: &mut W) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug self => _1;
+    debug writer => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: &std::result::Result<(), std::io::Error>;
+    let _6: std::result::Result<(), std::io::Error>;
+    let mut _7: &mut W;
+    let mut _8: &[u8];
+    let mut _9: &[u8; 8];
+    let _10: &[u8; 8];
+    let _11: [u8; 8];
+    let mut _12: !;
+    let mut _13: anchor_lang::error::Error;
+    let mut _14: anchor_lang::error::ErrorCode;
+    let _15: ();
+    let mut _16: bool;
+    let mut _17: &std::result::Result<(), std::io::Error>;
+    let _18: std::result::Result<(), std::io::Error>;
+    let mut _19: &state::signed_msg_user::SignedMsgUserOrders;
+    let mut _20: &mut W;
+    let mut _21: !;
+    let mut _22: anchor_lang::error::Error;
+    let mut _23: anchor_lang::error::ErrorCode;
+    let mut _24: ();
+    let mut _25: &[u8; 8];
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &mut (*_2);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _25 = const _;
+        _10 = &(*_25);
+        _9 = &(*_10);
+        _8 = move _9 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_9);
+        _6 = <W as std::io::Write>::write_all(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = &_6;
+        StorageDead(_8);
+        StorageDead(_7);
+        _4 = std::result::Result::<(), std::io::Error>::is_err(move _5) -> [return: bb2, unwind: bb17];
+    }
+
+    bb2: {
+        switchInt(move _4) -> [0: bb6, otherwise: bb3];
+    }
+
+    bb3: {
+        drop(_6) -> [return: bb4, unwind: bb18];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = AccountDidNotSerialize;
+        _13 = <anchor_lang::error::ErrorCode as Into<anchor_lang::error::Error>>::into(move _14) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _13);
+        StorageDead(_13);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb15;
+    }
+
+    bb6: {
+        drop(_6) -> [return: bb7, unwind: bb18];
+    }
+
+    bb7: {
+        StorageDead(_10);
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_1);
+        StorageLive(_20);
+        _20 = &mut (*_2);
+        _18 = <SignedMsgUserOrders as BorshSerialize>::serialize::<W>(move _19, move _20) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        _17 = &_18;
+        StorageDead(_20);
+        StorageDead(_19);
+        _16 = std::result::Result::<(), std::io::Error>::is_err(move _17) -> [return: bb9, unwind: bb16];
+    }
+
+    bb9: {
+        switchInt(move _16) -> [0: bb13, otherwise: bb10];
+    }
+
+    bb10: {
+        drop(_18) -> [return: bb11, unwind: bb18];
+    }
+
+    bb11: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = AccountDidNotSerialize;
+        _22 = <anchor_lang::error::ErrorCode as Into<anchor_lang::error::Error>>::into(move _23) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_23);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _22);
+        StorageDead(_22);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb15;
+    }
+
+    bb13: {
+        drop(_18) -> [return: bb14, unwind: bb18];
+    }
+
+    bb14: {
+        StorageDead(_18);
+        StorageDead(_17);
+        _15 = const ();
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageLive(_24);
+        _24 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _24);
+        StorageDead(_24);
+        goto -> bb15;
+    }
+
+    bb15: {
+        return;
+    }
+
+    bb16 (cleanup): {
+        drop(_18) -> [return: bb18, unwind terminate(cleanup)];
+    }
+
+    bb17 (cleanup): {
+        drop(_6) -> [return: bb18, unwind terminate(cleanup)];
+    }
+
+    bb18 (cleanup): {
+        resume;
+    }
+}

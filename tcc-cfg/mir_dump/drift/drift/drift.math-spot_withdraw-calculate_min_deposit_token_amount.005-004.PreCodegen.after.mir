@@ -1,0 +1,124 @@
+// MIR for `calculate_min_deposit_token_amount` after PreCodegen
+
+fn calculate_min_deposit_token_amount(_1: u128, _2: u128) -> std::result::Result<u128, error::ErrorCode> {
+    debug deposit_token_twap => _1;
+    debug withdraw_guard_threshold => _2;
+    let mut _0: std::result::Result<u128, error::ErrorCode>;
+    let _3: u128;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _5: std::result::Result<u128, error::ErrorCode>;
+    let mut _6: u128;
+    let mut _7: u128;
+    let mut _8: u128;
+    let mut _9: u128;
+    let mut _10: bool;
+    let mut _11: u128;
+    let mut _12: u128;
+    let mut _13: u128;
+    let mut _14: isize;
+    let _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _18: u128;
+    let mut _19: u128;
+    scope 1 {
+        debug min_deposit_token => _3;
+    }
+    scope 2 {
+        debug residual => _15;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _18;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _1;
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _1;
+        _10 = Eq(const 4_u128, const 0_u128);
+        assert(!move _10, "attempt to divide `{}` by zero", _9) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _8 = Div(move _9, const 4_u128);
+        StorageDead(_9);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _2;
+        StorageLive(_13);
+        _13 = _1;
+        _11 = <u128 as Ord>::min(move _12, move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_13);
+        StorageDead(_12);
+        _7 = <u128 as Ord>::max(move _8, move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_8);
+        _5 = <u128 as SafeMath>::safe_sub(move _6, move _7) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _5) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_5);
+        _14 = discriminant(_4);
+        switchInt(move _14) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_18);
+        _18 = ((_4 as Continue).0: u128);
+        _3 = _18;
+        StorageDead(_18);
+        StorageDead(_4);
+        StorageLive(_19);
+        _19 = _3;
+        _0 = std::result::Result::<u128, error::ErrorCode>::Ok(move _19);
+        StorageDead(_19);
+        StorageDead(_3);
+        goto -> bb10;
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_15);
+        _15 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_17);
+        _17 = _15;
+        _0 = <std::result::Result<u128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _17) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb10;
+    }
+
+    bb10: {
+        return;
+    }
+}

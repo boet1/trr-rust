@@ -1,0 +1,926 @@
+// MIR for `calculate_fee_for_fulfillment_with_external_market` before PreCodegen
+
+fn calculate_fee_for_fulfillment_with_external_market(_1: &UserStats, _2: u64, _3: &state::state::FeeStructure, _4: u64, _5: u64, _6: bool, _7: u64, _8: u64, _9: u64, _10: i16) -> std::result::Result<ExternalFillFees, error::ErrorCode> {
+    debug user_stats => _1;
+    debug quote_asset_amount => _2;
+    debug fee_structure => _3;
+    debug order_slot => _4;
+    debug clock_slot => _5;
+    debug reward_filler => _6;
+    debug external_market_fee => _7;
+    debug unsettled_referrer_rebate => _8;
+    debug fee_pool_amount => _9;
+    debug fee_adjustment => _10;
+    let mut _0: std::result::Result<math::fees::ExternalFillFees, error::ErrorCode>;
+    let _11: state::state::FeeTier;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::state::FeeTier>;
+    let mut _13: std::result::Result<state::state::FeeTier, error::ErrorCode>;
+    let mut _14: &state::user::UserStats;
+    let mut _15: &state::state::FeeStructure;
+    let mut _16: &state::user::MarketType;
+    let _17: &state::user::MarketType;
+    let _18: state::user::MarketType;
+    let mut _19: isize;
+    let _20: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _23: state::state::FeeTier;
+    let mut _25: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _26: std::result::Result<u64, error::ErrorCode>;
+    let mut _27: u64;
+    let mut _28: &state::state::FeeTier;
+    let _29: &state::state::FeeTier;
+    let mut _30: i16;
+    let mut _31: isize;
+    let mut _33: !;
+    let mut _34: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _37: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _38: std::result::Result<u64, error::ErrorCode>;
+    let mut _39: u64;
+    let mut _40: u64;
+    let mut _41: isize;
+    let mut _43: !;
+    let mut _44: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _47: u64;
+    let mut _48: u64;
+    let mut _50: bool;
+    let mut _52: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _53: std::result::Result<u64, error::ErrorCode>;
+    let mut _54: u64;
+    let mut _55: u64;
+    let mut _56: isize;
+    let mut _58: !;
+    let mut _59: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _62: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _63: std::result::Result<u64, error::ErrorCode>;
+    let mut _64: u64;
+    let mut _65: u64;
+    let mut _66: isize;
+    let mut _68: !;
+    let mut _69: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _72: u64;
+    let mut _73: u64;
+    let mut _74: u64;
+    let mut _75: u64;
+    let mut _76: u64;
+    let mut _77: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _78: std::result::Result<u64, error::ErrorCode>;
+    let mut _79: u64;
+    let mut _80: u64;
+    let mut _81: u64;
+    let mut _82: &state::state::OrderFillerRewardStructure;
+    let _83: &state::state::OrderFillerRewardStructure;
+    let mut _84: isize;
+    let mut _86: !;
+    let mut _87: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _89: u64;
+    let mut _91: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _92: std::result::Result<u64, error::ErrorCode>;
+    let mut _93: u64;
+    let mut _94: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _95: std::result::Result<u64, error::ErrorCode>;
+    let mut _96: u64;
+    let mut _97: u64;
+    let mut _98: isize;
+    let mut _100: !;
+    let mut _101: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _103: u64;
+    let mut _104: isize;
+    let mut _106: !;
+    let mut _107: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _110: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _111: std::result::Result<i64, error::ErrorCode>;
+    let mut _112: i64;
+    let mut _113: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _114: std::result::Result<i64, error::ErrorCode>;
+    let mut _115: u64;
+    let mut _116: isize;
+    let mut _118: !;
+    let mut _119: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _121: i64;
+    let mut _122: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _123: std::result::Result<i64, error::ErrorCode>;
+    let mut _124: u64;
+    let mut _125: isize;
+    let mut _127: !;
+    let mut _128: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _130: isize;
+    let mut _132: !;
+    let mut _133: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _135: math::fees::ExternalFillFees;
+    let mut _136: u64;
+    let mut _137: u64;
+    let mut _138: u64;
+    let mut _139: i64;
+    let mut _140: &state::user::MarketType;
+    scope 1 {
+        debug taker_fee_tier => _11;
+        let _24: u64;
+        let _32: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _35: u64;
+        scope 6 {
+            debug fee => _24;
+            let _36: u64;
+            let _42: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _45: u64;
+            scope 11 {
+                debug fee_plus_referrer_rebate => _36;
+                let _46: u64;
+                scope 16 {
+                    debug user_fee => _46;
+                    let _49: u64;
+                    let _51: u64;
+                    let _57: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _60: u64;
+                    scope 17 {
+                        debug filler_reward => _49;
+                        let _90: u64;
+                        let _99: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _102: u64;
+                        let _105: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _108: u64;
+                        scope 33 {
+                            debug fee_to_market => _90;
+                            let _109: i64;
+                            let _117: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _120: i64;
+                            let _126: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _129: i64;
+                            let _131: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _134: i64;
+                            scope 42 {
+                                debug fee_pool_delta => _109;
+                            }
+                            scope 43 {
+                                debug residual => _117;
+                                scope 44 {
+                                }
+                            }
+                            scope 45 {
+                                debug val => _120;
+                                scope 46 {
+                                }
+                            }
+                            scope 47 {
+                                debug residual => _126;
+                                scope 48 {
+                                }
+                            }
+                            scope 49 {
+                                debug val => _129;
+                                scope 50 {
+                                }
+                            }
+                            scope 51 {
+                                debug residual => _131;
+                                scope 52 {
+                                }
+                            }
+                            scope 53 {
+                                debug val => _134;
+                                scope 54 {
+                                }
+                            }
+                        }
+                        scope 34 {
+                            debug residual => _99;
+                            scope 35 {
+                            }
+                        }
+                        scope 36 {
+                            debug val => _102;
+                            scope 37 {
+                            }
+                        }
+                        scope 38 {
+                            debug residual => _105;
+                            scope 39 {
+                            }
+                        }
+                        scope 40 {
+                            debug val => _108;
+                            scope 41 {
+                            }
+                        }
+                    }
+                    scope 18 {
+                        debug immediately_available_fee => _51;
+                        let _61: u64;
+                        let _67: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _70: u64;
+                        scope 23 {
+                            debug eventual_available_fee => _61;
+                            let _71: u64;
+                            scope 28 {
+                                debug available_fee => _71;
+                                let _85: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _88: u64;
+                                scope 29 {
+                                    debug residual => _85;
+                                    scope 30 {
+                                    }
+                                }
+                                scope 31 {
+                                    debug val => _88;
+                                    scope 32 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 24 {
+                            debug residual => _67;
+                            scope 25 {
+                            }
+                        }
+                        scope 26 {
+                            debug val => _70;
+                            scope 27 {
+                            }
+                        }
+                    }
+                    scope 19 {
+                        debug residual => _57;
+                        scope 20 {
+                        }
+                    }
+                    scope 21 {
+                        debug val => _60;
+                        scope 22 {
+                        }
+                    }
+                }
+            }
+            scope 12 {
+                debug residual => _42;
+                scope 13 {
+                }
+            }
+            scope 14 {
+                debug val => _45;
+                scope 15 {
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _32;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _35;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _20;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _23;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        StorageLive(_15);
+        _15 = &(*_3);
+        StorageLive(_16);
+        StorageLive(_17);
+        _140 = const _;
+        _17 = &(*_140);
+        _16 = &(*_17);
+        _13 = determine_user_fee_tier(move _14, move _15, move _16, const false) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        _12 = <std::result::Result<state::state::FeeTier, error::ErrorCode> as Try>::branch(move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_13);
+        _19 = discriminant(_12);
+        switchInt(move _19) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_23);
+        _23 = ((_12 as Continue).0: state::state::FeeTier);
+        _11 = _23;
+        StorageDead(_23);
+        StorageDead(_17);
+        StorageDead(_12);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = _2;
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = &_11;
+        _28 = &(*_29);
+        StorageLive(_30);
+        _30 = _10;
+        _26 = calculate_taker_fee(move _27, move _28, move _30) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_20);
+        _20 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_22);
+        _22 = _20;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _22) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_12);
+        goto -> bb73;
+    }
+
+    bb7: {
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_27);
+        _25 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _26) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_26);
+        _31 = discriminant(_25);
+        switchInt(move _31) -> [0: bb9, 1: bb10, otherwise: bb4];
+    }
+
+    bb9: {
+        StorageLive(_35);
+        _35 = ((_25 as Continue).0: u64);
+        _24 = _35;
+        StorageDead(_35);
+        StorageDead(_29);
+        StorageDead(_25);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = _7;
+        StorageLive(_40);
+        _40 = _8;
+        _38 = <u64 as SafeMath>::safe_add(move _39, move _40) -> [return: bb12, unwind continue];
+    }
+
+    bb10: {
+        StorageLive(_32);
+        _32 = ((_25 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_34);
+        _34 = _32;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _34) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_34);
+        StorageDead(_32);
+        StorageDead(_29);
+        StorageDead(_25);
+        goto -> bb72;
+    }
+
+    bb12: {
+        StorageDead(_40);
+        StorageDead(_39);
+        _37 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _38) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_38);
+        _41 = discriminant(_37);
+        switchInt(move _41) -> [0: bb14, 1: bb15, otherwise: bb4];
+    }
+
+    bb14: {
+        StorageLive(_45);
+        _45 = ((_37 as Continue).0: u64);
+        _36 = _45;
+        StorageDead(_45);
+        StorageDead(_37);
+        StorageLive(_46);
+        StorageLive(_47);
+        _47 = _24;
+        StorageLive(_48);
+        _48 = _36;
+        _46 = <u64 as Ord>::max(move _47, move _48) -> [return: bb17, unwind continue];
+    }
+
+    bb15: {
+        StorageLive(_42);
+        _42 = ((_37 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_44);
+        _44 = _42;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _44) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_44);
+        StorageDead(_42);
+        StorageDead(_37);
+        goto -> bb71;
+    }
+
+    bb17: {
+        StorageDead(_48);
+        StorageDead(_47);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = _6;
+        switchInt(move _50) -> [0: bb37, otherwise: bb18];
+    }
+
+    bb18: {
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = _46;
+        StorageLive(_55);
+        _55 = _36;
+        _53 = <u64 as SafeMath>::safe_sub(move _54, move _55) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_55);
+        StorageDead(_54);
+        _52 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _53) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_53);
+        _56 = discriminant(_52);
+        switchInt(move _56) -> [0: bb21, 1: bb22, otherwise: bb4];
+    }
+
+    bb21: {
+        StorageLive(_60);
+        _60 = ((_52 as Continue).0: u64);
+        _51 = _60;
+        StorageDead(_60);
+        StorageDead(_52);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = _46;
+        StorageLive(_65);
+        _65 = _7;
+        _63 = <u64 as SafeMath>::safe_sub(move _64, move _65) -> [return: bb24, unwind continue];
+    }
+
+    bb22: {
+        StorageLive(_57);
+        _57 = ((_52 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_59);
+        _59 = _57;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _59) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_59);
+        StorageDead(_57);
+        StorageDead(_52);
+        goto -> bb68;
+    }
+
+    bb24: {
+        StorageDead(_65);
+        StorageDead(_64);
+        _62 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _63) -> [return: bb25, unwind continue];
+    }
+
+    bb25: {
+        StorageDead(_63);
+        _66 = discriminant(_62);
+        switchInt(move _66) -> [0: bb26, 1: bb27, otherwise: bb4];
+    }
+
+    bb26: {
+        StorageLive(_70);
+        _70 = ((_62 as Continue).0: u64);
+        _61 = _70;
+        StorageDead(_70);
+        StorageDead(_62);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = _61;
+        StorageLive(_73);
+        StorageLive(_74);
+        _74 = _9;
+        StorageLive(_75);
+        _75 = _51;
+        _73 = <u64 as Ord>::max(move _74, move _75) -> [return: bb29, unwind continue];
+    }
+
+    bb27: {
+        StorageLive(_67);
+        _67 = ((_62 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_69);
+        _69 = _67;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _69) -> [return: bb28, unwind continue];
+    }
+
+    bb28: {
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_62);
+        StorageDead(_61);
+        goto -> bb68;
+    }
+
+    bb29: {
+        StorageDead(_75);
+        StorageDead(_74);
+        _71 = <u64 as Ord>::min(move _72, move _73) -> [return: bb30, unwind continue];
+    }
+
+    bb30: {
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        _79 = _2;
+        StorageLive(_80);
+        _80 = _4;
+        StorageLive(_81);
+        _81 = _5;
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = &((*_3).1: state::state::OrderFillerRewardStructure);
+        _82 = &(*_83);
+        _78 = calculate_filler_reward(move _79, move _80, move _81, const 0_u64, move _82) -> [return: bb31, unwind continue];
+    }
+
+    bb31: {
+        StorageDead(_82);
+        StorageDead(_81);
+        StorageDead(_80);
+        StorageDead(_79);
+        _77 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _78) -> [return: bb32, unwind continue];
+    }
+
+    bb32: {
+        StorageDead(_78);
+        _84 = discriminant(_77);
+        switchInt(move _84) -> [0: bb33, 1: bb34, otherwise: bb4];
+    }
+
+    bb33: {
+        StorageLive(_88);
+        _88 = ((_77 as Continue).0: u64);
+        _76 = _88;
+        StorageDead(_88);
+        StorageLive(_89);
+        _89 = _71;
+        _49 = <u64 as Ord>::min(move _76, move _89) -> [return: bb36, unwind continue];
+    }
+
+    bb34: {
+        StorageLive(_85);
+        _85 = ((_77 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_87);
+        _87 = _85;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _87) -> [return: bb35, unwind continue];
+    }
+
+    bb35: {
+        StorageDead(_87);
+        StorageDead(_85);
+        StorageDead(_76);
+        StorageDead(_71);
+        StorageDead(_61);
+        StorageDead(_51);
+        StorageDead(_83);
+        StorageDead(_77);
+        goto -> bb69;
+    }
+
+    bb36: {
+        StorageDead(_89);
+        StorageDead(_76);
+        StorageDead(_71);
+        StorageDead(_61);
+        StorageDead(_51);
+        StorageDead(_83);
+        StorageDead(_77);
+        goto -> bb38;
+    }
+
+    bb37: {
+        _49 = const 0_u64;
+        goto -> bb38;
+    }
+
+    bb38: {
+        StorageDead(_50);
+        StorageLive(_90);
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        _96 = _46;
+        StorageLive(_97);
+        _97 = _7;
+        _95 = <u64 as SafeMath>::safe_sub(move _96, move _97) -> [return: bb39, unwind continue];
+    }
+
+    bb39: {
+        StorageDead(_97);
+        StorageDead(_96);
+        _94 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _95) -> [return: bb40, unwind continue];
+    }
+
+    bb40: {
+        StorageDead(_95);
+        _98 = discriminant(_94);
+        switchInt(move _98) -> [0: bb41, 1: bb42, otherwise: bb4];
+    }
+
+    bb41: {
+        StorageLive(_102);
+        _102 = ((_94 as Continue).0: u64);
+        _93 = _102;
+        StorageDead(_102);
+        StorageLive(_103);
+        _103 = _49;
+        _92 = <u64 as SafeMath>::safe_sub(move _93, move _103) -> [return: bb44, unwind continue];
+    }
+
+    bb42: {
+        StorageLive(_99);
+        _99 = ((_94 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_101);
+        _101 = _99;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _101) -> [return: bb43, unwind continue];
+    }
+
+    bb43: {
+        StorageDead(_101);
+        StorageDead(_99);
+        StorageDead(_93);
+        StorageDead(_92);
+        goto -> bb66;
+    }
+
+    bb44: {
+        StorageDead(_103);
+        StorageDead(_93);
+        _91 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _92) -> [return: bb45, unwind continue];
+    }
+
+    bb45: {
+        StorageDead(_92);
+        _104 = discriminant(_91);
+        switchInt(move _104) -> [0: bb46, 1: bb47, otherwise: bb4];
+    }
+
+    bb46: {
+        StorageLive(_108);
+        _108 = ((_91 as Continue).0: u64);
+        _90 = _108;
+        StorageDead(_108);
+        StorageDead(_94);
+        StorageDead(_91);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        _115 = _90;
+        _114 = <u64 as Cast>::cast::<i64>(move _115) -> [return: bb49, unwind continue];
+    }
+
+    bb47: {
+        StorageLive(_105);
+        _105 = ((_91 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_107);
+        _107 = _105;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _107) -> [return: bb48, unwind continue];
+    }
+
+    bb48: {
+        StorageDead(_107);
+        StorageDead(_105);
+        goto -> bb66;
+    }
+
+    bb49: {
+        StorageDead(_115);
+        _113 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _114) -> [return: bb50, unwind continue];
+    }
+
+    bb50: {
+        StorageDead(_114);
+        _116 = discriminant(_113);
+        switchInt(move _116) -> [0: bb51, 1: bb52, otherwise: bb4];
+    }
+
+    bb51: {
+        StorageLive(_120);
+        _120 = ((_113 as Continue).0: i64);
+        _112 = _120;
+        StorageDead(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        _124 = _8;
+        _123 = <u64 as Cast>::cast::<i64>(move _124) -> [return: bb54, unwind continue];
+    }
+
+    bb52: {
+        StorageLive(_117);
+        _117 = ((_113 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_119);
+        _119 = _117;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _119) -> [return: bb53, unwind continue];
+    }
+
+    bb53: {
+        StorageDead(_119);
+        StorageDead(_117);
+        StorageDead(_112);
+        StorageDead(_111);
+        goto -> bb65;
+    }
+
+    bb54: {
+        StorageDead(_124);
+        _122 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _123) -> [return: bb55, unwind continue];
+    }
+
+    bb55: {
+        StorageDead(_123);
+        _125 = discriminant(_122);
+        switchInt(move _125) -> [0: bb56, 1: bb57, otherwise: bb4];
+    }
+
+    bb56: {
+        StorageLive(_129);
+        _129 = ((_122 as Continue).0: i64);
+        _121 = _129;
+        StorageDead(_129);
+        _111 = <i64 as SafeMath>::safe_sub(move _112, move _121) -> [return: bb59, unwind continue];
+    }
+
+    bb57: {
+        StorageLive(_126);
+        _126 = ((_122 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_128);
+        _128 = _126;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _128) -> [return: bb58, unwind continue];
+    }
+
+    bb58: {
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_121);
+        StorageDead(_112);
+        StorageDead(_111);
+        goto -> bb64;
+    }
+
+    bb59: {
+        StorageDead(_121);
+        StorageDead(_112);
+        _110 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _111) -> [return: bb60, unwind continue];
+    }
+
+    bb60: {
+        StorageDead(_111);
+        _130 = discriminant(_110);
+        switchInt(move _130) -> [0: bb61, 1: bb62, otherwise: bb4];
+    }
+
+    bb61: {
+        StorageLive(_134);
+        _134 = ((_110 as Continue).0: i64);
+        _109 = _134;
+        StorageDead(_134);
+        StorageDead(_122);
+        StorageDead(_113);
+        StorageDead(_110);
+        StorageLive(_135);
+        StorageLive(_136);
+        _136 = _46;
+        StorageLive(_137);
+        _137 = _90;
+        StorageLive(_138);
+        _138 = _49;
+        StorageLive(_139);
+        _139 = _109;
+        _135 = ExternalFillFees { user_fee: move _136, fee_to_market: move _137, fee_pool_delta: move _139, filler_reward: move _138 };
+        StorageDead(_139);
+        StorageDead(_138);
+        StorageDead(_137);
+        StorageDead(_136);
+        _0 = std::result::Result::<ExternalFillFees, error::ErrorCode>::Ok(move _135);
+        StorageDead(_135);
+        StorageDead(_109);
+        StorageDead(_90);
+        StorageDead(_49);
+        StorageDead(_46);
+        StorageDead(_36);
+        StorageDead(_24);
+        StorageDead(_11);
+        goto -> bb74;
+    }
+
+    bb62: {
+        StorageLive(_131);
+        _131 = ((_110 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_133);
+        _133 = _131;
+        _0 = <std::result::Result<ExternalFillFees, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _133) -> [return: bb63, unwind continue];
+    }
+
+    bb63: {
+        StorageDead(_133);
+        StorageDead(_131);
+        goto -> bb64;
+    }
+
+    bb64: {
+        StorageDead(_122);
+        goto -> bb65;
+    }
+
+    bb65: {
+        StorageDead(_113);
+        StorageDead(_110);
+        StorageDead(_109);
+        goto -> bb67;
+    }
+
+    bb66: {
+        StorageDead(_94);
+        StorageDead(_91);
+        goto -> bb67;
+    }
+
+    bb67: {
+        StorageDead(_90);
+        goto -> bb70;
+    }
+
+    bb68: {
+        StorageDead(_51);
+        goto -> bb69;
+    }
+
+    bb69: {
+        StorageDead(_50);
+        goto -> bb70;
+    }
+
+    bb70: {
+        StorageDead(_49);
+        StorageDead(_46);
+        goto -> bb71;
+    }
+
+    bb71: {
+        StorageDead(_36);
+        goto -> bb72;
+    }
+
+    bb72: {
+        StorageDead(_24);
+        goto -> bb73;
+    }
+
+    bb73: {
+        StorageDead(_11);
+        goto -> bb74;
+    }
+
+    bb74: {
+        return;
+    }
+}

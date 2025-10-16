@@ -1,0 +1,35 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::split` after PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::split(_1: u64) -> (u64, u64) {
+    debug a => _1;
+    let mut _0: (u64, u64);
+    let mut _2: u64;
+    let mut _3: u64;
+    let mut _4: u32;
+    let mut _5: bool;
+    let mut _6: u64;
+    let mut _7: u64;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = _1;
+        _4 = const 32_i32 as u32 (IntToInt);
+        _5 = Lt(move _4, const 64_u32);
+        assert(move _5, "attempt to shift right by `{}`, which would overflow", const 32_i32) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _2 = Shr(move _3, const 32_i32);
+        StorageDead(_3);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _1;
+        _6 = BitAnd(move _7, const 4294967295_u64);
+        StorageDead(_7);
+        _0 = (move _2, move _6);
+        StorageDead(_6);
+        StorageDead(_2);
+        return;
+    }
+}

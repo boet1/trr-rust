@@ -1,0 +1,21 @@
+// MIR for `state::state::<impl at programs/drift/src/state/state.rs:141:1: 141:34>::default` after PreCodegen
+
+fn state::state::<impl at programs/drift/src/state/state.rs:141:1: 141:34>::default() -> state::state::OracleGuardRails {
+    let mut _0: state::state::OracleGuardRails;
+    let mut _1: state::state::PriceDivergenceGuardRails;
+    let mut _2: state::state::ValidityGuardRails;
+
+    bb0: {
+        StorageLive(_1);
+        _1 = <PriceDivergenceGuardRails as Default>::default() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_2);
+        _2 = ValidityGuardRails { slots_before_stale_for_amm: const 10_i64, slots_before_stale_for_margin: const 120_i64, confidence_interval_max_size: const 20000_u64, too_volatile_ratio: const 5_i64 };
+        _0 = state::state::OracleGuardRails { price_divergence: move _1, validity: move _2 };
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
+    }
+}

@@ -1,0 +1,152 @@
+// MIR for `get_market_set_for_user_positions` after PreCodegen
+
+fn get_market_set_for_user_positions(_1: &[PerpPosition; 8]) -> BTreeSet<u16> {
+    debug user_positions => _1;
+    let mut _0: std::collections::BTreeSet<u16>;
+    let mut _2: std::collections::BTreeSet<u16>;
+    let _3: ();
+    let mut _4: std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _5: std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _6: &[state::user::PerpPosition];
+    let mut _7: &[state::user::PerpPosition; 8];
+    let mut _9: ();
+    let _10: ();
+    let mut _11: std::option::Option<&state::user::PerpPosition>;
+    let mut _12: &mut std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _13: &mut std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _14: isize;
+    let mut _15: !;
+    let mut _17: bool;
+    let mut _18: &state::user::PerpPosition;
+    let _19: bool;
+    let mut _20: &mut std::collections::BTreeSet<u16>;
+    let mut _21: u16;
+    scope 1 {
+        debug writable_markets => _2;
+        let mut _8: std::slice::Iter<'_, state::user::PerpPosition>;
+        scope 2 {
+            debug iter => _8;
+            let _16: &state::user::PerpPosition;
+            scope 3 {
+                debug position => _16;
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = BTreeSet::<u16>::new() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(*_1);
+        _6 = move _7 as &[state::user::PerpPosition] (PointerCoercion(Unsize));
+        StorageDead(_7);
+        _5 = core::slice::<impl [PerpPosition]>::iter(move _6) -> [return: bb2, unwind: bb14];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _4 = <std::slice::Iter<'_, PerpPosition> as IntoIterator>::into_iter(move _5) -> [return: bb3, unwind: bb14];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        StorageLive(_8);
+        _8 = move _4;
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut _8;
+        _12 = &mut (*_13);
+        _11 = <std::slice::Iter<'_, PerpPosition> as Iterator>::next(move _12) -> [return: bb5, unwind: bb14];
+    }
+
+    bb5: {
+        StorageDead(_12);
+        _14 = discriminant(_11);
+        switchInt(move _14) -> [0: bb8, 1: bb6, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = ((_11 as Some).0: &state::user::PerpPosition);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &(*_16);
+        _17 = PerpPosition::is_available(move _18) -> [return: bb9, unwind: bb14];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        _3 = const ();
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        _0 = move _2;
+        StorageDead(_2);
+        return;
+    }
+
+    bb9: {
+        switchInt(move _17) -> [0: bb11, otherwise: bb10];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        _10 = const ();
+        goto -> bb13;
+    }
+
+    bb11: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = &mut _2;
+        StorageLive(_21);
+        _21 = ((*_16).13: u16);
+        _19 = BTreeSet::<u16>::insert(move _20, move _21) -> [return: bb12, unwind: bb14];
+    }
+
+    bb12: {
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        _10 = const ();
+        goto -> bb13;
+    }
+
+    bb13: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_10);
+        _9 = const ();
+        goto -> bb4;
+    }
+
+    bb14 (cleanup): {
+        drop(_2) -> [return: bb15, unwind terminate(cleanup)];
+    }
+
+    bb15 (cleanup): {
+        resume;
+    }
+}

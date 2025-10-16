@@ -1,0 +1,130 @@
+// MIR for `decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:510:4: 510:14>::as_u128` after PreCodegen
+
+fn decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:510:4: 510:14>::as_u128(_1: &U192) -> u128 {
+    debug self => _1;
+    let mut _0: u128;
+    let _2: &[u64; 3];
+    let _3: ();
+    let mut _4: std::ops::Range<usize>;
+    let mut _5: std::ops::Range<usize>;
+    let mut _7: ();
+    let _8: ();
+    let mut _9: std::option::Option<usize>;
+    let mut _10: &mut std::ops::Range<usize>;
+    let mut _11: &mut std::ops::Range<usize>;
+    let mut _12: isize;
+    let mut _13: !;
+    let mut _15: bool;
+    let mut _16: u64;
+    let _17: usize;
+    let mut _18: usize;
+    let mut _19: bool;
+    let mut _20: !;
+    let _21: !;
+    let mut _22: &math::decimal::U192;
+    scope 1 {
+        debug arr => _2;
+        let mut _6: std::ops::Range<usize>;
+        scope 2 {
+            debug iter => _6;
+            let _14: usize;
+            scope 3 {
+                debug i => _14;
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = &((*_1).0: [u64; 3]);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = std::ops::Range::<usize> { start: const 2_usize, end: const 3_usize };
+        _4 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = move _4;
+        goto -> bb2;
+    }
+
+    bb2: {
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &mut _6;
+        _10 = &mut (*_11);
+        _9 = <std::ops::Range<usize> as Iterator>::next(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _12 = discriminant(_9);
+        switchInt(move _12) -> [0: bb6, 1: bb4, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = ((_9 as Some).0: usize);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _14;
+        _18 = Len((*_2));
+        _19 = Lt(_17, _18);
+        assert(move _19, "index out of bounds: the length is {} but the index is {}", move _18, _17) -> [success: bb7, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        _3 = const ();
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_22);
+        _22 = &(*_1);
+        _0 = U192::low_u128(move _22) -> [return: bb10, unwind continue];
+    }
+
+    bb7: {
+        _16 = (*_2)[_17];
+        _15 = Ne(move _16, const 0_u64);
+        switchInt(move _15) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_21);
+        _21 = begin_panic::<&str>(const "Integer overflow when casting to u128") -> unwind continue;
+    }
+
+    bb9: {
+        StorageDead(_17);
+        StorageDead(_16);
+        _8 = const ();
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        _7 = const ();
+        goto -> bb2;
+    }
+
+    bb10: {
+        StorageDead(_22);
+        StorageDead(_2);
+        return;
+    }
+}

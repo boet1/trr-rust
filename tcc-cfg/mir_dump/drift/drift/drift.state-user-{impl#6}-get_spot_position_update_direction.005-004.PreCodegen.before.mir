@@ -1,0 +1,65 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::get_spot_position_update_direction` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::get_spot_position_update_direction(_1: &Order, _2: AssetType) -> SpotBalanceType {
+    debug self => _1;
+    debug asset_type => _2;
+    let mut _0: state::spot_market::SpotBalanceType;
+    let mut _3: (controller::position::PositionDirection, state::user::AssetType);
+    let mut _4: controller::position::PositionDirection;
+    let mut _5: state::user::AssetType;
+    let mut _6: isize;
+    let mut _7: isize;
+    let mut _8: isize;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).17: controller::position::PositionDirection);
+        StorageLive(_5);
+        _5 = _2;
+        _3 = (move _4, move _5);
+        StorageDead(_5);
+        StorageDead(_4);
+        _8 = discriminant((_3.0: controller::position::PositionDirection));
+        switchInt(move _8) -> [0: bb1, 1: bb3, otherwise: bb2];
+    }
+
+    bb1: {
+        _6 = discriminant((_3.1: state::user::AssetType));
+        switchInt(move _6) -> [0: bb5, 1: bb6, otherwise: bb2];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        _7 = discriminant((_3.1: state::user::AssetType));
+        switchInt(move _7) -> [0: bb7, 1: bb4, otherwise: bb2];
+    }
+
+    bb4: {
+        _0 = SpotBalanceType::Deposit;
+        goto -> bb8;
+    }
+
+    bb5: {
+        _0 = SpotBalanceType::Deposit;
+        goto -> bb8;
+    }
+
+    bb6: {
+        _0 = SpotBalanceType::Borrow;
+        goto -> bb8;
+    }
+
+    bb7: {
+        _0 = SpotBalanceType::Borrow;
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_3);
+        return;
+    }
+}

@@ -1,0 +1,30 @@
+// MIR for `calculate_obligation_liquidity_market_value` before PreCodegen
+
+fn calculate_obligation_liquidity_market_value(_1: &reserve::Reserve, _2: &obligation::ObligationLiquidity) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug borrow_reserve => _1;
+    debug borrow => _2;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _3: &state::reserve::Reserve;
+    let mut _4: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _5: &state::obligation::ObligationLiquidity;
+
+    bb0: {
+        StorageLive(_3);
+        _3 = &(*_1);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_2);
+        _4 = obligation::ObligationLiquidity::borrowed_amount(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _0 = calculate_market_value_from_liquidity_amount(move _3, move _4) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

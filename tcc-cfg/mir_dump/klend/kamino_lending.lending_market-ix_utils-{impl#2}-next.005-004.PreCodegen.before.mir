@@ -1,0 +1,149 @@
+// MIR for `ix_utils::<impl at programs\klend\src\lending_market\ix_utils.rs:117:1: 119:33>::next` before PreCodegen
+
+fn ix_utils::<impl at programs\klend\src\lending_market\ix_utils.rs:117:1: 119:33>::next(_1: &mut IxIterator<'_, IxLoader>) -> std::option::Option<std::result::Result<Instruction, anchor_lang::prelude::ProgramError>> {
+    debug self => _1;
+    let mut _0: std::option::Option<std::result::Result<solana_program::instruction::Instruction, anchor_lang::prelude::ProgramError>>;
+    let mut _2: std::result::Result<solana_program::instruction::Instruction, anchor_lang::prelude::ProgramError>;
+    let mut _3: &IxLoader;
+    let mut _4: usize;
+    let mut _5: isize;
+    let mut _6: isize;
+    let _7: solana_program::instruction::Instruction;
+    let mut _8: usize;
+    let mut _9: std::option::Option<usize>;
+    let mut _10: usize;
+    let mut _11: std::result::Result<solana_program::instruction::Instruction, anchor_lang::prelude::ProgramError>;
+    let mut _12: solana_program::instruction::Instruction;
+    let _13: anchor_lang::prelude::ProgramError;
+    let mut _14: std::result::Result<solana_program::instruction::Instruction, anchor_lang::prelude::ProgramError>;
+    let mut _15: anchor_lang::prelude::ProgramError;
+    let mut _16: &IxLoader;
+    let mut _17: bool;
+    let mut _18: bool;
+    let mut _19: bool;
+    let mut _20: isize;
+    let mut _21: isize;
+    let mut _22: isize;
+    scope 1 {
+        debug ix => _7;
+    }
+    scope 2 {
+        debug e => _13;
+    }
+
+    bb0: {
+        _18 = const false;
+        _19 = const false;
+        _17 = const false;
+        StorageLive(_2);
+        StorageLive(_3);
+        _16 = deref_copy ((*_1).1: &IxLoader);
+        _3 = &(*_16);
+        StorageLive(_4);
+        _4 = ((*_1).0: usize);
+        _17 = const true;
+        _18 = const true;
+        _19 = const true;
+        _2 = <IxLoader as InstructionLoader>::load_instruction_at(move _3, move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_3);
+        _6 = discriminant(_2);
+        switchInt(move _6) -> [0: bb5, 1: bb2, otherwise: bb4];
+    }
+
+    bb2: {
+        _5 = discriminant(((_2 as Err).0: anchor_lang::prelude::ProgramError));
+        switchInt(move _5) -> [1: bb8, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _19 = const false;
+        _13 = move ((_2 as Err).0: anchor_lang::prelude::ProgramError);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = move _13;
+        _14 = std::result::Result::<Instruction, anchor_lang::prelude::ProgramError>::Err(move _15);
+        StorageDead(_15);
+        _0 = std::option::Option::<std::result::Result<Instruction, anchor_lang::prelude::ProgramError>>::Some(move _14);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb14;
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_7);
+        _7 = move ((_2 as Ok).0: solana_program::instruction::Instruction);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = ((*_1).0: usize);
+        _9 = core::num::<impl usize>::checked_add(move _10, const 1_usize) -> [return: bb6, unwind: bb9];
+    }
+
+    bb6: {
+        StorageDead(_10);
+        _8 = std::option::Option::<usize>::unwrap(move _9) -> [return: bb7, unwind: bb9];
+    }
+
+    bb7: {
+        StorageDead(_9);
+        ((*_1).0: usize) = move _8;
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = move _7;
+        _11 = std::result::Result::<Instruction, anchor_lang::prelude::ProgramError>::Ok(move _12);
+        StorageDead(_12);
+        _0 = std::option::Option::<std::result::Result<Instruction, anchor_lang::prelude::ProgramError>>::Some(move _11);
+        StorageDead(_11);
+        StorageDead(_7);
+        goto -> bb14;
+    }
+
+    bb8: {
+        _0 = std::option::Option::<std::result::Result<Instruction, anchor_lang::prelude::ProgramError>>::None;
+        goto -> bb14;
+    }
+
+    bb9 (cleanup): {
+        drop(_7) -> [return: bb15, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11: {
+        _17 = const false;
+        _18 = const false;
+        _19 = const false;
+        StorageDead(_2);
+        return;
+    }
+
+    bb12: {
+        switchInt(_19) -> [0: bb11, otherwise: bb13];
+    }
+
+    bb13: {
+        drop(((_2 as Err).0: anchor_lang::prelude::ProgramError)) -> [return: bb11, unwind: bb10];
+    }
+
+    bb14: {
+        _20 = discriminant(_2);
+        switchInt(move _20) -> [0: bb11, otherwise: bb12];
+    }
+
+    bb15 (cleanup): {
+        _22 = discriminant(_2);
+        goto -> bb10;
+    }
+}

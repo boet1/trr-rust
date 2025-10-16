@@ -1,0 +1,25 @@
+// MIR for `state::unpack_decimal` before PreCodegen
+
+fn state::unpack_decimal(_1: &[u8; 16]) -> decimal::Decimal {
+    debug src => _1;
+    let mut _0: math::decimal::Decimal;
+    let mut _2: u128;
+    let mut _3: [u8; 16];
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = (*_1);
+        _2 = core::num::<impl u128>::from_le_bytes(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        _0 = decimal::Decimal::from_scaled_val(move _2) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_2);
+        return;
+    }
+}

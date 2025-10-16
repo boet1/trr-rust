@@ -1,0 +1,62 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:1107:1: 1107:29>::from_str` before PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:1107:1: 1107:29>::from_str(_1: &str) -> Result<reserve::ReserveType, ProgramError> {
+    debug input => _1;
+    let mut _0: std::result::Result<state::reserve::ReserveType, solana_program::program_error::ProgramError>;
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: state::reserve::ReserveType;
+    let mut _5: state::reserve::ReserveType;
+    let mut _6: solana_program::program_error::ProgramError;
+    let mut _7: error::LendingError;
+
+    bb0: {
+        _2 = <str as PartialEq>::eq(_1, const "Regular") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _2) -> [0: bb2, otherwise: bb5];
+    }
+
+    bb2: {
+        _3 = <str as PartialEq>::eq(_1, const "Isolated") -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        switchInt(move _3) -> [0: bb4, otherwise: bb6];
+    }
+
+    bb4: {
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = LendingError::InvalidConfig;
+        _6 = <LendingError as Into<ProgramError>>::into(move _7) -> [return: bb7, unwind continue];
+    }
+
+    bb5: {
+        StorageLive(_4);
+        _4 = reserve::ReserveType::Regular;
+        _0 = Result::<reserve::ReserveType, ProgramError>::Ok(move _4);
+        StorageDead(_4);
+        goto -> bb8;
+    }
+
+    bb6: {
+        StorageLive(_5);
+        _5 = reserve::ReserveType::Isolated;
+        _0 = Result::<reserve::ReserveType, ProgramError>::Ok(move _5);
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb7: {
+        StorageDead(_7);
+        _0 = Result::<reserve::ReserveType, ProgramError>::Err(move _6);
+        StorageDead(_6);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+}

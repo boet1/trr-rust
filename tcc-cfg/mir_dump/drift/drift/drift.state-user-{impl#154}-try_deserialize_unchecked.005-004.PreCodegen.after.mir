@@ -1,0 +1,57 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1613:1: 1613:30>::try_deserialize_unchecked` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1613:1: 1613:30>::try_deserialize_unchecked(_1: &mut &[u8]) -> std::result::Result<UserStats, anchor_lang::error::Error> {
+    debug buf => _1;
+    let mut _0: std::result::Result<state::user::UserStats, anchor_lang::error::Error>;
+    let _2: &[u8];
+    let _3: &[u8];
+    let _4: &[u8];
+    let mut _5: &[u8];
+    let mut _6: std::ops::RangeFrom<usize>;
+    let mut _8: &[u8];
+    let mut _9: state::user::UserStats;
+    let mut _10: &[u8];
+    scope 1 {
+        debug data => _2;
+        let _7: &state::user::UserStats;
+        scope 2 {
+            debug account => _7;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _10 = deref_copy (*_1);
+        _5 = &(*_10);
+        StorageLive(_6);
+        _6 = RangeFrom::<usize> { start: const 8_usize };
+        _4 = <[u8] as Index<RangeFrom<usize>>>::index(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = &(*_4);
+        _2 = &(*_3);
+        StorageDead(_3);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(*_2);
+        _7 = bytemuck::from_bytes::<UserStats>(move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageLive(_9);
+        _9 = (*_7);
+        _0 = std::result::Result::<UserStats, anchor_lang::error::Error>::Ok(move _9);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
+    }
+}

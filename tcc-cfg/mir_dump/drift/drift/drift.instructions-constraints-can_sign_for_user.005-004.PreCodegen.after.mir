@@ -1,0 +1,38 @@
+// MIR for `constraints::can_sign_for_user` after PreCodegen
+
+fn constraints::can_sign_for_user(_1: &anchor_lang::prelude::AccountLoader<'_, User>, _2: &anchor_lang::prelude::Signer<'_>) -> std::result::Result<bool, anchor_lang::error::Error> {
+    debug user => _1;
+    debug signer => _2;
+    let mut _0: std::result::Result<bool, anchor_lang::error::Error>;
+    let mut _3: std::result::Result<std::cell::Ref<'_, state::user::User>, anchor_lang::error::Error>;
+    let mut _4: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _5: {closure@programs/drift/src/instructions/constraints.rs:16:21: 16:27};
+    let mut _6: &&anchor_lang::prelude::Signer<'_>;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = anchor_lang::prelude::AccountLoader::<'_, User>::load(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &_2;
+        _5 = {closure@programs/drift/src/instructions/constraints.rs:16:21: 16:27} { signer: move _6 };
+        StorageDead(_6);
+        _0 = std::result::Result::<Ref<'_, User>, anchor_lang::error::Error>::map::<bool, {closure@programs/drift/src/instructions/constraints.rs:16:21: 16:27}>(move _3, move _5) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_3);
+        return;
+    }
+
+    bb3 (cleanup): {
+        resume;
+    }
+}

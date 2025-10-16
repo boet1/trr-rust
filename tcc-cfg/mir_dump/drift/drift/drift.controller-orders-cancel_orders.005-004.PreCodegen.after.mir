@@ -1,0 +1,549 @@
+// MIR for `controller::orders::cancel_orders` after PreCodegen
+
+fn controller::orders::cancel_orders(_1: &mut User, _2: &anchor_lang::prelude::Pubkey, _3: Option<&anchor_lang::prelude::Pubkey>, _4: &PerpMarketMap<'_>, _5: &SpotMarketMap<'_>, _6: &mut OracleMap<'_>, _7: i64, _8: u64, _9: OrderActionExplanation, _10: Option<state::user::MarketType>, _11: Option<u16>, _12: Option<controller::position::PositionDirection>) -> std::result::Result<Vec<u32>, error::ErrorCode> {
+    debug user => _1;
+    debug user_key => _2;
+    debug filler_key => _3;
+    debug perp_market_map => _4;
+    debug spot_market_map => _5;
+    debug oracle_map => _6;
+    debug now => _7;
+    debug slot => _8;
+    debug explanation => _9;
+    debug market_type => _10;
+    debug market_index => _11;
+    debug direction => _12;
+    let mut _0: std::result::Result<std::vec::Vec<u32>, error::ErrorCode>;
+    let mut _13: std::vec::Vec<u32>;
+    let _14: ();
+    let mut _15: std::ops::Range<usize>;
+    let mut _16: std::ops::Range<usize>;
+    let mut _17: usize;
+    let mut _18: &[state::user::Order];
+    let mut _19: &[state::user::Order; 32];
+    let mut _21: ();
+    let _22: ();
+    let mut _23: std::option::Option<usize>;
+    let mut _24: &mut std::ops::Range<usize>;
+    let mut _25: &mut std::ops::Range<usize>;
+    let mut _26: isize;
+    let mut _27: !;
+    let _29: ();
+    let mut _30: bool;
+    let mut _31: &state::user::OrderStatus;
+    let _32: usize;
+    let mut _33: usize;
+    let mut _34: bool;
+    let mut _35: &state::user::OrderStatus;
+    let _36: state::user::OrderStatus;
+    let mut _37: !;
+    let _38: ();
+    let mut _39: (std::option::Option<state::user::MarketType>, std::option::Option<u16>);
+    let mut _40: std::option::Option<state::user::MarketType>;
+    let mut _41: std::option::Option<u16>;
+    let mut _42: isize;
+    let mut _43: isize;
+    let _46: ();
+    let mut _47: bool;
+    let mut _48: &state::user::MarketType;
+    let _49: usize;
+    let mut _50: usize;
+    let mut _51: bool;
+    let mut _52: &state::user::MarketType;
+    let mut _53: !;
+    let mut _54: bool;
+    let mut _55: u16;
+    let _56: usize;
+    let mut _57: usize;
+    let mut _58: bool;
+    let mut _59: u16;
+    let mut _60: !;
+    let _61: ();
+    let mut _62: isize;
+    let mut _64: bool;
+    let mut _65: &controller::position::PositionDirection;
+    let _66: usize;
+    let mut _67: usize;
+    let mut _68: bool;
+    let mut _69: &controller::position::PositionDirection;
+    let mut _70: !;
+    let _71: ();
+    let mut _72: &mut std::vec::Vec<u32>;
+    let mut _73: u32;
+    let _74: usize;
+    let mut _75: usize;
+    let mut _76: bool;
+    let _77: ();
+    let mut _78: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _79: std::result::Result<(), error::ErrorCode>;
+    let mut _80: usize;
+    let mut _81: &mut state::user::User;
+    let mut _82: &anchor_lang::prelude::Pubkey;
+    let mut _83: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _84: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _85: &mut state::oracle_map::OracleMap<'_>;
+    let mut _86: i64;
+    let mut _87: u64;
+    let mut _88: state::events::OrderActionExplanation;
+    let mut _89: std::option::Option<&anchor_lang::prelude::Pubkey>;
+    let mut _90: isize;
+    let mut _92: !;
+    let mut _93: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _95: ();
+    let mut _96: &mut state::user::User;
+    let mut _97: u64;
+    let mut _98: std::vec::Vec<u32>;
+    scope 1 {
+        debug canceled_order_ids => _13;
+        let mut _20: std::ops::Range<usize>;
+        scope 2 {
+            debug iter => _20;
+            let _28: usize;
+            scope 3 {
+                debug order_index => _28;
+                let _91: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _94: ();
+                let mut _99: &state::user::OrderStatus;
+                scope 4 {
+                    debug market_type => _44;
+                    debug market_index => _45;
+                    let _44: state::user::MarketType;
+                    let _45: u16;
+                }
+                scope 5 {
+                    debug direction => _63;
+                    let _63: controller::position::PositionDirection;
+                }
+                scope 6 {
+                    debug residual => _91;
+                    scope 7 {
+                    }
+                }
+                scope 8 {
+                    debug val => _94;
+                    scope 9 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_13);
+        _13 = Vec::<u32>::new() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &((*_1).5: [state::user::Order; 32]);
+        _18 = move _19 as &[state::user::Order] (PointerCoercion(Unsize));
+        StorageDead(_19);
+        _17 = core::slice::<impl [Order]>::len(move _18) -> [return: bb2, unwind: bb43];
+    }
+
+    bb2: {
+        StorageDead(_18);
+        _16 = std::ops::Range::<usize> { start: const 0_usize, end: move _17 };
+        StorageDead(_17);
+        _15 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _16) -> [return: bb3, unwind: bb43];
+    }
+
+    bb3: {
+        StorageDead(_16);
+        StorageLive(_20);
+        _20 = move _15;
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &mut _20;
+        _24 = &mut (*_25);
+        _23 = <std::ops::Range<usize> as Iterator>::next(move _24) -> [return: bb5, unwind: bb43];
+    }
+
+    bb5: {
+        StorageDead(_24);
+        _26 = discriminant(_23);
+        switchInt(move _26) -> [0: bb8, 1: bb6, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_28);
+        _28 = ((_23 as Some).0: usize);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = _28;
+        _33 = Len(((*_1).5: [state::user::Order; 32]));
+        _34 = Lt(_32, _33);
+        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _32) -> [success: bb9, unwind: bb43];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        _14 = const ();
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_95);
+        StorageLive(_96);
+        _96 = &mut (*_1);
+        StorageLive(_97);
+        _97 = _8;
+        _95 = User::update_last_active_slot(move _96, move _97) -> [return: bb40, unwind: bb43];
+    }
+
+    bb9: {
+        _31 = &(((*_1).5: [state::user::Order; 32])[_32].12: state::user::OrderStatus);
+        StorageLive(_35);
+        _99 = const _;
+        _35 = &(*_99);
+        _30 = <OrderStatus as PartialEq>::ne(move _31, move _35) -> [return: bb10, unwind: bb43];
+    }
+
+    bb10: {
+        switchInt(move _30) -> [0: bb12, otherwise: bb11];
+    }
+
+    bb11: {
+        StorageDead(_35);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        goto -> bb39;
+    }
+
+    bb12: {
+        StorageDead(_35);
+        StorageDead(_32);
+        StorageDead(_31);
+        _29 = const ();
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        _40 = _10;
+        StorageLive(_41);
+        _41 = _11;
+        _39 = (move _40, move _41);
+        StorageDead(_41);
+        StorageDead(_40);
+        _43 = discriminant((_39.0: std::option::Option<state::user::MarketType>));
+        switchInt(move _43) -> [1: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        _38 = const ();
+        goto -> bb23;
+    }
+
+    bb14: {
+        _42 = discriminant((_39.1: std::option::Option<u16>));
+        switchInt(move _42) -> [1: bb15, otherwise: bb13];
+    }
+
+    bb15: {
+        StorageLive(_44);
+        _44 = (((_39.0: std::option::Option<state::user::MarketType>) as Some).0: state::user::MarketType);
+        StorageLive(_45);
+        _45 = (((_39.1: std::option::Option<u16>) as Some).0: u16);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = _28;
+        _50 = Len(((*_1).5: [state::user::Order; 32]));
+        _51 = Lt(_49, _50);
+        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> [success: bb16, unwind: bb43];
+    }
+
+    bb16: {
+        _48 = &(((*_1).5: [state::user::Order; 32])[_49].14: state::user::MarketType);
+        StorageLive(_52);
+        _52 = &_44;
+        _47 = <state::user::MarketType as PartialEq>::ne(move _48, move _52) -> [return: bb17, unwind: bb43];
+    }
+
+    bb17: {
+        switchInt(move _47) -> [0: bb19, otherwise: bb18];
+    }
+
+    bb18: {
+        StorageDead(_52);
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageDead(_47);
+        StorageDead(_46);
+        goto -> bb38;
+    }
+
+    bb19: {
+        StorageDead(_52);
+        StorageDead(_49);
+        StorageDead(_48);
+        _46 = const ();
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        _56 = _28;
+        _57 = Len(((*_1).5: [state::user::Order; 32]));
+        _58 = Lt(_56, _57);
+        assert(move _58, "index out of bounds: the length is {} but the index is {}", move _57, _56) -> [success: bb20, unwind: bb43];
+    }
+
+    bb20: {
+        _55 = (((*_1).5: [state::user::Order; 32])[_56].11: u16);
+        StorageLive(_59);
+        _59 = _45;
+        _54 = Ne(move _55, move _59);
+        switchInt(move _54) -> [0: bb22, otherwise: bb21];
+    }
+
+    bb21: {
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageDead(_54);
+        goto -> bb38;
+    }
+
+    bb22: {
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_55);
+        _38 = const ();
+        StorageDead(_54);
+        StorageDead(_45);
+        StorageDead(_44);
+        goto -> bb23;
+    }
+
+    bb23: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageLive(_61);
+        _62 = discriminant(_12);
+        switchInt(move _62) -> [1: bb24, otherwise: bb29];
+    }
+
+    bb24: {
+        StorageLive(_63);
+        _63 = ((_12 as Some).0: controller::position::PositionDirection);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        _66 = _28;
+        _67 = Len(((*_1).5: [state::user::Order; 32]));
+        _68 = Lt(_66, _67);
+        assert(move _68, "index out of bounds: the length is {} but the index is {}", move _67, _66) -> [success: bb25, unwind: bb43];
+    }
+
+    bb25: {
+        _65 = &(((*_1).5: [state::user::Order; 32])[_66].17: controller::position::PositionDirection);
+        StorageLive(_69);
+        _69 = &_63;
+        _64 = <controller::position::PositionDirection as PartialEq>::ne(move _65, move _69) -> [return: bb26, unwind: bb43];
+    }
+
+    bb26: {
+        switchInt(move _64) -> [0: bb28, otherwise: bb27];
+    }
+
+    bb27: {
+        StorageDead(_69);
+        StorageDead(_66);
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageDead(_63);
+        StorageDead(_61);
+        goto -> bb39;
+    }
+
+    bb28: {
+        StorageDead(_69);
+        StorageDead(_66);
+        StorageDead(_65);
+        _61 = const ();
+        StorageDead(_64);
+        StorageDead(_63);
+        goto -> bb30;
+    }
+
+    bb29: {
+        _61 = const ();
+        goto -> bb30;
+    }
+
+    bb30: {
+        StorageDead(_61);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = &mut _13;
+        StorageLive(_73);
+        StorageLive(_74);
+        _74 = _28;
+        _75 = Len(((*_1).5: [state::user::Order; 32]));
+        _76 = Lt(_74, _75);
+        assert(move _76, "index out of bounds: the length is {} but the index is {}", move _75, _74) -> [success: bb31, unwind: bb43];
+    }
+
+    bb31: {
+        _73 = (((*_1).5: [state::user::Order; 32])[_74].10: u32);
+        _71 = Vec::<u32>::push(move _72, move _73) -> [return: bb32, unwind: bb43];
+    }
+
+    bb32: {
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageDead(_74);
+        StorageDead(_71);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        _80 = _28;
+        StorageLive(_81);
+        _81 = &mut (*_1);
+        StorageLive(_82);
+        _82 = &(*_2);
+        StorageLive(_83);
+        _83 = &(*_4);
+        StorageLive(_84);
+        _84 = &(*_5);
+        StorageLive(_85);
+        _85 = &mut (*_6);
+        StorageLive(_86);
+        _86 = _7;
+        StorageLive(_87);
+        _87 = _8;
+        StorageLive(_88);
+        _88 = _9;
+        StorageLive(_89);
+        _89 = _3;
+        _79 = controller::orders::cancel_order(move _80, move _81, move _82, move _83, move _84, move _85, move _86, move _87, move _88, move _89, const 0_u64, const false) -> [return: bb33, unwind: bb43];
+    }
+
+    bb33: {
+        StorageDead(_89);
+        StorageDead(_88);
+        StorageDead(_87);
+        StorageDead(_86);
+        StorageDead(_85);
+        StorageDead(_84);
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageDead(_81);
+        StorageDead(_80);
+        _78 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _79) -> [return: bb34, unwind: bb43];
+    }
+
+    bb34: {
+        StorageDead(_79);
+        _90 = discriminant(_78);
+        switchInt(move _90) -> [0: bb35, 1: bb36, otherwise: bb7];
+    }
+
+    bb35: {
+        StorageLive(_94);
+        _94 = ((_78 as Continue).0: ());
+        _77 = _94;
+        StorageDead(_94);
+        StorageDead(_78);
+        StorageDead(_77);
+        _22 = const ();
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        _21 = const ();
+        goto -> bb4;
+    }
+
+    bb36: {
+        StorageLive(_91);
+        _91 = ((_78 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_93);
+        _93 = _91;
+        _0 = <std::result::Result<Vec<u32>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _93) -> [return: bb37, unwind: bb43];
+    }
+
+    bb37: {
+        StorageDead(_93);
+        StorageDead(_91);
+        StorageDead(_78);
+        StorageDead(_77);
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_15);
+        StorageDead(_14);
+        drop(_13) -> [return: bb41, unwind: bb44];
+    }
+
+    bb38: {
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageDead(_39);
+        StorageDead(_38);
+        goto -> bb39;
+    }
+
+    bb39: {
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_22);
+        goto -> bb4;
+    }
+
+    bb40: {
+        StorageDead(_97);
+        StorageDead(_96);
+        StorageDead(_95);
+        StorageLive(_98);
+        _98 = move _13;
+        _0 = std::result::Result::<Vec<u32>, error::ErrorCode>::Ok(move _98);
+        StorageDead(_98);
+        StorageDead(_13);
+        goto -> bb42;
+    }
+
+    bb41: {
+        StorageDead(_13);
+        goto -> bb42;
+    }
+
+    bb42: {
+        return;
+    }
+
+    bb43 (cleanup): {
+        drop(_13) -> [return: bb44, unwind terminate(cleanup)];
+    }
+
+    bb44 (cleanup): {
+        resume;
+    }
+}

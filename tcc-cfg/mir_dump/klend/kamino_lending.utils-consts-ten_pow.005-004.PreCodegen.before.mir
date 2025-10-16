@@ -1,0 +1,72 @@
+// MIR for `utils::consts::ten_pow` before PreCodegen
+
+fn utils::consts::ten_pow(_1: usize) -> u64 {
+    debug x => _1;
+    let mut _0: u64;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: !;
+    let _6: !;
+    let _7: !;
+    let mut _8: std::fmt::Arguments<'_>;
+    let mut _9: &[&str];
+    let mut _10: &[&str; 1];
+    let _11: &[&str; 1];
+    let _12: [&str; 1];
+    let mut _13: [u64; 20];
+    let _14: usize;
+    let mut _15: usize;
+    let mut _16: bool;
+    let mut _17: &[&str; 1];
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _1;
+        _3 = Gt(move _4, const 19_usize);
+        switchInt(move _3) -> [0: bb3, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _17 = const _;
+        _11 = &(*_17);
+        _10 = &(*_11);
+        _9 = move _10 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_10);
+        _8 = Arguments::<'_>::new_const(move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _7 = panic_fmt(move _8) -> unwind continue;
+    }
+
+    bb3: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_13);
+        _13 = const _;
+        StorageLive(_14);
+        _14 = _1;
+        _15 = Len(_13);
+        _16 = Lt(_14, _15);
+        assert(move _16, "index out of bounds: the length is {} but the index is {}", move _15, _14) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _0 = _13[_14];
+        StorageDead(_14);
+        StorageDead(_13);
+        return;
+    }
+}

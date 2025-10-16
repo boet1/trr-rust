@@ -1,0 +1,60 @@
+// MIR for `obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::new` after PreCodegen
+
+fn obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::new(_1: InitObligationParams) -> obligation::Obligation {
+    debug params => _1;
+    let mut _0: state::obligation::Obligation;
+    let mut _2: state::obligation::Obligation;
+    let _3: ();
+    let mut _4: &mut state::obligation::Obligation;
+    let mut _5: &mut state::obligation::Obligation;
+    let mut _6: state::obligation::InitObligationParams;
+    let mut _7: bool;
+    scope 1 {
+        debug obligation => _2;
+    }
+
+    bb0: {
+        _7 = const false;
+        _7 = const true;
+        StorageLive(_2);
+        _2 = <obligation::Obligation as Default>::default() -> [return: bb1, unwind: bb6];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &mut _2;
+        _4 = &mut (*_5);
+        StorageLive(_6);
+        _7 = const false;
+        _6 = move _1;
+        _3 = obligation::Obligation::init(move _4, move _6) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = move _2;
+        StorageDead(_2);
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> [return: bb6, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb6 (cleanup): {
+        switchInt(_7) -> [0: bb4, otherwise: bb5];
+    }
+}

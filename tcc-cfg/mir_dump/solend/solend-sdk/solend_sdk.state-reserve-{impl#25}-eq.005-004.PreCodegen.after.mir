@@ -1,0 +1,76 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:618:24: 618:33>::eq` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:618:24: 618:33>::eq(_1: &CalculateLiquidationResult, _2: &CalculateLiquidationResult) -> bool {
+    debug self => _1;
+    debug other => _2;
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: &math::decimal::Decimal;
+    let mut _5: &math::decimal::Decimal;
+    let mut _6: bool;
+    let mut _7: u64;
+    let mut _8: u64;
+    let mut _9: u64;
+    let mut _10: u64;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &((*_1).0: math::decimal::Decimal);
+        StorageLive(_5);
+        _5 = &((*_2).0: math::decimal::Decimal);
+        _3 = <decimal::Decimal as PartialEq>::eq(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).1: u64);
+        StorageLive(_8);
+        _8 = ((*_2).1: u64);
+        _6 = Eq(move _7, move _8);
+        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        _9 = ((*_1).2: u64);
+        StorageLive(_10);
+        _10 = ((*_2).2: u64);
+        _0 = Eq(move _9, move _10);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb7;
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb6;
+    }
+
+    bb6: {
+        _0 = const false;
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_6);
+        StorageDead(_3);
+        return;
+    }
+}

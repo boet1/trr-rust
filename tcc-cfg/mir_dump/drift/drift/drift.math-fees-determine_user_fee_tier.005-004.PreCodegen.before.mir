@@ -1,0 +1,146 @@
+// MIR for `determine_user_fee_tier` before PreCodegen
+
+fn determine_user_fee_tier(_1: &UserStats, _2: &state::state::FeeStructure, _3: &state::user::MarketType, _4: bool) -> std::result::Result<state::state::FeeTier, error::ErrorCode> {
+    debug user_stats => _1;
+    debug fee_structure => _2;
+    debug market_type => _3;
+    debug user_high_leverage_mode => _4;
+    let mut _0: std::result::Result<state::state::FeeTier, error::ErrorCode>;
+    let mut _5: isize;
+    let mut _6: &&state::user::MarketType;
+    let mut _7: &state::user::MarketType;
+    let mut _8: bool;
+    let mut _9: state::state::FeeTier;
+    let _10: usize;
+    let mut _11: usize;
+    let mut _12: bool;
+    let mut _13: &state::user::UserStats;
+    let mut _14: &state::state::FeeStructure;
+    let mut _15: state::state::FeeTier;
+    let mut _16: &state::state::FeeTier;
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &state::state::FeeTier>;
+    let mut _18: std::result::Result<&state::state::FeeTier, error::ErrorCode>;
+    let mut _19: &state::user::UserStats;
+    let mut _20: &state::state::FeeStructure;
+    let mut _21: isize;
+    let _22: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _23: !;
+    let mut _24: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _25: &state::state::FeeTier;
+    scope 1 {
+        debug residual => _22;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _25;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        _5 = discriminant((*_3));
+        switchInt(move _5) -> [0: bb1, 1: bb3, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_1);
+        StorageLive(_20);
+        _20 = &(*_2);
+        _18 = determine_spot_fee_tier(move _19, move _20) -> [return: bb8, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_8);
+        _8 = _4;
+        switchInt(move _8) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const 0_usize;
+        _11 = Len(((*_2).0: [state::state::FeeTier; 10]));
+        _12 = Lt(_10, _11);
+        assert(move _12, "index out of bounds: the length is {} but the index is {}", move _11, _10) -> [success: bb6, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_8);
+        StorageLive(_13);
+        _13 = &(*_1);
+        StorageLive(_14);
+        _14 = &(*_2);
+        _0 = determine_perp_fee_tier(move _13, move _14) -> [return: bb7, unwind continue];
+    }
+
+    bb6: {
+        _9 = ((*_2).0: [state::state::FeeTier; 10])[_10];
+        _0 = std::result::Result::<state::state::FeeTier, error::ErrorCode>::Ok(move _9);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb13;
+    }
+
+    bb7: {
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb13;
+    }
+
+    bb8: {
+        StorageDead(_20);
+        StorageDead(_19);
+        _17 = <std::result::Result<&state::state::FeeTier, error::ErrorCode> as Try>::branch(move _18) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_18);
+        _21 = discriminant(_17);
+        switchInt(move _21) -> [0: bb10, 1: bb11, otherwise: bb2];
+    }
+
+    bb10: {
+        StorageLive(_25);
+        _25 = ((_17 as Continue).0: &state::state::FeeTier);
+        _16 = _25;
+        StorageDead(_25);
+        _15 = (*_16);
+        _0 = std::result::Result::<state::state::FeeTier, error::ErrorCode>::Ok(move _15);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb13;
+    }
+
+    bb11: {
+        StorageLive(_22);
+        _22 = ((_17 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_24);
+        _24 = _22;
+        _0 = <std::result::Result<state::state::FeeTier, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _24) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_24);
+        StorageDead(_22);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+}

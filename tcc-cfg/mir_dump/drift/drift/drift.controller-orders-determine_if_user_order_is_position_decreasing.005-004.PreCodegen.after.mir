@@ -1,0 +1,300 @@
+// MIR for `determine_if_user_order_is_position_decreasing` after PreCodegen
+
+fn determine_if_user_order_is_position_decreasing(_1: &User, _2: u16, _3: usize) -> std::result::Result<bool, error::ErrorCode> {
+    debug user => _1;
+    debug market_index => _2;
+    debug order_index => _3;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _4: usize;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, usize>;
+    let mut _6: std::result::Result<usize, error::ErrorCode>;
+    let mut _7: &[state::user::PerpPosition; 8];
+    let _8: &[state::user::PerpPosition; 8];
+    let mut _9: u16;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: usize;
+    let _16: usize;
+    let mut _17: usize;
+    let mut _18: bool;
+    let _20: usize;
+    let mut _21: usize;
+    let mut _22: bool;
+    let mut _23: &controller::position::PositionDirection;
+    let _24: &controller::position::PositionDirection;
+    let mut _25: u64;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _27: std::result::Result<u64, error::ErrorCode>;
+    let mut _28: &state::user::Order;
+    let _29: usize;
+    let mut _30: usize;
+    let mut _31: bool;
+    let mut _32: std::option::Option<i64>;
+    let mut _33: i64;
+    let mut _34: isize;
+    let mut _36: !;
+    let mut _37: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _39: i64;
+    let mut _40: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _41: std::result::Result<i64, error::ErrorCode>;
+    let mut _42: i64;
+    let mut _43: isize;
+    let mut _45: !;
+    let mut _46: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    scope 1 {
+        debug position_index => _4;
+        let _15: controller::position::PositionDirection;
+        scope 6 {
+            debug order_direction => _15;
+            let _19: i64;
+            scope 7 {
+                debug position_base_asset_amount_before => _19;
+                let _35: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _38: u64;
+                let _44: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _47: i64;
+                scope 8 {
+                    debug residual => _35;
+                    scope 9 {
+                    }
+                }
+                scope 10 {
+                    debug val => _38;
+                    scope 11 {
+                    }
+                }
+                scope 12 {
+                    debug residual => _44;
+                    scope 13 {
+                    }
+                }
+                scope 14 {
+                    debug val => _47;
+                    scope 15 {
+                    }
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &((*_1).4: [state::user::PerpPosition; 8]);
+        _7 = &(*_8);
+        StorageLive(_9);
+        _9 = _2;
+        _6 = get_position_index(move _7, move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageDead(_7);
+        _5 = <std::result::Result<usize, error::ErrorCode> as Try>::branch(move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _10 = discriminant(_5);
+        switchInt(move _10) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_14);
+        _14 = ((_5 as Continue).0: usize);
+        _4 = _14;
+        StorageDead(_14);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = _3;
+        _17 = Len(((*_1).5: [state::user::Order; 32]));
+        _18 = Lt(_16, _17);
+        assert(move _18, "index out of bounds: the length is {} but the index is {}", move _17, _16) -> [success: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_11);
+        _11 = ((_5 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb22;
+    }
+
+    bb7: {
+        _15 = (((*_1).5: [state::user::Order; 32])[_16].17: controller::position::PositionDirection);
+        StorageDead(_16);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _4;
+        _21 = Len(((*_1).4: [state::user::PerpPosition; 8]));
+        _22 = Lt(_20, _21);
+        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _20) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _19 = (((*_1).4: [state::user::PerpPosition; 8])[_20].1: i64);
+        StorageDead(_20);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &_15;
+        _23 = &(*_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _3;
+        _30 = Len(((*_1).5: [state::user::Order; 32]));
+        _31 = Lt(_29, _30);
+        assert(move _31, "index out of bounds: the length is {} but the index is {}", move _30, _29) -> [success: bb9, unwind continue];
+    }
+
+    bb9: {
+        _28 = &((*_1).5: [state::user::Order; 32])[_29];
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = _19;
+        _32 = Option::<i64>::Some(move _33);
+        StorageDead(_33);
+        _27 = Order::get_base_asset_amount_unfilled(move _28, move _32) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_32);
+        StorageDead(_28);
+        _26 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _27) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_27);
+        _34 = discriminant(_26);
+        switchInt(move _34) -> [0: bb12, 1: bb13, otherwise: bb4];
+    }
+
+    bb12: {
+        StorageLive(_38);
+        _38 = ((_26 as Continue).0: u64);
+        _25 = _38;
+        StorageDead(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = _19;
+        _41 = <i64 as Cast>::cast::<i64>(move _42) -> [return: bb15, unwind continue];
+    }
+
+    bb13: {
+        StorageLive(_35);
+        _35 = ((_26 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_37);
+        _37 = _35;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _37) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_37);
+        StorageDead(_35);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_19);
+        StorageDead(_15);
+        StorageDead(_4);
+        goto -> bb21;
+    }
+
+    bb15: {
+        StorageDead(_42);
+        _40 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _41) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_41);
+        _43 = discriminant(_40);
+        switchInt(move _43) -> [0: bb17, 1: bb18, otherwise: bb4];
+    }
+
+    bb17: {
+        StorageLive(_47);
+        _47 = ((_40 as Continue).0: i64);
+        _39 = _47;
+        StorageDead(_47);
+        _0 = math::orders::is_order_position_reducing(move _23, move _25, move _39) -> [return: bb20, unwind continue];
+    }
+
+    bb18: {
+        StorageLive(_44);
+        _44 = ((_40 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_46);
+        _46 = _44;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _46) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_46);
+        StorageDead(_44);
+        StorageDead(_39);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_19);
+        StorageDead(_15);
+        StorageDead(_4);
+        StorageDead(_40);
+        goto -> bb21;
+    }
+
+    bb20: {
+        StorageDead(_39);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_19);
+        StorageDead(_15);
+        StorageDead(_4);
+        StorageDead(_40);
+        StorageDead(_29);
+        StorageDead(_26);
+        StorageDead(_24);
+        goto -> bb22;
+    }
+
+    bb21: {
+        StorageDead(_29);
+        StorageDead(_26);
+        StorageDead(_24);
+        goto -> bb22;
+    }
+
+    bb22: {
+        return;
+    }
+}

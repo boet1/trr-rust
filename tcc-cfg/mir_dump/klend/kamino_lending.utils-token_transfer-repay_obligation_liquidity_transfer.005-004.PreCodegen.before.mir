@@ -1,0 +1,141 @@
+// MIR for `repay_obligation_liquidity_transfer` before PreCodegen
+
+fn repay_obligation_liquidity_transfer(_1: anchor_lang::prelude::AccountInfo<'_>, _2: anchor_lang::prelude::AccountInfo<'_>, _3: anchor_lang::prelude::AccountInfo<'_>, _4: anchor_lang::prelude::AccountInfo<'_>, _5: anchor_lang::prelude::AccountInfo<'_>, _6: u64, _7: u8) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug token_program => _1;
+    debug liquidity_mint => _2;
+    debug user_liquidity => _3;
+    debug reserve_liquidity => _4;
+    debug user_authority => _5;
+    debug repay_amount => _6;
+    debug decimals => _7;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _8: ();
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _10: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _11: anchor_lang::context::CpiContext<'_, '_, '_, '_, anchor_spl::token_2022::TransferChecked<'_>>;
+    let mut _12: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _13: anchor_spl::token_2022::TransferChecked<'_>;
+    let mut _14: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _15: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _16: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _17: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _18: u64;
+    let mut _19: u8;
+    let mut _20: isize;
+    let _21: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _22: !;
+    let mut _23: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _24: ();
+    let mut _25: ();
+    let mut _26: isize;
+    let mut _27: isize;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    scope 1 {
+        debug residual => _21;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _24;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = move _1;
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = move _3;
+        StorageLive(_15);
+        _15 = move _4;
+        StorageLive(_16);
+        _16 = move _5;
+        StorageLive(_17);
+        _17 = move _2;
+        _13 = anchor_spl::token_2022::TransferChecked::<'_> { from: move _14, mint: move _17, to: move _15, authority: move _16 };
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        _11 = anchor_lang::context::CpiContext::<'_, '_, '_, '_, anchor_spl::token_2022::TransferChecked<'_>>::new(move _12, move _13) -> [return: bb1, unwind: bb9];
+    }
+
+    bb1: {
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageLive(_18);
+        _18 = _6;
+        StorageLive(_19);
+        _19 = _7;
+        _10 = anchor_spl::token_2022::transfer_checked(move _11, move _18, move _19) -> [return: bb2, unwind: bb9];
+    }
+
+    bb2: {
+        StorageDead(_19);
+        StorageDead(_18);
+        StorageDead(_11);
+        _9 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _10) -> [return: bb3, unwind: bb9];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _20 = discriminant(_9);
+        switchInt(move _20) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_24);
+        _24 = ((_9 as Continue).0: ());
+        _8 = _24;
+        StorageDead(_24);
+        _26 = discriminant(_9);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_25);
+        _25 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _25);
+        StorageDead(_25);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_21);
+        _21 = move ((_9 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_23);
+        _23 = move _21;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _23) -> [return: bb7, unwind: bb10];
+    }
+
+    bb7: {
+        StorageDead(_23);
+        StorageDead(_21);
+        _28 = discriminant(_9);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        resume;
+    }
+
+    bb10 (cleanup): {
+        _30 = discriminant(_9);
+        goto -> bb9;
+    }
+}

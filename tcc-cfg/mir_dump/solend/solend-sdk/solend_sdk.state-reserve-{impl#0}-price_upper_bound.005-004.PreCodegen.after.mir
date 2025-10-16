@@ -1,0 +1,62 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::price_upper_bound` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::price_upper_bound(_1: &reserve::Reserve) -> decimal::Decimal {
+    debug self => _1;
+    let mut _0: math::decimal::Decimal;
+    let _2: math::decimal::Decimal;
+    let mut _3: math::decimal::Decimal;
+    let mut _4: math::decimal::Decimal;
+    let mut _5: isize;
+    let mut _7: math::decimal::Decimal;
+    let mut _8: math::decimal::Decimal;
+    scope 1 {
+        debug price => _2;
+        scope 2 {
+            debug extra_price => _6;
+            let _6: math::decimal::Decimal;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = (((*_1).3: state::reserve::ReserveLiquidity).9: math::decimal::Decimal);
+        StorageLive(_4);
+        _4 = (((*_1).3: state::reserve::ReserveLiquidity).10: math::decimal::Decimal);
+        _2 = std::cmp::max::<decimal::Decimal>(move _3, move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_3);
+        _5 = discriminant((((*_1).3: state::reserve::ReserveLiquidity).11: std::option::Option<math::decimal::Decimal>));
+        switchInt(move _5) -> [1: bb2, otherwise: bb4];
+    }
+
+    bb2: {
+        StorageLive(_6);
+        _6 = (((((*_1).3: state::reserve::ReserveLiquidity).11: std::option::Option<math::decimal::Decimal>) as Some).0: math::decimal::Decimal);
+        StorageLive(_7);
+        _7 = _2;
+        StorageLive(_8);
+        _8 = _6;
+        _0 = std::cmp::max::<decimal::Decimal>(move _7, move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb5;
+    }
+
+    bb4: {
+        _0 = _2;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_2);
+        return;
+    }
+}

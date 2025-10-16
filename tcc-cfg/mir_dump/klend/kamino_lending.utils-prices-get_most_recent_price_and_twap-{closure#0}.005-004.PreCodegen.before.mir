@@ -1,0 +1,29 @@
+// MIR for `get_most_recent_price_and_twap::{closure#0}` before PreCodegen
+
+fn get_most_recent_price_and_twap::{closure#0}(_1: {closure@programs\klend\src\utils\prices\mod.rs:61:42: 61:45}, _2: &anchor_lang::prelude::AccountInfo<'_>) -> std::option::Option<TimestampedPriceWithTwap> {
+    debug a => _2;
+    let mut _0: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _3: std::result::Result<utils::prices::types::TimestampedPriceWithTwap, anchor_lang::error::Error>;
+    let mut _4: &anchor_lang::prelude::AccountInfo<'_>;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_2);
+        _3 = get_pyth_price_and_twap(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _0 = std::result::Result::<TimestampedPriceWithTwap, anchor_lang::error::Error>::ok(move _3) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        return;
+    }
+
+    bb3 (cleanup): {
+        resume;
+    }
+}

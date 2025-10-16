@@ -1,0 +1,80 @@
+// MIR for `invoke_optionally_signed` before PreCodegen
+
+fn invoke_optionally_signed(_1: &Instruction, _2: &[AccountInfo<'_>], _3: &[&[u8]]) -> Result<(), ProgramError> {
+    debug instruction => _1;
+    debug account_infos => _2;
+    debug authority_signer_seeds => _3;
+    let mut _0: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _4: bool;
+    let mut _5: &[&[u8]];
+    let mut _6: &solana_program::instruction::Instruction;
+    let mut _7: &[solana_program::account_info::AccountInfo<'_>];
+    let mut _8: &solana_program::instruction::Instruction;
+    let mut _9: &[solana_program::account_info::AccountInfo<'_>];
+    let mut _10: &[&[&[u8]]];
+    let mut _11: &[&[&[u8]]; 1];
+    let _12: &[&[&[u8]]; 1];
+    let _13: [&[&[u8]]; 1];
+    let mut _14: &[&[u8]];
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_3);
+        _4 = bytemuck::core::slice::<impl [&[u8]]>::is_empty(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _4) -> [0: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        _7 = &(*_2);
+        _0 = invoke(move _6, move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb6;
+    }
+
+    bb4: {
+        StorageDead(_5);
+        StorageLive(_8);
+        _8 = &(*_1);
+        StorageLive(_9);
+        _9 = &(*_2);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_3);
+        _13 = [move _14];
+        StorageDead(_14);
+        _12 = &_13;
+        _11 = &(*_12);
+        _10 = move _11 as &[&[&[u8]]] (PointerCoercion(Unsize));
+        StorageDead(_11);
+        _0 = invoke_signed(move _8, move _9, move _10) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb6;
+    }
+
+    bb6: {
+        StorageDead(_4);
+        return;
+    }
+}

@@ -1,0 +1,105 @@
+// MIR for `math::orders::is_order_position_reducing` before PreCodegen
+
+fn math::orders::is_order_position_reducing(_1: &controller::position::PositionDirection, _2: u64, _3: i64) -> std::result::Result<bool, error::ErrorCode> {
+    debug order_direction => _1;
+    debug order_base_asset_amount => _2;
+    debug position_base_asset_amount => _3;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let mut _4: bool;
+    let mut _5: isize;
+    let mut _6: &&controller::position::PositionDirection;
+    let mut _7: &controller::position::PositionDirection;
+    let mut _8: bool;
+    let mut _9: i64;
+    let mut _10: u64;
+    let mut _11: u64;
+    let mut _12: i64;
+    let mut _13: bool;
+    let mut _14: i64;
+    let mut _15: u64;
+    let mut _16: u64;
+    let mut _17: i64;
+
+    bb0: {
+        StorageLive(_4);
+        _5 = discriminant((*_1));
+        switchInt(move _5) -> [0: bb2, 1: bb6, otherwise: bb1];
+    }
+
+    bb1: {
+        _4 = const false;
+        goto -> bb10;
+    }
+
+    bb2: {
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _3;
+        _8 = Lt(move _9, const 0_i64);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = _2;
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _3;
+        _11 = core::num::<impl i64>::unsigned_abs(move _12) -> [return: bb5, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb1;
+    }
+
+    bb5: {
+        StorageDead(_12);
+        _4 = Le(move _10, move _11);
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb10;
+    }
+
+    bb6: {
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _3;
+        _13 = Gt(move _14, const 0_i64);
+        switchInt(move _13) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb7: {
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageLive(_15);
+        _15 = _2;
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _3;
+        _16 = core::num::<impl i64>::unsigned_abs(move _17) -> [return: bb9, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb1;
+    }
+
+    bb9: {
+        StorageDead(_17);
+        _4 = Le(move _15, move _16);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb10;
+    }
+
+    bb10: {
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _4);
+        StorageDead(_4);
+        return;
+    }
+}

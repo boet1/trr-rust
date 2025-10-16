@@ -1,0 +1,109 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::get_existing_position_params_for_order_action` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::get_existing_position_params_for_order_action(_1: &PerpPosition, _2: controller::position::PositionDirection) -> Option<(u64, u64)> {
+    debug self => _1;
+    debug fill_direction => _2;
+    let mut _0: std::option::Option<(u64, u64)>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: i64;
+    let mut _6: !;
+    let mut _7: bool;
+    let mut _8: &controller::position::PositionDirection;
+    let _9: controller::position::PositionDirection;
+    let mut _10: &state::user::PerpPosition;
+    let mut _11: &controller::position::PositionDirection;
+    let mut _12: (u64, u64);
+    let mut _13: u64;
+    let mut _14: i64;
+    let mut _15: u64;
+    let mut _16: i64;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).1: i64);
+        _4 = Eq(move _5, const 0_i64);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _0 = Option::<(u64, u64)>::None;
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb10;
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_1);
+        _9 = PerpPosition::get_direction_to_close(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _8 = &_9;
+        StorageDead(_10);
+        StorageLive(_11);
+        _11 = &_2;
+        _7 = <controller::position::PositionDirection as PartialEq>::eq(move _8, move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        switchInt(move _7) -> [0: bb8, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = ((*_1).4: i64);
+        _13 = core::num::<impl i64>::unsigned_abs(move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = ((*_1).1: i64);
+        _15 = core::num::<impl i64>::unsigned_abs(move _16) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_16);
+        _12 = (move _13, move _15);
+        StorageDead(_15);
+        StorageDead(_13);
+        _0 = Option::<(u64, u64)>::Some(move _12);
+        StorageDead(_12);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        _0 = Option::<(u64, u64)>::None;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_7);
+        goto -> bb10;
+    }
+
+    bb10: {
+        return;
+    }
+}

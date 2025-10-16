@@ -1,0 +1,52 @@
+// MIR for `controller::orders::place_perp_order::{closure#1}` before PreCodegen
+
+fn controller::orders::place_perp_order::{closure#1}(_1: &mut {closure@programs/drift/src/controller/orders.rs:168:23: 168:30}, _2: &Order) -> bool {
+    debug order => _2;
+    debug params => (*((*_1).0: &state::order_params::OrderParams));
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: u8;
+    let mut _5: u8;
+    let mut _6: bool;
+    let mut _7: &state::user::Order;
+    let mut _8: &state::order_params::OrderParams;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_2).15: u8);
+        StorageLive(_5);
+        _8 = deref_copy ((*_1).0: &state::order_params::OrderParams);
+        _5 = ((*_8).3: u8);
+        _3 = Eq(move _4, move _5);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(*_2);
+        _6 = Order::is_available(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = const false;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        _0 = Not(move _6);
+        StorageDead(_6);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_3);
+        return;
+    }
+}

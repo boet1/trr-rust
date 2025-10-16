@@ -1,0 +1,191 @@
+// MIR for `taker_price_to_phoenix_price_in_ticks_rounded_up` after PreCodegen
+
+fn taker_price_to_phoenix_price_in_ticks_rounded_up(_1: u64, _2: u64, _3: &MarketHeader) -> std::result::Result<Ticks, error::ErrorCode> {
+    debug taker_price => _1;
+    debug tick_size => _2;
+    debug header => _3;
+    let mut _0: std::result::Result<phoenix::quantities::Ticks, error::ErrorCode>;
+    let mut _4: std::result::Result<u64, error::ErrorCode>;
+    let mut _5: u64;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _7: std::result::Result<u64, error::ErrorCode>;
+    let mut _8: u64;
+    let mut _9: u64;
+    let mut _10: u32;
+    let mut _11: isize;
+    let _12: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _13: !;
+    let mut _14: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _15: u64;
+    let mut _16: u64;
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _18: std::result::Result<u64, error::ErrorCode>;
+    let mut _19: u64;
+    let mut _20: &phoenix::quantities::QuoteAtomsPerQuoteLot;
+    let _21: phoenix::quantities::QuoteAtomsPerQuoteLot;
+    let mut _22: &phoenix::program::MarketHeader;
+    let mut _23: u64;
+    let mut _24: isize;
+    let _25: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _26: !;
+    let mut _27: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _28: u64;
+    scope 1 {
+        debug residual => _12;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _15;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _25;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _28;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _1;
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = ((*_3).12: u32);
+        _9 = move _10 as u64 (IntToInt);
+        StorageDead(_10);
+        _7 = <u64 as SafeMath>::safe_mul(move _8, move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _6 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _11 = discriminant(_6);
+        switchInt(move _11) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_15);
+        _15 = ((_6 as Continue).0: u64);
+        _5 = _15;
+        StorageDead(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &(*_3);
+        _21 = MarketHeader::get_quote_lot_size(move _22) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_12);
+        _12 = ((_6 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_14);
+        _14 = _12;
+        _0 = <std::result::Result<Ticks, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb16;
+    }
+
+    bb7: {
+        _20 = &_21;
+        StorageDead(_22);
+        _19 = <QuoteAtomsPerQuoteLot as phoenix::quantities::WrapperU64>::as_u64(move _20) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_20);
+        StorageLive(_23);
+        _23 = _2;
+        _18 = <u64 as SafeMath>::safe_mul(move _19, move _23) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_23);
+        StorageDead(_19);
+        _17 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _18) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        _24 = discriminant(_17);
+        switchInt(move _24) -> [0: bb11, 1: bb12, otherwise: bb4];
+    }
+
+    bb11: {
+        StorageLive(_28);
+        _28 = ((_17 as Continue).0: u64);
+        _16 = _28;
+        StorageDead(_28);
+        _4 = <u64 as SafeMath>::safe_div_ceil(move _5, move _16) -> [return: bb14, unwind continue];
+    }
+
+    bb12: {
+        StorageLive(_25);
+        _25 = ((_17 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_27);
+        _27 = _25;
+        _0 = <std::result::Result<Ticks, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_16);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_21);
+        StorageDead(_17);
+        goto -> bb16;
+    }
+
+    bb14: {
+        StorageDead(_16);
+        StorageDead(_5);
+        _0 = std::result::Result::<u64, error::ErrorCode>::map::<Ticks, fn(u64) -> Ticks {<Ticks as phoenix::quantities::WrapperU64>::new}>(move _4, <Ticks as phoenix::quantities::WrapperU64>::new) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_4);
+        StorageDead(_21);
+        StorageDead(_17);
+        StorageDead(_6);
+        goto -> bb17;
+    }
+
+    bb16: {
+        StorageDead(_6);
+        goto -> bb17;
+    }
+
+    bb17: {
+        return;
+    }
+}

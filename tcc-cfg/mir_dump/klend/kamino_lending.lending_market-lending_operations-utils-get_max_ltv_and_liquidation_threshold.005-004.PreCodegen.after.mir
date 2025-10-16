@@ -1,0 +1,50 @@
+// MIR for `get_max_ltv_and_liquidation_threshold` after PreCodegen
+
+fn get_max_ltv_and_liquidation_threshold(_1: &reserve::Reserve, _2: std::option::Option<&state::lending_market::ElevationGroup>) -> (u8, u8) {
+    debug deposit_reserve => _1;
+    debug elevation_group => _2;
+    let mut _0: (u8, u8);
+    let mut _3: isize;
+    let mut _5: u8;
+    let mut _6: u8;
+    let mut _7: u8;
+    let mut _8: u8;
+    scope 1 {
+        debug elevation_group => _4;
+        let _4: &state::lending_market::ElevationGroup;
+    }
+
+    bb0: {
+        _3 = discriminant(_2);
+        switchInt(move _3) -> [1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_4);
+        _4 = ((_2 as Some).0: &state::lending_market::ElevationGroup);
+        StorageLive(_5);
+        _5 = ((*_4).2: u8);
+        StorageLive(_6);
+        _6 = ((*_4).3: u8);
+        _0 = (move _5, move _6);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb3;
+    }
+
+    bb2: {
+        StorageLive(_7);
+        _7 = (((*_1).9: state::reserve::ReserveConfig).7: u8);
+        StorageLive(_8);
+        _8 = (((*_1).9: state::reserve::ReserveConfig).8: u8);
+        _0 = (move _7, move _8);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb3;
+    }
+
+    bb3: {
+        return;
+    }
+}

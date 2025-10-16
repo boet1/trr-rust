@@ -1,0 +1,143 @@
+// MIR for `state::lending_market::<impl at programs\klend\src\state\lending_market.rs:197:1: 197:19>::set_elevation_group` before PreCodegen
+
+fn state::lending_market::<impl at programs\klend\src\state\lending_market.rs:197:1: 197:19>::set_elevation_group(_1: &mut state::lending_market::LendingMarket, _2: state::lending_market::ElevationGroup) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug self => _1;
+    debug elevation_group => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u8;
+    let mut _6: !;
+    let mut _7: anchor_lang::error::Error;
+    let mut _8: anchor_lang::error::AnchorError;
+    let mut _9: std::string::String;
+    let mut _10: &LendingError;
+    let _11: LendingError;
+    let mut _12: u32;
+    let mut _13: LendingError;
+    let mut _14: std::string::String;
+    let mut _15: &LendingError;
+    let _16: LendingError;
+    let mut _17: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _18: anchor_lang::error::ErrorOrigin;
+    let mut _19: anchor_lang::error::Source;
+    let mut _20: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _21: state::lending_market::ElevationGroup;
+    let _22: usize;
+    let mut _23: &state::lending_market::ElevationGroup;
+    let mut _24: usize;
+    let mut _25: bool;
+    let mut _26: ();
+    let mut _27: &LendingError;
+    let mut _28: &LendingError;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = (_2.1: u8);
+        _4 = Eq(move _5, const _);
+        switchInt(move _4) -> [0: bb6, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _28 = const _;
+        _10 = &(*_28);
+        _9 = LendingError::name(move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = LendingError::InvalidElevationGroupConfig;
+        _12 = <LendingError as Into<u32>>::into(move _13) -> [return: bb3, unwind: bb10];
+    }
+
+    bb3: {
+        StorageDead(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _27 = const _;
+        _15 = &(*_27);
+        _14 = <LendingError as ToString>::to_string(move _15) -> [return: bb4, unwind: bb10];
+    }
+
+    bb4: {
+        StorageDead(_15);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\state\\lending_market.rs", line: const 222_u32 };
+        _18 = anchor_lang::error::ErrorOrigin::Source(move _19);
+        StorageDead(_19);
+        _17 = std::option::Option::<ErrorOrigin>::Some(move _18);
+        StorageDead(_18);
+        StorageLive(_20);
+        _20 = std::option::Option::<ComparedValues>::None;
+        _8 = anchor_lang::error::AnchorError { error_name: move _9, error_code_number: move _12, error_msg: move _14, error_origin: move _17, compared_values: move _20 };
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_9);
+        _7 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _8) -> [return: bb5, unwind: bb11];
+    }
+
+    bb5: {
+        StorageDead(_8);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _7);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb6: {
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_21);
+        _21 = _2;
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = &_2;
+        _22 = state::lending_market::ElevationGroup::get_index(move _23) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_23);
+        _24 = Len(((*_1).18: [state::lending_market::ElevationGroup; 32]));
+        _25 = Lt(_22, _24);
+        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _22) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        ((*_1).18: [state::lending_market::ElevationGroup; 32])[_22] = move _21;
+        StorageDead(_21);
+        StorageDead(_22);
+        StorageLive(_26);
+        _26 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _26);
+        StorageDead(_26);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+
+    bb10 (cleanup): {
+        drop(_9) -> [return: bb11, unwind terminate(cleanup)];
+    }
+
+    bb11 (cleanup): {
+        resume;
+    }
+}

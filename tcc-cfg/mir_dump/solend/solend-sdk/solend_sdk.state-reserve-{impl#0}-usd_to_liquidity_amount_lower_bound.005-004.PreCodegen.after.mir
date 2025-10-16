@@ -1,0 +1,207 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::usd_to_liquidity_amount_lower_bound` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::usd_to_liquidity_amount_lower_bound(_1: &reserve::Reserve, _2: decimal::Decimal) -> Result<decimal::Decimal, ProgramError> {
+    debug self => _1;
+    debug quote_amount => _2;
+    let mut _0: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _3: math::decimal::Decimal;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::decimal::Decimal>;
+    let mut _5: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _6: math::decimal::Decimal;
+    let mut _7: math::decimal::Decimal;
+    let mut _8: u128;
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, u128>;
+    let mut _10: std::result::Result<u128, error::LendingError>;
+    let mut _11: std::option::Option<u128>;
+    let mut _12: u32;
+    let mut _13: u8;
+    let mut _14: error::LendingError;
+    let mut _15: isize;
+    let _16: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _19: u128;
+    let mut _20: isize;
+    let _21: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _22: !;
+    let mut _23: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _24: math::decimal::Decimal;
+    let mut _25: math::decimal::Decimal;
+    let mut _26: &state::reserve::Reserve;
+    let mut _27: bool;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    let mut _31: isize;
+    let mut _32: isize;
+    scope 1 {
+        debug residual => _16;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _19;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _21;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _24;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        _27 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _2;
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = (((*_1).3: state::reserve::ReserveLiquidity).1: u8);
+        _12 = move _13 as u32 (IntToInt);
+        StorageDead(_13);
+        _11 = core::num::<impl u128>::checked_pow(const 10_u128, move _12) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_12);
+        StorageLive(_14);
+        _14 = LendingError::MathOverflow;
+        _10 = Option::<u128>::ok_or::<LendingError>(move _11, move _14) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_14);
+        StorageDead(_11);
+        _9 = <Result<u128, LendingError> as Try>::branch(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _15 = discriminant(_9);
+        switchInt(move _15) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_19);
+        _19 = ((_9 as Continue).0: u128);
+        _8 = _19;
+        StorageDead(_19);
+        _7 = <decimal::Decimal as From<u128>>::from(move _8) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = move ((_9 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_18);
+        _18 = move _16;
+        _0 = <Result<decimal::Decimal, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_3);
+        goto -> bb16;
+    }
+
+    bb8: {
+        StorageDead(_8);
+        _5 = <decimal::Decimal as common::TryMul<decimal::Decimal>>::try_mul(move _6, move _7) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = <Result<decimal::Decimal, ProgramError> as Try>::branch(move _5) -> [return: bb10, unwind: bb18];
+    }
+
+    bb10: {
+        _27 = const true;
+        StorageDead(_5);
+        _20 = discriminant(_4);
+        switchInt(move _20) -> [0: bb11, 1: bb12, otherwise: bb5];
+    }
+
+    bb11: {
+        StorageLive(_24);
+        _24 = ((_4 as Continue).0: math::decimal::Decimal);
+        _3 = _24;
+        StorageDead(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &(*_1);
+        _25 = reserve::Reserve::price_upper_bound(move _26) -> [return: bb14, unwind: bb19];
+    }
+
+    bb12: {
+        StorageLive(_21);
+        _21 = move ((_4 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_23);
+        _23 = move _21;
+        _0 = <Result<decimal::Decimal, ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _23) -> [return: bb13, unwind: bb19];
+    }
+
+    bb13: {
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageDead(_3);
+        _30 = discriminant(_4);
+        goto -> bb16;
+    }
+
+    bb14: {
+        StorageDead(_26);
+        _0 = <decimal::Decimal as common::TryDiv<decimal::Decimal>>::try_div(move _3, move _25) -> [return: bb15, unwind: bb19];
+    }
+
+    bb15: {
+        StorageDead(_25);
+        StorageDead(_3);
+        _28 = discriminant(_4);
+        StorageDead(_9);
+        _27 = const false;
+        StorageDead(_4);
+        goto -> bb17;
+    }
+
+    bb16: {
+        StorageDead(_9);
+        _27 = const false;
+        StorageDead(_4);
+        goto -> bb17;
+    }
+
+    bb17: {
+        return;
+    }
+
+    bb18 (cleanup): {
+        resume;
+    }
+
+    bb19 (cleanup): {
+        _32 = discriminant(_4);
+        goto -> bb18;
+    }
+}

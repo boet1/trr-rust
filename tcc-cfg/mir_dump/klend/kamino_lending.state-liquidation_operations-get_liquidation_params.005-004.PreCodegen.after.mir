@@ -1,0 +1,595 @@
+// MIR for `get_liquidation_params` after PreCodegen
+
+fn get_liquidation_params(_1: &state::lending_market::LendingMarket, _2: &reserve::Reserve, _3: &reserve::Reserve, _4: &obligation::Obligation, _5: u64, _6: bool, _7: bool, _8: std::option::Option<u64>) -> std::result::Result<state::types::LiquidationParams, anchor_lang::error::Error> {
+    debug lending_market => _1;
+    debug collateral_reserve => _2;
+    debug debt_reserve => _3;
+    debug obligation => _4;
+    debug timestamp => _5;
+    debug is_debt_reserve_highest_borrow_factor => _6;
+    debug is_collateral_reserve_lowest_liquidation_ltv => _7;
+    debug max_allowed_ltv_override_pct_opt => _8;
+    let mut _0: std::result::Result<state::types::LiquidationParams, anchor_lang::error::Error>;
+    let _9: state::types::LiquidationCheckInputs<'_>;
+    let mut _10: &state::lending_market::LendingMarket;
+    let mut _11: &state::reserve::Reserve;
+    let mut _12: &state::reserve::Reserve;
+    let mut _13: &state::obligation::Obligation;
+    let mut _14: u64;
+    let mut _15: std::option::Option<u64>;
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>, state::types::LiquidationParams>;
+    let mut _18: std::result::Result<state::types::LiquidationParams, LendingError>;
+    let mut _19: std::option::Option<state::types::LiquidationParams>;
+    let mut _20: std::option::Option<state::types::LiquidationParams>;
+    let mut _21: std::option::Option<state::types::LiquidationParams>;
+    let mut _22: std::option::Option<state::types::LiquidationParams>;
+    let mut _23: &state::types::LiquidationCheckInputs<'_>;
+    let _24: &state::types::LiquidationCheckInputs<'_>;
+    let mut _25: {closure@programs\klend\src\state\liquidation_operations.rs:202:18: 202:20};
+    let mut _26: &state::types::LiquidationCheckInputs<'_>;
+    let mut _27: {closure@programs\klend\src\state\liquidation_operations.rs:203:18: 203:20};
+    let mut _28: &state::types::LiquidationCheckInputs<'_>;
+    let mut _29: {closure@programs\klend\src\state\liquidation_operations.rs:204:18: 204:20};
+    let mut _30: &state::types::LiquidationCheckInputs<'_>;
+    let mut _31: {closure@programs\klend\src\state\liquidation_operations.rs:205:21: 205:23};
+    let mut _32: &state::obligation::Obligation;
+    let mut _33: isize;
+    let mut _35: !;
+    let mut _36: std::result::Result<std::convert::Infallible, LendingError>;
+    let _38: ();
+    let mut _39: bool;
+    let mut _40: &state::types::LiquidationReason;
+    let mut _41: &state::types::LiquidationReason;
+    let _42: state::types::LiquidationReason;
+    let mut _43: bool;
+    let mut _44: !;
+    let _45: ();
+    let _46: ();
+    let mut _47: std::fmt::Arguments<'_>;
+    let mut _48: &[&str];
+    let mut _49: &[&str; 1];
+    let _50: &[&str; 1];
+    let _51: [&str; 1];
+    let mut _52: anchor_lang::error::Error;
+    let mut _53: anchor_lang::error::AnchorError;
+    let mut _54: std::string::String;
+    let mut _55: &LendingError;
+    let _56: LendingError;
+    let mut _57: u32;
+    let mut _58: LendingError;
+    let mut _59: std::string::String;
+    let mut _60: &LendingError;
+    let _61: LendingError;
+    let mut _62: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _63: anchor_lang::error::ErrorOrigin;
+    let mut _64: anchor_lang::error::Source;
+    let mut _65: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _66: ();
+    let mut _67: bool;
+    let mut _68: isize;
+    let mut _69: bool;
+    let mut _70: !;
+    let _71: ();
+    let _72: ();
+    let mut _73: std::fmt::Arguments<'_>;
+    let mut _74: &[&str];
+    let mut _75: &[&str; 1];
+    let _76: &[&str; 1];
+    let _77: [&str; 1];
+    let mut _78: anchor_lang::error::Error;
+    let mut _79: anchor_lang::error::AnchorError;
+    let mut _80: std::string::String;
+    let mut _81: &LendingError;
+    let _82: LendingError;
+    let mut _83: u32;
+    let mut _84: LendingError;
+    let mut _85: std::string::String;
+    let mut _86: &LendingError;
+    let _87: LendingError;
+    let mut _88: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _89: anchor_lang::error::ErrorOrigin;
+    let mut _90: anchor_lang::error::Source;
+    let mut _91: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _92: ();
+    let _93: ();
+    let mut _94: std::fmt::Arguments<'_>;
+    let mut _95: &[&str];
+    let mut _96: &[&str; 3];
+    let _97: &[&str; 3];
+    let _98: [&str; 3];
+    let mut _99: &[core::fmt::rt::Argument<'_>];
+    let mut _100: &[core::fmt::rt::Argument<'_>; 2];
+    let _101: &[core::fmt::rt::Argument<'_>; 2];
+    let _102: [core::fmt::rt::Argument<'_>; 2];
+    let mut _103: core::fmt::rt::Argument<'_>;
+    let mut _104: &state::types::LiquidationReason;
+    let _105: &state::types::LiquidationReason;
+    let mut _106: core::fmt::rt::Argument<'_>;
+    let mut _107: &u64;
+    let _108: &u64;
+    let _109: u64;
+    let mut _110: std::option::Option<u64>;
+    let mut _111: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _112: state::types::LiquidationParams;
+    scope 1 {
+        debug inputs => _9;
+        let _16: state::types::LiquidationParams;
+        let _34: std::result::Result<std::convert::Infallible, LendingError>;
+        let _37: state::types::LiquidationParams;
+        scope 2 {
+            debug params => _16;
+            let mut _113: &[&str; 3];
+            let mut _114: &LendingError;
+            let mut _115: &LendingError;
+            let mut _116: &[&str; 1];
+            let mut _117: &LendingError;
+            let mut _118: &LendingError;
+            let mut _119: &[&str; 1];
+            let mut _120: &state::types::LiquidationReason;
+        }
+        scope 3 {
+            debug residual => _34;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _37;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_1);
+        StorageLive(_11);
+        _11 = &(*_2);
+        StorageLive(_12);
+        _12 = &(*_3);
+        StorageLive(_13);
+        _13 = &(*_4);
+        StorageLive(_14);
+        _14 = _5;
+        StorageLive(_15);
+        _15 = _8;
+        _9 = state::types::LiquidationCheckInputs::<'_> { lending_market: move _10, collateral_reserve: move _11, debt_reserve: move _12, obligation: move _13, timestamp: move _14, max_allowed_ltv_override_pct_opt: move _15 };
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &_9;
+        _23 = &(*_24);
+        _22 = check_liquidate_obligation(move _23) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_23);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &_9;
+        _25 = {closure@programs\klend\src\state\liquidation_operations.rs:202:18: 202:20} { inputs: move _26 };
+        StorageDead(_26);
+        _21 = std::option::Option::<state::types::LiquidationParams>::or_else::<{closure@programs\klend\src\state\liquidation_operations.rs:202:18: 202:20}>(move _22, move _25) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &_9;
+        _27 = {closure@programs\klend\src\state\liquidation_operations.rs:203:18: 203:20} { inputs: move _28 };
+        StorageDead(_28);
+        _20 = std::option::Option::<state::types::LiquidationParams>::or_else::<{closure@programs\klend\src\state\liquidation_operations.rs:203:18: 203:20}>(move _21, move _27) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_27);
+        StorageDead(_21);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = &_9;
+        _29 = {closure@programs\klend\src\state\liquidation_operations.rs:204:18: 204:20} { inputs: move _30 };
+        StorageDead(_30);
+        _19 = std::option::Option::<state::types::LiquidationParams>::or_else::<{closure@programs\klend\src\state\liquidation_operations.rs:204:18: 204:20}>(move _20, move _29) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_29);
+        StorageDead(_20);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = &(*_4);
+        _31 = {closure@programs\klend\src\state\liquidation_operations.rs:205:21: 205:23} { obligation: move _32 };
+        StorageDead(_32);
+        _18 = std::option::Option::<state::types::LiquidationParams>::ok_or_else::<LendingError, {closure@programs\klend\src\state\liquidation_operations.rs:205:21: 205:23}>(move _19, move _31) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_31);
+        StorageDead(_19);
+        _17 = <std::result::Result<state::types::LiquidationParams, LendingError> as Try>::branch(move _18) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_18);
+        _33 = discriminant(_17);
+        switchInt(move _33) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_37);
+        _37 = move ((_17 as Continue).0: state::types::LiquidationParams);
+        _16 = move _37;
+        StorageDead(_37);
+        StorageDead(_24);
+        StorageDead(_17);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        _40 = &(_16.2: state::types::LiquidationReason);
+        StorageLive(_41);
+        _120 = const _;
+        _41 = &(*_120);
+        _39 = <state::types::LiquidationReason as PartialEq>::eq(move _40, move _41) -> [return: bb11, unwind continue];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_34);
+        _34 = ((_17 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_36);
+        _36 = _34;
+        _0 = <std::result::Result<state::types::LiquidationParams, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _36) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_36);
+        StorageDead(_34);
+        StorageDead(_24);
+        StorageDead(_17);
+        goto -> bb40;
+    }
+
+    bb11: {
+        switchInt(move _39) -> [0: bb20, otherwise: bb12];
+    }
+
+    bb12: {
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageLive(_43);
+        _43 = _6;
+        switchInt(move _43) -> [0: bb13, otherwise: bb21];
+    }
+
+    bb13: {
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _119 = const _;
+        _50 = &(*_119);
+        _49 = &(*_50);
+        _48 = move _49 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_49);
+        _47 = Arguments::<'_>::new_const(move _48) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_48);
+        _46 = _print(move _47) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_47);
+        StorageDead(_50);
+        StorageDead(_46);
+        _45 = const ();
+        StorageDead(_45);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        _118 = const _;
+        _55 = &(*_118);
+        _54 = LendingError::name(move _55) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_55);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = LendingError::LiquidationBorrowFactorPriority;
+        _57 = <LendingError as Into<u32>>::into(move _58) -> [return: bb17, unwind: bb43];
+    }
+
+    bb17: {
+        StorageDead(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        _117 = const _;
+        _60 = &(*_117);
+        _59 = <LendingError as ToString>::to_string(move _60) -> [return: bb18, unwind: bb43];
+    }
+
+    bb18: {
+        StorageDead(_60);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\state\\liquidation_operations.rs", line: const 218_u32 };
+        _63 = anchor_lang::error::ErrorOrigin::Source(move _64);
+        StorageDead(_64);
+        _62 = std::option::Option::<ErrorOrigin>::Some(move _63);
+        StorageDead(_63);
+        StorageLive(_65);
+        _65 = std::option::Option::<ComparedValues>::None;
+        _53 = anchor_lang::error::AnchorError { error_name: move _54, error_code_number: move _57, error_msg: move _59, error_origin: move _62, compared_values: move _65 };
+        StorageDead(_65);
+        StorageDead(_62);
+        StorageDead(_59);
+        StorageDead(_57);
+        StorageDead(_54);
+        _52 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _53) -> [return: bb19, unwind: bb44];
+    }
+
+    bb19: {
+        StorageDead(_53);
+        _0 = std::result::Result::<state::types::LiquidationParams, anchor_lang::error::Error>::Err(move _52);
+        StorageDead(_52);
+        StorageDead(_43);
+        StorageDead(_39);
+        StorageDead(_38);
+        goto -> bb40;
+    }
+
+    bb20: {
+        StorageDead(_41);
+        StorageDead(_40);
+        goto -> bb21;
+    }
+
+    bb21: {
+        _38 = const ();
+        StorageDead(_43);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageLive(_66);
+        StorageLive(_67);
+        _68 = discriminant((_16.2: state::types::LiquidationReason));
+        switchInt(move _68) -> [0: bb23, 3: bb23, otherwise: bb22];
+    }
+
+    bb22: {
+        _67 = const false;
+        goto -> bb24;
+    }
+
+    bb23: {
+        _67 = const true;
+        goto -> bb24;
+    }
+
+    bb24: {
+        switchInt(move _67) -> [0: bb33, otherwise: bb25];
+    }
+
+    bb25: {
+        StorageLive(_69);
+        _69 = _7;
+        switchInt(move _69) -> [0: bb26, otherwise: bb33];
+    }
+
+    bb26: {
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        StorageLive(_76);
+        _116 = const _;
+        _76 = &(*_116);
+        _75 = &(*_76);
+        _74 = move _75 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_75);
+        _73 = Arguments::<'_>::new_const(move _74) -> [return: bb27, unwind continue];
+    }
+
+    bb27: {
+        StorageDead(_74);
+        _72 = _print(move _73) -> [return: bb28, unwind continue];
+    }
+
+    bb28: {
+        StorageDead(_73);
+        StorageDead(_76);
+        StorageDead(_72);
+        _71 = const ();
+        StorageDead(_71);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _115 = const _;
+        _81 = &(*_115);
+        _80 = LendingError::name(move _81) -> [return: bb29, unwind continue];
+    }
+
+    bb29: {
+        StorageDead(_81);
+        StorageLive(_83);
+        StorageLive(_84);
+        _84 = LendingError::LiquidationLowestLiquidationLtvPriority;
+        _83 = <LendingError as Into<u32>>::into(move _84) -> [return: bb30, unwind: bb42];
+    }
+
+    bb30: {
+        StorageDead(_84);
+        StorageLive(_85);
+        StorageLive(_86);
+        _114 = const _;
+        _86 = &(*_114);
+        _85 = <LendingError as ToString>::to_string(move _86) -> [return: bb31, unwind: bb42];
+    }
+
+    bb31: {
+        StorageDead(_86);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\state\\liquidation_operations.rs", line: const 226_u32 };
+        _89 = anchor_lang::error::ErrorOrigin::Source(move _90);
+        StorageDead(_90);
+        _88 = std::option::Option::<ErrorOrigin>::Some(move _89);
+        StorageDead(_89);
+        StorageLive(_91);
+        _91 = std::option::Option::<ComparedValues>::None;
+        _79 = anchor_lang::error::AnchorError { error_name: move _80, error_code_number: move _83, error_msg: move _85, error_origin: move _88, compared_values: move _91 };
+        StorageDead(_91);
+        StorageDead(_88);
+        StorageDead(_85);
+        StorageDead(_83);
+        StorageDead(_80);
+        _78 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _79) -> [return: bb32, unwind: bb44];
+    }
+
+    bb32: {
+        StorageDead(_79);
+        _0 = std::result::Result::<state::types::LiquidationParams, anchor_lang::error::Error>::Err(move _78);
+        StorageDead(_78);
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_66);
+        goto -> bb40;
+    }
+
+    bb33: {
+        _66 = const ();
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_66);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        _113 = const _;
+        _97 = &(*_113);
+        _96 = &(*_97);
+        _95 = move _96 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_96);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        _105 = &(_16.2: state::types::LiquidationReason);
+        _104 = &(*_105);
+        _103 = core::fmt::rt::Argument::<'_>::new_debug::<state::types::LiquidationReason>(move _104) -> [return: bb34, unwind continue];
+    }
+
+    bb34: {
+        StorageDead(_104);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        _111 = &(_16.1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _110 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_bps::<u64>(move _111) -> [return: bb35, unwind continue];
+    }
+
+    bb35: {
+        StorageDead(_111);
+        _109 = std::option::Option::<u64>::unwrap(move _110) -> [return: bb36, unwind continue];
+    }
+
+    bb36: {
+        StorageDead(_110);
+        _108 = &_109;
+        _107 = &(*_108);
+        _106 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _107) -> [return: bb37, unwind continue];
+    }
+
+    bb37: {
+        StorageDead(_107);
+        _102 = [move _103, move _106];
+        StorageDead(_106);
+        StorageDead(_103);
+        _101 = &_102;
+        _100 = &(*_101);
+        _99 = move _100 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_100);
+        _94 = Arguments::<'_>::new_v1(move _95, move _99) -> [return: bb38, unwind continue];
+    }
+
+    bb38: {
+        StorageDead(_99);
+        StorageDead(_95);
+        _93 = _print(move _94) -> [return: bb39, unwind continue];
+    }
+
+    bb39: {
+        StorageDead(_94);
+        StorageDead(_109);
+        StorageDead(_108);
+        StorageDead(_105);
+        StorageDead(_102);
+        StorageDead(_101);
+        StorageDead(_97);
+        StorageDead(_93);
+        _92 = const ();
+        StorageDead(_92);
+        StorageLive(_112);
+        _112 = move _16;
+        _0 = std::result::Result::<state::types::LiquidationParams, anchor_lang::error::Error>::Ok(move _112);
+        StorageDead(_112);
+        StorageDead(_16);
+        StorageDead(_9);
+        goto -> bb41;
+    }
+
+    bb40: {
+        StorageDead(_16);
+        StorageDead(_9);
+        goto -> bb41;
+    }
+
+    bb41: {
+        return;
+    }
+
+    bb42 (cleanup): {
+        drop(_80) -> [return: bb44, unwind terminate(cleanup)];
+    }
+
+    bb43 (cleanup): {
+        drop(_54) -> [return: bb44, unwind terminate(cleanup)];
+    }
+
+    bb44 (cleanup): {
+        resume;
+    }
+}

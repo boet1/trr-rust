@@ -1,0 +1,59 @@
+// MIR for `state::unpack_bool` before PreCodegen
+
+fn state::unpack_bool(_1: &[u8; 1]) -> Result<bool, ProgramError> {
+    debug src => _1;
+    let mut _0: std::result::Result<bool, solana_program::program_error::ProgramError>;
+    let mut _2: u8;
+    let mut _3: [u8; 1];
+    let _4: ();
+    let mut _5: &str;
+    let _6: &str;
+    let mut _7: solana_program::program_error::ProgramError;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = (*_1);
+        _2 = core::num::<impl u8>::from_le_bytes(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        switchInt(_2) -> [0: bb3, 1: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = const "Boolean cannot be unpacked";
+        _5 = &(*_6);
+        _4 = solana_program::log::sol_log(move _5) -> [return: bb5, unwind continue];
+    }
+
+    bb3: {
+        _0 = Result::<bool, ProgramError>::Ok(const false);
+        goto -> bb6;
+    }
+
+    bb4: {
+        _0 = Result::<bool, ProgramError>::Ok(const true);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageLive(_7);
+        _7 = solana_program::program_error::ProgramError::InvalidAccountData;
+        _0 = Result::<bool, ProgramError>::Err(move _7);
+        StorageDead(_7);
+        goto -> bb6;
+    }
+
+    bb6: {
+        StorageDead(_2);
+        return;
+    }
+}

@@ -1,0 +1,583 @@
+// MIR for `lending_operations::refresh_obligation` after PreCodegen
+
+fn lending_operations::refresh_obligation(_1: &anchor_lang::prelude::Pubkey, _2: &mut obligation::Obligation, _3: &state::lending_market::LendingMarket, _4: u64, _5: state::types::MaxReservesAsCollateralCheck, _6: impl Iterator<Item = T>, _7: impl Iterator<Item = T>, _8: impl Iterator<Item = U>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug program_id => _1;
+    debug obligation => _2;
+    debug lending_market => _3;
+    debug slot => _4;
+    debug max_reserves_as_collateral_check => _5;
+    debug deposit_reserves_iter => _6;
+    debug borrow_reserves_iter => _7;
+    debug referrer_token_states_iter => _8;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _9: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _10: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::option::Option<&state::lending_market::ElevationGroup>>;
+    let mut _11: std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error>;
+    let mut _12: u8;
+    let mut _13: &state::lending_market::LendingMarket;
+    let mut _14: isize;
+    let _15: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _18: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _25: state::types::RefreshObligationBorrowsResult;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, state::types::RefreshObligationBorrowsResult>;
+    let mut _27: std::result::Result<state::types::RefreshObligationBorrowsResult, anchor_lang::error::Error>;
+    let mut _28: &anchor_lang::prelude::Pubkey;
+    let mut _29: &mut state::obligation::Obligation;
+    let mut _30: &state::lending_market::LendingMarket;
+    let mut _31: u64;
+    let mut _32: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _33: &mut impl Iterator<Item = T>;
+    let mut _34: &mut impl Iterator<Item = U>;
+    let mut _35: isize;
+    let mut _37: !;
+    let mut _38: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _48: state::types::RefreshObligationDepositsResult;
+    let mut _49: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, state::types::RefreshObligationDepositsResult>;
+    let mut _50: std::result::Result<state::types::RefreshObligationDepositsResult, anchor_lang::error::Error>;
+    let mut _51: &mut state::obligation::Obligation;
+    let mut _52: &state::lending_market::LendingMarket;
+    let mut _53: u64;
+    let mut _54: state::types::MaxReservesAsCollateralCheck;
+    let mut _55: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _56: &mut impl Iterator<Item = T>;
+    let mut _57: std::option::Option<u64>;
+    let mut _58: isize;
+    let mut _60: !;
+    let mut _61: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _63: u128;
+    let mut _64: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _65: u128;
+    let mut _66: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _67: u128;
+    let mut _68: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _69: u128;
+    let mut _70: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _71: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _72: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _73: u64;
+    let mut _74: u128;
+    let mut _75: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _76: u64;
+    let mut _77: u8;
+    let mut _78: u8;
+    let mut _79: u8;
+    let mut _80: u8;
+    let mut _81: u8;
+    let mut _82: bool;
+    let mut _83: u64;
+    let mut _85: state::last_update::PriceStatusFlags;
+    let mut _86: state::last_update::PriceStatusFlags;
+    let _87: ();
+    let mut _88: &mut state::last_update::LastUpdate;
+    let mut _89: u64;
+    let mut _90: std::option::Option<state::last_update::PriceStatusFlags>;
+    let mut _91: state::last_update::PriceStatusFlags;
+    let mut _92: ();
+    let mut _93: isize;
+    let mut _94: isize;
+    let mut _95: isize;
+    let mut _96: isize;
+    let mut _97: isize;
+    let mut _98: isize;
+    let mut _99: isize;
+    let mut _100: isize;
+    let mut _101: isize;
+    let mut _102: isize;
+    let mut _103: isize;
+    let mut _104: isize;
+    let mut _105: isize;
+    let mut _106: isize;
+    let mut _107: isize;
+    scope 1 {
+        debug elevation_group => _9;
+        let _19: u8;
+        let _20: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        let _21: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        let _22: state::last_update::PriceStatusFlags;
+        let _23: std::option::Option<u64>;
+        let _24: u64;
+        let _36: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _39: state::types::RefreshObligationBorrowsResult;
+        scope 6 {
+            debug num_of_obsolete_borrow_reserves => _19;
+            debug borrow_factor_adjusted_debt_value_f => _20;
+            debug borrowed_assets_market_value_f => _21;
+            debug borrows_prices_state => _22;
+            debug borrowed_amount_in_elevation_group => _23;
+            debug highest_borrow_factor_pct => _24;
+            let _40: u8;
+            let _41: u8;
+            let _42: u8;
+            let _43: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            let _44: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            let _45: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            let _46: state::last_update::PriceStatusFlags;
+            let _47: bool;
+            let _59: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _62: state::types::RefreshObligationDepositsResult;
+            scope 11 {
+                debug lowest_deposit_liquidation_ltv_threshold_pct => _40;
+                debug lowest_deposit_max_ltv_pct => _41;
+                debug num_of_obsolete_deposit_reserves => _42;
+                debug deposited_value_f => _43;
+                debug allowed_borrow_value => _44;
+                debug unhealthy_borrow_value => _45;
+                debug deposits_prices_state => _46;
+                debug borrowing_disabled => _47;
+                let _84: state::last_update::PriceStatusFlags;
+                scope 16 {
+                    debug prices_state => _84;
+                }
+            }
+            scope 12 {
+                debug residual => _59;
+                scope 13 {
+                }
+            }
+            scope 14 {
+                debug val => _62;
+                scope 15 {
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _36;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _39;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _15;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _18;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = ((*_2).14: u8);
+        StorageLive(_13);
+        _13 = &(*_3);
+        _11 = get_elevation_group(move _12, move _13) -> [return: bb1, unwind: bb34];
+    }
+
+    bb1: {
+        StorageDead(_13);
+        StorageDead(_12);
+        _10 = <std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error> as Try>::branch(move _11) -> [return: bb2, unwind: bb34];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        _14 = discriminant(_10);
+        switchInt(move _14) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_18);
+        _18 = ((_10 as Continue).0: std::option::Option<&state::lending_market::ElevationGroup>);
+        _9 = _18;
+        StorageDead(_18);
+        _93 = discriminant(_10);
+        StorageDead(_10);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &(*_1);
+        StorageLive(_29);
+        _29 = &mut (*_2);
+        StorageLive(_30);
+        _30 = &(*_3);
+        StorageLive(_31);
+        _31 = _4;
+        StorageLive(_32);
+        _32 = _9;
+        StorageLive(_33);
+        _33 = &mut _7;
+        StorageLive(_34);
+        _34 = &mut _8;
+        _27 = refresh_obligation_borrows::<'_, T, U, &mut impl Iterator<Item = T>, &mut impl Iterator<Item = U>>(move _28, move _29, move _30, move _31, move _32, move _33, move _34) -> [return: bb7, unwind: bb34];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_15);
+        _15 = move ((_10 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_17);
+        _17 = move _15;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _17) -> [return: bb6, unwind: bb40];
+    }
+
+    bb6: {
+        StorageDead(_17);
+        StorageDead(_15);
+        _103 = discriminant(_10);
+        StorageDead(_10);
+        goto -> bb30;
+    }
+
+    bb7: {
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        _26 = <std::result::Result<state::types::RefreshObligationBorrowsResult, anchor_lang::error::Error> as Try>::branch(move _27) -> [return: bb8, unwind: bb34];
+    }
+
+    bb8: {
+        StorageDead(_27);
+        _35 = discriminant(_26);
+        switchInt(move _35) -> [0: bb9, 1: bb10, otherwise: bb4];
+    }
+
+    bb9: {
+        StorageLive(_39);
+        _39 = move ((_26 as Continue).0: state::types::RefreshObligationBorrowsResult);
+        _25 = move _39;
+        StorageDead(_39);
+        StorageLive(_19);
+        _19 = (_25.5: u8);
+        StorageLive(_20);
+        _20 = (_25.0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_21);
+        _21 = (_25.1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_22);
+        _22 = (_25.2: state::last_update::PriceStatusFlags);
+        StorageLive(_23);
+        _23 = (_25.4: std::option::Option<u64>);
+        StorageLive(_24);
+        _24 = (_25.3: u64);
+        _95 = discriminant(_26);
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        _51 = &mut (*_2);
+        StorageLive(_52);
+        _52 = &(*_3);
+        StorageLive(_53);
+        _53 = _4;
+        StorageLive(_54);
+        _54 = move _5;
+        StorageLive(_55);
+        _55 = _9;
+        StorageLive(_56);
+        _56 = &mut _6;
+        StorageLive(_57);
+        _57 = _23;
+        _50 = refresh_obligation_deposits::<'_, T, &mut impl Iterator<Item = T>>(move _51, move _52, move _53, move _54, move _55, move _56, move _57) -> [return: bb12, unwind: bb34];
+    }
+
+    bb10: {
+        StorageLive(_36);
+        _36 = move ((_26 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_38);
+        _38 = move _36;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _38) -> [return: bb11, unwind: bb39];
+    }
+
+    bb11: {
+        StorageDead(_38);
+        StorageDead(_36);
+        _101 = discriminant(_26);
+        StorageDead(_26);
+        StorageDead(_25);
+        goto -> bb30;
+    }
+
+    bb12: {
+        StorageDead(_57);
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        StorageDead(_52);
+        StorageDead(_51);
+        _49 = <std::result::Result<state::types::RefreshObligationDepositsResult, anchor_lang::error::Error> as Try>::branch(move _50) -> [return: bb13, unwind: bb34];
+    }
+
+    bb13: {
+        StorageDead(_50);
+        _58 = discriminant(_49);
+        switchInt(move _58) -> [0: bb14, 1: bb15, otherwise: bb4];
+    }
+
+    bb14: {
+        StorageLive(_62);
+        _62 = move ((_49 as Continue).0: state::types::RefreshObligationDepositsResult);
+        _48 = move _62;
+        StorageDead(_62);
+        StorageLive(_40);
+        _40 = (_48.0: u8);
+        StorageLive(_41);
+        _41 = (_48.1: u8);
+        StorageLive(_42);
+        _42 = (_48.2: u8);
+        StorageLive(_43);
+        _43 = (_48.3: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_44);
+        _44 = (_48.4: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_45);
+        _45 = (_48.5: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_46);
+        _46 = (_48.6: state::last_update::PriceStatusFlags);
+        StorageLive(_47);
+        _47 = (_48.7: bool);
+        _97 = discriminant(_49);
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = _21;
+        _63 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _64) -> [return: bb17, unwind: bb34];
+    }
+
+    bb15: {
+        StorageLive(_59);
+        _59 = move ((_49 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_61);
+        _61 = move _59;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _61) -> [return: bb16, unwind: bb38];
+    }
+
+    bb16: {
+        StorageDead(_61);
+        StorageDead(_59);
+        _99 = discriminant(_49);
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        goto -> bb30;
+    }
+
+    bb17: {
+        StorageDead(_64);
+        ((*_2).9: u128) = move _63;
+        StorageDead(_63);
+        StorageLive(_65);
+        StorageLive(_66);
+        _66 = _43;
+        _65 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _66) -> [return: bb18, unwind: bb34];
+    }
+
+    bb18: {
+        StorageDead(_66);
+        ((*_2).6: u128) = move _65;
+        StorageDead(_65);
+        StorageLive(_67);
+        StorageLive(_68);
+        _68 = _20;
+        _67 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _68) -> [return: bb19, unwind: bb34];
+    }
+
+    bb19: {
+        StorageDead(_68);
+        ((*_2).8: u128) = move _67;
+        StorageDead(_67);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        _71 = _44;
+        StorageLive(_72);
+        StorageLive(_73);
+        _73 = ((*_3).15: u64);
+        _72 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _73) -> [return: bb20, unwind: bb34];
+    }
+
+    bb20: {
+        StorageDead(_73);
+        _70 = std::cmp::min::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>(move _71, move _72) -> [return: bb21, unwind: bb34];
+    }
+
+    bb21: {
+        StorageDead(_72);
+        StorageDead(_71);
+        _69 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _70) -> [return: bb22, unwind: bb34];
+    }
+
+    bb22: {
+        StorageDead(_70);
+        ((*_2).10: u128) = move _69;
+        StorageDead(_69);
+        StorageLive(_74);
+        StorageLive(_75);
+        _75 = _45;
+        _74 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _75) -> [return: bb23, unwind: bb34];
+    }
+
+    bb23: {
+        StorageDead(_75);
+        ((*_2).11: u128) = move _74;
+        StorageDead(_74);
+        StorageLive(_76);
+        StorageLive(_77);
+        _77 = _40;
+        _76 = <u8 as Into<u64>>::into(move _77) -> [return: bb24, unwind: bb34];
+    }
+
+    bb24: {
+        StorageDead(_77);
+        ((*_2).5: u64) = move _76;
+        StorageDead(_76);
+        StorageLive(_78);
+        _78 = _41;
+        ((*_2).20: u8) = move _78;
+        StorageDead(_78);
+        StorageLive(_79);
+        _79 = _19;
+        ((*_2).21: u8) = move _79;
+        StorageDead(_79);
+        StorageLive(_80);
+        _80 = _42;
+        ((*_2).15: u8) = move _80;
+        StorageDead(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        _82 = _47;
+        _81 = <bool as Into<u8>>::into(move _82) -> [return: bb25, unwind: bb34];
+    }
+
+    bb25: {
+        StorageDead(_82);
+        ((*_2).18: u8) = move _81;
+        StorageDead(_81);
+        StorageLive(_83);
+        _83 = _24;
+        ((*_2).23: u64) = move _83;
+        StorageDead(_83);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = _46;
+        StorageLive(_86);
+        _86 = _22;
+        _84 = last_update::_::<impl last_update::PriceStatusFlags>::intersection(move _85, move _86) -> [return: bb26, unwind: bb34];
+    }
+
+    bb26: {
+        StorageDead(_86);
+        StorageDead(_85);
+        StorageLive(_87);
+        StorageLive(_88);
+        _88 = &mut ((*_2).1: state::last_update::LastUpdate);
+        StorageLive(_89);
+        _89 = _4;
+        StorageLive(_90);
+        StorageLive(_91);
+        _91 = _84;
+        _90 = std::option::Option::<last_update::PriceStatusFlags>::Some(move _91);
+        StorageDead(_91);
+        _87 = last_update::LastUpdate::update_slot::<std::option::Option<last_update::PriceStatusFlags>>(move _88, move _89, move _90) -> [return: bb27, unwind: bb34];
+    }
+
+    bb27: {
+        StorageDead(_90);
+        StorageDead(_89);
+        StorageDead(_88);
+        StorageDead(_87);
+        StorageLive(_92);
+        _92 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _92);
+        StorageDead(_92);
+        StorageDead(_84);
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_9);
+        drop(_8) -> [return: bb28, unwind: bb35];
+    }
+
+    bb28: {
+        drop(_7) -> [return: bb29, unwind: bb36];
+    }
+
+    bb29: {
+        drop(_6) -> [return: bb33, unwind: bb37];
+    }
+
+    bb30: {
+        StorageDead(_9);
+        drop(_8) -> [return: bb31, unwind: bb35];
+    }
+
+    bb31: {
+        drop(_7) -> [return: bb32, unwind: bb36];
+    }
+
+    bb32: {
+        drop(_6) -> [return: bb33, unwind: bb37];
+    }
+
+    bb33: {
+        return;
+    }
+
+    bb34 (cleanup): {
+        drop(_8) -> [return: bb35, unwind terminate(cleanup)];
+    }
+
+    bb35 (cleanup): {
+        drop(_7) -> [return: bb36, unwind terminate(cleanup)];
+    }
+
+    bb36 (cleanup): {
+        drop(_6) -> [return: bb37, unwind terminate(cleanup)];
+    }
+
+    bb37 (cleanup): {
+        resume;
+    }
+
+    bb38 (cleanup): {
+        _105 = discriminant(_49);
+        goto -> bb34;
+    }
+
+    bb39 (cleanup): {
+        _106 = discriminant(_26);
+        goto -> bb34;
+    }
+
+    bb40 (cleanup): {
+        _107 = discriminant(_10);
+        goto -> bb34;
+    }
+}

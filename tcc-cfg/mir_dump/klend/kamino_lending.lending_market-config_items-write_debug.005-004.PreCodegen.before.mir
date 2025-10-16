@@ -1,0 +1,23 @@
+// MIR for `write_debug` before PreCodegen
+
+fn write_debug(_1: &T, _2: &mut Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+    debug value => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let mut _3: &T;
+    let mut _4: &mut std::fmt::Formatter<'_>;
+
+    bb0: {
+        StorageLive(_3);
+        _3 = &(*_1);
+        StorageLive(_4);
+        _4 = &mut (*_2);
+        _0 = <T as std::fmt::Debug>::fmt(move _3, move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

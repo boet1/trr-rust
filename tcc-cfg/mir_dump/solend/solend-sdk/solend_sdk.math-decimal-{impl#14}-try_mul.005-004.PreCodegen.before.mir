@@ -1,0 +1,182 @@
+// MIR for `decimal::<impl at token-lending\sdk\src\math\decimal.rs:218:1: 218:33>::try_mul` before PreCodegen
+
+fn decimal::<impl at token-lending\sdk\src\math\decimal.rs:218:1: 218:33>::try_mul(_1: decimal::Decimal, _2: decimal::Decimal) -> Result<decimal::Decimal, ProgramError> {
+    debug self => _1;
+    debug rhs => _2;
+    let mut _0: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _3: math::decimal::Decimal;
+    let mut _4: math::decimal::U192;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, math::decimal::U192>;
+    let mut _6: std::result::Result<math::decimal::U192, error::LendingError>;
+    let mut _7: std::option::Option<math::decimal::U192>;
+    let mut _8: math::decimal::U192;
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, math::decimal::U192>;
+    let mut _10: std::result::Result<math::decimal::U192, error::LendingError>;
+    let mut _11: std::option::Option<math::decimal::U192>;
+    let mut _12: math::decimal::U192;
+    let mut _13: math::decimal::U192;
+    let mut _14: error::LendingError;
+    let mut _15: isize;
+    let _16: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _19: math::decimal::U192;
+    let mut _20: math::decimal::U192;
+    let mut _21: error::LendingError;
+    let mut _22: isize;
+    let _23: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _24: !;
+    let mut _25: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _26: math::decimal::U192;
+    scope 1 {
+        debug residual => _16;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _19;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _23;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _26;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = (_1.0: math::decimal::U192);
+        StorageLive(_13);
+        _13 = (_2.0: math::decimal::U192);
+        _11 = U192::checked_mul(move _12, move _13) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageLive(_14);
+        _14 = LendingError::MathOverflow;
+        _10 = Option::<U192>::ok_or::<LendingError>(move _11, move _14) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_14);
+        StorageDead(_11);
+        _9 = <Result<U192, LendingError> as Try>::branch(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _15 = discriminant(_9);
+        switchInt(move _15) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_19);
+        _19 = ((_9 as Continue).0: math::decimal::U192);
+        _8 = _19;
+        StorageDead(_19);
+        StorageLive(_20);
+        _20 = decimal::Decimal::wad() -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = move ((_9 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_18);
+        _18 = move _16;
+        _0 = <Result<decimal::Decimal, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb15;
+    }
+
+    bb8: {
+        _7 = U192::checked_div(move _8, move _20) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        StorageDead(_8);
+        StorageLive(_21);
+        _21 = LendingError::MathOverflow;
+        _6 = Option::<U192>::ok_or::<LendingError>(move _7, move _21) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_21);
+        StorageDead(_7);
+        _5 = <Result<U192, LendingError> as Try>::branch(move _6) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_6);
+        _22 = discriminant(_5);
+        switchInt(move _22) -> [0: bb12, 1: bb13, otherwise: bb5];
+    }
+
+    bb12: {
+        StorageLive(_26);
+        _26 = ((_5 as Continue).0: math::decimal::U192);
+        _4 = _26;
+        StorageDead(_26);
+        _3 = decimal::Decimal(move _4);
+        StorageDead(_4);
+        _0 = Result::<decimal::Decimal, ProgramError>::Ok(move _3);
+        StorageDead(_3);
+        StorageDead(_9);
+        StorageDead(_5);
+        goto -> bb16;
+    }
+
+    bb13: {
+        StorageLive(_23);
+        _23 = move ((_5 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_25);
+        _25 = move _23;
+        _0 = <Result<decimal::Decimal, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _25) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_25);
+        StorageDead(_23);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_9);
+        StorageDead(_5);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

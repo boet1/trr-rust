@@ -1,0 +1,347 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::accrue_interest` after PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::accrue_interest(_1: &mut reserve::Reserve, _2: u64, _3: u16) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug self => _1;
+    debug current_slot => _2;
+    debug referral_fee_bps => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: u64;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, u64>;
+    let mut _6: std::result::Result<u64, anchor_lang::error::Error>;
+    let mut _7: &state::last_update::LastUpdate;
+    let mut _8: u64;
+    let mut _9: isize;
+    let _10: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _11: !;
+    let mut _12: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _13: u64;
+    let _14: ();
+    let mut _15: bool;
+    let mut _16: u64;
+    let mut _18: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>;
+    let mut _19: std::result::Result<fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, anchor_lang::error::Error>;
+    let mut _20: &state::reserve::Reserve;
+    let mut _21: isize;
+    let mut _23: !;
+    let mut _24: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _27: u8;
+    let mut _29: u16;
+    let mut _31: u16;
+    let _32: ();
+    let mut _33: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>>;
+    let mut _34: std::result::Result<(), LendingError>;
+    let mut _35: &mut state::reserve::ReserveLiquidity;
+    let mut _36: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _37: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _38: u64;
+    let mut _39: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _40: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _41: isize;
+    let mut _43: !;
+    let mut _44: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _46: ();
+    let mut _47: isize;
+    let mut _48: isize;
+    let mut _49: isize;
+    let mut _50: isize;
+    let mut _51: isize;
+    let mut _52: isize;
+    let mut _53: isize;
+    let mut _54: isize;
+    let mut _55: isize;
+    let mut _56: isize;
+    scope 1 {
+        debug slots_elapsed => _4;
+        let _17: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        let _22: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _25: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        scope 6 {
+            debug current_borrow_rate => _17;
+            let _26: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            scope 11 {
+                debug protocol_take_rate => _26;
+                let _28: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                scope 12 {
+                    debug referral_rate => _28;
+                    let _30: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                    scope 13 {
+                        debug host_fixed_interest_rate => _30;
+                        let _42: std::result::Result<std::convert::Infallible, LendingError>;
+                        let _45: ();
+                        scope 14 {
+                            debug residual => _42;
+                            scope 15 {
+                            }
+                        }
+                        scope 16 {
+                            debug val => _45;
+                            scope 17 {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _22;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _25;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _10;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _13;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).1: state::last_update::LastUpdate);
+        StorageLive(_8);
+        _8 = _2;
+        _6 = last_update::LastUpdate::slots_elapsed(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageDead(_7);
+        _5 = <std::result::Result<u64, anchor_lang::error::Error> as Try>::branch(move _6) -> [return: bb2, unwind: bb26];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _9 = discriminant(_5);
+        switchInt(move _9) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _13 = ((_5 as Continue).0: u64);
+        _4 = _13;
+        StorageDead(_13);
+        _47 = discriminant(_5);
+        StorageDead(_5);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = _4;
+        _15 = Gt(move _16, const 0_u64);
+        switchInt(move _15) -> [0: bb21, otherwise: bb7];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_10);
+        _10 = move ((_5 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_12);
+        _12 = move _10;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _12) -> [return: bb6, unwind: bb28];
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_10);
+        _53 = discriminant(_5);
+        StorageDead(_5);
+        goto -> bb24;
+    }
+
+    bb7: {
+        StorageDead(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = &(*_1);
+        _19 = reserve::Reserve::current_borrow_rate(move _20) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_20);
+        _18 = <std::result::Result<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, anchor_lang::error::Error> as Try>::branch(move _19) -> [return: bb9, unwind: bb26];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        _21 = discriminant(_18);
+        switchInt(move _21) -> [0: bb10, 1: bb11, otherwise: bb4];
+    }
+
+    bb10: {
+        StorageLive(_25);
+        _25 = ((_18 as Continue).0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _17 = _25;
+        StorageDead(_25);
+        _49 = discriminant(_18);
+        StorageDead(_18);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = (((*_1).9: state::reserve::ReserveConfig).5: u8);
+        _26 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::from_percent::<u8>(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb11: {
+        StorageLive(_22);
+        _22 = move ((_18 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_24);
+        _24 = move _22;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _24) -> [return: bb12, unwind: bb27];
+    }
+
+    bb12: {
+        StorageDead(_24);
+        StorageDead(_22);
+        _51 = discriminant(_18);
+        StorageDead(_18);
+        goto -> bb23;
+    }
+
+    bb13: {
+        StorageDead(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _3;
+        _28 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::from_bps::<u16>(move _29) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = (((*_1).9: state::reserve::ReserveConfig).2: u16);
+        _30 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::from_bps::<u16>(move _31) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        _35 = &mut ((*_1).5: state::reserve::ReserveLiquidity);
+        StorageLive(_36);
+        _36 = _17;
+        StorageLive(_37);
+        _37 = _30;
+        StorageLive(_38);
+        _38 = _4;
+        StorageLive(_39);
+        _39 = _26;
+        StorageLive(_40);
+        _40 = _28;
+        _34 = ReserveLiquidity::compound_interest(move _35, move _36, move _37, move _38, move _39, move _40) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_40);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_35);
+        _33 = <std::result::Result<(), LendingError> as Try>::branch(move _34) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_34);
+        _41 = discriminant(_33);
+        switchInt(move _41) -> [0: bb18, 1: bb19, otherwise: bb4];
+    }
+
+    bb18: {
+        StorageLive(_45);
+        _45 = ((_33 as Continue).0: ());
+        _32 = _45;
+        StorageDead(_45);
+        StorageDead(_33);
+        StorageDead(_32);
+        _14 = const ();
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_17);
+        goto -> bb22;
+    }
+
+    bb19: {
+        StorageLive(_42);
+        _42 = ((_33 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_44);
+        _44 = _42;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _44) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_44);
+        StorageDead(_42);
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_26);
+        goto -> bb23;
+    }
+
+    bb21: {
+        StorageDead(_16);
+        _14 = const ();
+        goto -> bb22;
+    }
+
+    bb22: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_46);
+        _46 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _46);
+        StorageDead(_46);
+        StorageDead(_4);
+        goto -> bb25;
+    }
+
+    bb23: {
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb24;
+    }
+
+    bb24: {
+        StorageDead(_4);
+        goto -> bb25;
+    }
+
+    bb25: {
+        return;
+    }
+
+    bb26 (cleanup): {
+        resume;
+    }
+
+    bb27 (cleanup): {
+        _55 = discriminant(_18);
+        goto -> bb26;
+    }
+
+    bb28 (cleanup): {
+        _56 = discriminant(_5);
+        goto -> bb26;
+    }
+}

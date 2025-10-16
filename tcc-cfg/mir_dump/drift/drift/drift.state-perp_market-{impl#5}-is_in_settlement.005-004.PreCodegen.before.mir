@@ -1,0 +1,88 @@
+// MIR for `state::perp_market::<impl at programs/drift/src/state/perp_market.rs:298:1: 298:16>::is_in_settlement` before PreCodegen
+
+fn state::perp_market::<impl at programs/drift/src/state/perp_market.rs:298:1: 298:16>::is_in_settlement(_1: &PerpMarket, _2: i64) -> bool {
+    debug self => _1;
+    debug now => _2;
+    let mut _0: bool;
+    let _3: bool;
+    let mut _4: isize;
+    let mut _6: bool;
+    let mut _7: i64;
+    let mut _8: i64;
+    let mut _9: i64;
+    let mut _10: bool;
+    scope 1 {
+        debug in_settlement => _3;
+        let _5: bool;
+        scope 2 {
+            debug expired => _5;
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _4 = discriminant(((*_1).22: state::perp_market::MarketStatus));
+        switchInt(move _4) -> [7: bb2, 8: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _3 = const false;
+        goto -> bb3;
+    }
+
+    bb2: {
+        _3 = const true;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).6: i64);
+        _6 = Ne(move _7, const 0_i64);
+        switchInt(move _6) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageLive(_8);
+        _8 = _2;
+        StorageLive(_9);
+        _9 = ((*_1).6: i64);
+        _5 = Ge(move _8, move _9);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_7);
+        _5 = const false;
+        goto -> bb6;
+    }
+
+    bb6: {
+        StorageDead(_6);
+        StorageLive(_10);
+        _10 = _3;
+        switchInt(move _10) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb7: {
+        _0 = const true;
+        goto -> bb9;
+    }
+
+    bb8: {
+        _0 = _5;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_10);
+        StorageDead(_5);
+        StorageDead(_3);
+        return;
+    }
+}

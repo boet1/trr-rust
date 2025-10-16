@@ -1,0 +1,42 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::exit_bankruptcy` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::exit_bankruptcy(_1: &mut User) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &mut state::user::User;
+    let mut _4: state::user::UserStatus;
+    let _5: ();
+    let mut _6: &mut state::user::User;
+    let mut _7: state::user::UserStatus;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &mut (*_1);
+        StorageLive(_4);
+        _4 = UserStatus::BeingLiquidated;
+        _2 = User::remove_user_status(move _3, move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &mut (*_1);
+        StorageLive(_7);
+        _7 = UserStatus::Bankrupt;
+        _5 = User::remove_user_status(move _6, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        ((*_1).13: u64) = const 0_u64;
+        _0 = const ();
+        return;
+    }
+}

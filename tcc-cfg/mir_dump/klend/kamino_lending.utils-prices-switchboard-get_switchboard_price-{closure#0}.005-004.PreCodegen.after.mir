@@ -1,0 +1,95 @@
+// MIR for `get_switchboard_price::{closure#0}` after PreCodegen
+
+fn get_switchboard_price::{closure#0}(_1: {closure@programs\klend\src\utils\prices\switchboard.rs:72:67: 72:70}, _2: TryFromIntError) -> anchor_lang::error::Error {
+    let mut _0: anchor_lang::error::Error;
+    let _3: ();
+    let mut _4: &str;
+    let _5: &str;
+    let mut _6: anchor_lang::error::AnchorError;
+    let mut _7: std::string::String;
+    let mut _8: &LendingError;
+    let _9: LendingError;
+    let mut _10: u32;
+    let mut _11: LendingError;
+    let mut _12: std::string::String;
+    let mut _13: &LendingError;
+    let _14: LendingError;
+    let mut _15: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _16: anchor_lang::error::ErrorOrigin;
+    let mut _17: anchor_lang::error::Source;
+    let mut _18: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _19: &LendingError;
+    let mut _20: &LendingError;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const "Switchboard standard deviation is negative which is against its math definition";
+        _4 = &(*_5);
+        _3 = solana_program::log::sol_log(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageDead(_3);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _20 = const _;
+        _8 = &(*_20);
+        _7 = LendingError::name(move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = LendingError::SwitchboardV2Error;
+        _10 = <LendingError as Into<u32>>::into(move _11) -> [return: bb3, unwind: bb6];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _19 = const _;
+        _13 = &(*_19);
+        _12 = <LendingError as ToString>::to_string(move _13) -> [return: bb4, unwind: bb6];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\utils\\prices\\switchboard.rs", line: const 74_u32 };
+        _16 = anchor_lang::error::ErrorOrigin::Source(move _17);
+        StorageDead(_17);
+        _15 = std::option::Option::<ErrorOrigin>::Some(move _16);
+        StorageDead(_16);
+        StorageLive(_18);
+        _18 = std::option::Option::<ComparedValues>::None;
+        _6 = anchor_lang::error::AnchorError { error_name: move _7, error_code_number: move _10, error_msg: move _12, error_origin: move _15, compared_values: move _18 };
+        StorageDead(_18);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_7);
+        _0 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _6) -> [return: bb5, unwind: bb7];
+    }
+
+    bb5: {
+        StorageDead(_6);
+        return;
+    }
+
+    bb6 (cleanup): {
+        drop(_7) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+}

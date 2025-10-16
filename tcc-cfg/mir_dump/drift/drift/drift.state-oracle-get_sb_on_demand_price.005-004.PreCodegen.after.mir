@@ -1,0 +1,848 @@
+// MIR for `get_sb_on_demand_price` after PreCodegen
+
+fn get_sb_on_demand_price(_1: &anchor_lang::prelude::AccountInfo<'_>, _2: u64) -> std::result::Result<OraclePriceData, error::ErrorCode> {
+    debug price_oracle => _1;
+    debug clock_slot => _2;
+    let mut _0: std::result::Result<state::oracle::OraclePriceData, error::ErrorCode>;
+    let _3: std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>>;
+    let mut _5: std::result::Result<std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>, error::ErrorCode>;
+    let mut _6: std::result::Result<std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>, anchor_lang::error::Error>;
+    let mut _7: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _8: std::result::Result<std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>, error::ErrorCode>;
+    let mut _9: error::ErrorCode;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>;
+    let mut _16: &switchboard_on_demand::PullFeedAccountData;
+    let _17: &switchboard_on_demand::PullFeedAccountData;
+    let mut _18: &std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>;
+    let mut _20: i128;
+    let mut _21: std::iter::Map<std::slice::Iter<'_, switchboard_on_demand::OracleSubmission>, {closure@programs/drift/src/state/oracle.rs:519:14: 519:26}>;
+    let mut _22: std::slice::Iter<'_, switchboard_on_demand::OracleSubmission>;
+    let mut _23: &[switchboard_on_demand::OracleSubmission];
+    let _24: &[switchboard_on_demand::OracleSubmission];
+    let mut _25: &std::vec::Vec<switchboard_on_demand::OracleSubmission>;
+    let mut _26: {closure@programs/drift/src/state/oracle.rs:519:14: 519:26};
+    let mut _27: i128;
+    let mut _28: usize;
+    let mut _29: &std::vec::Vec<switchboard_on_demand::OracleSubmission>;
+    let mut _30: bool;
+    let mut _31: bool;
+    let mut _32: bool;
+    let mut _33: bool;
+    let mut _35: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _36: std::result::Result<i64, error::ErrorCode>;
+    let mut _37: i128;
+    let mut _38: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _39: std::result::Result<i128, error::ErrorCode>;
+    let mut _40: &i128;
+    let _41: &i128;
+    let mut _42: isize;
+    let mut _44: !;
+    let mut _45: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _47: isize;
+    let mut _49: !;
+    let mut _50: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _53: i64;
+    let mut _54: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _55: std::result::Result<i64, error::ErrorCode>;
+    let mut _56: i128;
+    let mut _57: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _58: std::result::Result<i128, error::ErrorCode>;
+    let mut _59: &i128;
+    let _60: &i128;
+    let _61: i128;
+    let mut _62: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _63: std::result::Result<i128, error::ErrorCode>;
+    let mut _64: std::option::Option<i128>;
+    let mut _65: &switchboard_on_demand::PullFeedAccountData;
+    let _66: &switchboard_on_demand::PullFeedAccountData;
+    let mut _67: &std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>;
+    let mut _68: error::ErrorCode;
+    let mut _69: isize;
+    let mut _71: !;
+    let mut _72: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _74: isize;
+    let mut _76: !;
+    let mut _77: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _79: isize;
+    let mut _81: !;
+    let mut _82: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _85: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _86: std::result::Result<i64, error::ErrorCode>;
+    let mut _87: i64;
+    let mut _88: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _89: std::result::Result<i64, error::ErrorCode>;
+    let mut _90: u64;
+    let mut _91: isize;
+    let mut _93: !;
+    let mut _94: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _96: i64;
+    let mut _97: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _98: std::result::Result<i64, error::ErrorCode>;
+    let mut _99: u64;
+    let mut _100: &switchboard_on_demand::OracleSubmission;
+    let mut _101: &std::vec::Vec<switchboard_on_demand::OracleSubmission>;
+    let mut _102: isize;
+    let mut _104: !;
+    let mut _105: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _107: isize;
+    let mut _109: !;
+    let mut _110: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _113: state::oracle::OraclePriceData;
+    let mut _114: i64;
+    let mut _115: u64;
+    let mut _116: i64;
+    let mut _117: bool;
+    let mut _118: std::option::Option<u64>;
+    let mut _119: isize;
+    let mut _120: isize;
+    let mut _121: isize;
+    let mut _122: isize;
+    let mut _123: isize;
+    scope 1 {
+        debug pull_feed_account_info => _3;
+        let _15: std::vec::Vec<switchboard_on_demand::OracleSubmission>;
+        scope 6 {
+            debug latest_oracle_submssions => _15;
+            let _19: i128;
+            scope 7 {
+                debug average_price => _19;
+                let _34: i64;
+                let _43: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _46: i128;
+                let _48: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _51: i64;
+                scope 8 {
+                    debug price => _34;
+                    let _52: u64;
+                    let _70: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _73: i128;
+                    let _75: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _78: i128;
+                    let _80: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _83: i64;
+                    scope 17 {
+                        debug confidence => _52;
+                        let _84: i64;
+                        let _92: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _95: i64;
+                        let _103: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _106: i64;
+                        let _108: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _111: i64;
+                        scope 30 {
+                            debug delay => _84;
+                            let _112: bool;
+                            scope 43 {
+                                debug has_sufficient_number_of_data_points => _112;
+                            }
+                        }
+                        scope 31 {
+                            debug residual => _92;
+                            scope 32 {
+                            }
+                        }
+                        scope 33 {
+                            debug val => _95;
+                            scope 34 {
+                            }
+                        }
+                        scope 35 {
+                            debug residual => _103;
+                            scope 36 {
+                            }
+                        }
+                        scope 37 {
+                            debug val => _106;
+                            scope 38 {
+                            }
+                        }
+                        scope 39 {
+                            debug residual => _108;
+                            scope 40 {
+                            }
+                        }
+                        scope 41 {
+                            debug val => _111;
+                            scope 42 {
+                            }
+                        }
+                    }
+                    scope 18 {
+                        debug residual => _70;
+                        scope 19 {
+                        }
+                    }
+                    scope 20 {
+                        debug val => _73;
+                        scope 21 {
+                        }
+                    }
+                    scope 22 {
+                        debug residual => _75;
+                        scope 23 {
+                        }
+                    }
+                    scope 24 {
+                        debug val => _78;
+                        scope 25 {
+                        }
+                    }
+                    scope 26 {
+                        debug residual => _80;
+                        scope 27 {
+                        }
+                    }
+                    scope 28 {
+                        debug val => _83;
+                        scope 29 {
+                        }
+                    }
+                }
+                scope 9 {
+                    debug residual => _43;
+                    scope 10 {
+                    }
+                }
+                scope 11 {
+                    debug val => _46;
+                    scope 12 {
+                    }
+                }
+                scope 13 {
+                    debug residual => _48;
+                    scope 14 {
+                    }
+                }
+                scope 15 {
+                    debug val => _51;
+                    scope 16 {
+                    }
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(*_1);
+        _6 = load_ref::<PullFeedAccountData>(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = error::ErrorCode::UnableToLoadOracle;
+        _8 = std::result::Result::<Ref<'_, PullFeedAccountData>, error::ErrorCode>::Err(move _9);
+        StorageDead(_9);
+        _5 = std::result::Result::<Ref<'_, PullFeedAccountData>, anchor_lang::error::Error>::or::<error::ErrorCode>(move _6, move _8) -> [return: bb2, unwind: bb75];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_6);
+        _4 = <std::result::Result<Ref<'_, PullFeedAccountData>, error::ErrorCode> as Try>::branch(move _5) -> [return: bb3, unwind: bb75];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _10 = discriminant(_4);
+        switchInt(move _10) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = move ((_4 as Continue).0: std::cell::Ref<'_, switchboard_on_demand::PullFeedAccountData>);
+        _3 = move _14;
+        StorageDead(_14);
+        _121 = discriminant(_4);
+        StorageDead(_4);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &_3;
+        _17 = <Ref<'_, PullFeedAccountData> as Deref>::deref(move _18) -> [return: bb8, unwind: bb74];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_11);
+        _11 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb7, unwind: bb76];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_11);
+        _119 = discriminant(_4);
+        StorageDead(_4);
+        goto -> bb71;
+    }
+
+    bb8: {
+        _16 = &(*_17);
+        StorageDead(_18);
+        _15 = PullFeedAccountData::latest_submissions(move _16) -> [return: bb9, unwind: bb74];
+    }
+
+    bb9: {
+        StorageDead(_16);
+        StorageDead(_17);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &_15;
+        _24 = <Vec<OracleSubmission> as Deref>::deref(move _25) -> [return: bb10, unwind: bb73];
+    }
+
+    bb10: {
+        _23 = &(*_24);
+        StorageDead(_25);
+        _22 = core::slice::<impl [OracleSubmission]>::iter(move _23) -> [return: bb11, unwind: bb73];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        StorageLive(_26);
+        _26 = {closure@programs/drift/src/state/oracle.rs:519:14: 519:26};
+        _21 = <std::slice::Iter<'_, OracleSubmission> as Iterator>::map::<i128, {closure@programs/drift/src/state/oracle.rs:519:14: 519:26}>(move _22, move _26) -> [return: bb12, unwind: bb73];
+    }
+
+    bb12: {
+        StorageDead(_26);
+        StorageDead(_22);
+        _20 = <Map<std::slice::Iter<'_, OracleSubmission>, {closure@programs/drift/src/state/oracle.rs:519:14: 519:26}> as Iterator>::sum::<i128>(move _21) -> [return: bb13, unwind: bb73];
+    }
+
+    bb13: {
+        StorageDead(_21);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = &_15;
+        _28 = Vec::<OracleSubmission>::len(move _29) -> [return: bb14, unwind: bb73];
+    }
+
+    bb14: {
+        StorageDead(_29);
+        _27 = move _28 as i128 (IntToInt);
+        StorageDead(_28);
+        _30 = Eq(_27, const 0_i128);
+        assert(!move _30, "attempt to divide `{}` by zero", _20) -> [success: bb15, unwind: bb73];
+    }
+
+    bb15: {
+        _31 = Eq(_27, const -1_i128);
+        _32 = Eq(_20, const i128::MIN);
+        _33 = BitAnd(move _31, move _32);
+        assert(!move _33, "attempt to compute `{} / {}`, which would overflow", _20, _27) -> [success: bb16, unwind: bb73];
+    }
+
+    bb16: {
+        _19 = Div(move _20, move _27);
+        StorageDead(_27);
+        StorageDead(_20);
+        StorageDead(_24);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = &_19;
+        _40 = &(*_41);
+        _39 = convert_sb_i128(move _40) -> [return: bb17, unwind: bb73];
+    }
+
+    bb17: {
+        StorageDead(_40);
+        _38 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _39) -> [return: bb18, unwind: bb73];
+    }
+
+    bb18: {
+        StorageDead(_39);
+        _42 = discriminant(_38);
+        switchInt(move _42) -> [0: bb19, 1: bb20, otherwise: bb5];
+    }
+
+    bb19: {
+        StorageLive(_46);
+        _46 = ((_38 as Continue).0: i128);
+        _37 = _46;
+        StorageDead(_46);
+        _36 = <i128 as Cast>::cast::<i64>(move _37) -> [return: bb22, unwind: bb73];
+    }
+
+    bb20: {
+        StorageLive(_43);
+        _43 = ((_38 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_45);
+        _45 = _43;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _45) -> [return: bb21, unwind: bb73];
+    }
+
+    bb21: {
+        StorageDead(_45);
+        StorageDead(_43);
+        StorageDead(_37);
+        StorageDead(_36);
+        goto -> bb68;
+    }
+
+    bb22: {
+        StorageDead(_37);
+        _35 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _36) -> [return: bb23, unwind: bb73];
+    }
+
+    bb23: {
+        StorageDead(_36);
+        _47 = discriminant(_35);
+        switchInt(move _47) -> [0: bb24, 1: bb25, otherwise: bb5];
+    }
+
+    bb24: {
+        StorageLive(_51);
+        _51 = ((_35 as Continue).0: i64);
+        _34 = _51;
+        StorageDead(_51);
+        StorageDead(_41);
+        StorageDead(_38);
+        StorageDead(_35);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        _67 = &_3;
+        _66 = <Ref<'_, PullFeedAccountData> as Deref>::deref(move _67) -> [return: bb27, unwind: bb73];
+    }
+
+    bb25: {
+        StorageLive(_48);
+        _48 = ((_35 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_50);
+        _50 = _48;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _50) -> [return: bb26, unwind: bb73];
+    }
+
+    bb26: {
+        StorageDead(_50);
+        StorageDead(_48);
+        goto -> bb68;
+    }
+
+    bb27: {
+        _65 = &(*_66);
+        StorageDead(_67);
+        _64 = PullFeedAccountData::range(move _65) -> [return: bb28, unwind: bb73];
+    }
+
+    bb28: {
+        StorageDead(_65);
+        StorageLive(_68);
+        _68 = error::ErrorCode::UnableToLoadOracle;
+        _63 = Option::<i128>::ok_or::<error::ErrorCode>(move _64, move _68) -> [return: bb29, unwind: bb73];
+    }
+
+    bb29: {
+        StorageDead(_68);
+        StorageDead(_64);
+        _62 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _63) -> [return: bb30, unwind: bb73];
+    }
+
+    bb30: {
+        StorageDead(_63);
+        _69 = discriminant(_62);
+        switchInt(move _69) -> [0: bb31, 1: bb32, otherwise: bb5];
+    }
+
+    bb31: {
+        StorageLive(_73);
+        _73 = ((_62 as Continue).0: i128);
+        _61 = _73;
+        StorageDead(_73);
+        _60 = &_61;
+        _59 = &(*_60);
+        _58 = convert_sb_i128(move _59) -> [return: bb34, unwind: bb73];
+    }
+
+    bb32: {
+        StorageLive(_70);
+        _70 = ((_62 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_72);
+        _72 = _70;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _72) -> [return: bb33, unwind: bb73];
+    }
+
+    bb33: {
+        StorageDead(_72);
+        StorageDead(_70);
+        StorageDead(_59);
+        StorageDead(_58);
+        goto -> bb65;
+    }
+
+    bb34: {
+        StorageDead(_59);
+        _57 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _58) -> [return: bb35, unwind: bb73];
+    }
+
+    bb35: {
+        StorageDead(_58);
+        _74 = discriminant(_57);
+        switchInt(move _74) -> [0: bb36, 1: bb37, otherwise: bb5];
+    }
+
+    bb36: {
+        StorageLive(_78);
+        _78 = ((_57 as Continue).0: i128);
+        _56 = _78;
+        StorageDead(_78);
+        _55 = <i128 as Cast>::cast::<i64>(move _56) -> [return: bb39, unwind: bb73];
+    }
+
+    bb37: {
+        StorageLive(_75);
+        _75 = ((_57 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_77);
+        _77 = _75;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _77) -> [return: bb38, unwind: bb73];
+    }
+
+    bb38: {
+        StorageDead(_77);
+        StorageDead(_75);
+        goto -> bb65;
+    }
+
+    bb39: {
+        StorageDead(_56);
+        _54 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _55) -> [return: bb40, unwind: bb73];
+    }
+
+    bb40: {
+        StorageDead(_55);
+        _79 = discriminant(_54);
+        switchInt(move _79) -> [0: bb41, 1: bb42, otherwise: bb5];
+    }
+
+    bb41: {
+        StorageLive(_83);
+        _83 = ((_54 as Continue).0: i64);
+        _53 = _83;
+        StorageDead(_83);
+        _52 = core::num::<impl i64>::unsigned_abs(move _53) -> [return: bb44, unwind: bb73];
+    }
+
+    bb42: {
+        StorageLive(_80);
+        _80 = ((_54 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_82);
+        _82 = _80;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _82) -> [return: bb43, unwind: bb73];
+    }
+
+    bb43: {
+        StorageDead(_82);
+        StorageDead(_80);
+        goto -> bb66;
+    }
+
+    bb44: {
+        StorageDead(_53);
+        StorageDead(_66);
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageDead(_57);
+        StorageDead(_54);
+        StorageLive(_84);
+        StorageLive(_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = _2;
+        _89 = <u64 as Cast>::cast::<i64>(move _90) -> [return: bb45, unwind: bb73];
+    }
+
+    bb45: {
+        StorageDead(_90);
+        _88 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _89) -> [return: bb46, unwind: bb73];
+    }
+
+    bb46: {
+        StorageDead(_89);
+        _91 = discriminant(_88);
+        switchInt(move _91) -> [0: bb47, 1: bb48, otherwise: bb5];
+    }
+
+    bb47: {
+        StorageLive(_95);
+        _95 = ((_88 as Continue).0: i64);
+        _87 = _95;
+        StorageDead(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        _101 = &_15;
+        _100 = <Vec<OracleSubmission> as Index<usize>>::index(move _101, const 0_usize) -> [return: bb50, unwind: bb73];
+    }
+
+    bb48: {
+        StorageLive(_92);
+        _92 = ((_88 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_94);
+        _94 = _92;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _94) -> [return: bb49, unwind: bb73];
+    }
+
+    bb49: {
+        StorageDead(_94);
+        StorageDead(_92);
+        StorageDead(_87);
+        StorageDead(_86);
+        goto -> bb64;
+    }
+
+    bb50: {
+        StorageDead(_101);
+        _99 = ((*_100).2: u64);
+        _98 = <u64 as Cast>::cast::<i64>(move _99) -> [return: bb51, unwind: bb73];
+    }
+
+    bb51: {
+        StorageDead(_99);
+        _97 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _98) -> [return: bb52, unwind: bb73];
+    }
+
+    bb52: {
+        StorageDead(_98);
+        _102 = discriminant(_97);
+        switchInt(move _102) -> [0: bb53, 1: bb54, otherwise: bb5];
+    }
+
+    bb53: {
+        StorageLive(_106);
+        _106 = ((_97 as Continue).0: i64);
+        _96 = _106;
+        StorageDead(_106);
+        _86 = <i64 as SafeMath>::safe_sub(move _87, move _96) -> [return: bb56, unwind: bb73];
+    }
+
+    bb54: {
+        StorageLive(_103);
+        _103 = ((_97 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_105);
+        _105 = _103;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _105) -> [return: bb55, unwind: bb73];
+    }
+
+    bb55: {
+        StorageDead(_105);
+        StorageDead(_103);
+        StorageDead(_96);
+        StorageDead(_87);
+        StorageDead(_86);
+        goto -> bb63;
+    }
+
+    bb56: {
+        StorageDead(_96);
+        StorageDead(_87);
+        _85 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _86) -> [return: bb57, unwind: bb73];
+    }
+
+    bb57: {
+        StorageDead(_86);
+        _107 = discriminant(_85);
+        switchInt(move _107) -> [0: bb58, 1: bb59, otherwise: bb5];
+    }
+
+    bb58: {
+        StorageLive(_111);
+        _111 = ((_85 as Continue).0: i64);
+        _84 = _111;
+        StorageDead(_111);
+        StorageDead(_100);
+        StorageDead(_97);
+        StorageDead(_88);
+        StorageDead(_85);
+        StorageLive(_112);
+        _112 = const true;
+        StorageLive(_113);
+        StorageLive(_114);
+        _114 = _34;
+        StorageLive(_115);
+        _115 = _52;
+        StorageLive(_116);
+        _116 = _84;
+        StorageLive(_117);
+        _117 = _112;
+        StorageLive(_118);
+        _118 = Option::<u64>::None;
+        _113 = OraclePriceData { price: move _114, confidence: move _115, delay: move _116, has_sufficient_number_of_data_points: move _117, sequence_id: move _118 };
+        StorageDead(_118);
+        StorageDead(_117);
+        StorageDead(_116);
+        StorageDead(_115);
+        StorageDead(_114);
+        _0 = std::result::Result::<OraclePriceData, error::ErrorCode>::Ok(move _113);
+        StorageDead(_113);
+        StorageDead(_112);
+        StorageDead(_84);
+        StorageDead(_52);
+        StorageDead(_34);
+        StorageDead(_19);
+        drop(_15) -> [return: bb61, unwind: bb74];
+    }
+
+    bb59: {
+        StorageLive(_108);
+        _108 = ((_85 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_110);
+        _110 = _108;
+        _0 = <std::result::Result<OraclePriceData, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _110) -> [return: bb60, unwind: bb73];
+    }
+
+    bb60: {
+        StorageDead(_110);
+        StorageDead(_108);
+        goto -> bb63;
+    }
+
+    bb61: {
+        StorageDead(_15);
+        drop(_3) -> [return: bb62, unwind: bb75];
+    }
+
+    bb62: {
+        StorageDead(_3);
+        goto -> bb72;
+    }
+
+    bb63: {
+        StorageDead(_100);
+        StorageDead(_97);
+        goto -> bb64;
+    }
+
+    bb64: {
+        StorageDead(_88);
+        StorageDead(_85);
+        StorageDead(_84);
+        goto -> bb67;
+    }
+
+    bb65: {
+        StorageDead(_56);
+        StorageDead(_55);
+        goto -> bb66;
+    }
+
+    bb66: {
+        StorageDead(_53);
+        StorageDead(_66);
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageDead(_57);
+        StorageDead(_54);
+        goto -> bb67;
+    }
+
+    bb67: {
+        StorageDead(_52);
+        goto -> bb69;
+    }
+
+    bb68: {
+        StorageDead(_41);
+        StorageDead(_38);
+        StorageDead(_35);
+        goto -> bb69;
+    }
+
+    bb69: {
+        StorageDead(_34);
+        StorageDead(_19);
+        drop(_15) -> [return: bb70, unwind: bb74];
+    }
+
+    bb70: {
+        StorageDead(_15);
+        drop(_3) -> [return: bb71, unwind: bb75];
+    }
+
+    bb71: {
+        StorageDead(_3);
+        goto -> bb72;
+    }
+
+    bb72: {
+        return;
+    }
+
+    bb73 (cleanup): {
+        drop(_15) -> [return: bb74, unwind terminate(cleanup)];
+    }
+
+    bb74 (cleanup): {
+        drop(_3) -> [return: bb75, unwind terminate(cleanup)];
+    }
+
+    bb75 (cleanup): {
+        resume;
+    }
+
+    bb76 (cleanup): {
+        _123 = discriminant(_4);
+        goto -> bb75;
+    }
+}

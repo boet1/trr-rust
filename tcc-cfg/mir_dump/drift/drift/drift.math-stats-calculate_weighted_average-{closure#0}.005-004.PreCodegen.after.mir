@@ -1,0 +1,99 @@
+// MIR for `calculate_weighted_average::{closure#0}` after PreCodegen
+
+fn calculate_weighted_average::{closure#0}(_1: {closure@programs/drift/src/math/stats.rs:40:41: 40:43}) -> i64 {
+    debug weight2 => (*(_1.0: &i64));
+    debug latest_price_01 => (*(_1.1: &i128));
+    debug prev_twap_99 => (*(_1.2: &i128));
+    let mut _0: i64;
+    let mut _2: bool;
+    let mut _3: i64;
+    let mut _4: bool;
+    let mut _5: i128;
+    let mut _6: i128;
+    let mut _7: bool;
+    let mut _8: i128;
+    let mut _9: i128;
+    let mut _10: &i64;
+    let mut _11: &i128;
+    let mut _12: &i128;
+    let mut _13: &i128;
+    let mut _14: &i128;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _10 = deref_copy (_1.0: &i64);
+        _3 = (*_10);
+        _2 = Gt(move _3, const 1_i64);
+        switchInt(move _2) -> [0: bb8, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _11 = deref_copy (_1.1: &i128);
+        _5 = (*_11);
+        StorageLive(_6);
+        _12 = deref_copy (_1.2: &i128);
+        _6 = (*_12);
+        _4 = Lt(move _5, move _6);
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _0 = const -1_i64;
+        goto -> bb7;
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        _13 = deref_copy (_1.1: &i128);
+        _8 = (*_13);
+        StorageLive(_9);
+        _14 = deref_copy (_1.2: &i128);
+        _9 = (*_14);
+        _7 = Gt(move _8, move _9);
+        switchInt(move _7) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _0 = const 1_i64;
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _0 = const 0_i64;
+        goto -> bb6;
+    }
+
+    bb6: {
+        StorageDead(_7);
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_4);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_3);
+        _0 = const 0_i64;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_2);
+        return;
+    }
+}

@@ -1,0 +1,73 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:874:1: 874:28>::liquidity_to_collateral_fraction` after PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:874:1: 874:28>::liquidity_to_collateral_fraction(_1: &reserve::CollateralExchangeRate, _2: u64) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug self => _1;
+    debug liquidity_amount => _2;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _3: std::result::Result<fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, LendingError>;
+    let mut _4: utils::fraction::BigFraction;
+    let mut _5: utils::fraction::BigFraction;
+    let mut _6: u128;
+    let mut _7: u128;
+    let mut _8: u128;
+    let mut _9: u64;
+    let mut _10: (u128, bool);
+    let mut _11: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _12: &str;
+    let _13: &str;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).0: u128);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _2;
+        _8 = <u128 as From<u64>>::from(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        _10 = CheckedMul(_7, _8);
+        assert(!move (_10.1: bool), "attempt to compute `{} * {}`, which would overflow", move _7, move _8) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _6 = move (_10.0: u128);
+        StorageDead(_8);
+        StorageDead(_7);
+        _5 = utils::fraction::BigFraction::from_num::<u128>(move _6) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageLive(_11);
+        _11 = ((*_1).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _4 = <utils::fraction::BigFraction as std::ops::Div<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>>::div(move _5, move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_5);
+        _3 = <utils::fraction::BigFraction as TryInto<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>>::try_into(move _4) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = const "liquidity_to_collateral_fraction: collateral_amount overflow";
+        _12 = &(*_13);
+        _0 = std::result::Result::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, LendingError>::expect(move _3, move _12) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_3);
+        StorageDead(_13);
+        return;
+    }
+}

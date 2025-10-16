@@ -1,0 +1,49 @@
+// MIR for `state::state::<impl at programs/drift/src/state/state.rs:234:1: 234:18>::spot_default` before PreCodegen
+
+fn state::state::<impl at programs/drift/src/state/state.rs:234:1: 234:18>::spot_default() -> state::state::FeeStructure {
+    let mut _0: state::state::FeeStructure;
+    let mut _1: [state::state::FeeTier; 10];
+    let mut _2: state::state::FeeTier;
+    let mut _3: state::state::FeeTier;
+    let _4: usize;
+    let mut _5: usize;
+    let mut _6: bool;
+    let mut _7: [state::state::FeeTier; 10];
+    let mut _8: state::state::OrderFillerRewardStructure;
+    scope 1 {
+        debug fee_tiers => _1;
+    }
+
+    bb0: {
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = <state::state::FeeTier as Default>::default() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _1 = [move _2; 10];
+        StorageDead(_2);
+        StorageLive(_3);
+        _3 = state::state::FeeTier { fee_numerator: const 100_u32, fee_denominator: const _, maker_rebate_numerator: const 20_u32, maker_rebate_denominator: const _, referrer_reward_numerator: const 0_u32, referrer_reward_denominator: const _, referee_fee_numerator: const 0_u32, referee_fee_denominator: const _ };
+        StorageLive(_4);
+        _4 = const 0_usize;
+        _5 = Len(_1);
+        _6 = Lt(_4, _5);
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _1[_4] = move _3;
+        StorageDead(_3);
+        StorageDead(_4);
+        StorageLive(_7);
+        _7 = _1;
+        StorageLive(_8);
+        _8 = OrderFillerRewardStructure { reward_numerator: const 10_u32, reward_denominator: const _, time_based_reward_lower_bound: const 10000_u128 };
+        _0 = state::state::FeeStructure { fee_tiers: move _7, filler_reward_structure: move _8, referrer_reward_epoch_upper_bound: const _, flat_filler_fee: const 10000_u64 };
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_1);
+        return;
+    }
+}

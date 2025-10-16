@@ -1,0 +1,36 @@
+// MIR for `margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:62:1: 62:19>::fuel_numerator` before PreCodegen
+
+fn margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:62:1: 62:19>::fuel_numerator(_1: MarginContext, _2: &User, _3: i64) -> MarginContext {
+    debug self => _1;
+    debug user => _2;
+    debug now => _3;
+    let mut _0: state::margin_calculation::MarginContext;
+    let mut _4: i64;
+    let mut _5: std::result::Result<i64, error::ErrorCode>;
+    let mut _6: &state::user::User;
+    let mut _7: i64;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_2);
+        StorageLive(_7);
+        _7 = _3;
+        _5 = User::get_fuel_bonus_numerator(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = std::result::Result::<i64, error::ErrorCode>::unwrap(move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        (_1.5: i64) = move _4;
+        StorageDead(_4);
+        _0 = _1;
+        return;
+    }
+}

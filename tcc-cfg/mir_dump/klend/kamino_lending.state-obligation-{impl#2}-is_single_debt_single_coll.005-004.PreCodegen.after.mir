@@ -1,0 +1,51 @@
+// MIR for `obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::is_single_debt_single_coll` after PreCodegen
+
+fn obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::is_single_debt_single_coll(_1: &obligation::Obligation) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: bool;
+    let mut _3: usize;
+    let mut _4: &state::obligation::Obligation;
+    let mut _5: usize;
+    let mut _6: &state::obligation::Obligation;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = obligation::Obligation::active_deposits_count(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _2 = Eq(move _3, const 1_usize);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        _5 = obligation::Obligation::active_borrows_count(move _6) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_3);
+        _0 = const false;
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_6);
+        _0 = Eq(move _5, const 1_usize);
+        StorageDead(_5);
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_2);
+        return;
+    }
+}

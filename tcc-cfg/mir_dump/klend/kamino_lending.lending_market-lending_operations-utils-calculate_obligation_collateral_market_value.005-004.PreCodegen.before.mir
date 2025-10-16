@@ -1,0 +1,59 @@
+// MIR for `calculate_obligation_collateral_market_value` before PreCodegen
+
+fn calculate_obligation_collateral_market_value(_1: &reserve::Reserve, _2: &obligation::ObligationCollateral) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug deposit_reserve => _1;
+    debug deposit => _2;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _3: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _4: &state::reserve::CollateralExchangeRate;
+    let _5: state::reserve::CollateralExchangeRate;
+    let mut _6: &state::reserve::Reserve;
+    let mut _7: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _8: u64;
+    let mut _9: &state::reserve::Reserve;
+    let mut _10: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    scope 1 {
+        debug liquidity_amount_from_collateral => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        _5 = reserve::Reserve::collateral_exchange_rate(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &_5;
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = ((*_2).1: u64);
+        _7 = <u64 as Into<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>>::into(move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        _3 = reserve::CollateralExchangeRate::fraction_collateral_to_liquidity(move _4, move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageLive(_9);
+        _9 = &(*_1);
+        StorageLive(_10);
+        _10 = _3;
+        _0 = calculate_market_value_from_liquidity_amount(move _9, move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_3);
+        return;
+    }
+}

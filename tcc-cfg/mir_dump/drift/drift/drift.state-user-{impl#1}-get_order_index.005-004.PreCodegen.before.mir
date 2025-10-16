@@ -1,0 +1,53 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_order_index` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_order_index(_1: &User, _2: u32) -> std::result::Result<usize, error::ErrorCode> {
+    debug self => _1;
+    debug order_id => _2;
+    let mut _0: std::result::Result<usize, error::ErrorCode>;
+    let mut _3: std::option::Option<usize>;
+    let mut _4: &mut std::slice::Iter<'_, state::user::Order>;
+    let mut _5: std::slice::Iter<'_, state::user::Order>;
+    let mut _6: &[state::user::Order];
+    let mut _7: &[state::user::Order; 32];
+    let mut _8: {closure@programs/drift/src/state/user.rs:263:23: 263:30};
+    let mut _9: &u32;
+    let mut _10: error::ErrorCode;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).5: [state::user::Order; 32]);
+        _6 = move _7 as &[state::user::Order] (PointerCoercion(Unsize));
+        StorageDead(_7);
+        _5 = core::slice::<impl [Order]>::iter(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &mut _5;
+        StorageDead(_6);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &_2;
+        _8 = {closure@programs/drift/src/state/user.rs:263:23: 263:30} { order_id: move _9 };
+        StorageDead(_9);
+        _3 = <std::slice::Iter<'_, Order> as Iterator>::position::<{closure@programs/drift/src/state/user.rs:263:23: 263:30}>(move _4, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageLive(_10);
+        _10 = error::ErrorCode::OrderDoesNotExist;
+        _0 = Option::<usize>::ok_or::<error::ErrorCode>(move _3, move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageDead(_3);
+        StorageDead(_5);
+        return;
+    }
+}

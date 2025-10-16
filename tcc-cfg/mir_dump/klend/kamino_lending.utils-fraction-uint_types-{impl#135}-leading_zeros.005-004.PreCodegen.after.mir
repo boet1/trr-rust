@@ -1,0 +1,180 @@
+// MIR for `uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::leading_zeros` after PreCodegen
+
+fn uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::leading_zeros(_1: &uint_types::U128) -> u32 {
+    debug self => _1;
+    let mut _0: u32;
+    let mut _2: u32;
+    let _3: ();
+    let mut _4: std::ops::Range<usize>;
+    let mut _5: std::ops::Range<usize>;
+    let mut _7: ();
+    let _8: ();
+    let mut _9: std::option::Option<usize>;
+    let mut _10: &mut std::ops::Range<usize>;
+    let mut _11: &mut std::ops::Range<usize>;
+    let mut _12: isize;
+    let mut _13: !;
+    let _16: usize;
+    let mut _17: usize;
+    let mut _18: usize;
+    let mut _19: (usize, bool);
+    let mut _20: (usize, bool);
+    let mut _21: usize;
+    let mut _22: bool;
+    let mut _23: bool;
+    let mut _24: u64;
+    let mut _25: (u32, bool);
+    let mut _26: !;
+    let mut _27: u32;
+    let mut _28: u64;
+    let mut _29: (u32, bool);
+    scope 1 {
+        debug r => _2;
+        let mut _6: std::ops::Range<usize>;
+        scope 2 {
+            debug iter => _6;
+            let _14: usize;
+            scope 3 {
+                debug i => _14;
+                let _15: u64;
+                scope 4 {
+                    debug w => _15;
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = const 0_u32;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = std::ops::Range::<usize> { start: const 0_usize, end: const 2_usize };
+        _4 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = move _4;
+        goto -> bb2;
+    }
+
+    bb2: {
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &mut _6;
+        _10 = &mut (*_11);
+        _9 = <std::ops::Range<usize> as Iterator>::next(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _12 = discriminant(_9);
+        switchInt(move _12) -> [0: bb6, 1: bb4, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = ((_9 as Some).0: usize);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _14;
+        _19 = CheckedSub(const 2_usize, _18);
+        assert(!move (_19.1: bool), "attempt to compute `{} - {}`, which would overflow", const 2_usize, move _18) -> [success: bb7, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        _3 = const ();
+        goto -> bb15;
+    }
+
+    bb7: {
+        _17 = move (_19.0: usize);
+        StorageDead(_18);
+        _20 = CheckedSub(_17, const 1_usize);
+        assert(!move (_20.1: bool), "attempt to compute `{} - {}`, which would overflow", move _17, const 1_usize) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _16 = move (_20.0: usize);
+        StorageDead(_17);
+        _21 = Len(((*_1).0: [u64; 2]));
+        _22 = Lt(_16, _21);
+        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _16) -> [success: bb9, unwind continue];
+    }
+
+    bb9: {
+        _15 = ((*_1).0: [u64; 2])[_16];
+        StorageDead(_16);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = _15;
+        _23 = Eq(move _24, const 0_u64);
+        switchInt(move _23) -> [0: bb12, otherwise: bb10];
+    }
+
+    bb10: {
+        StorageDead(_24);
+        _25 = CheckedAdd(_2, const 64_u32);
+        assert(!move (_25.1: bool), "attempt to compute `{} + {}`, which would overflow", _2, const 64_u32) -> [success: bb11, unwind continue];
+    }
+
+    bb11: {
+        _2 = move (_25.0: u32);
+        _8 = const ();
+        StorageDead(_23);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        _7 = const ();
+        goto -> bb2;
+    }
+
+    bb12: {
+        StorageDead(_24);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _15;
+        _27 = core::num::<impl u64>::leading_zeros(move _28) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_28);
+        _29 = CheckedAdd(_2, _27);
+        assert(!move (_29.1: bool), "attempt to compute `{} + {}`, which would overflow", _2, move _27) -> [success: bb14, unwind continue];
+    }
+
+    bb14: {
+        _2 = move (_29.0: u32);
+        StorageDead(_27);
+        _3 = const ();
+        StorageDead(_23);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        _0 = _2;
+        StorageDead(_2);
+        return;
+    }
+}

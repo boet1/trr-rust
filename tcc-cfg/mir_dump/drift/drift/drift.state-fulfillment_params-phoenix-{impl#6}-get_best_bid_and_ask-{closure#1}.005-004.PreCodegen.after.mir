@@ -1,0 +1,74 @@
+// MIR for `phoenix::<impl at programs/drift/src/state/fulfillment_params/phoenix.rs:342:1: 342:72>::get_best_bid_and_ask::{closure#1}` after PreCodegen
+
+fn phoenix::<impl at programs/drift/src/state/fulfillment_params/phoenix.rs:342:1: 342:72>::get_best_bid_and_ask::{closure#1}(_1: {closure@programs/drift/src/state/fulfillment_params/phoenix.rs:365:74: 365:82}, _2: (&FIFOOrderId, &FIFORestingOrder)) -> Option<u64> {
+    debug market => (*(_1.0: &&dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, phoenix::state::markets::FIFOOrderId, phoenix::state::markets::FIFORestingOrder, phoenix::state::OrderPacket>));
+    debug header => (*(_1.1: &&phoenix::program::MarketHeader));
+    let mut _0: std::option::Option<u64>;
+    let _3: &phoenix::state::markets::FIFOOrderId;
+    let mut _4: std::result::Result<u64, error::ErrorCode>;
+    let mut _5: u64;
+    let mut _6: &phoenix::quantities::Ticks;
+    let mut _7: u64;
+    let mut _8: &phoenix::quantities::QuoteLotsPerBaseUnitPerTick;
+    let _9: phoenix::quantities::QuoteLotsPerBaseUnitPerTick;
+    let mut _10: &dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, phoenix::state::markets::FIFOOrderId, phoenix::state::markets::FIFORestingOrder, phoenix::state::OrderPacket>;
+    let mut _11: &phoenix::program::MarketHeader;
+    let mut _12: &&dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, phoenix::state::markets::FIFOOrderId, phoenix::state::markets::FIFORestingOrder, phoenix::state::OrderPacket>;
+    let mut _13: &dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, phoenix::state::markets::FIFOOrderId, phoenix::state::markets::FIFORestingOrder, phoenix::state::OrderPacket>;
+    let mut _14: &&phoenix::program::MarketHeader;
+    let mut _15: &phoenix::program::MarketHeader;
+    scope 1 {
+        debug o => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = (_2.0: &phoenix::state::markets::FIFOOrderId);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_3).0: phoenix::quantities::Ticks);
+        _5 = <Ticks as phoenix::quantities::WrapperU64>::as_u64(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _12 = deref_copy (_1.0: &&dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, phoenix::state::markets::FIFOOrderId, phoenix::state::markets::FIFORestingOrder, phoenix::state::OrderPacket>);
+        _13 = deref_copy (*_12);
+        _10 = &(*_13);
+        _9 = <dyn phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, FIFOOrderId, FIFORestingOrder, OrderPacket> as phoenix::state::markets::Market<anchor_lang::prelude::Pubkey, FIFOOrderId, FIFORestingOrder, OrderPacket>>::get_tick_size(move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _8 = &_9;
+        StorageDead(_10);
+        _7 = <QuoteLotsPerBaseUnitPerTick as phoenix::quantities::WrapperU64>::as_u64(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageLive(_11);
+        _14 = deref_copy (_1.1: &&phoenix::program::MarketHeader);
+        _15 = deref_copy (*_14);
+        _11 = &(*_15);
+        _4 = phoenix_price_in_ticks_to_taker_price(move _5, move _7, move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_7);
+        StorageDead(_5);
+        _0 = std::result::Result::<u64, error::ErrorCode>::ok(move _4) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageDead(_9);
+        StorageDead(_3);
+        return;
+    }
+}

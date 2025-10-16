@@ -1,0 +1,48 @@
+// MIR for `do_orders_cross` before PreCodegen
+
+fn do_orders_cross(_1: controller::position::PositionDirection, _2: u64, _3: u64) -> bool {
+    debug maker_direction => _1;
+    debug maker_price => _2;
+    debug taker_price => _3;
+    let mut _0: bool;
+    let mut _4: isize;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: u64;
+    let mut _8: u64;
+
+    bb0: {
+        _4 = discriminant(_1);
+        switchInt(move _4) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_7);
+        _7 = _3;
+        StorageLive(_8);
+        _8 = _2;
+        _0 = Ge(move _7, move _8);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb4;
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_5);
+        _5 = _3;
+        StorageLive(_6);
+        _6 = _2;
+        _0 = Le(move _5, move _6);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb4;
+    }
+
+    bb4: {
+        return;
+    }
+}

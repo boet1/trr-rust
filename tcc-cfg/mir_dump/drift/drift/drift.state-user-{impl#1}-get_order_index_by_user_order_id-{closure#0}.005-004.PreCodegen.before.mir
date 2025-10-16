@@ -1,0 +1,55 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_order_index_by_user_order_id::{closure#0}` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::get_order_index_by_user_order_id::{closure#0}(_1: &mut {closure@programs/drift/src/state/user.rs:270:23: 270:30}, _2: &Order) -> bool {
+    debug order => _2;
+    debug user_order_id => (*((*_1).0: &u8));
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: u8;
+    let mut _5: u8;
+    let mut _6: &state::user::OrderStatus;
+    let mut _7: &state::user::OrderStatus;
+    let _8: state::user::OrderStatus;
+    let mut _9: &state::user::OrderStatus;
+    let mut _10: &u8;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_2).15: u8);
+        StorageLive(_5);
+        _10 = deref_copy ((*_1).0: &u8);
+        _5 = (*_10);
+        _3 = Eq(move _4, move _5);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        _6 = &((*_2).12: state::user::OrderStatus);
+        StorageLive(_7);
+        _9 = const _;
+        _7 = &(*_9);
+        _0 = <OrderStatus as PartialEq>::eq(move _6, move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = const false;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_3);
+        return;
+    }
+}

@@ -1,0 +1,88 @@
+// MIR for `token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::is_valid` before PreCodegen
+
+fn token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::is_valid(_1: &token_info::TokenInfo) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: bool;
+    let mut _3: &state::token_info::ScopeConfiguration;
+    let mut _4: bool;
+    let mut _5: &state::token_info::ScopeConfiguration;
+    let mut _6: bool;
+    let mut _7: &state::token_info::SwitchboardConfiguration;
+    let mut _8: &state::token_info::PythConfiguration;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &((*_1).5: state::token_info::ScopeConfiguration);
+        _2 = token_info::ScopeConfiguration::is_valid(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &((*_1).5: state::token_info::ScopeConfiguration);
+        _4 = token_info::ScopeConfiguration::is_enabled(move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_3);
+        _0 = const false;
+        goto -> bb12;
+    }
+
+    bb4: {
+        switchInt(move _4) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_5);
+        goto -> bb8;
+    }
+
+    bb6: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).6: state::token_info::SwitchboardConfiguration);
+        _6 = SwitchboardConfiguration::is_enabled(move _7) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        switchInt(move _6) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_7);
+        _0 = const true;
+        goto -> bb11;
+    }
+
+    bb9: {
+        StorageDead(_7);
+        StorageLive(_8);
+        _8 = &((*_1).7: state::token_info::PythConfiguration);
+        _0 = PythConfiguration::is_enabled(move _8) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_8);
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_6);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb12: {
+        StorageDead(_2);
+        return;
+    }
+}

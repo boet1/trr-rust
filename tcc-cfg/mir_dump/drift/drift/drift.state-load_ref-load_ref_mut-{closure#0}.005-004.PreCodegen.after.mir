@@ -1,0 +1,64 @@
+// MIR for `load_ref_mut::{closure#0}` after PreCodegen
+
+fn load_ref_mut::{closure#0}(_1: {closure@programs/drift/src/state/load_ref.rs:36:26: 36:32}, _2: &mut &mut [u8]) -> &mut T {
+    debug data => _2;
+    let mut _0: &mut T;
+    let mut _3: &mut T;
+    let mut _4: &mut T;
+    let mut _5: &mut [u8];
+    let mut _6: &mut [u8];
+    let mut _7: &mut [u8];
+    let mut _8: &mut [u8];
+    let mut _9: std::ops::Range<usize>;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: (usize, bool);
+    let mut _13: &mut [u8];
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _13 = deref_copy (*_2);
+        _8 = &mut (*_13);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _12 = CheckedAdd(_11, const 8_usize);
+        assert(!move (_12.1: bool), "attempt to compute `{} + {}`, which would overflow", move _11, const 8_usize) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _10 = move (_12.0: usize);
+        StorageDead(_11);
+        _9 = std::ops::Range::<usize> { start: const 8_usize, end: move _10 };
+        StorageDead(_10);
+        _7 = <[u8] as IndexMut<std::ops::Range<usize>>>::index_mut(move _8, move _9) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _6 = &mut (*_7);
+        _5 = &mut (*_6);
+        _4 = bytemuck::from_bytes_mut::<T>(move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        _3 = &mut (*_4);
+        StorageDead(_5);
+        _0 = &mut (*_3);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

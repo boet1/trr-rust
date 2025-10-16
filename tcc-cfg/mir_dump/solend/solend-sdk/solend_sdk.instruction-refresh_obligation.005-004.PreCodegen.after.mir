@@ -1,0 +1,168 @@
+// MIR for `refresh_obligation` after PreCodegen
+
+fn refresh_obligation(_1: Pubkey, _2: Pubkey, _3: Vec<Pubkey>) -> Instruction {
+    debug program_id => _1;
+    debug obligation_pubkey => _2;
+    debug reserve_pubkeys => _3;
+    let mut _0: solana_program::instruction::Instruction;
+    let mut _4: std::vec::Vec<solana_program::instruction::AccountMeta>;
+    let mut _5: std::boxed::Box<[solana_program::instruction::AccountMeta]>;
+    let mut _6: std::boxed::Box<[solana_program::instruction::AccountMeta; 1]>;
+    let mut _7: usize;
+    let mut _8: usize;
+    let mut _9: *mut u8;
+    let mut _10: std::boxed::Box<[solana_program::instruction::AccountMeta; 1]>;
+    let mut _11: solana_program::instruction::AccountMeta;
+    let mut _12: solana_program::pubkey::Pubkey;
+    let _13: ();
+    let mut _14: &mut std::vec::Vec<solana_program::instruction::AccountMeta>;
+    let mut _15: std::iter::Map<std::vec::IntoIter<solana_program::pubkey::Pubkey>, {closure@token-lending\sdk\src\instruction.rs:1329:18: 1329:26}>;
+    let mut _16: std::vec::IntoIter<solana_program::pubkey::Pubkey>;
+    let mut _17: std::vec::Vec<solana_program::pubkey::Pubkey>;
+    let mut _18: {closure@token-lending\sdk\src\instruction.rs:1329:18: 1329:26};
+    let mut _19: solana_program::pubkey::Pubkey;
+    let mut _20: std::vec::Vec<solana_program::instruction::AccountMeta>;
+    let mut _21: std::vec::Vec<u8>;
+    let mut _22: &instruction::LendingInstruction;
+    let _23: instruction::LendingInstruction;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: *const [solana_program::instruction::AccountMeta; 1];
+    let mut _28: *const ();
+    let mut _29: usize;
+    let mut _30: usize;
+    let mut _31: usize;
+    let mut _32: usize;
+    let mut _33: bool;
+    scope 1 {
+        debug accounts => _4;
+        let mut _24: &instruction::LendingInstruction;
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _26 = const false;
+        _25 = const false;
+        _26 = const true;
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _7 = SizeOf([solana_program::instruction::AccountMeta; 1]);
+        _8 = AlignOf([solana_program::instruction::AccountMeta; 1]);
+        _9 = alloc::alloc::exchange_malloc(move _7, move _8) -> [return: bb1, unwind: bb14];
+    }
+
+    bb1: {
+        StorageLive(_10);
+        _10 = ShallowInitBox(move _9, [solana_program::instruction::AccountMeta; 1]);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _2;
+        _11 = AccountMeta::new(move _12, const false) -> [return: bb2, unwind: bb9];
+    }
+
+    bb2: {
+        StorageDead(_12);
+        _27 = (((_10.0: std::ptr::Unique<[solana_program::instruction::AccountMeta; 1]>).0: std::ptr::NonNull<[solana_program::instruction::AccountMeta; 1]>).0: *const [solana_program::instruction::AccountMeta; 1]);
+        _28 = _27 as *const () (PtrToPtr);
+        _29 = _28 as usize (Transmute);
+        _30 = AlignOf([solana_program::instruction::AccountMeta; 1]);
+        _31 = Sub(_30, const 1_usize);
+        _32 = BitAnd(_29, _31);
+        _33 = Eq(_32, const 0_usize);
+        assert(_33, "misaligned pointer dereference: address must be a multiple of {} but is {}", _30, _29) -> [success: bb15, unwind unreachable];
+    }
+
+    bb3: {
+        _25 = const true;
+        StorageDead(_5);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &mut _4;
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _26 = const false;
+        _17 = move _3;
+        _16 = <Vec<Pubkey> as IntoIterator>::into_iter(move _17) -> [return: bb4, unwind: bb12];
+    }
+
+    bb4: {
+        StorageDead(_17);
+        StorageLive(_18);
+        _18 = {closure@token-lending\sdk\src\instruction.rs:1329:18: 1329:26};
+        _15 = <std::vec::IntoIter<Pubkey> as Iterator>::map::<AccountMeta, {closure@token-lending\sdk\src\instruction.rs:1329:18: 1329:26}>(move _16, move _18) -> [return: bb5, unwind: bb12];
+    }
+
+    bb5: {
+        StorageDead(_18);
+        StorageDead(_16);
+        _13 = <Vec<AccountMeta> as Extend<AccountMeta>>::extend::<Map<std::vec::IntoIter<Pubkey>, {closure@token-lending\sdk\src\instruction.rs:1329:18: 1329:26}>>(move _14, move _15) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageLive(_19);
+        _19 = _1;
+        StorageLive(_20);
+        _25 = const false;
+        _20 = move _4;
+        StorageLive(_21);
+        StorageLive(_22);
+        _24 = const _;
+        _22 = &(*_24);
+        _21 = LendingInstruction::pack(move _22) -> [return: bb7, unwind: bb8];
+    }
+
+    bb7: {
+        StorageDead(_22);
+        _0 = Instruction { program_id: move _19, accounts: move _20, data: move _21 };
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        _25 = const false;
+        StorageDead(_4);
+        return;
+    }
+
+    bb8 (cleanup): {
+        drop(_20) -> [return: bb12, unwind terminate(cleanup)];
+    }
+
+    bb9 (cleanup): {
+        drop(_10) -> [return: bb14, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11 (cleanup): {
+        drop(_4) -> [return: bb14, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        switchInt(_25) -> [0: bb14, otherwise: bb11];
+    }
+
+    bb13 (cleanup): {
+        drop(_3) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb14 (cleanup): {
+        switchInt(_26) -> [0: bb10, otherwise: bb13];
+    }
+
+    bb15: {
+        (*_27) = [move _11];
+        StorageDead(_11);
+        _6 = move _10;
+        _5 = move _6 as std::boxed::Box<[solana_program::instruction::AccountMeta]> (PointerCoercion(Unsize));
+        StorageDead(_10);
+        StorageDead(_6);
+        _4 = std::slice::<impl [AccountMeta]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb3, unwind: bb14];
+    }
+}

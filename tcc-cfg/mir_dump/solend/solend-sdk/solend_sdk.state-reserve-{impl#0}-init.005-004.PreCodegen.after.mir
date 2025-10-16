@@ -1,0 +1,69 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::init` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::init(_1: &mut reserve::Reserve, _2: InitReserveParams) -> () {
+    debug self => _1;
+    debug params => _2;
+    let mut _0: ();
+    let mut _3: state::last_update::LastUpdate;
+    let mut _4: u64;
+    let mut _5: solana_program::pubkey::Pubkey;
+    let mut _6: state::reserve::ReserveLiquidity;
+    let mut _7: state::reserve::ReserveCollateral;
+    let mut _8: state::reserve::ReserveConfig;
+    let mut _9: state::rate_limiter::RateLimiter;
+    let mut _10: state::rate_limiter::RateLimiterConfig;
+    let mut _11: u64;
+    let mut _12: math::decimal::Decimal;
+
+    bb0: {
+        ((*_1).0: u8) = const _;
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (_2.0: u64);
+        _3 = last_update::LastUpdate::new(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        ((*_1).1: state::last_update::LastUpdate) = move _3;
+        StorageDead(_3);
+        StorageLive(_5);
+        _5 = (_2.1: solana_program::pubkey::Pubkey);
+        ((*_1).2: solana_program::pubkey::Pubkey) = move _5;
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = move (_2.2: state::reserve::ReserveLiquidity);
+        ((*_1).3: state::reserve::ReserveLiquidity) = move _6;
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = move (_2.3: state::reserve::ReserveCollateral);
+        ((*_1).4: state::reserve::ReserveCollateral) = move _7;
+        StorageDead(_7);
+        StorageLive(_8);
+        _8 = (_2.4: state::reserve::ReserveConfig);
+        ((*_1).5: state::reserve::ReserveConfig) = move _8;
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = (_2.5: state::rate_limiter::RateLimiterConfig);
+        StorageLive(_11);
+        _11 = (_2.0: u64);
+        _9 = rate_limiter::RateLimiter::new(move _10, move _11) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageDead(_10);
+        ((*_1).6: state::rate_limiter::RateLimiter) = move _9;
+        StorageDead(_9);
+        StorageLive(_12);
+        _12 = decimal::Decimal::zero() -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        ((*_1).7: math::decimal::Decimal) = move _12;
+        StorageDead(_12);
+        _0 = const ();
+        return;
+    }
+}

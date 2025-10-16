@@ -1,0 +1,305 @@
+// MIR for `update_maker_fills_map` before PreCodegen
+
+fn update_maker_fills_map(_1: &mut BTreeMap<anchor_lang::prelude::Pubkey, i64>, _2: &anchor_lang::prelude::Pubkey, _3: controller::position::PositionDirection, _4: u64) -> std::result::Result<(), error::ErrorCode> {
+    debug map => _1;
+    debug maker_key => _2;
+    debug maker_direction => _3;
+    debug fill => _4;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _5: i64;
+    let mut _6: isize;
+    let mut _7: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _8: std::result::Result<i64, error::ErrorCode>;
+    let mut _9: u64;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: i64;
+    let mut _15: i64;
+    let mut _16: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _17: std::result::Result<i64, error::ErrorCode>;
+    let mut _18: u64;
+    let mut _19: isize;
+    let _20: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _23: i64;
+    let mut _24: bool;
+    let _25: ();
+    let mut _26: std::option::Option<&mut i64>;
+    let mut _27: &mut std::collections::BTreeMap<anchor_lang::prelude::Pubkey, i64>;
+    let mut _28: &anchor_lang::prelude::Pubkey;
+    let mut _29: isize;
+    let mut _31: i64;
+    let mut _32: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _33: std::result::Result<i64, error::ErrorCode>;
+    let mut _34: i64;
+    let mut _35: i64;
+    let mut _36: isize;
+    let mut _38: !;
+    let mut _39: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _41: std::option::Option<i64>;
+    let mut _42: &mut std::collections::BTreeMap<anchor_lang::prelude::Pubkey, i64>;
+    let mut _43: anchor_lang::prelude::Pubkey;
+    let mut _44: i64;
+    let mut _45: ();
+    scope 1 {
+        debug signed_fill => _5;
+        scope 10 {
+            debug maker_filled => _30;
+            let _30: &mut i64;
+            let _37: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _40: i64;
+            scope 11 {
+                debug residual => _37;
+                scope 12 {
+                }
+            }
+            scope 13 {
+                debug val => _40;
+                scope 14 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+    scope 6 {
+        debug residual => _20;
+        scope 7 {
+        }
+    }
+    scope 8 {
+        debug val => _23;
+        scope 9 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _6 = discriminant(_3);
+        switchInt(move _6) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _4;
+        _17 = <u64 as Cast>::cast::<i64>(move _18) -> [return: bb9, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _4;
+        _8 = <u64 as Cast>::cast::<i64>(move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        _7 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _8) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_8);
+        _10 = discriminant(_7);
+        switchInt(move _10) -> [0: bb6, 1: bb7, otherwise: bb2];
+    }
+
+    bb6: {
+        StorageLive(_14);
+        _14 = ((_7 as Continue).0: i64);
+        _5 = _14;
+        StorageDead(_14);
+        StorageDead(_7);
+        goto -> bb15;
+    }
+
+    bb7: {
+        StorageLive(_11);
+        _11 = ((_7 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_7);
+        goto -> bb26;
+    }
+
+    bb9: {
+        StorageDead(_18);
+        _16 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _17) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_17);
+        _19 = discriminant(_16);
+        switchInt(move _19) -> [0: bb11, 1: bb12, otherwise: bb2];
+    }
+
+    bb11: {
+        StorageLive(_23);
+        _23 = ((_16 as Continue).0: i64);
+        _15 = _23;
+        StorageDead(_23);
+        _24 = Eq(_15, const i64::MIN);
+        assert(!move _24, "attempt to negate `{}`, which would overflow", _15) -> [success: bb14, unwind continue];
+    }
+
+    bb12: {
+        StorageLive(_20);
+        _20 = ((_16 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_22);
+        _22 = _20;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _22) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb26;
+    }
+
+    bb14: {
+        _5 = Neg(move _15);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &mut (*_1);
+        StorageLive(_28);
+        _28 = &(*_2);
+        _26 = BTreeMap::<anchor_lang::prelude::Pubkey, i64>::get_mut::<anchor_lang::prelude::Pubkey>(move _27, move _28) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_28);
+        StorageDead(_27);
+        _29 = discriminant(_26);
+        switchInt(move _29) -> [1: bb17, otherwise: bb23];
+    }
+
+    bb17: {
+        StorageLive(_30);
+        _30 = move ((_26 as Some).0: &mut i64);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = (*_30);
+        StorageLive(_35);
+        _35 = _5;
+        _33 = <i64 as SafeMath>::safe_add(move _34, move _35) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_35);
+        StorageDead(_34);
+        _32 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _33) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_33);
+        _36 = discriminant(_32);
+        switchInt(move _36) -> [0: bb20, 1: bb21, otherwise: bb2];
+    }
+
+    bb20: {
+        StorageLive(_40);
+        _40 = ((_32 as Continue).0: i64);
+        _31 = _40;
+        StorageDead(_40);
+        (*_30) = move _31;
+        StorageDead(_31);
+        StorageDead(_32);
+        _25 = const ();
+        StorageDead(_30);
+        goto -> bb25;
+    }
+
+    bb21: {
+        StorageLive(_37);
+        _37 = ((_32 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_39);
+        _39 = _37;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _39) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_39);
+        StorageDead(_37);
+        StorageDead(_31);
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_26);
+        StorageDead(_25);
+        goto -> bb26;
+    }
+
+    bb23: {
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = &mut (*_1);
+        StorageLive(_43);
+        _43 = (*_2);
+        StorageLive(_44);
+        _44 = _5;
+        _41 = BTreeMap::<anchor_lang::prelude::Pubkey, i64>::insert(move _42, move _43, move _44) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_44);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_41);
+        _25 = const ();
+        goto -> bb25;
+    }
+
+    bb25: {
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageLive(_45);
+        _45 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _45);
+        StorageDead(_45);
+        StorageDead(_5);
+        goto -> bb27;
+    }
+
+    bb26: {
+        StorageDead(_5);
+        goto -> bb27;
+    }
+
+    bb27: {
+        return;
+    }
+}

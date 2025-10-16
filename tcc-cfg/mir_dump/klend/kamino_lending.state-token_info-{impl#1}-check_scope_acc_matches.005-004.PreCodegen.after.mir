@@ -1,0 +1,99 @@
+// MIR for `token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::check_scope_acc_matches` after PreCodegen
+
+fn token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::check_scope_acc_matches(_1: &token_info::TokenInfo, _2: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>) -> bool {
+    debug self => _1;
+    debug scope_prices_info => _2;
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: &state::token_info::ScopeConfiguration;
+    let mut _5: isize;
+    let mut _6: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let _7: &anchor_lang::prelude::AccountInfo<'_>;
+    let _8: &&anchor_lang::prelude::AccountInfo<'_>;
+    let mut _9: bool;
+    let mut _10: &anchor_lang::prelude::Pubkey;
+    let mut _11: &anchor_lang::prelude::Pubkey;
+    let mut _12: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _13: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _14: &anchor_lang::prelude::Pubkey;
+    scope 1 {
+        debug a => _7;
+        debug a => _8;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &((*_1).5: state::token_info::ScopeConfiguration);
+        _3 = token_info::ScopeConfiguration::is_enabled(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb8, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        _5 = discriminant(_2);
+        switchInt(move _5) -> [1: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        _0 = const false;
+        goto -> bb10;
+    }
+
+    bb4: {
+        StorageLive(_8);
+        _8 = &((_2 as Some).0: &anchor_lang::prelude::AccountInfo<'_>);
+        StorageLive(_9);
+        StorageLive(_10);
+        _13 = deref_copy (*_8);
+        _14 = deref_copy ((*_13).0: &anchor_lang::prelude::Pubkey);
+        _10 = &(*_14);
+        StorageLive(_11);
+        _11 = &(((*_1).5: state::token_info::ScopeConfiguration).0: anchor_lang::prelude::Pubkey);
+        _9 = <anchor_lang::prelude::Pubkey as PartialEq>::eq(move _10, move _11) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        switchInt(move _9) -> [0: bb7, otherwise: bb6];
+    }
+
+    bb6: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageLive(_7);
+        _7 = ((_2 as Some).0: &anchor_lang::prelude::AccountInfo<'_>);
+        _0 = const true;
+        StorageDead(_7);
+        StorageDead(_8);
+        goto -> bb10;
+    }
+
+    bb7: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb3;
+    }
+
+    bb8: {
+        StorageDead(_4);
+        StorageLive(_12);
+        _12 = &_2;
+        _0 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::is_none(move _12) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_12);
+        goto -> bb10;
+    }
+
+    bb10: {
+        StorageDead(_3);
+        return;
+    }
+}

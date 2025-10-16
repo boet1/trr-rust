@@ -1,0 +1,217 @@
+// MIR for `is_amm_available_liquidity_source` after PreCodegen
+
+fn is_amm_available_liquidity_source(_1: &Order, _2: u8, _3: u64, _4: FillMode) -> std::result::Result<bool, error::ErrorCode> {
+    debug order => _1;
+    debug min_auction_duration => _2;
+    debug slot => _3;
+    debug fill_mode => _4;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _5: ();
+    let mut _6: bool;
+    let mut _7: &state::fill_mode::FillMode;
+    let mut _8: !;
+    let _9: ();
+    let mut _10: bool;
+    let mut _11: &state::user::Order;
+    let mut _12: state::user::OrderBitFlag;
+    let mut _13: !;
+    let _14: ();
+    let mut _15: bool;
+    let mut _16: &state::user::Order;
+    let mut _17: !;
+    let _18: u8;
+    let mut _19: u64;
+    let mut _20: bool;
+    let mut _21: u8;
+    let mut _22: u8;
+    let mut _23: u8;
+    let mut _24: u8;
+    let mut _25: bool;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _27: std::result::Result<bool, error::ErrorCode>;
+    let mut _28: u64;
+    let mut _29: u8;
+    let mut _30: u64;
+    let mut _31: isize;
+    let _32: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _33: !;
+    let mut _34: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _35: bool;
+    scope 1 {
+        debug clock_slot_tail => _18;
+    }
+    scope 2 {
+        debug residual => _32;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _35;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &_4;
+        _6 = FillMode::is_liquidation(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _6) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(const true);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb18;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        _5 = const ();
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &(*_1);
+        StorageLive(_12);
+        _12 = OrderBitFlag::SafeTriggerOrder;
+        _10 = Order::is_bit_flag_set(move _11, move _12) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        switchInt(move _10) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_12);
+        StorageDead(_11);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(const true);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb18;
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_11);
+        _9 = const ();
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &(*_1);
+        _15 = Order::is_signed_msg(move _16) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        switchInt(move _15) -> [0: bb11, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_16);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _3;
+        _18 = math::orders::get_posted_slot_from_clock_slot(move _19) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = _18;
+        StorageLive(_23);
+        _23 = ((*_1).23: u8);
+        _21 = core::num::<impl u8>::wrapping_sub(move _22, move _23) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageLive(_24);
+        _24 = _2;
+        _20 = Ge(move _21, move _24);
+        StorageDead(_24);
+        StorageDead(_21);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _20);
+        StorageDead(_20);
+        StorageDead(_18);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb18;
+    }
+
+    bb11: {
+        StorageDead(_16);
+        _14 = const ();
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = ((*_1).0: u64);
+        StorageLive(_29);
+        _29 = _2;
+        StorageLive(_30);
+        _30 = _3;
+        _27 = is_auction_complete(move _28, move _29, move _30) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        _26 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        _31 = discriminant(_26);
+        switchInt(move _31) -> [0: bb14, 1: bb16, otherwise: bb15];
+    }
+
+    bb14: {
+        StorageLive(_35);
+        _35 = ((_26 as Continue).0: bool);
+        _25 = _35;
+        StorageDead(_35);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _25);
+        StorageDead(_25);
+        StorageDead(_26);
+        goto -> bb18;
+    }
+
+    bb15: {
+        unreachable;
+    }
+
+    bb16: {
+        StorageLive(_32);
+        _32 = ((_26 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_34);
+        _34 = _32;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _34) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_34);
+        StorageDead(_32);
+        StorageDead(_25);
+        StorageDead(_26);
+        goto -> bb18;
+    }
+
+    bb18: {
+        return;
+    }
+}

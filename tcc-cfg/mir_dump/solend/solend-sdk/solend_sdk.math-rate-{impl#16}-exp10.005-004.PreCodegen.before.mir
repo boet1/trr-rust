@@ -1,0 +1,47 @@
+// MIR for `rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::exp10` before PreCodegen
+
+fn rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::exp10(_1: usize) -> U128 {
+    debug n => _1;
+    let mut _0: math::rate::U128;
+    let mut _2: math::rate::U128;
+    let mut _3: usize;
+    let mut _4: usize;
+    let mut _5: (usize, bool);
+
+    bb0: {
+        switchInt(_1) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _1;
+        _5 = CheckedSub(_4, const 1_usize);
+        assert(!move (_5.1: bool), "attempt to compute `{} - {}`, which would overflow", move _4, const 1_usize) -> [success: bb3, unwind continue];
+    }
+
+    bb2: {
+        _0 = <U128 as From<u64>>::from(const 1_u64) -> [return: bb6, unwind continue];
+    }
+
+    bb3: {
+        _3 = move (_5.0: usize);
+        StorageDead(_4);
+        _2 = U128::exp10(move _3) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_3);
+        _0 = <U128 as Mul<u32>>::mul(move _2, const 10_u32) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_2);
+        goto -> bb6;
+    }
+
+    bb6: {
+        return;
+    }
+}

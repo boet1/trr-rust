@@ -1,0 +1,848 @@
+// MIR for `operations::vault_operations::withdraw_pending_fees` before PreCodegen
+
+fn operations::vault_operations::withdraw_pending_fees(_1: &mut state::VaultState, _2: &anchor_lang::prelude::Pubkey, _3: &kamino_lending::Reserve, _4: impl Iterator<Item = T>, _5: u64, _6: u64) -> std::result::Result<WithdrawPendingFeesEffects, anchor_lang::error::Error> {
+    debug vault => _1;
+    debug reserve_address_to_withdraw_from => _2;
+    debug reserve_state_to_withdraw_from => _3;
+    debug reserves_iter => _4;
+    debug current_slot => _5;
+    debug current_timestamp => _6;
+    let mut _0: std::result::Result<operations::effects::WithdrawPendingFeesEffects, anchor_lang::error::Error>;
+    let _7: operations::vault_operations::common::Invested;
+    let _8: u64;
+    let _9: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _10: operations::vault_operations::common::Holdings;
+    let mut _11: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, operations::vault_operations::common::Holdings>;
+    let mut _12: std::result::Result<operations::vault_operations::common::Holdings, anchor_lang::error::Error>;
+    let mut _13: &state::VaultState;
+    let mut _14: impl Iterator<Item = T>;
+    let mut _15: u64;
+    let mut _16: isize;
+    let _17: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _18: !;
+    let mut _19: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _20: operations::vault_operations::common::Holdings;
+    let _21: ();
+    let mut _22: &str;
+    let _23: &str;
+    let mut _24: &std::string::String;
+    let _25: &std::string::String;
+    let _26: std::string::String;
+    let mut _28: std::fmt::Arguments<'_>;
+    let mut _29: &[&str];
+    let mut _30: &[&str; 3];
+    let _31: &[&str; 3];
+    let _32: [&str; 3];
+    let mut _33: &[core::fmt::rt::Argument<'_>];
+    let mut _34: &[core::fmt::rt::Argument<'_>; 3];
+    let _35: &[core::fmt::rt::Argument<'_>; 3];
+    let _36: [core::fmt::rt::Argument<'_>; 3];
+    let mut _37: core::fmt::rt::Argument<'_>;
+    let mut _38: &operations::vault_operations::common::Invested;
+    let _39: &operations::vault_operations::common::Invested;
+    let mut _40: core::fmt::rt::Argument<'_>;
+    let mut _41: &u64;
+    let _42: &u64;
+    let mut _43: core::fmt::rt::Argument<'_>;
+    let mut _44: &kamino_lending::utils::FractionDisplay<'_>;
+    let _45: &kamino_lending::utils::FractionDisplay<'_>;
+    let _46: kamino_lending::utils::FractionDisplay<'_>;
+    let mut _47: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _48: ();
+    let mut _49: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _50: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _51: &mut state::VaultState;
+    let mut _52: &operations::vault_operations::common::Invested;
+    let _53: &operations::vault_operations::common::Invested;
+    let mut _54: u64;
+    let mut _55: isize;
+    let mut _57: !;
+    let mut _58: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _61: u128;
+    let mut _63: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _64: u64;
+    let mut _65: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _67: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _69: &operations::vault_operations::common::Invested;
+    let mut _70: &anchor_lang::prelude::Pubkey;
+    let mut _72: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _73: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _74: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _75: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _77: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _79: &kamino_lending::Reserve;
+    let mut _81: &kamino_lending::CollateralExchangeRate;
+    let mut _82: u64;
+    let mut _84: &kamino_lending::CollateralExchangeRate;
+    let mut _85: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _86: u64;
+    let mut _88: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _90: bool;
+    let mut _91: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _92: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _93: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _94: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _95: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _97: u64;
+    let mut _98: u64;
+    let mut _99: (u64, bool);
+    let mut _101: u64;
+    let mut _102: u64;
+    let mut _103: (u64, bool);
+    let _104: ();
+    let mut _105: &mut state::VaultState;
+    let mut _106: u64;
+    let _107: ();
+    let mut _108: &mut state::VaultState;
+    let mut _109: u64;
+    let _110: ();
+    let mut _111: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _112: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _113: &mut state::VaultState;
+    let mut _114: u64;
+    let mut _115: &anchor_lang::prelude::Pubkey;
+    let mut _116: isize;
+    let mut _118: !;
+    let mut _119: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _121: ();
+    let mut _122: &mut state::VaultState;
+    let mut _123: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _124: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _125: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _126: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _127: u64;
+    let mut _128: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _129: u64;
+    let mut _130: operations::effects::WithdrawPendingFeesEffects;
+    let mut _131: u64;
+    let mut _132: u64;
+    let mut _133: u64;
+    let mut _134: u64;
+    let mut _137: isize;
+    let mut _138: isize;
+    let mut _139: isize;
+    let mut _140: isize;
+    let mut _141: isize;
+    let mut _142: isize;
+    let mut _143: isize;
+    let mut _144: isize;
+    let mut _145: isize;
+    let mut _146: isize;
+    let mut _147: isize;
+    let mut _148: isize;
+    let mut _149: isize;
+    let mut _150: isize;
+    let mut _151: isize;
+    let mut _152: isize;
+    scope 1 {
+        debug invested => _7;
+        debug available => _8;
+        debug total_sum => _9;
+        let _27: std::string::String;
+        let _56: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _59: ();
+        let _60: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        let mut _136: &[&str; 3];
+        scope 6 {
+            debug res => _27;
+        }
+        scope 7 {
+            debug residual => _56;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _59;
+            scope 10 {
+            }
+        }
+        scope 11 {
+            debug total_fees => _60;
+            let _62: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            scope 12 {
+                debug available_to_send_to_user_f => _62;
+                let _66: u64;
+                scope 13 {
+                    debug available_to_send_to_user => _66;
+                    let _68: &operations::vault_operations::common::InvestedReserve;
+                    scope 14 {
+                        debug invested_in_reserve => _68;
+                        let _71: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                        scope 15 {
+                            debug invested_liquidity_to_send_to_user_f => _71;
+                            let _76: u64;
+                            scope 16 {
+                                debug invested_liquidity_to_send_to_user => _76;
+                                let _78: kamino_lending::CollateralExchangeRate;
+                                scope 17 {
+                                    debug exchange_rate => _78;
+                                    let _80: u64;
+                                    scope 18 {
+                                        debug invested_to_disinvest_ctokens => _80;
+                                        let _83: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                        scope 19 {
+                                            debug invested_liquidity_to_disinvest_f => _83;
+                                            let _87: u64;
+                                            scope 20 {
+                                                debug invested_liquidity_to_disinvest => _87;
+                                                let _89: u64;
+                                                let mut _135: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                                scope 21 {
+                                                    debug liquidity_rounding_error => _89;
+                                                    let _96: u64;
+                                                    scope 22 {
+                                                        debug actual_invested_liquidity_to_send_to_user => _96;
+                                                        let _100: u64;
+                                                        scope 23 {
+                                                            debug disinvested_amount_left_in_vault => _100;
+                                                            let _117: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                                            let _120: ();
+                                                            scope 24 {
+                                                                debug residual => _117;
+                                                                scope 25 {
+                                                                }
+                                                            }
+                                                            scope 26 {
+                                                                debug val => _120;
+                                                                scope 27 {
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _17;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _20;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &(*_1);
+        StorageLive(_14);
+        _14 = move _4;
+        StorageLive(_15);
+        _15 = _5;
+        _12 = holdings::<'_, T, impl Iterator<Item = T>>(move _13, move _14, move _15) -> [return: bb1, unwind: bb59];
+    }
+
+    bb1: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        _11 = <std::result::Result<Holdings, anchor_lang::error::Error> as Try>::branch(move _12) -> [return: bb2, unwind: bb59];
+    }
+
+    bb2: {
+        StorageDead(_12);
+        _16 = discriminant(_11);
+        switchInt(move _16) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_20);
+        _20 = move ((_11 as Continue).0: operations::vault_operations::common::Holdings);
+        _10 = move _20;
+        StorageDead(_20);
+        StorageLive(_7);
+        _7 = move (_10.1: operations::vault_operations::common::Invested);
+        StorageLive(_8);
+        _8 = (_10.0: u64);
+        StorageLive(_9);
+        _9 = (_10.2: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _137 = discriminant(_11);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        _136 = const _;
+        _31 = &(*_136);
+        _30 = &(*_31);
+        _29 = move _30 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_30);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = &_7;
+        _38 = &(*_39);
+        _37 = core::fmt::rt::Argument::<'_>::new_debug::<Invested>(move _38) -> [return: bb7, unwind: bb58];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_17);
+        _17 = move ((_11 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_19);
+        _19 = move _17;
+        _0 = <std::result::Result<WithdrawPendingFeesEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _19) -> [return: bb6, unwind: bb62];
+    }
+
+    bb6: {
+        StorageDead(_19);
+        StorageDead(_17);
+        _147 = discriminant(_11);
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb56;
+    }
+
+    bb7: {
+        StorageDead(_38);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = &_8;
+        _41 = &(*_42);
+        _40 = core::fmt::rt::Argument::<'_>::new_debug::<u64>(move _41) -> [return: bb8, unwind: bb58];
+    }
+
+    bb8: {
+        StorageDead(_41);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        _47 = &_9;
+        _46 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as kamino_lending::utils::FractionExtra>::to_display(move _47) -> [return: bb9, unwind: bb58];
+    }
+
+    bb9: {
+        StorageDead(_47);
+        _45 = &_46;
+        _44 = &(*_45);
+        _43 = core::fmt::rt::Argument::<'_>::new_display::<FractionDisplay<'_>>(move _44) -> [return: bb10, unwind: bb58];
+    }
+
+    bb10: {
+        StorageDead(_44);
+        _36 = [move _37, move _40, move _43];
+        StorageDead(_43);
+        StorageDead(_40);
+        StorageDead(_37);
+        _35 = &_36;
+        _34 = &(*_35);
+        _33 = move _34 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_34);
+        _28 = Arguments::<'_>::new_v1(move _29, move _33) -> [return: bb11, unwind: bb58];
+    }
+
+    bb11: {
+        StorageDead(_33);
+        StorageDead(_29);
+        _27 = format(move _28) -> [return: bb12, unwind: bb58];
+    }
+
+    bb12: {
+        StorageDead(_28);
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageDead(_42);
+        StorageDead(_39);
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageDead(_31);
+        _26 = move _27;
+        StorageDead(_27);
+        _25 = &_26;
+        _24 = &(*_25);
+        _23 = <String as Deref>::deref(move _24) -> [return: bb13, unwind: bb57];
+    }
+
+    bb13: {
+        _22 = &(*_23);
+        StorageDead(_24);
+        _21 = solana_program::log::sol_log(move _22) -> [return: bb14, unwind: bb57];
+    }
+
+    bb14: {
+        StorageDead(_22);
+        drop(_26) -> [return: bb15, unwind: bb58];
+    }
+
+    bb15: {
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        _51 = &mut (*_1);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &_7;
+        _52 = &(*_53);
+        StorageLive(_54);
+        _54 = _6;
+        _50 = charge_fees(move _51, move _52, move _54) -> [return: bb16, unwind: bb58];
+    }
+
+    bb16: {
+        StorageDead(_54);
+        StorageDead(_52);
+        StorageDead(_51);
+        _49 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _50) -> [return: bb17, unwind: bb58];
+    }
+
+    bb17: {
+        StorageDead(_50);
+        _55 = discriminant(_49);
+        switchInt(move _55) -> [0: bb18, 1: bb19, otherwise: bb4];
+    }
+
+    bb18: {
+        StorageLive(_59);
+        _59 = ((_49 as Continue).0: ());
+        _48 = _59;
+        StorageDead(_59);
+        _139 = discriminant(_49);
+        StorageDead(_53);
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = ((*_1).17: u128);
+        _60 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _61) -> [return: bb21, unwind: bb58];
+    }
+
+    bb19: {
+        StorageLive(_56);
+        _56 = move ((_49 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_58);
+        _58 = move _56;
+        _0 = <std::result::Result<WithdrawPendingFeesEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _58) -> [return: bb20, unwind: bb61];
+    }
+
+    bb20: {
+        StorageDead(_58);
+        StorageDead(_56);
+        _145 = discriminant(_49);
+        StorageDead(_53);
+        StorageDead(_49);
+        StorageDead(_48);
+        goto -> bb54;
+    }
+
+    bb21: {
+        StorageDead(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        _64 = _8;
+        _63 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _64) -> [return: bb22, unwind: bb58];
+    }
+
+    bb22: {
+        StorageDead(_64);
+        StorageLive(_65);
+        _65 = _60;
+        _62 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _63, move _65) -> [return: bb23, unwind: bb58];
+    }
+
+    bb23: {
+        StorageDead(_65);
+        StorageDead(_63);
+        StorageLive(_66);
+        StorageLive(_67);
+        _67 = &_62;
+        _66 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as kamino_lending::utils::FractionExtra>::to_floor::<u64>(move _67) -> [return: bb24, unwind: bb58];
+    }
+
+    bb24: {
+        StorageDead(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        _69 = &_7;
+        StorageLive(_70);
+        _70 = &(*_2);
+        _68 = Invested::in_reserve(move _69, move _70) -> [return: bb25, unwind: bb58];
+    }
+
+    bb25: {
+        StorageDead(_70);
+        StorageDead(_69);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = ((*_68).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_73);
+        StorageLive(_74);
+        _74 = _60;
+        StorageLive(_75);
+        _75 = _62;
+        _73 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Sub>::sub(move _74, move _75) -> [return: bb26, unwind: bb58];
+    }
+
+    bb26: {
+        StorageDead(_75);
+        StorageDead(_74);
+        _71 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _72, move _73) -> [return: bb27, unwind: bb58];
+    }
+
+    bb27: {
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageLive(_76);
+        StorageLive(_77);
+        _77 = &_71;
+        _76 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as kamino_lending::utils::FractionExtra>::to_floor::<u64>(move _77) -> [return: bb28, unwind: bb58];
+    }
+
+    bb28: {
+        StorageDead(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        _79 = &(*_3);
+        _78 = kamino_lending::Reserve::collateral_exchange_rate(move _79) -> [return: bb29, unwind: bb58];
+    }
+
+    bb29: {
+        StorageDead(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _81 = &_78;
+        StorageLive(_82);
+        _82 = _76;
+        _80 = CollateralExchangeRate::liquidity_to_collateral_ceil(move _81, move _82) -> [return: bb30, unwind: bb58];
+    }
+
+    bb30: {
+        StorageDead(_82);
+        StorageDead(_81);
+        StorageLive(_83);
+        StorageLive(_84);
+        _84 = &_78;
+        StorageLive(_85);
+        StorageLive(_86);
+        _86 = _80;
+        _85 = <u64 as Into<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>>::into(move _86) -> [return: bb31, unwind: bb58];
+    }
+
+    bb31: {
+        StorageDead(_86);
+        _83 = CollateralExchangeRate::fraction_collateral_to_liquidity(move _84, move _85) -> [return: bb32, unwind: bb58];
+    }
+
+    bb32: {
+        StorageDead(_85);
+        StorageDead(_84);
+        StorageLive(_87);
+        StorageLive(_88);
+        _88 = &_83;
+        _87 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as kamino_lending::utils::FractionExtra>::to_floor::<u64>(move _88) -> [return: bb33, unwind: bb58];
+    }
+
+    bb33: {
+        StorageDead(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        _93 = _83;
+        _92 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::frac(move _93) -> [return: bb34, unwind: bb58];
+    }
+
+    bb34: {
+        _91 = &_92;
+        StorageDead(_93);
+        StorageLive(_94);
+        _135 = const _;
+        _94 = &(*_135);
+        _90 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as PartialOrd>::gt(move _91, move _94) -> [return: bb35, unwind: bb58];
+    }
+
+    bb35: {
+        switchInt(move _90) -> [0: bb37, otherwise: bb36];
+    }
+
+    bb36: {
+        StorageDead(_94);
+        StorageDead(_92);
+        StorageDead(_91);
+        _89 = const 1_u64;
+        goto -> bb38;
+    }
+
+    bb37: {
+        StorageDead(_94);
+        StorageDead(_92);
+        StorageDead(_91);
+        _89 = const 0_u64;
+        goto -> bb38;
+    }
+
+    bb38: {
+        StorageDead(_90);
+        StorageLive(_96);
+        StorageLive(_97);
+        _97 = _76;
+        StorageLive(_98);
+        _98 = _89;
+        _99 = CheckedSub(_97, _98);
+        assert(!move (_99.1: bool), "attempt to compute `{} - {}`, which would overflow", move _97, move _98) -> [success: bb39, unwind: bb58];
+    }
+
+    bb39: {
+        _96 = move (_99.0: u64);
+        StorageDead(_98);
+        StorageDead(_97);
+        StorageLive(_100);
+        StorageLive(_101);
+        _101 = _87;
+        StorageLive(_102);
+        _102 = _96;
+        _103 = CheckedSub(_101, _102);
+        assert(!move (_103.1: bool), "attempt to compute `{} - {}`, which would overflow", move _101, move _102) -> [success: bb40, unwind: bb58];
+    }
+
+    bb40: {
+        _100 = move (_103.0: u64);
+        StorageDead(_102);
+        StorageDead(_101);
+        StorageLive(_104);
+        StorageLive(_105);
+        _105 = &mut (*_1);
+        StorageLive(_106);
+        _106 = _66;
+        _104 = withdraw_from_vault(move _105, move _106) -> [return: bb41, unwind: bb58];
+    }
+
+    bb41: {
+        StorageDead(_106);
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageLive(_107);
+        StorageLive(_108);
+        _108 = &mut (*_1);
+        StorageLive(_109);
+        _109 = _100;
+        _107 = deposit_into_vault(move _108, move _109) -> [return: bb42, unwind: bb58];
+    }
+
+    bb42: {
+        StorageDead(_109);
+        StorageDead(_108);
+        StorageDead(_107);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        _113 = &mut (*_1);
+        StorageLive(_114);
+        _114 = _80;
+        StorageLive(_115);
+        _115 = &(*_2);
+        _112 = withdraw_from_vault_allocation(move _113, move _114, move _115) -> [return: bb43, unwind: bb58];
+    }
+
+    bb43: {
+        StorageDead(_115);
+        StorageDead(_114);
+        StorageDead(_113);
+        _111 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _112) -> [return: bb44, unwind: bb58];
+    }
+
+    bb44: {
+        StorageDead(_112);
+        _116 = discriminant(_111);
+        switchInt(move _116) -> [0: bb45, 1: bb46, otherwise: bb4];
+    }
+
+    bb45: {
+        StorageLive(_120);
+        _120 = ((_111 as Continue).0: ());
+        _110 = _120;
+        StorageDead(_120);
+        _141 = discriminant(_111);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageLive(_121);
+        StorageLive(_122);
+        _122 = &mut (*_1);
+        StorageLive(_123);
+        StorageLive(_124);
+        StorageLive(_125);
+        _125 = _60;
+        StorageLive(_126);
+        StorageLive(_127);
+        _127 = _66;
+        _126 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _127) -> [return: bb48, unwind: bb58];
+    }
+
+    bb46: {
+        StorageLive(_117);
+        _117 = move ((_111 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_119);
+        _119 = move _117;
+        _0 = <std::result::Result<WithdrawPendingFeesEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _119) -> [return: bb47, unwind: bb60];
+    }
+
+    bb47: {
+        StorageDead(_119);
+        StorageDead(_117);
+        _143 = discriminant(_111);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_100);
+        StorageDead(_96);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_83);
+        StorageDead(_80);
+        StorageDead(_78);
+        StorageDead(_76);
+        StorageDead(_71);
+        StorageDead(_68);
+        StorageDead(_66);
+        StorageDead(_62);
+        StorageDead(_60);
+        goto -> bb54;
+    }
+
+    bb48: {
+        StorageDead(_127);
+        _124 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Sub>::sub(move _125, move _126) -> [return: bb49, unwind: bb58];
+    }
+
+    bb49: {
+        StorageDead(_126);
+        StorageDead(_125);
+        StorageLive(_128);
+        StorageLive(_129);
+        _129 = _76;
+        _128 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _129) -> [return: bb50, unwind: bb58];
+    }
+
+    bb50: {
+        StorageDead(_129);
+        _123 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Sub>::sub(move _124, move _128) -> [return: bb51, unwind: bb58];
+    }
+
+    bb51: {
+        StorageDead(_128);
+        StorageDead(_124);
+        _121 = update_pending_fees(move _122, move _123) -> [return: bb52, unwind: bb58];
+    }
+
+    bb52: {
+        StorageDead(_123);
+        StorageDead(_122);
+        StorageDead(_121);
+        StorageLive(_130);
+        StorageLive(_131);
+        _131 = _66;
+        StorageLive(_132);
+        _132 = _80;
+        StorageLive(_133);
+        _133 = _96;
+        StorageLive(_134);
+        _134 = _87;
+        _130 = WithdrawPendingFeesEffects { available_to_send_to_user: move _131, invested_to_disinvest_ctokens: move _132, invested_liquidity_to_send_to_user: move _133, invested_liquidity_to_disinvest: move _134 };
+        StorageDead(_134);
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageDead(_131);
+        _0 = std::result::Result::<WithdrawPendingFeesEffects, anchor_lang::error::Error>::Ok(move _130);
+        StorageDead(_130);
+        StorageDead(_100);
+        StorageDead(_96);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_83);
+        StorageDead(_80);
+        StorageDead(_78);
+        StorageDead(_76);
+        StorageDead(_71);
+        StorageDead(_68);
+        StorageDead(_66);
+        StorageDead(_62);
+        StorageDead(_60);
+        StorageDead(_9);
+        StorageDead(_8);
+        drop(_7) -> [return: bb53, unwind: bb59];
+    }
+
+    bb53: {
+        StorageDead(_7);
+        goto -> bb56;
+    }
+
+    bb54: {
+        StorageDead(_9);
+        StorageDead(_8);
+        drop(_7) -> [return: bb55, unwind: bb59];
+    }
+
+    bb55: {
+        StorageDead(_7);
+        goto -> bb56;
+    }
+
+    bb56: {
+        return;
+    }
+
+    bb57 (cleanup): {
+        drop(_26) -> [return: bb58, unwind terminate(cleanup)];
+    }
+
+    bb58 (cleanup): {
+        drop(_7) -> [return: bb59, unwind terminate(cleanup)];
+    }
+
+    bb59 (cleanup): {
+        resume;
+    }
+
+    bb60 (cleanup): {
+        _149 = discriminant(_111);
+        goto -> bb58;
+    }
+
+    bb61 (cleanup): {
+        _150 = discriminant(_49);
+        goto -> bb58;
+    }
+
+    bb62 (cleanup): {
+        _152 = discriminant(_11);
+        goto -> bb59;
+    }
+}

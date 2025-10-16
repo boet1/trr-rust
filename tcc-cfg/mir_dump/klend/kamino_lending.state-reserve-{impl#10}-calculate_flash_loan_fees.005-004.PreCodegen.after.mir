@@ -1,0 +1,143 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:1317:1: 1317:17>::calculate_flash_loan_fees` after PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:1317:1: 1317:17>::calculate_flash_loan_fees(_1: &ReserveFees, _2: FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, _3: u16, _4: bool) -> std::result::Result<(u64, u64), anchor_lang::error::Error> {
+    debug self => _1;
+    debug flash_loan_amount_f => _2;
+    debug referral_fee_bps => _3;
+    debug has_referrer => _4;
+    let mut _0: std::result::Result<(u64, u64), anchor_lang::error::Error>;
+    let _5: u64;
+    let _6: u64;
+    let mut _7: (u64, u64);
+    let mut _8: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, (u64, u64)>;
+    let mut _9: std::result::Result<(u64, u64), anchor_lang::error::Error>;
+    let mut _10: &state::reserve::ReserveFees;
+    let mut _11: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _12: u64;
+    let mut _13: state::reserve::FeeCalculation;
+    let mut _14: u16;
+    let mut _15: bool;
+    let mut _16: isize;
+    let _17: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _18: !;
+    let mut _19: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _20: (u64, u64);
+    let mut _21: (u64, u64);
+    let mut _22: u64;
+    let mut _23: u64;
+    let mut _24: isize;
+    let mut _25: isize;
+    let mut _26: isize;
+    let mut _27: isize;
+    let mut _28: isize;
+    scope 1 {
+        debug protocol_fee => _5;
+        debug referral_fee => _6;
+    }
+    scope 2 {
+        debug residual => _17;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _20;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_1);
+        StorageLive(_11);
+        _11 = _2;
+        StorageLive(_12);
+        _12 = ((*_1).1: u64);
+        StorageLive(_13);
+        _13 = reserve::FeeCalculation::Exclusive;
+        StorageLive(_14);
+        _14 = _3;
+        StorageLive(_15);
+        _15 = _4;
+        _9 = ReserveFees::calculate_fees(move _10, move _11, move _12, move _13, move _14, move _15) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_10);
+        _8 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as Try>::branch(move _9) -> [return: bb2, unwind: bb8];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _16 = discriminant(_8);
+        switchInt(move _16) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_20);
+        _20 = ((_8 as Continue).0: (u64, u64));
+        _7 = _20;
+        StorageDead(_20);
+        StorageLive(_5);
+        _5 = (_7.0: u64);
+        StorageLive(_6);
+        _6 = (_7.1: u64);
+        _24 = discriminant(_8);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = _5;
+        StorageLive(_23);
+        _23 = _6;
+        _21 = (move _22, move _23);
+        StorageDead(_23);
+        StorageDead(_22);
+        _0 = std::result::Result::<(u64, u64), anchor_lang::error::Error>::Ok(move _21);
+        StorageDead(_21);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb7;
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_17);
+        _17 = move ((_8 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_19);
+        _19 = move _17;
+        _0 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _19) -> [return: bb6, unwind: bb9];
+    }
+
+    bb6: {
+        StorageDead(_19);
+        StorageDead(_17);
+        _26 = discriminant(_8);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb7;
+    }
+
+    bb7: {
+        return;
+    }
+
+    bb8 (cleanup): {
+        resume;
+    }
+
+    bb9 (cleanup): {
+        _28 = discriminant(_8);
+        goto -> bb8;
+    }
+}

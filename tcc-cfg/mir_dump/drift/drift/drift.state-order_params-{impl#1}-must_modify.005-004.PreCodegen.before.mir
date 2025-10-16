@@ -1,0 +1,40 @@
+// MIR for `order_params::<impl at programs/drift/src/state/order_params.rs:931:1: 931:23>::must_modify` before PreCodegen
+
+fn order_params::<impl at programs/drift/src/state/order_params.rs:931:1: 931:23>::must_modify(_1: &order_params::ModifyOrderParams) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: u8;
+    let mut _3: u8;
+    let mut _4: std::option::Option<u8>;
+    let mut _5: u8;
+    let mut _6: isize;
+    let mut _7: (isize, bool);
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).13: std::option::Option<u8>);
+        _3 = Option::<u8>::unwrap_or(move _4, const 0_u8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _7 = CheckedAdd(const _, const 0_isize);
+        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", const _, const 0_isize) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _6 = move (_7.0: isize);
+        _5 = move _6 as u8 (IntToInt);
+        StorageDead(_6);
+        _2 = BitAnd(move _3, move _5);
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = Ne(move _2, const 0_u8);
+        StorageDead(_2);
+        return;
+    }
+}

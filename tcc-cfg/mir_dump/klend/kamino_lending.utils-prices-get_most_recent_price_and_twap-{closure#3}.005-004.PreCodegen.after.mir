@@ -1,0 +1,75 @@
+// MIR for `get_most_recent_price_and_twap::{closure#3}` after PreCodegen
+
+fn get_most_recent_price_and_twap::{closure#3}(_1: &mut {closure@programs\klend\src\utils\prices\mod.rs:90:17: 90:37}, _2: TimestampedPriceWithTwap, _3: TimestampedPriceWithTwap) -> TimestampedPriceWithTwap {
+    debug current => _2;
+    debug candidate => _3;
+    let mut _0: utils::prices::types::TimestampedPriceWithTwap;
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: bool;
+    let mut _8: bool;
+
+    bb0: {
+        _8 = const false;
+        _7 = const false;
+        _8 = const true;
+        _7 = const true;
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((_3.0: utils::prices::types::TimestampedPrice).1: u64);
+        StorageLive(_6);
+        _6 = ((_2.0: utils::prices::types::TimestampedPrice).1: u64);
+        _4 = Gt(move _5, move _6);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _7 = const false;
+        _0 = move _3;
+        goto -> bb3;
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _8 = const false;
+        _0 = move _2;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_4);
+        switchInt(_7) -> [0: bb4, otherwise: bb8];
+    }
+
+    bb4: {
+        switchInt(_8) -> [0: bb5, otherwise: bb9];
+    }
+
+    bb5: {
+        return;
+    }
+
+    bb6 (cleanup): {
+        switchInt(_8) -> [0: bb7, otherwise: bb10];
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+
+    bb8: {
+        drop(_3) -> [return: bb4, unwind: bb6];
+    }
+
+    bb9: {
+        drop(_2) -> [return: bb5, unwind: bb7];
+    }
+
+    bb10 (cleanup): {
+        drop(_2) -> [return: bb7, unwind terminate(cleanup)];
+    }
+}

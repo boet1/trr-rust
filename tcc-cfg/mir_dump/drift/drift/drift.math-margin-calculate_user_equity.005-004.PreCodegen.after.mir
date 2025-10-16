@@ -1,0 +1,2427 @@
+// MIR for `calculate_user_equity` after PreCodegen
+
+fn calculate_user_equity(_1: &User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>) -> std::result::Result<(i128, bool), error::ErrorCode> {
+    debug user => _1;
+    debug perp_market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    let mut _0: std::result::Result<(i128, bool), error::ErrorCode>;
+    let mut _5: i128;
+    let _7: ();
+    let mut _8: std::slice::Iter<'_, state::user::SpotPosition>;
+    let mut _9: std::slice::Iter<'_, state::user::SpotPosition>;
+    let mut _10: &[state::user::SpotPosition];
+    let mut _11: &[state::user::SpotPosition; 8];
+    let mut _13: ();
+    let _14: ();
+    let mut _15: std::option::Option<&state::user::SpotPosition>;
+    let mut _16: &mut std::slice::Iter<'_, state::user::SpotPosition>;
+    let mut _17: &mut std::slice::Iter<'_, state::user::SpotPosition>;
+    let mut _18: isize;
+    let mut _19: !;
+    let _21: ();
+    let mut _22: bool;
+    let mut _23: &state::user::SpotPosition;
+    let mut _24: !;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::Ref<'_, state::spot_market::SpotMarket>>;
+    let mut _27: std::result::Result<std::cell::Ref<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _28: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _29: &u16;
+    let _30: &u16;
+    let mut _31: isize;
+    let mut _33: !;
+    let mut _34: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _38: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+    let mut _39: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (&state::oracle::OraclePriceData, math::oracle::OracleValidity)>;
+    let mut _40: std::result::Result<(&state::oracle::OraclePriceData, math::oracle::OracleValidity), error::ErrorCode>;
+    let mut _41: &mut state::oracle_map::OracleMap<'_>;
+    let mut _42: state::user::MarketType;
+    let mut _43: u16;
+    let mut _44: &state::spot_market::SpotMarket;
+    let mut _45: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _46: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _47: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _48: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _49: &state::spot_market::SpotMarket;
+    let _50: &state::spot_market::SpotMarket;
+    let mut _51: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _52: i64;
+    let mut _53: &state::spot_market::SpotMarket;
+    let mut _54: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _55: u64;
+    let mut _56: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _57: std::result::Result<u64, error::ErrorCode>;
+    let mut _58: &state::spot_market::SpotMarket;
+    let _59: &state::spot_market::SpotMarket;
+    let mut _60: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _61: isize;
+    let mut _63: !;
+    let mut _64: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _66: isize;
+    let mut _68: !;
+    let mut _69: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _71: bool;
+    let mut _72: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _73: std::result::Result<bool, error::ErrorCode>;
+    let mut _74: math::oracle::OracleValidity;
+    let mut _75: std::option::Option<math::oracle::DriftAction>;
+    let mut _76: math::oracle::DriftAction;
+    let mut _77: isize;
+    let mut _79: !;
+    let mut _80: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _83: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _84: std::result::Result<i128, error::ErrorCode>;
+    let mut _85: &state::user::SpotPosition;
+    let mut _86: &state::spot_market::SpotMarket;
+    let _87: &state::spot_market::SpotMarket;
+    let mut _88: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let _89: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _90: isize;
+    let mut _92: !;
+    let mut _93: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _97: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _98: std::result::Result<i128, error::ErrorCode>;
+    let mut _99: i128;
+    let mut _100: u32;
+    let mut _101: &state::spot_market::SpotMarket;
+    let mut _102: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _103: i64;
+    let mut _104: isize;
+    let mut _106: !;
+    let mut _107: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _109: i128;
+    let mut _110: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _111: std::result::Result<i128, error::ErrorCode>;
+    let mut _112: i128;
+    let mut _113: i128;
+    let mut _114: isize;
+    let mut _116: !;
+    let mut _117: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _119: ();
+    let mut _120: std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _121: std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _122: &[state::user::PerpPosition];
+    let mut _123: &[state::user::PerpPosition; 8];
+    let _125: ();
+    let mut _126: std::option::Option<&state::user::PerpPosition>;
+    let mut _127: &mut std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _128: &mut std::slice::Iter<'_, state::user::PerpPosition>;
+    let mut _129: isize;
+    let mut _130: !;
+    let _132: ();
+    let mut _133: bool;
+    let mut _134: &state::user::PerpPosition;
+    let mut _135: !;
+    let _137: std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _138: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::Ref<'_, state::perp_market::PerpMarket>>;
+    let mut _139: std::result::Result<std::cell::Ref<'_, state::perp_market::PerpMarket>, error::ErrorCode>;
+    let mut _140: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _141: &u16;
+    let _142: &u16;
+    let mut _143: isize;
+    let mut _145: !;
+    let mut _146: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _150: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::Ref<'_, state::spot_market::SpotMarket>>;
+    let mut _151: std::result::Result<std::cell::Ref<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _152: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _153: &u16;
+    let _154: &u16;
+    let _155: &state::perp_market::PerpMarket;
+    let mut _156: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _157: isize;
+    let mut _159: !;
+    let mut _160: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _164: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+    let mut _165: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (&state::oracle::OraclePriceData, math::oracle::OracleValidity)>;
+    let mut _166: std::result::Result<(&state::oracle::OraclePriceData, math::oracle::OracleValidity), error::ErrorCode>;
+    let mut _167: &mut state::oracle_map::OracleMap<'_>;
+    let mut _168: state::user::MarketType;
+    let mut _169: u16;
+    let mut _170: &state::spot_market::SpotMarket;
+    let mut _171: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _172: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _173: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _174: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _175: &state::spot_market::SpotMarket;
+    let _176: &state::spot_market::SpotMarket;
+    let mut _177: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _178: i64;
+    let mut _179: &state::spot_market::SpotMarket;
+    let mut _180: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _181: u64;
+    let mut _182: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _183: std::result::Result<u64, error::ErrorCode>;
+    let mut _184: &state::spot_market::SpotMarket;
+    let _185: &state::spot_market::SpotMarket;
+    let mut _186: &std::cell::Ref<'_, state::spot_market::SpotMarket>;
+    let mut _187: isize;
+    let mut _189: !;
+    let mut _190: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _192: isize;
+    let mut _194: !;
+    let mut _195: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _197: bool;
+    let mut _198: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _199: std::result::Result<bool, error::ErrorCode>;
+    let mut _200: math::oracle::OracleValidity;
+    let mut _201: std::option::Option<math::oracle::DriftAction>;
+    let mut _202: math::oracle::DriftAction;
+    let mut _203: isize;
+    let mut _205: !;
+    let mut _206: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _210: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+    let mut _211: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (&state::oracle::OraclePriceData, math::oracle::OracleValidity)>;
+    let mut _212: std::result::Result<(&state::oracle::OraclePriceData, math::oracle::OracleValidity), error::ErrorCode>;
+    let mut _213: &mut state::oracle_map::OracleMap<'_>;
+    let mut _214: state::user::MarketType;
+    let mut _215: u16;
+    let mut _216: &state::perp_market::PerpMarket;
+    let mut _217: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _218: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _219: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _220: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _221: &state::perp_market::PerpMarket;
+    let _222: &state::perp_market::PerpMarket;
+    let mut _223: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _224: i64;
+    let mut _225: &state::perp_market::PerpMarket;
+    let mut _226: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _227: u64;
+    let mut _228: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _229: std::result::Result<u64, error::ErrorCode>;
+    let mut _230: state::perp_market::PerpMarket;
+    let mut _231: &state::perp_market::PerpMarket;
+    let mut _232: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _233: isize;
+    let mut _235: !;
+    let mut _236: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _238: isize;
+    let mut _240: !;
+    let mut _241: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _243: bool;
+    let mut _244: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _245: std::result::Result<bool, error::ErrorCode>;
+    let mut _246: math::oracle::OracleValidity;
+    let mut _247: std::option::Option<math::oracle::DriftAction>;
+    let mut _248: math::oracle::DriftAction;
+    let mut _249: isize;
+    let mut _251: !;
+    let mut _252: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _255: bool;
+    let mut _256: &state::perp_market::MarketStatus;
+    let _257: &state::perp_market::PerpMarket;
+    let mut _258: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _259: &state::perp_market::MarketStatus;
+    let _260: state::perp_market::MarketStatus;
+    let mut _261: &state::perp_market::PerpMarket;
+    let mut _262: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _264: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _265: std::result::Result<i64, error::ErrorCode>;
+    let mut _266: i128;
+    let mut _267: bool;
+    let mut _268: i64;
+    let mut _269: &state::perp_market::PerpMarket;
+    let mut _270: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _271: &state::perp_market::PerpMarket;
+    let mut _272: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+    let mut _273: &state::user::PerpPosition;
+    let mut _274: isize;
+    let mut _276: !;
+    let mut _277: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _280: (u128, i128);
+    let mut _281: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (u128, i128)>;
+    let mut _282: std::result::Result<(u128, i128), error::ErrorCode>;
+    let mut _283: &state::user::PerpPosition;
+    let _284: &&state::user::PerpPosition;
+    let mut _285: i64;
+    let mut _286: isize;
+    let mut _288: !;
+    let mut _289: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _292: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _293: std::result::Result<i128, error::ErrorCode>;
+    let mut _294: i128;
+    let mut _295: i128;
+    let mut _296: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _297: std::result::Result<i128, error::ErrorCode>;
+    let mut _298: i64;
+    let mut _299: isize;
+    let mut _301: !;
+    let mut _302: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _304: isize;
+    let mut _306: !;
+    let mut _307: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _310: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _311: std::result::Result<i128, error::ErrorCode>;
+    let mut _312: i128;
+    let mut _313: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _314: std::result::Result<i128, error::ErrorCode>;
+    let mut _315: i128;
+    let mut _316: i128;
+    let mut _317: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _318: std::result::Result<i128, error::ErrorCode>;
+    let mut _319: i64;
+    let mut _320: isize;
+    let mut _322: !;
+    let mut _323: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _325: isize;
+    let mut _327: !;
+    let mut _328: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _330: isize;
+    let mut _332: !;
+    let mut _333: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _335: i128;
+    let mut _336: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _337: std::result::Result<i128, error::ErrorCode>;
+    let mut _338: i128;
+    let mut _339: i128;
+    let mut _340: isize;
+    let mut _342: !;
+    let mut _343: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _345: (i128, bool);
+    let mut _346: i128;
+    let mut _347: bool;
+    let mut _349: &state::user::PerpPosition;
+    let mut _350: isize;
+    let mut _351: isize;
+    let mut _352: isize;
+    let mut _353: isize;
+    let mut _354: isize;
+    let mut _355: isize;
+    let mut _356: isize;
+    let mut _357: isize;
+    let mut _358: isize;
+    let mut _359: isize;
+    let mut _360: isize;
+    let mut _361: isize;
+    let mut _362: isize;
+    let mut _363: isize;
+    let mut _364: isize;
+    scope 1 {
+        debug net_usd_value => _5;
+        let mut _6: bool;
+        scope 2 {
+            debug all_oracles_valid => _6;
+            let mut _12: std::slice::Iter<'_, state::user::SpotPosition>;
+            let mut _124: std::slice::Iter<'_, state::user::PerpPosition>;
+            scope 3 {
+                debug iter => _12;
+                let _20: &state::user::SpotPosition;
+                scope 4 {
+                    debug spot_position => _20;
+                    let _25: std::cell::Ref<'_, state::spot_market::SpotMarket>;
+                    let _32: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _35: std::cell::Ref<'_, state::spot_market::SpotMarket>;
+                    scope 5 {
+                        debug spot_market => _25;
+                        let _36: &state::oracle::OraclePriceData;
+                        let _37: math::oracle::OracleValidity;
+                        let _62: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _65: u64;
+                        let _67: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _70: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+                        scope 10 {
+                            debug oracle_price_data => _36;
+                            debug oracle_validity => _37;
+                            let _78: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _81: bool;
+                            let _82: i128;
+                            let _91: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _94: i128;
+                            scope 19 {
+                                debug residual => _78;
+                                scope 20 {
+                                }
+                            }
+                            scope 21 {
+                                debug val => _81;
+                                scope 22 {
+                                }
+                            }
+                            scope 23 {
+                                debug token_amount => _82;
+                                let _95: i64;
+                                scope 28 {
+                                    debug oracle_price => _95;
+                                    let _96: i128;
+                                    let _105: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _108: i128;
+                                    scope 29 {
+                                        debug token_value => _96;
+                                        let _115: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _118: i128;
+                                        scope 34 {
+                                            debug residual => _115;
+                                            scope 35 {
+                                            }
+                                        }
+                                        scope 36 {
+                                            debug val => _118;
+                                            scope 37 {
+                                            }
+                                        }
+                                    }
+                                    scope 30 {
+                                        debug residual => _105;
+                                        scope 31 {
+                                        }
+                                    }
+                                    scope 32 {
+                                        debug val => _108;
+                                        scope 33 {
+                                        }
+                                    }
+                                }
+                            }
+                            scope 24 {
+                                debug residual => _91;
+                                scope 25 {
+                                }
+                            }
+                            scope 26 {
+                                debug val => _94;
+                                scope 27 {
+                                }
+                            }
+                        }
+                        scope 11 {
+                            debug residual => _62;
+                            scope 12 {
+                            }
+                        }
+                        scope 13 {
+                            debug val => _65;
+                            scope 14 {
+                            }
+                        }
+                        scope 15 {
+                            debug residual => _67;
+                            scope 16 {
+                            }
+                        }
+                        scope 17 {
+                            debug val => _70;
+                            scope 18 {
+                            }
+                        }
+                    }
+                    scope 6 {
+                        debug residual => _32;
+                        scope 7 {
+                        }
+                    }
+                    scope 8 {
+                        debug val => _35;
+                        scope 9 {
+                        }
+                    }
+                }
+            }
+            scope 38 {
+                debug iter => _124;
+                let _131: &state::user::PerpPosition;
+                scope 39 {
+                    debug market_position => _131;
+                    let _136: &std::cell::Ref<'_, state::perp_market::PerpMarket>;
+                    let _144: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _147: std::cell::Ref<'_, state::perp_market::PerpMarket>;
+                    scope 40 {
+                        debug market => _136;
+                        let _148: i64;
+                        let _149: std::cell::Ref<'_, state::spot_market::SpotMarket>;
+                        let _158: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _161: std::cell::Ref<'_, state::spot_market::SpotMarket>;
+                        scope 45 {
+                            debug quote_oracle_price => _148;
+                            let _208: &state::oracle::OraclePriceData;
+                            let _209: math::oracle::OracleValidity;
+                            let _234: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _237: u64;
+                            let _239: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _242: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+                            scope 64 {
+                                debug oracle_price_data => _208;
+                                debug oracle_validity => _209;
+                                let _250: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _253: bool;
+                                let _254: i64;
+                                let mut _348: &state::perp_market::MarketStatus;
+                                scope 73 {
+                                    debug residual => _250;
+                                    scope 74 {
+                                    }
+                                }
+                                scope 75 {
+                                    debug val => _253;
+                                    scope 76 {
+                                    }
+                                }
+                                scope 77 {
+                                    debug valuation_price => _254;
+                                    let _263: i64;
+                                    let _275: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _278: i64;
+                                    scope 78 {
+                                        debug unrealized_funding => _263;
+                                        let _279: i128;
+                                        let _287: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _290: (u128, i128);
+                                        scope 83 {
+                                            debug unrealized_pnl => _279;
+                                            let _291: i128;
+                                            let _300: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _303: i128;
+                                            let _305: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _308: i128;
+                                            scope 88 {
+                                                debug pnl => _291;
+                                                let _309: i128;
+                                                let _321: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                let _324: i128;
+                                                let _326: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                let _329: i128;
+                                                let _331: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                let _334: i128;
+                                                scope 97 {
+                                                    debug pnl_value => _309;
+                                                    let _341: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                                    let _344: i128;
+                                                    scope 110 {
+                                                        debug residual => _341;
+                                                        scope 111 {
+                                                        }
+                                                    }
+                                                    scope 112 {
+                                                        debug val => _344;
+                                                        scope 113 {
+                                                        }
+                                                    }
+                                                }
+                                                scope 98 {
+                                                    debug residual => _321;
+                                                    scope 99 {
+                                                    }
+                                                }
+                                                scope 100 {
+                                                    debug val => _324;
+                                                    scope 101 {
+                                                    }
+                                                }
+                                                scope 102 {
+                                                    debug residual => _326;
+                                                    scope 103 {
+                                                    }
+                                                }
+                                                scope 104 {
+                                                    debug val => _329;
+                                                    scope 105 {
+                                                    }
+                                                }
+                                                scope 106 {
+                                                    debug residual => _331;
+                                                    scope 107 {
+                                                    }
+                                                }
+                                                scope 108 {
+                                                    debug val => _334;
+                                                    scope 109 {
+                                                    }
+                                                }
+                                            }
+                                            scope 89 {
+                                                debug residual => _300;
+                                                scope 90 {
+                                                }
+                                            }
+                                            scope 91 {
+                                                debug val => _303;
+                                                scope 92 {
+                                                }
+                                            }
+                                            scope 93 {
+                                                debug residual => _305;
+                                                scope 94 {
+                                                }
+                                            }
+                                            scope 95 {
+                                                debug val => _308;
+                                                scope 96 {
+                                                }
+                                            }
+                                        }
+                                        scope 84 {
+                                            debug residual => _287;
+                                            scope 85 {
+                                            }
+                                        }
+                                        scope 86 {
+                                            debug val => _290;
+                                            scope 87 {
+                                            }
+                                        }
+                                    }
+                                    scope 79 {
+                                        debug residual => _275;
+                                        scope 80 {
+                                        }
+                                    }
+                                    scope 81 {
+                                        debug val => _278;
+                                        scope 82 {
+                                        }
+                                    }
+                                }
+                            }
+                            scope 65 {
+                                debug residual => _234;
+                                scope 66 {
+                                }
+                            }
+                            scope 67 {
+                                debug val => _237;
+                                scope 68 {
+                                }
+                            }
+                            scope 69 {
+                                debug residual => _239;
+                                scope 70 {
+                                }
+                            }
+                            scope 71 {
+                                debug val => _242;
+                                scope 72 {
+                                }
+                            }
+                        }
+                        scope 46 {
+                            debug quote_spot_market => _149;
+                            let _162: &state::oracle::OraclePriceData;
+                            let _163: math::oracle::OracleValidity;
+                            let _188: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _191: u64;
+                            let _193: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _196: (&state::oracle::OraclePriceData, math::oracle::OracleValidity);
+                            scope 51 {
+                                debug quote_oracle_price_data => _162;
+                                debug quote_oracle_validity => _163;
+                                let _204: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _207: bool;
+                                scope 60 {
+                                    debug residual => _204;
+                                    scope 61 {
+                                    }
+                                }
+                                scope 62 {
+                                    debug val => _207;
+                                    scope 63 {
+                                    }
+                                }
+                            }
+                            scope 52 {
+                                debug residual => _188;
+                                scope 53 {
+                                }
+                            }
+                            scope 54 {
+                                debug val => _191;
+                                scope 55 {
+                                }
+                            }
+                            scope 56 {
+                                debug residual => _193;
+                                scope 57 {
+                                }
+                            }
+                            scope 58 {
+                                debug val => _196;
+                                scope 59 {
+                                }
+                            }
+                        }
+                        scope 47 {
+                            debug residual => _158;
+                            scope 48 {
+                            }
+                        }
+                        scope 49 {
+                            debug val => _161;
+                            scope 50 {
+                            }
+                        }
+                    }
+                    scope 41 {
+                        debug residual => _144;
+                        scope 42 {
+                        }
+                    }
+                    scope 43 {
+                        debug val => _147;
+                        scope 44 {
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _5 = const 0_i128;
+        StorageLive(_6);
+        _6 = const true;
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &((*_1).3: [state::user::SpotPosition; 8]);
+        _10 = move _11 as &[state::user::SpotPosition] (PointerCoercion(Unsize));
+        StorageDead(_11);
+        _9 = core::slice::<impl [SpotPosition]>::iter(move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        _8 = <std::slice::Iter<'_, SpotPosition> as IntoIterator>::into_iter(move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageLive(_12);
+        _12 = move _8;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &mut _12;
+        _16 = &mut (*_17);
+        _15 = <std::slice::Iter<'_, SpotPosition> as Iterator>::next(move _16) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_16);
+        _18 = discriminant(_15);
+        switchInt(move _18) -> [0: bb7, 1: bb5, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_20);
+        _20 = ((_15 as Some).0: &state::user::SpotPosition);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = &(*_20);
+        _22 = SpotPosition::is_available(move _23) -> [return: bb8, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        _7 = const ();
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = &((*_1).4: [state::user::PerpPosition; 8]);
+        _122 = move _123 as &[state::user::PerpPosition] (PointerCoercion(Unsize));
+        StorageDead(_123);
+        _121 = core::slice::<impl [PerpPosition]>::iter(move _122) -> [return: bb54, unwind continue];
+    }
+
+    bb8: {
+        switchInt(move _22) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb3;
+    }
+
+    bb10: {
+        StorageDead(_23);
+        _21 = const ();
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &(*_3);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = &((*_20).4: u16);
+        _29 = &(*_30);
+        _27 = SpotMarketMap::<'_>::get_ref(move _28, move _29) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_29);
+        StorageDead(_28);
+        _26 = <std::result::Result<Ref<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _27) -> [return: bb12, unwind: bb191];
+    }
+
+    bb12: {
+        StorageDead(_27);
+        _31 = discriminant(_26);
+        switchInt(move _31) -> [0: bb13, 1: bb14, otherwise: bb6];
+    }
+
+    bb13: {
+        StorageLive(_35);
+        _35 = move ((_26 as Continue).0: std::cell::Ref<'_, state::spot_market::SpotMarket>);
+        _25 = move _35;
+        StorageDead(_35);
+        _352 = discriminant(_26);
+        StorageDead(_30);
+        StorageDead(_26);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = &mut (*_4);
+        StorageLive(_42);
+        _42 = state::user::MarketType::Spot;
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = &_25;
+        _44 = <Ref<'_, SpotMarket> as Deref>::deref(move _45) -> [return: bb16, unwind: bb190];
+    }
+
+    bb14: {
+        StorageLive(_32);
+        _32 = ((_26 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_34);
+        _34 = _32;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _34) -> [return: bb15, unwind: bb194];
+    }
+
+    bb15: {
+        StorageDead(_34);
+        StorageDead(_32);
+        _350 = discriminant(_26);
+        StorageDead(_30);
+        StorageDead(_26);
+        goto -> bb185;
+    }
+
+    bb16: {
+        StorageDead(_45);
+        _43 = ((*_44).42: u16);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        _51 = &_25;
+        _50 = <Ref<'_, SpotMarket> as Deref>::deref(move _51) -> [return: bb17, unwind: bb190];
+    }
+
+    bb17: {
+        _49 = &(*_50);
+        StorageDead(_51);
+        _48 = SpotMarket::oracle_id(move _49) -> [return: bb18, unwind: bb190];
+    }
+
+    bb18: {
+        StorageDead(_49);
+        _47 = &_48;
+        _46 = &(*_47);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = &_25;
+        _53 = <Ref<'_, SpotMarket> as Deref>::deref(move _54) -> [return: bb19, unwind: bb190];
+    }
+
+    bb19: {
+        StorageDead(_54);
+        _52 = (((*_53).5: state::oracle::HistoricalOracleData).3: i64);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        _60 = &_25;
+        _59 = <Ref<'_, SpotMarket> as Deref>::deref(move _60) -> [return: bb20, unwind: bb190];
+    }
+
+    bb20: {
+        _58 = &(*_59);
+        StorageDead(_60);
+        _57 = SpotMarket::get_max_confidence_interval_multiplier(move _58) -> [return: bb21, unwind: bb190];
+    }
+
+    bb21: {
+        StorageDead(_58);
+        _56 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _57) -> [return: bb22, unwind: bb190];
+    }
+
+    bb22: {
+        StorageDead(_57);
+        _61 = discriminant(_56);
+        switchInt(move _61) -> [0: bb23, 1: bb24, otherwise: bb6];
+    }
+
+    bb23: {
+        StorageLive(_65);
+        _65 = ((_56 as Continue).0: u64);
+        _55 = _65;
+        StorageDead(_65);
+        _40 = OracleMap::<'_>::get_price_data_and_validity(move _41, move _42, move _43, move _46, move _52, move _55, const 0_i8) -> [return: bb26, unwind: bb190];
+    }
+
+    bb24: {
+        StorageLive(_62);
+        _62 = ((_56 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_64);
+        _64 = _62;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _64) -> [return: bb25, unwind: bb190];
+    }
+
+    bb25: {
+        StorageDead(_64);
+        StorageDead(_62);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_46);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_40);
+        goto -> bb183;
+    }
+
+    bb26: {
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_46);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_41);
+        _39 = <std::result::Result<(&OraclePriceData, OracleValidity), error::ErrorCode> as Try>::branch(move _40) -> [return: bb27, unwind: bb190];
+    }
+
+    bb27: {
+        StorageDead(_40);
+        _66 = discriminant(_39);
+        switchInt(move _66) -> [0: bb28, 1: bb29, otherwise: bb6];
+    }
+
+    bb28: {
+        StorageLive(_70);
+        _70 = ((_39 as Continue).0: (&state::oracle::OraclePriceData, math::oracle::OracleValidity));
+        _38 = _70;
+        StorageDead(_70);
+        StorageLive(_36);
+        _36 = (_38.0: &state::oracle::OraclePriceData);
+        StorageLive(_37);
+        _37 = (_38.1: math::oracle::OracleValidity);
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_53);
+        StorageDead(_50);
+        StorageDead(_48);
+        StorageDead(_47);
+        StorageDead(_44);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        _74 = _37;
+        StorageLive(_75);
+        StorageLive(_76);
+        _76 = DriftAction::MarginCalc;
+        _75 = Option::<DriftAction>::Some(move _76);
+        StorageDead(_76);
+        _73 = is_oracle_valid_for_action(move _74, move _75) -> [return: bb31, unwind: bb190];
+    }
+
+    bb29: {
+        StorageLive(_67);
+        _67 = ((_39 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_69);
+        _69 = _67;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _69) -> [return: bb30, unwind: bb190];
+    }
+
+    bb30: {
+        StorageDead(_69);
+        StorageDead(_67);
+        goto -> bb183;
+    }
+
+    bb31: {
+        StorageDead(_75);
+        StorageDead(_74);
+        _72 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _73) -> [return: bb32, unwind: bb190];
+    }
+
+    bb32: {
+        StorageDead(_73);
+        _77 = discriminant(_72);
+        switchInt(move _77) -> [0: bb33, 1: bb34, otherwise: bb6];
+    }
+
+    bb33: {
+        StorageLive(_81);
+        _81 = ((_72 as Continue).0: bool);
+        _71 = _81;
+        StorageDead(_81);
+        _6 = BitAnd(_6, move _71);
+        StorageDead(_71);
+        StorageDead(_72);
+        StorageLive(_82);
+        StorageLive(_83);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = &(*_20);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        _89 = &_25;
+        _88 = &(*_89);
+        _87 = <Ref<'_, SpotMarket> as Deref>::deref(move _88) -> [return: bb36, unwind: bb190];
+    }
+
+    bb34: {
+        StorageLive(_78);
+        _78 = ((_72 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_80);
+        _80 = _78;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _80) -> [return: bb35, unwind: bb190];
+    }
+
+    bb35: {
+        StorageDead(_80);
+        StorageDead(_78);
+        StorageDead(_71);
+        StorageDead(_72);
+        goto -> bb182;
+    }
+
+    bb36: {
+        _86 = &(*_87);
+        StorageDead(_88);
+        _84 = SpotPosition::get_signed_token_amount(move _85, move _86) -> [return: bb37, unwind: bb190];
+    }
+
+    bb37: {
+        StorageDead(_86);
+        StorageDead(_85);
+        _83 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _84) -> [return: bb38, unwind: bb190];
+    }
+
+    bb38: {
+        StorageDead(_84);
+        _90 = discriminant(_83);
+        switchInt(move _90) -> [0: bb39, 1: bb40, otherwise: bb6];
+    }
+
+    bb39: {
+        StorageLive(_94);
+        _94 = ((_83 as Continue).0: i128);
+        _82 = _94;
+        StorageDead(_94);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_83);
+        StorageLive(_95);
+        _95 = ((*_36).0: i64);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        _99 = _82;
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        _102 = &_25;
+        _101 = <Ref<'_, SpotMarket> as Deref>::deref(move _102) -> [return: bb42, unwind: bb190];
+    }
+
+    bb40: {
+        StorageLive(_91);
+        _91 = ((_83 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_93);
+        _93 = _91;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _93) -> [return: bb41, unwind: bb190];
+    }
+
+    bb41: {
+        StorageDead(_93);
+        StorageDead(_91);
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_83);
+        goto -> bb181;
+    }
+
+    bb42: {
+        StorageDead(_102);
+        _100 = ((*_101).41: u32);
+        StorageLive(_103);
+        _103 = _95;
+        _98 = get_token_value(move _99, move _100, move _103) -> [return: bb43, unwind: bb190];
+    }
+
+    bb43: {
+        StorageDead(_103);
+        StorageDead(_100);
+        StorageDead(_99);
+        _97 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _98) -> [return: bb44, unwind: bb190];
+    }
+
+    bb44: {
+        StorageDead(_98);
+        _104 = discriminant(_97);
+        switchInt(move _104) -> [0: bb45, 1: bb46, otherwise: bb6];
+    }
+
+    bb45: {
+        StorageLive(_108);
+        _108 = ((_97 as Continue).0: i128);
+        _96 = _108;
+        StorageDead(_108);
+        StorageDead(_101);
+        StorageDead(_97);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        _112 = _5;
+        StorageLive(_113);
+        _113 = _96;
+        _111 = <i128 as SafeMath>::safe_add(move _112, move _113) -> [return: bb48, unwind: bb190];
+    }
+
+    bb46: {
+        StorageLive(_105);
+        _105 = ((_97 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_107);
+        _107 = _105;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _107) -> [return: bb47, unwind: bb190];
+    }
+
+    bb47: {
+        StorageDead(_107);
+        StorageDead(_105);
+        StorageDead(_101);
+        StorageDead(_97);
+        goto -> bb180;
+    }
+
+    bb48: {
+        StorageDead(_113);
+        StorageDead(_112);
+        _110 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _111) -> [return: bb49, unwind: bb190];
+    }
+
+    bb49: {
+        StorageDead(_111);
+        _114 = discriminant(_110);
+        switchInt(move _114) -> [0: bb50, 1: bb51, otherwise: bb6];
+    }
+
+    bb50: {
+        StorageLive(_118);
+        _118 = ((_110 as Continue).0: i128);
+        _109 = _118;
+        StorageDead(_118);
+        _5 = move _109;
+        StorageDead(_109);
+        StorageDead(_110);
+        _14 = const ();
+        StorageDead(_96);
+        StorageDead(_95);
+        StorageDead(_82);
+        StorageDead(_37);
+        StorageDead(_36);
+        drop(_25) -> [return: bb53, unwind: bb191];
+    }
+
+    bb51: {
+        StorageLive(_115);
+        _115 = ((_110 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_117);
+        _117 = _115;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _117) -> [return: bb52, unwind: bb190];
+    }
+
+    bb52: {
+        StorageDead(_117);
+        StorageDead(_115);
+        StorageDead(_109);
+        StorageDead(_110);
+        goto -> bb180;
+    }
+
+    bb53: {
+        StorageDead(_25);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        _13 = const ();
+        goto -> bb3;
+    }
+
+    bb54: {
+        StorageDead(_122);
+        _120 = <std::slice::Iter<'_, PerpPosition> as IntoIterator>::into_iter(move _121) -> [return: bb55, unwind continue];
+    }
+
+    bb55: {
+        StorageDead(_121);
+        StorageLive(_124);
+        _124 = move _120;
+        goto -> bb56;
+    }
+
+    bb56: {
+        StorageLive(_125);
+        StorageLive(_126);
+        StorageLive(_127);
+        StorageLive(_128);
+        _128 = &mut _124;
+        _127 = &mut (*_128);
+        _126 = <std::slice::Iter<'_, PerpPosition> as Iterator>::next(move _127) -> [return: bb57, unwind continue];
+    }
+
+    bb57: {
+        StorageDead(_127);
+        _129 = discriminant(_126);
+        switchInt(move _129) -> [0: bb59, 1: bb58, otherwise: bb6];
+    }
+
+    bb58: {
+        StorageLive(_131);
+        _131 = ((_126 as Some).0: &state::user::PerpPosition);
+        StorageLive(_132);
+        StorageLive(_133);
+        StorageLive(_134);
+        _134 = &(*_131);
+        _133 = PerpPosition::is_available(move _134) -> [return: bb60, unwind continue];
+    }
+
+    bb59: {
+        _119 = const ();
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_125);
+        StorageDead(_124);
+        StorageDead(_120);
+        StorageDead(_119);
+        StorageLive(_345);
+        StorageLive(_346);
+        _346 = _5;
+        StorageLive(_347);
+        _347 = _6;
+        _345 = (move _346, move _347);
+        StorageDead(_347);
+        StorageDead(_346);
+        _0 = std::result::Result::<(i128, bool), error::ErrorCode>::Ok(move _345);
+        StorageDead(_345);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb187;
+    }
+
+    bb60: {
+        switchInt(move _133) -> [0: bb62, otherwise: bb61];
+    }
+
+    bb61: {
+        StorageDead(_134);
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageDead(_131);
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_125);
+        goto -> bb56;
+    }
+
+    bb62: {
+        StorageDead(_134);
+        _132 = const ();
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        StorageLive(_140);
+        _140 = &(*_2);
+        StorageLive(_141);
+        StorageLive(_142);
+        _142 = &((*_131).13: u16);
+        _141 = &(*_142);
+        _139 = PerpMarketMap::<'_>::get_ref(move _140, move _141) -> [return: bb63, unwind continue];
+    }
+
+    bb63: {
+        StorageDead(_141);
+        StorageDead(_140);
+        _138 = <std::result::Result<Ref<'_, PerpMarket>, error::ErrorCode> as Try>::branch(move _139) -> [return: bb64, unwind: bb191];
+    }
+
+    bb64: {
+        StorageDead(_139);
+        _143 = discriminant(_138);
+        switchInt(move _143) -> [0: bb65, 1: bb66, otherwise: bb6];
+    }
+
+    bb65: {
+        StorageLive(_147);
+        _147 = move ((_138 as Continue).0: std::cell::Ref<'_, state::perp_market::PerpMarket>);
+        _137 = move _147;
+        StorageDead(_147);
+        _136 = &_137;
+        _356 = discriminant(_138);
+        StorageDead(_142);
+        StorageDead(_138);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        _152 = &(*_3);
+        StorageLive(_153);
+        StorageLive(_154);
+        StorageLive(_155);
+        StorageLive(_156);
+        _156 = &(*_136);
+        _155 = <Ref<'_, PerpMarket> as Deref>::deref(move _156) -> [return: bb68, unwind: bb189];
+    }
+
+    bb66: {
+        StorageLive(_144);
+        _144 = ((_138 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_146);
+        _146 = _144;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _146) -> [return: bb67, unwind: bb193];
+    }
+
+    bb67: {
+        StorageDead(_146);
+        StorageDead(_144);
+        _354 = discriminant(_138);
+        StorageDead(_142);
+        StorageDead(_138);
+        goto -> bb179;
+    }
+
+    bb68: {
+        StorageDead(_156);
+        _154 = &((*_155).26: u16);
+        _153 = &(*_154);
+        _151 = SpotMarketMap::<'_>::get_ref(move _152, move _153) -> [return: bb69, unwind: bb189];
+    }
+
+    bb69: {
+        StorageDead(_153);
+        StorageDead(_152);
+        _150 = <std::result::Result<Ref<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _151) -> [return: bb70, unwind: bb189];
+    }
+
+    bb70: {
+        StorageDead(_151);
+        _157 = discriminant(_150);
+        switchInt(move _157) -> [0: bb71, 1: bb72, otherwise: bb6];
+    }
+
+    bb71: {
+        StorageLive(_161);
+        _161 = move ((_150 as Continue).0: std::cell::Ref<'_, state::spot_market::SpotMarket>);
+        _149 = move _161;
+        StorageDead(_161);
+        _360 = discriminant(_150);
+        StorageDead(_155);
+        StorageDead(_154);
+        StorageDead(_150);
+        StorageLive(_164);
+        StorageLive(_165);
+        StorageLive(_166);
+        StorageLive(_167);
+        _167 = &mut (*_4);
+        StorageLive(_168);
+        _168 = state::user::MarketType::Spot;
+        StorageLive(_169);
+        StorageLive(_170);
+        StorageLive(_171);
+        _171 = &_149;
+        _170 = <Ref<'_, SpotMarket> as Deref>::deref(move _171) -> [return: bb74, unwind: bb188];
+    }
+
+    bb72: {
+        StorageLive(_158);
+        _158 = ((_150 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_160);
+        _160 = _158;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _160) -> [return: bb73, unwind: bb192];
+    }
+
+    bb73: {
+        StorageDead(_160);
+        StorageDead(_158);
+        _358 = discriminant(_150);
+        StorageDead(_155);
+        StorageDead(_154);
+        StorageDead(_150);
+        goto -> bb177;
+    }
+
+    bb74: {
+        StorageDead(_171);
+        _169 = ((*_170).42: u16);
+        StorageLive(_172);
+        StorageLive(_173);
+        StorageLive(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        StorageLive(_177);
+        _177 = &_149;
+        _176 = <Ref<'_, SpotMarket> as Deref>::deref(move _177) -> [return: bb75, unwind: bb188];
+    }
+
+    bb75: {
+        _175 = &(*_176);
+        StorageDead(_177);
+        _174 = SpotMarket::oracle_id(move _175) -> [return: bb76, unwind: bb188];
+    }
+
+    bb76: {
+        StorageDead(_175);
+        _173 = &_174;
+        _172 = &(*_173);
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        _180 = &_149;
+        _179 = <Ref<'_, SpotMarket> as Deref>::deref(move _180) -> [return: bb77, unwind: bb188];
+    }
+
+    bb77: {
+        StorageDead(_180);
+        _178 = (((*_179).5: state::oracle::HistoricalOracleData).3: i64);
+        StorageLive(_181);
+        StorageLive(_182);
+        StorageLive(_183);
+        StorageLive(_184);
+        StorageLive(_185);
+        StorageLive(_186);
+        _186 = &_149;
+        _185 = <Ref<'_, SpotMarket> as Deref>::deref(move _186) -> [return: bb78, unwind: bb188];
+    }
+
+    bb78: {
+        _184 = &(*_185);
+        StorageDead(_186);
+        _183 = SpotMarket::get_max_confidence_interval_multiplier(move _184) -> [return: bb79, unwind: bb188];
+    }
+
+    bb79: {
+        StorageDead(_184);
+        _182 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _183) -> [return: bb80, unwind: bb188];
+    }
+
+    bb80: {
+        StorageDead(_183);
+        _187 = discriminant(_182);
+        switchInt(move _187) -> [0: bb81, 1: bb82, otherwise: bb6];
+    }
+
+    bb81: {
+        StorageLive(_191);
+        _191 = ((_182 as Continue).0: u64);
+        _181 = _191;
+        StorageDead(_191);
+        _166 = OracleMap::<'_>::get_price_data_and_validity(move _167, move _168, move _169, move _172, move _178, move _181, const 0_i8) -> [return: bb84, unwind: bb188];
+    }
+
+    bb82: {
+        StorageLive(_188);
+        _188 = ((_182 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_190);
+        _190 = _188;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _190) -> [return: bb83, unwind: bb188];
+    }
+
+    bb83: {
+        StorageDead(_190);
+        StorageDead(_188);
+        StorageDead(_181);
+        StorageDead(_178);
+        StorageDead(_172);
+        StorageDead(_169);
+        StorageDead(_168);
+        StorageDead(_167);
+        StorageDead(_166);
+        goto -> bb175;
+    }
+
+    bb84: {
+        StorageDead(_181);
+        StorageDead(_178);
+        StorageDead(_172);
+        StorageDead(_169);
+        StorageDead(_168);
+        StorageDead(_167);
+        _165 = <std::result::Result<(&OraclePriceData, OracleValidity), error::ErrorCode> as Try>::branch(move _166) -> [return: bb85, unwind: bb188];
+    }
+
+    bb85: {
+        StorageDead(_166);
+        _192 = discriminant(_165);
+        switchInt(move _192) -> [0: bb86, 1: bb87, otherwise: bb6];
+    }
+
+    bb86: {
+        StorageLive(_196);
+        _196 = ((_165 as Continue).0: (&state::oracle::OraclePriceData, math::oracle::OracleValidity));
+        _164 = _196;
+        StorageDead(_196);
+        StorageLive(_162);
+        _162 = (_164.0: &state::oracle::OraclePriceData);
+        StorageLive(_163);
+        _163 = (_164.1: math::oracle::OracleValidity);
+        StorageDead(_185);
+        StorageDead(_182);
+        StorageDead(_179);
+        StorageDead(_176);
+        StorageDead(_174);
+        StorageDead(_173);
+        StorageDead(_170);
+        StorageDead(_165);
+        StorageDead(_164);
+        StorageLive(_197);
+        StorageLive(_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        _200 = _163;
+        StorageLive(_201);
+        StorageLive(_202);
+        _202 = DriftAction::MarginCalc;
+        _201 = Option::<DriftAction>::Some(move _202);
+        StorageDead(_202);
+        _199 = is_oracle_valid_for_action(move _200, move _201) -> [return: bb89, unwind: bb188];
+    }
+
+    bb87: {
+        StorageLive(_193);
+        _193 = ((_165 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_195);
+        _195 = _193;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _195) -> [return: bb88, unwind: bb188];
+    }
+
+    bb88: {
+        StorageDead(_195);
+        StorageDead(_193);
+        goto -> bb175;
+    }
+
+    bb89: {
+        StorageDead(_201);
+        StorageDead(_200);
+        _198 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _199) -> [return: bb90, unwind: bb188];
+    }
+
+    bb90: {
+        StorageDead(_199);
+        _203 = discriminant(_198);
+        switchInt(move _203) -> [0: bb91, 1: bb92, otherwise: bb6];
+    }
+
+    bb91: {
+        StorageLive(_207);
+        _207 = ((_198 as Continue).0: bool);
+        _197 = _207;
+        StorageDead(_207);
+        _6 = BitAnd(_6, move _197);
+        StorageDead(_197);
+        StorageDead(_198);
+        _148 = ((*_162).0: i64);
+        StorageDead(_163);
+        StorageDead(_162);
+        drop(_149) -> [return: bb94, unwind: bb189];
+    }
+
+    bb92: {
+        StorageLive(_204);
+        _204 = ((_198 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_206);
+        _206 = _204;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _206) -> [return: bb93, unwind: bb188];
+    }
+
+    bb93: {
+        StorageDead(_206);
+        StorageDead(_204);
+        StorageDead(_197);
+        StorageDead(_198);
+        StorageDead(_163);
+        StorageDead(_162);
+        goto -> bb176;
+    }
+
+    bb94: {
+        StorageDead(_149);
+        StorageLive(_210);
+        StorageLive(_211);
+        StorageLive(_212);
+        StorageLive(_213);
+        _213 = &mut (*_4);
+        StorageLive(_214);
+        _214 = state::user::MarketType::Perp;
+        StorageLive(_215);
+        StorageLive(_216);
+        StorageLive(_217);
+        _217 = &(*_136);
+        _216 = <Ref<'_, PerpMarket> as Deref>::deref(move _217) -> [return: bb95, unwind: bb189];
+    }
+
+    bb95: {
+        StorageDead(_217);
+        _215 = ((*_216).21: u16);
+        StorageLive(_218);
+        StorageLive(_219);
+        StorageLive(_220);
+        StorageLive(_221);
+        StorageLive(_222);
+        StorageLive(_223);
+        _223 = &(*_136);
+        _222 = <Ref<'_, PerpMarket> as Deref>::deref(move _223) -> [return: bb96, unwind: bb189];
+    }
+
+    bb96: {
+        _221 = &(*_222);
+        StorageDead(_223);
+        _220 = PerpMarket::oracle_id(move _221) -> [return: bb97, unwind: bb189];
+    }
+
+    bb97: {
+        StorageDead(_221);
+        _219 = &_220;
+        _218 = &(*_219);
+        StorageLive(_224);
+        StorageLive(_225);
+        StorageLive(_226);
+        _226 = &(*_136);
+        _225 = <Ref<'_, PerpMarket> as Deref>::deref(move _226) -> [return: bb98, unwind: bb189];
+    }
+
+    bb98: {
+        StorageDead(_226);
+        _224 = ((((*_225).1: state::perp_market::AMM).1: state::oracle::HistoricalOracleData).3: i64);
+        StorageLive(_227);
+        StorageLive(_228);
+        StorageLive(_229);
+        StorageLive(_230);
+        StorageLive(_231);
+        StorageLive(_232);
+        _232 = &(*_136);
+        _231 = <Ref<'_, PerpMarket> as Deref>::deref(move _232) -> [return: bb99, unwind: bb189];
+    }
+
+    bb99: {
+        _230 = (*_231);
+        StorageDead(_232);
+        _229 = PerpMarket::get_max_confidence_interval_multiplier(move _230) -> [return: bb100, unwind: bb189];
+    }
+
+    bb100: {
+        StorageDead(_230);
+        _228 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _229) -> [return: bb101, unwind: bb189];
+    }
+
+    bb101: {
+        StorageDead(_229);
+        _233 = discriminant(_228);
+        switchInt(move _233) -> [0: bb102, 1: bb103, otherwise: bb6];
+    }
+
+    bb102: {
+        StorageLive(_237);
+        _237 = ((_228 as Continue).0: u64);
+        _227 = _237;
+        StorageDead(_237);
+        _212 = OracleMap::<'_>::get_price_data_and_validity(move _213, move _214, move _215, move _218, move _224, move _227, const 0_i8) -> [return: bb105, unwind: bb189];
+    }
+
+    bb103: {
+        StorageLive(_234);
+        _234 = ((_228 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_236);
+        _236 = _234;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _236) -> [return: bb104, unwind: bb189];
+    }
+
+    bb104: {
+        StorageDead(_236);
+        StorageDead(_234);
+        StorageDead(_227);
+        StorageDead(_224);
+        StorageDead(_218);
+        StorageDead(_215);
+        StorageDead(_214);
+        StorageDead(_213);
+        StorageDead(_212);
+        goto -> bb174;
+    }
+
+    bb105: {
+        StorageDead(_227);
+        StorageDead(_224);
+        StorageDead(_218);
+        StorageDead(_215);
+        StorageDead(_214);
+        StorageDead(_213);
+        _211 = <std::result::Result<(&OraclePriceData, OracleValidity), error::ErrorCode> as Try>::branch(move _212) -> [return: bb106, unwind: bb189];
+    }
+
+    bb106: {
+        StorageDead(_212);
+        _238 = discriminant(_211);
+        switchInt(move _238) -> [0: bb107, 1: bb108, otherwise: bb6];
+    }
+
+    bb107: {
+        StorageLive(_242);
+        _242 = ((_211 as Continue).0: (&state::oracle::OraclePriceData, math::oracle::OracleValidity));
+        _210 = _242;
+        StorageDead(_242);
+        StorageLive(_208);
+        _208 = (_210.0: &state::oracle::OraclePriceData);
+        StorageLive(_209);
+        _209 = (_210.1: math::oracle::OracleValidity);
+        StorageDead(_231);
+        StorageDead(_228);
+        StorageDead(_225);
+        StorageDead(_222);
+        StorageDead(_220);
+        StorageDead(_219);
+        StorageDead(_216);
+        StorageDead(_211);
+        StorageDead(_210);
+        StorageLive(_243);
+        StorageLive(_244);
+        StorageLive(_245);
+        StorageLive(_246);
+        _246 = _209;
+        StorageLive(_247);
+        StorageLive(_248);
+        _248 = DriftAction::MarginCalc;
+        _247 = Option::<DriftAction>::Some(move _248);
+        StorageDead(_248);
+        _245 = is_oracle_valid_for_action(move _246, move _247) -> [return: bb110, unwind: bb189];
+    }
+
+    bb108: {
+        StorageLive(_239);
+        _239 = ((_211 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_241);
+        _241 = _239;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _241) -> [return: bb109, unwind: bb189];
+    }
+
+    bb109: {
+        StorageDead(_241);
+        StorageDead(_239);
+        goto -> bb174;
+    }
+
+    bb110: {
+        StorageDead(_247);
+        StorageDead(_246);
+        _244 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _245) -> [return: bb111, unwind: bb189];
+    }
+
+    bb111: {
+        StorageDead(_245);
+        _249 = discriminant(_244);
+        switchInt(move _249) -> [0: bb112, 1: bb113, otherwise: bb6];
+    }
+
+    bb112: {
+        StorageLive(_253);
+        _253 = ((_244 as Continue).0: bool);
+        _243 = _253;
+        StorageDead(_253);
+        _6 = BitAnd(_6, move _243);
+        StorageDead(_243);
+        StorageDead(_244);
+        StorageLive(_254);
+        StorageLive(_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        StorageLive(_258);
+        _258 = &(*_136);
+        _257 = <Ref<'_, PerpMarket> as Deref>::deref(move _258) -> [return: bb115, unwind: bb189];
+    }
+
+    bb113: {
+        StorageLive(_250);
+        _250 = ((_244 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_252);
+        _252 = _250;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _252) -> [return: bb114, unwind: bb189];
+    }
+
+    bb114: {
+        StorageDead(_252);
+        StorageDead(_250);
+        StorageDead(_243);
+        StorageDead(_244);
+        goto -> bb173;
+    }
+
+    bb115: {
+        StorageDead(_258);
+        _256 = &((*_257).22: state::perp_market::MarketStatus);
+        StorageLive(_259);
+        _348 = const _;
+        _259 = &(*_348);
+        _255 = <state::perp_market::MarketStatus as PartialEq>::eq(move _256, move _259) -> [return: bb116, unwind: bb189];
+    }
+
+    bb116: {
+        switchInt(move _255) -> [0: bb119, otherwise: bb117];
+    }
+
+    bb117: {
+        StorageDead(_259);
+        StorageDead(_257);
+        StorageDead(_256);
+        StorageLive(_261);
+        StorageLive(_262);
+        _262 = &(*_136);
+        _261 = <Ref<'_, PerpMarket> as Deref>::deref(move _262) -> [return: bb118, unwind: bb189];
+    }
+
+    bb118: {
+        StorageDead(_262);
+        _254 = ((*_261).7: i64);
+        StorageDead(_261);
+        goto -> bb120;
+    }
+
+    bb119: {
+        StorageDead(_259);
+        StorageDead(_257);
+        StorageDead(_256);
+        _254 = ((*_208).0: i64);
+        goto -> bb120;
+    }
+
+    bb120: {
+        StorageDead(_255);
+        StorageLive(_263);
+        StorageLive(_264);
+        StorageLive(_265);
+        StorageLive(_266);
+        StorageLive(_267);
+        StorageLive(_268);
+        _268 = ((*_131).1: i64);
+        _267 = Gt(move _268, const 0_i64);
+        switchInt(move _267) -> [0: bb123, otherwise: bb121];
+    }
+
+    bb121: {
+        StorageDead(_268);
+        StorageLive(_269);
+        StorageLive(_270);
+        _270 = &(*_136);
+        _269 = <Ref<'_, PerpMarket> as Deref>::deref(move _270) -> [return: bb122, unwind: bb189];
+    }
+
+    bb122: {
+        StorageDead(_270);
+        _266 = (((*_269).1: state::perp_market::AMM).34: i128);
+        StorageDead(_269);
+        goto -> bb125;
+    }
+
+    bb123: {
+        StorageDead(_268);
+        StorageLive(_271);
+        StorageLive(_272);
+        _272 = &(*_136);
+        _271 = <Ref<'_, PerpMarket> as Deref>::deref(move _272) -> [return: bb124, unwind: bb189];
+    }
+
+    bb124: {
+        StorageDead(_272);
+        _266 = (((*_271).1: state::perp_market::AMM).35: i128);
+        StorageDead(_271);
+        goto -> bb125;
+    }
+
+    bb125: {
+        StorageDead(_267);
+        StorageLive(_273);
+        _273 = &(*_131);
+        _265 = calculate_funding_payment(move _266, move _273) -> [return: bb126, unwind: bb189];
+    }
+
+    bb126: {
+        StorageDead(_273);
+        StorageDead(_266);
+        _264 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _265) -> [return: bb127, unwind: bb189];
+    }
+
+    bb127: {
+        StorageDead(_265);
+        _274 = discriminant(_264);
+        switchInt(move _274) -> [0: bb128, 1: bb129, otherwise: bb6];
+    }
+
+    bb128: {
+        StorageLive(_278);
+        _278 = ((_264 as Continue).0: i64);
+        _263 = _278;
+        StorageDead(_278);
+        StorageDead(_264);
+        StorageLive(_280);
+        StorageLive(_281);
+        StorageLive(_282);
+        StorageLive(_283);
+        StorageLive(_284);
+        _284 = &_131;
+        _349 = deref_copy (*_284);
+        _283 = &(*_349);
+        StorageLive(_285);
+        _285 = _254;
+        _282 = calculate_base_asset_value_and_pnl_with_oracle_price(move _283, move _285) -> [return: bb131, unwind: bb189];
+    }
+
+    bb129: {
+        StorageLive(_275);
+        _275 = ((_264 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_277);
+        _277 = _275;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _277) -> [return: bb130, unwind: bb189];
+    }
+
+    bb130: {
+        StorageDead(_277);
+        StorageDead(_275);
+        StorageDead(_264);
+        goto -> bb172;
+    }
+
+    bb131: {
+        StorageDead(_285);
+        StorageDead(_283);
+        _281 = <std::result::Result<(u128, i128), error::ErrorCode> as Try>::branch(move _282) -> [return: bb132, unwind: bb189];
+    }
+
+    bb132: {
+        StorageDead(_282);
+        _286 = discriminant(_281);
+        switchInt(move _286) -> [0: bb133, 1: bb134, otherwise: bb6];
+    }
+
+    bb133: {
+        StorageLive(_290);
+        _290 = ((_281 as Continue).0: (u128, i128));
+        _280 = _290;
+        StorageDead(_290);
+        StorageLive(_279);
+        _279 = (_280.1: i128);
+        StorageDead(_284);
+        StorageDead(_281);
+        StorageDead(_280);
+        StorageLive(_291);
+        StorageLive(_292);
+        StorageLive(_293);
+        StorageLive(_294);
+        _294 = _279;
+        StorageLive(_295);
+        StorageLive(_296);
+        StorageLive(_297);
+        StorageLive(_298);
+        _298 = _263;
+        _297 = <i64 as Cast>::cast::<i128>(move _298) -> [return: bb136, unwind: bb189];
+    }
+
+    bb134: {
+        StorageLive(_287);
+        _287 = ((_281 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_289);
+        _289 = _287;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _289) -> [return: bb135, unwind: bb189];
+    }
+
+    bb135: {
+        StorageDead(_289);
+        StorageDead(_287);
+        StorageDead(_284);
+        StorageDead(_281);
+        StorageDead(_280);
+        goto -> bb172;
+    }
+
+    bb136: {
+        StorageDead(_298);
+        _296 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _297) -> [return: bb137, unwind: bb189];
+    }
+
+    bb137: {
+        StorageDead(_297);
+        _299 = discriminant(_296);
+        switchInt(move _299) -> [0: bb138, 1: bb139, otherwise: bb6];
+    }
+
+    bb138: {
+        StorageLive(_303);
+        _303 = ((_296 as Continue).0: i128);
+        _295 = _303;
+        StorageDead(_303);
+        _293 = <i128 as SafeMath>::safe_add(move _294, move _295) -> [return: bb141, unwind: bb189];
+    }
+
+    bb139: {
+        StorageLive(_300);
+        _300 = ((_296 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_302);
+        _302 = _300;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _302) -> [return: bb140, unwind: bb189];
+    }
+
+    bb140: {
+        StorageDead(_302);
+        StorageDead(_300);
+        StorageDead(_295);
+        StorageDead(_294);
+        StorageDead(_293);
+        goto -> bb170;
+    }
+
+    bb141: {
+        StorageDead(_295);
+        StorageDead(_294);
+        _292 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _293) -> [return: bb142, unwind: bb189];
+    }
+
+    bb142: {
+        StorageDead(_293);
+        _304 = discriminant(_292);
+        switchInt(move _304) -> [0: bb143, 1: bb144, otherwise: bb6];
+    }
+
+    bb143: {
+        StorageLive(_308);
+        _308 = ((_292 as Continue).0: i128);
+        _291 = _308;
+        StorageDead(_308);
+        StorageDead(_296);
+        StorageDead(_292);
+        StorageLive(_309);
+        StorageLive(_310);
+        StorageLive(_311);
+        StorageLive(_312);
+        StorageLive(_313);
+        StorageLive(_314);
+        StorageLive(_315);
+        _315 = _291;
+        StorageLive(_316);
+        StorageLive(_317);
+        StorageLive(_318);
+        StorageLive(_319);
+        _319 = _148;
+        _318 = <i64 as Cast>::cast::<i128>(move _319) -> [return: bb146, unwind: bb189];
+    }
+
+    bb144: {
+        StorageLive(_305);
+        _305 = ((_292 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_307);
+        _307 = _305;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _307) -> [return: bb145, unwind: bb189];
+    }
+
+    bb145: {
+        StorageDead(_307);
+        StorageDead(_305);
+        goto -> bb170;
+    }
+
+    bb146: {
+        StorageDead(_319);
+        _317 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _318) -> [return: bb147, unwind: bb189];
+    }
+
+    bb147: {
+        StorageDead(_318);
+        _320 = discriminant(_317);
+        switchInt(move _320) -> [0: bb148, 1: bb149, otherwise: bb6];
+    }
+
+    bb148: {
+        StorageLive(_324);
+        _324 = ((_317 as Continue).0: i128);
+        _316 = _324;
+        StorageDead(_324);
+        _314 = <i128 as SafeMath>::safe_mul(move _315, move _316) -> [return: bb151, unwind: bb189];
+    }
+
+    bb149: {
+        StorageLive(_321);
+        _321 = ((_317 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_323);
+        _323 = _321;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _323) -> [return: bb150, unwind: bb189];
+    }
+
+    bb150: {
+        StorageDead(_323);
+        StorageDead(_321);
+        StorageDead(_316);
+        StorageDead(_315);
+        StorageDead(_314);
+        goto -> bb167;
+    }
+
+    bb151: {
+        StorageDead(_316);
+        StorageDead(_315);
+        _313 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _314) -> [return: bb152, unwind: bb189];
+    }
+
+    bb152: {
+        StorageDead(_314);
+        _325 = discriminant(_313);
+        switchInt(move _325) -> [0: bb153, 1: bb154, otherwise: bb6];
+    }
+
+    bb153: {
+        StorageLive(_329);
+        _329 = ((_313 as Continue).0: i128);
+        _312 = _329;
+        StorageDead(_329);
+        _311 = <i128 as SafeMath>::safe_div(move _312, const _) -> [return: bb156, unwind: bb189];
+    }
+
+    bb154: {
+        StorageLive(_326);
+        _326 = ((_313 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_328);
+        _328 = _326;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _328) -> [return: bb155, unwind: bb189];
+    }
+
+    bb155: {
+        StorageDead(_328);
+        StorageDead(_326);
+        goto -> bb167;
+    }
+
+    bb156: {
+        StorageDead(_312);
+        _310 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _311) -> [return: bb157, unwind: bb189];
+    }
+
+    bb157: {
+        StorageDead(_311);
+        _330 = discriminant(_310);
+        switchInt(move _330) -> [0: bb158, 1: bb159, otherwise: bb6];
+    }
+
+    bb158: {
+        StorageLive(_334);
+        _334 = ((_310 as Continue).0: i128);
+        _309 = _334;
+        StorageDead(_334);
+        StorageDead(_317);
+        StorageDead(_313);
+        StorageDead(_310);
+        StorageLive(_335);
+        StorageLive(_336);
+        StorageLive(_337);
+        StorageLive(_338);
+        _338 = _5;
+        StorageLive(_339);
+        _339 = _309;
+        _337 = <i128 as SafeMath>::safe_add(move _338, move _339) -> [return: bb161, unwind: bb189];
+    }
+
+    bb159: {
+        StorageLive(_331);
+        _331 = ((_310 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_333);
+        _333 = _331;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _333) -> [return: bb160, unwind: bb189];
+    }
+
+    bb160: {
+        StorageDead(_333);
+        StorageDead(_331);
+        goto -> bb168;
+    }
+
+    bb161: {
+        StorageDead(_339);
+        StorageDead(_338);
+        _336 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _337) -> [return: bb162, unwind: bb189];
+    }
+
+    bb162: {
+        StorageDead(_337);
+        _340 = discriminant(_336);
+        switchInt(move _340) -> [0: bb163, 1: bb164, otherwise: bb6];
+    }
+
+    bb163: {
+        StorageLive(_344);
+        _344 = ((_336 as Continue).0: i128);
+        _335 = _344;
+        StorageDead(_344);
+        _5 = move _335;
+        StorageDead(_335);
+        StorageDead(_336);
+        _125 = const ();
+        StorageDead(_309);
+        StorageDead(_291);
+        StorageDead(_279);
+        StorageDead(_263);
+        StorageDead(_254);
+        StorageDead(_209);
+        StorageDead(_208);
+        StorageDead(_148);
+        drop(_137) -> [return: bb166, unwind: bb191];
+    }
+
+    bb164: {
+        StorageLive(_341);
+        _341 = ((_336 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_343);
+        _343 = _341;
+        _0 = <std::result::Result<(i128, bool), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _343) -> [return: bb165, unwind: bb189];
+    }
+
+    bb165: {
+        StorageDead(_343);
+        StorageDead(_341);
+        StorageDead(_335);
+        StorageDead(_336);
+        goto -> bb169;
+    }
+
+    bb166: {
+        StorageDead(_137);
+        StorageDead(_136);
+        StorageDead(_131);
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_125);
+        _13 = const ();
+        goto -> bb56;
+    }
+
+    bb167: {
+        StorageDead(_312);
+        StorageDead(_311);
+        goto -> bb168;
+    }
+
+    bb168: {
+        StorageDead(_317);
+        StorageDead(_313);
+        StorageDead(_310);
+        goto -> bb169;
+    }
+
+    bb169: {
+        StorageDead(_309);
+        goto -> bb171;
+    }
+
+    bb170: {
+        StorageDead(_296);
+        StorageDead(_292);
+        goto -> bb171;
+    }
+
+    bb171: {
+        StorageDead(_291);
+        StorageDead(_279);
+        goto -> bb172;
+    }
+
+    bb172: {
+        StorageDead(_263);
+        StorageDead(_254);
+        goto -> bb173;
+    }
+
+    bb173: {
+        StorageDead(_209);
+        StorageDead(_208);
+        goto -> bb178;
+    }
+
+    bb174: {
+        StorageDead(_231);
+        StorageDead(_228);
+        StorageDead(_225);
+        StorageDead(_222);
+        StorageDead(_220);
+        StorageDead(_219);
+        StorageDead(_216);
+        StorageDead(_211);
+        StorageDead(_210);
+        goto -> bb178;
+    }
+
+    bb175: {
+        StorageDead(_185);
+        StorageDead(_182);
+        StorageDead(_179);
+        StorageDead(_176);
+        StorageDead(_174);
+        StorageDead(_173);
+        StorageDead(_170);
+        StorageDead(_165);
+        StorageDead(_164);
+        goto -> bb176;
+    }
+
+    bb176: {
+        drop(_149) -> [return: bb177, unwind: bb189];
+    }
+
+    bb177: {
+        StorageDead(_149);
+        goto -> bb178;
+    }
+
+    bb178: {
+        StorageDead(_148);
+        drop(_137) -> [return: bb179, unwind: bb191];
+    }
+
+    bb179: {
+        StorageDead(_137);
+        StorageDead(_136);
+        StorageDead(_131);
+        StorageDead(_128);
+        StorageDead(_126);
+        StorageDead(_125);
+        StorageDead(_124);
+        StorageDead(_120);
+        StorageDead(_119);
+        goto -> bb186;
+    }
+
+    bb180: {
+        StorageDead(_96);
+        StorageDead(_95);
+        goto -> bb181;
+    }
+
+    bb181: {
+        StorageDead(_82);
+        goto -> bb182;
+    }
+
+    bb182: {
+        StorageDead(_37);
+        StorageDead(_36);
+        goto -> bb184;
+    }
+
+    bb183: {
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_53);
+        StorageDead(_50);
+        StorageDead(_48);
+        StorageDead(_47);
+        StorageDead(_44);
+        StorageDead(_39);
+        StorageDead(_38);
+        goto -> bb184;
+    }
+
+    bb184: {
+        drop(_25) -> [return: bb185, unwind: bb191];
+    }
+
+    bb185: {
+        StorageDead(_25);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb186;
+    }
+
+    bb186: {
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb187;
+    }
+
+    bb187: {
+        return;
+    }
+
+    bb188 (cleanup): {
+        drop(_149) -> [return: bb189, unwind terminate(cleanup)];
+    }
+
+    bb189 (cleanup): {
+        drop(_137) -> [return: bb191, unwind terminate(cleanup)];
+    }
+
+    bb190 (cleanup): {
+        drop(_25) -> [return: bb191, unwind terminate(cleanup)];
+    }
+
+    bb191 (cleanup): {
+        resume;
+    }
+
+    bb192 (cleanup): {
+        _362 = discriminant(_150);
+        goto -> bb189;
+    }
+
+    bb193 (cleanup): {
+        _363 = discriminant(_138);
+        goto -> bb191;
+    }
+
+    bb194 (cleanup): {
+        _364 = discriminant(_26);
+        goto -> bb191;
+    }
+}

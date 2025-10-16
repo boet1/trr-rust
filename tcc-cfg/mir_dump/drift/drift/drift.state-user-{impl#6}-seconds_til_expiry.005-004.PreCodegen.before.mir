@@ -1,0 +1,33 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::seconds_til_expiry` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::seconds_til_expiry(_1: Order, _2: i64) -> i64 {
+    debug self => _1;
+    debug now => _2;
+    let mut _0: i64;
+    let mut _3: i64;
+    let mut _4: i64;
+    let mut _5: i64;
+    let mut _6: (i64, bool);
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (_1.8: i64);
+        StorageLive(_5);
+        _5 = _2;
+        _6 = CheckedSub(_4, _5);
+        assert(!move (_6.1: bool), "attempt to compute `{} - {}`, which would overflow", move _4, move _5) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = move (_6.0: i64);
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = <i64 as Ord>::max(move _3, const 0_i64) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        return;
+    }
+}

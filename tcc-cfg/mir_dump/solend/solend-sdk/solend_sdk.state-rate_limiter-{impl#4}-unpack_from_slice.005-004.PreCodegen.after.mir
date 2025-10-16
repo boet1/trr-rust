@@ -1,0 +1,188 @@
+// MIR for `rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:166:1: 166:26>::unpack_from_slice` after PreCodegen
+
+fn rate_limiter::<impl at token-lending\sdk\src\state\rate_limiter.rs:166:1: 166:26>::unpack_from_slice(_1: &[u8]) -> Result<rate_limiter::RateLimiter, ProgramError> {
+    debug src => _1;
+    let mut _0: std::result::Result<state::rate_limiter::RateLimiter, solana_program::program_error::ProgramError>;
+    let _2: &[u8; 56];
+    let _3: usize;
+    let _5: &[u8];
+    let mut _6: &[u8];
+    let mut _7: std::ops::Range<usize>;
+    let mut _8: usize;
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: (usize, bool);
+    let mut _12: &[u8];
+    let mut _18: (&[u8; 8], &[u8; 8], &[u8; 16], &[u8; 8], &[u8; 16]);
+    let mut _20: &[u8; 56];
+    let mut _21: state::rate_limiter::RateLimiter;
+    let mut _22: state::rate_limiter::RateLimiterConfig;
+    let mut _23: u64;
+    let mut _24: [u8; 8];
+    let mut _25: u64;
+    let mut _26: [u8; 8];
+    let mut _27: math::decimal::Decimal;
+    let mut _28: &[u8; 16];
+    let mut _29: u64;
+    let mut _30: [u8; 8];
+    let mut _31: math::decimal::Decimal;
+    let mut _32: &[u8; 16];
+    scope 1 {
+        debug src => _2;
+        let _13: &[u8; 8];
+        let _14: &[u8; 8];
+        let _15: &[u8; 16];
+        let _16: &[u8; 8];
+        let _17: &[u8; 16];
+        let _19: &[u8; 56];
+        scope 6 {
+            debug config_max_outflow_src => _13;
+            debug config_window_duration_src => _14;
+            debug prev_qty_src => _15;
+            debug window_start_src => _16;
+            debug cur_qty_src => _17;
+        }
+        scope 7 {
+            debug input => _19;
+            scope 8 {
+                scope 9 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug offset => _3;
+        let _4: &[u8];
+        scope 3 {
+            debug slice => _4;
+            scope 4 {
+                scope 5 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = const 0_usize;
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _3;
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _3;
+        _11 = CheckedAdd(_10, const _);
+        assert(!move (_11.1: bool), "attempt to compute `{} + {}`, which would overflow", move _10, const _) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _9 = move (_11.0: usize);
+        StorageDead(_10);
+        _7 = std::ops::Range::<usize> { start: move _8, end: move _9 };
+        StorageDead(_9);
+        StorageDead(_8);
+        _5 = <[u8] as Index<std::ops::Range<usize>>>::index(move _6, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = &(*_5);
+        StorageLive(_12);
+        _12 = &(*_4);
+        _2 = <rate_limiter::RateLimiter as Pack>::unpack_from_slice::as_array::<u8>(move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _2;
+        StorageLive(_20);
+        _20 = &(*_19);
+        _18 = <rate_limiter::RateLimiter as Pack>::unpack_from_slice::as_arrays::<u8>(move _20) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageLive(_13);
+        _13 = (_18.0: &[u8; 8]);
+        StorageLive(_14);
+        _14 = (_18.1: &[u8; 8]);
+        StorageLive(_15);
+        _15 = (_18.2: &[u8; 16]);
+        StorageLive(_16);
+        _16 = (_18.3: &[u8; 8]);
+        StorageLive(_17);
+        _17 = (_18.4: &[u8; 16]);
+        StorageDead(_18);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = (*_13);
+        _23 = core::num::<impl u64>::from_le_bytes(move _24) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = (*_14);
+        _25 = core::num::<impl u64>::from_le_bytes(move _26) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_26);
+        _22 = rate_limiter::RateLimiterConfig { window_duration: move _25, max_outflow: move _23 };
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &(*_15);
+        _27 = state::unpack_decimal(move _28) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = (*_16);
+        _29 = core::num::<impl u64>::from_le_bytes(move _30) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = &(*_17);
+        _31 = state::unpack_decimal(move _32) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_32);
+        _21 = rate_limiter::RateLimiter { config: move _22, prev_qty: move _27, window_start: move _29, cur_qty: move _31 };
+        StorageDead(_31);
+        StorageDead(_29);
+        StorageDead(_27);
+        StorageDead(_22);
+        _0 = Result::<rate_limiter::RateLimiter, ProgramError>::Ok(move _21);
+        StorageDead(_21);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_2);
+        return;
+    }
+}

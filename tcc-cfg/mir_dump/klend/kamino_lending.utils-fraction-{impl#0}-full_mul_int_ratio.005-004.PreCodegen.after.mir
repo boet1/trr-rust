@@ -1,0 +1,143 @@
+// MIR for `utils::fraction::<impl at programs\klend\src\utils\fraction.rs:97:1: 97:32>::full_mul_int_ratio` after PreCodegen
+
+fn utils::fraction::<impl at programs\klend\src\utils\fraction.rs:97:1: 97:32>::full_mul_int_ratio(_1: &FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, _2: impl Into<U256>, _3: impl Into<U256>) -> FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> {
+    debug self => _1;
+    debug numerator => _2;
+    debug denominator => _3;
+    let mut _0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _4: utils::fraction::uint_types::U256;
+    let mut _5: impl Into<U256>;
+    let mut _7: impl Into<U256>;
+    let mut _9: u128;
+    let mut _10: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _12: utils::fraction::uint_types::U256;
+    let mut _13: utils::fraction::uint_types::U256;
+    let mut _14: utils::fraction::uint_types::U256;
+    let mut _15: utils::fraction::uint_types::U256;
+    let mut _17: std::result::Result<u128, &str>;
+    let mut _18: utils::fraction::uint_types::U256;
+    let mut _19: &str;
+    let _20: &str;
+    let mut _21: u128;
+    let mut _22: bool;
+    scope 1 {
+        debug numerator => _4;
+        let _6: utils::fraction::uint_types::U256;
+        scope 2 {
+            debug denominator => _6;
+            let _8: utils::fraction::uint_types::U256;
+            scope 3 {
+                debug big_sf => _8;
+                let _11: utils::fraction::uint_types::U256;
+                scope 4 {
+                    debug big_sf_res => _11;
+                    let _16: u128;
+                    scope 5 {
+                        debug sf_res => _16;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _22 = const false;
+        _22 = const true;
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = move _2;
+        _4 = <impl Into<U256> as Into<uint_types::U256>>::into(move _5) -> [return: bb1, unwind: bb12];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _22 = const false;
+        _7 = move _3;
+        _6 = <impl Into<U256> as Into<uint_types::U256>>::into(move _7) -> [return: bb2, unwind: bb12];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = (*_1);
+        _9 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _10) -> [return: bb3, unwind: bb12];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _8 = <uint_types::U256 as From<u128>>::from(move _9) -> [return: bb4, unwind: bb12];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _8;
+        StorageLive(_14);
+        _14 = _4;
+        _12 = <uint_types::U256 as std::ops::Mul>::mul(move _13, move _14) -> [return: bb5, unwind: bb12];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageLive(_15);
+        _15 = _6;
+        _11 = <uint_types::U256 as std::ops::Div>::div(move _12, move _15) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _11;
+        _17 = <uint_types::U256 as TryInto<u128>>::try_into(move _18) -> [return: bb7, unwind: bb12];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = const "Denominator is not big enough, the result doesn't fit in a Fraction.";
+        _19 = &(*_20);
+        _16 = std::result::Result::<u128, &str>::expect(move _17, move _19) -> [return: bb8, unwind: bb12];
+    }
+
+    bb8: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_20);
+        StorageLive(_21);
+        _21 = _16;
+        _0 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _21) -> [return: bb9, unwind: bb12];
+    }
+
+    bb9: {
+        StorageDead(_21);
+        StorageDead(_16);
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_4);
+        return;
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11 (cleanup): {
+        drop(_3) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        switchInt(_22) -> [0: bb10, otherwise: bb11];
+    }
+}

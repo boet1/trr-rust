@@ -1,0 +1,21 @@
+// MIR for `get_signed_token_amount::{closure#0}` before PreCodegen
+
+fn get_signed_token_amount::{closure#0}(_1: {closure@programs/drift/src/math/spot_balance.rs:72:18: 72:32}, _2: i128) -> i128 {
+    debug token_amount => _2;
+    let mut _0: i128;
+    let mut _3: i128;
+    let mut _4: bool;
+
+    bb0: {
+        StorageLive(_3);
+        _3 = _2;
+        _4 = Eq(_3, const i128::MIN);
+        assert(!move _4, "attempt to negate `{}`, which would overflow", _3) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = Neg(move _3);
+        StorageDead(_3);
+        return;
+    }
+}

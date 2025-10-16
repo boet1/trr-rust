@@ -1,0 +1,337 @@
+// MIR for `emit_buffers` before PreCodegen
+
+fn emit_buffers(_1: T, _2: &mut [u8], _3: &mut [u8]) -> std::result::Result<(), error::ErrorCode> {
+    debug event => _1;
+    debug data_buf => _2;
+    debug out_buf => _3;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let mut _4: std::io::Cursor<&mut [u8]>;
+    let mut _5: &mut [u8];
+    let _6: ();
+    let mut _7: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _8: std::result::Result<(), error::ErrorCode>;
+    let mut _9: std::result::Result<(), std::io::Error>;
+    let mut _10: &mut std::io::Cursor<&mut [u8]>;
+    let mut _11: &[u8];
+    let mut _12: &[u8; 8];
+    let _13: &[u8; 8];
+    let _14: [u8; 8];
+    let mut _15: isize;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _20: ();
+    let mut _21: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _22: std::result::Result<(), error::ErrorCode>;
+    let mut _23: std::result::Result<(), std::io::Error>;
+    let mut _24: &mut std::io::Cursor<&mut [u8]>;
+    let mut _25: &T;
+    let _26: &T;
+    let mut _27: isize;
+    let mut _29: !;
+    let mut _30: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _33: u64;
+    let mut _34: &std::io::Cursor<&mut [u8]>;
+    let mut _36: &[u8];
+    let _37: &[u8];
+    let mut _38: &[u8];
+    let _39: &mut [u8];
+    let mut _40: std::io::Cursor<&mut [u8]>;
+    let mut _41: std::ops::Range<usize>;
+    let mut _42: usize;
+    let mut _43: &mut [u8];
+    let _45: &[u8];
+    let mut _46: &[u8];
+    let mut _47: std::ops::Range<usize>;
+    let mut _48: usize;
+    let mut _50: &[u8];
+    let _51: ();
+    let mut _52: &str;
+    let mut _53: ();
+    scope 1 {
+        debug data_writer => _4;
+        let _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _19: ();
+        let _28: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _31: ();
+        let _32: usize;
+        scope 2 {
+            debug residual => _16;
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug val => _19;
+            scope 5 {
+            }
+        }
+        scope 6 {
+            debug residual => _28;
+            scope 7 {
+            }
+        }
+        scope 8 {
+            debug val => _31;
+            scope 9 {
+            }
+        }
+        scope 10 {
+            debug data_len => _32;
+            let _35: usize;
+            scope 11 {
+                debug out_len => _35;
+                let _44: &[u8];
+                scope 12 {
+                    debug msg_bytes => _44;
+                    let _49: &str;
+                    scope 13 {
+                        debug msg_str => _49;
+                    }
+                    scope 14 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = move _2;
+        _4 = std::io::Cursor::<&mut [u8]>::new(move _5) -> [return: bb1, unwind: bb25];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &mut _4;
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = <T as anchor_lang::Discriminator>::discriminator() -> [return: bb2, unwind: bb25];
+    }
+
+    bb2: {
+        _13 = &_14;
+        _12 = &(*_13);
+        _11 = move _12 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        _9 = <std::io::Cursor<&mut [u8]> as std::io::Write>::write_all(move _10, move _11) -> [return: bb3, unwind: bb25];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_10);
+        _8 = <std::result::Result<(), std::io::Error> as SafeUnwrap>::safe_unwrap(move _9) -> [return: bb4, unwind: bb25];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        _7 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _8) -> [return: bb5, unwind: bb25];
+    }
+
+    bb5: {
+        StorageDead(_8);
+        _15 = discriminant(_7);
+        switchInt(move _15) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_19);
+        _19 = ((_7 as Continue).0: ());
+        _6 = _19;
+        StorageDead(_19);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &mut _4;
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &_1;
+        _25 = &(*_26);
+        _23 = borsh::to_writer::<T, &mut std::io::Cursor<&mut [u8]>>(move _24, move _25) -> [return: bb10, unwind: bb25];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_16);
+        _16 = ((_7 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_18);
+        _18 = _16;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _18) -> [return: bb9, unwind: bb25];
+    }
+
+    bb9: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb23;
+    }
+
+    bb10: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _22 = <std::result::Result<(), std::io::Error> as SafeUnwrap>::safe_unwrap(move _23) -> [return: bb11, unwind: bb25];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        _21 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _22) -> [return: bb12, unwind: bb25];
+    }
+
+    bb12: {
+        StorageDead(_22);
+        _27 = discriminant(_21);
+        switchInt(move _27) -> [0: bb13, 1: bb14, otherwise: bb7];
+    }
+
+    bb13: {
+        StorageLive(_31);
+        _31 = ((_21 as Continue).0: ());
+        _20 = _31;
+        StorageDead(_31);
+        StorageDead(_26);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = &_4;
+        _33 = std::io::Cursor::<&mut [u8]>::position(move _34) -> [return: bb16, unwind: bb25];
+    }
+
+    bb14: {
+        StorageLive(_28);
+        _28 = ((_21 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_30);
+        _30 = _28;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _30) -> [return: bb15, unwind: bb25];
+    }
+
+    bb15: {
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_21);
+        StorageDead(_20);
+        goto -> bb23;
+    }
+
+    bb16: {
+        StorageDead(_34);
+        _32 = move _33 as usize (IntToInt);
+        StorageDead(_33);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        _40 = move _4;
+        _39 = std::io::Cursor::<&mut [u8]>::into_inner(move _40) -> [return: bb17, unwind: bb25];
+    }
+
+    bb17: {
+        _38 = &(*_39);
+        StorageDead(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = _32;
+        _41 = std::ops::Range::<usize> { start: const 0_usize, end: move _42 };
+        StorageDead(_42);
+        _37 = <[u8] as Index<std::ops::Range<usize>>>::index(move _38, move _41) -> [return: bb18, unwind: bb25];
+    }
+
+    bb18: {
+        StorageDead(_41);
+        StorageDead(_38);
+        _36 = &(*_37);
+        StorageLive(_43);
+        _43 = &mut (*_3);
+        _35 = encode_config_slice::<&[u8]>(move _36, const _, move _43) -> [return: bb19, unwind: bb25];
+    }
+
+    bb19: {
+        StorageDead(_43);
+        StorageDead(_36);
+        StorageDead(_39);
+        StorageDead(_37);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        _46 = &(*_3);
+        StorageLive(_47);
+        StorageLive(_48);
+        _48 = _35;
+        _47 = std::ops::Range::<usize> { start: const 0_usize, end: move _48 };
+        StorageDead(_48);
+        _45 = <[u8] as Index<std::ops::Range<usize>>>::index(move _46, move _47) -> [return: bb20, unwind: bb25];
+    }
+
+    bb20: {
+        StorageDead(_47);
+        StorageDead(_46);
+        _44 = &(*_45);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = &(*_44);
+        _49 = from_utf8_unchecked(move _50) -> [return: bb21, unwind: bb25];
+    }
+
+    bb21: {
+        StorageDead(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        _52 = &(*_49);
+        _51 = solana_program::log::sol_log(move _52) -> [return: bb22, unwind: bb25];
+    }
+
+    bb22: {
+        StorageDead(_52);
+        StorageDead(_51);
+        StorageLive(_53);
+        _53 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _53);
+        StorageDead(_53);
+        StorageDead(_49);
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageDead(_35);
+        StorageDead(_32);
+        StorageDead(_4);
+        drop(_1) -> [return: bb24, unwind: bb26];
+    }
+
+    bb23: {
+        StorageDead(_4);
+        drop(_1) -> [return: bb24, unwind: bb26];
+    }
+
+    bb24: {
+        return;
+    }
+
+    bb25 (cleanup): {
+        drop(_1) -> [return: bb26, unwind terminate(cleanup)];
+    }
+
+    bb26 (cleanup): {
+        resume;
+    }
+}

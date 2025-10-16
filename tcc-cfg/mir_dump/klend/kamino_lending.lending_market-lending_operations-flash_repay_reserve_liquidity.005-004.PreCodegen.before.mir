@@ -1,0 +1,547 @@
+// MIR for `lending_operations::flash_repay_reserve_liquidity` before PreCodegen
+
+fn lending_operations::flash_repay_reserve_liquidity(_1: &state::lending_market::LendingMarket, _2: &mut reserve::Reserve, _3: u64, _4: u64, _5: std::option::Option<&T>) -> std::result::Result<(u64, u64), anchor_lang::error::Error> {
+    debug lending_market => _1;
+    debug reserve => _2;
+    debug liquidity_amount => _3;
+    debug timestamp => _4;
+    debug referrer_token_state_loader => _5;
+    let mut _0: std::result::Result<(u64, u64), anchor_lang::error::Error>;
+    let _6: u64;
+    let mut _8: u64;
+    let mut _11: (u64, u64);
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, (u64, u64)>;
+    let mut _13: std::result::Result<(u64, u64), anchor_lang::error::Error>;
+    let mut _14: &state::reserve::ReserveFees;
+    let mut _15: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _16: u16;
+    let mut _17: bool;
+    let mut _18: &std::option::Option<&T>;
+    let mut _19: isize;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _24: ();
+    let mut _25: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>>;
+    let mut _26: std::result::Result<(), LendingError>;
+    let mut _27: &mut state::reserve::ReserveLiquidity;
+    let mut _28: u64;
+    let mut _29: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _30: isize;
+    let mut _32: !;
+    let mut _33: std::result::Result<std::convert::Infallible, LendingError>;
+    let _35: ();
+    let mut _36: &mut state::reserve::Reserve;
+    let mut _37: u64;
+    let _38: ();
+    let mut _39: &mut state::last_update::LastUpdate;
+    let _40: ();
+    let mut _41: isize;
+    let mut _43: bool;
+    let mut _44: u16;
+    let mut _46: std::cell::RefMut<'_, state::referral::ReferrerTokenState>;
+    let mut _47: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::cell::RefMut<'_, state::referral::ReferrerTokenState>>;
+    let mut _48: std::result::Result<std::cell::RefMut<'_, state::referral::ReferrerTokenState>, anchor_lang::error::Error>;
+    let mut _49: &T;
+    let mut _50: isize;
+    let mut _52: !;
+    let mut _53: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _55: ();
+    let mut _56: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _57: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _58: &mut state::reserve::Reserve;
+    let mut _59: &mut state::referral::ReferrerTokenState;
+    let mut _60: &mut state::referral::ReferrerTokenState;
+    let mut _61: &mut std::cell::RefMut<'_, state::referral::ReferrerTokenState>;
+    let mut _62: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _63: u64;
+    let mut _64: isize;
+    let mut _66: !;
+    let mut _67: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _69: u64;
+    let mut _70: (u64, bool);
+    let mut _72: u64;
+    let mut _73: u64;
+    let mut _74: (u64, bool);
+    let mut _75: (u64, u64);
+    let mut _76: u64;
+    let mut _77: u64;
+    let mut _78: isize;
+    let mut _79: isize;
+    let mut _80: isize;
+    let mut _81: isize;
+    let mut _82: isize;
+    let mut _83: isize;
+    let mut _84: isize;
+    let mut _85: isize;
+    let mut _86: isize;
+    let mut _87: isize;
+    let mut _88: isize;
+    let mut _89: isize;
+    let mut _90: isize;
+    let mut _91: isize;
+    let mut _92: isize;
+    scope 1 {
+        debug flash_loan_amount => _6;
+        let _7: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+        scope 2 {
+            debug flash_loan_amount_f => _7;
+            let _9: u64;
+            let _10: u64;
+            let _20: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _23: (u64, u64);
+            scope 3 {
+                debug protocol_fee => _9;
+                debug referrer_fee => _10;
+                let _31: std::result::Result<std::convert::Infallible, LendingError>;
+                let _34: ();
+                let _71: u64;
+                scope 8 {
+                    debug residual => _31;
+                    scope 9 {
+                    }
+                }
+                scope 10 {
+                    debug val => _34;
+                    scope 11 {
+                    }
+                }
+                scope 12 {
+                    debug referrer_token_state_loader => _42;
+                    let _42: &T;
+                    let _45: &mut std::cell::RefMut<'_, state::referral::ReferrerTokenState>;
+                    let _51: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                    let _54: std::cell::RefMut<'_, state::referral::ReferrerTokenState>;
+                    scope 13 {
+                        debug referrer_token_state => _45;
+                        let _65: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                        let _68: ();
+                        scope 18 {
+                            debug residual => _65;
+                            scope 19 {
+                            }
+                        }
+                        scope 20 {
+                            debug val => _68;
+                            scope 21 {
+                            }
+                        }
+                    }
+                    scope 14 {
+                        debug residual => _51;
+                        scope 15 {
+                        }
+                    }
+                    scope 16 {
+                        debug val => _54;
+                        scope 17 {
+                        }
+                    }
+                }
+                scope 22 {
+                    debug flash_loan_amount_with_referral_fee => _71;
+                }
+            }
+            scope 4 {
+                debug residual => _20;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _23;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        _6 = _3;
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _6;
+        _7 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(((*_2).9: state::reserve::ReserveConfig).14: state::reserve::ReserveFees);
+        StorageLive(_15);
+        _15 = _7;
+        StorageLive(_16);
+        _16 = ((*_1).5: u16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &_5;
+        _17 = std::option::Option::<&T>::is_some(move _18) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_18);
+        _13 = ReserveFees::calculate_flash_loan_fees(move _14, move _15, move _16, move _17) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        _12 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as Try>::branch(move _13) -> [return: bb4, unwind: bb42];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        _19 = discriminant(_12);
+        switchInt(move _19) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_23);
+        _23 = ((_12 as Continue).0: (u64, u64));
+        _11 = _23;
+        StorageDead(_23);
+        StorageLive(_9);
+        _9 = (_11.0: u64);
+        StorageLive(_10);
+        _10 = (_11.1: u64);
+        _78 = discriminant(_12);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &mut ((*_2).5: state::reserve::ReserveLiquidity);
+        StorageLive(_28);
+        _28 = _6;
+        StorageLive(_29);
+        _29 = _7;
+        _26 = ReserveLiquidity::repay(move _27, move _28, move _29) -> [return: bb9, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_20);
+        _20 = move ((_12 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_22);
+        _22 = move _20;
+        _0 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _22) -> [return: bb8, unwind: bb45];
+    }
+
+    bb8: {
+        StorageDead(_22);
+        StorageDead(_20);
+        _88 = discriminant(_12);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb39;
+    }
+
+    bb9: {
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_27);
+        _25 = <std::result::Result<(), LendingError> as Try>::branch(move _26) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_26);
+        _30 = discriminant(_25);
+        switchInt(move _30) -> [0: bb11, 1: bb12, otherwise: bb6];
+    }
+
+    bb11: {
+        StorageLive(_34);
+        _34 = ((_25 as Continue).0: ());
+        _24 = _34;
+        StorageDead(_34);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = &mut (*_2);
+        StorageLive(_37);
+        _37 = _4;
+        _35 = refresh_reserve_limit_timestamps(move _36, move _37) -> [return: bb14, unwind continue];
+    }
+
+    bb12: {
+        StorageLive(_31);
+        _31 = ((_25 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_33);
+        _33 = _31;
+        _0 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _33) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_33);
+        StorageDead(_31);
+        StorageDead(_25);
+        StorageDead(_24);
+        goto -> bb38;
+    }
+
+    bb14: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = &mut ((*_2).1: state::last_update::LastUpdate);
+        _38 = last_update::LastUpdate::mark_stale(move _39) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageLive(_40);
+        _41 = discriminant(_5);
+        switchInt(move _41) -> [1: bb16, otherwise: bb34];
+    }
+
+    bb16: {
+        StorageLive(_42);
+        _42 = ((_5 as Some).0: &T);
+        StorageLive(_43);
+        StorageLive(_44);
+        _44 = ((*_1).5: u16);
+        _43 = Gt(move _44, const 0_u16);
+        switchInt(move _43) -> [0: bb32, otherwise: bb17];
+    }
+
+    bb17: {
+        StorageDead(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = &(*_42);
+        _48 = <T as account_loader_trait::AnyAccountLoader<'_, referral::ReferrerTokenState>>::get_mut(move _49) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_49);
+        _47 = <std::result::Result<RefMut<'_, referral::ReferrerTokenState>, anchor_lang::error::Error> as Try>::branch(move _48) -> [return: bb19, unwind: bb42];
+    }
+
+    bb19: {
+        StorageDead(_48);
+        _50 = discriminant(_47);
+        switchInt(move _50) -> [0: bb20, 1: bb21, otherwise: bb6];
+    }
+
+    bb20: {
+        StorageLive(_54);
+        _54 = move ((_47 as Continue).0: std::cell::RefMut<'_, state::referral::ReferrerTokenState>);
+        _46 = move _54;
+        StorageDead(_54);
+        _45 = &mut _46;
+        _80 = discriminant(_47);
+        StorageDead(_47);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = &mut (*_2);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = &mut (*_45);
+        _60 = <RefMut<'_, referral::ReferrerTokenState> as DerefMut>::deref_mut(move _61) -> [return: bb23, unwind: bb41];
+    }
+
+    bb21: {
+        StorageLive(_51);
+        _51 = move ((_47 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_53);
+        _53 = move _51;
+        _0 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _53) -> [return: bb22, unwind: bb44];
+    }
+
+    bb22: {
+        StorageDead(_53);
+        StorageDead(_51);
+        _86 = discriminant(_47);
+        StorageDead(_47);
+        goto -> bb37;
+    }
+
+    bb23: {
+        _59 = &mut (*_60);
+        StorageDead(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = _10;
+        _62 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_num::<u64>(move _63) -> [return: bb24, unwind: bb41];
+    }
+
+    bb24: {
+        StorageDead(_63);
+        _57 = add_referrer_fee(move _58, move _59, move _62) -> [return: bb25, unwind: bb41];
+    }
+
+    bb25: {
+        StorageDead(_62);
+        StorageDead(_59);
+        StorageDead(_58);
+        _56 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _57) -> [return: bb26, unwind: bb41];
+    }
+
+    bb26: {
+        StorageDead(_57);
+        _64 = discriminant(_56);
+        switchInt(move _64) -> [0: bb27, 1: bb28, otherwise: bb6];
+    }
+
+    bb27: {
+        StorageLive(_68);
+        _68 = ((_56 as Continue).0: ());
+        _55 = _68;
+        StorageDead(_68);
+        _82 = discriminant(_56);
+        StorageDead(_60);
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageLive(_69);
+        _69 = _10;
+        _70 = CheckedAdd((((*_2).5: state::reserve::ReserveLiquidity).3: u64), _69);
+        assert(!move (_70.1: bool), "attempt to compute `{} + {}`, which would overflow", (((*_2).5: state::reserve::ReserveLiquidity).3: u64), move _69) -> [success: bb30, unwind: bb41];
+    }
+
+    bb28: {
+        StorageLive(_65);
+        _65 = move ((_56 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_67);
+        _67 = move _65;
+        _0 = <std::result::Result<(u64, u64), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _67) -> [return: bb29, unwind: bb43];
+    }
+
+    bb29: {
+        StorageDead(_67);
+        StorageDead(_65);
+        _84 = discriminant(_56);
+        StorageDead(_60);
+        StorageDead(_56);
+        StorageDead(_55);
+        drop(_46) -> [return: bb37, unwind: bb42];
+    }
+
+    bb30: {
+        (((*_2).5: state::reserve::ReserveLiquidity).3: u64) = move (_70.0: u64);
+        StorageDead(_69);
+        _40 = const ();
+        drop(_46) -> [return: bb31, unwind: bb42];
+    }
+
+    bb31: {
+        StorageDead(_46);
+        StorageDead(_45);
+        goto -> bb33;
+    }
+
+    bb32: {
+        StorageDead(_44);
+        _40 = const ();
+        goto -> bb33;
+    }
+
+    bb33: {
+        StorageDead(_43);
+        StorageDead(_42);
+        goto -> bb35;
+    }
+
+    bb34: {
+        _40 = const ();
+        goto -> bb35;
+    }
+
+    bb35: {
+        StorageDead(_40);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = _6;
+        StorageLive(_73);
+        _73 = _10;
+        _74 = CheckedAdd(_72, _73);
+        assert(!move (_74.1: bool), "attempt to compute `{} + {}`, which would overflow", move _72, move _73) -> [success: bb36, unwind continue];
+    }
+
+    bb36: {
+        _71 = move (_74.0: u64);
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageLive(_75);
+        StorageLive(_76);
+        _76 = _71;
+        StorageLive(_77);
+        _77 = _9;
+        _75 = (move _76, move _77);
+        StorageDead(_77);
+        StorageDead(_76);
+        _0 = std::result::Result::<(u64, u64), anchor_lang::error::Error>::Ok(move _75);
+        StorageDead(_75);
+        StorageDead(_71);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb40;
+    }
+
+    bb37: {
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_40);
+        goto -> bb38;
+    }
+
+    bb38: {
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb39;
+    }
+
+    bb39: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb40;
+    }
+
+    bb40: {
+        return;
+    }
+
+    bb41 (cleanup): {
+        drop(_46) -> [return: bb42, unwind terminate(cleanup)];
+    }
+
+    bb42 (cleanup): {
+        resume;
+    }
+
+    bb43 (cleanup): {
+        _90 = discriminant(_56);
+        goto -> bb41;
+    }
+
+    bb44 (cleanup): {
+        _91 = discriminant(_47);
+        goto -> bb42;
+    }
+
+    bb45 (cleanup): {
+        _92 = discriminant(_12);
+        goto -> bb42;
+    }
+}

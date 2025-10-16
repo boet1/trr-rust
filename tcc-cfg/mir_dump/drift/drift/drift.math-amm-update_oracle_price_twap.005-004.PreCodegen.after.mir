@@ -1,0 +1,997 @@
+// MIR for `update_oracle_price_twap` after PreCodegen
+
+fn update_oracle_price_twap(_1: &mut AMM, _2: i64, _3: &MMOraclePriceData, _4: Option<u64>, _5: Option<i64>) -> std::result::Result<i64, error::ErrorCode> {
+    debug amm => _1;
+    debug now => _2;
+    debug mm_oracle_price_data => _3;
+    debug precomputed_reserve_price => _4;
+    debug sanitize_clamp => _5;
+    let mut _0: std::result::Result<i64, error::ErrorCode>;
+    let _6: u64;
+    let mut _7: isize;
+    let _8: u64;
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _10: std::result::Result<u64, error::ErrorCode>;
+    let mut _11: &state::perp_market::AMM;
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _16: u64;
+    let mut _18: &state::oracle::MMOraclePriceData;
+    let mut _20: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _21: std::result::Result<i64, error::ErrorCode>;
+    let mut _22: &state::perp_market::AMM;
+    let mut _23: &state::oracle::OraclePriceData;
+    let _24: &state::oracle::OraclePriceData;
+    let _25: state::oracle::OraclePriceData;
+    let mut _26: &state::oracle::MMOraclePriceData;
+    let mut _27: std::option::Option<u64>;
+    let mut _28: u64;
+    let mut _29: isize;
+    let mut _31: !;
+    let mut _32: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _35: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _36: std::result::Result<i64, error::ErrorCode>;
+    let mut _37: i64;
+    let mut _38: i64;
+    let mut _39: std::option::Option<i64>;
+    let mut _40: isize;
+    let mut _42: !;
+    let mut _43: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _46: ();
+    let mut _47: bool;
+    let mut _48: i64;
+    let mut _49: bool;
+    let mut _50: i64;
+    let mut _51: i64;
+    let mut _52: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _53: std::result::Result<i64, error::ErrorCode>;
+    let mut _54: &state::perp_market::AMM;
+    let mut _55: i64;
+    let mut _56: i64;
+    let mut _57: math::amm::TwapPeriod;
+    let mut _58: isize;
+    let mut _60: !;
+    let mut _61: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _64: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _65: std::result::Result<i64, error::ErrorCode>;
+    let mut _66: &state::perp_market::AMM;
+    let mut _67: i64;
+    let mut _68: i64;
+    let mut _69: math::amm::TwapPeriod;
+    let mut _70: isize;
+    let mut _72: !;
+    let mut _73: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _75: i64;
+    let mut _76: i64;
+    let mut _77: state::oracle::OraclePriceData;
+    let mut _78: &state::oracle::MMOraclePriceData;
+    let mut _79: u64;
+    let mut _80: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _81: std::result::Result<u64, error::ErrorCode>;
+    let mut _82: &state::perp_market::AMM;
+    let mut _83: u64;
+    let mut _84: u64;
+    let mut _85: i64;
+    let mut _86: isize;
+    let mut _88: !;
+    let mut _89: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _91: i64;
+    let mut _92: state::oracle::OraclePriceData;
+    let mut _93: &state::oracle::MMOraclePriceData;
+    let mut _94: i64;
+    let mut _95: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _96: std::result::Result<i64, error::ErrorCode>;
+    let mut _97: &state::perp_market::AMM;
+    let mut _98: &state::oracle::MMOraclePriceData;
+    let mut _99: std::option::Option<u64>;
+    let mut _100: u64;
+    let mut _101: isize;
+    let mut _103: !;
+    let mut _104: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _106: bool;
+    let mut _107: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _108: std::result::Result<bool, error::ErrorCode>;
+    let mut _109: &mut state::perp_market::AMM;
+    let mut _110: i64;
+    let mut _111: u64;
+    let mut _112: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _113: std::result::Result<u64, error::ErrorCode>;
+    let mut _114: i64;
+    let mut _115: isize;
+    let mut _117: !;
+    let mut _118: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _120: u64;
+    let mut _121: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _122: std::result::Result<u64, error::ErrorCode>;
+    let mut _123: i64;
+    let mut _124: isize;
+    let mut _126: !;
+    let mut _127: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _129: u64;
+    let mut _130: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _131: std::result::Result<u64, error::ErrorCode>;
+    let mut _132: i64;
+    let mut _133: isize;
+    let mut _135: !;
+    let mut _136: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _138: isize;
+    let mut _140: !;
+    let mut _141: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _143: i64;
+    let mut _144: i64;
+    let mut _145: i64;
+    let mut _146: i64;
+    let mut _147: i64;
+    scope 1 {
+        debug reserve_price => _6;
+        let _17: u64;
+        scope 7 {
+            debug oracle_confidence => _17;
+            let _19: i64;
+            let _30: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _33: i64;
+            scope 8 {
+                debug oracle_price => _19;
+                let _34: i64;
+                let _41: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _44: i64;
+                scope 13 {
+                    debug capped_oracle_update_price => _34;
+                    let _45: i64;
+                    scope 18 {
+                        debug oracle_price_twap => _45;
+                        let _59: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _62: i64;
+                        let _63: i64;
+                        let _71: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _74: i64;
+                        scope 19 {
+                            debug residual => _59;
+                            scope 20 {
+                            }
+                        }
+                        scope 21 {
+                            debug val => _62;
+                            scope 22 {
+                            }
+                        }
+                        scope 23 {
+                            debug oracle_price_twap_5min => _63;
+                            let _87: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _90: u64;
+                            let _102: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _105: i64;
+                            let _116: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _119: u64;
+                            let _125: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _128: u64;
+                            let _134: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _137: u64;
+                            let _139: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _142: bool;
+                            scope 28 {
+                                debug residual => _87;
+                                scope 29 {
+                                }
+                            }
+                            scope 30 {
+                                debug val => _90;
+                                scope 31 {
+                                }
+                            }
+                            scope 32 {
+                                debug residual => _102;
+                                scope 33 {
+                                }
+                            }
+                            scope 34 {
+                                debug val => _105;
+                                scope 35 {
+                                }
+                            }
+                            scope 36 {
+                                debug residual => _116;
+                                scope 37 {
+                                }
+                            }
+                            scope 38 {
+                                debug val => _119;
+                                scope 39 {
+                                }
+                            }
+                            scope 40 {
+                                debug residual => _125;
+                                scope 41 {
+                                }
+                            }
+                            scope 42 {
+                                debug val => _128;
+                                scope 43 {
+                                }
+                            }
+                            scope 44 {
+                                debug residual => _134;
+                                scope 45 {
+                                }
+                            }
+                            scope 46 {
+                                debug val => _137;
+                                scope 47 {
+                                }
+                            }
+                            scope 48 {
+                                debug residual => _139;
+                                scope 49 {
+                                }
+                            }
+                            scope 50 {
+                                debug val => _142;
+                                scope 51 {
+                                }
+                            }
+                        }
+                        scope 24 {
+                            debug residual => _71;
+                            scope 25 {
+                            }
+                        }
+                        scope 26 {
+                            debug val => _74;
+                            scope 27 {
+                            }
+                        }
+                    }
+                }
+                scope 14 {
+                    debug residual => _41;
+                    scope 15 {
+                    }
+                }
+                scope 16 {
+                    debug val => _44;
+                    scope 17 {
+                    }
+                }
+            }
+            scope 9 {
+                debug residual => _30;
+                scope 10 {
+                }
+            }
+            scope 11 {
+                debug val => _33;
+                scope 12 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug reserve_price => _8;
+    }
+    scope 3 {
+        debug residual => _13;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug val => _16;
+        scope 6 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        _7 = discriminant(_4);
+        switchInt(move _7) -> [0: bb1, 1: bb3, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &(*_1);
+        _10 = AMM::reserve_price(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_8);
+        _8 = ((_4 as Some).0: u64);
+        _6 = _8;
+        StorageDead(_8);
+        goto -> bb9;
+    }
+
+    bb4: {
+        StorageDead(_11);
+        _9 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _10) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_10);
+        _12 = discriminant(_9);
+        switchInt(move _12) -> [0: bb6, 1: bb7, otherwise: bb2];
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = ((_9 as Continue).0: u64);
+        _6 = _16;
+        StorageDead(_16);
+        StorageDead(_9);
+        goto -> bb9;
+    }
+
+    bb7: {
+        StorageLive(_13);
+        _13 = ((_9 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_15);
+        _15 = _13;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _15) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_9);
+        goto -> bb77;
+    }
+
+    bb9: {
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &(*_3);
+        _17 = MMOraclePriceData::get_confidence(move _18) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &(*_1);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &(*_3);
+        _25 = MMOraclePriceData::get_exchange_oracle_price_data(move _26) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_26);
+        _24 = &_25;
+        _23 = &(*_24);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _6;
+        _27 = Option::<u64>::Some(move _28);
+        StorageDead(_28);
+        _21 = normalise_oracle_price(move _22, move _23, move _27) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_27);
+        StorageDead(_23);
+        StorageDead(_22);
+        _20 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _21) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_21);
+        _29 = discriminant(_20);
+        switchInt(move _29) -> [0: bb14, 1: bb15, otherwise: bb2];
+    }
+
+    bb14: {
+        StorageLive(_33);
+        _33 = ((_20 as Continue).0: i64);
+        _19 = _33;
+        StorageDead(_33);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_20);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        _37 = _19;
+        StorageLive(_38);
+        _38 = (((*_1).1: state::oracle::HistoricalOracleData).3: i64);
+        StorageLive(_39);
+        _39 = _5;
+        _36 = sanitize_new_price(move _37, move _38, move _39) -> [return: bb17, unwind continue];
+    }
+
+    bb15: {
+        StorageLive(_30);
+        _30 = ((_20 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_32);
+        _32 = _30;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _32) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_20);
+        goto -> bb76;
+    }
+
+    bb17: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_37);
+        _35 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _36) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_36);
+        _40 = discriminant(_35);
+        switchInt(move _40) -> [0: bb19, 1: bb20, otherwise: bb2];
+    }
+
+    bb19: {
+        StorageLive(_44);
+        _44 = ((_35 as Continue).0: i64);
+        _34 = _44;
+        StorageDead(_44);
+        StorageDead(_35);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        _48 = _34;
+        _47 = Gt(move _48, const 0_i64);
+        switchInt(move _47) -> [0: bb23, otherwise: bb22];
+    }
+
+    bb20: {
+        StorageLive(_41);
+        _41 = ((_35 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_43);
+        _43 = _41;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _43) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        StorageDead(_43);
+        StorageDead(_41);
+        StorageDead(_35);
+        goto -> bb75;
+    }
+
+    bb22: {
+        StorageDead(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = _19;
+        _49 = Gt(move _50, const 0_i64);
+        switchInt(move _49) -> [0: bb67, otherwise: bb24];
+    }
+
+    bb23: {
+        StorageDead(_48);
+        goto -> bb68;
+    }
+
+    bb24: {
+        StorageDead(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = &(*_1);
+        StorageLive(_55);
+        _55 = _2;
+        StorageLive(_56);
+        _56 = _34;
+        StorageLive(_57);
+        _57 = TwapPeriod::FundingPeriod;
+        _53 = calculate_new_oracle_price_twap(move _54, move _55, move _56, move _57) -> [return: bb25, unwind continue];
+    }
+
+    bb25: {
+        StorageDead(_57);
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageDead(_54);
+        _52 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _53) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_53);
+        _58 = discriminant(_52);
+        switchInt(move _58) -> [0: bb27, 1: bb28, otherwise: bb2];
+    }
+
+    bb27: {
+        StorageLive(_62);
+        _62 = ((_52 as Continue).0: i64);
+        _51 = _62;
+        StorageDead(_62);
+        _45 = move _51;
+        StorageDead(_51);
+        StorageDead(_52);
+        StorageLive(_63);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        _66 = &(*_1);
+        StorageLive(_67);
+        _67 = _2;
+        StorageLive(_68);
+        _68 = _34;
+        StorageLive(_69);
+        _69 = TwapPeriod::FiveMin;
+        _65 = calculate_new_oracle_price_twap(move _66, move _67, move _68, move _69) -> [return: bb30, unwind continue];
+    }
+
+    bb28: {
+        StorageLive(_59);
+        _59 = ((_52 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_61);
+        _61 = _59;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _61) -> [return: bb29, unwind continue];
+    }
+
+    bb29: {
+        StorageDead(_61);
+        StorageDead(_59);
+        StorageDead(_51);
+        StorageDead(_52);
+        goto -> bb74;
+    }
+
+    bb30: {
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_67);
+        StorageDead(_66);
+        _64 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _65) -> [return: bb31, unwind continue];
+    }
+
+    bb31: {
+        StorageDead(_65);
+        _70 = discriminant(_64);
+        switchInt(move _70) -> [0: bb32, 1: bb33, otherwise: bb2];
+    }
+
+    bb32: {
+        StorageLive(_74);
+        _74 = ((_64 as Continue).0: i64);
+        _63 = _74;
+        StorageDead(_74);
+        StorageDead(_64);
+        StorageLive(_75);
+        _75 = _34;
+        ((*_1).41: i64) = move _75;
+        StorageDead(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        _78 = &(*_3);
+        _77 = MMOraclePriceData::get_exchange_oracle_price_data(move _78) -> [return: bb35, unwind continue];
+    }
+
+    bb33: {
+        StorageLive(_71);
+        _71 = ((_64 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_73);
+        _73 = _71;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _73) -> [return: bb34, unwind continue];
+    }
+
+    bb34: {
+        StorageDead(_73);
+        StorageDead(_71);
+        StorageDead(_64);
+        goto -> bb73;
+    }
+
+    bb35: {
+        StorageDead(_78);
+        _76 = (_77.0: i64);
+        (((*_1).1: state::oracle::HistoricalOracleData).0: i64) = move _76;
+        StorageDead(_76);
+        StorageDead(_77);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        _82 = &(*_1);
+        StorageLive(_83);
+        _83 = _17;
+        StorageLive(_84);
+        _84 = _6;
+        StorageLive(_85);
+        _85 = _2;
+        _81 = AMM::get_new_oracle_conf_pct(move _82, move _83, move _84, move _85) -> [return: bb36, unwind continue];
+    }
+
+    bb36: {
+        StorageDead(_85);
+        StorageDead(_84);
+        StorageDead(_83);
+        StorageDead(_82);
+        _80 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _81) -> [return: bb37, unwind continue];
+    }
+
+    bb37: {
+        StorageDead(_81);
+        _86 = discriminant(_80);
+        switchInt(move _86) -> [0: bb38, 1: bb39, otherwise: bb2];
+    }
+
+    bb38: {
+        StorageLive(_90);
+        _90 = ((_80 as Continue).0: u64);
+        _79 = _90;
+        StorageDead(_90);
+        ((*_1).48: u64) = move _79;
+        StorageDead(_79);
+        StorageDead(_80);
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        _93 = &(*_3);
+        _92 = MMOraclePriceData::get_exchange_oracle_price_data(move _93) -> [return: bb41, unwind continue];
+    }
+
+    bb39: {
+        StorageLive(_87);
+        _87 = ((_80 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_89);
+        _89 = _87;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _89) -> [return: bb40, unwind continue];
+    }
+
+    bb40: {
+        StorageDead(_89);
+        StorageDead(_87);
+        StorageDead(_79);
+        StorageDead(_80);
+        goto -> bb73;
+    }
+
+    bb41: {
+        StorageDead(_93);
+        _91 = (_92.2: i64);
+        (((*_1).1: state::oracle::HistoricalOracleData).2: i64) = move _91;
+        StorageDead(_91);
+        StorageDead(_92);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        _97 = &(*_1);
+        StorageLive(_98);
+        _98 = &(*_3);
+        StorageLive(_99);
+        StorageLive(_100);
+        _100 = _6;
+        _99 = Option::<u64>::Some(move _100);
+        StorageDead(_100);
+        _96 = calculate_oracle_reserve_price_spread_pct(move _97, move _98, move _99) -> [return: bb42, unwind continue];
+    }
+
+    bb42: {
+        StorageDead(_99);
+        StorageDead(_98);
+        StorageDead(_97);
+        _95 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _96) -> [return: bb43, unwind continue];
+    }
+
+    bb43: {
+        StorageDead(_96);
+        _101 = discriminant(_95);
+        switchInt(move _101) -> [0: bb44, 1: bb45, otherwise: bb2];
+    }
+
+    bb44: {
+        StorageLive(_105);
+        _105 = ((_95 as Continue).0: i64);
+        _94 = _105;
+        StorageDead(_105);
+        ((*_1).42: i64) = move _94;
+        StorageDead(_94);
+        StorageDead(_95);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        _109 = &mut (*_1);
+        StorageLive(_110);
+        _110 = _2;
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        _114 = _19;
+        _113 = <i64 as Cast>::cast::<u64>(move _114) -> [return: bb47, unwind continue];
+    }
+
+    bb45: {
+        StorageLive(_102);
+        _102 = ((_95 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_104);
+        _104 = _102;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _104) -> [return: bb46, unwind continue];
+    }
+
+    bb46: {
+        StorageDead(_104);
+        StorageDead(_102);
+        StorageDead(_94);
+        StorageDead(_95);
+        goto -> bb73;
+    }
+
+    bb47: {
+        StorageDead(_114);
+        _112 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _113) -> [return: bb48, unwind continue];
+    }
+
+    bb48: {
+        StorageDead(_113);
+        _115 = discriminant(_112);
+        switchInt(move _115) -> [0: bb49, 1: bb50, otherwise: bb2];
+    }
+
+    bb49: {
+        StorageLive(_119);
+        _119 = ((_112 as Continue).0: u64);
+        _111 = _119;
+        StorageDead(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = (((*_1).1: state::oracle::HistoricalOracleData).3: i64);
+        _122 = <i64 as Cast>::cast::<u64>(move _123) -> [return: bb52, unwind continue];
+    }
+
+    bb50: {
+        StorageLive(_116);
+        _116 = ((_112 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_118);
+        _118 = _116;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _118) -> [return: bb51, unwind continue];
+    }
+
+    bb51: {
+        StorageDead(_118);
+        StorageDead(_116);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_109);
+        StorageDead(_108);
+        goto -> bb72;
+    }
+
+    bb52: {
+        StorageDead(_123);
+        _121 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _122) -> [return: bb53, unwind continue];
+    }
+
+    bb53: {
+        StorageDead(_122);
+        _124 = discriminant(_121);
+        switchInt(move _124) -> [0: bb54, 1: bb55, otherwise: bb2];
+    }
+
+    bb54: {
+        StorageLive(_128);
+        _128 = ((_121 as Continue).0: u64);
+        _120 = _128;
+        StorageDead(_128);
+        StorageLive(_129);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        _132 = (((*_1).1: state::oracle::HistoricalOracleData).4: i64);
+        _131 = <i64 as Cast>::cast::<u64>(move _132) -> [return: bb57, unwind continue];
+    }
+
+    bb55: {
+        StorageLive(_125);
+        _125 = ((_121 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_127);
+        _127 = _125;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _127) -> [return: bb56, unwind continue];
+    }
+
+    bb56: {
+        StorageDead(_127);
+        StorageDead(_125);
+        StorageDead(_120);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_109);
+        StorageDead(_108);
+        goto -> bb71;
+    }
+
+    bb57: {
+        StorageDead(_132);
+        _130 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _131) -> [return: bb58, unwind continue];
+    }
+
+    bb58: {
+        StorageDead(_131);
+        _133 = discriminant(_130);
+        switchInt(move _133) -> [0: bb59, 1: bb60, otherwise: bb2];
+    }
+
+    bb59: {
+        StorageLive(_137);
+        _137 = ((_130 as Continue).0: u64);
+        _129 = _137;
+        StorageDead(_137);
+        _108 = update_amm_oracle_std(move _109, move _110, move _111, move _120, move _129) -> [return: bb62, unwind continue];
+    }
+
+    bb60: {
+        StorageLive(_134);
+        _134 = ((_130 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_136);
+        _136 = _134;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _136) -> [return: bb61, unwind continue];
+    }
+
+    bb61: {
+        StorageDead(_136);
+        StorageDead(_134);
+        StorageDead(_129);
+        StorageDead(_120);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_109);
+        StorageDead(_108);
+        goto -> bb70;
+    }
+
+    bb62: {
+        StorageDead(_129);
+        StorageDead(_120);
+        StorageDead(_111);
+        StorageDead(_110);
+        StorageDead(_109);
+        _107 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _108) -> [return: bb63, unwind continue];
+    }
+
+    bb63: {
+        StorageDead(_108);
+        _138 = discriminant(_107);
+        switchInt(move _138) -> [0: bb64, 1: bb65, otherwise: bb2];
+    }
+
+    bb64: {
+        StorageLive(_142);
+        _142 = ((_107 as Continue).0: bool);
+        _106 = _142;
+        StorageDead(_142);
+        StorageDead(_130);
+        StorageDead(_121);
+        StorageDead(_112);
+        StorageDead(_107);
+        StorageDead(_106);
+        StorageLive(_143);
+        _143 = _63;
+        (((*_1).1: state::oracle::HistoricalOracleData).4: i64) = move _143;
+        StorageDead(_143);
+        StorageLive(_144);
+        _144 = _45;
+        (((*_1).1: state::oracle::HistoricalOracleData).3: i64) = move _144;
+        StorageDead(_144);
+        StorageLive(_145);
+        _145 = _2;
+        (((*_1).1: state::oracle::HistoricalOracleData).5: i64) = move _145;
+        StorageDead(_145);
+        _46 = const ();
+        StorageDead(_63);
+        goto -> bb69;
+    }
+
+    bb65: {
+        StorageLive(_139);
+        _139 = ((_107 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_141);
+        _141 = _139;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _141) -> [return: bb66, unwind continue];
+    }
+
+    bb66: {
+        StorageDead(_141);
+        StorageDead(_139);
+        goto -> bb70;
+    }
+
+    bb67: {
+        StorageDead(_50);
+        goto -> bb68;
+    }
+
+    bb68: {
+        StorageLive(_146);
+        _146 = (((*_1).1: state::oracle::HistoricalOracleData).3: i64);
+        _45 = move _146;
+        _46 = const ();
+        StorageDead(_146);
+        goto -> bb69;
+    }
+
+    bb69: {
+        StorageDead(_49);
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageLive(_147);
+        _147 = _45;
+        _0 = std::result::Result::<i64, error::ErrorCode>::Ok(move _147);
+        StorageDead(_147);
+        StorageDead(_45);
+        StorageDead(_34);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_6);
+        goto -> bb78;
+    }
+
+    bb70: {
+        StorageDead(_130);
+        goto -> bb71;
+    }
+
+    bb71: {
+        StorageDead(_121);
+        goto -> bb72;
+    }
+
+    bb72: {
+        StorageDead(_112);
+        StorageDead(_107);
+        StorageDead(_106);
+        goto -> bb73;
+    }
+
+    bb73: {
+        StorageDead(_63);
+        goto -> bb74;
+    }
+
+    bb74: {
+        StorageDead(_49);
+        StorageDead(_47);
+        StorageDead(_46);
+        StorageDead(_45);
+        goto -> bb75;
+    }
+
+    bb75: {
+        StorageDead(_34);
+        goto -> bb76;
+    }
+
+    bb76: {
+        StorageDead(_19);
+        StorageDead(_17);
+        goto -> bb77;
+    }
+
+    bb77: {
+        StorageDead(_6);
+        goto -> bb78;
+    }
+
+    bb78: {
+        return;
+    }
+}

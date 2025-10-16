@@ -1,0 +1,191 @@
+// MIR for `last_update::<impl at programs\klend\src\state\last_update.rs:72:1: 72:16>::is_stale` before PreCodegen
+
+fn last_update::<impl at programs\klend\src\state\last_update.rs:72:1: 72:16>::is_stale(_1: &last_update::LastUpdate, _2: u64, _3: last_update::PriceStatusFlags) -> std::result::Result<bool, anchor_lang::error::Error> {
+    debug self => _1;
+    debug slot => _2;
+    debug min_price_status => _3;
+    let mut _0: std::result::Result<bool, anchor_lang::error::Error>;
+    let _4: bool;
+    let mut _5: &state::last_update::PriceStatusFlags;
+    let _6: state::last_update::PriceStatusFlags;
+    let mut _7: &state::last_update::LastUpdate;
+    let mut _8: state::last_update::PriceStatusFlags;
+    let mut _9: bool;
+    let mut _10: bool;
+    let mut _11: u8;
+    let mut _12: u8;
+    let mut _13: bool;
+    let mut _14: u64;
+    let mut _15: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, u64>;
+    let mut _16: std::result::Result<u64, anchor_lang::error::Error>;
+    let mut _17: &state::last_update::LastUpdate;
+    let mut _18: u64;
+    let mut _19: isize;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _24: bool;
+    let mut _25: isize;
+    let mut _26: isize;
+    let mut _27: isize;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    let mut _31: isize;
+    scope 1 {
+        debug is_price_status_ok => _4;
+        let _20: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _23: u64;
+        scope 2 {
+            debug residual => _20;
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug val => _23;
+            scope 5 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(*_1);
+        _6 = last_update::LastUpdate::get_price_status(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = &_6;
+        StorageDead(_7);
+        StorageLive(_8);
+        _8 = _3;
+        _4 = last_update::_::<impl last_update::PriceStatusFlags>::contains(move _5, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_6);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = ((*_1).1: u8);
+        StorageLive(_12);
+        _12 = const false as u8 (IntToInt);
+        _10 = Ne(move _11, move _12);
+        switchInt(move _10) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb11;
+    }
+
+    bb4: {
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &(*_1);
+        StorageLive(_18);
+        _18 = _2;
+        _16 = last_update::LastUpdate::slots_elapsed(move _17, move _18) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_18);
+        StorageDead(_17);
+        _15 = <std::result::Result<u64, anchor_lang::error::Error> as Try>::branch(move _16) -> [return: bb6, unwind: bb14];
+    }
+
+    bb6: {
+        StorageDead(_16);
+        _19 = discriminant(_15);
+        switchInt(move _19) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_23);
+        _23 = ((_15 as Continue).0: u64);
+        _14 = _23;
+        StorageDead(_23);
+        _13 = Ge(move _14, const _);
+        switchInt(move _13) -> [0: bb16, otherwise: bb15];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_20);
+        _20 = move ((_15 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_22);
+        _22 = move _20;
+        _0 = <std::result::Result<bool, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _22) -> [return: bb10, unwind: bb17];
+    }
+
+    bb10: {
+        StorageDead(_22);
+        StorageDead(_20);
+        _29 = discriminant(_15);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_4);
+        goto -> bb13;
+    }
+
+    bb11: {
+        StorageDead(_15);
+        StorageDead(_14);
+        _9 = const true;
+        goto -> bb12;
+    }
+
+    bb12: {
+        StorageDead(_13);
+        StorageDead(_10);
+        _0 = std::result::Result::<bool, anchor_lang::error::Error>::Ok(move _9);
+        StorageDead(_9);
+        StorageDead(_4);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+
+    bb14 (cleanup): {
+        resume;
+    }
+
+    bb15: {
+        _25 = discriminant(_15);
+        goto -> bb11;
+    }
+
+    bb16: {
+        _27 = discriminant(_15);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_24);
+        _24 = _4;
+        _9 = Not(move _24);
+        StorageDead(_24);
+        goto -> bb12;
+    }
+
+    bb17 (cleanup): {
+        _31 = discriminant(_15);
+        goto -> bb14;
+    }
+}

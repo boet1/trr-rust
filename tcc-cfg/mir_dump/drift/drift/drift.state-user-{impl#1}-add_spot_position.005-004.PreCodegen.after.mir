@@ -1,0 +1,166 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::add_spot_position` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::add_spot_position(_1: &mut User, _2: u16, _3: SpotBalanceType) -> std::result::Result<usize, error::ErrorCode> {
+    debug self => _1;
+    debug market_index => _2;
+    debug balance_type => _3;
+    let mut _0: std::result::Result<usize, error::ErrorCode>;
+    let _4: usize;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, usize>;
+    let mut _6: std::result::Result<usize, error::ErrorCode>;
+    let mut _7: std::option::Option<usize>;
+    let mut _8: &mut std::iter::Enumerate<std::slice::Iter<'_, state::user::SpotPosition>>;
+    let mut _9: std::iter::Enumerate<std::slice::Iter<'_, state::user::SpotPosition>>;
+    let mut _10: std::slice::Iter<'_, state::user::SpotPosition>;
+    let mut _11: &[state::user::SpotPosition];
+    let mut _12: &[state::user::SpotPosition; 8];
+    let mut _13: {closure@programs/drift/src/state/user.rs:215:23: 215:47};
+    let mut _14: error::ErrorCode;
+    let mut _15: isize;
+    let _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _19: usize;
+    let mut _21: u16;
+    let mut _22: state::spot_market::SpotBalanceType;
+    let mut _23: state::user::SpotPosition;
+    let mut _24: state::user::SpotPosition;
+    let _25: usize;
+    let mut _26: usize;
+    let mut _27: bool;
+    let mut _28: usize;
+    scope 1 {
+        debug new_spot_position_index => _4;
+        let _20: state::user::SpotPosition;
+        scope 6 {
+            debug new_spot_position => _20;
+        }
+    }
+    scope 2 {
+        debug residual => _16;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _19;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &((*_1).3: [state::user::SpotPosition; 8]);
+        _11 = move _12 as &[state::user::SpotPosition] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        _10 = core::slice::<impl [SpotPosition]>::iter(move _11) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_11);
+        _9 = <std::slice::Iter<'_, SpotPosition> as Iterator>::enumerate(move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _8 = &mut _9;
+        StorageDead(_10);
+        StorageLive(_13);
+        _13 = {closure@programs/drift/src/state/user.rs:215:23: 215:47};
+        _7 = <Enumerate<std::slice::Iter<'_, SpotPosition>> as Iterator>::position::<{closure@programs/drift/src/state/user.rs:215:23: 215:47}>(move _8, move _13) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_13);
+        StorageDead(_8);
+        StorageLive(_14);
+        _14 = error::ErrorCode::NoSpotPositionAvailable;
+        _6 = Option::<usize>::ok_or::<error::ErrorCode>(move _7, move _14) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_14);
+        StorageDead(_7);
+        _5 = <std::result::Result<usize, error::ErrorCode> as Try>::branch(move _6) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_6);
+        _15 = discriminant(_5);
+        switchInt(move _15) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_19);
+        _19 = ((_5 as Continue).0: usize);
+        _4 = _19;
+        StorageDead(_19);
+        StorageDead(_9);
+        StorageDead(_5);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _2;
+        StorageLive(_22);
+        _22 = _3;
+        StorageLive(_23);
+        _23 = <SpotPosition as Default>::default() -> [return: bb10, unwind continue];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_16);
+        _16 = ((_5 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_18);
+        _18 = _16;
+        _0 = <std::result::Result<usize, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _18) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_9);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb10: {
+        _20 = SpotPosition { scaled_balance: (_23.0: u64), open_bids: (_23.1: i64), open_asks: (_23.2: i64), cumulative_deposits: (_23.3: i64), market_index: move _21, balance_type: move _22, open_orders: (_23.6: u8), padding: (_23.7: [u8; 4]) };
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_23);
+        StorageLive(_24);
+        _24 = _20;
+        StorageLive(_25);
+        _25 = _4;
+        _26 = Len(((*_1).3: [state::user::SpotPosition; 8]));
+        _27 = Lt(_25, _26);
+        assert(move _27, "index out of bounds: the length is {} but the index is {}", move _26, _25) -> [success: bb11, unwind continue];
+    }
+
+    bb11: {
+        ((*_1).3: [state::user::SpotPosition; 8])[_25] = move _24;
+        StorageDead(_24);
+        StorageDead(_25);
+        StorageLive(_28);
+        _28 = _4;
+        _0 = std::result::Result::<usize, error::ErrorCode>::Ok(move _28);
+        StorageDead(_28);
+        StorageDead(_20);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb12: {
+        return;
+    }
+}

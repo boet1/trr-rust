@@ -1,0 +1,438 @@
+// MIR for `state::spot_market::<impl at programs/drift/src/state/spot_market.rs:291:1: 291:16>::get_asset_weight` before PreCodegen
+
+fn state::spot_market::<impl at programs/drift/src/state/spot_market.rs:291:1: 291:16>::get_asset_weight(_1: &SpotMarket, _2: u128, _3: i64, _4: &math::margin::MarginRequirementType) -> std::result::Result<u32, error::ErrorCode> {
+    debug self => _1;
+    debug size => _2;
+    debug oracle_price => _3;
+    debug margin_requirement_type => _4;
+    let mut _0: std::result::Result<u32, error::ErrorCode>;
+    let _5: u128;
+    let mut _6: u32;
+    let mut _8: bool;
+    let mut _9: u128;
+    let mut _10: u128;
+    let mut _11: u128;
+    let mut _12: u128;
+    let mut _13: bool;
+    let mut _14: bool;
+    let mut _15: u128;
+    let mut _16: u128;
+    let mut _17: (u128, bool);
+    let mut _18: u128;
+    let mut _19: bool;
+    let mut _21: isize;
+    let mut _22: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _23: std::result::Result<u32, error::ErrorCode>;
+    let mut _24: &state::spot_market::SpotMarket;
+    let mut _25: i64;
+    let mut _26: isize;
+    let mut _28: !;
+    let mut _29: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _31: u32;
+    let mut _32: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _33: std::result::Result<u32, error::ErrorCode>;
+    let mut _34: u32;
+    let mut _35: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _36: std::result::Result<u32, error::ErrorCode>;
+    let mut _37: &state::spot_market::SpotMarket;
+    let mut _38: i64;
+    let mut _39: isize;
+    let mut _41: !;
+    let mut _42: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _44: u32;
+    let mut _45: isize;
+    let mut _47: !;
+    let mut _48: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _50: bool;
+    let mut _52: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _53: std::result::Result<u32, error::ErrorCode>;
+    let mut _54: u128;
+    let mut _55: u32;
+    let mut _56: u32;
+    let mut _57: isize;
+    let mut _59: !;
+    let mut _60: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _63: u32;
+    let mut _64: u32;
+    let mut _65: u32;
+    scope 1 {
+        debug size_precision => _5;
+        let _7: u128;
+        scope 2 {
+            debug size_in_amm_reserve_precision => _7;
+            let _20: u32;
+            let _27: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _30: u32;
+            let _40: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _43: u32;
+            let _46: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _49: u32;
+            scope 3 {
+                debug default_asset_weight => _20;
+                let _51: u32;
+                let _58: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _61: u32;
+                scope 16 {
+                    debug size_based_asset_weight => _51;
+                    let _62: u32;
+                    scope 21 {
+                        debug asset_weight => _62;
+                    }
+                }
+                scope 17 {
+                    debug residual => _58;
+                    scope 18 {
+                    }
+                }
+                scope 19 {
+                    debug val => _61;
+                    scope 20 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _27;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _30;
+                scope 7 {
+                }
+            }
+            scope 8 {
+                debug residual => _40;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _43;
+                scope 11 {
+                }
+            }
+            scope 12 {
+                debug residual => _46;
+                scope 13 {
+                }
+            }
+            scope 14 {
+                debug val => _49;
+                scope 15 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_1).41: u32);
+        _5 = core::num::<impl u128>::pow(const 10_u128, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _5;
+        _8 = Gt(move _9, const _);
+        switchInt(move _8) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageLive(_10);
+        _10 = _2;
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _5;
+        _13 = Eq(const _, const 0_u128);
+        assert(!move _13, "attempt to divide `{}` by zero", _12) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _11 = Div(move _12, const _);
+        StorageDead(_12);
+        _14 = Eq(_11, const 0_u128);
+        assert(!move _14, "attempt to divide `{}` by zero", _10) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _7 = Div(move _10, move _11);
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb8;
+    }
+
+    bb5: {
+        StorageDead(_9);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = _2;
+        _17 = CheckedMul(_16, const _);
+        assert(!move (_17.1: bool), "attempt to compute `{} * {}`, which would overflow", move _16, const _) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _15 = move (_17.0: u128);
+        StorageDead(_16);
+        StorageLive(_18);
+        _18 = _5;
+        _19 = Eq(_18, const 0_u128);
+        assert(!move _19, "attempt to divide `{}` by zero", _15) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _7 = Div(move _15, move _18);
+        StorageDead(_18);
+        StorageDead(_15);
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_8);
+        StorageLive(_20);
+        _21 = discriminant((*_4));
+        switchInt(move _21) -> [0: bb11, 1: bb17, 2: bb9, otherwise: bb10];
+    }
+
+    bb9: {
+        _20 = ((*_1).32: u32);
+        goto -> bb29;
+    }
+
+    bb10: {
+        unreachable;
+    }
+
+    bb11: {
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &(*_1);
+        StorageLive(_25);
+        _25 = _3;
+        _23 = SpotMarket::get_scaled_initial_asset_weight(move _24, move _25) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _22 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _23) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_23);
+        _26 = discriminant(_22);
+        switchInt(move _26) -> [0: bb14, 1: bb15, otherwise: bb10];
+    }
+
+    bb14: {
+        StorageLive(_30);
+        _30 = ((_22 as Continue).0: u32);
+        _20 = _30;
+        StorageDead(_30);
+        StorageDead(_22);
+        goto -> bb29;
+    }
+
+    bb15: {
+        StorageLive(_27);
+        _27 = ((_22 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_29);
+        _29 = _27;
+        _0 = <std::result::Result<u32, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _29) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_29);
+        StorageDead(_27);
+        StorageDead(_22);
+        goto -> bb37;
+    }
+
+    bb17: {
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        _37 = &(*_1);
+        StorageLive(_38);
+        _38 = _3;
+        _36 = SpotMarket::get_scaled_initial_asset_weight(move _37, move _38) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_38);
+        StorageDead(_37);
+        _35 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _36) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_36);
+        _39 = discriminant(_35);
+        switchInt(move _39) -> [0: bb20, 1: bb21, otherwise: bb10];
+    }
+
+    bb20: {
+        StorageLive(_43);
+        _43 = ((_35 as Continue).0: u32);
+        _34 = _43;
+        StorageDead(_43);
+        StorageLive(_44);
+        _44 = ((*_1).32: u32);
+        _33 = <u32 as SafeMath>::safe_add(move _34, move _44) -> [return: bb23, unwind continue];
+    }
+
+    bb21: {
+        StorageLive(_40);
+        _40 = ((_35 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_42);
+        _42 = _40;
+        _0 = <std::result::Result<u32, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _42) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_42);
+        StorageDead(_40);
+        StorageDead(_34);
+        StorageDead(_33);
+        goto -> bb36;
+    }
+
+    bb23: {
+        StorageDead(_44);
+        StorageDead(_34);
+        _32 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _33) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_33);
+        _45 = discriminant(_32);
+        switchInt(move _45) -> [0: bb25, 1: bb26, otherwise: bb10];
+    }
+
+    bb25: {
+        StorageLive(_49);
+        _49 = ((_32 as Continue).0: u32);
+        _31 = _49;
+        StorageDead(_49);
+        _50 = Eq(const 2_u32, const 0_u32);
+        assert(!move _50, "attempt to divide `{}` by zero", _31) -> [success: bb28, unwind continue];
+    }
+
+    bb26: {
+        StorageLive(_46);
+        _46 = ((_32 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_48);
+        _48 = _46;
+        _0 = <std::result::Result<u32, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _48) -> [return: bb27, unwind continue];
+    }
+
+    bb27: {
+        StorageDead(_48);
+        StorageDead(_46);
+        goto -> bb36;
+    }
+
+    bb28: {
+        _20 = Div(move _31, const 2_u32);
+        StorageDead(_31);
+        StorageDead(_35);
+        StorageDead(_32);
+        goto -> bb29;
+    }
+
+    bb29: {
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = _7;
+        StorageLive(_55);
+        _55 = ((*_1).35: u32);
+        StorageLive(_56);
+        _56 = _20;
+        _53 = calculate_size_discount_asset_weight(move _54, move _55, move _56) -> [return: bb30, unwind continue];
+    }
+
+    bb30: {
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageDead(_54);
+        _52 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _53) -> [return: bb31, unwind continue];
+    }
+
+    bb31: {
+        StorageDead(_53);
+        _57 = discriminant(_52);
+        switchInt(move _57) -> [0: bb32, 1: bb33, otherwise: bb10];
+    }
+
+    bb32: {
+        StorageLive(_61);
+        _61 = ((_52 as Continue).0: u32);
+        _51 = _61;
+        StorageDead(_61);
+        StorageDead(_52);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = _51;
+        StorageLive(_64);
+        _64 = _20;
+        _62 = <u32 as Ord>::min(move _63, move _64) -> [return: bb35, unwind continue];
+    }
+
+    bb33: {
+        StorageLive(_58);
+        _58 = ((_52 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_60);
+        _60 = _58;
+        _0 = <std::result::Result<u32, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _60) -> [return: bb34, unwind continue];
+    }
+
+    bb34: {
+        StorageDead(_60);
+        StorageDead(_58);
+        StorageDead(_52);
+        StorageDead(_51);
+        goto -> bb37;
+    }
+
+    bb35: {
+        StorageDead(_64);
+        StorageDead(_63);
+        StorageLive(_65);
+        _65 = _62;
+        _0 = std::result::Result::<u32, error::ErrorCode>::Ok(move _65);
+        StorageDead(_65);
+        StorageDead(_62);
+        StorageDead(_51);
+        StorageDead(_20);
+        StorageDead(_7);
+        StorageDead(_5);
+        goto -> bb38;
+    }
+
+    bb36: {
+        StorageDead(_31);
+        StorageDead(_35);
+        StorageDead(_32);
+        goto -> bb37;
+    }
+
+    bb37: {
+        StorageDead(_20);
+        StorageDead(_7);
+        StorageDead(_5);
+        goto -> bb38;
+    }
+
+    bb38: {
+        return;
+    }
+}

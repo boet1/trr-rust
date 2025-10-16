@@ -1,0 +1,84 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::mul_u64` before PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::mul_u64(_1: u64, _2: u64, _3: u64) -> (u64, u64) {
+    debug a => _1;
+    debug b => _2;
+    debug carry => _3;
+    let mut _0: (u64, u64);
+    let _4: u64;
+    let _5: u64;
+    let mut _6: (u64, u64);
+    let mut _7: u128;
+    let mut _8: u128;
+    let mut _9: u128;
+    let mut _10: u64;
+    let mut _11: u128;
+    let mut _12: u64;
+    let mut _13: (u128, bool);
+    let mut _14: u128;
+    let mut _15: u64;
+    let mut _16: (u128, bool);
+    let mut _17: u64;
+    let mut _18: u64;
+    scope 1 {
+        debug hi => _4;
+        debug lo => _5;
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _1;
+        _9 = move _10 as u128 (IntToInt);
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _2;
+        _11 = move _12 as u128 (IntToInt);
+        StorageDead(_12);
+        _13 = CheckedMul(_9, _11);
+        assert(!move (_13.1: bool), "attempt to compute `{} * {}`, which would overflow", move _9, move _11) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _8 = move (_13.0: u128);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _3;
+        _14 = move _15 as u128 (IntToInt);
+        StorageDead(_15);
+        _16 = CheckedAdd(_8, _14);
+        assert(!move (_16.1: bool), "attempt to compute `{} + {}`, which would overflow", move _8, move _14) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = move (_16.0: u128);
+        StorageDead(_14);
+        StorageDead(_8);
+        _6 = U192::split_u128(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageLive(_4);
+        _4 = (_6.0: u64);
+        StorageLive(_5);
+        _5 = (_6.1: u64);
+        StorageDead(_6);
+        StorageLive(_17);
+        _17 = _5;
+        StorageLive(_18);
+        _18 = _4;
+        _0 = (move _17, move _18);
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_5);
+        StorageDead(_4);
+        return;
+    }
+}

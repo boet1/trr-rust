@@ -1,0 +1,110 @@
+// MIR for `math::orders::standardize_base_asset_amount` after PreCodegen
+
+fn math::orders::standardize_base_asset_amount(_1: u64, _2: u64) -> std::result::Result<u64, error::ErrorCode> {
+    debug base_asset_amount => _1;
+    debug step_size => _2;
+    let mut _0: std::result::Result<u64, error::ErrorCode>;
+    let _3: u64;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _5: std::result::Result<u64, error::ErrorCode>;
+    let mut _6: std::option::Option<u64>;
+    let mut _7: u64;
+    let mut _8: u64;
+    let mut _9: {closure@programs/drift/src/error.rs:658:9: 658:11};
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: u64;
+    let mut _15: u64;
+    let mut _16: u64;
+    scope 1 {
+        debug remainder => _3;
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _1;
+        StorageLive(_8);
+        _8 = _2;
+        _6 = core::num::<impl u64>::checked_rem_euclid(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        _9 = {closure@programs/drift/src/error.rs:658:9: 658:11};
+        _5 = Option::<u64>::ok_or_else::<error::ErrorCode, {closure@programs/drift/src/error.rs:658:9: 658:11}>(move _6, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_6);
+        _4 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _5) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _10 = discriminant(_4);
+        switchInt(move _10) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = ((_4 as Continue).0: u64);
+        _3 = _14;
+        StorageDead(_14);
+        StorageDead(_4);
+        StorageLive(_15);
+        _15 = _1;
+        StorageLive(_16);
+        _16 = _3;
+        _0 = <u64 as SafeMath>::safe_sub(move _15, move _16) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_11);
+        _11 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+}

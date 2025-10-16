@@ -1,0 +1,320 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::accrue_interest` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::accrue_interest(_1: &mut reserve::Reserve, _2: u64) -> Result<(), ProgramError> {
+    debug self => _1;
+    debug current_slot => _2;
+    let mut _0: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let _3: u64;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, u64>;
+    let mut _5: std::result::Result<u64, solana_program::program_error::ProgramError>;
+    let mut _6: &state::last_update::LastUpdate;
+    let mut _7: u64;
+    let mut _8: isize;
+    let _9: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _10: !;
+    let mut _11: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _12: u64;
+    let _13: ();
+    let mut _14: bool;
+    let mut _15: u64;
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::rate::Rate>;
+    let mut _18: std::result::Result<math::rate::Rate, solana_program::program_error::ProgramError>;
+    let mut _19: &state::reserve::Reserve;
+    let mut _20: isize;
+    let mut _22: !;
+    let mut _23: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _26: u8;
+    let _27: ();
+    let mut _28: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _29: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _30: &mut state::reserve::ReserveLiquidity;
+    let mut _31: math::rate::Rate;
+    let mut _32: u64;
+    let mut _33: math::rate::Rate;
+    let mut _34: isize;
+    let mut _36: !;
+    let mut _37: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _39: ();
+    let mut _40: isize;
+    let mut _41: isize;
+    let mut _42: isize;
+    let mut _43: isize;
+    let mut _44: isize;
+    let mut _45: isize;
+    let mut _46: isize;
+    let mut _47: isize;
+    let mut _48: isize;
+    let mut _49: isize;
+    let mut _50: isize;
+    let mut _51: isize;
+    let mut _52: isize;
+    let mut _53: isize;
+    let mut _54: isize;
+    scope 1 {
+        debug slots_elapsed => _3;
+        let _16: math::rate::Rate;
+        let _21: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+        let _24: math::rate::Rate;
+        scope 6 {
+            debug current_borrow_rate => _16;
+            let _25: math::rate::Rate;
+            scope 11 {
+                debug take_rate => _25;
+                let _35: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                let _38: ();
+                scope 12 {
+                    debug residual => _35;
+                    scope 13 {
+                    }
+                }
+                scope 14 {
+                    debug val => _38;
+                    scope 15 {
+                    }
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _21;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _24;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _9;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _12;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_1).1: state::last_update::LastUpdate);
+        StorageLive(_7);
+        _7 = _2;
+        _5 = last_update::LastUpdate::slots_elapsed(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = <Result<u64, ProgramError> as Try>::branch(move _5) -> [return: bb2, unwind: bb24];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _8 = discriminant(_4);
+        switchInt(move _8) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_12);
+        _12 = ((_4 as Continue).0: u64);
+        _3 = _12;
+        StorageDead(_12);
+        _40 = discriminant(_4);
+        StorageDead(_4);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _3;
+        _14 = Gt(move _15, const 0_u64);
+        switchInt(move _14) -> [0: bb19, otherwise: bb7];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_9);
+        _9 = move ((_4 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_11);
+        _11 = move _9;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _11) -> [return: bb6, unwind: bb27];
+    }
+
+    bb6: {
+        StorageDead(_11);
+        StorageDead(_9);
+        _50 = discriminant(_4);
+        StorageDead(_4);
+        goto -> bb22;
+    }
+
+    bb7: {
+        StorageDead(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_1);
+        _18 = reserve::Reserve::current_borrow_rate(move _19) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_19);
+        _17 = <Result<rate::Rate, ProgramError> as Try>::branch(move _18) -> [return: bb9, unwind: bb24];
+    }
+
+    bb9: {
+        StorageDead(_18);
+        _20 = discriminant(_17);
+        switchInt(move _20) -> [0: bb10, 1: bb11, otherwise: bb4];
+    }
+
+    bb10: {
+        StorageLive(_24);
+        _24 = ((_17 as Continue).0: math::rate::Rate);
+        _16 = _24;
+        StorageDead(_24);
+        _42 = discriminant(_17);
+        StorageDead(_17);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = (((*_1).5: state::reserve::ReserveConfig).16: u8);
+        _25 = rate::Rate::from_percent(move _26) -> [return: bb13, unwind continue];
+    }
+
+    bb11: {
+        StorageLive(_21);
+        _21 = move ((_17 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_23);
+        _23 = move _21;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _23) -> [return: bb12, unwind: bb26];
+    }
+
+    bb12: {
+        StorageDead(_23);
+        StorageDead(_21);
+        _48 = discriminant(_17);
+        StorageDead(_17);
+        goto -> bb21;
+    }
+
+    bb13: {
+        StorageDead(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = &mut ((*_1).3: state::reserve::ReserveLiquidity);
+        StorageLive(_31);
+        _31 = _16;
+        StorageLive(_32);
+        _32 = _3;
+        StorageLive(_33);
+        _33 = _25;
+        _29 = ReserveLiquidity::compound_interest(move _30, move _31, move _32, move _33) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        _28 = <Result<(), ProgramError> as Try>::branch(move _29) -> [return: bb15, unwind: bb24];
+    }
+
+    bb15: {
+        StorageDead(_29);
+        _34 = discriminant(_28);
+        switchInt(move _34) -> [0: bb16, 1: bb17, otherwise: bb4];
+    }
+
+    bb16: {
+        StorageLive(_38);
+        _38 = ((_28 as Continue).0: ());
+        _27 = _38;
+        StorageDead(_38);
+        _44 = discriminant(_28);
+        StorageDead(_28);
+        StorageDead(_27);
+        _13 = const ();
+        StorageDead(_25);
+        StorageDead(_16);
+        goto -> bb20;
+    }
+
+    bb17: {
+        StorageLive(_35);
+        _35 = move ((_28 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_37);
+        _37 = move _35;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _37) -> [return: bb18, unwind: bb25];
+    }
+
+    bb18: {
+        StorageDead(_37);
+        StorageDead(_35);
+        _46 = discriminant(_28);
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageDead(_25);
+        goto -> bb21;
+    }
+
+    bb19: {
+        StorageDead(_15);
+        _13 = const ();
+        goto -> bb20;
+    }
+
+    bb20: {
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageLive(_39);
+        _39 = ();
+        _0 = Result::<(), ProgramError>::Ok(move _39);
+        StorageDead(_39);
+        StorageDead(_3);
+        goto -> bb23;
+    }
+
+    bb21: {
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb22;
+    }
+
+    bb22: {
+        StorageDead(_3);
+        goto -> bb23;
+    }
+
+    bb23: {
+        return;
+    }
+
+    bb24 (cleanup): {
+        resume;
+    }
+
+    bb25 (cleanup): {
+        _52 = discriminant(_28);
+        goto -> bb24;
+    }
+
+    bb26 (cleanup): {
+        _53 = discriminant(_17);
+        goto -> bb24;
+    }
+
+    bb27 (cleanup): {
+        _54 = discriminant(_4);
+        goto -> bb24;
+    }
+}

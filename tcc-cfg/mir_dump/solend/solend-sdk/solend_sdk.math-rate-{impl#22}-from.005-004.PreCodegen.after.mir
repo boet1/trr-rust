@@ -1,0 +1,42 @@
+// MIR for `rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:1351:3: 1351:51>::from` after PreCodegen
+
+fn rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:1351:3: 1351:51>::from(_1: i64) -> U128 {
+    debug value => _1;
+    let mut _0: math::rate::U128;
+    let mut _2: bool;
+    let mut _3: i64;
+    let mut _4: u64;
+    let mut _5: i64;
+    let mut _6: !;
+    let _7: !;
+    let _8: !;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = _1;
+        _2 = Ge(move _3, const 0_i64);
+        StorageDead(_3);
+        switchInt(_2) -> [0: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_8);
+        _8 = begin_panic::<&str>(const "Unsigned integer can't be created from negative value") -> unwind continue;
+    }
+
+    bb2: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _1;
+        _4 = move _5 as u64 (IntToInt);
+        StorageDead(_5);
+        _0 = <U128 as From<u64>>::from(move _4) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
+    }
+}

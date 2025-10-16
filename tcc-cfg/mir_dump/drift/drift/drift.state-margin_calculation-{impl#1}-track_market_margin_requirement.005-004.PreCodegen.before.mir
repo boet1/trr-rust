@@ -1,0 +1,72 @@
+// MIR for `margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:62:1: 62:19>::track_market_margin_requirement` before PreCodegen
+
+fn margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:62:1: 62:19>::track_market_margin_requirement(_1: MarginContext, _2: MarketIdentifier) -> std::result::Result<MarginContext, error::ErrorCode> {
+    debug self => _1;
+    debug market_identifier => _2;
+    let mut _0: std::result::Result<state::margin_calculation::MarginContext, error::ErrorCode>;
+    let _3: ();
+    let mut _4: isize;
+    let _5: &mut std::option::Option<state::margin_calculation::MarketIdentifier>;
+    let mut _6: std::option::Option<state::margin_calculation::MarketIdentifier>;
+    let mut _7: state::margin_calculation::MarketIdentifier;
+    let mut _8: !;
+    let _9: ();
+    let mut _10: &str;
+    let _11: &str;
+    let mut _12: error::ErrorCode;
+    let mut _13: state::margin_calculation::MarginContext;
+    scope 1 {
+        debug market_to_track => _5;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _4 = discriminant((_1.1: state::margin_calculation::MarginCalculationMode));
+        switchInt(move _4) -> [1: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = const "Cant track market outside of liquidation mode";
+        _10 = &(*_11);
+        _9 = solana_program::log::sol_log(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageLive(_5);
+        _5 = &mut (((_1.1: state::margin_calculation::MarginCalculationMode) as Liquidation).0: std::option::Option<state::margin_calculation::MarketIdentifier>);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _2;
+        _6 = Option::<MarketIdentifier>::Some(move _7);
+        StorageDead(_7);
+        (*_5) = move _6;
+        StorageDead(_6);
+        _3 = const ();
+        StorageDead(_5);
+        StorageDead(_3);
+        StorageLive(_13);
+        _13 = _1;
+        _0 = std::result::Result::<MarginContext, error::ErrorCode>::Ok(move _13);
+        StorageDead(_13);
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageLive(_12);
+        _12 = error::ErrorCode::InvalidMarginCalculation;
+        _0 = std::result::Result::<MarginContext, error::ErrorCode>::Err(move _12);
+        StorageDead(_12);
+        StorageDead(_3);
+        goto -> bb4;
+    }
+
+    bb4: {
+        return;
+    }
+}

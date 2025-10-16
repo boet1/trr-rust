@@ -1,0 +1,36 @@
+// MIR for `decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::from_bps` after PreCodegen
+
+fn decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::from_bps(_1: u64) -> decimal::Decimal {
+    debug bps => _1;
+    let mut _0: math::decimal::Decimal;
+    let mut _2: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _3: math::decimal::Decimal;
+    let mut _4: u64;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _1;
+        _3 = <decimal::Decimal as From<u64>>::from(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _2 = <decimal::Decimal as common::TryDiv<u64>>::try_div(move _3, const 10000_u64) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        _0 = Result::<decimal::Decimal, ProgramError>::unwrap(move _2) -> [return: bb3, unwind: bb4];
+    }
+
+    bb3: {
+        StorageDead(_2);
+        return;
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

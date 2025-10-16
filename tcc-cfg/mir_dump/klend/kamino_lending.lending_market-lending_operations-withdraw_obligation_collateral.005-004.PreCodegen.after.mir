@@ -1,0 +1,2780 @@
+// MIR for `lending_operations::withdraw_obligation_collateral` after PreCodegen
+
+fn lending_operations::withdraw_obligation_collateral(_1: &state::lending_market::LendingMarket, _2: &mut reserve::Reserve, _3: &mut obligation::Obligation, _4: u64, _5: u64, _6: anchor_lang::prelude::Pubkey, _7: state::types::LtvMaxWithdrawalCheck) -> std::result::Result<u64, anchor_lang::error::Error> {
+    debug lending_market => _1;
+    debug withdraw_reserve => _2;
+    debug obligation => _3;
+    debug collateral_amount => _4;
+    debug slot => _5;
+    debug withdraw_reserve_pk => _6;
+    debug ltv_max_withdrawal_check => _7;
+    let mut _0: std::result::Result<u64, anchor_lang::error::Error>;
+    let _8: ();
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: !;
+    let mut _12: anchor_lang::error::Error;
+    let mut _13: anchor_lang::error::AnchorError;
+    let mut _14: std::string::String;
+    let mut _15: &LendingError;
+    let _16: LendingError;
+    let mut _17: u32;
+    let mut _18: LendingError;
+    let mut _19: std::string::String;
+    let mut _20: &LendingError;
+    let _21: LendingError;
+    let mut _22: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _23: anchor_lang::error::ErrorOrigin;
+    let mut _24: anchor_lang::error::Source;
+    let mut _25: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _26: bool;
+    let mut _27: &state::obligation::Obligation;
+    let mut _29: bool;
+    let _30: ();
+    let mut _31: bool;
+    let mut _32: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, bool>;
+    let mut _33: std::result::Result<bool, anchor_lang::error::Error>;
+    let mut _34: &state::last_update::LastUpdate;
+    let mut _35: u64;
+    let mut _36: state::last_update::PriceStatusFlags;
+    let mut _37: isize;
+    let mut _39: !;
+    let mut _40: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _42: !;
+    let _43: ();
+    let mut _44: &str;
+    let _45: &str;
+    let mut _46: &std::string::String;
+    let _47: &std::string::String;
+    let _48: std::string::String;
+    let mut _50: std::fmt::Arguments<'_>;
+    let mut _51: &[&str];
+    let mut _52: &[&str; 1];
+    let _53: &[&str; 1];
+    let _54: [&str; 1];
+    let mut _55: &[core::fmt::rt::Argument<'_>];
+    let mut _56: &[core::fmt::rt::Argument<'_>; 1];
+    let _57: &[core::fmt::rt::Argument<'_>; 1];
+    let _58: [core::fmt::rt::Argument<'_>; 1];
+    let mut _59: core::fmt::rt::Argument<'_>;
+    let mut _60: &u8;
+    let _61: &u8;
+    let _62: state::last_update::PriceStatusFlags;
+    let mut _63: &state::last_update::LastUpdate;
+    let mut _64: &[core::fmt::rt::Placeholder];
+    let mut _65: &[core::fmt::rt::Placeholder; 1];
+    let _66: &[core::fmt::rt::Placeholder; 1];
+    let _67: [core::fmt::rt::Placeholder; 1];
+    let mut _68: core::fmt::rt::Placeholder;
+    let mut _69: core::fmt::rt::Alignment;
+    let mut _70: core::fmt::rt::Count;
+    let mut _71: core::fmt::rt::Count;
+    let mut _72: core::fmt::rt::UnsafeArg;
+    let mut _73: anchor_lang::error::Error;
+    let mut _74: anchor_lang::error::AnchorError;
+    let mut _75: std::string::String;
+    let mut _76: &LendingError;
+    let _77: LendingError;
+    let mut _78: u32;
+    let mut _79: LendingError;
+    let mut _80: std::string::String;
+    let mut _81: &LendingError;
+    let _82: LendingError;
+    let mut _83: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _84: anchor_lang::error::ErrorOrigin;
+    let mut _85: anchor_lang::error::Source;
+    let mut _86: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _87: ();
+    let mut _88: bool;
+    let mut _89: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, bool>;
+    let mut _90: std::result::Result<bool, anchor_lang::error::Error>;
+    let mut _91: &state::last_update::LastUpdate;
+    let mut _92: u64;
+    let mut _93: state::last_update::PriceStatusFlags;
+    let mut _94: isize;
+    let mut _96: !;
+    let mut _97: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _99: !;
+    let _100: ();
+    let mut _101: &str;
+    let _102: &str;
+    let mut _103: &std::string::String;
+    let _104: &std::string::String;
+    let _105: std::string::String;
+    let mut _107: std::fmt::Arguments<'_>;
+    let mut _108: &[&str];
+    let mut _109: &[&str; 1];
+    let _110: &[&str; 1];
+    let _111: [&str; 1];
+    let mut _112: &[core::fmt::rt::Argument<'_>];
+    let mut _113: &[core::fmt::rt::Argument<'_>; 1];
+    let _114: &[core::fmt::rt::Argument<'_>; 1];
+    let _115: [core::fmt::rt::Argument<'_>; 1];
+    let mut _116: core::fmt::rt::Argument<'_>;
+    let mut _117: &u8;
+    let _118: &u8;
+    let _119: state::last_update::PriceStatusFlags;
+    let mut _120: &state::last_update::LastUpdate;
+    let mut _121: &[core::fmt::rt::Placeholder];
+    let mut _122: &[core::fmt::rt::Placeholder; 1];
+    let _123: &[core::fmt::rt::Placeholder; 1];
+    let _124: [core::fmt::rt::Placeholder; 1];
+    let mut _125: core::fmt::rt::Placeholder;
+    let mut _126: core::fmt::rt::Alignment;
+    let mut _127: core::fmt::rt::Count;
+    let mut _128: core::fmt::rt::Count;
+    let mut _129: core::fmt::rt::UnsafeArg;
+    let mut _130: anchor_lang::error::Error;
+    let mut _131: anchor_lang::error::AnchorError;
+    let mut _132: std::string::String;
+    let mut _133: &LendingError;
+    let _134: LendingError;
+    let mut _135: u32;
+    let mut _136: LendingError;
+    let mut _137: std::string::String;
+    let mut _138: &LendingError;
+    let _139: LendingError;
+    let mut _140: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _141: anchor_lang::error::ErrorOrigin;
+    let mut _142: anchor_lang::error::Source;
+    let mut _143: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _145: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, usize>;
+    let mut _146: std::result::Result<usize, anchor_lang::error::Error>;
+    let mut _147: &state::obligation::Obligation;
+    let mut _148: anchor_lang::prelude::Pubkey;
+    let mut _149: isize;
+    let mut _151: !;
+    let mut _152: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _155: usize;
+    let mut _156: usize;
+    let mut _157: bool;
+    let _158: ();
+    let mut _159: bool;
+    let mut _160: u64;
+    let mut _161: !;
+    let mut _162: anchor_lang::error::Error;
+    let mut _163: anchor_lang::error::AnchorError;
+    let mut _164: std::string::String;
+    let mut _165: &LendingError;
+    let _166: LendingError;
+    let mut _167: u32;
+    let mut _168: LendingError;
+    let mut _169: std::string::String;
+    let mut _170: &LendingError;
+    let _171: LendingError;
+    let mut _172: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _173: anchor_lang::error::ErrorOrigin;
+    let mut _174: anchor_lang::error::Source;
+    let mut _175: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _176: ();
+    let mut _177: bool;
+    let _178: ();
+    let mut _179: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _180: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _181: &state::lending_market::LendingMarket;
+    let mut _182: &state::obligation::Obligation;
+    let mut _183: isize;
+    let mut _185: !;
+    let mut _186: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _188: ();
+    let mut _189: bool;
+    let mut _190: &state::obligation::Obligation;
+    let mut _191: bool;
+    let mut _192: &state::reserve::ReserveStatus;
+    let _193: state::reserve::ReserveStatus;
+    let mut _194: &state::reserve::ReserveConfig;
+    let mut _195: &state::reserve::ReserveStatus;
+    let _196: state::reserve::ReserveStatus;
+    let mut _197: !;
+    let mut _198: anchor_lang::error::Error;
+    let mut _199: anchor_lang::error::AnchorError;
+    let mut _200: std::string::String;
+    let mut _201: &LendingError;
+    let _202: LendingError;
+    let mut _203: u32;
+    let mut _204: LendingError;
+    let mut _205: std::string::String;
+    let mut _206: &LendingError;
+    let _207: LendingError;
+    let mut _208: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _209: anchor_lang::error::ErrorOrigin;
+    let mut _210: anchor_lang::error::Source;
+    let mut _211: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _214: (u8, u8);
+    let mut _215: &state::reserve::Reserve;
+    let mut _216: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _217: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::option::Option<&state::lending_market::ElevationGroup>>;
+    let mut _218: std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error>;
+    let mut _219: u8;
+    let mut _220: &state::lending_market::LendingMarket;
+    let mut _221: isize;
+    let mut _223: !;
+    let mut _224: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _227: bool;
+    let mut _228: bool;
+    let mut _229: u64;
+    let mut _230: u64;
+    let mut _231: u64;
+    let mut _232: bool;
+    let mut _233: u128;
+    let mut _234: !;
+    let _235: ();
+    let mut _236: &str;
+    let _237: &str;
+    let mut _238: anchor_lang::error::Error;
+    let mut _239: anchor_lang::error::AnchorError;
+    let mut _240: std::string::String;
+    let mut _241: &LendingError;
+    let _242: LendingError;
+    let mut _243: u32;
+    let mut _244: LendingError;
+    let mut _245: std::string::String;
+    let mut _246: &LendingError;
+    let _247: LendingError;
+    let mut _248: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _249: anchor_lang::error::ErrorOrigin;
+    let mut _250: anchor_lang::error::Source;
+    let mut _251: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _253: &state::obligation::Obligation;
+    let mut _254: &state::obligation::ObligationCollateral;
+    let mut _255: u8;
+    let mut _256: u8;
+    let mut _257: state::types::LtvMaxWithdrawalCheck;
+    let _258: ();
+    let mut _259: bool;
+    let mut _260: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _261: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _262: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _263: !;
+    let mut _264: anchor_lang::error::Error;
+    let mut _265: anchor_lang::error::AnchorError;
+    let mut _266: std::string::String;
+    let mut _267: &LendingError;
+    let _268: LendingError;
+    let mut _269: u32;
+    let mut _270: LendingError;
+    let mut _271: std::string::String;
+    let mut _272: &LendingError;
+    let _273: LendingError;
+    let mut _274: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _275: anchor_lang::error::ErrorOrigin;
+    let mut _276: anchor_lang::error::Source;
+    let mut _277: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _279: u128;
+    let mut _281: bool;
+    let mut _282: u64;
+    let mut _284: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _285: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _287: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _288: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _290: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _291: u128;
+    let mut _292: u64;
+    let mut _294: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _295: u64;
+    let mut _296: u64;
+    let mut _298: u64;
+    let mut _299: u64;
+    let mut _301: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _302: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _303: u64;
+    let mut _304: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _305: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _306: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _307: u64;
+    let mut _309: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _310: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _312: bool;
+    let mut _313: &state::types::LtvMaxWithdrawalCheck;
+    let mut _314: &state::types::LtvMaxWithdrawalCheck;
+    let _315: state::types::LtvMaxWithdrawalCheck;
+    let mut _316: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _317: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _318: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _319: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _320: ();
+    let mut _321: bool;
+    let mut _322: !;
+    let _323: ();
+    let mut _324: &str;
+    let _325: &str;
+    let mut _326: &std::string::String;
+    let _327: &std::string::String;
+    let _328: std::string::String;
+    let mut _330: std::fmt::Arguments<'_>;
+    let mut _331: &[&str];
+    let mut _332: &[&str; 6];
+    let _333: &[&str; 6];
+    let _334: [&str; 6];
+    let mut _335: &[core::fmt::rt::Argument<'_>];
+    let mut _336: &[core::fmt::rt::Argument<'_>; 6];
+    let _337: &[core::fmt::rt::Argument<'_>; 6];
+    let _338: [core::fmt::rt::Argument<'_>; 6];
+    let mut _339: core::fmt::rt::Argument<'_>;
+    let mut _340: &u64;
+    let _341: &u64;
+    let mut _342: core::fmt::rt::Argument<'_>;
+    let mut _343: &u64;
+    let _344: &u64;
+    let mut _345: core::fmt::rt::Argument<'_>;
+    let mut _346: &utils::fraction::FractionDisplay<'_>;
+    let _347: &utils::fraction::FractionDisplay<'_>;
+    let _348: utils::fraction::FractionDisplay<'_>;
+    let mut _349: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _350: core::fmt::rt::Argument<'_>;
+    let mut _351: &utils::fraction::FractionDisplay<'_>;
+    let _352: &utils::fraction::FractionDisplay<'_>;
+    let _353: utils::fraction::FractionDisplay<'_>;
+    let mut _354: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _355: core::fmt::rt::Argument<'_>;
+    let mut _356: &utils::fraction::FractionDisplay<'_>;
+    let _357: &utils::fraction::FractionDisplay<'_>;
+    let _358: utils::fraction::FractionDisplay<'_>;
+    let mut _359: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _360: core::fmt::rt::Argument<'_>;
+    let mut _361: &utils::fraction::FractionDisplay<'_>;
+    let _362: &utils::fraction::FractionDisplay<'_>;
+    let _363: utils::fraction::FractionDisplay<'_>;
+    let mut _364: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _365: anchor_lang::error::Error;
+    let mut _366: anchor_lang::error::AnchorError;
+    let mut _367: std::string::String;
+    let mut _368: &LendingError;
+    let _369: LendingError;
+    let mut _370: u32;
+    let mut _371: LendingError;
+    let mut _372: std::string::String;
+    let mut _373: &LendingError;
+    let _374: LendingError;
+    let mut _375: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _376: anchor_lang::error::ErrorOrigin;
+    let mut _377: anchor_lang::error::Source;
+    let mut _378: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _379: ();
+    let mut _380: bool;
+    let mut _381: u64;
+    let mut _382: !;
+    let _383: ();
+    let mut _384: &str;
+    let _385: &str;
+    let mut _386: anchor_lang::error::Error;
+    let mut _387: anchor_lang::error::AnchorError;
+    let mut _388: std::string::String;
+    let mut _389: &LendingError;
+    let _390: LendingError;
+    let mut _391: u32;
+    let mut _392: LendingError;
+    let mut _393: std::string::String;
+    let mut _394: &LendingError;
+    let _395: LendingError;
+    let mut _396: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _397: anchor_lang::error::ErrorOrigin;
+    let mut _398: anchor_lang::error::Source;
+    let mut _399: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _402: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, state::obligation::WithdrawResult>;
+    let mut _403: std::result::Result<state::obligation::WithdrawResult, anchor_lang::error::Error>;
+    let mut _404: &mut state::obligation::Obligation;
+    let mut _405: u64;
+    let mut _406: usize;
+    let mut _407: isize;
+    let mut _409: !;
+    let mut _410: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _412: ();
+    let mut _413: &mut state::last_update::LastUpdate;
+    let _414: ();
+    let mut _415: bool;
+    let mut _416: &state::obligation::WithdrawResult;
+    let mut _417: &state::obligation::WithdrawResult;
+    let _418: state::obligation::WithdrawResult;
+    let _419: ();
+    let mut _420: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _421: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _422: u64;
+    let mut _423: u8;
+    let mut _424: &mut state::reserve::Reserve;
+    let mut _425: isize;
+    let mut _427: !;
+    let mut _428: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _430: ();
+    let mut _431: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _432: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _433: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _434: &state::reserve::CollateralExchangeRate;
+    let _435: state::reserve::CollateralExchangeRate;
+    let mut _436: &state::reserve::Reserve;
+    let mut _437: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _438: u64;
+    let mut _439: &state::obligation::Obligation;
+    let mut _440: &state::reserve::Reserve;
+    let mut _441: u8;
+    let mut _442: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _443: u128;
+    let _444: usize;
+    let mut _445: usize;
+    let mut _446: bool;
+    let mut _447: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _448: u128;
+    let mut _449: isize;
+    let mut _451: !;
+    let mut _452: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _454: u64;
+    let mut _455: &LendingError;
+    let mut _456: &LendingError;
+    let mut _480: bool;
+    let mut _481: isize;
+    let mut _482: isize;
+    let mut _483: isize;
+    let mut _484: isize;
+    let mut _485: isize;
+    let mut _486: isize;
+    let mut _487: isize;
+    let mut _488: isize;
+    let mut _489: isize;
+    let mut _490: isize;
+    let mut _491: isize;
+    let mut _492: isize;
+    let mut _493: isize;
+    let mut _494: isize;
+    let mut _495: isize;
+    let mut _496: isize;
+    let mut _497: isize;
+    let mut _498: isize;
+    let mut _499: isize;
+    let mut _500: isize;
+    let mut _501: isize;
+    let mut _502: isize;
+    let mut _503: isize;
+    let mut _504: isize;
+    let mut _505: isize;
+    let mut _506: isize;
+    let mut _507: isize;
+    let mut _508: isize;
+    let mut _509: isize;
+    let mut _510: isize;
+    let mut _511: isize;
+    let mut _512: isize;
+    let mut _513: isize;
+    let mut _514: isize;
+    let mut _515: isize;
+    let mut _516: isize;
+    let mut _517: isize;
+    let mut _518: isize;
+    let mut _519: isize;
+    let mut _520: isize;
+    let mut _521: isize;
+    let mut _522: isize;
+    let mut _523: isize;
+    let mut _524: isize;
+    scope 1 {
+        debug is_borrows_empty => _26;
+        let _28: state::last_update::PriceStatusFlags;
+        scope 2 {
+            debug required_price_status => _28;
+            let _38: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _41: bool;
+            let _49: std::string::String;
+            let _95: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _98: bool;
+            let _106: std::string::String;
+            let _144: usize;
+            let _150: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+            let _153: usize;
+            let mut _457: &LendingError;
+            let mut _458: &LendingError;
+            let mut _459: &[&str; 1];
+            let mut _460: &LendingError;
+            let mut _461: &LendingError;
+            let mut _462: &[&str; 1];
+            scope 3 {
+                debug residual => _38;
+                scope 4 {
+                }
+            }
+            scope 5 {
+                debug val => _41;
+                scope 6 {
+                }
+            }
+            scope 7 {
+                debug res => _49;
+            }
+            scope 8 {
+            }
+            scope 9 {
+                debug residual => _95;
+                scope 10 {
+                }
+            }
+            scope 11 {
+                debug val => _98;
+                scope 12 {
+                }
+            }
+            scope 13 {
+                debug res => _106;
+            }
+            scope 14 {
+            }
+            scope 15 {
+                debug collateral_index => _144;
+                let _154: &state::obligation::ObligationCollateral;
+                scope 20 {
+                    debug collateral => _154;
+                    let _184: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                    let _187: ();
+                    let _212: u8;
+                    let _213: u8;
+                    let _222: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                    let _225: std::option::Option<&state::lending_market::ElevationGroup>;
+                    let mut _463: &LendingError;
+                    let mut _464: &LendingError;
+                    let mut _465: &LendingError;
+                    let mut _466: &LendingError;
+                    let mut _479: &state::reserve::ReserveStatus;
+                    scope 21 {
+                        debug residual => _184;
+                        scope 22 {
+                        }
+                    }
+                    scope 23 {
+                        debug val => _187;
+                        scope 24 {
+                        }
+                    }
+                    scope 25 {
+                        debug reserve_max_ltv_pct => _212;
+                        debug reserve_liq_threshold_ltv_pct => _213;
+                        let _226: u64;
+                        let _252: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                        let mut _468: &LendingError;
+                        let mut _469: &LendingError;
+                        scope 30 {
+                            debug withdraw_amount => _226;
+                            let _400: u64;
+                            scope 43 {
+                                debug previous_debt_in_elevation_group => _400;
+                                let _401: state::obligation::WithdrawResult;
+                                let _408: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                let _411: state::obligation::WithdrawResult;
+                                scope 44 {
+                                    debug is_full_withdrawal => _401;
+                                    let _426: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                    let _429: ();
+                                    let _450: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                                    let _453: ();
+                                    let mut _467: &state::obligation::WithdrawResult;
+                                    scope 49 {
+                                        debug residual => _426;
+                                        scope 50 {
+                                        }
+                                    }
+                                    scope 51 {
+                                        debug val => _429;
+                                        scope 52 {
+                                        }
+                                    }
+                                    scope 53 {
+                                        debug residual => _450;
+                                        scope 54 {
+                                        }
+                                    }
+                                    scope 55 {
+                                        debug val => _453;
+                                        scope 56 {
+                                        }
+                                    }
+                                }
+                                scope 45 {
+                                    debug residual => _408;
+                                    scope 46 {
+                                    }
+                                }
+                                scope 47 {
+                                    debug val => _411;
+                                    scope 48 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 31 {
+                            debug max_withdraw_value => _252;
+                            let _278: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                            let mut _470: &LendingError;
+                            let mut _471: &LendingError;
+                            let mut _478: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                            scope 32 {
+                                debug collateral_value => _278;
+                                let _280: u64;
+                                let _283: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                let _297: u64;
+                                scope 33 {
+                                    debug withdraw_amount => _280;
+                                    let mut _472: &LendingError;
+                                    let mut _473: &LendingError;
+                                }
+                                scope 34 {
+                                    debug withdraw_value => _283;
+                                    let _286: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                    scope 35 {
+                                        debug withdraw_ratio => _286;
+                                        let _289: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                        scope 36 {
+                                            debug ratioed_amount_f => _289;
+                                            let _293: u64;
+                                            scope 37 {
+                                                debug ratioed_amount => _293;
+                                            }
+                                        }
+                                    }
+                                }
+                                scope 38 {
+                                    debug withdraw_amount => _297;
+                                    let _300: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                    scope 39 {
+                                        debug withdraw_ratio => _300;
+                                        let _308: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                                        scope 40 {
+                                            debug withdraw_value => _308;
+                                            let _311: bool;
+                                            let mut _477: &state::types::LtvMaxWithdrawalCheck;
+                                            scope 41 {
+                                                debug exceeds_max_withdraw_value => _311;
+                                                let _329: std::string::String;
+                                                let mut _474: &LendingError;
+                                                let mut _475: &LendingError;
+                                                let mut _476: &[&str; 6];
+                                                scope 42 {
+                                                    debug res => _329;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    scope 26 {
+                        debug residual => _222;
+                        scope 27 {
+                        }
+                    }
+                    scope 28 {
+                        debug val => _225;
+                        scope 29 {
+                        }
+                    }
+                }
+            }
+            scope 16 {
+                debug residual => _150;
+                scope 17 {
+                }
+            }
+            scope 18 {
+                debug val => _153;
+                scope 19 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _480 = const false;
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _4;
+        _9 = Eq(move _10, const 0_u64);
+        switchInt(move _9) -> [0: bb6, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _456 = const _;
+        _15 = &(*_456);
+        _14 = LendingError::name(move _15) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_15);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = LendingError::InvalidAmount;
+        _17 = <LendingError as Into<u32>>::into(move _18) -> [return: bb3, unwind: bb205];
+    }
+
+    bb3: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _455 = const _;
+        _20 = &(*_455);
+        _19 = <LendingError as ToString>::to_string(move _20) -> [return: bb4, unwind: bb205];
+    }
+
+    bb4: {
+        StorageDead(_20);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 468_u32 };
+        _23 = anchor_lang::error::ErrorOrigin::Source(move _24);
+        StorageDead(_24);
+        _22 = std::option::Option::<ErrorOrigin>::Some(move _23);
+        StorageDead(_23);
+        StorageLive(_25);
+        _25 = std::option::Option::<ComparedValues>::None;
+        _13 = anchor_lang::error::AnchorError { error_name: move _14, error_code_number: move _17, error_msg: move _19, error_origin: move _22, compared_values: move _25 };
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_14);
+        _12 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _13) -> [return: bb5, unwind: bb206];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _12);
+        StorageDead(_12);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb193;
+    }
+
+    bb6: {
+        StorageDead(_10);
+        _8 = const ();
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &(*_3);
+        _26 = obligation::Obligation::active_borrows_empty(move _27) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _26;
+        switchInt(move _29) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb8: {
+        _28 = const _;
+        goto -> bb10;
+    }
+
+    bb9: {
+        _28 = const _;
+        goto -> bb10;
+    }
+
+    bb10: {
+        StorageDead(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = &((*_2).1: state::last_update::LastUpdate);
+        StorageLive(_35);
+        _35 = _5;
+        StorageLive(_36);
+        _36 = _28;
+        _33 = last_update::LastUpdate::is_stale(move _34, move _35, move _36) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageDead(_34);
+        _32 = <std::result::Result<bool, anchor_lang::error::Error> as Try>::branch(move _33) -> [return: bb12, unwind: bb206];
+    }
+
+    bb12: {
+        StorageDead(_33);
+        _37 = discriminant(_32);
+        switchInt(move _37) -> [0: bb13, 1: bb15, otherwise: bb14];
+    }
+
+    bb13: {
+        StorageLive(_41);
+        _41 = ((_32 as Continue).0: bool);
+        _31 = _41;
+        StorageDead(_41);
+        switchInt(move _31) -> [0: bb208, otherwise: bb207];
+    }
+
+    bb14: {
+        unreachable;
+    }
+
+    bb15: {
+        StorageLive(_38);
+        _38 = move ((_32 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_40);
+        _40 = move _38;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _40) -> [return: bb16, unwind: bb218];
+    }
+
+    bb16: {
+        StorageDead(_40);
+        StorageDead(_38);
+        _515 = discriminant(_32);
+        StorageDead(_32);
+        goto -> bb191;
+    }
+
+    bb17: {
+        StorageDead(_63);
+        _61 = &(_62.0: u8);
+        _60 = &(*_61);
+        _59 = core::fmt::rt::Argument::<'_>::new_binary::<u8>(move _60) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_60);
+        _58 = [move _59];
+        StorageDead(_59);
+        _57 = &_58;
+        _56 = &(*_57);
+        _55 = move _56 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_56);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        _69 = core::fmt::rt::Alignment::Unknown;
+        StorageLive(_70);
+        _70 = core::fmt::rt::Count::Implied;
+        StorageLive(_71);
+        _71 = core::fmt::rt::Count::Is(const 8_usize);
+        _68 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _69, const 8_u32, move _70, move _71) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_71);
+        StorageDead(_70);
+        StorageDead(_69);
+        _67 = [move _68];
+        StorageDead(_68);
+        _66 = &_67;
+        _65 = &(*_66);
+        _64 = move _65 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
+        StorageDead(_65);
+        StorageLive(_72);
+        _72 = core::fmt::rt::UnsafeArg::new() -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        _50 = Arguments::<'_>::new_v1_formatted(move _51, move _55, move _64, move _72) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        StorageDead(_72);
+        StorageDead(_64);
+        StorageDead(_55);
+        StorageDead(_51);
+        _49 = format(move _50) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_50);
+        StorageDead(_67);
+        StorageDead(_66);
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageDead(_58);
+        StorageDead(_57);
+        StorageDead(_53);
+        _48 = move _49;
+        StorageDead(_49);
+        _47 = &_48;
+        _46 = &(*_47);
+        _45 = <std::string::String as Deref>::deref(move _46) -> [return: bb23, unwind: bb204];
+    }
+
+    bb23: {
+        _44 = &(*_45);
+        StorageDead(_46);
+        _43 = solana_program::log::sol_log(move _44) -> [return: bb24, unwind: bb204];
+    }
+
+    bb24: {
+        StorageDead(_44);
+        drop(_48) -> [return: bb25, unwind: bb206];
+    }
+
+    bb25: {
+        StorageDead(_48);
+        StorageDead(_47);
+        StorageDead(_45);
+        StorageDead(_43);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        StorageLive(_76);
+        _458 = const _;
+        _76 = &(*_458);
+        _75 = LendingError::name(move _76) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_76);
+        StorageLive(_78);
+        StorageLive(_79);
+        _79 = LendingError::ReserveStale;
+        _78 = <LendingError as Into<u32>>::into(move _79) -> [return: bb27, unwind: bb203];
+    }
+
+    bb27: {
+        StorageDead(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _457 = const _;
+        _81 = &(*_457);
+        _80 = <LendingError as ToString>::to_string(move _81) -> [return: bb28, unwind: bb203];
+    }
+
+    bb28: {
+        StorageDead(_81);
+        StorageLive(_83);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 487_u32 };
+        _84 = anchor_lang::error::ErrorOrigin::Source(move _85);
+        StorageDead(_85);
+        _83 = std::option::Option::<ErrorOrigin>::Some(move _84);
+        StorageDead(_84);
+        StorageLive(_86);
+        _86 = std::option::Option::<ComparedValues>::None;
+        _74 = anchor_lang::error::AnchorError { error_name: move _75, error_code_number: move _78, error_msg: move _80, error_origin: move _83, compared_values: move _86 };
+        StorageDead(_86);
+        StorageDead(_83);
+        StorageDead(_80);
+        StorageDead(_78);
+        StorageDead(_75);
+        _73 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _74) -> [return: bb29, unwind: bb206];
+    }
+
+    bb29: {
+        StorageDead(_74);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _73);
+        StorageDead(_73);
+        goto -> bb191;
+    }
+
+    bb30: {
+        StorageDead(_93);
+        StorageDead(_92);
+        StorageDead(_91);
+        _89 = <std::result::Result<bool, anchor_lang::error::Error> as Try>::branch(move _90) -> [return: bb31, unwind: bb206];
+    }
+
+    bb31: {
+        StorageDead(_90);
+        _94 = discriminant(_89);
+        switchInt(move _94) -> [0: bb32, 1: bb33, otherwise: bb14];
+    }
+
+    bb32: {
+        StorageLive(_98);
+        _98 = ((_89 as Continue).0: bool);
+        _88 = _98;
+        StorageDead(_98);
+        switchInt(move _88) -> [0: bb210, otherwise: bb209];
+    }
+
+    bb33: {
+        StorageLive(_95);
+        _95 = move ((_89 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_97);
+        _97 = move _95;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _97) -> [return: bb34, unwind: bb217];
+    }
+
+    bb34: {
+        StorageDead(_97);
+        StorageDead(_95);
+        _513 = discriminant(_89);
+        StorageDead(_89);
+        goto -> bb190;
+    }
+
+    bb35: {
+        StorageDead(_120);
+        _118 = &(_119.0: u8);
+        _117 = &(*_118);
+        _116 = core::fmt::rt::Argument::<'_>::new_binary::<u8>(move _117) -> [return: bb36, unwind continue];
+    }
+
+    bb36: {
+        StorageDead(_117);
+        _115 = [move _116];
+        StorageDead(_116);
+        _114 = &_115;
+        _113 = &(*_114);
+        _112 = move _113 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_113);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        _126 = core::fmt::rt::Alignment::Unknown;
+        StorageLive(_127);
+        _127 = core::fmt::rt::Count::Implied;
+        StorageLive(_128);
+        _128 = core::fmt::rt::Count::Is(const 8_usize);
+        _125 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _126, const 8_u32, move _127, move _128) -> [return: bb37, unwind continue];
+    }
+
+    bb37: {
+        StorageDead(_128);
+        StorageDead(_127);
+        StorageDead(_126);
+        _124 = [move _125];
+        StorageDead(_125);
+        _123 = &_124;
+        _122 = &(*_123);
+        _121 = move _122 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
+        StorageDead(_122);
+        StorageLive(_129);
+        _129 = core::fmt::rt::UnsafeArg::new() -> [return: bb38, unwind continue];
+    }
+
+    bb38: {
+        _107 = Arguments::<'_>::new_v1_formatted(move _108, move _112, move _121, move _129) -> [return: bb39, unwind continue];
+    }
+
+    bb39: {
+        StorageDead(_129);
+        StorageDead(_121);
+        StorageDead(_112);
+        StorageDead(_108);
+        _106 = format(move _107) -> [return: bb40, unwind continue];
+    }
+
+    bb40: {
+        StorageDead(_107);
+        StorageDead(_124);
+        StorageDead(_123);
+        StorageDead(_119);
+        StorageDead(_118);
+        StorageDead(_115);
+        StorageDead(_114);
+        StorageDead(_110);
+        _105 = move _106;
+        StorageDead(_106);
+        _104 = &_105;
+        _103 = &(*_104);
+        _102 = <std::string::String as Deref>::deref(move _103) -> [return: bb41, unwind: bb202];
+    }
+
+    bb41: {
+        _101 = &(*_102);
+        StorageDead(_103);
+        _100 = solana_program::log::sol_log(move _101) -> [return: bb42, unwind: bb202];
+    }
+
+    bb42: {
+        StorageDead(_101);
+        drop(_105) -> [return: bb43, unwind: bb206];
+    }
+
+    bb43: {
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageDead(_102);
+        StorageDead(_100);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        StorageLive(_133);
+        _461 = const _;
+        _133 = &(*_461);
+        _132 = LendingError::name(move _133) -> [return: bb44, unwind continue];
+    }
+
+    bb44: {
+        StorageDead(_133);
+        StorageLive(_135);
+        StorageLive(_136);
+        _136 = LendingError::ObligationStale;
+        _135 = <LendingError as Into<u32>>::into(move _136) -> [return: bb45, unwind: bb201];
+    }
+
+    bb45: {
+        StorageDead(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        _460 = const _;
+        _138 = &(*_460);
+        _137 = <LendingError as ToString>::to_string(move _138) -> [return: bb46, unwind: bb201];
+    }
+
+    bb46: {
+        StorageDead(_138);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        _142 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 498_u32 };
+        _141 = anchor_lang::error::ErrorOrigin::Source(move _142);
+        StorageDead(_142);
+        _140 = std::option::Option::<ErrorOrigin>::Some(move _141);
+        StorageDead(_141);
+        StorageLive(_143);
+        _143 = std::option::Option::<ComparedValues>::None;
+        _131 = anchor_lang::error::AnchorError { error_name: move _132, error_code_number: move _135, error_msg: move _137, error_origin: move _140, compared_values: move _143 };
+        StorageDead(_143);
+        StorageDead(_140);
+        StorageDead(_137);
+        StorageDead(_135);
+        StorageDead(_132);
+        _130 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _131) -> [return: bb47, unwind: bb206];
+    }
+
+    bb47: {
+        StorageDead(_131);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _130);
+        StorageDead(_130);
+        goto -> bb190;
+    }
+
+    bb48: {
+        StorageDead(_148);
+        StorageDead(_147);
+        _145 = <std::result::Result<usize, anchor_lang::error::Error> as Try>::branch(move _146) -> [return: bb49, unwind: bb206];
+    }
+
+    bb49: {
+        StorageDead(_146);
+        _149 = discriminant(_145);
+        switchInt(move _149) -> [0: bb50, 1: bb51, otherwise: bb14];
+    }
+
+    bb50: {
+        StorageLive(_153);
+        _153 = ((_145 as Continue).0: usize);
+        _144 = _153;
+        StorageDead(_153);
+        _489 = discriminant(_145);
+        StorageDead(_145);
+        StorageLive(_154);
+        StorageLive(_155);
+        _155 = _144;
+        _156 = Len(((*_3).4: [state::obligation::ObligationCollateral; 8]));
+        _157 = Lt(_155, _156);
+        assert(move _157, "index out of bounds: the length is {} but the index is {}", move _156, _155) -> [success: bb53, unwind continue];
+    }
+
+    bb51: {
+        StorageLive(_150);
+        _150 = move ((_145 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_152);
+        _152 = move _150;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _152) -> [return: bb52, unwind: bb216];
+    }
+
+    bb52: {
+        StorageDead(_152);
+        StorageDead(_150);
+        _511 = discriminant(_145);
+        StorageDead(_145);
+        goto -> bb189;
+    }
+
+    bb53: {
+        _154 = &((*_3).4: [state::obligation::ObligationCollateral; 8])[_155];
+        StorageLive(_158);
+        StorageLive(_159);
+        StorageLive(_160);
+        _160 = ((*_154).1: u64);
+        _159 = Eq(move _160, const 0_u64);
+        switchInt(move _159) -> [0: bb59, otherwise: bb54];
+    }
+
+    bb54: {
+        StorageDead(_160);
+        StorageLive(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        StorageLive(_165);
+        _464 = const _;
+        _165 = &(*_464);
+        _164 = LendingError::name(move _165) -> [return: bb55, unwind continue];
+    }
+
+    bb55: {
+        StorageDead(_165);
+        StorageLive(_167);
+        StorageLive(_168);
+        _168 = LendingError::ObligationCollateralEmpty;
+        _167 = <LendingError as Into<u32>>::into(move _168) -> [return: bb56, unwind: bb200];
+    }
+
+    bb56: {
+        StorageDead(_168);
+        StorageLive(_169);
+        StorageLive(_170);
+        _463 = const _;
+        _170 = &(*_463);
+        _169 = <LendingError as ToString>::to_string(move _170) -> [return: bb57, unwind: bb200];
+    }
+
+    bb57: {
+        StorageDead(_170);
+        StorageLive(_172);
+        StorageLive(_173);
+        StorageLive(_174);
+        _174 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 504_u32 };
+        _173 = anchor_lang::error::ErrorOrigin::Source(move _174);
+        StorageDead(_174);
+        _172 = std::option::Option::<ErrorOrigin>::Some(move _173);
+        StorageDead(_173);
+        StorageLive(_175);
+        _175 = std::option::Option::<ComparedValues>::None;
+        _163 = anchor_lang::error::AnchorError { error_name: move _164, error_code_number: move _167, error_msg: move _169, error_origin: move _172, compared_values: move _175 };
+        StorageDead(_175);
+        StorageDead(_172);
+        StorageDead(_169);
+        StorageDead(_167);
+        StorageDead(_164);
+        _162 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _163) -> [return: bb58, unwind: bb206];
+    }
+
+    bb58: {
+        StorageDead(_163);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _162);
+        StorageDead(_162);
+        StorageDead(_159);
+        StorageDead(_158);
+        goto -> bb188;
+    }
+
+    bb59: {
+        StorageDead(_160);
+        _158 = const ();
+        StorageDead(_159);
+        StorageDead(_158);
+        StorageLive(_176);
+        StorageLive(_177);
+        _177 = _26;
+        switchInt(move _177) -> [0: bb61, otherwise: bb60];
+    }
+
+    bb60: {
+        _176 = const ();
+        goto -> bb67;
+    }
+
+    bb61: {
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        _181 = &(*_1);
+        StorageLive(_182);
+        _182 = &(*_3);
+        _180 = check_elevation_group_borrowing_enabled(move _181, move _182) -> [return: bb62, unwind continue];
+    }
+
+    bb62: {
+        StorageDead(_182);
+        StorageDead(_181);
+        _179 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _180) -> [return: bb63, unwind: bb206];
+    }
+
+    bb63: {
+        StorageDead(_180);
+        _183 = discriminant(_179);
+        switchInt(move _183) -> [0: bb64, 1: bb65, otherwise: bb14];
+    }
+
+    bb64: {
+        StorageLive(_187);
+        _187 = ((_179 as Continue).0: ());
+        _178 = _187;
+        StorageDead(_187);
+        _491 = discriminant(_179);
+        StorageDead(_179);
+        StorageDead(_178);
+        _176 = const ();
+        goto -> bb67;
+    }
+
+    bb65: {
+        StorageLive(_184);
+        _184 = move ((_179 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_186);
+        _186 = move _184;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _186) -> [return: bb66, unwind: bb215];
+    }
+
+    bb66: {
+        StorageDead(_186);
+        StorageDead(_184);
+        _509 = discriminant(_179);
+        StorageDead(_179);
+        StorageDead(_178);
+        StorageDead(_177);
+        StorageDead(_176);
+        goto -> bb188;
+    }
+
+    bb67: {
+        StorageDead(_177);
+        StorageDead(_176);
+        StorageLive(_188);
+        StorageLive(_189);
+        StorageLive(_190);
+        _190 = &(*_3);
+        _189 = obligation::Obligation::has_obsolete_reserves(move _190) -> [return: bb68, unwind continue];
+    }
+
+    bb68: {
+        switchInt(move _189) -> [0: bb78, otherwise: bb69];
+    }
+
+    bb69: {
+        StorageDead(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        _194 = &((*_2).9: state::reserve::ReserveConfig);
+        _193 = reserve::ReserveConfig::status(move _194) -> [return: bb70, unwind continue];
+    }
+
+    bb70: {
+        _192 = &_193;
+        StorageDead(_194);
+        StorageLive(_195);
+        _479 = const _;
+        _195 = &(*_479);
+        _191 = <reserve::ReserveStatus as PartialEq>::eq(move _192, move _195) -> [return: bb71, unwind continue];
+    }
+
+    bb71: {
+        switchInt(move _191) -> [0: bb77, otherwise: bb72];
+    }
+
+    bb72: {
+        StorageDead(_195);
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageLive(_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        StorageLive(_201);
+        _466 = const _;
+        _201 = &(*_466);
+        _200 = LendingError::name(move _201) -> [return: bb73, unwind continue];
+    }
+
+    bb73: {
+        StorageDead(_201);
+        StorageLive(_203);
+        StorageLive(_204);
+        _204 = LendingError::ObligationInObsoleteReserve;
+        _203 = <LendingError as Into<u32>>::into(move _204) -> [return: bb74, unwind: bb199];
+    }
+
+    bb74: {
+        StorageDead(_204);
+        StorageLive(_205);
+        StorageLive(_206);
+        _465 = const _;
+        _206 = &(*_465);
+        _205 = <LendingError as ToString>::to_string(move _206) -> [return: bb75, unwind: bb199];
+    }
+
+    bb75: {
+        StorageDead(_206);
+        StorageLive(_208);
+        StorageLive(_209);
+        StorageLive(_210);
+        _210 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 514_u32 };
+        _209 = anchor_lang::error::ErrorOrigin::Source(move _210);
+        StorageDead(_210);
+        _208 = std::option::Option::<ErrorOrigin>::Some(move _209);
+        StorageDead(_209);
+        StorageLive(_211);
+        _211 = std::option::Option::<ComparedValues>::None;
+        _199 = anchor_lang::error::AnchorError { error_name: move _200, error_code_number: move _203, error_msg: move _205, error_origin: move _208, compared_values: move _211 };
+        StorageDead(_211);
+        StorageDead(_208);
+        StorageDead(_205);
+        StorageDead(_203);
+        StorageDead(_200);
+        _198 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _199) -> [return: bb76, unwind: bb206];
+    }
+
+    bb76: {
+        StorageDead(_199);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _198);
+        StorageDead(_198);
+        StorageDead(_191);
+        StorageDead(_189);
+        StorageDead(_188);
+        goto -> bb188;
+    }
+
+    bb77: {
+        StorageDead(_195);
+        StorageDead(_193);
+        StorageDead(_192);
+        goto -> bb79;
+    }
+
+    bb78: {
+        StorageDead(_190);
+        goto -> bb79;
+    }
+
+    bb79: {
+        _188 = const ();
+        StorageDead(_191);
+        StorageDead(_189);
+        StorageDead(_188);
+        StorageLive(_214);
+        StorageLive(_215);
+        _215 = &(*_2);
+        StorageLive(_216);
+        StorageLive(_217);
+        StorageLive(_218);
+        StorageLive(_219);
+        _219 = ((*_3).14: u8);
+        StorageLive(_220);
+        _220 = &(*_1);
+        _218 = get_elevation_group(move _219, move _220) -> [return: bb80, unwind continue];
+    }
+
+    bb80: {
+        StorageDead(_220);
+        StorageDead(_219);
+        _217 = <std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error> as Try>::branch(move _218) -> [return: bb81, unwind: bb206];
+    }
+
+    bb81: {
+        _480 = const true;
+        StorageDead(_218);
+        _221 = discriminant(_217);
+        switchInt(move _221) -> [0: bb82, 1: bb83, otherwise: bb14];
+    }
+
+    bb82: {
+        StorageLive(_225);
+        _225 = ((_217 as Continue).0: std::option::Option<&state::lending_market::ElevationGroup>);
+        _216 = _225;
+        StorageDead(_225);
+        _214 = get_max_ltv_and_liquidation_threshold(move _215, move _216) -> [return: bb85, unwind: bb214];
+    }
+
+    bb83: {
+        StorageLive(_222);
+        _222 = move ((_217 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_224);
+        _224 = move _222;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _224) -> [return: bb84, unwind: bb214];
+    }
+
+    bb84: {
+        StorageDead(_224);
+        StorageDead(_222);
+        StorageDead(_216);
+        StorageDead(_215);
+        _507 = discriminant(_217);
+        _480 = const false;
+        StorageDead(_217);
+        StorageDead(_214);
+        goto -> bb188;
+    }
+
+    bb85: {
+        StorageDead(_216);
+        StorageDead(_215);
+        StorageLive(_212);
+        _212 = (_214.0: u8);
+        StorageLive(_213);
+        _213 = (_214.1: u8);
+        _493 = discriminant(_217);
+        _480 = const false;
+        StorageDead(_217);
+        StorageDead(_214);
+        StorageLive(_226);
+        StorageLive(_227);
+        _227 = _26;
+        switchInt(move _227) -> [0: bb91, otherwise: bb86];
+    }
+
+    bb86: {
+        StorageLive(_228);
+        StorageLive(_229);
+        _229 = _4;
+        _228 = Eq(move _229, const _);
+        switchInt(move _228) -> [0: bb88, otherwise: bb87];
+    }
+
+    bb87: {
+        StorageDead(_229);
+        _226 = ((*_154).1: u64);
+        goto -> bb90;
+    }
+
+    bb88: {
+        StorageDead(_229);
+        StorageLive(_230);
+        _230 = ((*_154).1: u64);
+        StorageLive(_231);
+        _231 = _4;
+        _226 = <u64 as Ord>::min(move _230, move _231) -> [return: bb89, unwind continue];
+    }
+
+    bb89: {
+        StorageDead(_231);
+        StorageDead(_230);
+        goto -> bb90;
+    }
+
+    bb90: {
+        StorageDead(_228);
+        goto -> bb156;
+    }
+
+    bb91: {
+        StorageLive(_232);
+        StorageLive(_233);
+        _233 = ((*_3).6: u128);
+        _232 = Eq(move _233, const 0_u128);
+        switchInt(move _232) -> [0: bb98, otherwise: bb92];
+    }
+
+    bb92: {
+        StorageDead(_233);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        _237 = const "Obligation deposited value is zero";
+        _236 = &(*_237);
+        _235 = solana_program::log::sol_log(move _236) -> [return: bb93, unwind continue];
+    }
+
+    bb93: {
+        StorageDead(_236);
+        StorageDead(_237);
+        StorageDead(_235);
+        StorageLive(_238);
+        StorageLive(_239);
+        StorageLive(_240);
+        StorageLive(_241);
+        _469 = const _;
+        _241 = &(*_469);
+        _240 = LendingError::name(move _241) -> [return: bb94, unwind continue];
+    }
+
+    bb94: {
+        StorageDead(_241);
+        StorageLive(_243);
+        StorageLive(_244);
+        _244 = LendingError::ObligationDepositsZero;
+        _243 = <LendingError as Into<u32>>::into(move _244) -> [return: bb95, unwind: bb198];
+    }
+
+    bb95: {
+        StorageDead(_244);
+        StorageLive(_245);
+        StorageLive(_246);
+        _468 = const _;
+        _246 = &(*_468);
+        _245 = <LendingError as ToString>::to_string(move _246) -> [return: bb96, unwind: bb198];
+    }
+
+    bb96: {
+        StorageDead(_246);
+        StorageLive(_248);
+        StorageLive(_249);
+        StorageLive(_250);
+        _250 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 533_u32 };
+        _249 = anchor_lang::error::ErrorOrigin::Source(move _250);
+        StorageDead(_250);
+        _248 = std::option::Option::<ErrorOrigin>::Some(move _249);
+        StorageDead(_249);
+        StorageLive(_251);
+        _251 = std::option::Option::<ComparedValues>::None;
+        _239 = anchor_lang::error::AnchorError { error_name: move _240, error_code_number: move _243, error_msg: move _245, error_origin: move _248, compared_values: move _251 };
+        StorageDead(_251);
+        StorageDead(_248);
+        StorageDead(_245);
+        StorageDead(_243);
+        StorageDead(_240);
+        _238 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _239) -> [return: bb97, unwind: bb206];
+    }
+
+    bb97: {
+        StorageDead(_239);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _238);
+        StorageDead(_238);
+        goto -> bb186;
+    }
+
+    bb98: {
+        StorageDead(_233);
+        StorageLive(_252);
+        StorageLive(_253);
+        _253 = &(*_3);
+        StorageLive(_254);
+        _254 = &(*_154);
+        StorageLive(_255);
+        _255 = _212;
+        StorageLive(_256);
+        _256 = _213;
+        StorageLive(_257);
+        _257 = _7;
+        _252 = obligation::Obligation::max_withdraw_value(move _253, move _254, move _255, move _256, move _257) -> [return: bb99, unwind continue];
+    }
+
+    bb99: {
+        StorageDead(_257);
+        StorageDead(_256);
+        StorageDead(_255);
+        StorageDead(_254);
+        StorageDead(_253);
+        StorageLive(_258);
+        StorageLive(_259);
+        StorageLive(_260);
+        _260 = &_252;
+        StorageLive(_261);
+        _478 = const _;
+        _261 = &(*_478);
+        _259 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as PartialEq>::eq(move _260, move _261) -> [return: bb100, unwind continue];
+    }
+
+    bb100: {
+        switchInt(move _259) -> [0: bb106, otherwise: bb101];
+    }
+
+    bb101: {
+        StorageDead(_261);
+        StorageDead(_260);
+        StorageLive(_264);
+        StorageLive(_265);
+        StorageLive(_266);
+        StorageLive(_267);
+        _471 = const _;
+        _267 = &(*_471);
+        _266 = LendingError::name(move _267) -> [return: bb102, unwind continue];
+    }
+
+    bb102: {
+        StorageDead(_267);
+        StorageLive(_269);
+        StorageLive(_270);
+        _270 = LendingError::MaximumWithdrawValueZero;
+        _269 = <LendingError as Into<u32>>::into(move _270) -> [return: bb103, unwind: bb197];
+    }
+
+    bb103: {
+        StorageDead(_270);
+        StorageLive(_271);
+        StorageLive(_272);
+        _470 = const _;
+        _272 = &(*_470);
+        _271 = <LendingError as ToString>::to_string(move _272) -> [return: bb104, unwind: bb197];
+    }
+
+    bb104: {
+        StorageDead(_272);
+        StorageLive(_274);
+        StorageLive(_275);
+        StorageLive(_276);
+        _276 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 543_u32 };
+        _275 = anchor_lang::error::ErrorOrigin::Source(move _276);
+        StorageDead(_276);
+        _274 = std::option::Option::<ErrorOrigin>::Some(move _275);
+        StorageDead(_275);
+        StorageLive(_277);
+        _277 = std::option::Option::<ComparedValues>::None;
+        _265 = anchor_lang::error::AnchorError { error_name: move _266, error_code_number: move _269, error_msg: move _271, error_origin: move _274, compared_values: move _277 };
+        StorageDead(_277);
+        StorageDead(_274);
+        StorageDead(_271);
+        StorageDead(_269);
+        StorageDead(_266);
+        _264 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _265) -> [return: bb105, unwind: bb206];
+    }
+
+    bb105: {
+        StorageDead(_265);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _264);
+        StorageDead(_264);
+        StorageDead(_259);
+        StorageDead(_258);
+        goto -> bb185;
+    }
+
+    bb106: {
+        StorageDead(_261);
+        StorageDead(_260);
+        _258 = const ();
+        StorageDead(_259);
+        StorageDead(_258);
+        StorageLive(_278);
+        StorageLive(_279);
+        _279 = ((*_154).2: u128);
+        _278 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _279) -> [return: bb107, unwind continue];
+    }
+
+    bb107: {
+        StorageDead(_279);
+        StorageLive(_280);
+        StorageLive(_281);
+        StorageLive(_282);
+        _282 = _4;
+        _281 = Eq(move _282, const _);
+        switchInt(move _281) -> [0: bb115, otherwise: bb108];
+    }
+
+    bb108: {
+        StorageDead(_282);
+        StorageLive(_283);
+        StorageLive(_284);
+        _284 = _252;
+        StorageLive(_285);
+        _285 = _278;
+        _283 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Ord>::min(move _284, move _285) -> [return: bb109, unwind continue];
+    }
+
+    bb109: {
+        StorageDead(_285);
+        StorageDead(_284);
+        StorageLive(_286);
+        StorageLive(_287);
+        _287 = _283;
+        StorageLive(_288);
+        _288 = _278;
+        _286 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Div>::div(move _287, move _288) -> [return: bb110, unwind continue];
+    }
+
+    bb110: {
+        StorageDead(_288);
+        StorageDead(_287);
+        StorageLive(_289);
+        StorageLive(_290);
+        _290 = _286;
+        StorageLive(_291);
+        StorageLive(_292);
+        _292 = ((*_154).1: u64);
+        _291 = <u128 as From<u64>>::from(move _292) -> [return: bb111, unwind continue];
+    }
+
+    bb111: {
+        StorageDead(_292);
+        _289 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Mul<u128>>::mul(move _290, move _291) -> [return: bb112, unwind continue];
+    }
+
+    bb112: {
+        StorageDead(_291);
+        StorageDead(_290);
+        StorageLive(_293);
+        StorageLive(_294);
+        _294 = &_289;
+        _293 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_floor::<u64>(move _294) -> [return: bb113, unwind continue];
+    }
+
+    bb113: {
+        StorageDead(_294);
+        StorageLive(_295);
+        _295 = ((*_154).1: u64);
+        StorageLive(_296);
+        _296 = _293;
+        _280 = std::cmp::min::<u64>(move _295, move _296) -> [return: bb114, unwind continue];
+    }
+
+    bb114: {
+        StorageDead(_296);
+        StorageDead(_295);
+        StorageDead(_293);
+        StorageDead(_289);
+        StorageDead(_286);
+        StorageDead(_283);
+        goto -> bb148;
+    }
+
+    bb115: {
+        StorageDead(_282);
+        StorageLive(_297);
+        StorageLive(_298);
+        _298 = _4;
+        StorageLive(_299);
+        _299 = ((*_154).1: u64);
+        _297 = <u64 as Ord>::min(move _298, move _299) -> [return: bb116, unwind continue];
+    }
+
+    bb116: {
+        StorageDead(_299);
+        StorageDead(_298);
+        StorageLive(_300);
+        StorageLive(_301);
+        StorageLive(_302);
+        StorageLive(_303);
+        _303 = _297;
+        _302 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _303) -> [return: bb117, unwind continue];
+    }
+
+    bb117: {
+        _301 = &_302;
+        StorageDead(_303);
+        StorageLive(_304);
+        StorageLive(_305);
+        StorageLive(_306);
+        StorageLive(_307);
+        _307 = ((*_154).1: u64);
+        _306 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _307) -> [return: bb118, unwind continue];
+    }
+
+    bb118: {
+        StorageDead(_307);
+        _305 = &_306;
+        _304 = &(*_305);
+        _300 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::div_ceil(move _301, move _304) -> [return: bb119, unwind continue];
+    }
+
+    bb119: {
+        StorageDead(_304);
+        StorageDead(_301);
+        StorageDead(_306);
+        StorageDead(_305);
+        StorageDead(_302);
+        StorageLive(_308);
+        StorageLive(_309);
+        _309 = _278;
+        StorageLive(_310);
+        _310 = _300;
+        _308 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as std::ops::Mul>::mul(move _309, move _310) -> [return: bb120, unwind continue];
+    }
+
+    bb120: {
+        StorageDead(_310);
+        StorageDead(_309);
+        StorageLive(_311);
+        StorageLive(_312);
+        StorageLive(_313);
+        _313 = &_7;
+        StorageLive(_314);
+        _477 = const _;
+        _314 = &(*_477);
+        _312 = <state::types::LtvMaxWithdrawalCheck as PartialEq>::eq(move _313, move _314) -> [return: bb121, unwind continue];
+    }
+
+    bb121: {
+        switchInt(move _312) -> [0: bb124, otherwise: bb122];
+    }
+
+    bb122: {
+        StorageDead(_314);
+        StorageDead(_313);
+        StorageLive(_316);
+        _316 = &_308;
+        StorageLive(_317);
+        _317 = &_252;
+        _311 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as PartialOrd>::ge(move _316, move _317) -> [return: bb123, unwind continue];
+    }
+
+    bb123: {
+        StorageDead(_317);
+        StorageDead(_316);
+        goto -> bb126;
+    }
+
+    bb124: {
+        StorageDead(_314);
+        StorageDead(_313);
+        StorageLive(_318);
+        _318 = &_308;
+        StorageLive(_319);
+        _319 = &_252;
+        _311 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as PartialOrd>::gt(move _318, move _319) -> [return: bb125, unwind continue];
+    }
+
+    bb125: {
+        StorageDead(_319);
+        StorageDead(_318);
+        goto -> bb126;
+    }
+
+    bb126: {
+        StorageDead(_312);
+        StorageLive(_320);
+        StorageLive(_321);
+        _321 = _311;
+        switchInt(move _321) -> [0: bb147, otherwise: bb127];
+    }
+
+    bb127: {
+        StorageLive(_323);
+        StorageLive(_324);
+        StorageLive(_325);
+        StorageLive(_326);
+        StorageLive(_327);
+        StorageLive(_328);
+        StorageLive(_329);
+        StorageLive(_330);
+        StorageLive(_331);
+        StorageLive(_332);
+        StorageLive(_333);
+        _476 = const _;
+        _333 = &(*_476);
+        _332 = &(*_333);
+        _331 = move _332 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_332);
+        StorageLive(_335);
+        StorageLive(_336);
+        StorageLive(_337);
+        StorageLive(_338);
+        StorageLive(_339);
+        StorageLive(_340);
+        StorageLive(_341);
+        _341 = &_4;
+        _340 = &(*_341);
+        _339 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _340) -> [return: bb128, unwind continue];
+    }
+
+    bb128: {
+        StorageDead(_340);
+        StorageLive(_342);
+        StorageLive(_343);
+        StorageLive(_344);
+        _344 = &((*_154).1: u64);
+        _343 = &(*_344);
+        _342 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _343) -> [return: bb129, unwind continue];
+    }
+
+    bb129: {
+        StorageDead(_343);
+        StorageLive(_345);
+        StorageLive(_346);
+        StorageLive(_347);
+        StorageLive(_348);
+        StorageLive(_349);
+        _349 = &_300;
+        _348 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_display(move _349) -> [return: bb130, unwind continue];
+    }
+
+    bb130: {
+        StorageDead(_349);
+        _347 = &_348;
+        _346 = &(*_347);
+        _345 = core::fmt::rt::Argument::<'_>::new_display::<FractionDisplay<'_>>(move _346) -> [return: bb131, unwind continue];
+    }
+
+    bb131: {
+        StorageDead(_346);
+        StorageLive(_350);
+        StorageLive(_351);
+        StorageLive(_352);
+        StorageLive(_353);
+        StorageLive(_354);
+        _354 = &_278;
+        _353 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_display(move _354) -> [return: bb132, unwind continue];
+    }
+
+    bb132: {
+        StorageDead(_354);
+        _352 = &_353;
+        _351 = &(*_352);
+        _350 = core::fmt::rt::Argument::<'_>::new_display::<FractionDisplay<'_>>(move _351) -> [return: bb133, unwind continue];
+    }
+
+    bb133: {
+        StorageDead(_351);
+        StorageLive(_355);
+        StorageLive(_356);
+        StorageLive(_357);
+        StorageLive(_358);
+        StorageLive(_359);
+        _359 = &_252;
+        _358 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_display(move _359) -> [return: bb134, unwind continue];
+    }
+
+    bb134: {
+        StorageDead(_359);
+        _357 = &_358;
+        _356 = &(*_357);
+        _355 = core::fmt::rt::Argument::<'_>::new_display::<FractionDisplay<'_>>(move _356) -> [return: bb135, unwind continue];
+    }
+
+    bb135: {
+        StorageDead(_356);
+        StorageLive(_360);
+        StorageLive(_361);
+        StorageLive(_362);
+        StorageLive(_363);
+        StorageLive(_364);
+        _364 = &_308;
+        _363 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_display(move _364) -> [return: bb136, unwind continue];
+    }
+
+    bb136: {
+        StorageDead(_364);
+        _362 = &_363;
+        _361 = &(*_362);
+        _360 = core::fmt::rt::Argument::<'_>::new_display::<FractionDisplay<'_>>(move _361) -> [return: bb137, unwind continue];
+    }
+
+    bb137: {
+        StorageDead(_361);
+        _338 = [move _339, move _342, move _345, move _350, move _355, move _360];
+        StorageDead(_360);
+        StorageDead(_355);
+        StorageDead(_350);
+        StorageDead(_345);
+        StorageDead(_342);
+        StorageDead(_339);
+        _337 = &_338;
+        _336 = &(*_337);
+        _335 = move _336 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_336);
+        _330 = Arguments::<'_>::new_v1(move _331, move _335) -> [return: bb138, unwind continue];
+    }
+
+    bb138: {
+        StorageDead(_335);
+        StorageDead(_331);
+        _329 = format(move _330) -> [return: bb139, unwind continue];
+    }
+
+    bb139: {
+        StorageDead(_330);
+        StorageDead(_363);
+        StorageDead(_362);
+        StorageDead(_358);
+        StorageDead(_357);
+        StorageDead(_353);
+        StorageDead(_352);
+        StorageDead(_348);
+        StorageDead(_347);
+        StorageDead(_344);
+        StorageDead(_341);
+        StorageDead(_338);
+        StorageDead(_337);
+        StorageDead(_333);
+        _328 = move _329;
+        StorageDead(_329);
+        _327 = &_328;
+        _326 = &(*_327);
+        _325 = <std::string::String as Deref>::deref(move _326) -> [return: bb140, unwind: bb196];
+    }
+
+    bb140: {
+        _324 = &(*_325);
+        StorageDead(_326);
+        _323 = solana_program::log::sol_log(move _324) -> [return: bb141, unwind: bb196];
+    }
+
+    bb141: {
+        StorageDead(_324);
+        drop(_328) -> [return: bb142, unwind: bb206];
+    }
+
+    bb142: {
+        StorageDead(_328);
+        StorageDead(_327);
+        StorageDead(_325);
+        StorageDead(_323);
+        StorageLive(_365);
+        StorageLive(_366);
+        StorageLive(_367);
+        StorageLive(_368);
+        _475 = const _;
+        _368 = &(*_475);
+        _367 = LendingError::name(move _368) -> [return: bb143, unwind continue];
+    }
+
+    bb143: {
+        StorageDead(_368);
+        StorageLive(_370);
+        StorageLive(_371);
+        _371 = LendingError::WithdrawTooLarge;
+        _370 = <LendingError as Into<u32>>::into(move _371) -> [return: bb144, unwind: bb195];
+    }
+
+    bb144: {
+        StorageDead(_371);
+        StorageLive(_372);
+        StorageLive(_373);
+        _474 = const _;
+        _373 = &(*_474);
+        _372 = <LendingError as ToString>::to_string(move _373) -> [return: bb145, unwind: bb195];
+    }
+
+    bb145: {
+        StorageDead(_373);
+        StorageLive(_375);
+        StorageLive(_376);
+        StorageLive(_377);
+        _377 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 577_u32 };
+        _376 = anchor_lang::error::ErrorOrigin::Source(move _377);
+        StorageDead(_377);
+        _375 = std::option::Option::<ErrorOrigin>::Some(move _376);
+        StorageDead(_376);
+        StorageLive(_378);
+        _378 = std::option::Option::<ComparedValues>::None;
+        _366 = anchor_lang::error::AnchorError { error_name: move _367, error_code_number: move _370, error_msg: move _372, error_origin: move _375, compared_values: move _378 };
+        StorageDead(_378);
+        StorageDead(_375);
+        StorageDead(_372);
+        StorageDead(_370);
+        StorageDead(_367);
+        _365 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _366) -> [return: bb146, unwind: bb206];
+    }
+
+    bb146: {
+        StorageDead(_366);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _365);
+        StorageDead(_365);
+        StorageDead(_321);
+        StorageDead(_320);
+        StorageDead(_311);
+        StorageDead(_308);
+        StorageDead(_300);
+        StorageDead(_297);
+        StorageDead(_281);
+        goto -> bb184;
+    }
+
+    bb147: {
+        _320 = const ();
+        StorageDead(_321);
+        StorageDead(_320);
+        _280 = _297;
+        StorageDead(_311);
+        StorageDead(_308);
+        StorageDead(_300);
+        StorageDead(_297);
+        goto -> bb148;
+    }
+
+    bb148: {
+        StorageDead(_281);
+        StorageLive(_379);
+        StorageLive(_380);
+        StorageLive(_381);
+        _381 = _280;
+        _380 = Eq(move _381, const 0_u64);
+        switchInt(move _380) -> [0: bb155, otherwise: bb149];
+    }
+
+    bb149: {
+        StorageDead(_381);
+        StorageLive(_383);
+        StorageLive(_384);
+        StorageLive(_385);
+        _385 = const "Withdraw amount is too small to transfer collateral";
+        _384 = &(*_385);
+        _383 = solana_program::log::sol_log(move _384) -> [return: bb150, unwind continue];
+    }
+
+    bb150: {
+        StorageDead(_384);
+        StorageDead(_385);
+        StorageDead(_383);
+        StorageLive(_386);
+        StorageLive(_387);
+        StorageLive(_388);
+        StorageLive(_389);
+        _473 = const _;
+        _389 = &(*_473);
+        _388 = LendingError::name(move _389) -> [return: bb151, unwind continue];
+    }
+
+    bb151: {
+        StorageDead(_389);
+        StorageLive(_391);
+        StorageLive(_392);
+        _392 = LendingError::WithdrawTooSmall;
+        _391 = <LendingError as Into<u32>>::into(move _392) -> [return: bb152, unwind: bb194];
+    }
+
+    bb152: {
+        StorageDead(_392);
+        StorageLive(_393);
+        StorageLive(_394);
+        _472 = const _;
+        _394 = &(*_472);
+        _393 = <LendingError as ToString>::to_string(move _394) -> [return: bb153, unwind: bb194];
+    }
+
+    bb153: {
+        StorageDead(_394);
+        StorageLive(_396);
+        StorageLive(_397);
+        StorageLive(_398);
+        _398 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 584_u32 };
+        _397 = anchor_lang::error::ErrorOrigin::Source(move _398);
+        StorageDead(_398);
+        _396 = std::option::Option::<ErrorOrigin>::Some(move _397);
+        StorageDead(_397);
+        StorageLive(_399);
+        _399 = std::option::Option::<ComparedValues>::None;
+        _387 = anchor_lang::error::AnchorError { error_name: move _388, error_code_number: move _391, error_msg: move _393, error_origin: move _396, compared_values: move _399 };
+        StorageDead(_399);
+        StorageDead(_396);
+        StorageDead(_393);
+        StorageDead(_391);
+        StorageDead(_388);
+        _386 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _387) -> [return: bb154, unwind: bb206];
+    }
+
+    bb154: {
+        StorageDead(_387);
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Err(move _386);
+        StorageDead(_386);
+        StorageDead(_380);
+        StorageDead(_379);
+        goto -> bb184;
+    }
+
+    bb155: {
+        StorageDead(_381);
+        _379 = const ();
+        StorageDead(_380);
+        StorageDead(_379);
+        _226 = _280;
+        StorageDead(_280);
+        StorageDead(_278);
+        StorageDead(_252);
+        StorageDead(_232);
+        goto -> bb156;
+    }
+
+    bb156: {
+        StorageDead(_227);
+        StorageLive(_400);
+        _400 = ((*_154).3: u64);
+        StorageLive(_401);
+        StorageLive(_402);
+        StorageLive(_403);
+        StorageLive(_404);
+        _404 = &mut (*_3);
+        StorageLive(_405);
+        _405 = _226;
+        StorageLive(_406);
+        _406 = _144;
+        _403 = obligation::Obligation::withdraw(move _404, move _405, move _406) -> [return: bb157, unwind continue];
+    }
+
+    bb157: {
+        StorageDead(_406);
+        StorageDead(_405);
+        StorageDead(_404);
+        _402 = <std::result::Result<obligation::WithdrawResult, anchor_lang::error::Error> as Try>::branch(move _403) -> [return: bb158, unwind: bb206];
+    }
+
+    bb158: {
+        StorageDead(_403);
+        _407 = discriminant(_402);
+        switchInt(move _407) -> [0: bb159, 1: bb160, otherwise: bb14];
+    }
+
+    bb159: {
+        StorageLive(_411);
+        _411 = ((_402 as Continue).0: state::obligation::WithdrawResult);
+        _401 = _411;
+        StorageDead(_411);
+        _495 = discriminant(_402);
+        StorageDead(_402);
+        StorageLive(_412);
+        StorageLive(_413);
+        _413 = &mut ((*_3).1: state::last_update::LastUpdate);
+        _412 = last_update::LastUpdate::mark_stale(move _413) -> [return: bb162, unwind continue];
+    }
+
+    bb160: {
+        StorageLive(_408);
+        _408 = move ((_402 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_410);
+        _410 = move _408;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _410) -> [return: bb161, unwind: bb213];
+    }
+
+    bb161: {
+        StorageDead(_410);
+        StorageDead(_408);
+        _505 = discriminant(_402);
+        StorageDead(_402);
+        goto -> bb183;
+    }
+
+    bb162: {
+        StorageDead(_413);
+        StorageDead(_412);
+        StorageLive(_414);
+        StorageLive(_415);
+        StorageLive(_416);
+        _416 = &_401;
+        StorageLive(_417);
+        _467 = const _;
+        _417 = &(*_467);
+        _415 = <obligation::WithdrawResult as PartialEq>::eq(move _416, move _417) -> [return: bb163, unwind continue];
+    }
+
+    bb163: {
+        switchInt(move _415) -> [0: bb170, otherwise: bb164];
+    }
+
+    bb164: {
+        StorageDead(_417);
+        StorageDead(_416);
+        StorageLive(_419);
+        StorageLive(_420);
+        StorageLive(_421);
+        StorageLive(_422);
+        _422 = _400;
+        StorageLive(_423);
+        _423 = ((*_3).14: u8);
+        StorageLive(_424);
+        _424 = &mut (*_2);
+        _421 = update_elevation_group_debt_trackers_on_full_withdraw(move _422, move _423, move _424) -> [return: bb165, unwind continue];
+    }
+
+    bb165: {
+        StorageDead(_424);
+        StorageDead(_423);
+        StorageDead(_422);
+        _420 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _421) -> [return: bb166, unwind: bb206];
+    }
+
+    bb166: {
+        StorageDead(_421);
+        _425 = discriminant(_420);
+        switchInt(move _425) -> [0: bb167, 1: bb168, otherwise: bb14];
+    }
+
+    bb167: {
+        StorageLive(_429);
+        _429 = ((_420 as Continue).0: ());
+        _419 = _429;
+        StorageDead(_429);
+        _497 = discriminant(_420);
+        StorageDead(_420);
+        StorageDead(_419);
+        _414 = const ();
+        goto -> bb171;
+    }
+
+    bb168: {
+        StorageLive(_426);
+        _426 = move ((_420 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_428);
+        _428 = move _426;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _428) -> [return: bb169, unwind: bb212];
+    }
+
+    bb169: {
+        StorageDead(_428);
+        StorageDead(_426);
+        _503 = discriminant(_420);
+        StorageDead(_420);
+        StorageDead(_419);
+        StorageDead(_415);
+        StorageDead(_414);
+        goto -> bb183;
+    }
+
+    bb170: {
+        StorageDead(_417);
+        StorageDead(_416);
+        _414 = const ();
+        goto -> bb171;
+    }
+
+    bb171: {
+        StorageDead(_415);
+        StorageDead(_414);
+        StorageLive(_430);
+        StorageLive(_431);
+        StorageLive(_432);
+        StorageLive(_433);
+        StorageLive(_434);
+        StorageLive(_435);
+        StorageLive(_436);
+        _436 = &(*_2);
+        _435 = reserve::Reserve::collateral_exchange_rate(move _436) -> [return: bb172, unwind continue];
+    }
+
+    bb172: {
+        _434 = &_435;
+        StorageDead(_436);
+        StorageLive(_437);
+        StorageLive(_438);
+        _438 = _226;
+        _437 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _438) -> [return: bb173, unwind continue];
+    }
+
+    bb173: {
+        StorageDead(_438);
+        _433 = reserve::CollateralExchangeRate::fraction_collateral_to_liquidity(move _434, move _437) -> [return: bb174, unwind continue];
+    }
+
+    bb174: {
+        StorageDead(_437);
+        StorageDead(_434);
+        StorageLive(_439);
+        _439 = &(*_3);
+        StorageLive(_440);
+        _440 = &(*_2);
+        StorageLive(_441);
+        _441 = _213;
+        StorageLive(_442);
+        StorageLive(_443);
+        StorageLive(_444);
+        _444 = _144;
+        _445 = Len(((*_3).4: [state::obligation::ObligationCollateral; 8]));
+        _446 = Lt(_444, _445);
+        assert(move _446, "index out of bounds: the length is {} but the index is {}", move _445, _444) -> [success: bb175, unwind continue];
+    }
+
+    bb175: {
+        _443 = (((*_3).4: [state::obligation::ObligationCollateral; 8])[_444].2: u128);
+        _442 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _443) -> [return: bb176, unwind continue];
+    }
+
+    bb176: {
+        StorageDead(_443);
+        StorageLive(_447);
+        StorageLive(_448);
+        _448 = ((*_1).20: u128);
+        _447 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _448) -> [return: bb177, unwind continue];
+    }
+
+    bb177: {
+        StorageDead(_448);
+        _432 = post_withdraw_obligation_invariants(move _433, move _439, move _440, move _441, move _442, move _447) -> [return: bb178, unwind continue];
+    }
+
+    bb178: {
+        StorageDead(_447);
+        StorageDead(_442);
+        StorageDead(_441);
+        StorageDead(_440);
+        StorageDead(_439);
+        StorageDead(_433);
+        _431 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _432) -> [return: bb179, unwind: bb206];
+    }
+
+    bb179: {
+        StorageDead(_432);
+        _449 = discriminant(_431);
+        switchInt(move _449) -> [0: bb180, 1: bb181, otherwise: bb14];
+    }
+
+    bb180: {
+        StorageLive(_453);
+        _453 = ((_431 as Continue).0: ());
+        _430 = _453;
+        StorageDead(_453);
+        _499 = discriminant(_431);
+        StorageDead(_444);
+        StorageDead(_435);
+        StorageDead(_431);
+        StorageDead(_430);
+        StorageLive(_454);
+        _454 = _226;
+        _0 = std::result::Result::<u64, anchor_lang::error::Error>::Ok(move _454);
+        StorageDead(_454);
+        StorageDead(_401);
+        StorageDead(_400);
+        StorageDead(_226);
+        StorageDead(_213);
+        StorageDead(_212);
+        StorageDead(_155);
+        StorageDead(_154);
+        StorageDead(_144);
+        StorageDead(_28);
+        StorageDead(_26);
+        goto -> bb193;
+    }
+
+    bb181: {
+        StorageLive(_450);
+        _450 = move ((_431 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_452);
+        _452 = move _450;
+        _0 = <std::result::Result<u64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _452) -> [return: bb182, unwind: bb211];
+    }
+
+    bb182: {
+        StorageDead(_452);
+        StorageDead(_450);
+        _501 = discriminant(_431);
+        StorageDead(_444);
+        StorageDead(_435);
+        StorageDead(_431);
+        StorageDead(_430);
+        goto -> bb183;
+    }
+
+    bb183: {
+        StorageDead(_401);
+        StorageDead(_400);
+        goto -> bb187;
+    }
+
+    bb184: {
+        StorageDead(_280);
+        StorageDead(_278);
+        goto -> bb185;
+    }
+
+    bb185: {
+        StorageDead(_252);
+        goto -> bb186;
+    }
+
+    bb186: {
+        StorageDead(_232);
+        StorageDead(_227);
+        goto -> bb187;
+    }
+
+    bb187: {
+        StorageDead(_226);
+        StorageDead(_213);
+        StorageDead(_212);
+        goto -> bb188;
+    }
+
+    bb188: {
+        StorageDead(_155);
+        StorageDead(_154);
+        goto -> bb189;
+    }
+
+    bb189: {
+        StorageDead(_144);
+        goto -> bb192;
+    }
+
+    bb190: {
+        StorageDead(_88);
+        StorageDead(_87);
+        goto -> bb192;
+    }
+
+    bb191: {
+        StorageDead(_31);
+        StorageDead(_30);
+        goto -> bb192;
+    }
+
+    bb192: {
+        StorageDead(_28);
+        StorageDead(_26);
+        goto -> bb193;
+    }
+
+    bb193: {
+        return;
+    }
+
+    bb194 (cleanup): {
+        drop(_388) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb195 (cleanup): {
+        drop(_367) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb196 (cleanup): {
+        drop(_328) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb197 (cleanup): {
+        drop(_266) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb198 (cleanup): {
+        drop(_240) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb199 (cleanup): {
+        drop(_200) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb200 (cleanup): {
+        drop(_164) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb201 (cleanup): {
+        drop(_132) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb202 (cleanup): {
+        drop(_105) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb203 (cleanup): {
+        drop(_75) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb204 (cleanup): {
+        drop(_48) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb205 (cleanup): {
+        drop(_14) -> [return: bb206, unwind terminate(cleanup)];
+    }
+
+    bb206 (cleanup): {
+        resume;
+    }
+
+    bb207: {
+        _481 = discriminant(_32);
+        StorageDead(_32);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _459 = const _;
+        _53 = &(*_459);
+        _52 = &(*_53);
+        _51 = move _52 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_52);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = &((*_2).1: state::last_update::LastUpdate);
+        _62 = last_update::LastUpdate::get_price_status(move _63) -> [return: bb17, unwind continue];
+    }
+
+    bb208: {
+        _483 = discriminant(_32);
+        StorageDead(_32);
+        _30 = const ();
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        StorageLive(_91);
+        _91 = &((*_3).1: state::last_update::LastUpdate);
+        StorageLive(_92);
+        _92 = _5;
+        StorageLive(_93);
+        _93 = _28;
+        _90 = last_update::LastUpdate::is_stale(move _91, move _92, move _93) -> [return: bb30, unwind continue];
+    }
+
+    bb209: {
+        _485 = discriminant(_89);
+        StorageDead(_89);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        _462 = const _;
+        _110 = &(*_462);
+        _109 = &(*_110);
+        _108 = move _109 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_109);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        _120 = &((*_3).1: state::last_update::LastUpdate);
+        _119 = last_update::LastUpdate::get_price_status(move _120) -> [return: bb35, unwind continue];
+    }
+
+    bb210: {
+        _487 = discriminant(_89);
+        StorageDead(_89);
+        _87 = const ();
+        StorageDead(_88);
+        StorageDead(_87);
+        StorageLive(_144);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        _147 = &(*_3);
+        StorageLive(_148);
+        _148 = _6;
+        _146 = obligation::Obligation::position_of_collateral_in_deposits(move _147, move _148) -> [return: bb48, unwind continue];
+    }
+
+    bb211 (cleanup): {
+        _517 = discriminant(_431);
+        goto -> bb206;
+    }
+
+    bb212 (cleanup): {
+        _518 = discriminant(_420);
+        goto -> bb206;
+    }
+
+    bb213 (cleanup): {
+        _519 = discriminant(_402);
+        goto -> bb206;
+    }
+
+    bb214 (cleanup): {
+        _520 = discriminant(_217);
+        goto -> bb206;
+    }
+
+    bb215 (cleanup): {
+        _521 = discriminant(_179);
+        goto -> bb206;
+    }
+
+    bb216 (cleanup): {
+        _522 = discriminant(_145);
+        goto -> bb206;
+    }
+
+    bb217 (cleanup): {
+        _523 = discriminant(_89);
+        goto -> bb206;
+    }
+
+    bb218 (cleanup): {
+        _524 = discriminant(_32);
+        goto -> bb206;
+    }
+}

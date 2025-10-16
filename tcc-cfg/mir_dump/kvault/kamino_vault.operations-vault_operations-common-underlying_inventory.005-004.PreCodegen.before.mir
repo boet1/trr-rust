@@ -1,0 +1,148 @@
+// MIR for `underlying_inventory` before PreCodegen
+
+fn underlying_inventory(_1: &state::VaultState, _2: impl Iterator<Item = T>, _3: u64) -> std::result::Result<(u64, Invested), anchor_lang::error::Error> {
+    debug vault => _1;
+    debug reserves_iter => _2;
+    debug slot => _3;
+    let mut _0: std::result::Result<(u64, operations::vault_operations::common::Invested), anchor_lang::error::Error>;
+    let _4: u64;
+    let mut _5: &state::VaultState;
+    let mut _7: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, operations::vault_operations::common::Invested>;
+    let mut _8: std::result::Result<operations::vault_operations::common::Invested, anchor_lang::error::Error>;
+    let mut _9: &state::VaultState;
+    let mut _10: impl Iterator<Item = T>;
+    let mut _11: u64;
+    let mut _12: isize;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _17: (u64, operations::vault_operations::common::Invested);
+    let mut _18: u64;
+    let mut _19: operations::vault_operations::common::Invested;
+    let mut _20: bool;
+    let mut _21: isize;
+    let mut _22: isize;
+    let mut _23: isize;
+    let mut _24: isize;
+    let mut _25: isize;
+    scope 1 {
+        debug available => _4;
+        let _6: operations::vault_operations::common::Invested;
+        let _13: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _16: operations::vault_operations::common::Invested;
+        scope 2 {
+            debug invested => _6;
+        }
+        scope 3 {
+            debug residual => _13;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _16;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        _20 = const false;
+        _20 = const true;
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = available_to_invest(move _5) -> [return: bb1, unwind: bb12];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &(*_1);
+        StorageLive(_10);
+        _20 = const false;
+        _10 = move _2;
+        StorageLive(_11);
+        _11 = _3;
+        _8 = amounts_invested::<'_, T, impl Iterator<Item = T>>(move _9, move _10, move _11) -> [return: bb2, unwind: bb12];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        _7 = <std::result::Result<Invested, anchor_lang::error::Error> as Try>::branch(move _8) -> [return: bb3, unwind: bb12];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        _12 = discriminant(_7);
+        switchInt(move _12) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_16);
+        _16 = move ((_7 as Continue).0: operations::vault_operations::common::Invested);
+        _6 = move _16;
+        StorageDead(_16);
+        _21 = discriminant(_7);
+        StorageDead(_7);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _4;
+        StorageLive(_19);
+        _19 = move _6;
+        _17 = (move _18, move _19);
+        StorageDead(_19);
+        StorageDead(_18);
+        _0 = std::result::Result::<(u64, Invested), anchor_lang::error::Error>::Ok(move _17);
+        StorageDead(_17);
+        StorageDead(_6);
+        StorageDead(_4);
+        goto -> bb8;
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_13);
+        _13 = move ((_7 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_15);
+        _15 = move _13;
+        _0 = <std::result::Result<(u64, Invested), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _15) -> [return: bb7, unwind: bb10];
+    }
+
+    bb7: {
+        StorageDead(_15);
+        StorageDead(_13);
+        _23 = discriminant(_7);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        resume;
+    }
+
+    bb10 (cleanup): {
+        _25 = discriminant(_7);
+        goto -> bb12;
+    }
+
+    bb11 (cleanup): {
+        drop(_2) -> [return: bb9, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        switchInt(_20) -> [0: bb9, otherwise: bb11];
+    }
+}

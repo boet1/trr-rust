@@ -1,0 +1,212 @@
+// MIR for `assert_uninitialized` before PreCodegen
+
+fn assert_uninitialized(_1: &AccountInfo<'_>) -> Result<T, ProgramError> {
+    debug account_info => _1;
+    let mut _0: std::result::Result<T, solana_program::program_error::ProgramError>;
+    let _2: T;
+    let mut _3: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, T>;
+    let mut _4: std::result::Result<T, solana_program::program_error::ProgramError>;
+    let mut _5: &[u8];
+    let _6: &&mut [u8];
+    let mut _7: &std::cell::Ref<'_, &mut [u8]>;
+    let _8: &std::cell::Ref<'_, &mut [u8]>;
+    let _9: std::cell::Ref<'_, &mut [u8]>;
+    let mut _10: &std::cell::RefCell<&mut [u8]>;
+    let _11: &std::cell::RefCell<&mut [u8]>;
+    let mut _12: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _17: T;
+    let mut _18: bool;
+    let mut _19: &T;
+    let mut _20: solana_program::program_error::ProgramError;
+    let mut _21: solend_sdk::error::LendingError;
+    let mut _22: T;
+    let mut _23: &mut [u8];
+    let mut _24: bool;
+    let mut _25: isize;
+    let mut _26: isize;
+    let mut _27: isize;
+    let mut _28: isize;
+    let mut _29: isize;
+    scope 1 {
+        debug account => _2;
+    }
+    scope 2 {
+        debug residual => _14;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _17;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        _24 = const false;
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &((*_1).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _11 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _12) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _10 = &(*_11);
+        StorageDead(_12);
+        _9 = RefCell::<&mut [u8]>::borrow(move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        _8 = &_9;
+        _7 = &(*_8);
+        _6 = <Ref<'_, &mut [u8]> as Deref>::deref(move _7) -> [return: bb3, unwind: bb20];
+    }
+
+    bb3: {
+        _23 = deref_copy (*_6);
+        _5 = &(*_23);
+        StorageDead(_7);
+        _4 = <T as Pack>::unpack_unchecked(move _5) -> [return: bb4, unwind: bb20];
+    }
+
+    bb4: {
+        StorageDead(_5);
+        _3 = <Result<T, ProgramError> as Try>::branch(move _4) -> [return: bb5, unwind: bb20];
+    }
+
+    bb5: {
+        StorageDead(_4);
+        _13 = discriminant(_3);
+        switchInt(move _13) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_17);
+        _17 = move ((_3 as Continue).0: T);
+        _24 = const true;
+        _2 = move _17;
+        StorageDead(_17);
+        _25 = discriminant(_3);
+        drop(_9) -> [return: bb10, unwind: bb19];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_14);
+        _14 = move ((_3 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_16);
+        _16 = move _14;
+        _0 = <Result<T, ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _16) -> [return: bb9, unwind: bb23];
+    }
+
+    bb9: {
+        StorageDead(_16);
+        StorageDead(_14);
+        _27 = discriminant(_3);
+        drop(_9) -> [return: bb17, unwind: bb21];
+    }
+
+    bb10: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_3);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &_2;
+        _18 = <T as IsInitialized>::is_initialized(move _19) -> [return: bb11, unwind: bb19];
+    }
+
+    bb11: {
+        switchInt(move _18) -> [0: bb14, otherwise: bb12];
+    }
+
+    bb12: {
+        StorageDead(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = AlreadyInitialized;
+        _20 = <LendingError as Into<ProgramError>>::into(move _21) -> [return: bb13, unwind: bb19];
+    }
+
+    bb13: {
+        StorageDead(_21);
+        _0 = Result::<T, ProgramError>::Err(move _20);
+        StorageDead(_20);
+        goto -> bb15;
+    }
+
+    bb14: {
+        StorageDead(_19);
+        StorageLive(_22);
+        _24 = const false;
+        _22 = move _2;
+        _0 = Result::<T, ProgramError>::Ok(move _22);
+        StorageDead(_22);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_18);
+        switchInt(_24) -> [0: bb16, otherwise: bb22];
+    }
+
+    bb16: {
+        _24 = const false;
+        StorageDead(_2);
+        goto -> bb18;
+    }
+
+    bb17: {
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_3);
+        _24 = const false;
+        StorageDead(_2);
+        goto -> bb18;
+    }
+
+    bb18: {
+        return;
+    }
+
+    bb19 (cleanup): {
+        drop(_2) -> [return: bb21, unwind terminate(cleanup)];
+    }
+
+    bb20 (cleanup): {
+        drop(_9) -> [return: bb21, unwind terminate(cleanup)];
+    }
+
+    bb21 (cleanup): {
+        resume;
+    }
+
+    bb22: {
+        drop(_2) -> [return: bb16, unwind: bb21];
+    }
+
+    bb23 (cleanup): {
+        _29 = discriminant(_3);
+        goto -> bb20;
+    }
+}

@@ -1,0 +1,49 @@
+// MIR for `prices::types::<impl at programs\klend\src\utils\prices\types.rs:12:10: 12:15>::clone` after PreCodegen
+
+fn prices::types::<impl at programs\klend\src\utils\prices\types.rs:12:10: 12:15>::clone(_1: &prices::types::Price<T>) -> prices::types::Price<T> {
+    debug self => _1;
+    let mut _0: utils::prices::types::Price<T>;
+    let mut _2: T;
+    let mut _3: &T;
+    let _4: &T;
+    let mut _5: u32;
+    let mut _6: &u32;
+    let _7: &u32;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &((*_1).0: T);
+        _3 = &(*_4);
+        _2 = <T as Clone>::clone(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).1: u32);
+        _6 = &(*_7);
+        _5 = <u32 as Clone>::clone(move _6) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _0 = prices::types::Price::<T> { value: move _2, exp: move _5 };
+        StorageDead(_5);
+        StorageDead(_2);
+        StorageDead(_7);
+        StorageDead(_4);
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

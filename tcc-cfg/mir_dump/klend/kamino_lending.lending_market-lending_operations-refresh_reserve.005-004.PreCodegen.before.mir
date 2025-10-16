@@ -1,0 +1,243 @@
+// MIR for `lending_operations::refresh_reserve` before PreCodegen
+
+fn lending_operations::refresh_reserve(_1: &mut reserve::Reserve, _2: &anchor_lang::prelude::Clock, _3: std::option::Option<prices::GetPriceResult>, _4: u16) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug reserve => _1;
+    debug clock => _2;
+    debug price => _3;
+    debug referral_fee_bps => _4;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _5: u64;
+    let _6: ();
+    let mut _7: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _8: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _9: &mut state::reserve::Reserve;
+    let mut _10: u64;
+    let mut _11: u16;
+    let mut _12: isize;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _18: isize;
+    let mut _22: u128;
+    let mut _23: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _24: u64;
+    let mut _25: state::last_update::PriceStatusFlags;
+    let mut _26: bool;
+    let mut _27: &state::reserve::Reserve;
+    let mut _28: i64;
+    let mut _29: state::last_update::PriceStatusFlags;
+    let _30: ();
+    let mut _31: &mut state::last_update::LastUpdate;
+    let mut _32: u64;
+    let mut _33: std::option::Option<state::last_update::PriceStatusFlags>;
+    let mut _34: [u8; 9];
+    let mut _35: ();
+    let mut _36: isize;
+    let mut _37: isize;
+    let mut _38: isize;
+    let mut _39: isize;
+    let mut _40: isize;
+    scope 1 {
+        debug slot => _5;
+        let _13: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _16: ();
+        let _17: std::option::Option<state::last_update::PriceStatusFlags>;
+        scope 2 {
+            debug residual => _13;
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug val => _16;
+            scope 5 {
+            }
+        }
+        scope 6 {
+            debug price_status => _17;
+        }
+        scope 7 {
+            debug price => _19;
+            debug status => _20;
+            debug timestamp => _21;
+            let _19: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+            let _20: state::last_update::PriceStatusFlags;
+            let _21: u64;
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _5 = ((*_2).0: u64);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &mut (*_1);
+        StorageLive(_10);
+        _10 = _5;
+        StorageLive(_11);
+        _11 = _4;
+        _8 = reserve::Reserve::accrue_interest(move _9, move _10, move _11) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        _7 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _8) -> [return: bb2, unwind: bb19];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        _12 = discriminant(_7);
+        switchInt(move _12) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_16);
+        _16 = ((_7 as Continue).0: ());
+        _6 = _16;
+        StorageDead(_16);
+        _36 = discriminant(_7);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_17);
+        _18 = discriminant(_3);
+        switchInt(move _18) -> [1: bb7, otherwise: bb9];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_13);
+        _13 = move ((_7 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_15);
+        _15 = move _13;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _15) -> [return: bb6, unwind: bb20];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageDead(_13);
+        _38 = discriminant(_7);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb18;
+    }
+
+    bb7: {
+        StorageLive(_19);
+        _19 = (((_3 as Some).0: utils::prices::GetPriceResult).0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        StorageLive(_20);
+        _20 = (((_3 as Some).0: utils::prices::GetPriceResult).2: state::last_update::PriceStatusFlags);
+        StorageLive(_21);
+        _21 = (((_3 as Some).0: utils::prices::GetPriceResult).1: u64);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = _19;
+        _22 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::to_bits(move _23) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_23);
+        (((*_1).5: state::reserve::ReserveLiquidity).5: u128) = move _22;
+        StorageDead(_22);
+        StorageLive(_24);
+        _24 = _21;
+        (((*_1).5: state::reserve::ReserveLiquidity).6: u64) = move _24;
+        StorageDead(_24);
+        StorageLive(_25);
+        _25 = _20;
+        _17 = std::option::Option::<last_update::PriceStatusFlags>::Some(move _25);
+        StorageDead(_25);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        goto -> bb15;
+    }
+
+    bb9: {
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &(*_1);
+        StorageLive(_28);
+        _28 = ((*_2).4: i64);
+        _26 = is_saved_price_age_valid(move _27, move _28) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        switchInt(move _26) -> [0: bb12, otherwise: bb11];
+    }
+
+    bb11: {
+        StorageDead(_28);
+        StorageDead(_27);
+        _17 = std::option::Option::<last_update::PriceStatusFlags>::None;
+        goto -> bb14;
+    }
+
+    bb12: {
+        StorageDead(_28);
+        StorageDead(_27);
+        StorageLive(_29);
+        _29 = last_update::_::<impl last_update::PriceStatusFlags>::empty() -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        _17 = std::option::Option::<last_update::PriceStatusFlags>::Some(move _29);
+        StorageDead(_29);
+        goto -> bb14;
+    }
+
+    bb14: {
+        StorageDead(_26);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = &mut ((*_1).1: state::last_update::LastUpdate);
+        StorageLive(_32);
+        _32 = _5;
+        StorageLive(_33);
+        _33 = _17;
+        _30 = last_update::LastUpdate::update_slot::<std::option::Option<last_update::PriceStatusFlags>>(move _31, move _32, move _33) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageLive(_34);
+        _34 = <[u8; 9] as Default>::default() -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        (((*_1).9: state::reserve::ReserveConfig).3: [u8; 9]) = move _34;
+        StorageDead(_34);
+        StorageLive(_35);
+        _35 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _35);
+        StorageDead(_35);
+        StorageDead(_17);
+        StorageDead(_5);
+        goto -> bb18;
+    }
+
+    bb18: {
+        return;
+    }
+
+    bb19 (cleanup): {
+        resume;
+    }
+
+    bb20 (cleanup): {
+        _40 = discriminant(_7);
+        goto -> bb19;
+    }
+}

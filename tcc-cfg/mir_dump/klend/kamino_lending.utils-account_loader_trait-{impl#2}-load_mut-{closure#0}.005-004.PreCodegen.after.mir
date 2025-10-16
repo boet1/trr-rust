@@ -1,0 +1,73 @@
+// MIR for `account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:50:1: 50:60>::load_mut::{closure#0}` after PreCodegen
+
+fn account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:50:1: 50:60>::load_mut::{closure#0}(_1: {closure@programs\klend\src\utils\account_loader_trait.rs:127:30: 127:36}, _2: &mut &mut [u8]) -> &mut T {
+    debug data => _2;
+    let mut _0: &mut T;
+    let mut _3: &mut T;
+    let mut _4: &mut T;
+    let mut _5: &mut [u8];
+    let mut _6: &mut [u8];
+    let mut _7: &mut [u8];
+    let mut _8: &mut [u8];
+    let mut _9: &mut [u8];
+    let mut _10: &mut &mut [u8];
+    let mut _11: std::ops::Range<usize>;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: (usize, bool);
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &mut (*_2);
+        _9 = <&mut [u8] as DerefMut>::deref_mut(move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _8 = &mut (*_9);
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = std::mem::size_of::<T>() -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _14 = CheckedAdd(_13, const 8_usize);
+        assert(!move (_14.1: bool), "attempt to compute `{} + {}`, which would overflow", move _13, const 8_usize) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = move (_14.0: usize);
+        StorageDead(_13);
+        _11 = std::ops::Range::<usize> { start: const 8_usize, end: move _12 };
+        StorageDead(_12);
+        _7 = <[u8] as IndexMut<std::ops::Range<usize>>>::index_mut(move _8, move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_8);
+        _6 = &mut (*_7);
+        _5 = &mut (*_6);
+        _4 = bytemuck::from_bytes_mut::<T>(move _5) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _3 = &mut (*_4);
+        StorageDead(_5);
+        _0 = &mut (*_3);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+}

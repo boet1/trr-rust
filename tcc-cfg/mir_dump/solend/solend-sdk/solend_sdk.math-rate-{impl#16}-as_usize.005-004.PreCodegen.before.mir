@@ -1,0 +1,103 @@
+// MIR for `rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::as_usize` before PreCodegen
+
+fn rate::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::as_usize(_1: &U128) -> usize {
+    debug self => _1;
+    let mut _0: usize;
+    let _2: &[u64; 2];
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: &math::rate::U128;
+    let mut _6: bool;
+    let mut _7: u64;
+    let _8: usize;
+    let mut _9: usize;
+    let mut _10: bool;
+    let mut _11: u64;
+    let mut _12: usize;
+    let mut _13: !;
+    let _14: !;
+    let mut _15: u64;
+    let _16: usize;
+    let mut _17: usize;
+    let mut _18: bool;
+    scope 1 {
+        debug arr => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = &((*_1).0: [u64; 2]);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = U128::fits_word(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const 0_usize;
+        _9 = Len((*_2));
+        _10 = Lt(_8, _9);
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        goto -> bb6;
+    }
+
+    bb4: {
+        _7 = (*_2)[_8];
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = core::num::<impl usize>::max_value() -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _11 = move _12 as u64 (IntToInt);
+        StorageDead(_12);
+        _6 = Gt(move _7, move _11);
+        switchInt(move _6) -> [0: bb7, otherwise: bb6];
+    }
+
+    bb6: {
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_14);
+        _14 = begin_panic::<&str>(const "Integer overflow when casting to usize") -> unwind continue;
+    }
+
+    bb7: {
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_7);
+        _3 = const ();
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = const 0_usize;
+        _17 = Len((*_2));
+        _18 = Lt(_16, _17);
+        assert(move _18, "index out of bounds: the length is {} but the index is {}", move _17, _16) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _15 = (*_2)[_16];
+        _0 = move _15 as usize (IntToInt);
+        StorageDead(_15);
+        StorageDead(_2);
+        StorageDead(_16);
+        return;
+    }
+}

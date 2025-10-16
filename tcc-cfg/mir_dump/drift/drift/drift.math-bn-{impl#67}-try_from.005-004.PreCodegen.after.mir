@@ -1,0 +1,113 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:196:3: 196:54>::try_from` after PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:196:3: 196:54>::try_from(_1: U256) -> std::result::Result<i16, &str> {
+    debug u => _1;
+    let mut _0: std::result::Result<i16, &str>;
+    let _2: [u64; 4];
+    let mut _3: bool;
+    let mut _4: &math::bn::U256;
+    let mut _5: bool;
+    let mut _6: u64;
+    let _7: usize;
+    let mut _8: usize;
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: i16;
+    let mut _12: &str;
+    let _13: &str;
+    let mut _14: i16;
+    let mut _15: u64;
+    let _16: usize;
+    let mut _17: usize;
+    let mut _18: bool;
+    scope 1 {
+        debug arr => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = (_1.0: [u64; 4]);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &_1;
+        _3 = U256::fits_word(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = const 0_usize;
+        _8 = Len(_2);
+        _9 = Lt(_7, _8);
+        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> [success: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        goto -> bb6;
+    }
+
+    bb4: {
+        _6 = _2[_7];
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = core::num::<impl i16>::max_value() -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _10 = move _11 as u64 (IntToInt);
+        StorageDead(_11);
+        _5 = Gt(move _6, move _10);
+        switchInt(move _5) -> [0: bb7, otherwise: bb6];
+    }
+
+    bb6: {
+        StorageDead(_10);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = const "integer overflow when casting to i16";
+        _12 = &(*_13);
+        _0 = std::result::Result::<i16, &str>::Err(move _12);
+        StorageDead(_12);
+        StorageDead(_13);
+        goto -> bb9;
+    }
+
+    bb7: {
+        StorageDead(_10);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = const 0_usize;
+        _17 = Len(_2);
+        _18 = Lt(_16, _17);
+        assert(move _18, "index out of bounds: the length is {} but the index is {}", move _17, _16) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _15 = _2[_16];
+        _14 = move _15 as i16 (IntToInt);
+        StorageDead(_15);
+        _0 = std::result::Result::<i16, &str>::Ok(move _14);
+        StorageDead(_14);
+        StorageDead(_16);
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_5);
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}

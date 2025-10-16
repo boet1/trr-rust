@@ -1,0 +1,73 @@
+// MIR for `can_reward_user_with_perp_pnl` before PreCodegen
+
+fn can_reward_user_with_perp_pnl(_1: &mut Option<&mut User>, _2: u16) -> bool {
+    debug user => _1;
+    debug market_index => _2;
+    let mut _0: bool;
+    let mut _3: std::option::Option<&mut &mut state::user::User>;
+    let mut _4: &mut std::option::Option<&mut state::user::User>;
+    let mut _5: isize;
+    let _6: &mut &mut state::user::User;
+    let mut _7: &std::result::Result<&mut state::user::PerpPosition, error::ErrorCode>;
+    let _8: std::result::Result<&mut state::user::PerpPosition, error::ErrorCode>;
+    let mut _9: &mut state::user::User;
+    let mut _10: u16;
+    let mut _11: &mut state::user::User;
+    scope 1 {
+        debug user => _6;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &mut (*_1);
+        _3 = Option::<&mut User>::as_mut(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _5 = discriminant(_3);
+        switchInt(move _5) -> [0: bb2, 1: bb4, otherwise: bb3];
+    }
+
+    bb2: {
+        _0 = const false;
+        goto -> bb7;
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_6);
+        _6 = move ((_3 as Some).0: &mut &mut state::user::User);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _11 = deref_copy (*_6);
+        _9 = &mut (*_11);
+        StorageLive(_10);
+        _10 = _2;
+        _8 = User::force_get_perp_position_mut(move _9, move _10) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _7 = &_8;
+        StorageDead(_10);
+        StorageDead(_9);
+        _0 = std::result::Result::<&mut PerpPosition, error::ErrorCode>::is_ok(move _7) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_3);
+        return;
+    }
+}

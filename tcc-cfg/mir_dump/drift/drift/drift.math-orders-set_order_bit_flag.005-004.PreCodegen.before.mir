@@ -1,0 +1,78 @@
+// MIR for `math::orders::set_order_bit_flag` before PreCodegen
+
+fn math::orders::set_order_bit_flag(_1: u8, _2: bool, _3: OrderBitFlag) -> u8 {
+    debug flags => _1;
+    debug value => _2;
+    debug flag => _3;
+    let mut _0: u8;
+    let _4: ();
+    let mut _5: bool;
+    let mut _6: u8;
+    let _7: state::user::OrderBitFlag;
+    let mut _8: isize;
+    let mut _9: u8;
+    let mut _10: bool;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: u8;
+    let mut _14: u8;
+    let _15: state::user::OrderBitFlag;
+    let mut _16: isize;
+    let mut _17: u8;
+    let mut _18: bool;
+    let mut _19: bool;
+    let mut _20: bool;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _3;
+        _8 = discriminant(_7);
+        _9 = _8 as u8 (IntToInt);
+        _10 = Ge(_9, const 1_u8);
+        _11 = Le(_9, const 8_u8);
+        _12 = BitAnd(move _10, move _11);
+        assume(move _12);
+        _6 = move _8 as u8 (IntToInt);
+        StorageDead(_7);
+        _1 = BitOr(_1, move _6);
+        StorageDead(_6);
+        _4 = const ();
+        goto -> bb3;
+    }
+
+    bb2: {
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _3;
+        _16 = discriminant(_15);
+        _17 = _16 as u8 (IntToInt);
+        _18 = Ge(_17, const 1_u8);
+        _19 = Le(_17, const 8_u8);
+        _20 = BitAnd(move _18, move _19);
+        assume(move _20);
+        _14 = move _16 as u8 (IntToInt);
+        StorageDead(_15);
+        _13 = Not(move _14);
+        StorageDead(_14);
+        _1 = BitAnd(_1, move _13);
+        StorageDead(_13);
+        _4 = const ();
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = _1;
+        return;
+    }
+}

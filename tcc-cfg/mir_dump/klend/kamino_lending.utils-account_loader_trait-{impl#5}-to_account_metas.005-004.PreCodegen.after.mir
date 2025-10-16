@@ -1,0 +1,129 @@
+// MIR for `account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:189:1: 189:79>::to_account_metas` after PreCodegen
+
+fn account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:189:1: 189:79>::to_account_metas(_1: &account_loader_trait::FatAccountLoader<'_, T>, _2: std::option::Option<bool>) -> Vec<anchor_lang::prelude::AccountMeta> {
+    debug self => _1;
+    debug is_signer => _2;
+    let mut _0: std::vec::Vec<anchor_lang::prelude::AccountMeta>;
+    let _3: bool;
+    let mut _4: std::option::Option<bool>;
+    let mut _5: bool;
+    let mut _7: anchor_lang::prelude::Pubkey;
+    let mut _8: bool;
+    let mut _9: anchor_lang::prelude::Pubkey;
+    let mut _10: bool;
+    let mut _11: std::boxed::Box<[anchor_lang::prelude::AccountMeta]>;
+    let mut _12: std::boxed::Box<[anchor_lang::prelude::AccountMeta; 1]>;
+    let mut _13: usize;
+    let mut _14: usize;
+    let mut _15: *mut u8;
+    let mut _16: std::boxed::Box<[anchor_lang::prelude::AccountMeta; 1]>;
+    let mut _17: anchor_lang::prelude::AccountMeta;
+    let mut _18: &anchor_lang::prelude::Pubkey;
+    let mut _19: &anchor_lang::prelude::Pubkey;
+    let mut _20: *const [anchor_lang::prelude::AccountMeta; 1];
+    scope 1 {
+        debug is_signer => _3;
+        let _6: anchor_lang::prelude::AccountMeta;
+        scope 2 {
+            debug meta => _6;
+            let mut _21: *const ();
+            let mut _22: usize;
+            let mut _23: usize;
+            let mut _24: usize;
+            let mut _25: usize;
+            let mut _26: bool;
+            scope 3 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _2;
+        StorageLive(_5);
+        _5 = (((*_1).0: anchor_lang::prelude::AccountInfo<'_>).5: bool);
+        _3 = std::option::Option::<bool>::unwrap_or(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        switchInt((((*_1).0: anchor_lang::prelude::AccountInfo<'_>).6: bool)) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageLive(_9);
+        _18 = deref_copy (((*_1).0: anchor_lang::prelude::AccountInfo<'_>).0: &anchor_lang::prelude::Pubkey);
+        _9 = (*_18);
+        StorageLive(_10);
+        _10 = _3;
+        _6 = anchor_lang::prelude::AccountMeta::new(move _9, move _10) -> [return: bb5, unwind continue];
+    }
+
+    bb3: {
+        StorageLive(_7);
+        _19 = deref_copy (((*_1).0: anchor_lang::prelude::AccountInfo<'_>).0: &anchor_lang::prelude::Pubkey);
+        _7 = (*_19);
+        StorageLive(_8);
+        _8 = _3;
+        _6 = anchor_lang::prelude::AccountMeta::new_readonly(move _7, move _8) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb6;
+    }
+
+    bb6: {
+        StorageLive(_11);
+        StorageLive(_12);
+        _13 = SizeOf([anchor_lang::prelude::AccountMeta; 1]);
+        _14 = AlignOf([anchor_lang::prelude::AccountMeta; 1]);
+        _15 = alloc::alloc::exchange_malloc(move _13, move _14) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageLive(_16);
+        _16 = ShallowInitBox(move _15, [anchor_lang::prelude::AccountMeta; 1]);
+        StorageLive(_17);
+        _17 = move _6;
+        _20 = (((_16.0: std::ptr::Unique<[anchor_lang::prelude::AccountMeta; 1]>).0: std::ptr::NonNull<[anchor_lang::prelude::AccountMeta; 1]>).0: *const [anchor_lang::prelude::AccountMeta; 1]);
+        _21 = _20 as *const () (PtrToPtr);
+        _22 = _21 as usize (Transmute);
+        _23 = AlignOf([anchor_lang::prelude::AccountMeta; 1]);
+        _24 = Sub(_23, const 1_usize);
+        _25 = BitAnd(_22, _24);
+        _26 = Eq(_25, const 0_usize);
+        assert(_26, "misaligned pointer dereference: address must be a multiple of {} but is {}", _23, _22) -> [success: bb10, unwind unreachable];
+    }
+
+    bb8: {
+        StorageDead(_11);
+        StorageDead(_6);
+        StorageDead(_3);
+        return;
+    }
+
+    bb9 (cleanup): {
+        resume;
+    }
+
+    bb10: {
+        (*_20) = [move _17];
+        StorageDead(_17);
+        _12 = move _16;
+        _11 = move _12 as std::boxed::Box<[anchor_lang::prelude::AccountMeta]> (PointerCoercion(Unsize));
+        StorageDead(_16);
+        StorageDead(_12);
+        _0 = std::slice::<impl [anchor_lang::prelude::AccountMeta]>::into_vec::<std::alloc::Global>(move _11) -> [return: bb8, unwind: bb9];
+    }
+}

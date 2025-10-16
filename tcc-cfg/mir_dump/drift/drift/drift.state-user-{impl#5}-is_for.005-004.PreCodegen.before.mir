@@ -1,0 +1,50 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::is_for` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::is_for(_1: &PerpPosition, _2: u16) -> bool {
+    debug self => _1;
+    debug market_index => _2;
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: u16;
+    let mut _5: u16;
+    let mut _6: bool;
+    let mut _7: &state::user::PerpPosition;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).13: u16);
+        StorageLive(_5);
+        _5 = _2;
+        _3 = Eq(move _4, move _5);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(*_1);
+        _6 = PerpPosition::is_available(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _0 = const false;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        _0 = Not(move _6);
+        StorageDead(_6);
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_3);
+        return;
+    }
+}

@@ -1,0 +1,240 @@
+// MIR for `check_capacity_allows_withdrawals` before PreCodegen
+
+fn check_capacity_allows_withdrawals(_1: &mut reserve::WithdrawalCaps, _2: u64) -> std::result::Result<(), LendingError> {
+    debug caps => _1;
+    debug requested_amount => _2;
+    let mut _0: std::result::Result<(), LendingError>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: i64;
+    let mut _6: !;
+    let mut _7: LendingError;
+    let _8: ();
+    let mut _9: bool;
+    let mut _10: i64;
+    let mut _11: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>, i64>;
+    let mut _12: std::result::Result<i64, LendingError>;
+    let mut _13: std::option::Option<i64>;
+    let mut _14: i64;
+    let mut _15: i64;
+    let mut _16: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>, i64>;
+    let mut _17: std::result::Result<i64, LendingError>;
+    let mut _18: std::result::Result<i64, std::num::TryFromIntError>;
+    let mut _19: u64;
+    let mut _20: {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:118:30: 118:33};
+    let mut _21: isize;
+    let _22: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _23: !;
+    let mut _24: std::result::Result<std::convert::Infallible, LendingError>;
+    let _25: i64;
+    let mut _26: {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:120:25: 120:27};
+    let mut _27: isize;
+    let _28: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _29: !;
+    let mut _30: std::result::Result<std::convert::Infallible, LendingError>;
+    let _31: i64;
+    let mut _32: i64;
+    let mut _33: !;
+    let mut _34: LendingError;
+    let mut _35: ();
+    scope 1 {
+        debug residual => _22;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _25;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _28;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _31;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).0: i64);
+        _4 = Lt(move _5, const 0_i64);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_7);
+        _7 = LendingError::WithdrawalCapReached;
+        _0 = std::result::Result::<(), LendingError>::Err(move _7);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb20;
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = ((*_1).1: i64);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _2;
+        _18 = <u64 as TryInto<i64>>::try_into(move _19) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_19);
+        StorageLive(_20);
+        _20 = {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:118:30: 118:33};
+        _17 = std::result::Result::<i64, TryFromIntError>::map_err::<LendingError, {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:118:30: 118:33}>(move _18, move _20) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_20);
+        StorageDead(_18);
+        _16 = <std::result::Result<i64, LendingError> as Try>::branch(move _17) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_17);
+        _21 = discriminant(_16);
+        switchInt(move _21) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_25);
+        _25 = ((_16 as Continue).0: i64);
+        _15 = _25;
+        StorageDead(_25);
+        _13 = core::num::<impl i64>::checked_add(move _14, move _15) -> [return: bb10, unwind continue];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_22);
+        _22 = ((_16 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_24);
+        _24 = _22;
+        _0 = <std::result::Result<(), LendingError> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _24) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_24);
+        StorageDead(_22);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb18;
+    }
+
+    bb10: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_26);
+        _26 = {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:120:25: 120:27};
+        _12 = std::option::Option::<i64>::ok_or_else::<LendingError, {closure@programs\klend\src\lending_market\withdrawal_cap_operations.rs:120:25: 120:27}>(move _13, move _26) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_26);
+        StorageDead(_13);
+        _11 = <std::result::Result<i64, LendingError> as Try>::branch(move _12) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_12);
+        _27 = discriminant(_11);
+        switchInt(move _27) -> [0: bb13, 1: bb14, otherwise: bb7];
+    }
+
+    bb13: {
+        StorageLive(_31);
+        _31 = ((_11 as Continue).0: i64);
+        _10 = _31;
+        StorageDead(_31);
+        StorageLive(_32);
+        _32 = ((*_1).0: i64);
+        _9 = Gt(move _10, move _32);
+        switchInt(move _9) -> [0: bb17, otherwise: bb16];
+    }
+
+    bb14: {
+        StorageLive(_28);
+        _28 = ((_11 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_30);
+        _30 = _28;
+        _0 = <std::result::Result<(), LendingError> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _30) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_30);
+        StorageDead(_28);
+        goto -> bb18;
+    }
+
+    bb16: {
+        StorageDead(_32);
+        StorageDead(_16);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageLive(_34);
+        _34 = LendingError::WithdrawalCapReached;
+        _0 = std::result::Result::<(), LendingError>::Err(move _34);
+        StorageDead(_34);
+        goto -> bb19;
+    }
+
+    bb17: {
+        StorageDead(_32);
+        StorageDead(_16);
+        StorageDead(_11);
+        StorageDead(_10);
+        _8 = const ();
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_35);
+        _35 = ();
+        _0 = std::result::Result::<(), LendingError>::Ok(move _35);
+        StorageDead(_35);
+        goto -> bb20;
+    }
+
+    bb18: {
+        StorageDead(_16);
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb19;
+    }
+
+    bb19: {
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb20;
+    }
+
+    bb20: {
+        return;
+    }
+}

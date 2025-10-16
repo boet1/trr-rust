@@ -1,0 +1,240 @@
+// MIR for `check_elevation_group_borrowing_enabled` after PreCodegen
+
+fn check_elevation_group_borrowing_enabled(_1: &state::lending_market::LendingMarket, _2: &obligation::Obligation) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug market => _1;
+    debug obligation => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, std::option::Option<&state::lending_market::ElevationGroup>>;
+    let mut _6: std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error>;
+    let mut _7: u8;
+    let mut _8: &state::lending_market::LendingMarket;
+    let mut _9: isize;
+    let mut _11: !;
+    let mut _12: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _14: isize;
+    let _16: ();
+    let mut _17: bool;
+    let mut _18: &state::lending_market::ElevationGroup;
+    let mut _19: !;
+    let mut _20: anchor_lang::error::Error;
+    let mut _21: anchor_lang::error::AnchorError;
+    let mut _22: std::string::String;
+    let mut _23: &LendingError;
+    let _24: LendingError;
+    let mut _25: u32;
+    let mut _26: LendingError;
+    let mut _27: std::string::String;
+    let mut _28: &LendingError;
+    let _29: LendingError;
+    let mut _30: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _31: anchor_lang::error::ErrorOrigin;
+    let mut _32: anchor_lang::error::Source;
+    let mut _33: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _34: ();
+    let mut _37: bool;
+    let mut _38: isize;
+    let mut _39: isize;
+    let mut _40: isize;
+    let mut _41: isize;
+    let mut _42: isize;
+    scope 1 {
+        debug elevation_group => _15;
+        let _10: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+        let _13: std::option::Option<&state::lending_market::ElevationGroup>;
+        let _15: &state::lending_market::ElevationGroup;
+        let mut _35: &LendingError;
+        let mut _36: &LendingError;
+        scope 2 {
+            debug residual => _10;
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug val => _13;
+            scope 5 {
+            }
+        }
+    }
+
+    bb0: {
+        _37 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_2).14: u8);
+        StorageLive(_8);
+        _8 = &(*_1);
+        _6 = get_elevation_group(move _7, move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        StorageDead(_7);
+        _5 = <std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error> as Try>::branch(move _6) -> [return: bb2, unwind: bb19];
+    }
+
+    bb2: {
+        _37 = const true;
+        StorageDead(_6);
+        _9 = discriminant(_5);
+        switchInt(move _9) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _13 = ((_5 as Continue).0: std::option::Option<&state::lending_market::ElevationGroup>);
+        _4 = _13;
+        StorageDead(_13);
+        _14 = discriminant(_4);
+        switchInt(move _14) -> [1: bb8, otherwise: bb7];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_10);
+        _10 = move ((_5 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_12);
+        _12 = move _10;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _12) -> [return: bb6, unwind: bb21];
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_10);
+        goto -> bb16;
+    }
+
+    bb7: {
+        _3 = const ();
+        goto -> bb20;
+    }
+
+    bb8: {
+        StorageLive(_15);
+        _15 = ((_4 as Some).0: &state::lending_market::ElevationGroup);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = &(*_15);
+        _17 = state::lending_market::ElevationGroup::new_loans_disabled(move _18) -> [return: bb9, unwind: bb21];
+    }
+
+    bb9: {
+        switchInt(move _17) -> [0: bb11, otherwise: bb10];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _36 = const _;
+        _23 = &(*_36);
+        _22 = LendingError::name(move _23) -> [return: bb12, unwind: bb21];
+    }
+
+    bb11: {
+        StorageDead(_18);
+        _16 = const ();
+        StorageDead(_17);
+        StorageDead(_16);
+        _3 = const ();
+        StorageDead(_15);
+        goto -> bb20;
+    }
+
+    bb12: {
+        StorageDead(_23);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = LendingError::ElevationGroupNewLoansDisabled;
+        _25 = <LendingError as Into<u32>>::into(move _26) -> [return: bb13, unwind: bb18];
+    }
+
+    bb13: {
+        StorageDead(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _35 = const _;
+        _28 = &(*_35);
+        _27 = <LendingError as ToString>::to_string(move _28) -> [return: bb14, unwind: bb18];
+    }
+
+    bb14: {
+        StorageDead(_28);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 2432_u32 };
+        _31 = anchor_lang::error::ErrorOrigin::Source(move _32);
+        StorageDead(_32);
+        _30 = std::option::Option::<ErrorOrigin>::Some(move _31);
+        StorageDead(_31);
+        StorageLive(_33);
+        _33 = std::option::Option::<ComparedValues>::None;
+        _21 = anchor_lang::error::AnchorError { error_name: move _22, error_code_number: move _25, error_msg: move _27, error_origin: move _30, compared_values: move _33 };
+        StorageDead(_33);
+        StorageDead(_30);
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_22);
+        _20 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _21) -> [return: bb15, unwind: bb21];
+    }
+
+    bb15: {
+        StorageDead(_21);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _20);
+        StorageDead(_20);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb16;
+    }
+
+    bb16: {
+        _40 = discriminant(_5);
+        _37 = const false;
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb17;
+    }
+
+    bb17: {
+        return;
+    }
+
+    bb18 (cleanup): {
+        drop(_22) -> [return: bb21, unwind terminate(cleanup)];
+    }
+
+    bb19 (cleanup): {
+        resume;
+    }
+
+    bb20: {
+        _38 = discriminant(_5);
+        _37 = const false;
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_34);
+        _34 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _34);
+        StorageDead(_34);
+        goto -> bb17;
+    }
+
+    bb21 (cleanup): {
+        _42 = discriminant(_5);
+        goto -> bb19;
+    }
+}

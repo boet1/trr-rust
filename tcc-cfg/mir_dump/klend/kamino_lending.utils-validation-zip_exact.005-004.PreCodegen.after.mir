@@ -1,0 +1,54 @@
+// MIR for `zip_exact` after PreCodegen
+
+fn zip_exact(_1: impl IntoIterator<Item = L::Item, IntoIter = L>, _2: impl IntoIterator<Item = R::Item, IntoIter = R>) -> LengthCheckingZipIterator<L, R> {
+    debug lefts => _1;
+    debug rights => _2;
+    let mut _0: utils::validation::LengthCheckingZipIterator<L, R>;
+    let mut _3: L;
+    let mut _4: impl IntoIterator<Item = L::Item, IntoIter = L>;
+    let mut _5: R;
+    let mut _6: impl IntoIterator<Item = R::Item, IntoIter = R>;
+    let mut _7: bool;
+
+    bb0: {
+        _7 = const false;
+        _7 = const true;
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = move _1;
+        _3 = <impl IntoIterator<Item = L::Item, IntoIter = L> as IntoIterator>::into_iter(move _4) -> [return: bb1, unwind: bb6];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _7 = const false;
+        _6 = move _2;
+        _5 = <impl IntoIterator<Item = R::Item, IntoIter = R> as IntoIterator>::into_iter(move _6) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _0 = LengthCheckingZipIterator::<L, R> { lefts: move _3, rights: move _5, errored: const false };
+        StorageDead(_5);
+        StorageDead(_3);
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_3) -> [return: bb6, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+
+    bb5 (cleanup): {
+        drop(_2) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb6 (cleanup): {
+        switchInt(_7) -> [0: bb4, otherwise: bb5];
+    }
+}

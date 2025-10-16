@@ -1,0 +1,125 @@
+// MIR for `math::orders::should_expire_order` before PreCodegen
+
+fn math::orders::should_expire_order(_1: &User, _2: usize, _3: i64) -> std::result::Result<bool, error::ErrorCode> {
+    debug user => _1;
+    debug user_order_index => _2;
+    debug now => _3;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _4: &state::user::Order;
+    let _5: usize;
+    let mut _6: usize;
+    let mut _7: bool;
+    let _8: ();
+    let mut _9: bool;
+    let mut _10: &state::user::OrderStatus;
+    let mut _11: &state::user::OrderStatus;
+    let _12: state::user::OrderStatus;
+    let mut _13: bool;
+    let mut _14: i64;
+    let mut _15: bool;
+    let mut _16: &state::user::Order;
+    let mut _17: !;
+    let mut _18: bool;
+    let mut _19: i64;
+    let mut _20: i64;
+    scope 1 {
+        debug order => _4;
+        let mut _21: &state::user::OrderStatus;
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        _6 = Len(((*_1).5: [state::user::Order; 32]));
+        _7 = Lt(_5, _6);
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &((*_1).5: [state::user::Order; 32])[_5];
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_4).12: state::user::OrderStatus);
+        StorageLive(_11);
+        _21 = const _;
+        _11 = &(*_21);
+        _9 = <OrderStatus as PartialEq>::ne(move _10, move _11) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _9) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = ((*_4).8: i64);
+        _13 = Eq(move _14, const 0_i64);
+        switchInt(move _13) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        goto -> bb8;
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &(*_4);
+        _15 = Order::must_be_triggered(move _16) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        switchInt(move _15) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_16);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(const false);
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb10;
+    }
+
+    bb9: {
+        StorageDead(_16);
+        _8 = const ();
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _3;
+        StorageLive(_20);
+        _20 = ((*_4).8: i64);
+        _18 = Gt(move _19, move _20);
+        StorageDead(_20);
+        StorageDead(_19);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _18);
+        StorageDead(_18);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb10;
+    }
+
+    bb10: {
+        return;
+    }
+}

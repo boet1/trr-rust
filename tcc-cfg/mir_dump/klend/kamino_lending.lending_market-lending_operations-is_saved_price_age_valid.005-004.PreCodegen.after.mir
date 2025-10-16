@@ -1,0 +1,74 @@
+// MIR for `is_saved_price_age_valid` after PreCodegen
+
+fn is_saved_price_age_valid(_1: &reserve::Reserve, _2: i64) -> bool {
+    debug reserve => _1;
+    debug current_ts => _2;
+    let mut _0: bool;
+    let _3: u64;
+    let mut _4: std::result::Result<u64, std::num::TryFromIntError>;
+    let mut _5: i64;
+    let mut _6: &str;
+    let _7: &str;
+    let mut _10: u64;
+    let mut _11: u64;
+    let mut _12: u64;
+    let mut _13: u64;
+    scope 1 {
+        debug current_ts => _3;
+        let _8: u64;
+        scope 2 {
+            debug price_last_updated_ts => _8;
+            let _9: u64;
+            scope 3 {
+                debug price_max_age => _9;
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        _4 = <i64 as TryInto<u64>>::try_into(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = const "Negative timestamp";
+        _6 = &(*_7);
+        _3 = std::result::Result::<u64, TryFromIntError>::expect(move _4, move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_7);
+        StorageLive(_8);
+        _8 = (((*_1).5: state::reserve::ReserveLiquidity).6: u64);
+        StorageLive(_9);
+        _9 = ((((*_1).9: state::reserve::ReserveConfig).19: state::token_info::TokenInfo).3: u64);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _3;
+        StorageLive(_12);
+        _12 = _8;
+        _10 = core::num::<impl u64>::saturating_sub(move _11, move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_13);
+        _13 = _9;
+        _0 = Lt(move _10, move _13);
+        StorageDead(_13);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_3);
+        return;
+    }
+}

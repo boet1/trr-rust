@@ -1,0 +1,2881 @@
+// MIR for `controller::liquidation::liquidate_spot_with_swap_end` before PreCodegen
+
+fn controller::liquidation::liquidate_spot_with_swap_end(_1: u16, _2: u16, _3: &mut User, _4: &anchor_lang::prelude::Pubkey, _5: &mut UserStats, _6: &mut User, _7: &anchor_lang::prelude::Pubkey, _8: &mut UserStats, _9: &PerpMarketMap<'_>, _10: &SpotMarketMap<'_>, _11: &mut OracleMap<'_>, _12: i64, _13: u64, _14: &state::state::State, _15: u128, _16: u128) -> std::result::Result<(), error::ErrorCode> {
+    debug asset_market_index => _1;
+    debug liability_market_index => _2;
+    debug user => _3;
+    debug user_key => _4;
+    debug user_stats => _5;
+    debug _liquidator => _6;
+    debug liquidator_key => _7;
+    debug _liquidator_stats => _8;
+    debug perp_market_map => _9;
+    debug spot_market_map => _10;
+    debug oracle_map => _11;
+    debug now => _12;
+    debug slot => _13;
+    debug state => _14;
+    debug asset_transfer => _15;
+    debug liability_transfer => _16;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _17: u32;
+    let mut _21: (i64, u32, u32);
+    let mut _23: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _24: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _25: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _26: &u16;
+    let _27: &u16;
+    let mut _28: isize;
+    let mut _30: !;
+    let mut _31: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _35: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails);
+    let mut _36: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails)>;
+    let mut _37: std::result::Result<(&state::oracle::OraclePriceData, &state::state::ValidityGuardRails), error::ErrorCode>;
+    let mut _38: &mut state::oracle_map::OracleMap<'_>;
+    let mut _39: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _40: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _41: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _42: &state::spot_market::SpotMarket;
+    let _43: &state::spot_market::SpotMarket;
+    let mut _44: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _45: isize;
+    let mut _47: !;
+    let mut _48: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _51: i64;
+    let mut _52: u32;
+    let mut _53: &state::spot_market::SpotMarket;
+    let mut _54: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _55: u32;
+    let mut _56: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _57: std::result::Result<u32, error::ErrorCode>;
+    let mut _58: u32;
+    let mut _59: &state::spot_market::SpotMarket;
+    let mut _60: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _61: math::liquidation::LiquidationMultiplierType;
+    let mut _62: isize;
+    let mut _64: !;
+    let mut _65: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _71: (i64, u32, u32, u32);
+    let mut _73: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _74: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _75: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _76: &u16;
+    let _77: &u16;
+    let mut _78: isize;
+    let mut _80: !;
+    let mut _81: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _85: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails);
+    let mut _86: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails)>;
+    let mut _87: std::result::Result<(&state::oracle::OraclePriceData, &state::state::ValidityGuardRails), error::ErrorCode>;
+    let mut _88: &mut state::oracle_map::OracleMap<'_>;
+    let mut _89: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _90: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _91: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _92: &state::spot_market::SpotMarket;
+    let _93: &state::spot_market::SpotMarket;
+    let mut _94: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _95: isize;
+    let mut _97: !;
+    let mut _98: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _102: &state::spot_market::SpotMarket;
+    let mut _103: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _104: i64;
+    let mut _105: u32;
+    let mut _106: &state::spot_market::SpotMarket;
+    let mut _107: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _108: u32;
+    let mut _109: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _110: std::result::Result<u32, error::ErrorCode>;
+    let mut _111: u32;
+    let mut _112: &state::spot_market::SpotMarket;
+    let mut _113: &std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _114: math::liquidation::LiquidationMultiplierType;
+    let mut _115: isize;
+    let mut _117: !;
+    let mut _118: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _120: u32;
+    let _121: ();
+    let mut _122: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _123: std::result::Result<(), error::ErrorCode>;
+    let mut _124: u128;
+    let mut _125: u128;
+    let mut _126: u32;
+    let mut _127: u32;
+    let mut _128: i64;
+    let mut _129: i64;
+    let mut _130: u32;
+    let mut _131: u32;
+    let mut _132: isize;
+    let mut _134: !;
+    let mut _135: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _138: state::margin_calculation::MarginContext;
+    let mut _139: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginContext>;
+    let mut _140: std::result::Result<state::margin_calculation::MarginContext, error::ErrorCode>;
+    let mut _141: state::margin_calculation::MarginContext;
+    let mut _142: u32;
+    let mut _143: state::margin_calculation::MarketIdentifier;
+    let mut _144: u16;
+    let mut _145: isize;
+    let mut _147: !;
+    let mut _148: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _150: &state::user::User;
+    let mut _151: i64;
+    let mut _153: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginCalculation>;
+    let mut _154: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _155: &mut state::user::User;
+    let mut _156: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _157: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _158: &mut state::oracle_map::OracleMap<'_>;
+    let mut _159: state::margin_calculation::MarginContext;
+    let mut _160: &mut state::user::UserStats;
+    let mut _161: i64;
+    let mut _162: isize;
+    let mut _164: !;
+    let mut _165: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _168: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u16>;
+    let mut _169: std::result::Result<u16, error::ErrorCode>;
+    let mut _170: &mut state::user::User;
+    let mut _171: u64;
+    let mut _172: isize;
+    let mut _174: !;
+    let mut _175: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _179: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _180: std::result::Result<u128, error::ErrorCode>;
+    let mut _181: &state::margin_calculation::MarginCalculation;
+    let mut _182: isize;
+    let mut _184: !;
+    let mut _185: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _188: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _189: std::result::Result<u128, error::ErrorCode>;
+    let mut _190: u128;
+    let mut _191: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _192: std::result::Result<u128, error::ErrorCode>;
+    let mut _193: u128;
+    let mut _194: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _195: std::result::Result<u128, error::ErrorCode>;
+    let mut _196: u128;
+    let mut _197: isize;
+    let mut _199: !;
+    let mut _200: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _202: u128;
+    let mut _203: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _204: std::result::Result<u128, error::ErrorCode>;
+    let mut _205: u32;
+    let mut _206: isize;
+    let mut _208: !;
+    let mut _209: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _211: isize;
+    let mut _213: !;
+    let mut _214: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _216: isize;
+    let mut _218: !;
+    let mut _219: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _221: ();
+    let mut _223: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _224: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _225: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _226: &u16;
+    let _227: &u16;
+    let mut _228: isize;
+    let mut _230: !;
+    let mut _231: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _233: ();
+    let mut _234: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _235: std::result::Result<(), error::ErrorCode>;
+    let mut _236: u128;
+    let mut _237: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _238: std::result::Result<u128, error::ErrorCode>;
+    let mut _239: u128;
+    let mut _240: u128;
+    let mut _241: isize;
+    let mut _243: !;
+    let mut _244: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _246: &state::spot_market::SpotBalanceType;
+    let _247: &state::spot_market::SpotBalanceType;
+    let _248: state::spot_market::SpotBalanceType;
+    let mut _249: &mut state::spot_market::SpotMarket;
+    let mut _250: &mut state::spot_market::SpotMarket;
+    let mut _251: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _252: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _253: &mut state::user::SpotPosition;
+    let mut _254: &mut state::user::SpotPosition;
+    let mut _255: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &mut state::user::SpotPosition>;
+    let mut _256: std::result::Result<&mut state::user::SpotPosition, error::ErrorCode>;
+    let mut _257: &mut state::user::User;
+    let mut _258: u16;
+    let mut _259: isize;
+    let mut _261: !;
+    let mut _262: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _264: std::option::Option<u128>;
+    let mut _265: u128;
+    let mut _266: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _267: std::result::Result<u128, error::ErrorCode>;
+    let mut _268: u128;
+    let mut _269: u128;
+    let mut _270: isize;
+    let mut _272: !;
+    let mut _273: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _275: isize;
+    let mut _277: !;
+    let mut _278: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _280: ();
+    let mut _281: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _282: std::result::Result<(), error::ErrorCode>;
+    let mut _283: u128;
+    let mut _284: &state::spot_market::SpotBalanceType;
+    let _285: &state::spot_market::SpotBalanceType;
+    let _286: state::spot_market::SpotBalanceType;
+    let mut _287: &mut state::spot_market::SpotMarket;
+    let mut _288: &mut state::spot_market::SpotMarket;
+    let mut _289: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _290: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _291: isize;
+    let mut _293: !;
+    let mut _294: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _296: ();
+    let mut _298: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::spot_market::SpotMarket>>;
+    let mut _299: std::result::Result<std::cell::RefMut<'_, state::spot_market::SpotMarket>, error::ErrorCode>;
+    let mut _300: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _301: &u16;
+    let _302: &u16;
+    let mut _303: isize;
+    let mut _305: !;
+    let mut _306: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _308: ();
+    let mut _309: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _310: std::result::Result<(), error::ErrorCode>;
+    let mut _311: u128;
+    let mut _312: &state::spot_market::SpotBalanceType;
+    let _313: &state::spot_market::SpotBalanceType;
+    let _314: state::spot_market::SpotBalanceType;
+    let mut _315: &mut state::spot_market::SpotMarket;
+    let mut _316: &mut state::spot_market::SpotMarket;
+    let mut _317: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _318: &mut std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+    let mut _319: &mut state::user::SpotPosition;
+    let mut _320: &mut state::user::SpotPosition;
+    let mut _321: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &mut state::user::SpotPosition>;
+    let mut _322: std::result::Result<&mut state::user::SpotPosition, error::ErrorCode>;
+    let mut _323: &mut state::user::User;
+    let mut _324: u16;
+    let mut _325: isize;
+    let mut _327: !;
+    let mut _328: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _330: std::option::Option<u128>;
+    let mut _331: u128;
+    let mut _332: isize;
+    let mut _334: !;
+    let mut _335: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _339: (u64, state::margin_calculation::MarginCalculation);
+    let mut _340: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (u64, state::margin_calculation::MarginCalculation)>;
+    let mut _341: std::result::Result<(u64, state::margin_calculation::MarginCalculation), error::ErrorCode>;
+    let mut _342: &state::user::User;
+    let mut _343: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _344: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _345: &mut state::oracle_map::OracleMap<'_>;
+    let mut _346: u32;
+    let mut _347: u128;
+    let mut _348: isize;
+    let mut _350: !;
+    let mut _351: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _353: u64;
+    let mut _354: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _355: std::result::Result<u64, error::ErrorCode>;
+    let mut _356: u64;
+    let mut _357: u64;
+    let mut _358: isize;
+    let mut _360: !;
+    let mut _361: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _363: ();
+    let mut _364: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _365: std::result::Result<(), error::ErrorCode>;
+    let mut _366: &mut state::user::User;
+    let mut _367: u64;
+    let mut _368: isize;
+    let mut _370: !;
+    let mut _371: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _373: ();
+    let mut _374: bool;
+    let mut _375: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _376: std::result::Result<bool, error::ErrorCode>;
+    let mut _377: &state::margin_calculation::MarginCalculation;
+    let mut _378: isize;
+    let mut _380: !;
+    let mut _381: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _383: ();
+    let mut _384: &mut state::user::User;
+    let mut _385: bool;
+    let mut _386: &state::user::User;
+    let _387: ();
+    let mut _388: &mut state::user::User;
+    let _389: ();
+    let _390: ();
+    let mut _391: &[&[u8]];
+    let mut _392: &[&[u8]; 1];
+    let _393: &[&[u8]; 1];
+    let _394: [&[u8]; 1];
+    let mut _395: &[u8];
+    let _396: &[u8];
+    let mut _397: &std::vec::Vec<u8>;
+    let _398: &std::vec::Vec<u8>;
+    let _399: std::vec::Vec<u8>;
+    let mut _400: &state::events::LiquidationRecord;
+    let _401: &state::events::LiquidationRecord;
+    let _402: state::events::LiquidationRecord;
+    let mut _403: i64;
+    let mut _404: u16;
+    let mut _405: state::events::LiquidationType;
+    let mut _406: anchor_lang::prelude::Pubkey;
+    let mut _407: anchor_lang::prelude::Pubkey;
+    let mut _408: u128;
+    let mut _409: i128;
+    let mut _410: bool;
+    let mut _411: &state::user::User;
+    let mut _412: u64;
+    let mut _413: state::events::LiquidateSpotRecord;
+    let mut _414: u16;
+    let mut _415: i64;
+    let mut _416: u128;
+    let mut _417: u16;
+    let mut _418: i64;
+    let mut _419: u128;
+    let mut _420: u64;
+    let mut _421: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _422: std::result::Result<u64, error::ErrorCode>;
+    let mut _423: u128;
+    let mut _424: isize;
+    let mut _426: !;
+    let mut _427: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _429: state::events::LiquidationRecord;
+    let mut _430: ();
+    let mut _434: isize;
+    let mut _435: isize;
+    let mut _436: isize;
+    let mut _437: isize;
+    let mut _438: isize;
+    let mut _439: isize;
+    let mut _440: isize;
+    let mut _441: isize;
+    let mut _442: isize;
+    let mut _443: isize;
+    let mut _444: isize;
+    let mut _445: isize;
+    let mut _446: isize;
+    let mut _447: isize;
+    let mut _448: isize;
+    let mut _449: isize;
+    let mut _450: isize;
+    let mut _451: isize;
+    let mut _452: isize;
+    let mut _453: isize;
+    scope 1 {
+        debug liquidation_margin_buffer_ratio => _17;
+        let _18: i64;
+        let _19: u32;
+        let _20: u32;
+        let _22: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+        let _29: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _32: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+        scope 2 {
+            debug asset_price => _18;
+            debug asset_decimals => _19;
+            debug asset_liquidation_multiplier => _20;
+            let _67: i64;
+            let _68: u32;
+            let _69: u32;
+            let _70: u32;
+            let _72: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+            let _79: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _82: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+            scope 18 {
+                debug liability_price => _67;
+                debug liability_decimals => _68;
+                debug liability_liquidation_multiplier => _69;
+                debug liquidation_if_fee => _70;
+                let _133: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _136: ();
+                let _137: state::margin_calculation::MarginContext;
+                let _146: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _149: state::margin_calculation::MarginContext;
+                scope 35 {
+                    debug residual => _133;
+                    scope 36 {
+                    }
+                }
+                scope 37 {
+                    debug val => _136;
+                    scope 38 {
+                    }
+                }
+                scope 39 {
+                    debug margin_context => _137;
+                    let _152: state::margin_calculation::MarginCalculation;
+                    let _163: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _166: state::margin_calculation::MarginCalculation;
+                    scope 44 {
+                        debug margin_calculation => _152;
+                        let _167: u16;
+                        let _173: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _176: u16;
+                        scope 49 {
+                            debug liquidation_id => _167;
+                            let mut _177: u64;
+                            scope 54 {
+                                debug margin_freed => _177;
+                                let _178: u128;
+                                let _183: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _186: u128;
+                                scope 55 {
+                                    debug margin_shortage => _178;
+                                    let _187: u128;
+                                    let _198: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _201: u128;
+                                    let _207: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _210: u128;
+                                    let _212: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _215: u128;
+                                    let _217: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                    let _220: u128;
+                                    scope 60 {
+                                        debug if_fee => _187;
+                                        let mut _222: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        let _229: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _232: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        let mut _297: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        let _304: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _307: std::cell::RefMut<'_, state::spot_market::SpotMarket>;
+                                        let _337: u64;
+                                        let _338: state::margin_calculation::MarginCalculation;
+                                        let _349: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                        let _352: (u64, state::margin_calculation::MarginCalculation);
+                                        scope 77 {
+                                            debug liability_market => _222;
+                                            let _242: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _245: u128;
+                                            let _260: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _263: &mut state::user::SpotPosition;
+                                            let _271: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _274: u128;
+                                            let _276: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _279: ();
+                                            let _292: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _295: ();
+                                            let mut _432: &state::spot_market::SpotBalanceType;
+                                            let mut _433: &state::spot_market::SpotBalanceType;
+                                            scope 82 {
+                                                debug residual => _242;
+                                                scope 83 {
+                                                }
+                                            }
+                                            scope 84 {
+                                                debug val => _245;
+                                                scope 85 {
+                                                }
+                                            }
+                                            scope 86 {
+                                                debug residual => _260;
+                                                scope 87 {
+                                                }
+                                            }
+                                            scope 88 {
+                                                debug val => _263;
+                                                scope 89 {
+                                                }
+                                            }
+                                            scope 90 {
+                                                debug residual => _271;
+                                                scope 91 {
+                                                }
+                                            }
+                                            scope 92 {
+                                                debug val => _274;
+                                                scope 93 {
+                                                }
+                                            }
+                                            scope 94 {
+                                                debug residual => _276;
+                                                scope 95 {
+                                                }
+                                            }
+                                            scope 96 {
+                                                debug val => _279;
+                                                scope 97 {
+                                                }
+                                            }
+                                            scope 98 {
+                                                debug residual => _292;
+                                                scope 99 {
+                                                }
+                                            }
+                                            scope 100 {
+                                                debug val => _295;
+                                                scope 101 {
+                                                }
+                                            }
+                                        }
+                                        scope 78 {
+                                            debug residual => _229;
+                                            scope 79 {
+                                            }
+                                        }
+                                        scope 80 {
+                                            debug val => _232;
+                                            scope 81 {
+                                            }
+                                        }
+                                        scope 102 {
+                                            debug asset_market => _297;
+                                            let _326: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _329: &mut state::user::SpotPosition;
+                                            let _333: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _336: ();
+                                            let mut _431: &state::spot_market::SpotBalanceType;
+                                            scope 107 {
+                                                debug residual => _326;
+                                                scope 108 {
+                                                }
+                                            }
+                                            scope 109 {
+                                                debug val => _329;
+                                                scope 110 {
+                                                }
+                                            }
+                                            scope 111 {
+                                                debug residual => _333;
+                                                scope 112 {
+                                                }
+                                            }
+                                            scope 113 {
+                                                debug val => _336;
+                                                scope 114 {
+                                                }
+                                            }
+                                        }
+                                        scope 103 {
+                                            debug residual => _304;
+                                            scope 104 {
+                                            }
+                                        }
+                                        scope 105 {
+                                            debug val => _307;
+                                            scope 106 {
+                                            }
+                                        }
+                                        scope 115 {
+                                            debug margin_freed_from_liability => _337;
+                                            debug margin_calulcation_after => _338;
+                                            let _359: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _362: u64;
+                                            let _369: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _372: ();
+                                            let _379: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _382: bool;
+                                            let _425: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                            let _428: u64;
+                                            scope 120 {
+                                                debug residual => _359;
+                                                scope 121 {
+                                                }
+                                            }
+                                            scope 122 {
+                                                debug val => _362;
+                                                scope 123 {
+                                                }
+                                            }
+                                            scope 124 {
+                                                debug residual => _369;
+                                                scope 125 {
+                                                }
+                                            }
+                                            scope 126 {
+                                                debug val => _372;
+                                                scope 127 {
+                                                }
+                                            }
+                                            scope 128 {
+                                                debug residual => _379;
+                                                scope 129 {
+                                                }
+                                            }
+                                            scope 130 {
+                                                debug val => _382;
+                                                scope 131 {
+                                                }
+                                            }
+                                            scope 132 {
+                                                debug residual => _425;
+                                                scope 133 {
+                                                }
+                                            }
+                                            scope 134 {
+                                                debug val => _428;
+                                                scope 135 {
+                                                }
+                                            }
+                                        }
+                                        scope 116 {
+                                            debug residual => _349;
+                                            scope 117 {
+                                            }
+                                        }
+                                        scope 118 {
+                                            debug val => _352;
+                                            scope 119 {
+                                            }
+                                        }
+                                    }
+                                    scope 61 {
+                                        debug residual => _198;
+                                        scope 62 {
+                                        }
+                                    }
+                                    scope 63 {
+                                        debug val => _201;
+                                        scope 64 {
+                                        }
+                                    }
+                                    scope 65 {
+                                        debug residual => _207;
+                                        scope 66 {
+                                        }
+                                    }
+                                    scope 67 {
+                                        debug val => _210;
+                                        scope 68 {
+                                        }
+                                    }
+                                    scope 69 {
+                                        debug residual => _212;
+                                        scope 70 {
+                                        }
+                                    }
+                                    scope 71 {
+                                        debug val => _215;
+                                        scope 72 {
+                                        }
+                                    }
+                                    scope 73 {
+                                        debug residual => _217;
+                                        scope 74 {
+                                        }
+                                    }
+                                    scope 75 {
+                                        debug val => _220;
+                                        scope 76 {
+                                        }
+                                    }
+                                }
+                                scope 56 {
+                                    debug residual => _183;
+                                    scope 57 {
+                                    }
+                                }
+                                scope 58 {
+                                    debug val => _186;
+                                    scope 59 {
+                                    }
+                                }
+                            }
+                        }
+                        scope 50 {
+                            debug residual => _173;
+                            scope 51 {
+                            }
+                        }
+                        scope 52 {
+                            debug val => _176;
+                            scope 53 {
+                            }
+                        }
+                    }
+                    scope 45 {
+                        debug residual => _163;
+                        scope 46 {
+                        }
+                    }
+                    scope 47 {
+                        debug val => _166;
+                        scope 48 {
+                        }
+                    }
+                }
+                scope 40 {
+                    debug residual => _146;
+                    scope 41 {
+                    }
+                }
+                scope 42 {
+                    debug val => _149;
+                    scope 43 {
+                    }
+                }
+            }
+            scope 19 {
+                debug liability_market => _72;
+                let _83: &state::oracle::OraclePriceData;
+                let _84: &state::state::ValidityGuardRails;
+                let _96: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _99: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails);
+                scope 24 {
+                    debug liability_price_data => _83;
+                    debug _validity_guard_rails => _84;
+                    let _100: i64;
+                    scope 29 {
+                        debug liability_price => _100;
+                        let _101: u32;
+                        scope 30 {
+                            debug liquidation_if_fee => _101;
+                            let _116: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                            let _119: u32;
+                            scope 31 {
+                                debug residual => _116;
+                                scope 32 {
+                                }
+                            }
+                            scope 33 {
+                                debug val => _119;
+                                scope 34 {
+                                }
+                            }
+                        }
+                    }
+                }
+                scope 25 {
+                    debug residual => _96;
+                    scope 26 {
+                    }
+                }
+                scope 27 {
+                    debug val => _99;
+                    scope 28 {
+                    }
+                }
+            }
+            scope 20 {
+                debug residual => _79;
+                scope 21 {
+                }
+            }
+            scope 22 {
+                debug val => _82;
+                scope 23 {
+                }
+            }
+        }
+        scope 3 {
+            debug asset_market => _22;
+            let _33: &state::oracle::OraclePriceData;
+            let _34: &state::state::ValidityGuardRails;
+            let _46: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _49: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails);
+            scope 8 {
+                debug asset_price_data => _33;
+                debug _validity_guard_rails => _34;
+                let _50: i64;
+                scope 13 {
+                    debug asset_price => _50;
+                    let _63: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                    let _66: u32;
+                    scope 14 {
+                        debug residual => _63;
+                        scope 15 {
+                        }
+                    }
+                    scope 16 {
+                        debug val => _66;
+                        scope 17 {
+                        }
+                    }
+                }
+            }
+            scope 9 {
+                debug residual => _46;
+                scope 10 {
+                }
+            }
+            scope 11 {
+                debug val => _49;
+                scope 12 {
+                }
+            }
+        }
+        scope 4 {
+            debug residual => _29;
+            scope 5 {
+            }
+        }
+        scope 6 {
+            debug val => _32;
+            scope 7 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_17);
+        _17 = ((*_14).11: u32);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = &(*_10);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &_1;
+        _26 = &(*_27);
+        _24 = SpotMarketMap::<'_>::get_ref_mut(move _25, move _26) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_26);
+        StorageDead(_25);
+        _23 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _24) -> [return: bb2, unwind: bb214];
+    }
+
+    bb2: {
+        StorageDead(_24);
+        _28 = discriminant(_23);
+        switchInt(move _28) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_32);
+        _32 = move ((_23 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _22 = move _32;
+        StorageDead(_32);
+        _436 = discriminant(_23);
+        StorageDead(_27);
+        StorageDead(_23);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = &mut (*_11);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        _44 = &_22;
+        _43 = <RefMut<'_, SpotMarket> as Deref>::deref(move _44) -> [return: bb7, unwind: bb213];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_29);
+        _29 = ((_23 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_31);
+        _31 = _29;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _31) -> [return: bb6, unwind: bb218];
+    }
+
+    bb6: {
+        StorageDead(_31);
+        StorageDead(_29);
+        _434 = discriminant(_23);
+        StorageDead(_27);
+        StorageDead(_23);
+        goto -> bb204;
+    }
+
+    bb7: {
+        _42 = &(*_43);
+        StorageDead(_44);
+        _41 = SpotMarket::oracle_id(move _42) -> [return: bb8, unwind: bb213];
+    }
+
+    bb8: {
+        StorageDead(_42);
+        _40 = &_41;
+        _39 = &(*_40);
+        _37 = OracleMap::<'_>::get_price_data_and_guard_rails(move _38, move _39) -> [return: bb9, unwind: bb213];
+    }
+
+    bb9: {
+        StorageDead(_39);
+        StorageDead(_38);
+        _36 = <std::result::Result<(&OraclePriceData, &ValidityGuardRails), error::ErrorCode> as Try>::branch(move _37) -> [return: bb10, unwind: bb213];
+    }
+
+    bb10: {
+        StorageDead(_37);
+        _45 = discriminant(_36);
+        switchInt(move _45) -> [0: bb11, 1: bb12, otherwise: bb4];
+    }
+
+    bb11: {
+        StorageLive(_49);
+        _49 = ((_36 as Continue).0: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails));
+        _35 = _49;
+        StorageDead(_49);
+        StorageLive(_33);
+        _33 = (_35.0: &state::oracle::OraclePriceData);
+        StorageLive(_34);
+        _34 = (_35.1: &state::state::ValidityGuardRails);
+        StorageDead(_43);
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageLive(_50);
+        _50 = ((*_33).0: i64);
+        StorageLive(_51);
+        _51 = _50;
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        _54 = &_22;
+        _53 = <RefMut<'_, SpotMarket> as Deref>::deref(move _54) -> [return: bb14, unwind: bb213];
+    }
+
+    bb12: {
+        StorageLive(_46);
+        _46 = ((_36 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_48);
+        _48 = _46;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _48) -> [return: bb13, unwind: bb213];
+    }
+
+    bb13: {
+        StorageDead(_48);
+        StorageDead(_46);
+        StorageDead(_43);
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageDead(_36);
+        StorageDead(_35);
+        drop(_22) -> [return: bb204, unwind: bb214];
+    }
+
+    bb14: {
+        StorageDead(_54);
+        _52 = ((*_53).41: u32);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        _60 = &_22;
+        _59 = <RefMut<'_, SpotMarket> as Deref>::deref(move _60) -> [return: bb15, unwind: bb213];
+    }
+
+    bb15: {
+        StorageDead(_60);
+        _58 = ((*_59).36: u32);
+        StorageLive(_61);
+        _61 = LiquidationMultiplierType::Premium;
+        _57 = calculate_liquidation_multiplier(move _58, move _61) -> [return: bb16, unwind: bb213];
+    }
+
+    bb16: {
+        StorageDead(_61);
+        StorageDead(_58);
+        _56 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _57) -> [return: bb17, unwind: bb213];
+    }
+
+    bb17: {
+        StorageDead(_57);
+        _62 = discriminant(_56);
+        switchInt(move _62) -> [0: bb18, 1: bb19, otherwise: bb4];
+    }
+
+    bb18: {
+        StorageLive(_66);
+        _66 = ((_56 as Continue).0: u32);
+        _55 = _66;
+        StorageDead(_66);
+        _21 = (move _51, move _52, move _55);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_51);
+        StorageDead(_50);
+        StorageDead(_34);
+        StorageDead(_33);
+        drop(_22) -> [return: bb21, unwind: bb214];
+    }
+
+    bb19: {
+        StorageLive(_63);
+        _63 = ((_56 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_65);
+        _65 = _63;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _65) -> [return: bb20, unwind: bb213];
+    }
+
+    bb20: {
+        StorageDead(_65);
+        StorageDead(_63);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_51);
+        StorageDead(_50);
+        StorageDead(_34);
+        StorageDead(_33);
+        drop(_22) -> [return: bb203, unwind: bb214];
+    }
+
+    bb21: {
+        StorageDead(_22);
+        StorageLive(_18);
+        _18 = (_21.0: i64);
+        StorageLive(_19);
+        _19 = (_21.1: u32);
+        StorageLive(_20);
+        _20 = (_21.2: u32);
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_53);
+        StorageDead(_21);
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        _75 = &(*_10);
+        StorageLive(_76);
+        StorageLive(_77);
+        _77 = &_2;
+        _76 = &(*_77);
+        _74 = SpotMarketMap::<'_>::get_ref_mut(move _75, move _76) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_76);
+        StorageDead(_75);
+        _73 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _74) -> [return: bb23, unwind: bb214];
+    }
+
+    bb23: {
+        StorageDead(_74);
+        _78 = discriminant(_73);
+        switchInt(move _78) -> [0: bb24, 1: bb25, otherwise: bb4];
+    }
+
+    bb24: {
+        StorageLive(_82);
+        _82 = move ((_73 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _72 = move _82;
+        StorageDead(_82);
+        _440 = discriminant(_73);
+        StorageDead(_77);
+        StorageDead(_73);
+        StorageLive(_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        _88 = &mut (*_11);
+        StorageLive(_89);
+        StorageLive(_90);
+        StorageLive(_91);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        _94 = &_72;
+        _93 = <RefMut<'_, SpotMarket> as Deref>::deref(move _94) -> [return: bb27, unwind: bb212];
+    }
+
+    bb25: {
+        StorageLive(_79);
+        _79 = ((_73 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_81);
+        _81 = _79;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _81) -> [return: bb26, unwind: bb217];
+    }
+
+    bb26: {
+        StorageDead(_81);
+        StorageDead(_79);
+        _438 = discriminant(_73);
+        StorageDead(_77);
+        StorageDead(_73);
+        goto -> bb200;
+    }
+
+    bb27: {
+        _92 = &(*_93);
+        StorageDead(_94);
+        _91 = SpotMarket::oracle_id(move _92) -> [return: bb28, unwind: bb212];
+    }
+
+    bb28: {
+        StorageDead(_92);
+        _90 = &_91;
+        _89 = &(*_90);
+        _87 = OracleMap::<'_>::get_price_data_and_guard_rails(move _88, move _89) -> [return: bb29, unwind: bb212];
+    }
+
+    bb29: {
+        StorageDead(_89);
+        StorageDead(_88);
+        _86 = <std::result::Result<(&OraclePriceData, &ValidityGuardRails), error::ErrorCode> as Try>::branch(move _87) -> [return: bb30, unwind: bb212];
+    }
+
+    bb30: {
+        StorageDead(_87);
+        _95 = discriminant(_86);
+        switchInt(move _95) -> [0: bb31, 1: bb32, otherwise: bb4];
+    }
+
+    bb31: {
+        StorageLive(_99);
+        _99 = ((_86 as Continue).0: (&state::oracle::OraclePriceData, &state::state::ValidityGuardRails));
+        _85 = _99;
+        StorageDead(_99);
+        StorageLive(_83);
+        _83 = (_85.0: &state::oracle::OraclePriceData);
+        StorageLive(_84);
+        _84 = (_85.1: &state::state::ValidityGuardRails);
+        StorageDead(_93);
+        StorageDead(_91);
+        StorageDead(_90);
+        StorageDead(_86);
+        StorageDead(_85);
+        StorageLive(_100);
+        _100 = ((*_83).0: i64);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        _103 = &_72;
+        _102 = <RefMut<'_, SpotMarket> as Deref>::deref(move _103) -> [return: bb34, unwind: bb212];
+    }
+
+    bb32: {
+        StorageLive(_96);
+        _96 = ((_86 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_98);
+        _98 = _96;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _98) -> [return: bb33, unwind: bb212];
+    }
+
+    bb33: {
+        StorageDead(_98);
+        StorageDead(_96);
+        StorageDead(_93);
+        StorageDead(_91);
+        StorageDead(_90);
+        StorageDead(_86);
+        StorageDead(_85);
+        drop(_72) -> [return: bb200, unwind: bb214];
+    }
+
+    bb34: {
+        StorageDead(_103);
+        _101 = ((*_102).37: u32);
+        StorageDead(_102);
+        StorageLive(_104);
+        _104 = _100;
+        StorageLive(_105);
+        StorageLive(_106);
+        StorageLive(_107);
+        _107 = &_72;
+        _106 = <RefMut<'_, SpotMarket> as Deref>::deref(move _107) -> [return: bb35, unwind: bb212];
+    }
+
+    bb35: {
+        StorageDead(_107);
+        _105 = ((*_106).41: u32);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        _113 = &_72;
+        _112 = <RefMut<'_, SpotMarket> as Deref>::deref(move _113) -> [return: bb36, unwind: bb212];
+    }
+
+    bb36: {
+        StorageDead(_113);
+        _111 = ((*_112).36: u32);
+        StorageLive(_114);
+        _114 = LiquidationMultiplierType::Discount;
+        _110 = calculate_liquidation_multiplier(move _111, move _114) -> [return: bb37, unwind: bb212];
+    }
+
+    bb37: {
+        StorageDead(_114);
+        StorageDead(_111);
+        _109 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _110) -> [return: bb38, unwind: bb212];
+    }
+
+    bb38: {
+        StorageDead(_110);
+        _115 = discriminant(_109);
+        switchInt(move _115) -> [0: bb39, 1: bb40, otherwise: bb4];
+    }
+
+    bb39: {
+        StorageLive(_119);
+        _119 = ((_109 as Continue).0: u32);
+        _108 = _119;
+        StorageDead(_119);
+        StorageLive(_120);
+        _120 = _101;
+        _71 = (move _104, move _105, move _108, move _120);
+        StorageDead(_120);
+        StorageDead(_108);
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_84);
+        StorageDead(_83);
+        drop(_72) -> [return: bb42, unwind: bb214];
+    }
+
+    bb40: {
+        StorageLive(_116);
+        _116 = ((_109 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_118);
+        _118 = _116;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _118) -> [return: bb41, unwind: bb212];
+    }
+
+    bb41: {
+        StorageDead(_118);
+        StorageDead(_116);
+        StorageDead(_108);
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_84);
+        StorageDead(_83);
+        drop(_72) -> [return: bb199, unwind: bb214];
+    }
+
+    bb42: {
+        StorageDead(_72);
+        StorageLive(_67);
+        _67 = (_71.0: i64);
+        StorageLive(_68);
+        _68 = (_71.1: u32);
+        StorageLive(_69);
+        _69 = (_71.2: u32);
+        StorageLive(_70);
+        _70 = (_71.3: u32);
+        StorageDead(_112);
+        StorageDead(_109);
+        StorageDead(_106);
+        StorageDead(_71);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        _124 = _15;
+        StorageLive(_125);
+        _125 = _16;
+        StorageLive(_126);
+        _126 = _19;
+        StorageLive(_127);
+        _127 = _68;
+        StorageLive(_128);
+        _128 = _18;
+        StorageLive(_129);
+        _129 = _67;
+        StorageLive(_130);
+        _130 = _20;
+        StorageLive(_131);
+        _131 = _69;
+        _123 = validate_swap_within_liquidation_boundaries(move _124, move _125, move _126, move _127, move _128, move _129, move _130, move _131) -> [return: bb43, unwind continue];
+    }
+
+    bb43: {
+        StorageDead(_131);
+        StorageDead(_130);
+        StorageDead(_129);
+        StorageDead(_128);
+        StorageDead(_127);
+        StorageDead(_126);
+        StorageDead(_125);
+        StorageDead(_124);
+        _122 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _123) -> [return: bb44, unwind continue];
+    }
+
+    bb44: {
+        StorageDead(_123);
+        _132 = discriminant(_122);
+        switchInt(move _132) -> [0: bb45, 1: bb46, otherwise: bb4];
+    }
+
+    bb45: {
+        StorageLive(_136);
+        _136 = ((_122 as Continue).0: ());
+        _121 = _136;
+        StorageDead(_136);
+        StorageDead(_122);
+        StorageDead(_121);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        _142 = _17;
+        _141 = MarginContext::liquidation(move _142) -> [return: bb48, unwind continue];
+    }
+
+    bb46: {
+        StorageLive(_133);
+        _133 = ((_122 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_135);
+        _135 = _133;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _135) -> [return: bb47, unwind continue];
+    }
+
+    bb47: {
+        StorageDead(_135);
+        StorageDead(_133);
+        StorageDead(_122);
+        StorageDead(_121);
+        goto -> bb198;
+    }
+
+    bb48: {
+        StorageDead(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        _144 = _2;
+        _143 = MarketIdentifier::spot(move _144) -> [return: bb49, unwind continue];
+    }
+
+    bb49: {
+        StorageDead(_144);
+        _140 = MarginContext::track_market_margin_requirement(move _141, move _143) -> [return: bb50, unwind continue];
+    }
+
+    bb50: {
+        StorageDead(_143);
+        StorageDead(_141);
+        _139 = <std::result::Result<MarginContext, error::ErrorCode> as Try>::branch(move _140) -> [return: bb51, unwind continue];
+    }
+
+    bb51: {
+        StorageDead(_140);
+        _145 = discriminant(_139);
+        switchInt(move _145) -> [0: bb52, 1: bb53, otherwise: bb4];
+    }
+
+    bb52: {
+        StorageLive(_149);
+        _149 = ((_139 as Continue).0: state::margin_calculation::MarginContext);
+        _138 = _149;
+        StorageDead(_149);
+        StorageLive(_150);
+        _150 = &(*_3);
+        StorageLive(_151);
+        _151 = _12;
+        _137 = MarginContext::fuel_numerator(move _138, move _150, move _151) -> [return: bb55, unwind continue];
+    }
+
+    bb53: {
+        StorageLive(_146);
+        _146 = ((_139 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_148);
+        _148 = _146;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _148) -> [return: bb54, unwind continue];
+    }
+
+    bb54: {
+        StorageDead(_148);
+        StorageDead(_146);
+        StorageDead(_138);
+        StorageDead(_139);
+        goto -> bb197;
+    }
+
+    bb55: {
+        StorageDead(_151);
+        StorageDead(_150);
+        StorageDead(_138);
+        StorageDead(_139);
+        StorageLive(_152);
+        StorageLive(_153);
+        StorageLive(_154);
+        StorageLive(_155);
+        _155 = &mut (*_3);
+        StorageLive(_156);
+        _156 = &(*_9);
+        StorageLive(_157);
+        _157 = &(*_10);
+        StorageLive(_158);
+        _158 = &mut (*_11);
+        StorageLive(_159);
+        _159 = _137;
+        StorageLive(_160);
+        _160 = &mut (*_5);
+        StorageLive(_161);
+        _161 = _12;
+        _154 = User::calculate_margin_and_increment_fuel_bonus(move _155, move _156, move _157, move _158, move _159, move _160, move _161) -> [return: bb56, unwind continue];
+    }
+
+    bb56: {
+        StorageDead(_161);
+        StorageDead(_160);
+        StorageDead(_159);
+        StorageDead(_158);
+        StorageDead(_157);
+        StorageDead(_156);
+        StorageDead(_155);
+        _153 = <std::result::Result<MarginCalculation, error::ErrorCode> as Try>::branch(move _154) -> [return: bb57, unwind continue];
+    }
+
+    bb57: {
+        StorageDead(_154);
+        _162 = discriminant(_153);
+        switchInt(move _162) -> [0: bb58, 1: bb59, otherwise: bb4];
+    }
+
+    bb58: {
+        StorageLive(_166);
+        _166 = ((_153 as Continue).0: state::margin_calculation::MarginCalculation);
+        _152 = _166;
+        StorageDead(_166);
+        StorageDead(_153);
+        StorageLive(_167);
+        StorageLive(_168);
+        StorageLive(_169);
+        StorageLive(_170);
+        _170 = &mut (*_3);
+        StorageLive(_171);
+        _171 = _13;
+        _169 = User::enter_liquidation(move _170, move _171) -> [return: bb61, unwind continue];
+    }
+
+    bb59: {
+        StorageLive(_163);
+        _163 = ((_153 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_165);
+        _165 = _163;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _165) -> [return: bb60, unwind continue];
+    }
+
+    bb60: {
+        StorageDead(_165);
+        StorageDead(_163);
+        StorageDead(_153);
+        goto -> bb196;
+    }
+
+    bb61: {
+        StorageDead(_171);
+        StorageDead(_170);
+        _168 = <std::result::Result<u16, error::ErrorCode> as Try>::branch(move _169) -> [return: bb62, unwind continue];
+    }
+
+    bb62: {
+        StorageDead(_169);
+        _172 = discriminant(_168);
+        switchInt(move _172) -> [0: bb63, 1: bb64, otherwise: bb4];
+    }
+
+    bb63: {
+        StorageLive(_176);
+        _176 = ((_168 as Continue).0: u16);
+        _167 = _176;
+        StorageDead(_176);
+        StorageDead(_168);
+        StorageLive(_177);
+        _177 = const 0_u64;
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        _181 = &_152;
+        _180 = MarginCalculation::margin_shortage(move _181) -> [return: bb66, unwind continue];
+    }
+
+    bb64: {
+        StorageLive(_173);
+        _173 = ((_168 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_175);
+        _175 = _173;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _175) -> [return: bb65, unwind continue];
+    }
+
+    bb65: {
+        StorageDead(_175);
+        StorageDead(_173);
+        StorageDead(_168);
+        goto -> bb195;
+    }
+
+    bb66: {
+        StorageDead(_181);
+        _179 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _180) -> [return: bb67, unwind continue];
+    }
+
+    bb67: {
+        StorageDead(_180);
+        _182 = discriminant(_179);
+        switchInt(move _182) -> [0: bb68, 1: bb69, otherwise: bb4];
+    }
+
+    bb68: {
+        StorageLive(_186);
+        _186 = ((_179 as Continue).0: u128);
+        _178 = _186;
+        StorageDead(_186);
+        StorageDead(_179);
+        StorageLive(_187);
+        StorageLive(_188);
+        StorageLive(_189);
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        StorageLive(_195);
+        StorageLive(_196);
+        _196 = _16;
+        _195 = <u128 as Cast>::cast::<u128>(move _196) -> [return: bb71, unwind continue];
+    }
+
+    bb69: {
+        StorageLive(_183);
+        _183 = ((_179 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_185);
+        _185 = _183;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _185) -> [return: bb70, unwind continue];
+    }
+
+    bb70: {
+        StorageDead(_185);
+        StorageDead(_183);
+        StorageDead(_179);
+        goto -> bb194;
+    }
+
+    bb71: {
+        StorageDead(_196);
+        _194 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _195) -> [return: bb72, unwind continue];
+    }
+
+    bb72: {
+        StorageDead(_195);
+        _197 = discriminant(_194);
+        switchInt(move _197) -> [0: bb73, 1: bb74, otherwise: bb4];
+    }
+
+    bb73: {
+        StorageLive(_201);
+        _201 = ((_194 as Continue).0: u128);
+        _193 = _201;
+        StorageDead(_201);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        StorageLive(_205);
+        _205 = _70;
+        _204 = <u32 as Cast>::cast::<u128>(move _205) -> [return: bb76, unwind continue];
+    }
+
+    bb74: {
+        StorageLive(_198);
+        _198 = ((_194 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_200);
+        _200 = _198;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _200) -> [return: bb75, unwind continue];
+    }
+
+    bb75: {
+        StorageDead(_200);
+        StorageDead(_198);
+        StorageDead(_193);
+        StorageDead(_192);
+        StorageDead(_190);
+        StorageDead(_189);
+        goto -> bb192;
+    }
+
+    bb76: {
+        StorageDead(_205);
+        _203 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _204) -> [return: bb77, unwind continue];
+    }
+
+    bb77: {
+        StorageDead(_204);
+        _206 = discriminant(_203);
+        switchInt(move _206) -> [0: bb78, 1: bb79, otherwise: bb4];
+    }
+
+    bb78: {
+        StorageLive(_210);
+        _210 = ((_203 as Continue).0: u128);
+        _202 = _210;
+        StorageDead(_210);
+        _192 = <u128 as SafeMath>::safe_mul(move _193, move _202) -> [return: bb81, unwind continue];
+    }
+
+    bb79: {
+        StorageLive(_207);
+        _207 = ((_203 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_209);
+        _209 = _207;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _209) -> [return: bb80, unwind continue];
+    }
+
+    bb80: {
+        StorageDead(_209);
+        StorageDead(_207);
+        StorageDead(_202);
+        StorageDead(_193);
+        StorageDead(_192);
+        goto -> bb190;
+    }
+
+    bb81: {
+        StorageDead(_202);
+        StorageDead(_193);
+        _191 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _192) -> [return: bb82, unwind continue];
+    }
+
+    bb82: {
+        StorageDead(_192);
+        _211 = discriminant(_191);
+        switchInt(move _211) -> [0: bb83, 1: bb84, otherwise: bb4];
+    }
+
+    bb83: {
+        StorageLive(_215);
+        _215 = ((_191 as Continue).0: u128);
+        _190 = _215;
+        StorageDead(_215);
+        _189 = <u128 as SafeMath>::safe_div(move _190, const _) -> [return: bb86, unwind continue];
+    }
+
+    bb84: {
+        StorageLive(_212);
+        _212 = ((_191 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_214);
+        _214 = _212;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _214) -> [return: bb85, unwind continue];
+    }
+
+    bb85: {
+        StorageDead(_214);
+        StorageDead(_212);
+        goto -> bb190;
+    }
+
+    bb86: {
+        StorageDead(_190);
+        _188 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _189) -> [return: bb87, unwind continue];
+    }
+
+    bb87: {
+        StorageDead(_189);
+        _216 = discriminant(_188);
+        switchInt(move _216) -> [0: bb88, 1: bb89, otherwise: bb4];
+    }
+
+    bb88: {
+        StorageLive(_220);
+        _220 = ((_188 as Continue).0: u128);
+        _187 = _220;
+        StorageDead(_220);
+        StorageDead(_203);
+        StorageDead(_194);
+        StorageDead(_191);
+        StorageDead(_188);
+        StorageLive(_221);
+        StorageLive(_222);
+        StorageLive(_223);
+        StorageLive(_224);
+        StorageLive(_225);
+        _225 = &(*_10);
+        StorageLive(_226);
+        StorageLive(_227);
+        _227 = &_2;
+        _226 = &(*_227);
+        _224 = SpotMarketMap::<'_>::get_ref_mut(move _225, move _226) -> [return: bb91, unwind continue];
+    }
+
+    bb89: {
+        StorageLive(_217);
+        _217 = ((_188 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_219);
+        _219 = _217;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _219) -> [return: bb90, unwind continue];
+    }
+
+    bb90: {
+        StorageDead(_219);
+        StorageDead(_217);
+        goto -> bb191;
+    }
+
+    bb91: {
+        StorageDead(_226);
+        StorageDead(_225);
+        _223 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _224) -> [return: bb92, unwind: bb214];
+    }
+
+    bb92: {
+        StorageDead(_224);
+        _228 = discriminant(_223);
+        switchInt(move _228) -> [0: bb93, 1: bb94, otherwise: bb4];
+    }
+
+    bb93: {
+        StorageLive(_232);
+        _232 = move ((_223 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _222 = move _232;
+        StorageDead(_232);
+        _444 = discriminant(_223);
+        StorageDead(_227);
+        StorageDead(_223);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        StorageLive(_238);
+        StorageLive(_239);
+        _239 = _16;
+        StorageLive(_240);
+        _240 = _187;
+        _238 = <u128 as SafeMath>::safe_sub(move _239, move _240) -> [return: bb96, unwind: bb211];
+    }
+
+    bb94: {
+        StorageLive(_229);
+        _229 = ((_223 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_231);
+        _231 = _229;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _231) -> [return: bb95, unwind: bb216];
+    }
+
+    bb95: {
+        StorageDead(_231);
+        StorageDead(_229);
+        _442 = discriminant(_223);
+        StorageDead(_227);
+        StorageDead(_223);
+        goto -> bb189;
+    }
+
+    bb96: {
+        StorageDead(_240);
+        StorageDead(_239);
+        _237 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _238) -> [return: bb97, unwind: bb211];
+    }
+
+    bb97: {
+        StorageDead(_238);
+        _241 = discriminant(_237);
+        switchInt(move _241) -> [0: bb98, 1: bb99, otherwise: bb4];
+    }
+
+    bb98: {
+        StorageLive(_245);
+        _245 = ((_237 as Continue).0: u128);
+        _236 = _245;
+        StorageDead(_245);
+        StorageLive(_246);
+        StorageLive(_247);
+        _433 = const _;
+        _247 = &(*_433);
+        _246 = &(*_247);
+        StorageLive(_249);
+        StorageLive(_250);
+        StorageLive(_251);
+        StorageLive(_252);
+        _252 = &mut _222;
+        _251 = &mut (*_252);
+        _250 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _251) -> [return: bb101, unwind: bb211];
+    }
+
+    bb99: {
+        StorageLive(_242);
+        _242 = ((_237 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_244);
+        _244 = _242;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _244) -> [return: bb100, unwind: bb211];
+    }
+
+    bb100: {
+        StorageDead(_244);
+        StorageDead(_242);
+        StorageDead(_236);
+        StorageDead(_235);
+        goto -> bb187;
+    }
+
+    bb101: {
+        _249 = &mut (*_250);
+        StorageDead(_251);
+        StorageLive(_253);
+        StorageLive(_254);
+        StorageLive(_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        _257 = &mut (*_3);
+        StorageLive(_258);
+        _258 = _2;
+        _256 = User::get_spot_position_mut(move _257, move _258) -> [return: bb102, unwind: bb211];
+    }
+
+    bb102: {
+        StorageDead(_258);
+        StorageDead(_257);
+        _255 = <std::result::Result<&mut SpotPosition, error::ErrorCode> as Try>::branch(move _256) -> [return: bb103, unwind: bb211];
+    }
+
+    bb103: {
+        StorageDead(_256);
+        _259 = discriminant(_255);
+        switchInt(move _259) -> [0: bb104, 1: bb105, otherwise: bb4];
+    }
+
+    bb104: {
+        StorageLive(_263);
+        _263 = move ((_255 as Continue).0: &mut state::user::SpotPosition);
+        _254 = &mut (*_263);
+        StorageDead(_263);
+        _253 = &mut (*_254);
+        StorageLive(_264);
+        StorageLive(_265);
+        StorageLive(_266);
+        StorageLive(_267);
+        StorageLive(_268);
+        _268 = _16;
+        StorageLive(_269);
+        _269 = _187;
+        _267 = <u128 as SafeMath>::safe_sub(move _268, move _269) -> [return: bb107, unwind: bb211];
+    }
+
+    bb105: {
+        StorageLive(_260);
+        _260 = ((_255 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_262);
+        _262 = _260;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _262) -> [return: bb106, unwind: bb211];
+    }
+
+    bb106: {
+        StorageDead(_262);
+        StorageDead(_260);
+        StorageDead(_253);
+        StorageDead(_249);
+        StorageDead(_246);
+        StorageDead(_236);
+        StorageDead(_235);
+        goto -> bb186;
+    }
+
+    bb107: {
+        StorageDead(_269);
+        StorageDead(_268);
+        _266 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _267) -> [return: bb108, unwind: bb211];
+    }
+
+    bb108: {
+        StorageDead(_267);
+        _270 = discriminant(_266);
+        switchInt(move _270) -> [0: bb109, 1: bb110, otherwise: bb4];
+    }
+
+    bb109: {
+        StorageLive(_274);
+        _274 = ((_266 as Continue).0: u128);
+        _265 = _274;
+        StorageDead(_274);
+        _264 = Option::<u128>::Some(move _265);
+        StorageDead(_265);
+        _235 = update_spot_balances_and_cumulative_deposits(move _236, move _246, move _249, move _253, const false, move _264) -> [return: bb112, unwind: bb211];
+    }
+
+    bb110: {
+        StorageLive(_271);
+        _271 = ((_266 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_273);
+        _273 = _271;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _273) -> [return: bb111, unwind: bb211];
+    }
+
+    bb111: {
+        StorageDead(_273);
+        StorageDead(_271);
+        StorageDead(_265);
+        StorageDead(_264);
+        StorageDead(_253);
+        StorageDead(_249);
+        StorageDead(_246);
+        StorageDead(_236);
+        StorageDead(_235);
+        goto -> bb185;
+    }
+
+    bb112: {
+        StorageDead(_264);
+        StorageDead(_253);
+        StorageDead(_249);
+        StorageDead(_246);
+        StorageDead(_236);
+        _234 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _235) -> [return: bb113, unwind: bb211];
+    }
+
+    bb113: {
+        StorageDead(_235);
+        _275 = discriminant(_234);
+        switchInt(move _275) -> [0: bb114, 1: bb115, otherwise: bb4];
+    }
+
+    bb114: {
+        StorageLive(_279);
+        _279 = ((_234 as Continue).0: ());
+        _233 = _279;
+        StorageDead(_279);
+        StorageDead(_266);
+        StorageDead(_255);
+        StorageDead(_254);
+        StorageDead(_252);
+        StorageDead(_250);
+        StorageDead(_247);
+        StorageDead(_237);
+        StorageDead(_234);
+        StorageDead(_233);
+        StorageLive(_280);
+        StorageLive(_281);
+        StorageLive(_282);
+        StorageLive(_283);
+        _283 = _187;
+        StorageLive(_284);
+        StorageLive(_285);
+        _432 = const _;
+        _285 = &(*_432);
+        _284 = &(*_285);
+        StorageLive(_287);
+        StorageLive(_288);
+        StorageLive(_289);
+        StorageLive(_290);
+        _290 = &mut _222;
+        _289 = &mut (*_290);
+        _288 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _289) -> [return: bb117, unwind: bb211];
+    }
+
+    bb115: {
+        StorageLive(_276);
+        _276 = ((_234 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_278);
+        _278 = _276;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _278) -> [return: bb116, unwind: bb211];
+    }
+
+    bb116: {
+        StorageDead(_278);
+        StorageDead(_276);
+        goto -> bb185;
+    }
+
+    bb117: {
+        _287 = &mut (*_288);
+        StorageDead(_289);
+        _282 = update_revenue_pool_balances(move _283, move _284, move _287) -> [return: bb118, unwind: bb211];
+    }
+
+    bb118: {
+        StorageDead(_287);
+        StorageDead(_284);
+        StorageDead(_283);
+        _281 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _282) -> [return: bb119, unwind: bb211];
+    }
+
+    bb119: {
+        StorageDead(_282);
+        _291 = discriminant(_281);
+        switchInt(move _291) -> [0: bb120, 1: bb121, otherwise: bb4];
+    }
+
+    bb120: {
+        StorageLive(_295);
+        _295 = ((_281 as Continue).0: ());
+        _280 = _295;
+        StorageDead(_295);
+        StorageDead(_290);
+        StorageDead(_288);
+        StorageDead(_285);
+        StorageDead(_281);
+        StorageDead(_280);
+        _221 = const ();
+        drop(_222) -> [return: bb123, unwind: bb214];
+    }
+
+    bb121: {
+        StorageLive(_292);
+        _292 = ((_281 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_294);
+        _294 = _292;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _294) -> [return: bb122, unwind: bb211];
+    }
+
+    bb122: {
+        StorageDead(_294);
+        StorageDead(_292);
+        StorageDead(_290);
+        StorageDead(_288);
+        StorageDead(_285);
+        StorageDead(_281);
+        StorageDead(_280);
+        goto -> bb188;
+    }
+
+    bb123: {
+        StorageDead(_222);
+        StorageDead(_221);
+        StorageLive(_296);
+        StorageLive(_297);
+        StorageLive(_298);
+        StorageLive(_299);
+        StorageLive(_300);
+        _300 = &(*_10);
+        StorageLive(_301);
+        StorageLive(_302);
+        _302 = &_1;
+        _301 = &(*_302);
+        _299 = SpotMarketMap::<'_>::get_ref_mut(move _300, move _301) -> [return: bb124, unwind continue];
+    }
+
+    bb124: {
+        StorageDead(_301);
+        StorageDead(_300);
+        _298 = <std::result::Result<RefMut<'_, SpotMarket>, error::ErrorCode> as Try>::branch(move _299) -> [return: bb125, unwind: bb214];
+    }
+
+    bb125: {
+        StorageDead(_299);
+        _303 = discriminant(_298);
+        switchInt(move _303) -> [0: bb126, 1: bb127, otherwise: bb4];
+    }
+
+    bb126: {
+        StorageLive(_307);
+        _307 = move ((_298 as Continue).0: std::cell::RefMut<'_, state::spot_market::SpotMarket>);
+        _297 = move _307;
+        StorageDead(_307);
+        _448 = discriminant(_298);
+        StorageDead(_302);
+        StorageDead(_298);
+        StorageLive(_308);
+        StorageLive(_309);
+        StorageLive(_310);
+        StorageLive(_311);
+        _311 = _15;
+        StorageLive(_312);
+        StorageLive(_313);
+        _431 = const _;
+        _313 = &(*_431);
+        _312 = &(*_313);
+        StorageLive(_315);
+        StorageLive(_316);
+        StorageLive(_317);
+        StorageLive(_318);
+        _318 = &mut _297;
+        _317 = &mut (*_318);
+        _316 = <RefMut<'_, SpotMarket> as DerefMut>::deref_mut(move _317) -> [return: bb129, unwind: bb210];
+    }
+
+    bb127: {
+        StorageLive(_304);
+        _304 = ((_298 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_306);
+        _306 = _304;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _306) -> [return: bb128, unwind: bb215];
+    }
+
+    bb128: {
+        StorageDead(_306);
+        StorageDead(_304);
+        _446 = discriminant(_298);
+        StorageDead(_302);
+        StorageDead(_298);
+        goto -> bb184;
+    }
+
+    bb129: {
+        _315 = &mut (*_316);
+        StorageDead(_317);
+        StorageLive(_319);
+        StorageLive(_320);
+        StorageLive(_321);
+        StorageLive(_322);
+        StorageLive(_323);
+        _323 = &mut (*_3);
+        StorageLive(_324);
+        _324 = _1;
+        _322 = User::force_get_spot_position_mut(move _323, move _324) -> [return: bb130, unwind: bb210];
+    }
+
+    bb130: {
+        StorageDead(_324);
+        StorageDead(_323);
+        _321 = <std::result::Result<&mut SpotPosition, error::ErrorCode> as Try>::branch(move _322) -> [return: bb131, unwind: bb210];
+    }
+
+    bb131: {
+        StorageDead(_322);
+        _325 = discriminant(_321);
+        switchInt(move _325) -> [0: bb132, 1: bb133, otherwise: bb4];
+    }
+
+    bb132: {
+        StorageLive(_329);
+        _329 = move ((_321 as Continue).0: &mut state::user::SpotPosition);
+        _320 = &mut (*_329);
+        StorageDead(_329);
+        _319 = &mut (*_320);
+        StorageLive(_330);
+        StorageLive(_331);
+        _331 = _15;
+        _330 = Option::<u128>::Some(move _331);
+        StorageDead(_331);
+        _310 = update_spot_balances_and_cumulative_deposits(move _311, move _312, move _315, move _319, const false, move _330) -> [return: bb135, unwind: bb210];
+    }
+
+    bb133: {
+        StorageLive(_326);
+        _326 = ((_321 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_328);
+        _328 = _326;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _328) -> [return: bb134, unwind: bb210];
+    }
+
+    bb134: {
+        StorageDead(_328);
+        StorageDead(_326);
+        StorageDead(_319);
+        StorageDead(_315);
+        StorageDead(_312);
+        StorageDead(_311);
+        StorageDead(_310);
+        goto -> bb183;
+    }
+
+    bb135: {
+        StorageDead(_330);
+        StorageDead(_319);
+        StorageDead(_315);
+        StorageDead(_312);
+        StorageDead(_311);
+        _309 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _310) -> [return: bb136, unwind: bb210];
+    }
+
+    bb136: {
+        StorageDead(_310);
+        _332 = discriminant(_309);
+        switchInt(move _332) -> [0: bb137, 1: bb138, otherwise: bb4];
+    }
+
+    bb137: {
+        StorageLive(_336);
+        _336 = ((_309 as Continue).0: ());
+        _308 = _336;
+        StorageDead(_336);
+        StorageDead(_321);
+        StorageDead(_320);
+        StorageDead(_318);
+        StorageDead(_316);
+        StorageDead(_313);
+        StorageDead(_309);
+        StorageDead(_308);
+        _296 = const ();
+        drop(_297) -> [return: bb140, unwind: bb214];
+    }
+
+    bb138: {
+        StorageLive(_333);
+        _333 = ((_309 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_335);
+        _335 = _333;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _335) -> [return: bb139, unwind: bb210];
+    }
+
+    bb139: {
+        StorageDead(_335);
+        StorageDead(_333);
+        goto -> bb183;
+    }
+
+    bb140: {
+        StorageDead(_297);
+        StorageDead(_296);
+        StorageLive(_339);
+        StorageLive(_340);
+        StorageLive(_341);
+        StorageLive(_342);
+        _342 = &(*_3);
+        StorageLive(_343);
+        _343 = &(*_9);
+        StorageLive(_344);
+        _344 = &(*_10);
+        StorageLive(_345);
+        _345 = &mut (*_11);
+        StorageLive(_346);
+        _346 = _17;
+        StorageLive(_347);
+        _347 = _178;
+        _341 = calculate_margin_freed(move _342, move _343, move _344, move _345, move _346, move _347) -> [return: bb141, unwind continue];
+    }
+
+    bb141: {
+        StorageDead(_347);
+        StorageDead(_346);
+        StorageDead(_345);
+        StorageDead(_344);
+        StorageDead(_343);
+        StorageDead(_342);
+        _340 = <std::result::Result<(u64, MarginCalculation), error::ErrorCode> as Try>::branch(move _341) -> [return: bb142, unwind continue];
+    }
+
+    bb142: {
+        StorageDead(_341);
+        _348 = discriminant(_340);
+        switchInt(move _348) -> [0: bb143, 1: bb144, otherwise: bb4];
+    }
+
+    bb143: {
+        StorageLive(_352);
+        _352 = ((_340 as Continue).0: (u64, state::margin_calculation::MarginCalculation));
+        _339 = _352;
+        StorageDead(_352);
+        StorageLive(_337);
+        _337 = (_339.0: u64);
+        StorageLive(_338);
+        _338 = (_339.1: state::margin_calculation::MarginCalculation);
+        StorageDead(_340);
+        StorageDead(_339);
+        StorageLive(_353);
+        StorageLive(_354);
+        StorageLive(_355);
+        StorageLive(_356);
+        _356 = _177;
+        StorageLive(_357);
+        _357 = _337;
+        _355 = <u64 as SafeMath>::safe_add(move _356, move _357) -> [return: bb146, unwind continue];
+    }
+
+    bb144: {
+        StorageLive(_349);
+        _349 = ((_340 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_351);
+        _351 = _349;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _351) -> [return: bb145, unwind continue];
+    }
+
+    bb145: {
+        StorageDead(_351);
+        StorageDead(_349);
+        StorageDead(_340);
+        StorageDead(_339);
+        goto -> bb193;
+    }
+
+    bb146: {
+        StorageDead(_357);
+        StorageDead(_356);
+        _354 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _355) -> [return: bb147, unwind continue];
+    }
+
+    bb147: {
+        StorageDead(_355);
+        _358 = discriminant(_354);
+        switchInt(move _358) -> [0: bb148, 1: bb149, otherwise: bb4];
+    }
+
+    bb148: {
+        StorageLive(_362);
+        _362 = ((_354 as Continue).0: u64);
+        _353 = _362;
+        StorageDead(_362);
+        _177 = move _353;
+        StorageDead(_353);
+        StorageDead(_354);
+        StorageLive(_363);
+        StorageLive(_364);
+        StorageLive(_365);
+        StorageLive(_366);
+        _366 = &mut (*_3);
+        StorageLive(_367);
+        _367 = _337;
+        _365 = User::increment_margin_freed(move _366, move _367) -> [return: bb151, unwind continue];
+    }
+
+    bb149: {
+        StorageLive(_359);
+        _359 = ((_354 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_361);
+        _361 = _359;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _361) -> [return: bb150, unwind continue];
+    }
+
+    bb150: {
+        StorageDead(_361);
+        StorageDead(_359);
+        StorageDead(_353);
+        StorageDead(_354);
+        goto -> bb182;
+    }
+
+    bb151: {
+        StorageDead(_367);
+        StorageDead(_366);
+        _364 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _365) -> [return: bb152, unwind continue];
+    }
+
+    bb152: {
+        StorageDead(_365);
+        _368 = discriminant(_364);
+        switchInt(move _368) -> [0: bb153, 1: bb154, otherwise: bb4];
+    }
+
+    bb153: {
+        StorageLive(_372);
+        _372 = ((_364 as Continue).0: ());
+        _363 = _372;
+        StorageDead(_372);
+        StorageDead(_364);
+        StorageDead(_363);
+        StorageLive(_373);
+        StorageLive(_374);
+        StorageLive(_375);
+        StorageLive(_376);
+        StorageLive(_377);
+        _377 = &_338;
+        _376 = MarginCalculation::can_exit_liquidation(move _377) -> [return: bb156, unwind continue];
+    }
+
+    bb154: {
+        StorageLive(_369);
+        _369 = ((_364 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_371);
+        _371 = _369;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _371) -> [return: bb155, unwind continue];
+    }
+
+    bb155: {
+        StorageDead(_371);
+        StorageDead(_369);
+        StorageDead(_364);
+        StorageDead(_363);
+        goto -> bb182;
+    }
+
+    bb156: {
+        StorageDead(_377);
+        _375 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _376) -> [return: bb157, unwind continue];
+    }
+
+    bb157: {
+        StorageDead(_376);
+        _378 = discriminant(_375);
+        switchInt(move _378) -> [0: bb158, 1: bb159, otherwise: bb4];
+    }
+
+    bb158: {
+        StorageLive(_382);
+        _382 = ((_375 as Continue).0: bool);
+        _374 = _382;
+        StorageDead(_382);
+        switchInt(move _374) -> [0: bb162, otherwise: bb161];
+    }
+
+    bb159: {
+        StorageLive(_379);
+        _379 = ((_375 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_381);
+        _381 = _379;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _381) -> [return: bb160, unwind continue];
+    }
+
+    bb160: {
+        StorageDead(_381);
+        StorageDead(_379);
+        StorageDead(_375);
+        StorageDead(_374);
+        StorageDead(_373);
+        goto -> bb182;
+    }
+
+    bb161: {
+        StorageDead(_375);
+        StorageLive(_383);
+        StorageLive(_384);
+        _384 = &mut (*_3);
+        _383 = User::exit_liquidation(move _384) -> [return: bb163, unwind continue];
+    }
+
+    bb162: {
+        StorageDead(_375);
+        StorageLive(_385);
+        StorageLive(_386);
+        _386 = &(*_3);
+        _385 = is_user_bankrupt(move _386) -> [return: bb164, unwind continue];
+    }
+
+    bb163: {
+        StorageDead(_384);
+        StorageDead(_383);
+        _373 = const ();
+        goto -> bb169;
+    }
+
+    bb164: {
+        switchInt(move _385) -> [0: bb167, otherwise: bb165];
+    }
+
+    bb165: {
+        StorageDead(_386);
+        StorageLive(_387);
+        StorageLive(_388);
+        _388 = &mut (*_3);
+        _387 = User::enter_bankruptcy(move _388) -> [return: bb166, unwind continue];
+    }
+
+    bb166: {
+        StorageDead(_388);
+        StorageDead(_387);
+        _373 = const ();
+        goto -> bb168;
+    }
+
+    bb167: {
+        StorageDead(_386);
+        _373 = const ();
+        goto -> bb168;
+    }
+
+    bb168: {
+        StorageDead(_385);
+        goto -> bb169;
+    }
+
+    bb169: {
+        StorageDead(_374);
+        StorageDead(_373);
+        StorageLive(_389);
+        StorageLive(_390);
+        StorageLive(_391);
+        StorageLive(_392);
+        StorageLive(_393);
+        StorageLive(_394);
+        StorageLive(_395);
+        StorageLive(_396);
+        StorageLive(_397);
+        StorageLive(_398);
+        StorageLive(_399);
+        StorageLive(_400);
+        StorageLive(_401);
+        StorageLive(_402);
+        StorageLive(_403);
+        _403 = _12;
+        StorageLive(_404);
+        _404 = _167;
+        StorageLive(_405);
+        _405 = LiquidationType::LiquidateSpot;
+        StorageLive(_406);
+        _406 = (*_4);
+        StorageLive(_407);
+        _407 = (*_7);
+        StorageLive(_408);
+        _408 = (_152.3: u128);
+        StorageLive(_409);
+        _409 = (_152.1: i128);
+        StorageLive(_410);
+        StorageLive(_411);
+        _411 = &(*_3);
+        _410 = User::is_bankrupt(move _411) -> [return: bb170, unwind continue];
+    }
+
+    bb170: {
+        StorageDead(_411);
+        StorageLive(_412);
+        _412 = _177;
+        StorageLive(_413);
+        StorageLive(_414);
+        _414 = _1;
+        StorageLive(_415);
+        _415 = _18;
+        StorageLive(_416);
+        _416 = _15;
+        StorageLive(_417);
+        _417 = _2;
+        StorageLive(_418);
+        _418 = _67;
+        StorageLive(_419);
+        _419 = _16;
+        StorageLive(_420);
+        StorageLive(_421);
+        StorageLive(_422);
+        StorageLive(_423);
+        _423 = _187;
+        _422 = <u128 as Cast>::cast::<u64>(move _423) -> [return: bb171, unwind continue];
+    }
+
+    bb171: {
+        StorageDead(_423);
+        _421 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _422) -> [return: bb172, unwind continue];
+    }
+
+    bb172: {
+        StorageDead(_422);
+        _424 = discriminant(_421);
+        switchInt(move _424) -> [0: bb173, 1: bb174, otherwise: bb4];
+    }
+
+    bb173: {
+        StorageLive(_428);
+        _428 = ((_421 as Continue).0: u64);
+        _420 = _428;
+        StorageDead(_428);
+        _413 = LiquidateSpotRecord { asset_market_index: move _414, asset_price: move _415, asset_transfer: move _416, liability_market_index: move _417, liability_price: move _418, liability_transfer: move _419, if_fee: move _420 };
+        StorageDead(_420);
+        StorageDead(_419);
+        StorageDead(_418);
+        StorageDead(_417);
+        StorageDead(_416);
+        StorageDead(_415);
+        StorageDead(_414);
+        StorageLive(_429);
+        _429 = <LiquidationRecord as Default>::default() -> [return: bb176, unwind continue];
+    }
+
+    bb174: {
+        StorageLive(_425);
+        _425 = ((_421 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_427);
+        _427 = _425;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _427) -> [return: bb175, unwind continue];
+    }
+
+    bb175: {
+        StorageDead(_427);
+        StorageDead(_425);
+        StorageDead(_420);
+        StorageDead(_419);
+        StorageDead(_418);
+        StorageDead(_417);
+        StorageDead(_416);
+        StorageDead(_415);
+        StorageDead(_414);
+        StorageDead(_413);
+        StorageDead(_412);
+        StorageDead(_410);
+        StorageDead(_409);
+        StorageDead(_408);
+        StorageDead(_407);
+        StorageDead(_406);
+        StorageDead(_405);
+        StorageDead(_404);
+        StorageDead(_403);
+        StorageDead(_400);
+        StorageDead(_397);
+        StorageDead(_395);
+        StorageDead(_392);
+        StorageDead(_391);
+        StorageDead(_421);
+        StorageDead(_402);
+        StorageDead(_401);
+        StorageDead(_399);
+        StorageDead(_398);
+        StorageDead(_396);
+        StorageDead(_394);
+        StorageDead(_393);
+        StorageDead(_390);
+        StorageDead(_389);
+        goto -> bb182;
+    }
+
+    bb176: {
+        _402 = LiquidationRecord { ts: move _403, liquidation_type: move _405, user: move _406, liquidator: move _407, margin_requirement: move _408, total_collateral: move _409, margin_freed: move _412, liquidation_id: move _404, bankrupt: move _410, canceled_order_ids: move (_429.9: std::vec::Vec<u32>), liquidate_perp: move (_429.10: state::events::LiquidatePerpRecord), liquidate_spot: move _413, liquidate_borrow_for_perp_pnl: move (_429.12: state::events::LiquidateBorrowForPerpPnlRecord), liquidate_perp_pnl_for_deposit: move (_429.13: state::events::LiquidatePerpPnlForDepositRecord), perp_bankruptcy: move (_429.14: state::events::PerpBankruptcyRecord), spot_bankruptcy: move (_429.15: state::events::SpotBankruptcyRecord) };
+        StorageDead(_413);
+        StorageDead(_412);
+        StorageDead(_410);
+        StorageDead(_409);
+        StorageDead(_408);
+        StorageDead(_407);
+        StorageDead(_406);
+        StorageDead(_405);
+        StorageDead(_404);
+        StorageDead(_403);
+        _401 = &_402;
+        _400 = &(*_401);
+        _399 = <LiquidationRecord as anchor_lang::Event>::data(move _400) -> [return: bb177, unwind: bb209];
+    }
+
+    bb177: {
+        StorageDead(_400);
+        _398 = &_399;
+        _397 = &(*_398);
+        _396 = <Vec<u8> as Deref>::deref(move _397) -> [return: bb178, unwind: bb208];
+    }
+
+    bb178: {
+        _395 = &(*_396);
+        StorageDead(_397);
+        _394 = [move _395];
+        StorageDead(_395);
+        _393 = &_394;
+        _392 = &(*_393);
+        _391 = move _392 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_392);
+        _390 = solana_program::log::sol_log_data(move _391) -> [return: bb179, unwind: bb208];
+    }
+
+    bb179: {
+        StorageDead(_391);
+        drop(_399) -> [return: bb180, unwind: bb209];
+    }
+
+    bb180: {
+        drop(_402) -> [return: bb181, unwind: bb214];
+    }
+
+    bb181: {
+        StorageDead(_429);
+        StorageDead(_421);
+        StorageDead(_402);
+        StorageDead(_401);
+        StorageDead(_399);
+        StorageDead(_398);
+        StorageDead(_396);
+        StorageDead(_394);
+        StorageDead(_393);
+        StorageDead(_390);
+        _389 = const ();
+        StorageDead(_389);
+        StorageLive(_430);
+        _430 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _430);
+        StorageDead(_430);
+        StorageDead(_338);
+        StorageDead(_337);
+        StorageDead(_187);
+        StorageDead(_178);
+        StorageDead(_177);
+        StorageDead(_167);
+        StorageDead(_152);
+        StorageDead(_137);
+        StorageDead(_70);
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_67);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        StorageDead(_17);
+        goto -> bb207;
+    }
+
+    bb182: {
+        StorageDead(_338);
+        StorageDead(_337);
+        goto -> bb193;
+    }
+
+    bb183: {
+        StorageDead(_321);
+        StorageDead(_320);
+        StorageDead(_318);
+        StorageDead(_316);
+        StorageDead(_313);
+        StorageDead(_309);
+        StorageDead(_308);
+        drop(_297) -> [return: bb184, unwind: bb214];
+    }
+
+    bb184: {
+        StorageDead(_297);
+        StorageDead(_296);
+        goto -> bb193;
+    }
+
+    bb185: {
+        StorageDead(_266);
+        goto -> bb186;
+    }
+
+    bb186: {
+        StorageDead(_255);
+        StorageDead(_254);
+        StorageDead(_252);
+        StorageDead(_250);
+        StorageDead(_247);
+        goto -> bb187;
+    }
+
+    bb187: {
+        StorageDead(_237);
+        StorageDead(_234);
+        StorageDead(_233);
+        goto -> bb188;
+    }
+
+    bb188: {
+        drop(_222) -> [return: bb189, unwind: bb214];
+    }
+
+    bb189: {
+        StorageDead(_222);
+        StorageDead(_221);
+        goto -> bb193;
+    }
+
+    bb190: {
+        StorageDead(_190);
+        StorageDead(_189);
+        goto -> bb191;
+    }
+
+    bb191: {
+        StorageDead(_203);
+        goto -> bb192;
+    }
+
+    bb192: {
+        StorageDead(_194);
+        StorageDead(_191);
+        StorageDead(_188);
+        goto -> bb193;
+    }
+
+    bb193: {
+        StorageDead(_187);
+        goto -> bb194;
+    }
+
+    bb194: {
+        StorageDead(_178);
+        StorageDead(_177);
+        goto -> bb195;
+    }
+
+    bb195: {
+        StorageDead(_167);
+        goto -> bb196;
+    }
+
+    bb196: {
+        StorageDead(_152);
+        goto -> bb197;
+    }
+
+    bb197: {
+        StorageDead(_137);
+        goto -> bb198;
+    }
+
+    bb198: {
+        StorageDead(_70);
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_67);
+        goto -> bb202;
+    }
+
+    bb199: {
+        StorageDead(_72);
+        StorageDead(_112);
+        StorageDead(_109);
+        StorageDead(_106);
+        goto -> bb201;
+    }
+
+    bb200: {
+        StorageDead(_72);
+        goto -> bb201;
+    }
+
+    bb201: {
+        StorageDead(_71);
+        goto -> bb202;
+    }
+
+    bb202: {
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        goto -> bb206;
+    }
+
+    bb203: {
+        StorageDead(_22);
+        StorageDead(_59);
+        StorageDead(_56);
+        StorageDead(_53);
+        goto -> bb205;
+    }
+
+    bb204: {
+        StorageDead(_22);
+        goto -> bb205;
+    }
+
+    bb205: {
+        StorageDead(_21);
+        goto -> bb206;
+    }
+
+    bb206: {
+        StorageDead(_17);
+        goto -> bb207;
+    }
+
+    bb207: {
+        return;
+    }
+
+    bb208 (cleanup): {
+        drop(_399) -> [return: bb209, unwind terminate(cleanup)];
+    }
+
+    bb209 (cleanup): {
+        drop(_402) -> [return: bb214, unwind terminate(cleanup)];
+    }
+
+    bb210 (cleanup): {
+        drop(_297) -> [return: bb214, unwind terminate(cleanup)];
+    }
+
+    bb211 (cleanup): {
+        drop(_222) -> [return: bb214, unwind terminate(cleanup)];
+    }
+
+    bb212 (cleanup): {
+        drop(_72) -> [return: bb214, unwind terminate(cleanup)];
+    }
+
+    bb213 (cleanup): {
+        drop(_22) -> [return: bb214, unwind terminate(cleanup)];
+    }
+
+    bb214 (cleanup): {
+        resume;
+    }
+
+    bb215 (cleanup): {
+        _450 = discriminant(_298);
+        goto -> bb214;
+    }
+
+    bb216 (cleanup): {
+        _451 = discriminant(_223);
+        goto -> bb214;
+    }
+
+    bb217 (cleanup): {
+        _452 = discriminant(_73);
+        goto -> bb214;
+    }
+
+    bb218 (cleanup): {
+        _453 = discriminant(_23);
+        goto -> bb214;
+    }
+}

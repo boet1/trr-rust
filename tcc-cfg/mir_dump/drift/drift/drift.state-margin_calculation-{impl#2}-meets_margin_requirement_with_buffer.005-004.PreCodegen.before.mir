@@ -1,0 +1,30 @@
+// MIR for `margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::meets_margin_requirement_with_buffer` before PreCodegen
+
+fn margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::meets_margin_requirement_with_buffer(_1: &MarginCalculation) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: i128;
+    let mut _3: &state::margin_calculation::MarginCalculation;
+    let mut _4: i128;
+    let mut _5: u128;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &(*_1);
+        _2 = MarginCalculation::get_total_collateral_plus_buffer(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).4: u128);
+        _4 = move _5 as i128 (IntToInt);
+        StorageDead(_5);
+        _0 = Ge(move _2, move _4);
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
+    }
+}

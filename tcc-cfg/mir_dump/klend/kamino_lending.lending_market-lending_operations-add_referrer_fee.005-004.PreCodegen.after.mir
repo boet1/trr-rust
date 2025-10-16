@@ -1,0 +1,64 @@
+// MIR for `add_referrer_fee` after PreCodegen
+
+fn add_referrer_fee(_1: &mut reserve::Reserve, _2: &mut referral::ReferrerTokenState, _3: FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug borrow_reserve => _1;
+    debug referrer_token_state => _2;
+    debug referrer_fee => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: u128;
+    let mut _5: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _6: u128;
+    let mut _7: (u128, bool);
+    let mut _8: u128;
+    let mut _9: (u128, bool);
+    let mut _10: u128;
+    let mut _11: (u128, bool);
+    let mut _12: ();
+    scope 1 {
+        debug referrer_fee_sf => _4;
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &_3;
+        _4 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_sf(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = _4;
+        _7 = CheckedAdd(((*_2).3: u128), _6);
+        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_2).3: u128), move _6) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        ((*_2).3: u128) = move (_7.0: u128);
+        StorageDead(_6);
+        StorageLive(_8);
+        _8 = _4;
+        _9 = CheckedAdd(((*_2).2: u128), _8);
+        assert(!move (_9.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_2).2: u128), move _8) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        ((*_2).2: u128) = move (_9.0: u128);
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = _4;
+        _11 = CheckedAdd((((*_1).5: state::reserve::ReserveLiquidity).12: u128), _10);
+        assert(!move (_11.1: bool), "attempt to compute `{} + {}`, which would overflow", (((*_1).5: state::reserve::ReserveLiquidity).12: u128), move _10) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        (((*_1).5: state::reserve::ReserveLiquidity).12: u128) = move (_11.0: u128);
+        StorageDead(_10);
+        StorageLive(_12);
+        _12 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _12);
+        StorageDead(_12);
+        StorageDead(_4);
+        return;
+    }
+}

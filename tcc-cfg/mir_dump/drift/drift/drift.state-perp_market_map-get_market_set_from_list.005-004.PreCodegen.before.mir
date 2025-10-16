@@ -1,0 +1,142 @@
+// MIR for `get_market_set_from_list` before PreCodegen
+
+fn get_market_set_from_list(_1: Vec<u16>) -> BTreeSet<u16> {
+    debug market_indexes => _1;
+    let mut _0: std::collections::BTreeSet<u16>;
+    let mut _2: std::collections::BTreeSet<u16>;
+    let _3: ();
+    let mut _4: std::slice::Iter<'_, u16>;
+    let mut _5: std::slice::Iter<'_, u16>;
+    let mut _6: &[u16];
+    let _7: &[u16];
+    let mut _8: &std::vec::Vec<u16>;
+    let mut _10: ();
+    let _11: ();
+    let mut _12: std::option::Option<&u16>;
+    let mut _13: &mut std::slice::Iter<'_, u16>;
+    let mut _14: &mut std::slice::Iter<'_, u16>;
+    let mut _15: isize;
+    let mut _16: !;
+    let _18: bool;
+    let mut _19: &mut std::collections::BTreeSet<u16>;
+    let mut _20: u16;
+    scope 1 {
+        debug writable_markets => _2;
+        let mut _9: std::slice::Iter<'_, u16>;
+        scope 2 {
+            debug iter => _9;
+            let _17: &u16;
+            scope 3 {
+                debug market_index => _17;
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = BTreeSet::<u16>::new() -> [return: bb1, unwind: bb13];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &_1;
+        _7 = <Vec<u16> as Deref>::deref(move _8) -> [return: bb2, unwind: bb12];
+    }
+
+    bb2: {
+        _6 = &(*_7);
+        StorageDead(_8);
+        _5 = core::slice::<impl [u16]>::iter(move _6) -> [return: bb3, unwind: bb12];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        _4 = <std::slice::Iter<'_, u16> as IntoIterator>::into_iter(move _5) -> [return: bb4, unwind: bb12];
+    }
+
+    bb4: {
+        StorageDead(_5);
+        StorageLive(_9);
+        _9 = move _4;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &mut _9;
+        _13 = &mut (*_14);
+        _12 = <std::slice::Iter<'_, u16> as Iterator>::next(move _13) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        _15 = discriminant(_12);
+        switchInt(move _15) -> [0: bb9, 1: bb7, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_17);
+        _17 = ((_12 as Some).0: &u16);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &mut _2;
+        StorageLive(_20);
+        _20 = (*_17);
+        _18 = BTreeSet::<u16>::insert(move _19, move _20) -> [return: bb10, unwind: bb12];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        _3 = const ();
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        _0 = move _2;
+        StorageDead(_2);
+        drop(_1) -> [return: bb11, unwind: bb14];
+    }
+
+    bb10: {
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        _11 = const ();
+        StorageDead(_17);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_11);
+        _10 = const ();
+        goto -> bb5;
+    }
+
+    bb11: {
+        return;
+    }
+
+    bb12 (cleanup): {
+        drop(_2) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        drop(_1) -> [return: bb14, unwind terminate(cleanup)];
+    }
+
+    bb14 (cleanup): {
+        resume;
+    }
+}

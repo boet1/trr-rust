@@ -1,0 +1,33 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::get_direction` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:992:1: 992:18>::get_direction(_1: &PerpPosition) -> controller::position::PositionDirection {
+    debug self => _1;
+    let mut _0: controller::position::PositionDirection;
+    let mut _2: bool;
+    let mut _3: i64;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = ((*_1).1: i64);
+        _2 = Ge(move _3, const 0_i64);
+        switchInt(move _2) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        _0 = controller::position::PositionDirection::Long;
+        goto -> bb3;
+    }
+
+    bb2: {
+        StorageDead(_3);
+        _0 = controller::position::PositionDirection::Short;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_2);
+        return;
+    }
+}

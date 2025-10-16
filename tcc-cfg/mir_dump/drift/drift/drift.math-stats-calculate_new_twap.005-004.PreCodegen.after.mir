@@ -1,0 +1,202 @@
+// MIR for `calculate_new_twap` after PreCodegen
+
+fn calculate_new_twap(_1: i64, _2: i64, _3: i64, _4: i64, _5: i64) -> std::result::Result<i64, error::ErrorCode> {
+    debug current_price => _1;
+    debug current_ts => _2;
+    debug last_twap => _3;
+    debug last_ts => _4;
+    debug period => _5;
+    let mut _0: std::result::Result<i64, error::ErrorCode>;
+    let _6: i64;
+    let mut _7: i64;
+    let mut _8: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _9: std::result::Result<i64, error::ErrorCode>;
+    let mut _10: i64;
+    let mut _11: i64;
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _16: i64;
+    let mut _18: i64;
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _20: std::result::Result<i64, error::ErrorCode>;
+    let mut _21: i64;
+    let mut _22: i64;
+    let mut _23: isize;
+    let mut _25: !;
+    let mut _26: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _28: i64;
+    let mut _29: i64;
+    let mut _30: i64;
+    let mut _31: i64;
+    let mut _32: std::option::Option<i64>;
+    scope 1 {
+        debug since_last => _6;
+        let _17: i64;
+        let _24: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _27: i64;
+        scope 6 {
+            debug from_start => _17;
+        }
+        scope 7 {
+            debug residual => _24;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _27;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _13;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _16;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _2;
+        StorageLive(_11);
+        _11 = _4;
+        _9 = <i64 as SafeMath>::safe_sub(move _10, move _11) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_11);
+        StorageDead(_10);
+        _8 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _12 = discriminant(_8);
+        switchInt(move _12) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_16);
+        _16 = ((_8 as Continue).0: i64);
+        _7 = _16;
+        StorageDead(_16);
+        _6 = std::cmp::max::<i64>(const 0_i64, move _7) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_13);
+        _13 = ((_8 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_15);
+        _15 = _13;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _15) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_7);
+        StorageDead(_8);
+        goto -> bb15;
+    }
+
+    bb7: {
+        StorageDead(_7);
+        StorageDead(_8);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _5;
+        StorageLive(_22);
+        _22 = _6;
+        _20 = <i64 as SafeMath>::safe_sub(move _21, move _22) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_22);
+        StorageDead(_21);
+        _19 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _20) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        _23 = discriminant(_19);
+        switchInt(move _23) -> [0: bb10, 1: bb11, otherwise: bb4];
+    }
+
+    bb10: {
+        StorageLive(_27);
+        _27 = ((_19 as Continue).0: i64);
+        _18 = _27;
+        StorageDead(_27);
+        _17 = std::cmp::max::<i64>(const 1_i64, move _18) -> [return: bb13, unwind continue];
+    }
+
+    bb11: {
+        StorageLive(_24);
+        _24 = ((_19 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_26);
+        _26 = _24;
+        _0 = <std::result::Result<i64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _26) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageDead(_18);
+        StorageDead(_19);
+        StorageDead(_17);
+        goto -> bb15;
+    }
+
+    bb13: {
+        StorageDead(_18);
+        StorageDead(_19);
+        StorageLive(_28);
+        _28 = _1;
+        StorageLive(_29);
+        _29 = _3;
+        StorageLive(_30);
+        _30 = _6;
+        StorageLive(_31);
+        _31 = _17;
+        StorageLive(_32);
+        _32 = Option::<i64>::None;
+        _0 = calculate_weighted_average(move _28, move _29, move _30, move _31, move _32) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_17);
+        StorageDead(_6);
+        goto -> bb16;
+    }
+
+    bb15: {
+        StorageDead(_6);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

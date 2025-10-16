@@ -1,0 +1,168 @@
+// MIR for `get_timestamp_from_price_update_message` before PreCodegen
+
+fn get_timestamp_from_price_update_message(_1: &PrefixedVec<u16, u8>) -> std::result::Result<i64, anchor_lang::error::Error> {
+    debug update_message => _1;
+    let mut _0: std::result::Result<i64, anchor_lang::error::Error>;
+    let _2: pythnet_sdk::messages::Message;
+    let mut _3: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, pythnet_sdk::messages::Message>;
+    let mut _4: std::result::Result<pythnet_sdk::messages::Message, error::ErrorCode>;
+    let mut _5: std::result::Result<pythnet_sdk::messages::Message, pythnet_sdk::wire::DeserializerError>;
+    let mut _6: &[u8];
+    let _7: &[u8];
+    let mut _8: &std::vec::Vec<u8>;
+    let _9: &std::vec::Vec<u8>;
+    let mut _10: &pythnet_sdk::wire::PrefixedVec<u16, u8>;
+    let mut _11: {closure@programs/drift/src/instructions/pyth_pull_oracle.rs:216:18: 216:21};
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _16: pythnet_sdk::messages::Message;
+    let mut _18: isize;
+    let mut _20: !;
+    let mut _21: anchor_lang::error::Error;
+    let mut _22: error::ErrorCode;
+    let mut _23: i64;
+    scope 1 {
+        debug message => _2;
+        let _17: i64;
+        let _19: pyth_solana_receiver_sdk::price_update::PriceFeedMessage;
+        scope 6 {
+            debug next_timestamp => _17;
+        }
+        scope 7 {
+            debug price_feed_message => _19;
+        }
+    }
+    scope 2 {
+        debug residual => _13;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _16;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_1);
+        _9 = <PrefixedVec<u16, u8> as AsRef<Vec<u8>>>::as_ref(move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _8 = &(*_9);
+        _7 = <Vec<u8> as Deref>::deref(move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _6 = &(*_7);
+        StorageDead(_10);
+        StorageDead(_8);
+        _5 = from_slice::<'_, BigEndian, pythnet_sdk::messages::Message>(move _6) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageLive(_11);
+        _11 = {closure@programs/drift/src/instructions/pyth_pull_oracle.rs:216:18: 216:21};
+        _4 = std::result::Result::<pythnet_sdk::messages::Message, DeserializerError>::map_err::<error::ErrorCode, {closure@programs/drift/src/instructions/pyth_pull_oracle.rs:216:18: 216:21}>(move _5, move _11) -> [return: bb4, unwind: bb15];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageDead(_5);
+        _3 = <std::result::Result<pythnet_sdk::messages::Message, error::ErrorCode> as Try>::branch(move _4) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_4);
+        _12 = discriminant(_3);
+        switchInt(move _12) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = ((_3 as Continue).0: pythnet_sdk::messages::Message);
+        _2 = _16;
+        StorageDead(_16);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_3);
+        StorageLive(_17);
+        _18 = discriminant(_2);
+        switchInt(move _18) -> [0: bb11, 1: bb10, otherwise: bb7];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_13);
+        _13 = ((_3 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_15);
+        _15 = _13;
+        _0 = <std::result::Result<i64, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _15) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_3);
+        goto -> bb13;
+    }
+
+    bb10: {
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = error::ErrorCode::OracleUnsupportedMessageType;
+        _21 = <error::ErrorCode as Into<anchor_lang::error::Error>>::into(move _22) -> [return: bb12, unwind continue];
+    }
+
+    bb11: {
+        StorageLive(_19);
+        _19 = ((_2 as PriceFeedMessage).0: pyth_solana_receiver_sdk::price_update::PriceFeedMessage);
+        _17 = (_19.4: i64);
+        StorageDead(_19);
+        StorageLive(_23);
+        _23 = _17;
+        _0 = std::result::Result::<i64, anchor_lang::error::Error>::Ok(move _23);
+        StorageDead(_23);
+        StorageDead(_17);
+        StorageDead(_2);
+        goto -> bb14;
+    }
+
+    bb12: {
+        StorageDead(_22);
+        _0 = std::result::Result::<i64, anchor_lang::error::Error>::Err(move _21);
+        StorageDead(_21);
+        StorageDead(_17);
+        goto -> bb13;
+    }
+
+    bb13: {
+        StorageDead(_2);
+        goto -> bb14;
+    }
+
+    bb14: {
+        return;
+    }
+
+    bb15 (cleanup): {
+        resume;
+    }
+}

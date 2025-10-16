@@ -1,0 +1,91 @@
+// MIR for `obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::init` before PreCodegen
+
+fn obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::init(_1: &mut obligation::Obligation, _2: InitObligationParams) -> () {
+    debug self => _1;
+    debug params => _2;
+    let mut _0: ();
+    let mut _3: state::last_update::LastUpdate;
+    let mut _4: u64;
+    let mut _5: solana_program::pubkey::Pubkey;
+    let mut _6: solana_program::pubkey::Pubkey;
+    let mut _7: std::vec::Vec<state::obligation::ObligationCollateral>;
+    let mut _8: std::vec::Vec<state::obligation::ObligationLiquidity>;
+    let mut _9: bool;
+    let mut _10: bool;
+
+    bb0: {
+        _10 = const false;
+        _9 = const false;
+        _9 = const true;
+        _10 = const true;
+        ((*_1).0: u8) = const _;
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (_2.0: u64);
+        _3 = last_update::LastUpdate::new(move _4) -> [return: bb1, unwind: bb10];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        ((*_1).1: state::last_update::LastUpdate) = move _3;
+        StorageDead(_3);
+        StorageLive(_5);
+        _5 = (_2.1: solana_program::pubkey::Pubkey);
+        ((*_1).2: solana_program::pubkey::Pubkey) = move _5;
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = (_2.2: solana_program::pubkey::Pubkey);
+        ((*_1).3: solana_program::pubkey::Pubkey) = move _6;
+        StorageDead(_6);
+        StorageLive(_7);
+        _10 = const false;
+        _7 = move (_2.3: std::vec::Vec<state::obligation::ObligationCollateral>);
+        drop(((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>)) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        ((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>) = move _7;
+        StorageDead(_7);
+        StorageLive(_8);
+        _9 = const false;
+        _8 = move (_2.4: std::vec::Vec<state::obligation::ObligationLiquidity>);
+        drop(((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>)) -> [return: bb4, unwind: bb5];
+    }
+
+    bb3 (cleanup): {
+        ((*_1).4: std::vec::Vec<state::obligation::ObligationCollateral>) = move _7;
+        goto -> bb10;
+    }
+
+    bb4: {
+        ((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>) = move _8;
+        StorageDead(_8);
+        _0 = const ();
+        return;
+    }
+
+    bb5 (cleanup): {
+        ((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>) = move _8;
+        goto -> bb10;
+    }
+
+    bb6 (cleanup): {
+        resume;
+    }
+
+    bb7 (cleanup): {
+        switchInt(_9) -> [0: bb6, otherwise: bb8];
+    }
+
+    bb8 (cleanup): {
+        drop((_2.4: std::vec::Vec<state::obligation::ObligationLiquidity>)) -> [return: bb6, unwind terminate(cleanup)];
+    }
+
+    bb9 (cleanup): {
+        drop((_2.3: std::vec::Vec<state::obligation::ObligationCollateral>)) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        switchInt(_10) -> [0: bb7, otherwise: bb9];
+    }
+}

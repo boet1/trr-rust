@@ -1,0 +1,164 @@
+// MIR for `validate_pyth_pull_price_account_info` before PreCodegen
+
+fn validate_pyth_pull_price_account_info(_1: &AccountInfo<'_>) -> Result<(), anchor_lang::prelude::ProgramError> {
+    debug pyth_price_info => _1;
+    let mut _0: std::result::Result<(), anchor_lang::prelude::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &anchor_lang::prelude::Pubkey;
+    let mut _5: &anchor_lang::prelude::Pubkey;
+    let _6: anchor_lang::prelude::Pubkey;
+    let mut _7: !;
+    let _8: ();
+    let mut _9: &str;
+    let _10: &str;
+    let mut _11: anchor_lang::prelude::ProgramError;
+    let _12: pyth_solana_receiver_sdk::price_update::PriceUpdateV2;
+    let mut _13: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>, pyth_solana_receiver_sdk::price_update::PriceUpdateV2>;
+    let mut _14: std::result::Result<pyth_solana_receiver_sdk::price_update::PriceUpdateV2, solend_sdk::error::LendingError>;
+    let mut _15: std::result::Result<pyth_solana_receiver_sdk::price_update::PriceUpdateV2, anchor_lang::prelude::ProgramError>;
+    let mut _16: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _17: {closure@token-lending\oracles\src\pyth.rs:59:91: 59:94};
+    let mut _18: isize;
+    let _19: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>;
+    let mut _20: !;
+    let mut _21: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>;
+    let _22: pyth_solana_receiver_sdk::price_update::PriceUpdateV2;
+    let mut _23: ();
+    let mut _24: &anchor_lang::prelude::Pubkey;
+    scope 1 {
+        debug _price_feed_account => _12;
+    }
+    scope 2 {
+        debug residual => _19;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _22;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _24 = deref_copy ((*_1).3: &anchor_lang::prelude::Pubkey);
+        _4 = &(*_24);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = pyth_pull_mainnet::id() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = &_6;
+        _3 = <Pubkey as PartialEq>::ne(move _4, move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _3) -> [0: bb5, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const "pyth price account is not owned by pyth program";
+        _9 = &(*_10);
+        _8 = solana_program::log::sol_log(move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageLive(_11);
+        _11 = anchor_lang::prelude::ProgramError::IncorrectProgramId;
+        _0 = Result::<(), anchor_lang::prelude::ProgramError>::Err(move _11);
+        StorageDead(_11);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb13;
+    }
+
+    bb5: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &(*_1);
+        _15 = account_deserialize::<PriceUpdateV2>(move _16) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_16);
+        StorageLive(_17);
+        _17 = {closure@token-lending\oracles\src\pyth.rs:59:91: 59:94};
+        _14 = Result::<PriceUpdateV2, anchor_lang::prelude::ProgramError>::map_err::<LendingError, {closure@token-lending\oracles\src\pyth.rs:59:91: 59:94}>(move _15, move _17) -> [return: bb7, unwind: bb14];
+    }
+
+    bb7: {
+        StorageDead(_17);
+        StorageDead(_15);
+        _13 = <Result<PriceUpdateV2, LendingError> as Try>::branch(move _14) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_14);
+        _18 = discriminant(_13);
+        switchInt(move _18) -> [0: bb9, 1: bb11, otherwise: bb10];
+    }
+
+    bb9: {
+        StorageLive(_22);
+        _22 = move ((_13 as Continue).0: pyth_solana_receiver_sdk::price_update::PriceUpdateV2);
+        _12 = move _22;
+        StorageDead(_22);
+        StorageDead(_13);
+        StorageLive(_23);
+        _23 = ();
+        _0 = Result::<(), anchor_lang::prelude::ProgramError>::Ok(move _23);
+        StorageDead(_23);
+        StorageDead(_12);
+        goto -> bb13;
+    }
+
+    bb10: {
+        unreachable;
+    }
+
+    bb11: {
+        StorageLive(_19);
+        _19 = move ((_13 as Break).0: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>);
+        StorageLive(_21);
+        _21 = move _19;
+        _0 = <Result<(), anchor_lang::prelude::ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _21) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_21);
+        StorageDead(_19);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+
+    bb14 (cleanup): {
+        resume;
+    }
+}

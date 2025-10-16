@@ -1,0 +1,290 @@
+// MIR for `check_and_update_withdrawal_caps` before PreCodegen
+
+fn check_and_update_withdrawal_caps(_1: &mut reserve::WithdrawalCaps, _2: u64, _3: u64, _4: WithdrawalCapAction) -> std::result::Result<(), LendingError> {
+    debug caps => _1;
+    debug requested_amount => _2;
+    debug curr_timestamp => _3;
+    debug action => _4;
+    let mut _0: std::result::Result<(), LendingError>;
+    let mut _5: bool;
+    let mut _6: u64;
+    let _7: ();
+    let mut _8: bool;
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>, bool>;
+    let mut _10: std::result::Result<bool, LendingError>;
+    let mut _11: &mut state::reserve::WithdrawalCaps;
+    let mut _12: u64;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, LendingError>;
+    let _17: bool;
+    let _18: ();
+    let mut _19: &mut state::reserve::WithdrawalCaps;
+    let mut _20: u64;
+    let _21: ();
+    let mut _22: bool;
+    let mut _23: &lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    let mut _24: &lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    let _25: lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    let _26: ();
+    let mut _27: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, LendingError>>;
+    let mut _28: std::result::Result<(), LendingError>;
+    let mut _29: &mut state::reserve::WithdrawalCaps;
+    let mut _30: u64;
+    let mut _31: isize;
+    let _32: std::result::Result<std::convert::Infallible, LendingError>;
+    let mut _33: !;
+    let mut _34: std::result::Result<std::convert::Infallible, LendingError>;
+    let _35: ();
+    let mut _36: &mut state::reserve::WithdrawalCaps;
+    let mut _37: u64;
+    let mut _38: lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    let mut _39: lending_market::withdrawal_cap_operations::utils::WithdrawalCapOverflowAction;
+    let mut _40: &mut state::reserve::WithdrawalCaps;
+    let mut _41: u64;
+    let mut _42: lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    let mut _43: lending_market::withdrawal_cap_operations::utils::WithdrawalCapOverflowAction;
+    let mut _44: &lending_market::withdrawal_cap_operations::utils::WithdrawalCapAction;
+    scope 1 {
+        debug residual => _14;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _17;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _32;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _35;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_1).3: u64);
+        _5 = Ne(move _6, const 0_u64);
+        switchInt(move _5) -> [0: bb22, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &mut (*_1);
+        StorageLive(_12);
+        _12 = _3;
+        _10 = check_last_interval_elapsed(move _11, move _12) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_12);
+        StorageDead(_11);
+        _9 = <std::result::Result<bool, LendingError> as Try>::branch(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _13 = discriminant(_9);
+        switchInt(move _13) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_17);
+        _17 = ((_9 as Continue).0: bool);
+        _8 = _17;
+        StorageDead(_17);
+        switchInt(move _8) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_14);
+        _14 = ((_9 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_16);
+        _16 = _14;
+        _0 = <std::result::Result<(), LendingError> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _16) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb25;
+    }
+
+    bb8: {
+        StorageDead(_9);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &mut (*_1);
+        StorageLive(_20);
+        _20 = _3;
+        _18 = reset_current_interval_and_counter(move _19, move _20) -> [return: bb10, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_9);
+        _7 = const ();
+        goto -> bb11;
+    }
+
+    bb10: {
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        _7 = const ();
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = &_4;
+        StorageLive(_24);
+        _44 = const _;
+        _24 = &(*_44);
+        _22 = <WithdrawalCapAction as PartialEq>::eq(move _23, move _24) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        switchInt(move _22) -> [0: bb19, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = &mut (*_1);
+        StorageLive(_30);
+        _30 = _2;
+        _28 = check_capacity_allows_withdrawals(move _29, move _30) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_30);
+        StorageDead(_29);
+        _27 = <std::result::Result<(), LendingError> as Try>::branch(move _28) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_28);
+        _31 = discriminant(_27);
+        switchInt(move _31) -> [0: bb16, 1: bb17, otherwise: bb5];
+    }
+
+    bb16: {
+        StorageLive(_35);
+        _35 = ((_27 as Continue).0: ());
+        _26 = _35;
+        StorageDead(_35);
+        StorageDead(_27);
+        StorageDead(_26);
+        _21 = const ();
+        goto -> bb20;
+    }
+
+    bb17: {
+        StorageLive(_32);
+        _32 = ((_27 as Break).0: std::result::Result<std::convert::Infallible, LendingError>);
+        StorageLive(_34);
+        _34 = _32;
+        _0 = <std::result::Result<(), LendingError> as FromResidual<std::result::Result<Infallible, LendingError>>>::from_residual(move _34) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_34);
+        StorageDead(_32);
+        StorageDead(_27);
+        StorageDead(_26);
+        StorageDead(_22);
+        StorageDead(_21);
+        goto -> bb25;
+    }
+
+    bb19: {
+        StorageDead(_24);
+        StorageDead(_23);
+        _21 = const ();
+        goto -> bb20;
+    }
+
+    bb20: {
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageLive(_36);
+        _36 = &mut (*_1);
+        StorageLive(_37);
+        _37 = _2;
+        StorageLive(_38);
+        _38 = move _4;
+        StorageLive(_39);
+        _39 = WithdrawalCapOverflowAction::ErrorOnOverflow;
+        _0 = update_counter(move _36, move _37, move _38, move _39) -> [return: bb21, unwind continue];
+    }
+
+    bb21: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_37);
+        StorageDead(_36);
+        goto -> bb24;
+    }
+
+    bb22: {
+        StorageDead(_6);
+        StorageLive(_40);
+        _40 = &mut (*_1);
+        StorageLive(_41);
+        _41 = _2;
+        StorageLive(_42);
+        _42 = move _4;
+        StorageLive(_43);
+        _43 = WithdrawalCapOverflowAction::SaturatingOverflow;
+        _0 = update_counter(move _40, move _41, move _42, move _43) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_40);
+        goto -> bb24;
+    }
+
+    bb24: {
+        StorageDead(_5);
+        goto -> bb26;
+    }
+
+    bb25: {
+        StorageDead(_5);
+        goto -> bb26;
+    }
+
+    bb26: {
+        return;
+    }
+}

@@ -1,0 +1,65 @@
+// MIR for `__idl::<impl at programs\kvault\src\lib.rs:32:1: 32:11>::try_deserialize_unchecked` after PreCodegen
+
+fn __idl::<impl at programs\kvault\src\lib.rs:32:1: 32:11>::try_deserialize_unchecked(_1: &mut &[u8]) -> std::result::Result<__idl::IdlAccount, anchor_lang::error::Error> {
+    debug buf => _1;
+    let mut _0: std::result::Result<__private::__idl::IdlAccount, anchor_lang::error::Error>;
+    let mut _2: &[u8];
+    let _3: &[u8];
+    let _4: &[u8];
+    let mut _5: &[u8];
+    let mut _6: std::ops::RangeFrom<usize>;
+    let mut _7: std::result::Result<__private::__idl::IdlAccount, std::io::Error>;
+    let mut _8: &mut &[u8];
+    let mut _9: &mut &[u8];
+    let mut _10: {closure@programs\kvault\src\lib.rs:32:1: 32:11};
+    let mut _11: &[u8];
+    scope 1 {
+        debug data => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _11 = deref_copy (*_1);
+        _5 = &(*_11);
+        StorageLive(_6);
+        _6 = RangeFrom::<usize> { start: const 8_usize };
+        _4 = <[u8] as Index<RangeFrom<usize>>>::index(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = &(*_4);
+        _2 = &(*_3);
+        StorageDead(_3);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &mut _2;
+        _8 = &mut (*_9);
+        _7 = <__idl::IdlAccount as BorshDeserialize>::deserialize(move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = {closure@programs\kvault\src\lib.rs:32:1: 32:11};
+        _0 = std::result::Result::<__idl::IdlAccount, std::io::Error>::map_err::<anchor_lang::error::Error, {closure@programs\kvault\src\lib.rs:32:1: 32:11}>(move _7, move _10) -> [return: bb3, unwind: bb4];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_2);
+        StorageDead(_9);
+        return;
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

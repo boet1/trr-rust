@@ -1,0 +1,44 @@
+// MIR for `drift::place_and_make_spot_order` before PreCodegen
+
+fn drift::place_and_make_spot_order(_1: anchor_lang::context::Context<'_, '_, '_, '_, instructions::user::PlaceAndMake<'_>>, _2: order_params::OrderParams, _3: u32, _4: Option<keeper::SpotFulfillmentType>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug params => _2;
+    debug taker_order_id => _3;
+    debug fulfillment_type => _4;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _5: anchor_lang::context::Context<'_, '_, '_, '_, instructions::user::PlaceAndMake<'_>>;
+    let mut _6: state::order_params::OrderParams;
+    let mut _7: u32;
+    let mut _8: instructions::keeper::SpotFulfillmentType;
+    let mut _9: std::option::Option<instructions::keeper::SpotFulfillmentType>;
+    let mut _10: instructions::keeper::SpotFulfillmentType;
+
+    bb0: {
+        StorageLive(_5);
+        _5 = move _1;
+        StorageLive(_6);
+        _6 = _2;
+        StorageLive(_7);
+        _7 = _3;
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _4;
+        StorageLive(_10);
+        _10 = keeper::SpotFulfillmentType::Match;
+        _8 = Option::<keeper::SpotFulfillmentType>::unwrap_or(move _9, move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        StorageDead(_9);
+        _0 = instructions::user::handle_place_and_make_spot_order::<'_, '_>(move _5, move _6, move _7, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        return;
+    }
+}

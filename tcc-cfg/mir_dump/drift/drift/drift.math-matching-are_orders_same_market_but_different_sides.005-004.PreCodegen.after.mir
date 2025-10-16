@@ -1,0 +1,79 @@
+// MIR for `are_orders_same_market_but_different_sides` after PreCodegen
+
+fn are_orders_same_market_but_different_sides(_1: &Order, _2: &Order) -> bool {
+    debug maker_order => _1;
+    debug taker_order => _2;
+    let mut _0: bool;
+    let mut _3: bool;
+    let mut _4: u16;
+    let mut _5: u16;
+    let mut _6: bool;
+    let mut _7: &state::user::MarketType;
+    let mut _8: &state::user::MarketType;
+    let mut _9: &controller::position::PositionDirection;
+    let mut _10: &controller::position::PositionDirection;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).11: u16);
+        StorageLive(_5);
+        _5 = ((*_2).11: u16);
+        _3 = Eq(move _4, move _5);
+        switchInt(move _3) -> [0: bb5, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).14: state::user::MarketType);
+        StorageLive(_8);
+        _8 = &((*_2).14: state::user::MarketType);
+        _6 = <state::user::MarketType as PartialEq>::eq(move _7, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        _9 = &((*_1).17: controller::position::PositionDirection);
+        StorageLive(_10);
+        _10 = &((*_2).17: controller::position::PositionDirection);
+        _0 = <controller::position::PositionDirection as PartialEq>::ne(move _9, move _10) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb6;
+    }
+
+    bb6: {
+        _0 = const false;
+        goto -> bb8;
+    }
+
+    bb7: {
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_6);
+        StorageDead(_3);
+        return;
+    }
+}

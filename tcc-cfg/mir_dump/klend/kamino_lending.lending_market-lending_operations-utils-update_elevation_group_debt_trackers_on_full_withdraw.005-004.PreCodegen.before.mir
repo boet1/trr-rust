@@ -1,0 +1,104 @@
+// MIR for `update_elevation_group_debt_trackers_on_full_withdraw` before PreCodegen
+
+fn update_elevation_group_debt_trackers_on_full_withdraw(_1: u64, _2: u8, _3: &mut reserve::Reserve) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug previous_debt_in_elevation_group => _1;
+    debug elevation_group_id => _2;
+    debug deposit_reserve => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: ();
+    let mut _5: bool;
+    let mut _6: u8;
+    let _7: usize;
+    let mut _8: usize;
+    let mut _9: u8;
+    let mut _10: (usize, bool);
+    let mut _11: u64;
+    let mut _12: u64;
+    let _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
+    let mut _16: u64;
+    let _17: usize;
+    let mut _18: usize;
+    let mut _19: bool;
+    let mut _20: ();
+    scope 1 {
+        debug elevation_group_index => _7;
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _2;
+        _5 = Ne(move _6, const _);
+        switchInt(move _5) -> [0: bb6, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _2;
+        _8 = move _9 as usize (IntToInt);
+        StorageDead(_9);
+        _10 = CheckedSub(_8, const 1_usize);
+        assert(!move (_10.1: bool), "attempt to compute `{} - {}`, which would overflow", move _8, const 1_usize) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = move (_10.0: usize);
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _7;
+        _14 = Len(((*_3).12: [u64; 32]));
+        _15 = Lt(_13, _14);
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = ((*_3).12: [u64; 32])[_13];
+        StorageLive(_16);
+        _16 = _1;
+        _11 = core::num::<impl u64>::saturating_sub(move _12, move _16) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_16);
+        StorageDead(_12);
+        StorageLive(_17);
+        _17 = _7;
+        _18 = Len(((*_3).12: [u64; 32]));
+        _19 = Lt(_17, _18);
+        assert(move _19, "index out of bounds: the length is {} but the index is {}", move _18, _17) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        ((*_3).12: [u64; 32])[_17] = move _11;
+        StorageDead(_11);
+        StorageDead(_17);
+        StorageDead(_13);
+        _4 = const ();
+        StorageDead(_7);
+        goto -> bb7;
+    }
+
+    bb6: {
+        StorageDead(_6);
+        _4 = const ();
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_20);
+        _20 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _20);
+        StorageDead(_20);
+        return;
+    }
+}

@@ -1,0 +1,37 @@
+// MIR for `verify_and_decode_ed25519_msg::{closure#4}` before PreCodegen
+
+fn verify_and_decode_ed25519_msg::{closure#4}(_1: {closure@programs/drift/src/validation/sig_verification.rs:239:18: 239:21}, _2: std::io::Error) -> SignatureVerificationError {
+    let mut _0: validation::sig_verification::SignatureVerificationError;
+    let _3: ();
+    let mut _4: &str;
+    let _5: &str;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const "Invalid message encoding for is_delegate_signer = true";
+        _4 = &(*_5);
+        _3 = solana_program::log::sol_log(move _4) -> [return: bb1, unwind: bb3];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = SignatureVerificationError::InvalidMessageDataSize;
+        drop(_2) -> [return: bb2, unwind: bb4];
+    }
+
+    bb2: {
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

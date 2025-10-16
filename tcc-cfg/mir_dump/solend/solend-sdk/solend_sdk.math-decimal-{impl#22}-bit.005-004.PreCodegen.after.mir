@@ -1,0 +1,73 @@
+// MIR for `decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::bit` after PreCodegen
+
+fn decimal::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.1\src\uint.rs:587:3: 587:13>::bit(_1: &U192, _2: usize) -> bool {
+    debug self => _1;
+    debug index => _2;
+    let mut _0: bool;
+    let _3: &[u64; 3];
+    let mut _4: u64;
+    let mut _5: u64;
+    let _6: usize;
+    let mut _7: usize;
+    let mut _8: bool;
+    let mut _9: usize;
+    let mut _10: bool;
+    let mut _11: u64;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: bool;
+    let mut _15: bool;
+    scope 1 {
+        debug arr => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        _3 = &((*_1).0: [u64; 3]);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _2;
+        _8 = Eq(const 64_usize, const 0_usize);
+        assert(!move _8, "attempt to divide `{}` by zero", _7) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = Div(move _7, const 64_usize);
+        StorageDead(_7);
+        _9 = Len((*_3));
+        _10 = Lt(_6, _9);
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _6) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _5 = (*_3)[_6];
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _2;
+        _14 = Eq(const 64_usize, const 0_usize);
+        assert(!move _14, "attempt to calculate the remainder of `{}` with a divisor of zero", _13) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = Rem(move _13, const 64_usize);
+        StorageDead(_13);
+        _15 = Lt(_12, const 64_usize);
+        assert(move _15, "attempt to shift left by `{}`, which would overflow", _12) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _11 = Shl(const 1_u64, move _12);
+        StorageDead(_12);
+        _4 = BitAnd(move _5, move _11);
+        StorageDead(_11);
+        StorageDead(_5);
+        _0 = Ne(move _4, const 0_u64);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_6);
+        return;
+    }
+}

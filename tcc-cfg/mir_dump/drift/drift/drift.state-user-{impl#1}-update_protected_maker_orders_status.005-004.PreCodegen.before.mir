@@ -1,0 +1,67 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::update_protected_maker_orders_status` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::update_protected_maker_orders_status(_1: &mut User, _2: bool) -> std::result::Result<(), error::ErrorCode> {
+    debug self => _1;
+    debug protected_maker_orders => _2;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _3: ();
+    let mut _4: bool;
+    let _5: ();
+    let mut _6: &mut state::user::User;
+    let mut _7: state::user::UserStatus;
+    let _8: ();
+    let mut _9: &mut state::user::User;
+    let mut _10: state::user::UserStatus;
+    let mut _11: ();
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _2;
+        switchInt(move _4) -> [0: bb3, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &mut (*_1);
+        StorageLive(_7);
+        _7 = UserStatus::ProtectedMakerOrders;
+        _5 = User::add_user_status(move _6, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        goto -> bb5;
+    }
+
+    bb3: {
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &mut (*_1);
+        StorageLive(_10);
+        _10 = UserStatus::ProtectedMakerOrders;
+        _8 = User::remove_user_status(move _9, move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        _3 = const ();
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_11);
+        _11 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _11);
+        StorageDead(_11);
+        return;
+    }
+}

@@ -1,0 +1,23 @@
+// MIR for `burn_shares` after PreCodegen
+
+fn burn_shares(_1: &mut state::VaultState, _2: u64) -> () {
+    debug vault => _1;
+    debug amt => _2;
+    let mut _0: ();
+    let mut _3: u64;
+    let mut _4: (u64, bool);
+
+    bb0: {
+        StorageLive(_3);
+        _3 = _2;
+        _4 = CheckedSub(((*_1).10: u64), _3);
+        assert(!move (_4.1: bool), "attempt to compute `{} - {}`, which would overflow", ((*_1).10: u64), move _3) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        ((*_1).10: u64) = move (_4.0: u64);
+        StorageDead(_3);
+        _0 = const ();
+        return;
+    }
+}

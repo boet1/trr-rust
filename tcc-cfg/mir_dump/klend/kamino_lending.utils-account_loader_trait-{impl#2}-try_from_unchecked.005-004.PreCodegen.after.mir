@@ -1,0 +1,125 @@
+// MIR for `account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:50:1: 50:60>::try_from_unchecked` after PreCodegen
+
+fn account_loader_trait::<impl at programs\klend\src\utils\account_loader_trait.rs:50:1: 50:60>::try_from_unchecked(_1: &anchor_lang::prelude::Pubkey, _2: &anchor_lang::prelude::AccountInfo<'_>) -> std::result::Result<account_loader_trait::FatAccountLoader<'_, T>, anchor_lang::error::Error> {
+    debug _program_id => _1;
+    debug acc_info => _2;
+    let mut _0: std::result::Result<utils::account_loader_trait::FatAccountLoader<'_, T>, anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: &&anchor_lang::prelude::Pubkey;
+    let mut _6: &&anchor_lang::prelude::Pubkey;
+    let _7: &anchor_lang::prelude::Pubkey;
+    let _8: anchor_lang::prelude::Pubkey;
+    let mut _9: !;
+    let mut _10: anchor_lang::error::Error;
+    let mut _11: anchor_lang::error::Error;
+    let mut _12: anchor_lang::error::ErrorCode;
+    let mut _13: (anchor_lang::prelude::Pubkey, anchor_lang::prelude::Pubkey);
+    let mut _14: anchor_lang::prelude::Pubkey;
+    let mut _15: anchor_lang::prelude::Pubkey;
+    let mut _16: utils::account_loader_trait::FatAccountLoader<'_, T>;
+    let mut _17: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _18: &anchor_lang::prelude::Pubkey;
+    let mut _19: bool;
+
+    bb0: {
+        _19 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &((*_2).3: &anchor_lang::prelude::Pubkey);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = <T as anchor_lang::Owner>::owner() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _7 = &_8;
+        _6 = &_7;
+        _4 = <&anchor_lang::prelude::Pubkey as PartialEq>::ne(move _5, move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _4) -> [0: bb7, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = AccountOwnedByWrongProgram;
+        _19 = const true;
+        _11 = <anchor_lang::error::Error as From<anchor_lang::error::ErrorCode>>::from(move _12) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _18 = deref_copy ((*_2).3: &anchor_lang::prelude::Pubkey);
+        _14 = (*_18);
+        StorageLive(_15);
+        _15 = <T as anchor_lang::Owner>::owner() -> [return: bb5, unwind: bb12];
+    }
+
+    bb5: {
+        _13 = (move _14, move _15);
+        StorageDead(_15);
+        StorageDead(_14);
+        _19 = const false;
+        _10 = anchor_lang::error::Error::with_pubkeys(move _11, move _13) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        _19 = const false;
+        StorageDead(_11);
+        _0 = std::result::Result::<account_loader_trait::FatAccountLoader<'_, T>, anchor_lang::error::Error>::Err(move _10);
+        StorageDead(_10);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb7: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &(*_2);
+        _16 = account_loader_trait::FatAccountLoader::<'_, T>::new(move _17) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        _0 = std::result::Result::<account_loader_trait::FatAccountLoader<'_, T>, anchor_lang::error::Error>::Ok(move _16);
+        StorageDead(_16);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11 (cleanup): {
+        drop(_11) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        switchInt(_19) -> [0: bb10, otherwise: bb11];
+    }
+}

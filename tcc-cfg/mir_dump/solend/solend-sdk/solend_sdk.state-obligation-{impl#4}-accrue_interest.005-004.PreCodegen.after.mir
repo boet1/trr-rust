@@ -1,0 +1,351 @@
+// MIR for `obligation::<impl at token-lending\sdk\src\state\obligation.rs:368:1: 368:25>::accrue_interest` after PreCodegen
+
+fn obligation::<impl at token-lending\sdk\src\state\obligation.rs:368:1: 368:25>::accrue_interest(_1: &mut obligation::ObligationLiquidity, _2: decimal::Decimal) -> Result<(), ProgramError> {
+    debug self => _1;
+    debug cumulative_borrow_rate_wads => _2;
+    let mut _0: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let _3: ();
+    let mut _4: std::cmp::Ordering;
+    let mut _5: &math::decimal::Decimal;
+    let mut _6: &math::decimal::Decimal;
+    let _7: &math::decimal::Decimal;
+    let mut _8: i8;
+    let mut _9: !;
+    let _10: ();
+    let mut _11: &str;
+    let _12: &str;
+    let mut _13: solana_program::program_error::ProgramError;
+    let mut _14: error::LendingError;
+    let _15: math::rate::Rate;
+    let mut _16: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::rate::Rate>;
+    let mut _17: std::result::Result<math::rate::Rate, solana_program::program_error::ProgramError>;
+    let mut _18: math::decimal::Decimal;
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::decimal::Decimal>;
+    let mut _20: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _21: math::decimal::Decimal;
+    let mut _22: math::decimal::Decimal;
+    let mut _23: isize;
+    let _24: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _25: !;
+    let mut _26: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _27: math::decimal::Decimal;
+    let mut _28: isize;
+    let _29: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _30: !;
+    let mut _31: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _32: math::rate::Rate;
+    let mut _33: math::decimal::Decimal;
+    let mut _34: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, math::decimal::Decimal>;
+    let mut _35: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _36: math::decimal::Decimal;
+    let mut _37: math::rate::Rate;
+    let mut _38: isize;
+    let mut _40: !;
+    let mut _41: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _43: math::decimal::Decimal;
+    let mut _44: ();
+    let mut _45: bool;
+    let mut _46: isize;
+    let mut _47: isize;
+    let mut _48: isize;
+    let mut _49: isize;
+    let mut _50: isize;
+    let mut _51: isize;
+    let mut _52: isize;
+    let mut _53: isize;
+    let mut _54: isize;
+    let mut _55: isize;
+    let mut _56: isize;
+    let mut _57: isize;
+    let mut _58: isize;
+    let mut _59: isize;
+    let mut _60: isize;
+    scope 1 {
+        debug compounded_interest_rate => _15;
+        let _39: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+        let _42: math::decimal::Decimal;
+        scope 10 {
+            debug residual => _39;
+            scope 11 {
+            }
+        }
+        scope 12 {
+            debug val => _42;
+            scope 13 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _24;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _27;
+        scope 5 {
+        }
+    }
+    scope 6 {
+        debug residual => _29;
+        scope 7 {
+        }
+    }
+    scope 8 {
+        debug val => _32;
+        scope 9 {
+        }
+    }
+
+    bb0: {
+        _45 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &_2;
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).1: math::decimal::Decimal);
+        _6 = &(*_7);
+        _4 = <decimal::Decimal as Ord>::cmp(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _8 = discriminant(_4);
+        switchInt(move _8) -> [255: bb4, 0: bb7, 1: bb2, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _2;
+        StorageLive(_22);
+        _22 = ((*_1).1: math::decimal::Decimal);
+        _20 = <decimal::Decimal as common::TryDiv<decimal::Decimal>>::try_div(move _21, move _22) -> [return: bb8, unwind continue];
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = const "Interest rate cannot be negative";
+        _11 = &(*_12);
+        _10 = solana_program::log::sol_log(move _11) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_11);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = LendingError::NegativeInterestRate;
+        _13 = <LendingError as Into<ProgramError>>::into(move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        _0 = Result::<(), ProgramError>::Err(move _13);
+        StorageDead(_13);
+        goto -> bb26;
+    }
+
+    bb7: {
+        _3 = const ();
+        goto -> bb23;
+    }
+
+    bb8: {
+        StorageDead(_22);
+        StorageDead(_21);
+        _19 = <Result<decimal::Decimal, ProgramError> as Try>::branch(move _20) -> [return: bb9, unwind: bb28];
+    }
+
+    bb9: {
+        _45 = const true;
+        StorageDead(_20);
+        _23 = discriminant(_19);
+        switchInt(move _23) -> [0: bb10, 1: bb11, otherwise: bb3];
+    }
+
+    bb10: {
+        StorageLive(_27);
+        _27 = ((_19 as Continue).0: math::decimal::Decimal);
+        _18 = _27;
+        StorageDead(_27);
+        _17 = <decimal::Decimal as TryInto<rate::Rate>>::try_into(move _18) -> [return: bb13, unwind: bb31];
+    }
+
+    bb11: {
+        StorageLive(_24);
+        _24 = move ((_19 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_26);
+        _26 = move _24;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _26) -> [return: bb12, unwind: bb31];
+    }
+
+    bb12: {
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageDead(_18);
+        StorageDead(_17);
+        goto -> bb24;
+    }
+
+    bb13: {
+        StorageDead(_18);
+        _16 = <Result<rate::Rate, ProgramError> as Try>::branch(move _17) -> [return: bb14, unwind: bb31];
+    }
+
+    bb14: {
+        StorageDead(_17);
+        _28 = discriminant(_16);
+        switchInt(move _28) -> [0: bb15, 1: bb16, otherwise: bb3];
+    }
+
+    bb15: {
+        StorageLive(_32);
+        _32 = ((_16 as Continue).0: math::rate::Rate);
+        _15 = _32;
+        StorageDead(_32);
+        _46 = discriminant(_16);
+        _48 = discriminant(_19);
+        _45 = const false;
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = ((*_1).2: math::decimal::Decimal);
+        StorageLive(_37);
+        _37 = _15;
+        _35 = <decimal::Decimal as common::TryMul<rate::Rate>>::try_mul(move _36, move _37) -> [return: bb18, unwind continue];
+    }
+
+    bb16: {
+        StorageLive(_29);
+        _29 = move ((_16 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_31);
+        _31 = move _29;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _31) -> [return: bb17, unwind: bb30];
+    }
+
+    bb17: {
+        StorageDead(_31);
+        StorageDead(_29);
+        _54 = discriminant(_16);
+        goto -> bb24;
+    }
+
+    bb18: {
+        StorageDead(_37);
+        StorageDead(_36);
+        _34 = <Result<decimal::Decimal, ProgramError> as Try>::branch(move _35) -> [return: bb19, unwind: bb28];
+    }
+
+    bb19: {
+        StorageDead(_35);
+        _38 = discriminant(_34);
+        switchInt(move _38) -> [0: bb20, 1: bb21, otherwise: bb3];
+    }
+
+    bb20: {
+        StorageLive(_42);
+        _42 = ((_34 as Continue).0: math::decimal::Decimal);
+        _33 = _42;
+        StorageDead(_42);
+        ((*_1).2: math::decimal::Decimal) = move _33;
+        StorageDead(_33);
+        _50 = discriminant(_34);
+        StorageDead(_34);
+        StorageLive(_43);
+        _43 = _2;
+        ((*_1).1: math::decimal::Decimal) = move _43;
+        StorageDead(_43);
+        _3 = const ();
+        StorageDead(_15);
+        goto -> bb23;
+    }
+
+    bb21: {
+        StorageLive(_39);
+        _39 = move ((_34 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_41);
+        _41 = move _39;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _41) -> [return: bb22, unwind: bb29];
+    }
+
+    bb22: {
+        StorageDead(_41);
+        StorageDead(_39);
+        StorageDead(_33);
+        _52 = discriminant(_34);
+        StorageDead(_34);
+        goto -> bb25;
+    }
+
+    bb23: {
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_44);
+        _44 = ();
+        _0 = Result::<(), ProgramError>::Ok(move _44);
+        StorageDead(_44);
+        goto -> bb27;
+    }
+
+    bb24: {
+        _56 = discriminant(_19);
+        _45 = const false;
+        StorageDead(_19);
+        StorageDead(_16);
+        goto -> bb25;
+    }
+
+    bb25: {
+        StorageDead(_15);
+        goto -> bb26;
+    }
+
+    bb26: {
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb27;
+    }
+
+    bb27: {
+        return;
+    }
+
+    bb28 (cleanup): {
+        resume;
+    }
+
+    bb29 (cleanup): {
+        _58 = discriminant(_34);
+        goto -> bb28;
+    }
+
+    bb30 (cleanup): {
+        _59 = discriminant(_16);
+        goto -> bb31;
+    }
+
+    bb31 (cleanup): {
+        _60 = discriminant(_19);
+        goto -> bb28;
+    }
+}

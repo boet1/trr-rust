@@ -1,0 +1,199 @@
+// MIR for `uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::full_shl` after PreCodegen
+
+fn uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::full_shl(_1: uint_types::U128, _2: u32) -> [u64; 3] {
+    debug self => _1;
+    debug shift => _2;
+    let mut _0: [u64; 3];
+    let _3: ();
+    let mut _4: bool;
+    let _5: ();
+    let mut _6: bool;
+    let mut _7: u32;
+    let mut _8: u32;
+    let mut _9: !;
+    let mut _10: [u64; 3];
+    let mut _12: u64;
+    let _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
+    let mut _16: u32;
+    let mut _17: bool;
+    let mut _19: utils::fraction::uint_types::U128;
+    let mut _20: u32;
+    let mut _21: u32;
+    let mut _22: u32;
+    let mut _23: (u32, bool);
+    let mut _24: u64;
+    let _25: usize;
+    let mut _26: usize;
+    let mut _27: bool;
+    let _28: ();
+    let mut _29: &mut [u64];
+    let mut _30: &mut [u64];
+    let mut _31: &mut [u64; 3];
+    let mut _32: std::ops::RangeFrom<usize>;
+    let mut _33: &[u64];
+    let _34: &[u64];
+    let _35: &[u64];
+    let mut _36: &[u64; 2];
+    let mut _37: std::ops::RangeFull;
+    scope 1 {
+        debug u => _10;
+        let _11: u64;
+        scope 2 {
+            debug u_lo => _11;
+            let _18: utils::fraction::uint_types::U128;
+            scope 3 {
+                debug u_hi => _18;
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = const true;
+        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _2;
+        StorageLive(_8);
+        _8 = const _ as u32 (IntToInt);
+        _6 = Lt(move _7, move _8);
+        switchInt(move _6) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_7);
+        _5 = const ();
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        goto -> bb5;
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_9);
+        _9 = panic(const "assertion failed: shift < Self::WORD_BITS as u32") -> unwind continue;
+    }
+
+    bb4: {
+        _3 = const ();
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_10);
+        _10 = [const 0_u64; 3];
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = const 0_usize;
+        _14 = Len((_1.0: [u64; 2]));
+        _15 = Lt(_13, _14);
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _12 = (_1.0: [u64; 2])[_13];
+        StorageLive(_16);
+        _16 = _2;
+        _17 = Lt(_16, const 64_u32);
+        assert(move _17, "attempt to shift left by `{}`, which would overflow", _16) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _11 = Shl(move _12, move _16);
+        StorageDead(_16);
+        StorageDead(_12);
+        StorageDead(_13);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _1;
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = const _ as u32 (IntToInt);
+        StorageLive(_22);
+        _22 = _2;
+        _23 = CheckedSub(_21, _22);
+        assert(!move (_23.1: bool), "attempt to compute `{} - {}`, which would overflow", move _21, move _22) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _20 = move (_23.0: u32);
+        StorageDead(_22);
+        StorageDead(_21);
+        _18 = <uint_types::U128 as Shr<u32>>::shr(move _19, move _20) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageLive(_24);
+        _24 = _11;
+        StorageLive(_25);
+        _25 = const 0_usize;
+        _26 = Len(_10);
+        _27 = Lt(_25, _26);
+        assert(move _27, "index out of bounds: the length is {} but the index is {}", move _26, _25) -> [success: bb10, unwind continue];
+    }
+
+    bb10: {
+        _10[_25] = move _24;
+        StorageDead(_24);
+        StorageDead(_25);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = &mut _10;
+        StorageLive(_32);
+        _32 = RangeFrom::<usize> { start: const 1_usize };
+        _30 = <[u64; 3] as IndexMut<RangeFrom<usize>>>::index_mut(move _31, move _32) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        _29 = &mut (*_30);
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = &(_18.0: [u64; 2]);
+        StorageLive(_37);
+        _37 = RangeFull;
+        _35 = <[u64; 2] as Index<RangeFull>>::index(move _36, move _37) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_37);
+        StorageDead(_36);
+        _34 = &(*_35);
+        _33 = &(*_34);
+        _28 = core::slice::<impl [u64]>::copy_from_slice(move _29, move _33) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_33);
+        StorageDead(_29);
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_30);
+        StorageDead(_28);
+        _0 = _10;
+        StorageDead(_18);
+        StorageDead(_11);
+        StorageDead(_10);
+        return;
+    }
+}

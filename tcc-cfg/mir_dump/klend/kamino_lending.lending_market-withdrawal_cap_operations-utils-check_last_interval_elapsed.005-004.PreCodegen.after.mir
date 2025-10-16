@@ -1,0 +1,73 @@
+// MIR for `check_last_interval_elapsed` after PreCodegen
+
+fn check_last_interval_elapsed(_1: &mut reserve::WithdrawalCaps, _2: u64) -> std::result::Result<bool, LendingError> {
+    debug caps => _1;
+    debug curr_timestamp => _2;
+    let mut _0: std::result::Result<bool, LendingError>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: !;
+    let mut _8: LendingError;
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: u64;
+    let mut _12: u64;
+    let mut _13: u64;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).2: u64);
+        StorageLive(_6);
+        _6 = _2;
+        _4 = Gt(move _5, move _6);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_8);
+        _8 = LendingError::LastTimestampGreaterThanCurrent;
+        _0 = std::result::Result::<bool, LendingError>::Err(move _8);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb4;
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = ((*_1).3: u64);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _2;
+        StorageLive(_13);
+        _13 = ((*_1).2: u64);
+        _11 = core::num::<impl u64>::saturating_sub(move _12, move _13) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_13);
+        StorageDead(_12);
+        _9 = Le(move _10, move _11);
+        StorageDead(_11);
+        StorageDead(_10);
+        _0 = std::result::Result::<bool, LendingError>::Ok(move _9);
+        StorageDead(_9);
+        goto -> bb4;
+    }
+
+    bb4: {
+        return;
+    }
+}

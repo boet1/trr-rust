@@ -1,0 +1,155 @@
+// MIR for `calculate_utilization` before PreCodegen
+
+fn calculate_utilization(_1: u128, _2: u128) -> std::result::Result<u128, error::ErrorCode> {
+    debug deposit_token_amount => _1;
+    debug borrow_token_amount => _2;
+    let mut _0: std::result::Result<u128, error::ErrorCode>;
+    let _3: u128;
+    let mut _4: std::option::Option<u128>;
+    let mut _5: u128;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _7: std::result::Result<u128, error::ErrorCode>;
+    let mut _8: u128;
+    let mut _9: isize;
+    let _10: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _11: !;
+    let mut _12: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _13: u128;
+    let mut _14: u128;
+    let mut _15: u128;
+    let mut _16: bool;
+    let mut _17: u128;
+    let mut _18: bool;
+    let mut _19: u128;
+    let mut _20: u128;
+    scope 1 {
+        debug utilization => _3;
+    }
+    scope 2 {
+        debug residual => _10;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _13;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _2;
+        _7 = <u128 as SafeMath>::safe_mul(move _8, const _) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_8);
+        _6 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _9 = discriminant(_6);
+        switchInt(move _9) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_13);
+        _13 = ((_6 as Continue).0: u128);
+        _5 = _13;
+        StorageDead(_13);
+        StorageLive(_14);
+        _14 = _1;
+        _4 = core::num::<impl u128>::checked_div(move _5, move _14) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_10);
+        _10 = ((_6 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_12);
+        _12 = _10;
+        _0 = <std::result::Result<u128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _12) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_6);
+        StorageDead(_3);
+        goto -> bb15;
+    }
+
+    bb7: {
+        StorageDead(_14);
+        StorageDead(_5);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _1;
+        _16 = Eq(move _17, const 0_u128);
+        switchInt(move _16) -> [0: bb11, otherwise: bb8];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = _2;
+        _18 = Eq(move _19, const 0_u128);
+        switchInt(move _18) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        _15 = const 0_u128;
+        goto -> bb13;
+    }
+
+    bb10: {
+        StorageDead(_19);
+        goto -> bb12;
+    }
+
+    bb11: {
+        StorageDead(_17);
+        goto -> bb12;
+    }
+
+    bb12: {
+        _15 = const _;
+        goto -> bb13;
+    }
+
+    bb13: {
+        StorageDead(_18);
+        StorageDead(_16);
+        _3 = Option::<u128>::unwrap_or(move _4, move _15) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_15);
+        StorageDead(_4);
+        StorageDead(_6);
+        StorageLive(_20);
+        _20 = _3;
+        _0 = std::result::Result::<u128, error::ErrorCode>::Ok(move _20);
+        StorageDead(_20);
+        StorageDead(_3);
+        goto -> bb15;
+    }
+
+    bb15: {
+        return;
+    }
+}

@@ -1,0 +1,56 @@
+// MIR for `get_signed_token_amount` before PreCodegen
+
+fn get_signed_token_amount(_1: u128, _2: &SpotBalanceType) -> std::result::Result<i128, error::ErrorCode> {
+    debug token_amount => _1;
+    debug balance_type => _2;
+    let mut _0: std::result::Result<i128, error::ErrorCode>;
+    let mut _3: isize;
+    let mut _4: u128;
+    let mut _5: std::result::Result<i128, error::ErrorCode>;
+    let mut _6: u128;
+    let mut _7: {closure@programs/drift/src/math/spot_balance.rs:72:18: 72:32};
+
+    bb0: {
+        _3 = discriminant((*_2));
+        switchInt(move _3) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _1;
+        _5 = <u128 as Cast>::cast::<i128>(move _6) -> [return: bb5, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_4);
+        _4 = _1;
+        _0 = <u128 as Cast>::cast::<i128>(move _4) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_4);
+        goto -> bb7;
+    }
+
+    bb5: {
+        StorageDead(_6);
+        StorageLive(_7);
+        _7 = {closure@programs/drift/src/math/spot_balance.rs:72:18: 72:32};
+        _0 = std::result::Result::<i128, error::ErrorCode>::map::<i128, {closure@programs/drift/src/math/spot_balance.rs:72:18: 72:32}>(move _5, move _7) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_7);
+        StorageDead(_5);
+        goto -> bb7;
+    }
+
+    bb7: {
+        return;
+    }
+}

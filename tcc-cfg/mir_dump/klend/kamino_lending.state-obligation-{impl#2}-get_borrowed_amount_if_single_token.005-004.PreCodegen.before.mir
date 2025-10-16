@@ -1,0 +1,91 @@
+// MIR for `obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::get_borrowed_amount_if_single_token` before PreCodegen
+
+fn obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::get_borrowed_amount_if_single_token(_1: &obligation::Obligation) -> std::option::Option<u64> {
+    debug self => _1;
+    let mut _0: std::option::Option<u64>;
+    let mut _2: bool;
+    let mut _3: usize;
+    let mut _4: &state::obligation::Obligation;
+    let mut _5: u64;
+    let mut _6: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _7: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _8: u128;
+    let mut _9: std::iter::Map<std::slice::Iter<'_, state::obligation::ObligationLiquidity>, {closure@programs\klend\src\state\obligation.rs:480:61: 480:64}>;
+    let mut _10: std::slice::Iter<'_, state::obligation::ObligationLiquidity>;
+    let mut _11: &[state::obligation::ObligationLiquidity];
+    let mut _12: &[state::obligation::ObligationLiquidity; 5];
+    let mut _13: {closure@programs\klend\src\state\obligation.rs:480:61: 480:64};
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = obligation::Obligation::active_borrows_count(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _2 = Gt(move _3, const 1_usize);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        _0 = std::option::Option::<u64>::None;
+        goto -> bb9;
+    }
+
+    bb3: {
+        StorageDead(_3);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &((*_1).7: [state::obligation::ObligationLiquidity; 5]);
+        _11 = move _12 as &[state::obligation::ObligationLiquidity] (PointerCoercion(Unsize));
+        StorageDead(_12);
+        _10 = core::slice::<impl [obligation::ObligationLiquidity]>::iter(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageLive(_13);
+        _13 = {closure@programs\klend\src\state\obligation.rs:480:61: 480:64};
+        _9 = <std::slice::Iter<'_, obligation::ObligationLiquidity> as Iterator>::map::<u128, {closure@programs\klend\src\state\obligation.rs:480:61: 480:64}>(move _10, move _13) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        StorageDead(_10);
+        _8 = <std::iter::Map<std::slice::Iter<'_, obligation::ObligationLiquidity>, {closure@programs\klend\src\state\obligation.rs:480:61: 480:64}> as Iterator>::sum::<u128>(move _9) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_9);
+        _7 = FixedU128::<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>::from_bits(move _8) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        _6 = &_7;
+        StorageDead(_8);
+        _5 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_ceil::<u64>(move _6) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_6);
+        _0 = std::option::Option::<u64>::Some(move _5);
+        StorageDead(_5);
+        StorageDead(_7);
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_2);
+        return;
+    }
+}

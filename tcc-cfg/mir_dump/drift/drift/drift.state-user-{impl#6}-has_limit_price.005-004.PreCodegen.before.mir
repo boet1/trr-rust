@@ -1,0 +1,138 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::has_limit_price` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::has_limit_price(_1: Order, _2: u64) -> std::result::Result<bool, error::ErrorCode> {
+    debug self => _1;
+    debug slot => _2;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let mut _3: bool;
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: bool;
+    let mut _7: state::user::Order;
+    let mut _8: bool;
+    let mut _9: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _10: std::result::Result<bool, error::ErrorCode>;
+    let mut _11: u64;
+    let mut _12: u8;
+    let mut _13: u64;
+    let mut _14: isize;
+    let _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _18: bool;
+    scope 1 {
+        debug residual => _15;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _18;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = (_1.1: u64);
+        _4 = Gt(move _5, const 0_u64);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        goto -> bb4;
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _1;
+        _6 = Order::has_oracle_price_offset(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        switchInt(move _6) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        _3 = const true;
+        goto -> bb12;
+    }
+
+    bb5: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = (_1.0: u64);
+        StorageLive(_12);
+        _12 = (_1.22: u8);
+        StorageLive(_13);
+        _13 = _2;
+        _10 = is_auction_complete(move _11, move _12, move _13) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_11);
+        _9 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _10) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_10);
+        _14 = discriminant(_9);
+        switchInt(move _14) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_18);
+        _18 = ((_9 as Continue).0: bool);
+        _8 = _18;
+        StorageDead(_18);
+        _3 = Not(move _8);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb12;
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_15);
+        _15 = ((_9 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_17);
+        _17 = _15;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _17) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb13;
+    }
+
+    bb12: {
+        StorageDead(_6);
+        StorageDead(_4);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _3);
+        StorageDead(_3);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+}

@@ -1,0 +1,96 @@
+// MIR for `slice_to_array_padded` after PreCodegen
+
+fn slice_to_array_padded(_1: &[u8]) -> [u8; 40] {
+    debug slice => _1;
+    let mut _0: [u8; 40];
+    let mut _2: [u8; 40];
+    let mut _4: usize;
+    let mut _5: &[u8];
+    let _6: ();
+    let mut _7: &mut [u8];
+    let mut _8: &mut [u8];
+    let mut _9: &mut [u8; 40];
+    let mut _10: std::ops::RangeTo<usize>;
+    let mut _11: usize;
+    let mut _12: &[u8];
+    let _13: &[u8];
+    let _14: &[u8];
+    let mut _15: &[u8];
+    let mut _16: std::ops::RangeTo<usize>;
+    let mut _17: usize;
+    scope 1 {
+        debug array => _2;
+        let _3: usize;
+        scope 2 {
+            debug len => _3;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = [const 0_u8; 40];
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = core::slice::<impl [u8]>::len(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _3 = <usize as Ord>::min(move _4, const 40_usize) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &mut _2;
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _3;
+        _10 = RangeTo::<usize> { end: move _11 };
+        StorageDead(_11);
+        _8 = <[u8; 40] as IndexMut<RangeTo<usize>>>::index_mut(move _9, move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _7 = &mut (*_8);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &(*_1);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _3;
+        _16 = RangeTo::<usize> { end: move _17 };
+        StorageDead(_17);
+        _14 = <[u8] as Index<RangeTo<usize>>>::index(move _15, move _16) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_16);
+        StorageDead(_15);
+        _13 = &(*_14);
+        _12 = &(*_13);
+        _6 = core::slice::<impl [u8]>::copy_from_slice(move _7, move _12) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_12);
+        StorageDead(_7);
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_8);
+        StorageDead(_6);
+        _0 = _2;
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}

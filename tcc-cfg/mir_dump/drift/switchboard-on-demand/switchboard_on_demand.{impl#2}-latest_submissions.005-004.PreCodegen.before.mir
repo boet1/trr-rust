@@ -1,0 +1,94 @@
+// MIR for `<impl at programs/switchboard-on-demand/src/lib.rs:181:1: 181:25>::latest_submissions` before PreCodegen
+
+fn <impl at programs/switchboard-on-demand/src/lib.rs:181:1: 181:25>::latest_submissions(_1: &PullFeedAccountData) -> Vec<OracleSubmission> {
+    debug self => _1;
+    let mut _0: std::vec::Vec<OracleSubmission>;
+    let _2: u64;
+    let mut _3: std::option::Option<u64>;
+    let mut _4: std::iter::Map<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:225:18: 225:21}>;
+    let mut _5: std::slice::Iter<'_, OracleSubmission>;
+    let mut _6: &[OracleSubmission];
+    let mut _7: &[OracleSubmission; 32];
+    let mut _8: {closure@programs/switchboard-on-demand/src/lib.rs:225:18: 225:21};
+    let mut _9: std::iter::Cloned<std::iter::Filter<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33}>>;
+    let mut _10: std::iter::Filter<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33}>;
+    let mut _11: std::slice::Iter<'_, OracleSubmission>;
+    let mut _12: &[OracleSubmission];
+    let mut _13: &[OracleSubmission; 32];
+    let mut _14: {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33};
+    let mut _15: &u64;
+    scope 1 {
+        debug max_landed_at => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &((*_1).0: [OracleSubmission; 32]);
+        _6 = move _7 as &[OracleSubmission] (PointerCoercion(Unsize));
+        StorageDead(_7);
+        _5 = core::slice::<impl [OracleSubmission]>::iter(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_8);
+        _8 = {closure@programs/switchboard-on-demand/src/lib.rs:225:18: 225:21};
+        _4 = <std::slice::Iter<'_, OracleSubmission> as Iterator>::map::<u64, {closure@programs/switchboard-on-demand/src/lib.rs:225:18: 225:21}>(move _5, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_5);
+        _3 = <Map<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:225:18: 225:21}> as Iterator>::max(move _4) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        _2 = Option::<u64>::unwrap_or(move _3, const 0_u64) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_3);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &((*_1).0: [OracleSubmission; 32]);
+        _12 = move _13 as &[OracleSubmission] (PointerCoercion(Unsize));
+        StorageDead(_13);
+        _11 = core::slice::<impl [OracleSubmission]>::iter(move _12) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_12);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &_2;
+        _14 = {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33} { max_landed_at: move _15 };
+        StorageDead(_15);
+        _10 = <std::slice::Iter<'_, OracleSubmission> as Iterator>::filter::<{closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33}>(move _11, move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageDead(_11);
+        _9 = <Filter<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33}> as Iterator>::cloned::<'_, OracleSubmission>(move _10) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_10);
+        _0 = <Cloned<Filter<std::slice::Iter<'_, OracleSubmission>, {closure@programs/switchboard-on-demand/src/lib.rs:230:21: 230:33}>> as Iterator>::collect::<Vec<OracleSubmission>>(move _9) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_9);
+        StorageDead(_2);
+        return;
+    }
+}

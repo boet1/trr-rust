@@ -1,0 +1,1544 @@
+// MIR for `admin::handle_init_user_fuel` after PreCodegen
+
+fn admin::handle_init_user_fuel(_1: anchor_lang::context::Context<'_, '_, '_, '_, admin::InitUserFuel<'_>>, _2: Option<i32>, _3: Option<u32>, _4: Option<u32>, _5: Option<u32>, _6: Option<u32>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    debug fuel_bonus_deposits => _2;
+    debug fuel_bonus_borrows => _3;
+    debug fuel_bonus_taker => _4;
+    debug fuel_bonus_maker => _5;
+    debug fuel_bonus_insurance => _6;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _7: anchor_lang::prelude::Clock;
+    let mut _8: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, anchor_lang::prelude::Clock>;
+    let mut _9: std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError>;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let _14: anchor_lang::prelude::Clock;
+    let mut _16: i64;
+    let mut _18: std::cell::RefMut<'_, state::user::User>;
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::user::User>>;
+    let mut _20: std::result::Result<std::cell::RefMut<'_, state::user::User>, error::ErrorCode>;
+    let mut _21: std::result::Result<std::cell::RefMut<'_, state::user::User>, anchor_lang::error::Error>;
+    let mut _22: &anchor_lang::prelude::AccountLoader<'_, state::user::User>;
+    let mut _23: {closure@programs/drift/src/macros.rs:58:44: 58:47};
+    let mut _24: isize;
+    let mut _26: !;
+    let mut _27: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _30: std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _31: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::user::UserStats>>;
+    let mut _32: std::result::Result<std::cell::RefMut<'_, state::user::UserStats>, error::ErrorCode>;
+    let mut _33: std::result::Result<std::cell::RefMut<'_, state::user::UserStats>, anchor_lang::error::Error>;
+    let mut _34: &anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>;
+    let mut _35: {closure@programs/drift/src/macros.rs:58:44: 58:47};
+    let mut _36: isize;
+    let mut _38: !;
+    let mut _39: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _41: ();
+    let mut _42: isize;
+    let mut _45: bool;
+    let mut _46: i32;
+    let mut _47: u32;
+    let mut _48: &state::user::UserStats;
+    let mut _49: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _50: u32;
+    let mut _51: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u32>;
+    let mut _52: std::result::Result<u32, error::ErrorCode>;
+    let mut _53: i32;
+    let mut _54: isize;
+    let mut _56: !;
+    let mut _57: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _59: u32;
+    let mut _60: &state::user::UserStats;
+    let mut _61: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _62: u32;
+    let mut _63: i32;
+    let _64: ();
+    let mut _65: &str;
+    let _66: &str;
+    let mut _67: &std::string::String;
+    let _68: &std::string::String;
+    let _69: std::string::String;
+    let mut _71: std::fmt::Arguments<'_>;
+    let mut _72: &[&str];
+    let mut _73: &[&str; 2];
+    let _74: &[&str; 2];
+    let _75: [&str; 2];
+    let mut _76: &[core::fmt::rt::Argument<'_>];
+    let mut _77: &[core::fmt::rt::Argument<'_>; 2];
+    let _78: &[core::fmt::rt::Argument<'_>; 2];
+    let _79: [core::fmt::rt::Argument<'_>; 2];
+    let mut _80: core::fmt::rt::Argument<'_>;
+    let mut _81: &u32;
+    let _82: &u32;
+    let _83: &state::user::UserStats;
+    let mut _84: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _85: core::fmt::rt::Argument<'_>;
+    let mut _86: &u32;
+    let _87: &u32;
+    let mut _88: u32;
+    let mut _89: &mut state::user::UserStats;
+    let mut _90: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let _91: ();
+    let mut _92: isize;
+    let _94: ();
+    let mut _95: &str;
+    let _96: &str;
+    let mut _97: &std::string::String;
+    let _98: &std::string::String;
+    let _99: std::string::String;
+    let mut _101: std::fmt::Arguments<'_>;
+    let mut _102: &[&str];
+    let mut _103: &[&str; 2];
+    let _104: &[&str; 2];
+    let _105: [&str; 2];
+    let mut _106: &[core::fmt::rt::Argument<'_>];
+    let mut _107: &[core::fmt::rt::Argument<'_>; 2];
+    let _108: &[core::fmt::rt::Argument<'_>; 2];
+    let _109: [core::fmt::rt::Argument<'_>; 2];
+    let mut _110: core::fmt::rt::Argument<'_>;
+    let mut _111: &u32;
+    let _112: &u32;
+    let _113: &state::user::UserStats;
+    let mut _114: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _115: core::fmt::rt::Argument<'_>;
+    let mut _116: &u32;
+    let _117: &u32;
+    let _118: u32;
+    let mut _119: u32;
+    let mut _120: &state::user::UserStats;
+    let mut _121: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _122: u32;
+    let mut _123: u32;
+    let mut _124: u32;
+    let mut _125: &state::user::UserStats;
+    let mut _126: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _127: u32;
+    let mut _128: &mut state::user::UserStats;
+    let mut _129: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let _130: ();
+    let mut _131: isize;
+    let _133: ();
+    let mut _134: &str;
+    let _135: &str;
+    let mut _136: &std::string::String;
+    let _137: &std::string::String;
+    let _138: std::string::String;
+    let mut _140: std::fmt::Arguments<'_>;
+    let mut _141: &[&str];
+    let mut _142: &[&str; 2];
+    let _143: &[&str; 2];
+    let _144: [&str; 2];
+    let mut _145: &[core::fmt::rt::Argument<'_>];
+    let mut _146: &[core::fmt::rt::Argument<'_>; 2];
+    let _147: &[core::fmt::rt::Argument<'_>; 2];
+    let _148: [core::fmt::rt::Argument<'_>; 2];
+    let mut _149: core::fmt::rt::Argument<'_>;
+    let mut _150: &u32;
+    let _151: &u32;
+    let _152: &state::user::UserStats;
+    let mut _153: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _154: core::fmt::rt::Argument<'_>;
+    let mut _155: &u32;
+    let _156: &u32;
+    let _157: u32;
+    let mut _158: u32;
+    let mut _159: &state::user::UserStats;
+    let mut _160: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _161: u32;
+    let mut _162: u32;
+    let mut _163: u32;
+    let mut _164: &state::user::UserStats;
+    let mut _165: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _166: u32;
+    let mut _167: &mut state::user::UserStats;
+    let mut _168: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let _169: ();
+    let mut _170: isize;
+    let _172: ();
+    let mut _173: &str;
+    let _174: &str;
+    let mut _175: &std::string::String;
+    let _176: &std::string::String;
+    let _177: std::string::String;
+    let mut _179: std::fmt::Arguments<'_>;
+    let mut _180: &[&str];
+    let mut _181: &[&str; 2];
+    let _182: &[&str; 2];
+    let _183: [&str; 2];
+    let mut _184: &[core::fmt::rt::Argument<'_>];
+    let mut _185: &[core::fmt::rt::Argument<'_>; 2];
+    let _186: &[core::fmt::rt::Argument<'_>; 2];
+    let _187: [core::fmt::rt::Argument<'_>; 2];
+    let mut _188: core::fmt::rt::Argument<'_>;
+    let mut _189: &u32;
+    let _190: &u32;
+    let _191: &state::user::UserStats;
+    let mut _192: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _193: core::fmt::rt::Argument<'_>;
+    let mut _194: &u32;
+    let _195: &u32;
+    let _196: u32;
+    let mut _197: u32;
+    let mut _198: &state::user::UserStats;
+    let mut _199: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _200: u32;
+    let mut _201: u32;
+    let mut _202: u32;
+    let mut _203: &state::user::UserStats;
+    let mut _204: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _205: u32;
+    let mut _206: &mut state::user::UserStats;
+    let mut _207: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let _208: ();
+    let mut _209: isize;
+    let _211: ();
+    let mut _212: &str;
+    let _213: &str;
+    let mut _214: &std::string::String;
+    let _215: &std::string::String;
+    let _216: std::string::String;
+    let mut _218: std::fmt::Arguments<'_>;
+    let mut _219: &[&str];
+    let mut _220: &[&str; 2];
+    let _221: &[&str; 2];
+    let _222: [&str; 2];
+    let mut _223: &[core::fmt::rt::Argument<'_>];
+    let mut _224: &[core::fmt::rt::Argument<'_>; 2];
+    let _225: &[core::fmt::rt::Argument<'_>; 2];
+    let _226: [core::fmt::rt::Argument<'_>; 2];
+    let mut _227: core::fmt::rt::Argument<'_>;
+    let mut _228: &u32;
+    let _229: &u32;
+    let _230: &state::user::UserStats;
+    let mut _231: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _232: core::fmt::rt::Argument<'_>;
+    let mut _233: &u32;
+    let _234: &u32;
+    let _235: u32;
+    let mut _236: u32;
+    let mut _237: &state::user::UserStats;
+    let mut _238: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _239: u32;
+    let mut _240: u32;
+    let mut _241: u32;
+    let mut _242: &state::user::UserStats;
+    let mut _243: &std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _244: u32;
+    let mut _245: &mut state::user::UserStats;
+    let mut _246: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _247: u32;
+    let mut _248: &mut state::user::User;
+    let mut _249: &mut std::cell::RefMut<'_, state::user::User>;
+    let mut _250: u32;
+    let mut _251: &mut state::user::UserStats;
+    let mut _252: &mut std::cell::RefMut<'_, state::user::UserStats>;
+    let mut _253: ();
+    let mut _259: &mut instructions::admin::InitUserFuel<'_>;
+    let mut _260: &mut instructions::admin::InitUserFuel<'_>;
+    let mut _261: isize;
+    let mut _262: isize;
+    let mut _263: isize;
+    let mut _264: isize;
+    let mut _265: isize;
+    let mut _266: isize;
+    let mut _267: isize;
+    let mut _268: isize;
+    let mut _269: isize;
+    let mut _270: isize;
+    let mut _271: isize;
+    let mut _272: isize;
+    let mut _273: isize;
+    let mut _274: isize;
+    let mut _275: isize;
+    scope 1 {
+        debug clock => _7;
+        let _15: u32;
+        scope 6 {
+            debug now_u32 => _15;
+            let _17: &mut std::cell::RefMut<'_, state::user::User>;
+            let _25: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _28: std::cell::RefMut<'_, state::user::User>;
+            scope 7 {
+                debug user => _17;
+                let _29: &mut std::cell::RefMut<'_, state::user::UserStats>;
+                let _37: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _40: std::cell::RefMut<'_, state::user::UserStats>;
+                scope 12 {
+                    debug user_stats => _29;
+                    scope 17 {
+                        debug fuel_bonus_deposits => _43;
+                        let _43: i32;
+                        let _44: u32;
+                        let _55: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                        let _58: u32;
+                        scope 18 {
+                            debug new_fuel_bonus_deposits => _44;
+                            let _70: std::string::String;
+                            let mut _258: &[&str; 2];
+                            scope 23 {
+                                debug res => _70;
+                            }
+                        }
+                        scope 19 {
+                            debug residual => _55;
+                            scope 20 {
+                            }
+                        }
+                        scope 21 {
+                            debug val => _58;
+                            scope 22 {
+                            }
+                        }
+                    }
+                    scope 24 {
+                        debug fuel_bonus_borrows => _93;
+                        let _93: u32;
+                        let _100: std::string::String;
+                        let mut _257: &[&str; 2];
+                        scope 25 {
+                            debug res => _100;
+                        }
+                    }
+                    scope 26 {
+                        debug fuel_bonus_taker => _132;
+                        let _132: u32;
+                        let _139: std::string::String;
+                        let mut _256: &[&str; 2];
+                        scope 27 {
+                            debug res => _139;
+                        }
+                    }
+                    scope 28 {
+                        debug fuel_bonus_maker => _171;
+                        let _171: u32;
+                        let _178: std::string::String;
+                        let mut _255: &[&str; 2];
+                        scope 29 {
+                            debug res => _178;
+                        }
+                    }
+                    scope 30 {
+                        debug fuel_bonus_insurance => _210;
+                        let _210: u32;
+                        let _217: std::string::String;
+                        let mut _254: &[&str; 2];
+                        scope 31 {
+                            debug res => _217;
+                        }
+                    }
+                }
+                scope 13 {
+                    debug residual => _37;
+                    scope 14 {
+                    }
+                }
+                scope 15 {
+                    debug val => _40;
+                    scope 16 {
+                    }
+                }
+            }
+            scope 8 {
+                debug residual => _25;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _28;
+                scope 11 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = <anchor_lang::prelude::Clock as anchor_lang::prelude::SolanaSysvar>::get() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _8 = <std::result::Result<anchor_lang::prelude::Clock, anchor_lang::prelude::ProgramError> as Try>::branch(move _9) -> [return: bb2, unwind: bb123];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _10 = discriminant(_8);
+        switchInt(move _10) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_14);
+        _14 = move ((_8 as Continue).0: anchor_lang::prelude::Clock);
+        _7 = move _14;
+        StorageDead(_14);
+        _261 = discriminant(_8);
+        StorageDead(_8);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = (_7.4: i64);
+        _15 = move _16 as u32 (IntToInt);
+        StorageDead(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _259 = deref_copy (_1.1: &mut instructions::admin::InitUserFuel<'_>);
+        _22 = &((*_259).2: anchor_lang::prelude::AccountLoader<'_, state::user::User>);
+        _21 = anchor_lang::prelude::AccountLoader::<'_, User>::load_mut(move _22) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_11);
+        _11 = move ((_8 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_13);
+        _13 = move _11;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _13) -> [return: bb6, unwind: bb126];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_11);
+        _271 = discriminant(_8);
+        StorageDead(_8);
+        goto -> bb114;
+    }
+
+    bb7: {
+        StorageDead(_22);
+        StorageLive(_23);
+        _23 = {closure@programs/drift/src/macros.rs:58:44: 58:47};
+        _20 = std::result::Result::<RefMut<'_, User>, anchor_lang::error::Error>::map_err::<error::ErrorCode, {closure@programs/drift/src/macros.rs:58:44: 58:47}>(move _21, move _23) -> [return: bb8, unwind: bb123];
+    }
+
+    bb8: {
+        StorageDead(_23);
+        StorageDead(_21);
+        _19 = <std::result::Result<RefMut<'_, User>, error::ErrorCode> as Try>::branch(move _20) -> [return: bb9, unwind: bb123];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        _24 = discriminant(_19);
+        switchInt(move _24) -> [0: bb10, 1: bb11, otherwise: bb4];
+    }
+
+    bb10: {
+        StorageLive(_28);
+        _28 = move ((_19 as Continue).0: std::cell::RefMut<'_, state::user::User>);
+        _18 = move _28;
+        StorageDead(_28);
+        _17 = &mut _18;
+        _265 = discriminant(_19);
+        StorageDead(_19);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        _260 = deref_copy (_1.1: &mut instructions::admin::InitUserFuel<'_>);
+        _34 = &((*_260).3: anchor_lang::prelude::AccountLoader<'_, state::user::UserStats>);
+        _33 = anchor_lang::prelude::AccountLoader::<'_, UserStats>::load_mut(move _34) -> [return: bb13, unwind: bb122];
+    }
+
+    bb11: {
+        StorageLive(_25);
+        _25 = ((_19 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_27);
+        _27 = _25;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _27) -> [return: bb12, unwind: bb125];
+    }
+
+    bb12: {
+        StorageDead(_27);
+        StorageDead(_25);
+        _263 = discriminant(_19);
+        StorageDead(_19);
+        goto -> bb113;
+    }
+
+    bb13: {
+        StorageDead(_34);
+        StorageLive(_35);
+        _35 = {closure@programs/drift/src/macros.rs:58:44: 58:47};
+        _32 = std::result::Result::<RefMut<'_, UserStats>, anchor_lang::error::Error>::map_err::<error::ErrorCode, {closure@programs/drift/src/macros.rs:58:44: 58:47}>(move _33, move _35) -> [return: bb14, unwind: bb122];
+    }
+
+    bb14: {
+        StorageDead(_35);
+        StorageDead(_33);
+        _31 = <std::result::Result<RefMut<'_, UserStats>, error::ErrorCode> as Try>::branch(move _32) -> [return: bb15, unwind: bb122];
+    }
+
+    bb15: {
+        StorageDead(_32);
+        _36 = discriminant(_31);
+        switchInt(move _36) -> [0: bb16, 1: bb17, otherwise: bb4];
+    }
+
+    bb16: {
+        StorageLive(_40);
+        _40 = move ((_31 as Continue).0: std::cell::RefMut<'_, state::user::UserStats>);
+        _30 = move _40;
+        StorageDead(_40);
+        _29 = &mut _30;
+        _269 = discriminant(_31);
+        StorageDead(_31);
+        StorageLive(_41);
+        _42 = discriminant(_2);
+        switchInt(move _42) -> [1: bb19, otherwise: bb42];
+    }
+
+    bb17: {
+        StorageLive(_37);
+        _37 = ((_31 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_39);
+        _39 = _37;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _39) -> [return: bb18, unwind: bb124];
+    }
+
+    bb18: {
+        StorageDead(_39);
+        StorageDead(_37);
+        _267 = discriminant(_31);
+        StorageDead(_31);
+        goto -> bb112;
+    }
+
+    bb19: {
+        StorageLive(_43);
+        _43 = ((_2 as Some).0: i32);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        _46 = _43;
+        _45 = Ge(move _46, const 0_i32);
+        switchInt(move _45) -> [0: bb28, otherwise: bb20];
+    }
+
+    bb20: {
+        StorageDead(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = &(*_29);
+        _48 = <RefMut<'_, UserStats> as Deref>::deref(move _49) -> [return: bb21, unwind: bb121];
+    }
+
+    bb21: {
+        StorageDead(_49);
+        _47 = ((*_48).18: u32);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = _43;
+        _52 = <i32 as Cast>::cast::<u32>(move _53) -> [return: bb22, unwind: bb121];
+    }
+
+    bb22: {
+        StorageDead(_53);
+        _51 = <std::result::Result<u32, error::ErrorCode> as Try>::branch(move _52) -> [return: bb23, unwind: bb121];
+    }
+
+    bb23: {
+        StorageDead(_52);
+        _54 = discriminant(_51);
+        switchInt(move _54) -> [0: bb24, 1: bb25, otherwise: bb4];
+    }
+
+    bb24: {
+        StorageLive(_58);
+        _58 = ((_51 as Continue).0: u32);
+        _50 = _58;
+        StorageDead(_58);
+        _44 = core::num::<impl u32>::saturating_add(move _47, move _50) -> [return: bb27, unwind: bb121];
+    }
+
+    bb25: {
+        StorageLive(_55);
+        _55 = ((_51 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_57);
+        _57 = _55;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _57) -> [return: bb26, unwind: bb121];
+    }
+
+    bb26: {
+        StorageDead(_57);
+        StorageDead(_55);
+        StorageDead(_50);
+        StorageDead(_47);
+        StorageDead(_51);
+        StorageDead(_48);
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageDead(_43);
+        StorageDead(_41);
+        drop(_30) -> [return: bb112, unwind: bb122];
+    }
+
+    bb27: {
+        StorageDead(_50);
+        StorageDead(_47);
+        StorageDead(_51);
+        StorageDead(_48);
+        goto -> bb32;
+    }
+
+    bb28: {
+        StorageDead(_46);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = &(*_29);
+        _60 = <RefMut<'_, UserStats> as Deref>::deref(move _61) -> [return: bb29, unwind: bb121];
+    }
+
+    bb29: {
+        StorageDead(_61);
+        _59 = ((*_60).18: u32);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = _43;
+        _62 = core::num::<impl i32>::unsigned_abs(move _63) -> [return: bb30, unwind: bb121];
+    }
+
+    bb30: {
+        StorageDead(_63);
+        _44 = core::num::<impl u32>::saturating_sub(move _59, move _62) -> [return: bb31, unwind: bb121];
+    }
+
+    bb31: {
+        StorageDead(_62);
+        StorageDead(_59);
+        StorageDead(_60);
+        goto -> bb32;
+    }
+
+    bb32: {
+        StorageDead(_45);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        _258 = const _;
+        _74 = &(*_258);
+        _73 = &(*_74);
+        _72 = move _73 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_73);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        StorageLive(_83);
+        StorageLive(_84);
+        _84 = &(*_29);
+        _83 = <RefMut<'_, UserStats> as Deref>::deref(move _84) -> [return: bb33, unwind: bb121];
+    }
+
+    bb33: {
+        StorageDead(_84);
+        _82 = &((*_83).18: u32);
+        _81 = &(*_82);
+        _80 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _81) -> [return: bb34, unwind: bb121];
+    }
+
+    bb34: {
+        StorageDead(_81);
+        StorageLive(_85);
+        StorageLive(_86);
+        StorageLive(_87);
+        _87 = &_44;
+        _86 = &(*_87);
+        _85 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _86) -> [return: bb35, unwind: bb121];
+    }
+
+    bb35: {
+        StorageDead(_86);
+        _79 = [move _80, move _85];
+        StorageDead(_85);
+        StorageDead(_80);
+        _78 = &_79;
+        _77 = &(*_78);
+        _76 = move _77 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_77);
+        _71 = Arguments::<'_>::new_v1(move _72, move _76) -> [return: bb36, unwind: bb121];
+    }
+
+    bb36: {
+        StorageDead(_76);
+        StorageDead(_72);
+        _70 = format(move _71) -> [return: bb37, unwind: bb121];
+    }
+
+    bb37: {
+        StorageDead(_71);
+        StorageDead(_87);
+        StorageDead(_83);
+        StorageDead(_82);
+        StorageDead(_79);
+        StorageDead(_78);
+        StorageDead(_74);
+        _69 = move _70;
+        StorageDead(_70);
+        _68 = &_69;
+        _67 = &(*_68);
+        _66 = <String as Deref>::deref(move _67) -> [return: bb38, unwind: bb120];
+    }
+
+    bb38: {
+        _65 = &(*_66);
+        StorageDead(_67);
+        _64 = solana_program::log::sol_log(move _65) -> [return: bb39, unwind: bb120];
+    }
+
+    bb39: {
+        StorageDead(_65);
+        drop(_69) -> [return: bb40, unwind: bb121];
+    }
+
+    bb40: {
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_66);
+        StorageDead(_64);
+        StorageLive(_88);
+        _88 = _44;
+        StorageLive(_89);
+        StorageLive(_90);
+        _90 = &mut (*_29);
+        _89 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _90) -> [return: bb41, unwind: bb121];
+    }
+
+    bb41: {
+        StorageDead(_90);
+        ((*_89).18: u32) = move _88;
+        StorageDead(_88);
+        StorageDead(_89);
+        _41 = const ();
+        StorageDead(_44);
+        StorageDead(_43);
+        goto -> bb43;
+    }
+
+    bb42: {
+        _41 = const ();
+        goto -> bb43;
+    }
+
+    bb43: {
+        StorageDead(_41);
+        StorageLive(_91);
+        _92 = discriminant(_3);
+        switchInt(move _92) -> [1: bb44, otherwise: bb58];
+    }
+
+    bb44: {
+        StorageLive(_93);
+        _93 = ((_3 as Some).0: u32);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        _257 = const _;
+        _104 = &(*_257);
+        _103 = &(*_104);
+        _102 = move _103 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_103);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        _114 = &(*_29);
+        _113 = <RefMut<'_, UserStats> as Deref>::deref(move _114) -> [return: bb45, unwind: bb121];
+    }
+
+    bb45: {
+        StorageDead(_114);
+        _112 = &((*_113).19: u32);
+        _111 = &(*_112);
+        _110 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _111) -> [return: bb46, unwind: bb121];
+    }
+
+    bb46: {
+        StorageDead(_111);
+        StorageLive(_115);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        _121 = &(*_29);
+        _120 = <RefMut<'_, UserStats> as Deref>::deref(move _121) -> [return: bb47, unwind: bb121];
+    }
+
+    bb47: {
+        StorageDead(_121);
+        _119 = ((*_120).19: u32);
+        StorageLive(_122);
+        _122 = _93;
+        _118 = core::num::<impl u32>::saturating_add(move _119, move _122) -> [return: bb48, unwind: bb121];
+    }
+
+    bb48: {
+        StorageDead(_122);
+        StorageDead(_119);
+        _117 = &_118;
+        _116 = &(*_117);
+        _115 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _116) -> [return: bb49, unwind: bb121];
+    }
+
+    bb49: {
+        StorageDead(_116);
+        _109 = [move _110, move _115];
+        StorageDead(_115);
+        StorageDead(_110);
+        _108 = &_109;
+        _107 = &(*_108);
+        _106 = move _107 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_107);
+        _101 = Arguments::<'_>::new_v1(move _102, move _106) -> [return: bb50, unwind: bb121];
+    }
+
+    bb50: {
+        StorageDead(_106);
+        StorageDead(_102);
+        _100 = format(move _101) -> [return: bb51, unwind: bb121];
+    }
+
+    bb51: {
+        StorageDead(_101);
+        StorageDead(_120);
+        StorageDead(_118);
+        StorageDead(_117);
+        StorageDead(_113);
+        StorageDead(_112);
+        StorageDead(_109);
+        StorageDead(_108);
+        StorageDead(_104);
+        _99 = move _100;
+        StorageDead(_100);
+        _98 = &_99;
+        _97 = &(*_98);
+        _96 = <String as Deref>::deref(move _97) -> [return: bb52, unwind: bb119];
+    }
+
+    bb52: {
+        _95 = &(*_96);
+        StorageDead(_97);
+        _94 = solana_program::log::sol_log(move _95) -> [return: bb53, unwind: bb119];
+    }
+
+    bb53: {
+        StorageDead(_95);
+        drop(_99) -> [return: bb54, unwind: bb121];
+    }
+
+    bb54: {
+        StorageDead(_99);
+        StorageDead(_98);
+        StorageDead(_96);
+        StorageDead(_94);
+        StorageLive(_123);
+        StorageLive(_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        _126 = &(*_29);
+        _125 = <RefMut<'_, UserStats> as Deref>::deref(move _126) -> [return: bb55, unwind: bb121];
+    }
+
+    bb55: {
+        StorageDead(_126);
+        _124 = ((*_125).19: u32);
+        StorageLive(_127);
+        _127 = _93;
+        _123 = core::num::<impl u32>::saturating_add(move _124, move _127) -> [return: bb56, unwind: bb121];
+    }
+
+    bb56: {
+        StorageDead(_127);
+        StorageDead(_124);
+        StorageLive(_128);
+        StorageLive(_129);
+        _129 = &mut (*_29);
+        _128 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _129) -> [return: bb57, unwind: bb121];
+    }
+
+    bb57: {
+        StorageDead(_129);
+        ((*_128).19: u32) = move _123;
+        StorageDead(_123);
+        StorageDead(_128);
+        StorageDead(_125);
+        _91 = const ();
+        StorageDead(_93);
+        goto -> bb59;
+    }
+
+    bb58: {
+        _91 = const ();
+        goto -> bb59;
+    }
+
+    bb59: {
+        StorageDead(_91);
+        StorageLive(_130);
+        _131 = discriminant(_4);
+        switchInt(move _131) -> [1: bb60, otherwise: bb74];
+    }
+
+    bb60: {
+        StorageLive(_132);
+        _132 = ((_4 as Some).0: u32);
+        StorageLive(_133);
+        StorageLive(_134);
+        StorageLive(_135);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        _256 = const _;
+        _143 = &(*_256);
+        _142 = &(*_143);
+        _141 = move _142 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_142);
+        StorageLive(_145);
+        StorageLive(_146);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        StorageLive(_153);
+        _153 = &(*_29);
+        _152 = <RefMut<'_, UserStats> as Deref>::deref(move _153) -> [return: bb61, unwind: bb121];
+    }
+
+    bb61: {
+        StorageDead(_153);
+        _151 = &((*_152).21: u32);
+        _150 = &(*_151);
+        _149 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _150) -> [return: bb62, unwind: bb121];
+    }
+
+    bb62: {
+        StorageDead(_150);
+        StorageLive(_154);
+        StorageLive(_155);
+        StorageLive(_156);
+        StorageLive(_157);
+        StorageLive(_158);
+        StorageLive(_159);
+        StorageLive(_160);
+        _160 = &(*_29);
+        _159 = <RefMut<'_, UserStats> as Deref>::deref(move _160) -> [return: bb63, unwind: bb121];
+    }
+
+    bb63: {
+        StorageDead(_160);
+        _158 = ((*_159).21: u32);
+        StorageLive(_161);
+        _161 = _132;
+        _157 = core::num::<impl u32>::saturating_add(move _158, move _161) -> [return: bb64, unwind: bb121];
+    }
+
+    bb64: {
+        StorageDead(_161);
+        StorageDead(_158);
+        _156 = &_157;
+        _155 = &(*_156);
+        _154 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _155) -> [return: bb65, unwind: bb121];
+    }
+
+    bb65: {
+        StorageDead(_155);
+        _148 = [move _149, move _154];
+        StorageDead(_154);
+        StorageDead(_149);
+        _147 = &_148;
+        _146 = &(*_147);
+        _145 = move _146 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_146);
+        _140 = Arguments::<'_>::new_v1(move _141, move _145) -> [return: bb66, unwind: bb121];
+    }
+
+    bb66: {
+        StorageDead(_145);
+        StorageDead(_141);
+        _139 = format(move _140) -> [return: bb67, unwind: bb121];
+    }
+
+    bb67: {
+        StorageDead(_140);
+        StorageDead(_159);
+        StorageDead(_157);
+        StorageDead(_156);
+        StorageDead(_152);
+        StorageDead(_151);
+        StorageDead(_148);
+        StorageDead(_147);
+        StorageDead(_143);
+        _138 = move _139;
+        StorageDead(_139);
+        _137 = &_138;
+        _136 = &(*_137);
+        _135 = <String as Deref>::deref(move _136) -> [return: bb68, unwind: bb118];
+    }
+
+    bb68: {
+        _134 = &(*_135);
+        StorageDead(_136);
+        _133 = solana_program::log::sol_log(move _134) -> [return: bb69, unwind: bb118];
+    }
+
+    bb69: {
+        StorageDead(_134);
+        drop(_138) -> [return: bb70, unwind: bb121];
+    }
+
+    bb70: {
+        StorageDead(_138);
+        StorageDead(_137);
+        StorageDead(_135);
+        StorageDead(_133);
+        StorageLive(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        StorageLive(_165);
+        _165 = &(*_29);
+        _164 = <RefMut<'_, UserStats> as Deref>::deref(move _165) -> [return: bb71, unwind: bb121];
+    }
+
+    bb71: {
+        StorageDead(_165);
+        _163 = ((*_164).21: u32);
+        StorageLive(_166);
+        _166 = _132;
+        _162 = core::num::<impl u32>::saturating_add(move _163, move _166) -> [return: bb72, unwind: bb121];
+    }
+
+    bb72: {
+        StorageDead(_166);
+        StorageDead(_163);
+        StorageLive(_167);
+        StorageLive(_168);
+        _168 = &mut (*_29);
+        _167 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _168) -> [return: bb73, unwind: bb121];
+    }
+
+    bb73: {
+        StorageDead(_168);
+        ((*_167).21: u32) = move _162;
+        StorageDead(_162);
+        StorageDead(_167);
+        StorageDead(_164);
+        _130 = const ();
+        StorageDead(_132);
+        goto -> bb75;
+    }
+
+    bb74: {
+        _130 = const ();
+        goto -> bb75;
+    }
+
+    bb75: {
+        StorageDead(_130);
+        StorageLive(_169);
+        _170 = discriminant(_5);
+        switchInt(move _170) -> [1: bb76, otherwise: bb90];
+    }
+
+    bb76: {
+        StorageLive(_171);
+        _171 = ((_5 as Some).0: u32);
+        StorageLive(_172);
+        StorageLive(_173);
+        StorageLive(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        StorageLive(_177);
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        StorageLive(_182);
+        _255 = const _;
+        _182 = &(*_255);
+        _181 = &(*_182);
+        _180 = move _181 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_181);
+        StorageLive(_184);
+        StorageLive(_185);
+        StorageLive(_186);
+        StorageLive(_187);
+        StorageLive(_188);
+        StorageLive(_189);
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        _192 = &(*_29);
+        _191 = <RefMut<'_, UserStats> as Deref>::deref(move _192) -> [return: bb77, unwind: bb121];
+    }
+
+    bb77: {
+        StorageDead(_192);
+        _190 = &((*_191).22: u32);
+        _189 = &(*_190);
+        _188 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _189) -> [return: bb78, unwind: bb121];
+    }
+
+    bb78: {
+        StorageDead(_189);
+        StorageLive(_193);
+        StorageLive(_194);
+        StorageLive(_195);
+        StorageLive(_196);
+        StorageLive(_197);
+        StorageLive(_198);
+        StorageLive(_199);
+        _199 = &(*_29);
+        _198 = <RefMut<'_, UserStats> as Deref>::deref(move _199) -> [return: bb79, unwind: bb121];
+    }
+
+    bb79: {
+        StorageDead(_199);
+        _197 = ((*_198).22: u32);
+        StorageLive(_200);
+        _200 = _171;
+        _196 = core::num::<impl u32>::saturating_add(move _197, move _200) -> [return: bb80, unwind: bb121];
+    }
+
+    bb80: {
+        StorageDead(_200);
+        StorageDead(_197);
+        _195 = &_196;
+        _194 = &(*_195);
+        _193 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _194) -> [return: bb81, unwind: bb121];
+    }
+
+    bb81: {
+        StorageDead(_194);
+        _187 = [move _188, move _193];
+        StorageDead(_193);
+        StorageDead(_188);
+        _186 = &_187;
+        _185 = &(*_186);
+        _184 = move _185 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_185);
+        _179 = Arguments::<'_>::new_v1(move _180, move _184) -> [return: bb82, unwind: bb121];
+    }
+
+    bb82: {
+        StorageDead(_184);
+        StorageDead(_180);
+        _178 = format(move _179) -> [return: bb83, unwind: bb121];
+    }
+
+    bb83: {
+        StorageDead(_179);
+        StorageDead(_198);
+        StorageDead(_196);
+        StorageDead(_195);
+        StorageDead(_191);
+        StorageDead(_190);
+        StorageDead(_187);
+        StorageDead(_186);
+        StorageDead(_182);
+        _177 = move _178;
+        StorageDead(_178);
+        _176 = &_177;
+        _175 = &(*_176);
+        _174 = <String as Deref>::deref(move _175) -> [return: bb84, unwind: bb117];
+    }
+
+    bb84: {
+        _173 = &(*_174);
+        StorageDead(_175);
+        _172 = solana_program::log::sol_log(move _173) -> [return: bb85, unwind: bb117];
+    }
+
+    bb85: {
+        StorageDead(_173);
+        drop(_177) -> [return: bb86, unwind: bb121];
+    }
+
+    bb86: {
+        StorageDead(_177);
+        StorageDead(_176);
+        StorageDead(_174);
+        StorageDead(_172);
+        StorageLive(_201);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        _204 = &(*_29);
+        _203 = <RefMut<'_, UserStats> as Deref>::deref(move _204) -> [return: bb87, unwind: bb121];
+    }
+
+    bb87: {
+        StorageDead(_204);
+        _202 = ((*_203).22: u32);
+        StorageLive(_205);
+        _205 = _171;
+        _201 = core::num::<impl u32>::saturating_add(move _202, move _205) -> [return: bb88, unwind: bb121];
+    }
+
+    bb88: {
+        StorageDead(_205);
+        StorageDead(_202);
+        StorageLive(_206);
+        StorageLive(_207);
+        _207 = &mut (*_29);
+        _206 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _207) -> [return: bb89, unwind: bb121];
+    }
+
+    bb89: {
+        StorageDead(_207);
+        ((*_206).22: u32) = move _201;
+        StorageDead(_201);
+        StorageDead(_206);
+        StorageDead(_203);
+        _169 = const ();
+        StorageDead(_171);
+        goto -> bb91;
+    }
+
+    bb90: {
+        _169 = const ();
+        goto -> bb91;
+    }
+
+    bb91: {
+        StorageDead(_169);
+        StorageLive(_208);
+        _209 = discriminant(_6);
+        switchInt(move _209) -> [1: bb92, otherwise: bb106];
+    }
+
+    bb92: {
+        StorageLive(_210);
+        _210 = ((_6 as Some).0: u32);
+        StorageLive(_211);
+        StorageLive(_212);
+        StorageLive(_213);
+        StorageLive(_214);
+        StorageLive(_215);
+        StorageLive(_216);
+        StorageLive(_217);
+        StorageLive(_218);
+        StorageLive(_219);
+        StorageLive(_220);
+        StorageLive(_221);
+        _254 = const _;
+        _221 = &(*_254);
+        _220 = &(*_221);
+        _219 = move _220 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_220);
+        StorageLive(_223);
+        StorageLive(_224);
+        StorageLive(_225);
+        StorageLive(_226);
+        StorageLive(_227);
+        StorageLive(_228);
+        StorageLive(_229);
+        StorageLive(_230);
+        StorageLive(_231);
+        _231 = &(*_29);
+        _230 = <RefMut<'_, UserStats> as Deref>::deref(move _231) -> [return: bb93, unwind: bb121];
+    }
+
+    bb93: {
+        StorageDead(_231);
+        _229 = &((*_230).17: u32);
+        _228 = &(*_229);
+        _227 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _228) -> [return: bb94, unwind: bb121];
+    }
+
+    bb94: {
+        StorageDead(_228);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        StorageLive(_238);
+        _238 = &(*_29);
+        _237 = <RefMut<'_, UserStats> as Deref>::deref(move _238) -> [return: bb95, unwind: bb121];
+    }
+
+    bb95: {
+        StorageDead(_238);
+        _236 = ((*_237).17: u32);
+        StorageLive(_239);
+        _239 = _210;
+        _235 = core::num::<impl u32>::saturating_add(move _236, move _239) -> [return: bb96, unwind: bb121];
+    }
+
+    bb96: {
+        StorageDead(_239);
+        StorageDead(_236);
+        _234 = &_235;
+        _233 = &(*_234);
+        _232 = core::fmt::rt::Argument::<'_>::new_debug::<u32>(move _233) -> [return: bb97, unwind: bb121];
+    }
+
+    bb97: {
+        StorageDead(_233);
+        _226 = [move _227, move _232];
+        StorageDead(_232);
+        StorageDead(_227);
+        _225 = &_226;
+        _224 = &(*_225);
+        _223 = move _224 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_224);
+        _218 = Arguments::<'_>::new_v1(move _219, move _223) -> [return: bb98, unwind: bb121];
+    }
+
+    bb98: {
+        StorageDead(_223);
+        StorageDead(_219);
+        _217 = format(move _218) -> [return: bb99, unwind: bb121];
+    }
+
+    bb99: {
+        StorageDead(_218);
+        StorageDead(_237);
+        StorageDead(_235);
+        StorageDead(_234);
+        StorageDead(_230);
+        StorageDead(_229);
+        StorageDead(_226);
+        StorageDead(_225);
+        StorageDead(_221);
+        _216 = move _217;
+        StorageDead(_217);
+        _215 = &_216;
+        _214 = &(*_215);
+        _213 = <String as Deref>::deref(move _214) -> [return: bb100, unwind: bb116];
+    }
+
+    bb100: {
+        _212 = &(*_213);
+        StorageDead(_214);
+        _211 = solana_program::log::sol_log(move _212) -> [return: bb101, unwind: bb116];
+    }
+
+    bb101: {
+        StorageDead(_212);
+        drop(_216) -> [return: bb102, unwind: bb121];
+    }
+
+    bb102: {
+        StorageDead(_216);
+        StorageDead(_215);
+        StorageDead(_213);
+        StorageDead(_211);
+        StorageLive(_240);
+        StorageLive(_241);
+        StorageLive(_242);
+        StorageLive(_243);
+        _243 = &(*_29);
+        _242 = <RefMut<'_, UserStats> as Deref>::deref(move _243) -> [return: bb103, unwind: bb121];
+    }
+
+    bb103: {
+        StorageDead(_243);
+        _241 = ((*_242).17: u32);
+        StorageLive(_244);
+        _244 = _210;
+        _240 = core::num::<impl u32>::saturating_add(move _241, move _244) -> [return: bb104, unwind: bb121];
+    }
+
+    bb104: {
+        StorageDead(_244);
+        StorageDead(_241);
+        StorageLive(_245);
+        StorageLive(_246);
+        _246 = &mut (*_29);
+        _245 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _246) -> [return: bb105, unwind: bb121];
+    }
+
+    bb105: {
+        StorageDead(_246);
+        ((*_245).17: u32) = move _240;
+        StorageDead(_240);
+        StorageDead(_245);
+        StorageDead(_242);
+        _208 = const ();
+        StorageDead(_210);
+        goto -> bb107;
+    }
+
+    bb106: {
+        _208 = const ();
+        goto -> bb107;
+    }
+
+    bb107: {
+        StorageDead(_208);
+        StorageLive(_247);
+        _247 = _15;
+        StorageLive(_248);
+        StorageLive(_249);
+        _249 = &mut (*_17);
+        _248 = <RefMut<'_, User> as DerefMut>::deref_mut(move _249) -> [return: bb108, unwind: bb121];
+    }
+
+    bb108: {
+        StorageDead(_249);
+        ((*_248).29: u32) = move _247;
+        StorageDead(_247);
+        StorageDead(_248);
+        StorageLive(_250);
+        _250 = _15;
+        StorageLive(_251);
+        StorageLive(_252);
+        _252 = &mut (*_29);
+        _251 = <RefMut<'_, UserStats> as DerefMut>::deref_mut(move _252) -> [return: bb109, unwind: bb121];
+    }
+
+    bb109: {
+        StorageDead(_252);
+        ((*_251).24: u32) = move _250;
+        StorageDead(_250);
+        StorageDead(_251);
+        StorageLive(_253);
+        _253 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _253);
+        StorageDead(_253);
+        drop(_30) -> [return: bb110, unwind: bb122];
+    }
+
+    bb110: {
+        StorageDead(_30);
+        StorageDead(_29);
+        drop(_18) -> [return: bb111, unwind: bb123];
+    }
+
+    bb111: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_7);
+        goto -> bb115;
+    }
+
+    bb112: {
+        StorageDead(_30);
+        StorageDead(_29);
+        drop(_18) -> [return: bb113, unwind: bb123];
+    }
+
+    bb113: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_15);
+        goto -> bb114;
+    }
+
+    bb114: {
+        StorageDead(_7);
+        goto -> bb115;
+    }
+
+    bb115: {
+        return;
+    }
+
+    bb116 (cleanup): {
+        drop(_216) -> [return: bb121, unwind terminate(cleanup)];
+    }
+
+    bb117 (cleanup): {
+        drop(_177) -> [return: bb121, unwind terminate(cleanup)];
+    }
+
+    bb118 (cleanup): {
+        drop(_138) -> [return: bb121, unwind terminate(cleanup)];
+    }
+
+    bb119 (cleanup): {
+        drop(_99) -> [return: bb121, unwind terminate(cleanup)];
+    }
+
+    bb120 (cleanup): {
+        drop(_69) -> [return: bb121, unwind terminate(cleanup)];
+    }
+
+    bb121 (cleanup): {
+        drop(_30) -> [return: bb122, unwind terminate(cleanup)];
+    }
+
+    bb122 (cleanup): {
+        drop(_18) -> [return: bb123, unwind terminate(cleanup)];
+    }
+
+    bb123 (cleanup): {
+        resume;
+    }
+
+    bb124 (cleanup): {
+        _273 = discriminant(_31);
+        goto -> bb122;
+    }
+
+    bb125 (cleanup): {
+        _274 = discriminant(_19);
+        goto -> bb123;
+    }
+
+    bb126 (cleanup): {
+        _275 = discriminant(_8);
+        goto -> bb123;
+    }
+}

@@ -1,0 +1,202 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::to_little_endian` after PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:587:3: 587:13>::to_little_endian(_1: &U256, _2: &mut [u8]) -> () {
+    debug self => _1;
+    debug bytes => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: bool;
+    let _5: ();
+    let mut _6: bool;
+    let mut _7: usize;
+    let mut _8: (usize, bool);
+    let mut _9: usize;
+    let mut _10: &[u8];
+    let mut _11: !;
+    let mut _12: std::ops::Range<usize>;
+    let mut _13: std::ops::Range<usize>;
+    let mut _14: std::ops::Range<usize>;
+    let mut _15: ();
+    let _16: ();
+    let mut _17: std::option::Option<usize>;
+    let mut _18: &mut std::ops::Range<usize>;
+    let mut _19: &mut std::ops::Range<usize>;
+    let mut _20: isize;
+    let mut _21: !;
+    let _23: ();
+    let mut _24: &mut [u8];
+    let mut _25: &mut [u8];
+    let mut _26: &mut [u8];
+    let mut _27: &mut [u8];
+    let mut _28: std::ops::RangeFrom<usize>;
+    let mut _29: usize;
+    let mut _30: usize;
+    let mut _31: (usize, bool);
+    let mut _32: u64;
+    let _33: usize;
+    let mut _34: usize;
+    let mut _35: bool;
+    scope 1 {
+        debug iter => _14;
+        let _22: usize;
+        scope 2 {
+            debug i => _22;
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = const true;
+        switchInt(move _4) -> [0: bb6, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _8 = CheckedMul(const 4_usize, const 8_usize);
+        assert(!move (_8.1: bool), "attempt to compute `{} * {}`, which would overflow", const 4_usize, const 8_usize) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = move (_8.0: usize);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_2);
+        _9 = core::slice::<impl [u8]>::len(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        _6 = Eq(move _7, move _9);
+        switchInt(move _6) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_7);
+        _5 = const ();
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        goto -> bb7;
+    }
+
+    bb5: {
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageLive(_11);
+        _11 = panic(const "assertion failed: 4 * 8 == bytes.len()") -> unwind continue;
+    }
+
+    bb6: {
+        _3 = const ();
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = std::ops::Range::<usize> { start: const 0_usize, end: const 4_usize };
+        _12 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _13) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_13);
+        StorageLive(_14);
+        _14 = move _12;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &mut _14;
+        _18 = &mut (*_19);
+        _17 = <std::ops::Range<usize> as Iterator>::next(move _18) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        _20 = discriminant(_17);
+        switchInt(move _20) -> [0: bb13, 1: bb11, otherwise: bb12];
+    }
+
+    bb11: {
+        StorageLive(_22);
+        _22 = ((_17 as Some).0: usize);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &mut (*_2);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        _30 = _22;
+        _31 = CheckedMul(const 8_usize, _30);
+        assert(!move (_31.1: bool), "attempt to compute `{} * {}`, which would overflow", const 8_usize, move _30) -> [success: bb14, unwind continue];
+    }
+
+    bb12: {
+        unreachable;
+    }
+
+    bb13: {
+        _0 = const ();
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_12);
+        return;
+    }
+
+    bb14: {
+        _29 = move (_31.0: usize);
+        StorageDead(_30);
+        _28 = RangeFrom::<usize> { start: move _29 };
+        StorageDead(_29);
+        _26 = <[u8] as IndexMut<RangeFrom<usize>>>::index_mut(move _27, move _28) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_28);
+        StorageDead(_27);
+        _25 = &mut (*_26);
+        _24 = &mut (*_25);
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = _22;
+        _34 = Len(((*_1).0: [u64; 4]));
+        _35 = Lt(_33, _34);
+        assert(move _35, "index out of bounds: the length is {} but the index is {}", move _34, _33) -> [success: bb16, unwind continue];
+    }
+
+    bb16: {
+        _32 = ((*_1).0: [u64; 4])[_33];
+        _23 = <LittleEndian as ByteOrder>::write_u64(move _24, move _32) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_32);
+        StorageDead(_24);
+        StorageDead(_33);
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageDead(_23);
+        _16 = const ();
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_16);
+        _15 = const ();
+        goto -> bb9;
+    }
+}

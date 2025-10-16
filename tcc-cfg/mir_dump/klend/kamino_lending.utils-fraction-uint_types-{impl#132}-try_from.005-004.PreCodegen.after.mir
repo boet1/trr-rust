@@ -1,0 +1,152 @@
+// MIR for `uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:537:4: 537:56>::try_from` after PreCodegen
+
+fn uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:537:4: 537:56>::try_from(_1: uint_types::U128) -> std::result::Result<i128, &str> {
+    debug u => _1;
+    let mut _0: std::result::Result<i128, &str>;
+    let _2: &str;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, &str>, u128>;
+    let mut _5: std::result::Result<u128, &str>;
+    let mut _6: std::result::Result<u128, &str>;
+    let mut _7: utils::fraction::uint_types::U128;
+    let mut _8: {closure@C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:543:40: 543:43};
+    let mut _9: &&str;
+    let mut _10: isize;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, &str>;
+    let mut _15: bool;
+    let mut _16: u128;
+    let mut _17: u128;
+    let mut _18: i128;
+    let mut _19: &str;
+    let mut _20: i128;
+    let mut _21: u128;
+    scope 1 {
+        debug err_str => _2;
+        let _3: u128;
+        let _11: std::result::Result<std::convert::Infallible, &str>;
+        let _14: u128;
+        scope 2 {
+            debug i => _3;
+        }
+        scope 3 {
+            debug residual => _11;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _14;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = const "integer overflow when casting to i128";
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _1;
+        _6 = <u128 as TryFrom<uint_types::U128>>::try_from(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &_2;
+        _8 = {closure@C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:543:40: 543:43} { err_str: move _9 };
+        StorageDead(_9);
+        _5 = std::result::Result::<u128, &str>::map_err::<&str, {closure@C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:543:40: 543:43}>(move _6, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_6);
+        _4 = <std::result::Result<u128, &str> as Try>::branch(move _5) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _10 = discriminant(_4);
+        switchInt(move _10) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = ((_4 as Continue).0: u128);
+        _3 = _14;
+        StorageDead(_14);
+        StorageDead(_4);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = _3;
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = core::num::<impl i128>::max_value() -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_11);
+        _11 = ((_4 as Break).0: std::result::Result<std::convert::Infallible, &str>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<i128, &str> as FromResidual<std::result::Result<Infallible, &str>>>::from_residual(move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb12;
+    }
+
+    bb8: {
+        _17 = move _18 as u128 (IntToInt);
+        StorageDead(_18);
+        _15 = Gt(move _16, move _17);
+        switchInt(move _15) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_19);
+        _19 = &(*_2);
+        _0 = std::result::Result::<i128, &str>::Err(move _19);
+        StorageDead(_19);
+        goto -> bb11;
+    }
+
+    bb10: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _3;
+        _20 = move _21 as i128 (IntToInt);
+        StorageDead(_21);
+        _0 = std::result::Result::<i128, &str>::Ok(move _20);
+        StorageDead(_20);
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_15);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb12;
+    }
+
+    bb12: {
+        return;
+    }
+}

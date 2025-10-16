@@ -1,0 +1,142 @@
+// MIR for `constraints::settle_pnl_not_paused` after PreCodegen
+
+fn constraints::settle_pnl_not_paused(_1: &anchor_lang::prelude::Account<'_, state::state::State>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug state => _1;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: enumflags2::BitFlags<state::state::ExchangeStatus>;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, enumflags2::BitFlags<state::state::ExchangeStatus>>;
+    let mut _6: std::result::Result<enumflags2::BitFlags<state::state::ExchangeStatus>, error::ErrorCode>;
+    let mut _7: &state::state::State;
+    let _8: &state::state::State;
+    let mut _9: &anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: enumflags2::BitFlags<state::state::ExchangeStatus>;
+    let mut _15: state::state::ExchangeStatus;
+    let mut _16: !;
+    let mut _17: anchor_lang::error::Error;
+    let mut _18: error::ErrorCode;
+    let mut _19: ();
+    scope 1 {
+        debug residual => _11;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _14;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &(*_1);
+        _8 = <anchor_lang::prelude::Account<'_, state::state::State> as Deref>::deref(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _7 = &(*_8);
+        StorageDead(_9);
+        _6 = state::state::State::get_exchange_status(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _5 = <std::result::Result<BitFlags<state::state::ExchangeStatus>, error::ErrorCode> as Try>::branch(move _6) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        _10 = discriminant(_5);
+        switchInt(move _10) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_14);
+        _14 = ((_5 as Continue).0: enumflags2::BitFlags<state::state::ExchangeStatus>);
+        _4 = _14;
+        StorageDead(_14);
+        StorageLive(_15);
+        _15 = state::state::ExchangeStatus::SettlePnlPaused;
+        _3 = BitFlags::<state::state::ExchangeStatus>::contains::<state::state::ExchangeStatus>(move _4, move _15) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_11);
+        _11 = ((_5 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<(), anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb8: {
+        switchInt(move _3) -> [0: bb11, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_15);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = error::ErrorCode::ExchangePaused;
+        _17 = <error::ErrorCode as Into<anchor_lang::error::Error>>::into(move _18) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _17);
+        StorageDead(_17);
+        goto -> bb12;
+    }
+
+    bb11: {
+        StorageDead(_15);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_19);
+        _19 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _19);
+        StorageDead(_19);
+        goto -> bb13;
+    }
+
+    bb12: {
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+}

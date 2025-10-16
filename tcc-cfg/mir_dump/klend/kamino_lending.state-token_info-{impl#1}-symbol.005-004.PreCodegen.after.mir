@@ -1,0 +1,56 @@
+// MIR for `token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::symbol` after PreCodegen
+
+fn token_info::<impl at programs\klend\src\state\token_info.rs:74:1: 74:15>::symbol(_1: &token_info::TokenInfo) -> &str {
+    debug self => _1;
+    let mut _0: &str;
+    let _2: &str;
+    let mut _3: &str;
+    let _4: &str;
+    let mut _5: std::result::Result<&str, std::str::Utf8Error>;
+    let mut _6: &[u8];
+    let mut _7: &[u8; 32];
+    let _8: &[u8; 32];
+    let mut _9: &str;
+    let _10: &str;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &((*_1).0: [u8; 32]);
+        _7 = &(*_8);
+        _6 = move _7 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_7);
+        _5 = from_utf8(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const "InvalidTokenName";
+        _9 = &(*_10);
+        _4 = std::result::Result::<&str, Utf8Error>::unwrap_or(move _5, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _3 = &(*_4);
+        StorageDead(_9);
+        StorageDead(_5);
+        _2 = core::str::<impl str>::trim_end_matches::<'_, char>(move _3, const '\0') -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _0 = &(*_2);
+        StorageDead(_3);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
+    }
+}

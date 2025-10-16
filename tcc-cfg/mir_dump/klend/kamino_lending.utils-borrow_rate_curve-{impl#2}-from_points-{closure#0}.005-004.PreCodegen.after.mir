@@ -1,0 +1,95 @@
+// MIR for `borrow_rate_curve::<impl at programs\klend\src\utils\borrow_rate_curve.rs:91:1: 91:18>::from_points::{closure#0}` after PreCodegen
+
+fn borrow_rate_curve::<impl at programs\klend\src\utils\borrow_rate_curve.rs:91:1: 91:18>::from_points::{closure#0}(_1: {closure@programs\klend\src\utils\borrow_rate_curve.rs:96:25: 96:27}) -> anchor_lang::error::Error {
+    let mut _0: anchor_lang::error::Error;
+    let _2: ();
+    let mut _3: &str;
+    let _4: &str;
+    let mut _5: anchor_lang::error::AnchorError;
+    let mut _6: std::string::String;
+    let mut _7: &LendingError;
+    let _8: LendingError;
+    let mut _9: u32;
+    let mut _10: LendingError;
+    let mut _11: std::string::String;
+    let mut _12: &LendingError;
+    let _13: LendingError;
+    let mut _14: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _15: anchor_lang::error::ErrorOrigin;
+    let mut _16: anchor_lang::error::Source;
+    let mut _17: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _18: &LendingError;
+    let mut _19: &LendingError;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = const "Borrow rate must be ever growing in the curve";
+        _3 = &(*_4);
+        _2 = solana_program::log::sol_log(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageDead(_4);
+        StorageDead(_2);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _19 = const _;
+        _7 = &(*_19);
+        _6 = LendingError::name(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = LendingError::InvalidBorrowRateCurvePoint;
+        _9 = <LendingError as Into<u32>>::into(move _10) -> [return: bb3, unwind: bb6];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _18 = const _;
+        _12 = &(*_18);
+        _11 = <LendingError as ToString>::to_string(move _12) -> [return: bb4, unwind: bb6];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\utils\\borrow_rate_curve.rs", line: const 98_u32 };
+        _15 = anchor_lang::error::ErrorOrigin::Source(move _16);
+        StorageDead(_16);
+        _14 = std::option::Option::<ErrorOrigin>::Some(move _15);
+        StorageDead(_15);
+        StorageLive(_17);
+        _17 = std::option::Option::<ComparedValues>::None;
+        _5 = anchor_lang::error::AnchorError { error_name: move _6, error_code_number: move _9, error_msg: move _11, error_origin: move _14, compared_values: move _17 };
+        StorageDead(_17);
+        StorageDead(_14);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageDead(_6);
+        _0 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _5) -> [return: bb5, unwind: bb7];
+    }
+
+    bb5: {
+        StorageDead(_5);
+        return;
+    }
+
+    bb6 (cleanup): {
+        drop(_6) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+}

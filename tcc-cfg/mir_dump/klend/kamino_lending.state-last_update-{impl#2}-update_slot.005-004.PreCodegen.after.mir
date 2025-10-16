@@ -1,0 +1,71 @@
+// MIR for `last_update::<impl at programs\klend\src\state\last_update.rs:72:1: 72:16>::update_slot` after PreCodegen
+
+fn last_update::<impl at programs\klend\src\state\last_update.rs:72:1: 72:16>::update_slot(_1: &mut last_update::LastUpdate, _2: u64, _3: impl Into<Option<PriceStatusFlags>>) -> () {
+    debug self => _1;
+    debug slot => _2;
+    debug price_status => _3;
+    let mut _0: ();
+    let _4: std::option::Option<state::last_update::PriceStatusFlags>;
+    let mut _5: impl Into<Option<PriceStatusFlags>>;
+    let mut _6: u64;
+    let mut _7: isize;
+    let mut _9: u8;
+    let mut _10: &state::last_update::PriceStatusFlags;
+    scope 1 {
+        debug price_status => _4;
+        scope 2 {
+            debug price_status => _8;
+            let _8: state::last_update::PriceStatusFlags;
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = move _3;
+        _4 = <impl Into<Option<PriceStatusFlags>> as Into<std::option::Option<last_update::PriceStatusFlags>>>::into(move _5) -> [return: bb1, unwind: bb6];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = _2;
+        ((*_1).0: u64) = move _6;
+        StorageDead(_6);
+        ((*_1).1: u8) = const false as u8 (IntToInt);
+        _7 = discriminant(_4);
+        switchInt(move _7) -> [1: bb2, otherwise: bb4];
+    }
+
+    bb2: {
+        StorageLive(_8);
+        _8 = ((_4 as Some).0: state::last_update::PriceStatusFlags);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &_8;
+        _9 = last_update::_::<impl last_update::PriceStatusFlags>::bits(move _10) -> [return: bb3, unwind: bb6];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        ((*_1).2: u8) = move _9;
+        StorageDead(_9);
+        _0 = const ();
+        StorageDead(_8);
+        goto -> bb5;
+    }
+
+    bb4: {
+        _0 = const ();
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        return;
+    }
+
+    bb6 (cleanup): {
+        resume;
+    }
+}

@@ -1,0 +1,272 @@
+// MIR for `calculate_amm_jit_liquidity` after PreCodegen
+
+fn calculate_amm_jit_liquidity(_1: &mut PerpMarket, _2: controller::position::PositionDirection, _3: u64, _4: Option<i64>, _5: u64, _6: u64, _7: u64, _8: bool) -> std::result::Result<u64, error::ErrorCode> {
+    debug market => _1;
+    debug taker_direction => _2;
+    debug maker_price => _3;
+    debug valid_oracle_price => _4;
+    debug base_asset_amount => _5;
+    debug taker_base_asset_amount => _6;
+    debug maker_base_asset_amount => _7;
+    debug taker_has_limit_price => _8;
+    let mut _0: std::result::Result<u64, error::ErrorCode>;
+    let mut _9: u64;
+    let mut _11: bool;
+    let mut _12: u64;
+    let mut _13: u64;
+    let _14: ();
+    let mut _15: bool;
+    let mut _16: !;
+    let mut _17: u64;
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _20: std::result::Result<bool, error::ErrorCode>;
+    let mut _21: &state::perp_market::AMM;
+    let mut _22: controller::position::PositionDirection;
+    let mut _23: isize;
+    let mut _25: !;
+    let mut _26: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _28: ();
+    let mut _29: bool;
+    let mut _30: u64;
+    let mut _31: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _32: std::result::Result<u64, error::ErrorCode>;
+    let mut _33: &state::perp_market::PerpMarket;
+    let mut _34: u64;
+    let mut _35: u64;
+    let mut _36: std::option::Option<i64>;
+    let mut _37: controller::position::PositionDirection;
+    let mut _38: isize;
+    let mut _40: !;
+    let mut _41: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _43: u64;
+    scope 1 {
+        debug jit_base_asset_amount => _9;
+        let _10: bool;
+        scope 2 {
+            debug amm_will_fill_next_round => _10;
+            let _18: bool;
+            let _24: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _27: bool;
+            scope 3 {
+                debug amm_wants_to_jit_make => _18;
+                let _39: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _42: u64;
+                scope 8 {
+                    debug residual => _39;
+                    scope 9 {
+                    }
+                }
+                scope 10 {
+                    debug val => _42;
+                    scope 11 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _24;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _27;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_9);
+        _9 = const 0_u64;
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _8;
+        switchInt(move _11) -> [0: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_12);
+        _12 = _7;
+        StorageLive(_13);
+        _13 = _6;
+        _10 = Lt(move _12, move _13);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb3;
+    }
+
+    bb2: {
+        _10 = const false;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _10;
+        switchInt(move _15) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageLive(_17);
+        _17 = _9;
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(move _17);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_14);
+        goto -> bb21;
+    }
+
+    bb5: {
+        _14 = const ();
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &((*_1).1: state::perp_market::AMM);
+        StorageLive(_22);
+        _22 = _2;
+        _20 = AMM::amm_wants_to_jit_make(move _21, move _22) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_22);
+        StorageDead(_21);
+        _19 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _20) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_20);
+        _23 = discriminant(_19);
+        switchInt(move _23) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_27);
+        _27 = ((_19 as Continue).0: bool);
+        _18 = _27;
+        StorageDead(_27);
+        StorageDead(_19);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _18;
+        switchInt(move _29) -> [0: bb13, otherwise: bb12];
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_24);
+        _24 = ((_19 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_26);
+        _26 = _24;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _26) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageDead(_19);
+        goto -> bb20;
+    }
+
+    bb12: {
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = &(*_1);
+        StorageLive(_34);
+        _34 = _5;
+        StorageLive(_35);
+        _35 = _3;
+        StorageLive(_36);
+        _36 = _4;
+        StorageLive(_37);
+        _37 = _2;
+        _32 = calculate_jit_base_asset_amount(move _33, move _34, move _35, move _36, move _37) -> [return: bb14, unwind continue];
+    }
+
+    bb13: {
+        _28 = const ();
+        goto -> bb19;
+    }
+
+    bb14: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_33);
+        _31 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _32) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_32);
+        _38 = discriminant(_31);
+        switchInt(move _38) -> [0: bb16, 1: bb17, otherwise: bb9];
+    }
+
+    bb16: {
+        StorageLive(_42);
+        _42 = ((_31 as Continue).0: u64);
+        _30 = _42;
+        StorageDead(_42);
+        _9 = move _30;
+        StorageDead(_30);
+        StorageDead(_31);
+        _28 = const ();
+        goto -> bb19;
+    }
+
+    bb17: {
+        StorageLive(_39);
+        _39 = ((_31 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_41);
+        _41 = _39;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _41) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_41);
+        StorageDead(_39);
+        StorageDead(_30);
+        StorageDead(_31);
+        StorageDead(_29);
+        StorageDead(_28);
+        goto -> bb20;
+    }
+
+    bb19: {
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageLive(_43);
+        _43 = _9;
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(move _43);
+        StorageDead(_43);
+        StorageDead(_18);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb22;
+    }
+
+    bb20: {
+        StorageDead(_18);
+        goto -> bb21;
+    }
+
+    bb21: {
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb22;
+    }
+
+    bb22: {
+        return;
+    }
+}

@@ -1,0 +1,350 @@
+// MIR for `apply_protected_maker_limit_price_offset` before PreCodegen
+
+fn apply_protected_maker_limit_price_offset(_1: u64, _2: controller::position::PositionDirection, _3: ProtectedMakerParams, _4: bool) -> std::result::Result<u64, error::ErrorCode> {
+    debug price => _1;
+    debug direction => _2;
+    debug params => _3;
+    debug standardize => _4;
+    let mut _0: std::result::Result<u64, error::ErrorCode>;
+    let _5: u64;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _7: std::result::Result<u64, error::ErrorCode>;
+    let mut _8: std::option::Option<u64>;
+    let mut _9: u64;
+    let mut _10: error::ErrorCode;
+    let mut _11: isize;
+    let _12: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _13: !;
+    let mut _14: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _15: u64;
+    let mut _17: bool;
+    let mut _18: u8;
+    let mut _19: u64;
+    let mut _20: u8;
+    let mut _21: bool;
+    let mut _23: u64;
+    let mut _24: u64;
+    let mut _25: u64;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _27: std::result::Result<u64, error::ErrorCode>;
+    let mut _28: u64;
+    let mut _29: u64;
+    let mut _30: isize;
+    let mut _32: !;
+    let mut _33: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _35: u64;
+    let mut _36: u64;
+    let mut _37: u64;
+    let mut _38: u64;
+    let mut _39: bool;
+    let mut _41: isize;
+    let mut _42: u64;
+    let mut _43: u64;
+    let mut _44: u64;
+    let mut _45: u64;
+    let mut _46: u64;
+    let mut _47: u64;
+    let mut _48: bool;
+    let mut _49: u64;
+    let mut _50: u64;
+    let mut _51: controller::position::PositionDirection;
+    let mut _52: u64;
+    scope 1 {
+        debug min_offset => _5;
+        let _16: u64;
+        scope 6 {
+            debug limit_price_bps_divisor => _16;
+            let _22: u64;
+            let _31: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _34: u64;
+            scope 7 {
+                debug price_offset => _22;
+                let _40: u64;
+                scope 12 {
+                    debug price => _40;
+                }
+            }
+            scope 8 {
+                debug residual => _31;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _34;
+                scope 11 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _12;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _15;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = (_3.2: u64);
+        _8 = core::num::<impl u64>::checked_shl(move _9, const 3_u32) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageLive(_10);
+        _10 = error::ErrorCode::MathError;
+        _7 = Option::<u64>::ok_or::<error::ErrorCode>(move _8, move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_10);
+        StorageDead(_8);
+        _6 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        _11 = discriminant(_6);
+        switchInt(move _11) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_15);
+        _15 = ((_6 as Continue).0: u64);
+        _5 = _15;
+        StorageDead(_15);
+        StorageDead(_6);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = (_3.0: u8);
+        _17 = Gt(move _18, const 0_u8);
+        switchInt(move _17) -> [0: bb9, otherwise: bb8];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_12);
+        _12 = ((_6 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_14);
+        _14 = _12;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _14) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_6);
+        goto -> bb31;
+    }
+
+    bb8: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = (_3.0: u8);
+        _19 = move _20 as u64 (IntToInt);
+        StorageDead(_20);
+        _21 = Eq(_19, const 0_u64);
+        assert(!move _21, "attempt to divide `{}` by zero", const 10000_u64) -> [success: bb10, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_18);
+        _16 = const 1000_u64;
+        goto -> bb11;
+    }
+
+    bb10: {
+        _16 = Div(const 10000_u64, move _19);
+        StorageDead(_19);
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_17);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _1;
+        StorageLive(_29);
+        _29 = _16;
+        _27 = <u64 as SafeMath>::safe_div(move _28, move _29) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_29);
+        StorageDead(_28);
+        _26 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _27) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        _30 = discriminant(_26);
+        switchInt(move _30) -> [0: bb14, 1: bb15, otherwise: bb5];
+    }
+
+    bb14: {
+        StorageLive(_34);
+        _34 = ((_26 as Continue).0: u64);
+        _25 = _34;
+        StorageDead(_34);
+        StorageLive(_35);
+        _35 = _5;
+        _24 = <u64 as Ord>::max(move _25, move _35) -> [return: bb17, unwind continue];
+    }
+
+    bb15: {
+        StorageLive(_31);
+        _31 = ((_26 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_33);
+        _33 = _31;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _33) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_33);
+        StorageDead(_31);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_26);
+        StorageDead(_22);
+        StorageDead(_16);
+        goto -> bb31;
+    }
+
+    bb17: {
+        StorageDead(_35);
+        StorageDead(_25);
+        StorageLive(_36);
+        _36 = (_3.1: u64);
+        _23 = <u64 as Ord>::max(move _24, move _36) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_36);
+        StorageDead(_24);
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = _1;
+        _39 = Eq(const 20_u64, const 0_u64);
+        assert(!move _39, "attempt to divide `{}` by zero", _38) -> [success: bb19, unwind continue];
+    }
+
+    bb19: {
+        _37 = Div(move _38, const 20_u64);
+        StorageDead(_38);
+        _22 = <u64 as Ord>::min(move _23, move _37) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_37);
+        StorageDead(_23);
+        StorageDead(_26);
+        StorageLive(_40);
+        _41 = discriminant(_2);
+        switchInt(move _41) -> [0: bb22, 1: bb21, otherwise: bb5];
+    }
+
+    bb21: {
+        StorageLive(_46);
+        _46 = _1;
+        StorageLive(_47);
+        _47 = _22;
+        _40 = core::num::<impl u64>::saturating_add(move _46, move _47) -> [return: bb25, unwind continue];
+    }
+
+    bb22: {
+        StorageLive(_42);
+        StorageLive(_43);
+        _43 = _1;
+        StorageLive(_44);
+        _44 = _22;
+        _42 = core::num::<impl u64>::saturating_sub(move _43, move _44) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_44);
+        StorageDead(_43);
+        StorageLive(_45);
+        _45 = (_3.2: u64);
+        _40 = <u64 as Ord>::max(move _42, move _45) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_45);
+        StorageDead(_42);
+        goto -> bb26;
+    }
+
+    bb25: {
+        StorageDead(_47);
+        StorageDead(_46);
+        goto -> bb26;
+    }
+
+    bb26: {
+        StorageLive(_48);
+        _48 = _4;
+        switchInt(move _48) -> [0: bb29, otherwise: bb27];
+    }
+
+    bb27: {
+        StorageLive(_49);
+        _49 = _40;
+        StorageLive(_50);
+        _50 = (_3.2: u64);
+        StorageLive(_51);
+        _51 = _2;
+        _0 = math::orders::standardize_price(move _49, move _50, move _51) -> [return: bb28, unwind continue];
+    }
+
+    bb28: {
+        StorageDead(_51);
+        StorageDead(_50);
+        StorageDead(_49);
+        goto -> bb30;
+    }
+
+    bb29: {
+        StorageLive(_52);
+        _52 = _40;
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(move _52);
+        StorageDead(_52);
+        goto -> bb30;
+    }
+
+    bb30: {
+        StorageDead(_48);
+        StorageDead(_40);
+        StorageDead(_22);
+        StorageDead(_16);
+        StorageDead(_5);
+        goto -> bb32;
+    }
+
+    bb31: {
+        StorageDead(_5);
+        goto -> bb32;
+    }
+
+    bb32: {
+        return;
+    }
+}

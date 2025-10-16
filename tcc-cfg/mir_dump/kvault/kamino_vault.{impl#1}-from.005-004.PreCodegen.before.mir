@@ -1,0 +1,36 @@
+// MIR for `<impl at programs\kvault\src\lib.rs:122:1: 122:14>::from` before PreCodegen
+
+fn <impl at programs\kvault\src\lib.rs:122:1: 122:14>::from(_1: KaminoVaultError) -> u32 {
+    debug e => _1;
+    let mut _0: u32;
+    let mut _2: u32;
+    let _3: KaminoVaultError;
+    let mut _4: u32;
+    let mut _5: u32;
+    let mut _6: bool;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: (u32, bool);
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = _1;
+        _4 = discriminant(_3);
+        _5 = _4 as u32 (IntToInt);
+        _6 = Ge(_5, const 1000_u32);
+        _7 = Le(_5, const 1048_u32);
+        _8 = BitAnd(move _6, move _7);
+        assume(move _8);
+        _2 = move _4 as u32 (IntToInt);
+        StorageDead(_3);
+        _9 = CheckedAdd(_2, const _);
+        assert(!move (_9.1: bool), "attempt to compute `{} + {}`, which would overflow", move _2, const _) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = move (_9.0: u32);
+        StorageDead(_2);
+        return;
+    }
+}

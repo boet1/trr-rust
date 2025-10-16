@@ -1,0 +1,108 @@
+// MIR for `rate::<impl at token-lending\sdk\src\math\rate.rs:159:1: 159:26>::try_mul` before PreCodegen
+
+fn rate::<impl at token-lending\sdk\src\math\rate.rs:159:1: 159:26>::try_mul(_1: rate::Rate, _2: u64) -> Result<rate::Rate, ProgramError> {
+    debug self => _1;
+    debug rhs => _2;
+    let mut _0: std::result::Result<math::rate::Rate, solana_program::program_error::ProgramError>;
+    let mut _3: math::rate::Rate;
+    let mut _4: math::rate::U128;
+    let mut _5: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, math::rate::U128>;
+    let mut _6: std::result::Result<math::rate::U128, error::LendingError>;
+    let mut _7: std::option::Option<math::rate::U128>;
+    let mut _8: math::rate::U128;
+    let mut _9: math::rate::U128;
+    let mut _10: u64;
+    let mut _11: error::LendingError;
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _16: math::rate::U128;
+    scope 1 {
+        debug residual => _13;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _16;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = (_1.0: math::rate::U128);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _2;
+        _9 = <U128 as From<u64>>::from(move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        _7 = U128::checked_mul(move _8, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_11);
+        _11 = LendingError::MathOverflow;
+        _6 = Option::<U128>::ok_or::<LendingError>(move _7, move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_7);
+        _5 = <Result<U128, LendingError> as Try>::branch(move _6) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_6);
+        _12 = discriminant(_5);
+        switchInt(move _12) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_16);
+        _16 = ((_5 as Continue).0: math::rate::U128);
+        _4 = _16;
+        StorageDead(_16);
+        _3 = rate::Rate(move _4);
+        StorageDead(_4);
+        _0 = Result::<rate::Rate, ProgramError>::Ok(move _3);
+        StorageDead(_3);
+        StorageDead(_5);
+        goto -> bb9;
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_13);
+        _13 = move ((_5 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_15);
+        _15 = move _13;
+        _0 = <Result<rate::Rate, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _15) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_5);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+}

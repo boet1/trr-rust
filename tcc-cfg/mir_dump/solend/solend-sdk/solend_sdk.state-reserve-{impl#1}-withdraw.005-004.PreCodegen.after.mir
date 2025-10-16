@@ -1,0 +1,157 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:669:1: 669:22>::withdraw` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:669:1: 669:22>::withdraw(_1: &mut ReserveLiquidity, _2: u64) -> Result<(), ProgramError> {
+    debug self => _1;
+    debug liquidity_amount => _2;
+    let mut _0: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u64;
+    let mut _6: u64;
+    let mut _7: !;
+    let _8: ();
+    let mut _9: &str;
+    let _10: &str;
+    let mut _11: solana_program::program_error::ProgramError;
+    let mut _12: error::LendingError;
+    let mut _13: u64;
+    let mut _14: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, u64>;
+    let mut _15: std::result::Result<u64, error::LendingError>;
+    let mut _16: std::option::Option<u64>;
+    let mut _17: u64;
+    let mut _18: u64;
+    let mut _19: error::LendingError;
+    let mut _20: isize;
+    let _21: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _22: !;
+    let mut _23: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _24: u64;
+    let mut _25: ();
+    scope 1 {
+        debug residual => _21;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _24;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        StorageLive(_6);
+        _6 = ((*_1).5: u64);
+        _4 = Gt(move _5, move _6);
+        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const "Withdraw amount cannot exceed available amount";
+        _9 = &(*_10);
+        _8 = solana_program::log::sol_log(move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = LendingError::InsufficientLiquidity;
+        _11 = <LendingError as Into<ProgramError>>::into(move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        _0 = Result::<(), ProgramError>::Err(move _11);
+        StorageDead(_11);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb12;
+    }
+
+    bb4: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = ((*_1).5: u64);
+        StorageLive(_18);
+        _18 = _2;
+        _16 = core::num::<impl u64>::checked_sub(move _17, move _18) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageLive(_19);
+        _19 = LendingError::MathOverflow;
+        _15 = Option::<u64>::ok_or::<LendingError>(move _16, move _19) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_19);
+        StorageDead(_16);
+        _14 = <Result<u64, LendingError> as Try>::branch(move _15) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_15);
+        _20 = discriminant(_14);
+        switchInt(move _20) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_24);
+        _24 = ((_14 as Continue).0: u64);
+        _13 = _24;
+        StorageDead(_24);
+        ((*_1).5: u64) = move _13;
+        StorageDead(_13);
+        StorageDead(_14);
+        StorageLive(_25);
+        _25 = ();
+        _0 = Result::<(), ProgramError>::Ok(move _25);
+        StorageDead(_25);
+        goto -> bb12;
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_21);
+        _21 = move ((_14 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_23);
+        _23 = move _21;
+        _0 = <Result<(), ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _23) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageDead(_13);
+        StorageDead(_14);
+        goto -> bb12;
+    }
+
+    bb12: {
+        return;
+    }
+}

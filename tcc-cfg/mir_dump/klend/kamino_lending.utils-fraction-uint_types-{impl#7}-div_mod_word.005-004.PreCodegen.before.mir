@@ -1,0 +1,167 @@
+// MIR for `uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::div_mod_word` before PreCodegen
+
+fn uint_types::<impl at C:\Users\Yellow Letter HQ\.cargo\registry\src\index.crates.io-6f17d22bba15001f\uint-0.9.5\src\uint.rs:573:3: 573:13>::div_mod_word(_1: u64, _2: u64, _3: u64) -> (u64, u64) {
+    debug hi => _1;
+    debug lo => _2;
+    debug y => _3;
+    let mut _0: (u64, u64);
+    let _4: ();
+    let mut _5: bool;
+    let _6: ();
+    let mut _7: bool;
+    let mut _8: u64;
+    let mut _9: u64;
+    let mut _10: !;
+    let _11: u128;
+    let mut _12: u128;
+    let mut _13: u128;
+    let mut _14: u64;
+    let mut _15: u32;
+    let mut _16: bool;
+    let mut _17: u128;
+    let mut _18: u64;
+    let mut _19: (u128, bool);
+    let mut _21: u64;
+    let mut _22: u64;
+    let mut _23: u128;
+    let mut _24: u128;
+    let mut _25: u128;
+    let mut _26: bool;
+    let mut _27: u64;
+    let mut _28: u128;
+    let mut _29: u128;
+    let mut _30: u128;
+    let mut _31: bool;
+    scope 1 {
+        debug x => _11;
+        let _20: u128;
+        scope 2 {
+            debug y => _20;
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const true;
+        switchInt(move _5) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = _1;
+        StorageLive(_9);
+        _9 = _3;
+        _7 = Lt(move _8, move _9);
+        switchInt(move _7) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _6 = const ();
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = const ();
+        goto -> bb5;
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = panic(const "assertion failed: hi < y") -> unwind continue;
+    }
+
+    bb4: {
+        _4 = const ();
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _1;
+        _13 = <u128 as From<u64>>::from(move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        _15 = const 64_i32 as u32 (IntToInt);
+        _16 = Lt(move _15, const 128_u32);
+        assert(move _16, "attempt to shift left by `{}`, which would overflow", const 64_i32) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _12 = Shl(move _13, const 64_i32);
+        StorageDead(_13);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _2;
+        _17 = <u128 as From<u64>>::from(move _18) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_18);
+        _19 = CheckedAdd(_12, _17);
+        assert(!move (_19.1: bool), "attempt to compute `{} + {}`, which would overflow", move _12, move _17) -> [success: bb9, unwind continue];
+    }
+
+    bb9: {
+        _11 = move (_19.0: u128);
+        StorageDead(_17);
+        StorageDead(_12);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _3;
+        _20 = <u128 as From<u64>>::from(move _21) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = _11;
+        StorageLive(_25);
+        _25 = _20;
+        _26 = Eq(_25, const 0_u128);
+        assert(!move _26, "attempt to divide `{}` by zero", _24) -> [success: bb11, unwind continue];
+    }
+
+    bb11: {
+        _23 = Div(move _24, move _25);
+        StorageDead(_25);
+        StorageDead(_24);
+        _22 = move _23 as u64 (IntToInt);
+        StorageDead(_23);
+        StorageLive(_27);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = _11;
+        StorageLive(_30);
+        _30 = _20;
+        _31 = Eq(_30, const 0_u128);
+        assert(!move _31, "attempt to calculate the remainder of `{}` with a divisor of zero", _29) -> [success: bb12, unwind continue];
+    }
+
+    bb12: {
+        _28 = Rem(move _29, move _30);
+        StorageDead(_30);
+        StorageDead(_29);
+        _27 = move _28 as u64 (IntToInt);
+        StorageDead(_28);
+        _0 = (move _22, move _27);
+        StorageDead(_27);
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_11);
+        return;
+    }
+}

@@ -1,0 +1,205 @@
+// MIR for `margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::margin_shortage` after PreCodegen
+
+fn margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::margin_shortage(_1: &MarginCalculation) -> std::result::Result<u128, error::ErrorCode> {
+    debug self => _1;
+    let mut _0: std::result::Result<u128, error::ErrorCode>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: u128;
+    let mut _5: !;
+    let _6: ();
+    let mut _7: &str;
+    let _8: &str;
+    let mut _9: error::ErrorCode;
+    let mut _10: u128;
+    let mut _11: i128;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _13: std::result::Result<i128, error::ErrorCode>;
+    let mut _14: i128;
+    let mut _15: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _16: std::result::Result<i128, error::ErrorCode>;
+    let mut _17: u128;
+    let mut _18: isize;
+    let _19: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _20: !;
+    let mut _21: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _22: i128;
+    let mut _23: i128;
+    let mut _24: &state::margin_calculation::MarginCalculation;
+    let mut _25: isize;
+    let _26: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _27: !;
+    let mut _28: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _29: i128;
+    scope 1 {
+        debug residual => _19;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _22;
+        scope 4 {
+        }
+    }
+    scope 5 {
+        debug residual => _26;
+        scope 6 {
+        }
+    }
+    scope 7 {
+        debug val => _29;
+        scope 8 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (((*_1).0: state::margin_calculation::MarginContext).4: u128);
+        _3 = Eq(move _4, const 0_u128);
+        switchInt(move _3) -> [0: bb3, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const "margin buffer mode not enabled";
+        _7 = &(*_8);
+        _6 = solana_program::log::sol_log(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageLive(_9);
+        _9 = error::ErrorCode::InvalidMarginCalculation;
+        _0 = std::result::Result::<u128, error::ErrorCode>::Err(move _9);
+        StorageDead(_9);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb18;
+    }
+
+    bb3: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = ((*_1).4: u128);
+        _16 = <u128 as Cast>::cast::<i128>(move _17) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_17);
+        _15 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _16) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_16);
+        _18 = discriminant(_15);
+        switchInt(move _18) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_22);
+        _22 = ((_15 as Continue).0: i128);
+        _14 = _22;
+        StorageDead(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &(*_1);
+        _23 = MarginCalculation::get_total_collateral_plus_buffer(move _24) -> [return: bb10, unwind continue];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_19);
+        _19 = ((_15 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_21);
+        _21 = _19;
+        _0 = <std::result::Result<u128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _21) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_21);
+        StorageDead(_19);
+        StorageDead(_14);
+        StorageDead(_13);
+        goto -> bb17;
+    }
+
+    bb10: {
+        StorageDead(_24);
+        _13 = <i128 as SafeMath>::safe_sub(move _14, move _23) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        StorageDead(_14);
+        _12 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _13) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_13);
+        _25 = discriminant(_12);
+        switchInt(move _25) -> [0: bb13, 1: bb14, otherwise: bb7];
+    }
+
+    bb13: {
+        StorageLive(_29);
+        _29 = ((_12 as Continue).0: i128);
+        _11 = _29;
+        StorageDead(_29);
+        _10 = core::num::<impl i128>::unsigned_abs(move _11) -> [return: bb16, unwind continue];
+    }
+
+    bb14: {
+        StorageLive(_26);
+        _26 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_28);
+        _28 = _26;
+        _0 = <std::result::Result<u128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _28) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_28);
+        StorageDead(_26);
+        goto -> bb17;
+    }
+
+    bb16: {
+        StorageDead(_11);
+        _0 = std::result::Result::<u128, error::ErrorCode>::Ok(move _10);
+        StorageDead(_10);
+        StorageDead(_15);
+        StorageDead(_12);
+        goto -> bb18;
+    }
+
+    bb17: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_15);
+        StorageDead(_12);
+        goto -> bb18;
+    }
+
+    bb18: {
+        return;
+    }
+}

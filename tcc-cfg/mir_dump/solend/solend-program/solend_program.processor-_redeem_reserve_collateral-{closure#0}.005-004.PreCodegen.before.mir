@@ -1,0 +1,34 @@
+// MIR for `_redeem_reserve_collateral::{closure#0}` before PreCodegen
+
+fn _redeem_reserve_collateral::{closure#0}(_1: {closure@token-lending\program\src\processor.rs:889:22: 889:27}, _2: ProgramError) -> ProgramError {
+    debug err => _2;
+    let mut _0: solana_program::program_error::ProgramError;
+    let _3: ();
+    let mut _4: &str;
+    let _5: &str;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const "Market outflow limit exceeded! Please try again later.";
+        _4 = &(*_5);
+        _3 = solana_program::log::sol_log(move _4) -> [return: bb1, unwind: bb2];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = move _2;
+        return;
+    }
+
+    bb2 (cleanup): {
+        drop(_2) -> [return: bb3, unwind terminate(cleanup)];
+    }
+
+    bb3 (cleanup): {
+        resume;
+    }
+}

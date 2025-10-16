@@ -1,0 +1,52 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:125:5: 125:21>::try_from_primitive` before PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:125:5: 125:21>::try_from_primitive(_1: u8) -> std::result::Result<reserve::ReserveFarmKind, TryFromPrimitiveError<reserve::ReserveFarmKind>> {
+    debug number => _1;
+    let mut _0: std::result::Result<state::reserve::ReserveFarmKind, num_enum::TryFromPrimitiveError<state::reserve::ReserveFarmKind>>;
+    let mut _2: state::reserve::ReserveFarmKind;
+    let mut _3: state::reserve::ReserveFarmKind;
+    let mut _4: num_enum::TryFromPrimitiveError<state::reserve::ReserveFarmKind>;
+    let mut _5: u8;
+    scope 1 {
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        switchInt(_1) -> [0: bb2, 1: bb3, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _1;
+        _4 = TryFromPrimitiveError::<reserve::ReserveFarmKind>::new(move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb2: {
+        StorageLive(_2);
+        _2 = reserve::ReserveFarmKind::Collateral;
+        _0 = std::result::Result::<reserve::ReserveFarmKind, TryFromPrimitiveError<reserve::ReserveFarmKind>>::Ok(move _2);
+        StorageDead(_2);
+        goto -> bb5;
+    }
+
+    bb3: {
+        StorageLive(_3);
+        _3 = reserve::ReserveFarmKind::Debt;
+        _0 = std::result::Result::<reserve::ReserveFarmKind, TryFromPrimitiveError<reserve::ReserveFarmKind>>::Ok(move _3);
+        StorageDead(_3);
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_5);
+        _0 = std::result::Result::<reserve::ReserveFarmKind, TryFromPrimitiveError<reserve::ReserveFarmKind>>::Err(move _4);
+        StorageDead(_4);
+        goto -> bb5;
+    }
+
+    bb5: {
+        return;
+    }
+}

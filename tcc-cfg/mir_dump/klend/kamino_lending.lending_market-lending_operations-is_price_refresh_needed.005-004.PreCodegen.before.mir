@@ -1,0 +1,102 @@
+// MIR for `is_price_refresh_needed` before PreCodegen
+
+fn is_price_refresh_needed(_1: &reserve::Reserve, _2: &state::lending_market::LendingMarket, _3: i64) -> bool {
+    debug reserve => _1;
+    debug market => _2;
+    debug current_ts => _3;
+    let mut _0: bool;
+    let _4: u64;
+    let mut _5: i64;
+    let mut _9: u8;
+    let mut _11: u64;
+    let mut _12: u64;
+    let mut _13: u64;
+    let mut _14: (u64, bool);
+    let mut _15: bool;
+    let mut _16: u64;
+    let mut _17: u64;
+    let mut _18: u64;
+    let mut _19: u64;
+    scope 1 {
+        debug current_ts => _4;
+        let _6: u64;
+        scope 2 {
+            debug price_last_updated_ts => _6;
+            let _7: u64;
+            scope 3 {
+                debug price_max_age => _7;
+                let _8: u64;
+                scope 4 {
+                    debug price_refresh_trigger_to_max_age_pct => _8;
+                    let _10: u64;
+                    scope 5 {
+                        debug price_refresh_trigger_to_max_age_secs => _10;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _3;
+        _4 = move _5 as u64 (IntToInt);
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = (((*_1).5: state::reserve::ReserveLiquidity).6: u64);
+        StorageLive(_7);
+        _7 = ((((*_1).9: state::reserve::ReserveConfig).19: state::token_info::TokenInfo).3: u64);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = ((*_2).9: u8);
+        _8 = <u8 as Into<u64>>::into(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _7;
+        StorageLive(_13);
+        _13 = _8;
+        _14 = CheckedMul(_12, _13);
+        assert(!move (_14.1: bool), "attempt to compute `{} * {}`, which would overflow", move _12, move _13) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _11 = move (_14.0: u64);
+        StorageDead(_13);
+        StorageDead(_12);
+        _15 = Eq(const 100_u64, const 0_u64);
+        assert(!move _15, "attempt to divide `{}` by zero", _11) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _10 = Div(move _11, const 100_u64);
+        StorageDead(_11);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _4;
+        StorageLive(_18);
+        _18 = _6;
+        _16 = core::num::<impl u64>::saturating_sub(move _17, move _18) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageLive(_19);
+        _19 = _10;
+        _0 = Ge(move _16, move _19);
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        return;
+    }
+}

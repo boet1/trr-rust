@@ -1,0 +1,44 @@
+// MIR for `get_writable_perp_market_set` before PreCodegen
+
+fn get_writable_perp_market_set(_1: u16) -> BTreeSet<u16> {
+    debug market_index => _1;
+    let mut _0: std::collections::BTreeSet<u16>;
+    let mut _2: std::collections::BTreeSet<u16>;
+    let _3: bool;
+    let mut _4: &mut std::collections::BTreeSet<u16>;
+    let mut _5: u16;
+    scope 1 {
+        debug writable_markets => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = BTreeSet::<u16>::new() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &mut _2;
+        StorageLive(_5);
+        _5 = _1;
+        _3 = BTreeSet::<u16>::insert(move _4, move _5) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        _0 = move _2;
+        StorageDead(_2);
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

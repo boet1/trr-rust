@@ -1,0 +1,181 @@
+// MIR for `admin::handle_initialize` after PreCodegen
+
+fn admin::handle_initialize(_1: anchor_lang::context::Context<'_, '_, '_, '_, admin::Initialize<'_>>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _2: anchor_lang::prelude::Pubkey;
+    let _3: u8;
+    let mut _4: (anchor_lang::prelude::Pubkey, u8);
+    let mut _5: &[&[u8]];
+    let mut _6: &[&[u8]; 1];
+    let _7: &[&[u8]; 1];
+    let _8: [&[u8]; 1];
+    let mut _9: &[u8];
+    let _10: &[u8];
+    let mut _11: &[u8; 12];
+    let _12: &[u8; 12];
+    let mut _13: &anchor_lang::prelude::Pubkey;
+    let mut _14: state::state::State;
+    let mut _15: anchor_lang::prelude::Pubkey;
+    let mut _16: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _17: &anchor_lang::prelude::Signer<'_>;
+    let mut _18: u8;
+    let mut _19: anchor_lang::prelude::Pubkey;
+    let mut _20: anchor_lang::prelude::Pubkey;
+    let mut _21: state::state::OracleGuardRails;
+    let mut _22: anchor_lang::prelude::Pubkey;
+    let mut _23: u8;
+    let mut _24: anchor_lang::prelude::Pubkey;
+    let mut _25: state::state::FeeStructure;
+    let mut _26: state::state::FeeStructure;
+    let mut _27: [u8; 9];
+    let mut _28: &mut state::state::State;
+    let mut _29: &mut anchor_lang::prelude::Account<'_, state::state::State>;
+    let mut _30: ();
+    let mut _31: &anchor_lang::prelude::Pubkey;
+    let mut _32: &mut instructions::admin::Initialize<'_>;
+    let mut _33: &anchor_lang::prelude::Pubkey;
+    let mut _34: &mut instructions::admin::Initialize<'_>;
+    let mut _35: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>;
+    let mut _36: *const anchor_lang::prelude::Account<'_, state::state::State>;
+    scope 1 {
+        debug drift_signer => _2;
+        debug drift_signer_nonce => _3;
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = const b"drift_signer";
+        _11 = &(*_12);
+        _10 = <[u8; 12] as AsRef<[u8]>>::as_ref(move _11) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _9 = &(*_10);
+        StorageDead(_11);
+        _8 = [move _9];
+        StorageDead(_9);
+        _7 = &_8;
+        _6 = &(*_7);
+        _5 = move _6 as &[&[u8]] (PointerCoercion(Unsize));
+        StorageDead(_6);
+        StorageLive(_13);
+        _31 = deref_copy (_1.0: &anchor_lang::prelude::Pubkey);
+        _13 = &(*_31);
+        _4 = anchor_lang::prelude::Pubkey::find_program_address(move _5, move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_13);
+        StorageDead(_5);
+        StorageLive(_2);
+        _2 = (_4.0: anchor_lang::prelude::Pubkey);
+        StorageLive(_3);
+        _3 = (_4.1: u8);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _32 = deref_copy (_1.1: &mut instructions::admin::Initialize<'_>);
+        _17 = &((*_32).0: anchor_lang::prelude::Signer<'_>);
+        _16 = <anchor_lang::prelude::Signer<'_> as Deref>::deref(move _17) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_17);
+        _33 = deref_copy ((*_16).0: &anchor_lang::prelude::Pubkey);
+        _15 = (*_33);
+        StorageLive(_18);
+        _18 = state::state::ExchangeStatus::active() -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageLive(_19);
+        _19 = <anchor_lang::prelude::Pubkey as Default>::default() -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageLive(_20);
+        _20 = <anchor_lang::prelude::Pubkey as Default>::default() -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageLive(_21);
+        _21 = <state::state::OracleGuardRails as Default>::default() -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageLive(_22);
+        _22 = _2;
+        StorageLive(_23);
+        _23 = _3;
+        StorageLive(_24);
+        _24 = <anchor_lang::prelude::Pubkey as Default>::default() -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageLive(_25);
+        _25 = state::state::FeeStructure::perps_default() -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageLive(_26);
+        _26 = state::state::FeeStructure::spot_default() -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageLive(_27);
+        _27 = [const 0_u8; 9];
+        _14 = state::state::State { admin: move _15, whitelist_mint: move _19, discount_mint: move _20, signer: move _22, srm_vault: move _24, perp_fee_structure: move _25, spot_fee_structure: move _26, oracle_guard_rails: move _21, number_of_authorities: const 0_u64, number_of_sub_accounts: const 0_u64, lp_cooldown_time: const 0_u64, liquidation_margin_buffer_ratio: const _, settlement_duration: const 0_u16, number_of_markets: const 0_u16, number_of_spot_markets: const 0_u16, signer_nonce: move _23, min_perp_auction_duration: const 10_u8, default_market_order_time_in_force: const 60_u8, default_spot_auction_duration: const 10_u8, exchange_status: move _18, liquidation_duration: const 0_u8, initial_pct_to_liquidate: const 0_u16, max_number_of_sub_accounts: const 0_u16, max_initialize_user_fee: const 0_u16, feature_bit_flags: const 0_u8, padding: move _27 };
+        StorageDead(_27);
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        StorageDead(_15);
+        StorageLive(_28);
+        StorageLive(_29);
+        _34 = deref_copy (_1.1: &mut instructions::admin::Initialize<'_>);
+        _35 = deref_copy ((*_34).1: std::boxed::Box<anchor_lang::prelude::Account<'_, state::state::State>>);
+        _36 = (((_35.0: std::ptr::Unique<anchor_lang::prelude::Account<'_, state::state::State>>).0: std::ptr::NonNull<anchor_lang::prelude::Account<'_, state::state::State>>).0: *const anchor_lang::prelude::Account<'_, state::state::State>);
+        _29 = &mut (*_36);
+        _28 = <anchor_lang::prelude::Account<'_, state::state::State> as DerefMut>::deref_mut(move _29) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_29);
+        (*_28) = move _14;
+        StorageDead(_14);
+        StorageDead(_28);
+        StorageDead(_16);
+        StorageLive(_30);
+        _30 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _30);
+        StorageDead(_30);
+        StorageDead(_3);
+        StorageDead(_2);
+        return;
+    }
+}
+
+alloc170 (size: 12, align: 1) {
+    64 72 69 66 74 5f 73 69 67 6e 65 72             │ drift_signer
+}

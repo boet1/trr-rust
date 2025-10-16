@@ -1,0 +1,184 @@
+// MIR for `obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::find_liquidity_in_borrows` after PreCodegen
+
+fn obligation::<impl at token-lending\sdk\src\state\obligation.rs:68:1: 68:16>::find_liquidity_in_borrows(_1: &obligation::Obligation, _2: Pubkey) -> Result<(&obligation::ObligationLiquidity, usize), ProgramError> {
+    debug self => _1;
+    debug borrow_reserve => _2;
+    let mut _0: std::result::Result<(&state::obligation::ObligationLiquidity, usize), solana_program::program_error::ProgramError>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: &std::vec::Vec<state::obligation::ObligationLiquidity>;
+    let mut _6: !;
+    let _7: ();
+    let mut _8: &str;
+    let _9: &str;
+    let mut _10: solana_program::program_error::ProgramError;
+    let mut _11: error::LendingError;
+    let _12: usize;
+    let mut _13: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, usize>;
+    let mut _14: std::result::Result<usize, error::LendingError>;
+    let mut _15: std::option::Option<usize>;
+    let mut _16: &state::obligation::Obligation;
+    let mut _17: solana_program::pubkey::Pubkey;
+    let mut _18: error::LendingError;
+    let mut _19: isize;
+    let _20: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _23: usize;
+    let mut _24: (&state::obligation::ObligationLiquidity, usize);
+    let mut _25: &state::obligation::ObligationLiquidity;
+    let _26: &state::obligation::ObligationLiquidity;
+    let _27: &state::obligation::ObligationLiquidity;
+    let mut _28: &std::vec::Vec<state::obligation::ObligationLiquidity>;
+    let mut _29: usize;
+    let mut _30: usize;
+    scope 1 {
+        debug liquidity_index => _12;
+    }
+    scope 2 {
+        debug residual => _20;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _23;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>);
+        _4 = Vec::<obligation::ObligationLiquidity>::is_empty(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _4) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = const "Obligation has no borrows";
+        _8 = &(*_9);
+        _7 = solana_program::log::sol_log(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = LendingError::ObligationBorrowsEmpty;
+        _10 = <LendingError as Into<ProgramError>>::into(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        _0 = Result::<(&obligation::ObligationLiquidity, usize), ProgramError>::Err(move _10);
+        StorageDead(_10);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb14;
+    }
+
+    bb5: {
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &(*_1);
+        StorageLive(_17);
+        _17 = _2;
+        _15 = obligation::Obligation::_find_liquidity_index_in_borrows(move _16, move _17) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageLive(_18);
+        _18 = LendingError::InvalidObligationLiquidity;
+        _14 = Option::<usize>::ok_or::<LendingError>(move _15, move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageDead(_15);
+        _13 = <Result<usize, LendingError> as Try>::branch(move _14) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_14);
+        _19 = discriminant(_13);
+        switchInt(move _19) -> [0: bb9, 1: bb11, otherwise: bb10];
+    }
+
+    bb9: {
+        StorageLive(_23);
+        _23 = ((_13 as Continue).0: usize);
+        _12 = _23;
+        StorageDead(_23);
+        StorageDead(_13);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &((*_1).5: std::vec::Vec<state::obligation::ObligationLiquidity>);
+        StorageLive(_29);
+        _29 = _12;
+        _27 = <Vec<obligation::ObligationLiquidity> as Index<usize>>::index(move _28, move _29) -> [return: bb13, unwind continue];
+    }
+
+    bb10: {
+        unreachable;
+    }
+
+    bb11: {
+        StorageLive(_20);
+        _20 = move ((_13 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_22);
+        _22 = move _20;
+        _0 = <Result<(&obligation::ObligationLiquidity, usize), ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _22) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb14;
+    }
+
+    bb13: {
+        StorageDead(_29);
+        StorageDead(_28);
+        _26 = &(*_27);
+        _25 = &(*_26);
+        StorageLive(_30);
+        _30 = _12;
+        _24 = (move _25, move _30);
+        StorageDead(_30);
+        StorageDead(_25);
+        _0 = Result::<(&obligation::ObligationLiquidity, usize), ProgramError>::Ok(move _24);
+        StorageDead(_24);
+        StorageDead(_12);
+        StorageDead(_27);
+        StorageDead(_26);
+        goto -> bb14;
+    }
+
+    bb14: {
+        return;
+    }
+}

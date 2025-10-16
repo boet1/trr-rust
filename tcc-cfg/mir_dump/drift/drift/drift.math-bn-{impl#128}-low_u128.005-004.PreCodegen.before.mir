@@ -1,0 +1,76 @@
+// MIR for `bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:510:4: 510:14>::low_u128` before PreCodegen
+
+fn bn::<impl at /home/bitnami/.cargo/registry/src/index.crates.io-6f17d22bba15001f/uint-0.9.1/src/uint.rs:510:4: 510:14>::low_u128(_1: &U192) -> u128 {
+    debug self => _1;
+    let mut _0: u128;
+    let _2: &[u64; 3];
+    let mut _3: u128;
+    let mut _4: u128;
+    let mut _5: u64;
+    let _6: usize;
+    let mut _7: usize;
+    let mut _8: bool;
+    let mut _9: u32;
+    let mut _10: bool;
+    let mut _11: u128;
+    let mut _12: u64;
+    let _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
+    let mut _16: (u128, bool);
+    scope 1 {
+        debug arr => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = &((*_1).0: [u64; 3]);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = const 1_usize;
+        _7 = Len((*_2));
+        _8 = Lt(_6, _7);
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = (*_2)[_6];
+        _4 = move _5 as u128 (IntToInt);
+        StorageDead(_5);
+        _9 = const 64_i32 as u32 (IntToInt);
+        _10 = Lt(move _9, const 128_u32);
+        assert(move _10, "attempt to shift left by `{}`, which would overflow", const 64_i32) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _3 = Shl(move _4, const 64_i32);
+        StorageDead(_4);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = const 0_usize;
+        _14 = Len((*_2));
+        _15 = Lt(_13, _14);
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = (*_2)[_13];
+        _11 = move _12 as u128 (IntToInt);
+        StorageDead(_12);
+        _16 = CheckedAdd(_3, _11);
+        assert(!move (_16.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, move _11) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _0 = move (_16.0: u128);
+        StorageDead(_11);
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_13);
+        StorageDead(_6);
+        return;
+    }
+}

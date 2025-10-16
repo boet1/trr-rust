@@ -1,0 +1,32 @@
+// MIR for `determine_spot_fee_tier` after PreCodegen
+
+fn determine_spot_fee_tier(_1: &UserStats, _2: &state::state::FeeStructure) -> std::result::Result<&state::state::FeeTier, error::ErrorCode> {
+    debug _user_stats => _1;
+    debug fee_structure => _2;
+    let mut _0: std::result::Result<&state::state::FeeTier, error::ErrorCode>;
+    let mut _3: &state::state::FeeTier;
+    let _4: &state::state::FeeTier;
+    let _5: usize;
+    let mut _6: usize;
+    let mut _7: bool;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const 0_usize;
+        _6 = Len(((*_2).0: [state::state::FeeTier; 10]));
+        _7 = Lt(_5, _6);
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = &((*_2).0: [state::state::FeeTier; 10])[_5];
+        _3 = &(*_4);
+        _0 = std::result::Result::<&state::state::FeeTier, error::ErrorCode>::Ok(move _3);
+        StorageDead(_3);
+        StorageDead(_5);
+        StorageDead(_4);
+        return;
+    }
+}

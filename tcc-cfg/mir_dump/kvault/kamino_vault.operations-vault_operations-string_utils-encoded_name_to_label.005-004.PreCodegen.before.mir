@@ -1,0 +1,49 @@
+// MIR for `encoded_name_to_label` before PreCodegen
+
+fn encoded_name_to_label(_1: &[u8], _2: anchor_lang::prelude::Pubkey) -> String {
+    debug encoded_name => _1;
+    debug mint => _2;
+    let mut _0: std::string::String;
+    let mut _3: std::result::Result<std::string::String, std::str::Utf8Error>;
+    let mut _4: std::result::Result<&str, std::str::Utf8Error>;
+    let mut _5: &[u8];
+    let mut _6: {closure@programs\kvault\src\operations\vault_operations.rs:909:18: 909:21};
+    let mut _7: {closure@programs\kvault\src\operations\vault_operations.rs:910:29: 910:32};
+    let mut _8: &anchor_lang::prelude::Pubkey;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = from_utf8(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        _6 = {closure@programs\kvault\src\operations\vault_operations.rs:909:18: 909:21};
+        _3 = std::result::Result::<&str, Utf8Error>::map::<String, {closure@programs\kvault\src\operations\vault_operations.rs:909:18: 909:21}>(move _4, move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &_2;
+        _7 = {closure@programs\kvault\src\operations\vault_operations.rs:910:29: 910:32} { mint: move _8 };
+        StorageDead(_8);
+        _0 = std::result::Result::<String, Utf8Error>::unwrap_or_else::<{closure@programs\kvault\src\operations\vault_operations.rs:910:29: 910:32}>(move _3, move _7) -> [return: bb3, unwind: bb4];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageDead(_3);
+        return;
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

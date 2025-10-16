@@ -1,0 +1,87 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::is_open_order_for_market` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::is_open_order_for_market(_1: &Order, _2: u16, _3: &state::user::MarketType) -> bool {
+    debug self => _1;
+    debug market_index => _2;
+    debug market_type => _3;
+    let mut _0: bool;
+    let mut _4: bool;
+    let mut _5: u16;
+    let mut _6: u16;
+    let mut _7: bool;
+    let mut _8: &state::user::OrderStatus;
+    let mut _9: &state::user::OrderStatus;
+    let _10: state::user::OrderStatus;
+    let mut _11: &&state::user::MarketType;
+    let _12: &state::user::MarketType;
+    let mut _13: &&state::user::MarketType;
+    let mut _14: &state::user::OrderStatus;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).11: u16);
+        StorageLive(_6);
+        _6 = _2;
+        _4 = Eq(move _5, move _6);
+        switchInt(move _4) -> [0: bb5, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &((*_1).12: state::user::OrderStatus);
+        StorageLive(_9);
+        _14 = const _;
+        _9 = &(*_14);
+        _7 = <OrderStatus as PartialEq>::eq(move _8, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _7) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &((*_1).14: state::user::MarketType);
+        _11 = &_12;
+        StorageLive(_13);
+        _13 = &_3;
+        _0 = <&state::user::MarketType as PartialEq>::eq(move _11, move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb6;
+    }
+
+    bb6: {
+        _0 = const false;
+        goto -> bb8;
+    }
+
+    bb7: {
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb8;
+    }
+
+    bb8: {
+        StorageDead(_7);
+        StorageDead(_4);
+        return;
+    }
+}

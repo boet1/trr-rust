@@ -1,0 +1,70 @@
+// MIR for `find_bids_and_asks_from_users::{closure#0}::{closure#0}` after PreCodegen
+
+fn find_bids_and_asks_from_users::{closure#0}::{closure#0}(_1: &mut {closure@programs/drift/src/math/orders.rs:1241:51: 1241:58}, _2: &Level) -> std::cmp::Ordering {
+    debug level => _2;
+    debug direction => (*((*_1).0: &controller::position::PositionDirection));
+    debug price => (*((*_1).1: &u64));
+    let mut _0: std::cmp::Ordering;
+    let mut _3: isize;
+    let mut _4: &u64;
+    let mut _5: &u64;
+    let _6: &u64;
+    let mut _7: &u64;
+    let mut _8: &u64;
+    let _9: &u64;
+    let mut _10: &controller::position::PositionDirection;
+    let mut _11: &controller::position::PositionDirection;
+    let mut _12: &u64;
+    let mut _13: &u64;
+
+    bb0: {
+        _10 = deref_copy ((*_1).0: &controller::position::PositionDirection);
+        _11 = deref_copy ((*_1).0: &controller::position::PositionDirection);
+        _3 = discriminant((*_11));
+        switchInt(move _3) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_7);
+        _7 = &((*_2).0: u64);
+        StorageLive(_8);
+        StorageLive(_9);
+        _12 = deref_copy ((*_1).1: &u64);
+        _9 = &(*_12);
+        _8 = &(*_9);
+        _0 = <u64 as Ord>::cmp(move _7, move _8) -> [return: bb5, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_4);
+        _13 = deref_copy ((*_1).1: &u64);
+        _4 = &(*_13);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_2).0: u64);
+        _5 = &(*_6);
+        _0 = <u64 as Ord>::cmp(move _4, move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb6;
+    }
+
+    bb6: {
+        return;
+    }
+}

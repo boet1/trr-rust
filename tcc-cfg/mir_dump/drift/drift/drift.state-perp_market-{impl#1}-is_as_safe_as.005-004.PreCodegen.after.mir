@@ -1,0 +1,54 @@
+// MIR for `state::perp_market::<impl at programs/drift/src/state/perp_market.rs:121:1: 121:18>::is_as_safe_as` after PreCodegen
+
+fn state::perp_market::<impl at programs/drift/src/state/perp_market.rs:121:1: 121:18>::is_as_safe_as(_1: &state::perp_market::ContractTier, _2: &state::perp_market::ContractTier, _3: &state::spot_market::AssetTier) -> bool {
+    debug self => _1;
+    debug best_contract => _2;
+    debug best_asset => _3;
+    let mut _0: bool;
+    let mut _4: bool;
+    let mut _5: &state::perp_market::ContractTier;
+    let mut _6: &state::perp_market::ContractTier;
+    let mut _7: &state::perp_market::ContractTier;
+    let mut _8: &state::spot_market::AssetTier;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        StorageLive(_6);
+        _6 = &(*_2);
+        _4 = state::perp_market::ContractTier::is_as_safe_as_contract(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_7);
+        _7 = &(*_1);
+        StorageLive(_8);
+        _8 = &(*_3);
+        _0 = state::perp_market::ContractTier::is_as_safe_as_asset(move _7, move _8) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _0 = const false;
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        return;
+    }
+}

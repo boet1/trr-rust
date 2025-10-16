@@ -1,0 +1,174 @@
+// MIR for `decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::try_floor_u64` before PreCodegen
+
+fn decimal::<impl at token-lending\sdk\src\math\decimal.rs:32:1: 32:13>::try_floor_u64(_1: &decimal::Decimal) -> Result<u64, ProgramError> {
+    debug self => _1;
+    let mut _0: std::result::Result<u64, solana_program::program_error::ProgramError>;
+    let _2: math::decimal::U192;
+    let mut _3: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, math::decimal::U192>;
+    let mut _4: std::result::Result<math::decimal::U192, error::LendingError>;
+    let mut _5: std::option::Option<math::decimal::U192>;
+    let mut _6: math::decimal::U192;
+    let mut _7: math::decimal::U192;
+    let mut _8: error::LendingError;
+    let mut _9: isize;
+    let _10: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _11: !;
+    let mut _12: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let _13: math::decimal::U192;
+    let mut _14: u64;
+    let mut _15: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, u64>;
+    let mut _16: std::result::Result<u64, error::LendingError>;
+    let mut _17: std::result::Result<u64, &str>;
+    let mut _18: math::decimal::U192;
+    let mut _19: {closure@token-lending\sdk\src\math\decimal.rs:107:44: 107:47};
+    let mut _20: isize;
+    let mut _22: !;
+    let mut _23: std::result::Result<std::convert::Infallible, error::LendingError>;
+    scope 1 {
+        debug ceil_val => _2;
+        let _21: std::result::Result<std::convert::Infallible, error::LendingError>;
+        let _24: u64;
+        scope 6 {
+            debug residual => _21;
+            scope 7 {
+            }
+        }
+        scope 8 {
+            debug val => _24;
+            scope 9 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _10;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _13;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_1).0: math::decimal::U192);
+        StorageLive(_7);
+        _7 = decimal::Decimal::wad() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _5 = U192::checked_div(move _6, move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_8);
+        _8 = LendingError::MathOverflow;
+        _4 = Option::<U192>::ok_or::<LendingError>(move _5, move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_5);
+        _3 = <Result<U192, LendingError> as Try>::branch(move _4) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_4);
+        _9 = discriminant(_3);
+        switchInt(move _9) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_13);
+        _13 = ((_3 as Continue).0: math::decimal::U192);
+        _2 = _13;
+        StorageDead(_13);
+        StorageDead(_3);
+        StorageLive(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _2;
+        _17 = <u64 as TryFrom<U192>>::try_from(move _18) -> [return: bb9, unwind continue];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_10);
+        _10 = move ((_3 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_12);
+        _12 = move _10;
+        _0 = <Result<u64, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _12) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb15;
+    }
+
+    bb9: {
+        StorageDead(_18);
+        StorageLive(_19);
+        _19 = {closure@token-lending\sdk\src\math\decimal.rs:107:44: 107:47};
+        _16 = Result::<u64, &str>::map_err::<LendingError, {closure@token-lending\sdk\src\math\decimal.rs:107:44: 107:47}>(move _17, move _19) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_19);
+        StorageDead(_17);
+        _15 = <Result<u64, LendingError> as Try>::branch(move _16) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_16);
+        _20 = discriminant(_15);
+        switchInt(move _20) -> [0: bb12, 1: bb13, otherwise: bb6];
+    }
+
+    bb12: {
+        StorageLive(_24);
+        _24 = ((_15 as Continue).0: u64);
+        _14 = _24;
+        StorageDead(_24);
+        _0 = Result::<u64, ProgramError>::Ok(move _14);
+        StorageDead(_14);
+        StorageDead(_2);
+        StorageDead(_15);
+        goto -> bb15;
+    }
+
+    bb13: {
+        StorageLive(_21);
+        _21 = move ((_15 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_23);
+        _23 = move _21;
+        _0 = <Result<u64, ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _23) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageDead(_14);
+        StorageDead(_2);
+        StorageDead(_15);
+        goto -> bb15;
+    }
+
+    bb15: {
+        return;
+    }
+}

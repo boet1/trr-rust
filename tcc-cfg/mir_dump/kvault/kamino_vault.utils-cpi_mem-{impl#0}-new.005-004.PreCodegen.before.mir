@@ -1,0 +1,59 @@
+// MIR for `cpi_mem::<impl at programs\kvault\src\utils\cpi_mem.rs:24:1: 24:35>::new` before PreCodegen
+
+fn cpi_mem::<impl at programs\kvault\src\utils\cpi_mem.rs:24:1: 24:35>::new(_1: Vec<anchor_lang::prelude::AccountInfo<'_>>, _2: usize, _3: usize) -> cpi_mem::CpiMemoryLender<'_> {
+    debug accounts_infos => _1;
+    debug max_accounts => _2;
+    debug max_data => _3;
+    let mut _0: utils::cpi_mem::CpiMemoryLender<'_>;
+    let mut _4: std::option::Option<std::vec::Vec<anchor_lang::prelude::AccountMeta>>;
+    let mut _5: std::vec::Vec<anchor_lang::prelude::AccountMeta>;
+    let mut _6: usize;
+    let mut _7: std::option::Option<std::vec::Vec<u8>>;
+    let mut _8: std::vec::Vec<u8>;
+    let mut _9: usize;
+    let mut _10: std::vec::Vec<anchor_lang::prelude::AccountInfo<'_>>;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _2;
+        _5 = Vec::<AccountMeta>::with_capacity(move _6) -> [return: bb1, unwind: bb4];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        _4 = Option::<Vec<AccountMeta>>::Some(move _5);
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = _3;
+        _8 = Vec::<u8>::with_capacity(move _9) -> [return: bb2, unwind: bb3];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _7 = Option::<Vec<u8>>::Some(move _8);
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = move _1;
+        _0 = cpi_mem::CpiMemoryLender::<'_> { accounts: move _4, data: move _7, accounts_infos: move _10 };
+        StorageDead(_10);
+        StorageDead(_7);
+        StorageDead(_4);
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_4) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        drop(_1) -> [return: bb5, unwind terminate(cleanup)];
+    }
+
+    bb5 (cleanup): {
+        resume;
+    }
+}

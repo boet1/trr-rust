@@ -1,0 +1,154 @@
+// MIR for `init_obligation` before PreCodegen
+
+fn init_obligation(_1: Pubkey, _2: Pubkey, _3: Pubkey, _4: Pubkey) -> Instruction {
+    debug program_id => _1;
+    debug obligation_pubkey => _2;
+    debug lending_market_pubkey => _3;
+    debug obligation_owner_pubkey => _4;
+    let mut _0: solana_program::instruction::Instruction;
+    let mut _5: solana_program::pubkey::Pubkey;
+    let mut _6: std::vec::Vec<solana_program::instruction::AccountMeta>;
+    let mut _7: std::boxed::Box<[solana_program::instruction::AccountMeta]>;
+    let mut _8: std::boxed::Box<[solana_program::instruction::AccountMeta; 5]>;
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: *mut u8;
+    let mut _12: std::boxed::Box<[solana_program::instruction::AccountMeta; 5]>;
+    let mut _13: solana_program::instruction::AccountMeta;
+    let mut _14: solana_program::pubkey::Pubkey;
+    let mut _15: solana_program::instruction::AccountMeta;
+    let mut _16: solana_program::pubkey::Pubkey;
+    let mut _17: solana_program::instruction::AccountMeta;
+    let mut _18: solana_program::pubkey::Pubkey;
+    let mut _19: solana_program::instruction::AccountMeta;
+    let mut _20: solana_program::pubkey::Pubkey;
+    let mut _21: solana_program::instruction::AccountMeta;
+    let mut _22: solana_program::pubkey::Pubkey;
+    let mut _23: std::vec::Vec<u8>;
+    let mut _24: &instruction::LendingInstruction;
+    let _25: instruction::LendingInstruction;
+    let mut _26: &instruction::LendingInstruction;
+    let mut _27: *const [solana_program::instruction::AccountMeta; 5];
+    let mut _28: *const ();
+    let mut _29: usize;
+    let mut _30: usize;
+    let mut _31: usize;
+    let mut _32: usize;
+    let mut _33: bool;
+    scope 1 {
+    }
+
+    bb0: {
+        StorageLive(_5);
+        _5 = _1;
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _9 = SizeOf([solana_program::instruction::AccountMeta; 5]);
+        _10 = AlignOf([solana_program::instruction::AccountMeta; 5]);
+        _11 = alloc::alloc::exchange_malloc(move _9, move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_12);
+        _12 = ShallowInitBox(move _11, [solana_program::instruction::AccountMeta; 5]);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _2;
+        _13 = AccountMeta::new(move _14, const false) -> [return: bb2, unwind: bb12];
+    }
+
+    bb2: {
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = _3;
+        _15 = AccountMeta::new_readonly(move _16, const false) -> [return: bb3, unwind: bb12];
+    }
+
+    bb3: {
+        StorageDead(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _4;
+        _17 = AccountMeta::new_readonly(move _18, const true) -> [return: bb4, unwind: bb12];
+    }
+
+    bb4: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = solana_program::sysvar::rent::id() -> [return: bb5, unwind: bb12];
+    }
+
+    bb5: {
+        _19 = AccountMeta::new_readonly(move _20, const false) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = spl_token::id() -> [return: bb7, unwind: bb12];
+    }
+
+    bb7: {
+        _21 = AccountMeta::new_readonly(move _22, const false) -> [return: bb8, unwind: bb12];
+    }
+
+    bb8: {
+        StorageDead(_22);
+        _27 = (((_12.0: std::ptr::Unique<[solana_program::instruction::AccountMeta; 5]>).0: std::ptr::NonNull<[solana_program::instruction::AccountMeta; 5]>).0: *const [solana_program::instruction::AccountMeta; 5]);
+        _28 = _27 as *const () (PtrToPtr);
+        _29 = _28 as usize (Transmute);
+        _30 = AlignOf([solana_program::instruction::AccountMeta; 5]);
+        _31 = Sub(_30, const 1_usize);
+        _32 = BitAnd(_29, _31);
+        _33 = Eq(_32, const 0_usize);
+        assert(_33, "misaligned pointer dereference: address must be a multiple of {} but is {}", _30, _29) -> [success: bb14, unwind unreachable];
+    }
+
+    bb9: {
+        StorageDead(_7);
+        StorageLive(_23);
+        StorageLive(_24);
+        _26 = const _;
+        _24 = &(*_26);
+        _23 = LendingInstruction::pack(move _24) -> [return: bb10, unwind: bb11];
+    }
+
+    bb10: {
+        StorageDead(_24);
+        _0 = Instruction { program_id: move _5, accounts: move _6, data: move _23 };
+        StorageDead(_23);
+        StorageDead(_6);
+        StorageDead(_5);
+        return;
+    }
+
+    bb11 (cleanup): {
+        drop(_6) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        drop(_12) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+
+    bb14: {
+        (*_27) = [move _13, move _15, move _17, move _19, move _21];
+        StorageDead(_21);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_13);
+        _8 = move _12;
+        _7 = move _8 as std::boxed::Box<[solana_program::instruction::AccountMeta]> (PointerCoercion(Unsize));
+        StorageDead(_12);
+        StorageDead(_8);
+        _6 = std::slice::<impl [AccountMeta]>::into_vec::<std::alloc::Global>(move _7) -> [return: bb9, unwind: bb13];
+    }
+}

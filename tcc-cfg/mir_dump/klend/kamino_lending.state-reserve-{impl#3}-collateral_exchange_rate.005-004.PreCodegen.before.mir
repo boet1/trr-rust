@@ -1,0 +1,36 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::collateral_exchange_rate` before PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:140:1: 140:13>::collateral_exchange_rate(_1: &reserve::Reserve) -> reserve::CollateralExchangeRate {
+    debug self => _1;
+    let mut _0: state::reserve::CollateralExchangeRate;
+    let _2: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _3: &state::reserve::ReserveLiquidity;
+    let mut _4: &state::reserve::ReserveCollateral;
+    let mut _5: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    scope 1 {
+        debug total_liquidity => _2;
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &((*_1).5: state::reserve::ReserveLiquidity);
+        _2 = ReserveLiquidity::total_supply(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_3);
+        StorageLive(_4);
+        _4 = &((*_1).7: state::reserve::ReserveCollateral);
+        StorageLive(_5);
+        _5 = _2;
+        _0 = ReserveCollateral::exchange_rate(move _4, move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
+    }
+}

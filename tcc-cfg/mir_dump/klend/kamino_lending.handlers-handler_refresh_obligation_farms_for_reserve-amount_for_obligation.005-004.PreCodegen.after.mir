@@ -1,0 +1,146 @@
+// MIR for `amount_for_obligation` after PreCodegen
+
+fn amount_for_obligation(_1: &obligation::Obligation, _2: &anchor_lang::prelude::Pubkey, _3: reserve::ReserveFarmKind) -> u64 {
+    debug obligation => _1;
+    debug reserve_address => _2;
+    debug farm_kind => _3;
+    let mut _0: u64;
+    let mut _4: u8;
+    let _5: std::result::Result<&state::obligation::ObligationCollateral, anchor_lang::error::Error>;
+    let mut _6: &state::obligation::Obligation;
+    let mut _7: anchor_lang::prelude::Pubkey;
+    let mut _8: isize;
+    let _10: std::result::Result<(&state::obligation::ObligationLiquidity, usize), anchor_lang::error::Error>;
+    let mut _11: &state::obligation::Obligation;
+    let mut _12: anchor_lang::prelude::Pubkey;
+    let mut _13: isize;
+    let mut _15: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _16: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _17: &state::obligation::ObligationLiquidity;
+    scope 1 {
+        debug collateral => _5;
+        scope 2 {
+            debug obligation_collateral => _9;
+            let _9: &state::obligation::ObligationCollateral;
+        }
+    }
+    scope 3 {
+        debug liquidity => _10;
+        scope 4 {
+            debug obligation_liquidity => _14;
+            let _14: &state::obligation::ObligationLiquidity;
+        }
+    }
+
+    bb0: {
+        _4 = discriminant(_3);
+        switchInt(move _4) -> [0: bb3, 1: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &(*_1);
+        StorageLive(_12);
+        _12 = (*_2);
+        _10 = obligation::Obligation::find_liquidity_in_borrows(move _11, move _12) -> [return: bb9, unwind continue];
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        _7 = (*_2);
+        _5 = obligation::Obligation::find_collateral_in_deposits(move _6, move _7) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _8 = discriminant(_5);
+        switchInt(move _8) -> [0: bb5, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_9);
+        _9 = ((_5 as Ok).0: &state::obligation::ObligationCollateral);
+        _0 = ((*_9).1: u64);
+        StorageDead(_9);
+        goto -> bb7;
+    }
+
+    bb6: {
+        _0 = const 0_u64;
+        goto -> bb7;
+    }
+
+    bb7: {
+        drop(_5) -> [return: bb8, unwind: bb18];
+    }
+
+    bb8: {
+        StorageDead(_5);
+        goto -> bb16;
+    }
+
+    bb9: {
+        StorageDead(_12);
+        StorageDead(_11);
+        _13 = discriminant(_10);
+        switchInt(move _13) -> [0: bb10, otherwise: bb13];
+    }
+
+    bb10: {
+        StorageLive(_14);
+        _14 = (((_10 as Ok).0: (&state::obligation::ObligationLiquidity, usize)).0: &state::obligation::ObligationLiquidity);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &(*_14);
+        _16 = obligation::ObligationLiquidity::borrowed_amount(move _17) -> [return: bb11, unwind: bb17];
+    }
+
+    bb11: {
+        _15 = &_16;
+        StorageDead(_17);
+        _0 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as utils::fraction::FractionExtra>::to_floor::<u64>(move _15) -> [return: bb12, unwind: bb17];
+    }
+
+    bb12: {
+        StorageDead(_15);
+        StorageDead(_16);
+        StorageDead(_14);
+        goto -> bb14;
+    }
+
+    bb13: {
+        _0 = const 0_u64;
+        goto -> bb14;
+    }
+
+    bb14: {
+        drop(_10) -> [return: bb15, unwind: bb18];
+    }
+
+    bb15: {
+        StorageDead(_10);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+
+    bb17 (cleanup): {
+        drop(_10) -> [return: bb18, unwind terminate(cleanup)];
+    }
+
+    bb18 (cleanup): {
+        resume;
+    }
+}

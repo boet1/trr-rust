@@ -1,0 +1,469 @@
+// MIR for `pay_keeper_flat_reward_for_perps` before PreCodegen
+
+fn pay_keeper_flat_reward_for_perps(_1: &mut User, _2: Option<&mut User>, _3: &mut PerpMarket, _4: u64, _5: u64) -> std::result::Result<u64, error::ErrorCode> {
+    debug user => _1;
+    debug filler => _2;
+    debug market => _3;
+    debug filler_reward => _4;
+    debug slot => _5;
+    let mut _0: std::result::Result<u64, error::ErrorCode>;
+    let _6: u64;
+    let mut _7: isize;
+    let mut _10: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &mut state::user::PerpPosition>;
+    let mut _11: std::result::Result<&mut state::user::PerpPosition, error::ErrorCode>;
+    let mut _12: &mut state::user::User;
+    let mut _13: u16;
+    let mut _14: isize;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _19: ();
+    let mut _20: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _21: std::result::Result<(), error::ErrorCode>;
+    let mut _22: &mut state::user::PerpPosition;
+    let mut _23: &mut state::perp_market::PerpMarket;
+    let mut _24: i64;
+    let mut _25: i64;
+    let mut _26: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _27: std::result::Result<i64, error::ErrorCode>;
+    let mut _28: u64;
+    let mut _29: isize;
+    let mut _31: !;
+    let mut _32: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _34: bool;
+    let mut _35: isize;
+    let mut _37: !;
+    let mut _38: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _40: ();
+    let mut _41: &mut state::user::User;
+    let mut _42: u64;
+    let mut _44: std::result::Result<&mut state::user::PerpPosition, error::ErrorCode>;
+    let mut _45: &mut state::user::User;
+    let mut _46: u16;
+    let mut _47: isize;
+    let mut _49: !;
+    let _50: ();
+    let mut _51: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _52: std::result::Result<(), error::ErrorCode>;
+    let mut _53: &mut state::user::PerpPosition;
+    let mut _54: &mut state::perp_market::PerpMarket;
+    let mut _55: i64;
+    let mut _56: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i64>;
+    let mut _57: std::result::Result<i64, error::ErrorCode>;
+    let mut _58: u64;
+    let mut _59: isize;
+    let mut _61: !;
+    let mut _62: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _64: isize;
+    let mut _66: !;
+    let mut _67: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _69: u64;
+    scope 1 {
+        debug filler_reward => _6;
+    }
+    scope 2 {
+        debug filler => _8;
+        let _8: &mut state::user::User;
+        let _9: &mut state::user::PerpPosition;
+        let _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _18: &mut state::user::PerpPosition;
+        scope 3 {
+            debug user_position => _9;
+            let _30: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _33: i64;
+            let _36: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _39: ();
+            let _43: &mut state::user::PerpPosition;
+            let _48: &mut state::user::PerpPosition;
+            scope 8 {
+                debug residual => _30;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _33;
+                scope 11 {
+                }
+            }
+            scope 12 {
+                debug residual => _36;
+                scope 13 {
+                }
+            }
+            scope 14 {
+                debug val => _39;
+                scope 15 {
+                }
+            }
+            scope 16 {
+                debug filler_position => _43;
+                let _60: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _63: i64;
+                let _65: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _68: ();
+                scope 18 {
+                    debug residual => _60;
+                    scope 19 {
+                    }
+                }
+                scope 20 {
+                    debug val => _63;
+                    scope 21 {
+                    }
+                }
+                scope 22 {
+                    debug residual => _65;
+                    scope 23 {
+                    }
+                }
+                scope 24 {
+                    debug val => _68;
+                    scope 25 {
+                    }
+                }
+            }
+            scope 17 {
+                debug position => _48;
+            }
+        }
+        scope 4 {
+            debug residual => _15;
+            scope 5 {
+            }
+        }
+        scope 6 {
+            debug val => _18;
+            scope 7 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        _7 = discriminant(_2);
+        switchInt(move _7) -> [1: bb1, otherwise: bb33];
+    }
+
+    bb1: {
+        StorageLive(_8);
+        _8 = move ((_2 as Some).0: &mut state::user::User);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &mut (*_1);
+        StorageLive(_13);
+        _13 = ((*_3).21: u16);
+        _11 = User::get_perp_position_mut(move _12, move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_13);
+        StorageDead(_12);
+        _10 = <std::result::Result<&mut PerpPosition, error::ErrorCode> as Try>::branch(move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        _14 = discriminant(_10);
+        switchInt(move _14) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_18);
+        _18 = move ((_10 as Continue).0: &mut state::user::PerpPosition);
+        _9 = move _18;
+        StorageDead(_18);
+        StorageDead(_10);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &mut (*_9);
+        StorageLive(_23);
+        _23 = &mut (*_3);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _4;
+        _27 = <u64 as Cast>::cast::<i64>(move _28) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_15);
+        _15 = ((_10 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_17);
+        _17 = _15;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _17) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_17);
+        StorageDead(_15);
+        StorageDead(_10);
+        goto -> bb38;
+    }
+
+    bb8: {
+        StorageDead(_28);
+        _26 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _27) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_27);
+        _29 = discriminant(_26);
+        switchInt(move _29) -> [0: bb10, 1: bb11, otherwise: bb5];
+    }
+
+    bb10: {
+        StorageLive(_33);
+        _33 = ((_26 as Continue).0: i64);
+        _25 = _33;
+        StorageDead(_33);
+        _34 = Eq(_25, const i64::MIN);
+        assert(!move _34, "attempt to negate `{}`, which would overflow", _25) -> [success: bb13, unwind continue];
+    }
+
+    bb11: {
+        StorageLive(_30);
+        _30 = ((_26 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_32);
+        _32 = _30;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _32) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        goto -> bb37;
+    }
+
+    bb13: {
+        _24 = Neg(move _25);
+        StorageDead(_25);
+        _21 = update_quote_asset_and_break_even_amount(move _22, move _23, move _24) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_22);
+        _20 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _21) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_21);
+        _35 = discriminant(_20);
+        switchInt(move _35) -> [0: bb16, 1: bb17, otherwise: bb5];
+    }
+
+    bb16: {
+        StorageLive(_39);
+        _39 = ((_20 as Continue).0: ());
+        _19 = _39;
+        StorageDead(_39);
+        StorageDead(_26);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageLive(_40);
+        StorageLive(_41);
+        _41 = &mut (*_8);
+        StorageLive(_42);
+        _42 = _5;
+        _40 = User::update_last_active_slot(move _41, move _42) -> [return: bb19, unwind continue];
+    }
+
+    bb17: {
+        StorageLive(_36);
+        _36 = ((_20 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_38);
+        _38 = _36;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _38) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_38);
+        StorageDead(_36);
+        goto -> bb37;
+    }
+
+    bb19: {
+        StorageDead(_42);
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        _45 = &mut (*_8);
+        StorageLive(_46);
+        _46 = ((*_3).21: u16);
+        _44 = User::force_get_perp_position_mut(move _45, move _46) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_46);
+        StorageDead(_45);
+        _47 = discriminant(_44);
+        switchInt(move _47) -> [0: bb22, 1: bb21, otherwise: bb5];
+    }
+
+    bb21: {
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(const 0_u64);
+        StorageDead(_44);
+        goto -> bb36;
+    }
+
+    bb22: {
+        StorageLive(_48);
+        _48 = move ((_44 as Ok).0: &mut state::user::PerpPosition);
+        _43 = move _48;
+        StorageDead(_48);
+        StorageDead(_44);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &mut (*_43);
+        StorageLive(_54);
+        _54 = &mut (*_3);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = _4;
+        _57 = <u64 as Cast>::cast::<i64>(move _58) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_58);
+        _56 = <std::result::Result<i64, error::ErrorCode> as Try>::branch(move _57) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_57);
+        _59 = discriminant(_56);
+        switchInt(move _59) -> [0: bb25, 1: bb26, otherwise: bb5];
+    }
+
+    bb25: {
+        StorageLive(_63);
+        _63 = ((_56 as Continue).0: i64);
+        _55 = _63;
+        StorageDead(_63);
+        _52 = update_quote_asset_amount(move _53, move _54, move _55) -> [return: bb28, unwind continue];
+    }
+
+    bb26: {
+        StorageLive(_60);
+        _60 = ((_56 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_62);
+        _62 = _60;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _62) -> [return: bb27, unwind continue];
+    }
+
+    bb27: {
+        StorageDead(_62);
+        StorageDead(_60);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        StorageDead(_52);
+        goto -> bb35;
+    }
+
+    bb28: {
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageDead(_53);
+        _51 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _52) -> [return: bb29, unwind continue];
+    }
+
+    bb29: {
+        StorageDead(_52);
+        _64 = discriminant(_51);
+        switchInt(move _64) -> [0: bb30, 1: bb31, otherwise: bb5];
+    }
+
+    bb30: {
+        StorageLive(_68);
+        _68 = ((_51 as Continue).0: ());
+        _50 = _68;
+        StorageDead(_68);
+        StorageDead(_56);
+        StorageDead(_51);
+        StorageDead(_50);
+        _6 = _4;
+        StorageDead(_43);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb34;
+    }
+
+    bb31: {
+        StorageLive(_65);
+        _65 = ((_51 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_67);
+        _67 = _65;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _67) -> [return: bb32, unwind continue];
+    }
+
+    bb32: {
+        StorageDead(_67);
+        StorageDead(_65);
+        goto -> bb35;
+    }
+
+    bb33: {
+        _6 = const 0_u64;
+        goto -> bb34;
+    }
+
+    bb34: {
+        StorageLive(_69);
+        _69 = _6;
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(move _69);
+        StorageDead(_69);
+        StorageDead(_6);
+        goto -> bb39;
+    }
+
+    bb35: {
+        StorageDead(_56);
+        StorageDead(_51);
+        StorageDead(_50);
+        goto -> bb36;
+    }
+
+    bb36: {
+        StorageDead(_43);
+        goto -> bb38;
+    }
+
+    bb37: {
+        StorageDead(_26);
+        StorageDead(_20);
+        StorageDead(_19);
+        goto -> bb38;
+    }
+
+    bb38: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_6);
+        goto -> bb39;
+    }
+
+    bb39: {
+        return;
+    }
+}

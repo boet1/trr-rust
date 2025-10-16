@@ -1,0 +1,158 @@
+// MIR for `check_same_elevation_group` before PreCodegen
+
+fn check_same_elevation_group(_1: &obligation::Obligation, _2: &reserve::Reserve) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug obligation => _1;
+    debug reserve => _2;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u8;
+    let mut _6: bool;
+    let mut _7: &[u8];
+    let mut _8: &[u8; 20];
+    let mut _9: &u8;
+    let _10: &u8;
+    let mut _11: !;
+    let mut _12: anchor_lang::error::Error;
+    let mut _13: anchor_lang::error::AnchorError;
+    let mut _14: std::string::String;
+    let mut _15: &LendingError;
+    let _16: LendingError;
+    let mut _17: u32;
+    let mut _18: LendingError;
+    let mut _19: std::string::String;
+    let mut _20: &LendingError;
+    let _21: LendingError;
+    let mut _22: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _23: anchor_lang::error::ErrorOrigin;
+    let mut _24: anchor_lang::error::Source;
+    let mut _25: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _26: ();
+    let mut _27: &LendingError;
+    let mut _28: &LendingError;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).14: u8);
+        _4 = Ne(move _5, const _);
+        switchInt(move _4) -> [0: bb9, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(((*_2).9: state::reserve::ReserveConfig).22: [u8; 20]);
+        _7 = move _8 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_1).14: u8);
+        _9 = &(*_10);
+        _6 = core::slice::<impl [u8]>::contains(move _7, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_10);
+        goto -> bb10;
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageDead(_10);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _28 = const _;
+        _15 = &(*_28);
+        _14 = LendingError::name(move _15) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_15);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = LendingError::InconsistentElevationGroup;
+        _17 = <LendingError as Into<u32>>::into(move _18) -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _27 = const _;
+        _20 = &(*_27);
+        _19 = <LendingError as ToString>::to_string(move _20) -> [return: bb7, unwind: bb12];
+    }
+
+    bb7: {
+        StorageDead(_20);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\lending_operations.rs", line: const 2757_u32 };
+        _23 = anchor_lang::error::ErrorOrigin::Source(move _24);
+        StorageDead(_24);
+        _22 = std::option::Option::<ErrorOrigin>::Some(move _23);
+        StorageDead(_23);
+        StorageLive(_25);
+        _25 = std::option::Option::<ComparedValues>::None;
+        _13 = anchor_lang::error::AnchorError { error_name: move _14, error_code_number: move _17, error_msg: move _19, error_origin: move _22, compared_values: move _25 };
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_14);
+        _12 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _13) -> [return: bb8, unwind: bb13];
+    }
+
+    bb8: {
+        StorageDead(_13);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _12);
+        StorageDead(_12);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb11;
+    }
+
+    bb9: {
+        StorageDead(_5);
+        goto -> bb10;
+    }
+
+    bb10: {
+        _3 = const ();
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_26);
+        _26 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _26);
+        StorageDead(_26);
+        goto -> bb11;
+    }
+
+    bb11: {
+        return;
+    }
+
+    bb12 (cleanup): {
+        drop(_14) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+}

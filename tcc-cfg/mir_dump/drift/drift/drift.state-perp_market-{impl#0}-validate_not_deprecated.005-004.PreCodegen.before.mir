@@ -1,0 +1,66 @@
+// MIR for `state::perp_market::<impl at programs/drift/src/state/perp_market.rs:77:1: 77:18>::validate_not_deprecated` before PreCodegen
+
+fn state::perp_market::<impl at programs/drift/src/state/perp_market.rs:77:1: 77:18>::validate_not_deprecated(_1: &state::perp_market::MarketStatus) -> std::result::Result<(), error::ErrorCode> {
+    debug self => _1;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let mut _2: bool;
+    let mut _3: isize;
+    let _4: ();
+    let mut _5: &str;
+    let _6: &str;
+    let mut _7: error::ErrorCode;
+    let mut _8: ();
+
+    bb0: {
+        StorageLive(_2);
+        _3 = discriminant((*_1));
+        switchInt(move _3) -> [2: bb2, 3: bb2, 4: bb2, 5: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _2 = const false;
+        goto -> bb3;
+    }
+
+    bb2: {
+        _2 = const true;
+        goto -> bb3;
+    }
+
+    bb3: {
+        switchInt(move _2) -> [0: bb6, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = const "MarketStatus is deprecated";
+        _5 = &(*_6);
+        _4 = solana_program::log::sol_log(move _5) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageLive(_7);
+        _7 = error::ErrorCode::DefaultError;
+        _0 = std::result::Result::<(), error::ErrorCode>::Err(move _7);
+        StorageDead(_7);
+        goto -> bb7;
+    }
+
+    bb6: {
+        StorageLive(_8);
+        _8 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _8);
+        StorageDead(_8);
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_2);
+        return;
+    }
+}

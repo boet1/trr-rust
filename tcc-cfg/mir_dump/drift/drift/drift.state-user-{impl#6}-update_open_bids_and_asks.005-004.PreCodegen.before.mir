@@ -1,0 +1,93 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::update_open_bids_and_asks` before PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:1263:1: 1263:11>::update_open_bids_and_asks(_1: &Order) -> bool {
+    debug self => _1;
+    let mut _0: bool;
+    let mut _2: bool;
+    let mut _3: &state::user::Order;
+    let mut _4: bool;
+    let mut _5: &state::user::Order;
+    let mut _6: bool;
+    let mut _7: bool;
+    let mut _8: &state::user::Order;
+    let mut _9: state::user::OrderBitFlag;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &(*_1);
+        _2 = Order::must_be_triggered(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = Order::triggered(move _5) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_3);
+        _0 = const true;
+        goto -> bb12;
+    }
+
+    bb4: {
+        switchInt(move _4) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ((*_1).18: bool);
+        switchInt(move _7) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageDead(_5);
+        _0 = const false;
+        goto -> bb11;
+    }
+
+    bb7: {
+        StorageLive(_8);
+        _8 = &(*_1);
+        StorageLive(_9);
+        _9 = OrderBitFlag::NewTriggerReduceOnly;
+        _6 = Order::is_bit_flag_set(move _8, move _9) -> [return: bb9, unwind continue];
+    }
+
+    bb8: {
+        _6 = const false;
+        goto -> bb10;
+    }
+
+    bb9: {
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb10;
+    }
+
+    bb10: {
+        StorageDead(_7);
+        _0 = Not(move _6);
+        StorageDead(_6);
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_4);
+        goto -> bb12;
+    }
+
+    bb12: {
+        StorageDead(_2);
+        return;
+    }
+}

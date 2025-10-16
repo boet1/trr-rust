@@ -1,0 +1,37 @@
+// MIR for `process_set_obligation_closeability_status::{closure#0}` after PreCodegen
+
+fn process_set_obligation_closeability_status::{closure#0}(_1: {closure@token-lending\program\src\processor.rs:3192:18: 3192:21}, _2: ProgramError) -> LendingError {
+    let mut _0: solend_sdk::error::LendingError;
+    let _3: ();
+    let mut _4: &str;
+    let _5: &str;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const "Obligation does not have a deposit for the reserve provided";
+        _4 = &(*_5);
+        _3 = solana_program::log::sol_log(move _4) -> [return: bb1, unwind: bb3];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = ObligationCollateralEmpty;
+        drop(_2) -> [return: bb2, unwind: bb4];
+    }
+
+    bb2: {
+        return;
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+}

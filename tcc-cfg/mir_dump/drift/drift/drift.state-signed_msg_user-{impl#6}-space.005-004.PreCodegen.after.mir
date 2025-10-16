@@ -1,0 +1,100 @@
+// MIR for `signed_msg_user::<impl at programs/drift/src/state/signed_msg_user.rs:245:1: 245:26>::space` after PreCodegen
+
+fn signed_msg_user::<impl at programs/drift/src/state/signed_msg_user.rs:245:1: 245:26>::space(_1: &SignedMsgWsDelegates, _2: bool) -> usize {
+    debug self => _1;
+    debug add => _2;
+    let mut _0: usize;
+    let _3: usize;
+    let mut _4: bool;
+    let mut _5: usize;
+    let mut _6: &std::vec::Vec<anchor_lang::prelude::Pubkey>;
+    let mut _7: (usize, bool);
+    let mut _8: usize;
+    let mut _9: &std::vec::Vec<anchor_lang::prelude::Pubkey>;
+    let mut _10: (usize, bool);
+    let mut _11: usize;
+    let mut _12: (usize, bool);
+    let mut _13: usize;
+    let mut _14: usize;
+    let mut _15: (usize, bool);
+    let mut _16: (usize, bool);
+    scope 1 {
+        debug delegate_count => _3;
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _2;
+        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_1).0: std::vec::Vec<anchor_lang::prelude::Pubkey>);
+        _5 = Vec::<anchor_lang::prelude::Pubkey>::len(move _6) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _7 = CheckedAdd(_5, const 1_usize);
+        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", move _5, const 1_usize) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _3 = move (_7.0: usize);
+        StorageDead(_5);
+        goto -> bb7;
+    }
+
+    bb4: {
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_1).0: std::vec::Vec<anchor_lang::prelude::Pubkey>);
+        _8 = Vec::<anchor_lang::prelude::Pubkey>::len(move _9) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_9);
+        _10 = CheckedSub(_8, const 1_usize);
+        assert(!move (_10.1: bool), "attempt to compute `{} - {}`, which would overflow", move _8, const 1_usize) -> [success: bb6, unwind continue];
+    }
+
+    bb6: {
+        _3 = move (_10.0: usize);
+        StorageDead(_8);
+        goto -> bb7;
+    }
+
+    bb7: {
+        StorageDead(_4);
+        StorageLive(_11);
+        _12 = CheckedAdd(const 8_usize, const 4_usize);
+        assert(!move (_12.1: bool), "attempt to compute `{} + {}`, which would overflow", const 8_usize, const 4_usize) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _11 = move (_12.0: usize);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _3;
+        _15 = CheckedMul(_14, const 32_usize);
+        assert(!move (_15.1: bool), "attempt to compute `{} * {}`, which would overflow", move _14, const 32_usize) -> [success: bb9, unwind continue];
+    }
+
+    bb9: {
+        _13 = move (_15.0: usize);
+        StorageDead(_14);
+        _16 = CheckedAdd(_11, _13);
+        assert(!move (_16.1: bool), "attempt to compute `{} + {}`, which would overflow", move _11, move _13) -> [success: bb10, unwind continue];
+    }
+
+    bb10: {
+        _0 = move (_16.0: usize);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_3);
+        return;
+    }
+}

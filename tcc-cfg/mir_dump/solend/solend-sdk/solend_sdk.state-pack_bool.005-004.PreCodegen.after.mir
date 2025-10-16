@@ -1,0 +1,28 @@
+// MIR for `state::pack_bool` after PreCodegen
+
+fn state::pack_bool(_1: bool, _2: &mut [u8; 1]) -> () {
+    debug boolean => _1;
+    debug dst => _2;
+    let mut _0: ();
+    let mut _3: [u8; 1];
+    let mut _4: u8;
+    let mut _5: bool;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _1;
+        _4 = move _5 as u8 (IntToInt);
+        StorageDead(_5);
+        _3 = core::num::<impl u8>::to_le_bytes(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        (*_2) = move _3;
+        _0 = const ();
+        StorageDead(_3);
+        return;
+    }
+}

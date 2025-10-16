@@ -1,0 +1,299 @@
+// MIR for `get_pyth_price_unchecked` after PreCodegen
+
+fn get_pyth_price_unchecked(_1: &AccountInfo<'_>) -> Result<solend_sdk::math::Decimal, anchor_lang::prelude::ProgramError> {
+    debug pyth_price_info => _1;
+    let mut _0: std::result::Result<solend_sdk::math::Decimal, anchor_lang::prelude::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &anchor_lang::prelude::Pubkey;
+    let mut _5: &anchor_lang::prelude::Pubkey;
+    let _6: anchor_lang::prelude::Pubkey;
+    let mut _7: !;
+    let mut _8: anchor_lang::prelude::ProgramError;
+    let mut _9: solend_sdk::error::LendingError;
+    let _10: &std::cell::Ref<'_, &mut [u8]>;
+    let _11: std::cell::Ref<'_, &mut [u8]>;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, std::cell::Ref<'_, &mut [u8]>>;
+    let mut _13: std::result::Result<std::cell::Ref<'_, &mut [u8]>, anchor_lang::prelude::ProgramError>;
+    let mut _14: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _15: isize;
+    let _16: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let _19: std::cell::Ref<'_, &mut [u8]>;
+    let mut _21: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>, &pyth_sdk_solana::state::PriceAccount>;
+    let mut _22: std::result::Result<&pyth_sdk_solana::state::PriceAccount, solend_sdk::error::LendingError>;
+    let mut _23: std::result::Result<&pyth_sdk_solana::state::PriceAccount, pyth_sdk_solana::PythError>;
+    let mut _24: &[u8];
+    let _25: &&mut [u8];
+    let mut _26: &std::cell::Ref<'_, &mut [u8]>;
+    let mut _27: {closure@token-lending\oracles\src\pyth.rs:74:82: 74:85};
+    let mut _28: isize;
+    let mut _30: !;
+    let mut _31: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>;
+    let mut _34: &pyth_sdk_solana::state::PriceAccount;
+    let mut _35: &anchor_lang::prelude::Pubkey;
+    let mut _37: &pyth_sdk_solana::PriceFeed;
+    let mut _38: &pyth_sdk_solana::Price;
+    let _39: &pyth_sdk_solana::Price;
+    let mut _40: &anchor_lang::prelude::Pubkey;
+    let mut _41: &anchor_lang::prelude::Pubkey;
+    let mut _42: &mut [u8];
+    let mut _43: &anchor_lang::prelude::Pubkey;
+    let mut _44: isize;
+    let mut _45: isize;
+    let mut _46: isize;
+    let mut _47: isize;
+    let mut _48: isize;
+    scope 1 {
+        debug data => _10;
+        let _20: &pyth_sdk_solana::state::PriceAccount;
+        let _29: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>;
+        let _32: &pyth_sdk_solana::state::PriceAccount;
+        scope 6 {
+            debug price_account => _20;
+            let _33: pyth_sdk_solana::PriceFeed;
+            scope 11 {
+                debug price_feed => _33;
+                let _36: pyth_sdk_solana::Price;
+                scope 12 {
+                    debug price => _36;
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _29;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _32;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _16;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _19;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _41 = deref_copy ((*_1).0: &anchor_lang::prelude::Pubkey);
+        _4 = &(*_41);
+        StorageLive(_5);
+        _40 = const _;
+        _5 = &(*_40);
+        _3 = <Pubkey as PartialEq>::eq(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = NullOracleConfig;
+        _8 = <LendingError as Into<anchor_lang::prelude::ProgramError>>::into(move _9) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_9);
+        _0 = Result::<solend_sdk::math::Decimal, anchor_lang::prelude::ProgramError>::Err(move _8);
+        StorageDead(_8);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb23;
+    }
+
+    bb4: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        _13 = AccountInfo::<'_>::try_borrow_data(move _14) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        _12 = <Result<Ref<'_, &mut [u8]>, anchor_lang::prelude::ProgramError> as Try>::branch(move _13) -> [return: bb6, unwind: bb25];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        _15 = discriminant(_12);
+        switchInt(move _15) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_19);
+        _19 = move ((_12 as Continue).0: std::cell::Ref<'_, &mut [u8]>);
+        _11 = move _19;
+        StorageDead(_19);
+        _10 = &_11;
+        _44 = discriminant(_12);
+        StorageDead(_12);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &(*_10);
+        _25 = <Ref<'_, &mut [u8]> as Deref>::deref(move _26) -> [return: bb11, unwind: bb24];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_16);
+        _16 = move ((_12 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_18);
+        _18 = move _16;
+        _0 = <Result<solend_sdk::math::Decimal, anchor_lang::prelude::ProgramError> as FromResidual<Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _18) -> [return: bb10, unwind: bb26];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        StorageDead(_16);
+        _46 = discriminant(_12);
+        StorageDead(_12);
+        goto -> bb22;
+    }
+
+    bb11: {
+        _42 = deref_copy (*_25);
+        _24 = &(*_42);
+        StorageDead(_26);
+        _23 = load_price_account(move _24) -> [return: bb12, unwind: bb24];
+    }
+
+    bb12: {
+        StorageDead(_24);
+        StorageLive(_27);
+        _27 = {closure@token-lending\oracles\src\pyth.rs:74:82: 74:85};
+        _22 = Result::<&PriceAccount, PythError>::map_err::<LendingError, {closure@token-lending\oracles\src\pyth.rs:74:82: 74:85}>(move _23, move _27) -> [return: bb13, unwind: bb24];
+    }
+
+    bb13: {
+        StorageDead(_27);
+        StorageDead(_23);
+        _21 = <Result<&PriceAccount, LendingError> as Try>::branch(move _22) -> [return: bb14, unwind: bb24];
+    }
+
+    bb14: {
+        StorageDead(_22);
+        _28 = discriminant(_21);
+        switchInt(move _28) -> [0: bb15, 1: bb16, otherwise: bb8];
+    }
+
+    bb15: {
+        StorageLive(_32);
+        _32 = ((_21 as Continue).0: &pyth_sdk_solana::state::PriceAccount);
+        _20 = _32;
+        StorageDead(_32);
+        StorageDead(_25);
+        StorageDead(_21);
+        StorageLive(_33);
+        StorageLive(_34);
+        _34 = &(*_20);
+        StorageLive(_35);
+        _43 = deref_copy ((*_1).0: &anchor_lang::prelude::Pubkey);
+        _35 = &(*_43);
+        _33 = PriceAccount::to_price_feed(move _34, move _35) -> [return: bb18, unwind: bb24];
+    }
+
+    bb16: {
+        StorageLive(_29);
+        _29 = move ((_21 as Break).0: std::result::Result<std::convert::Infallible, solend_sdk::error::LendingError>);
+        StorageLive(_31);
+        _31 = move _29;
+        _0 = <Result<solend_sdk::math::Decimal, anchor_lang::prelude::ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _31) -> [return: bb17, unwind: bb24];
+    }
+
+    bb17: {
+        StorageDead(_31);
+        StorageDead(_29);
+        StorageDead(_25);
+        StorageDead(_21);
+        StorageDead(_20);
+        drop(_11) -> [return: bb22, unwind: bb25];
+    }
+
+    bb18: {
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageLive(_36);
+        StorageLive(_37);
+        _37 = &_33;
+        _36 = PriceFeed::get_price_unchecked(move _37) -> [return: bb19, unwind: bb24];
+    }
+
+    bb19: {
+        StorageDead(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = &_36;
+        _38 = &(*_39);
+        _0 = pyth_price_to_decimal(move _38) -> [return: bb20, unwind: bb24];
+    }
+
+    bb20: {
+        StorageDead(_38);
+        StorageDead(_36);
+        StorageDead(_33);
+        StorageDead(_20);
+        drop(_11) -> [return: bb21, unwind: bb25];
+    }
+
+    bb21: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_39);
+        goto -> bb23;
+    }
+
+    bb22: {
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb23;
+    }
+
+    bb23: {
+        return;
+    }
+
+    bb24 (cleanup): {
+        drop(_11) -> [return: bb25, unwind terminate(cleanup)];
+    }
+
+    bb25 (cleanup): {
+        resume;
+    }
+
+    bb26 (cleanup): {
+        _48 = discriminant(_12);
+        goto -> bb25;
+    }
+}

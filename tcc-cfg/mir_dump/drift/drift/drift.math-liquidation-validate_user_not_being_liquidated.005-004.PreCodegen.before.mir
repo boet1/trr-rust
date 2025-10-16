@@ -1,0 +1,174 @@
+// MIR for `validate_user_not_being_liquidated` before PreCodegen
+
+fn validate_user_not_being_liquidated(_1: &mut User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>, _5: u32) -> std::result::Result<(), error::ErrorCode> {
+    debug user => _1;
+    debug market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    debug liquidation_margin_buffer_ratio => _5;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _6: ();
+    let mut _7: bool;
+    let mut _8: &state::user::User;
+    let mut _9: !;
+    let mut _10: ();
+    let _11: bool;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _13: std::result::Result<bool, error::ErrorCode>;
+    let mut _14: &state::user::User;
+    let mut _15: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _16: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _17: &mut state::oracle_map::OracleMap<'_>;
+    let mut _18: u32;
+    let mut _19: isize;
+    let _20: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _23: bool;
+    let _24: ();
+    let mut _25: bool;
+    let mut _26: !;
+    let mut _27: error::ErrorCode;
+    let mut _28: &mut state::user::User;
+    let mut _29: ();
+    scope 1 {
+        debug is_still_being_liquidated => _11;
+    }
+    scope 2 {
+        debug residual => _20;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _23;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(*_1);
+        _7 = User::is_being_liquidated(move _8) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _7) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        _6 = const ();
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        StorageLive(_15);
+        _15 = &(*_2);
+        StorageLive(_16);
+        _16 = &(*_3);
+        StorageLive(_17);
+        _17 = &mut (*_4);
+        StorageLive(_18);
+        _18 = _5;
+        _13 = is_user_being_liquidated(move _14, move _15, move _16, move _17, move _18) -> [return: bb4, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageLive(_10);
+        _10 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _10);
+        StorageDead(_10);
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb14;
+    }
+
+    bb4: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        _12 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _13) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        _19 = discriminant(_12);
+        switchInt(move _19) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_23);
+        _23 = ((_12 as Continue).0: bool);
+        _11 = _23;
+        StorageDead(_23);
+        StorageDead(_12);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = _11;
+        switchInt(move _25) -> [0: bb11, otherwise: bb10];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_20);
+        _20 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_22);
+        _22 = _20;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _22) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_12);
+        goto -> bb13;
+    }
+
+    bb10: {
+        StorageLive(_27);
+        _27 = error::ErrorCode::UserIsBeingLiquidated;
+        _0 = std::result::Result::<(), error::ErrorCode>::Err(move _27);
+        StorageDead(_27);
+        StorageDead(_25);
+        StorageDead(_24);
+        goto -> bb13;
+    }
+
+    bb11: {
+        StorageLive(_28);
+        _28 = &mut (*_1);
+        _24 = User::exit_liquidation(move _28) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageLive(_29);
+        _29 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _29);
+        StorageDead(_29);
+        StorageDead(_11);
+        goto -> bb14;
+    }
+
+    bb13: {
+        StorageDead(_11);
+        goto -> bb14;
+    }
+
+    bb14: {
+        return;
+    }
+}

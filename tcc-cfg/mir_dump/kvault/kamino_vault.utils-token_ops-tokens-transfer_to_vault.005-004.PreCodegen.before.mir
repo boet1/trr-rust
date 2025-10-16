@@ -1,0 +1,119 @@
+// MIR for `transfer_to_vault` before PreCodegen
+
+fn transfer_to_vault(_1: &UserTransferAccounts<'_>, _2: u64, _3: u8) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug accounts => _1;
+    debug amount => _2;
+    debug decimals => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _4: anchor_lang::context::CpiContext<'_, '_, '_, '_, anchor_spl::token_2022::TransferChecked<'_>>;
+    let mut _5: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _6: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _7: anchor_spl::token_2022::TransferChecked<'_>;
+    let mut _8: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _9: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _10: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _11: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _12: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _13: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _14: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _15: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _16: u64;
+    let mut _17: u8;
+    let mut _18: bool;
+
+    bb0: {
+        _18 = const false;
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_1).0: anchor_lang::prelude::AccountInfo<'_>);
+        _18 = const true;
+        _5 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_1).2: anchor_lang::prelude::AccountInfo<'_>);
+        _8 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _9) -> [return: bb2, unwind: bb13];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &((*_1).1: anchor_lang::prelude::AccountInfo<'_>);
+        _10 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _11) -> [return: bb3, unwind: bb10];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &((*_1).4: anchor_lang::prelude::AccountInfo<'_>);
+        _12 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _13) -> [return: bb4, unwind: bb9];
+    }
+
+    bb4: {
+        StorageDead(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &((*_1).3: anchor_lang::prelude::AccountInfo<'_>);
+        _14 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _15) -> [return: bb5, unwind: bb8];
+    }
+
+    bb5: {
+        StorageDead(_15);
+        _7 = anchor_spl::token_2022::TransferChecked::<'_> { from: move _8, mint: move _14, to: move _10, authority: move _12 };
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_8);
+        _18 = const false;
+        _4 = anchor_lang::context::CpiContext::<'_, '_, '_, '_, anchor_spl::token_2022::TransferChecked<'_>>::new(move _5, move _7) -> [return: bb6, unwind: bb13];
+    }
+
+    bb6: {
+        StorageDead(_7);
+        _18 = const false;
+        StorageDead(_5);
+        StorageLive(_16);
+        _16 = _2;
+        StorageLive(_17);
+        _17 = _3;
+        _0 = anchor_spl::token_2022::transfer_checked(move _4, move _16, move _17) -> [return: bb7, unwind: bb11];
+    }
+
+    bb7: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_4);
+        return;
+    }
+
+    bb8 (cleanup): {
+        drop(_12) -> [return: bb9, unwind terminate(cleanup)];
+    }
+
+    bb9 (cleanup): {
+        drop(_10) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        drop(_8) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb11 (cleanup): {
+        resume;
+    }
+
+    bb12 (cleanup): {
+        drop(_5) -> [return: bb11, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        switchInt(_18) -> [0: bb11, otherwise: bb12];
+    }
+}

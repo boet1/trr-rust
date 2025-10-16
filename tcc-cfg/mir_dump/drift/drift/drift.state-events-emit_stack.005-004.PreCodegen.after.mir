@@ -1,0 +1,95 @@
+// MIR for `emit_stack` after PreCodegen
+
+fn emit_stack(_1: T) -> std::result::Result<(), error::ErrorCode> {
+    debug event => _1;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let mut _2: [u8; N];
+    let mut _4: T;
+    let mut _5: &mut [u8];
+    let mut _6: &mut [u8];
+    let mut _7: &mut [u8];
+    let mut _8: &mut [u8; N];
+    let mut _9: std::ops::RangeFull;
+    let mut _10: &mut [u8];
+    let mut _11: &mut [u8];
+    let mut _12: &mut [u8];
+    let mut _13: &mut [u8; N];
+    let mut _14: std::ops::RangeFull;
+    let mut _15: bool;
+    scope 1 {
+        debug data_buf => _2;
+        let mut _3: [u8; N];
+        scope 2 {
+            debug out_buf => _3;
+        }
+    }
+
+    bb0: {
+        _15 = const false;
+        StorageLive(_2);
+        _2 = [const 0_u8; N];
+        StorageLive(_3);
+        _3 = [const 0_u8; N];
+        StorageLive(_4);
+        _15 = const true;
+        _4 = move _1;
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &mut _2;
+        StorageLive(_9);
+        _9 = RangeFull;
+        _7 = <[u8; N] as IndexMut<RangeFull>>::index_mut(move _8, move _9) -> [return: bb1, unwind: bb6];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _6 = &mut (*_7);
+        _5 = &mut (*_6);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut _3;
+        StorageLive(_14);
+        _14 = RangeFull;
+        _12 = <[u8; N] as IndexMut<RangeFull>>::index_mut(move _13, move _14) -> [return: bb2, unwind: bb6];
+    }
+
+    bb2: {
+        StorageDead(_14);
+        StorageDead(_13);
+        _11 = &mut (*_12);
+        _10 = &mut (*_11);
+        _15 = const false;
+        _0 = emit_buffers::<T>(move _4, move _5, move _10) -> [return: bb3, unwind: bb6];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageDead(_5);
+        _15 = const false;
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_7);
+        StorageDead(_6);
+        return;
+    }
+
+    bb4 (cleanup): {
+        resume;
+    }
+
+    bb5 (cleanup): {
+        drop(_4) -> [return: bb4, unwind terminate(cleanup)];
+    }
+
+    bb6 (cleanup): {
+        switchInt(_15) -> [0: bb4, otherwise: bb5];
+    }
+}

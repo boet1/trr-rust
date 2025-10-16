@@ -1,0 +1,211 @@
+// MIR for `instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_i64` after PreCodegen
+
+fn instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_i64(_1: &[u8]) -> Result<(i64, &[u8]), ProgramError> {
+    debug input => _1;
+    let mut _0: std::result::Result<(i64, &[u8]), solana_program::program_error::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: &[u8];
+    let mut _6: !;
+    let _7: ();
+    let mut _8: &str;
+    let _9: &str;
+    let mut _10: solana_program::program_error::ProgramError;
+    let mut _11: error::LendingError;
+    let _12: &[u8];
+    let _13: &[u8];
+    let mut _14: (&[u8], &[u8]);
+    let mut _15: &[u8];
+    let mut _17: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, i64>;
+    let mut _18: std::result::Result<i64, error::LendingError>;
+    let mut _19: std::option::Option<i64>;
+    let mut _20: std::option::Option<[u8; 8]>;
+    let mut _21: std::option::Option<&[u8]>;
+    let mut _22: &[u8];
+    let mut _23: std::ops::RangeTo<usize>;
+    let mut _24: {closure@token-lending\sdk\src\instruction.rs:818:23: 818:30};
+    let mut _25: error::LendingError;
+    let mut _26: isize;
+    let mut _28: !;
+    let mut _29: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _31: (i64, &[u8]);
+    let mut _32: i64;
+    let mut _33: &[u8];
+    scope 1 {
+        debug bytes => _12;
+        debug rest => _13;
+        let _16: i64;
+        let _27: std::result::Result<std::convert::Infallible, error::LendingError>;
+        let _30: i64;
+        scope 2 {
+            debug value => _16;
+        }
+        scope 3 {
+            debug residual => _27;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _30;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = core::slice::<impl [u8]>::len(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _3 = Lt(move _4, const 8_usize);
+        switchInt(move _3) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = const "i64 cannot be unpacked";
+        _8 = &(*_9);
+        _7 = solana_program::log::sol_log(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        StorageDead(_9);
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = LendingError::InstructionUnpackError;
+        _10 = <LendingError as Into<ProgramError>>::into(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        _0 = Result::<(i64, &[u8]), ProgramError>::Err(move _10);
+        StorageDead(_10);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb16;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &(*_1);
+        _14 = core::slice::<impl [u8]>::split_at(move _15, const 8_usize) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_15);
+        StorageLive(_12);
+        _12 = (_14.0: &[u8]);
+        StorageLive(_13);
+        _13 = (_14.1: &[u8]);
+        StorageDead(_14);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &(*_12);
+        StorageLive(_23);
+        _23 = RangeTo::<usize> { end: const 8_usize };
+        _21 = core::slice::<impl [u8]>::get::<RangeTo<usize>>(move _22, move _23) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageLive(_24);
+        _24 = {closure@token-lending\sdk\src\instruction.rs:818:23: 818:30};
+        _20 = Option::<&[u8]>::and_then::<[u8; 8], {closure@token-lending\sdk\src\instruction.rs:818:23: 818:30}>(move _21, move _24) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_24);
+        StorageDead(_21);
+        _19 = Option::<[u8; 8]>::map::<i64, fn([u8; core::::num::{impl#3}::from_le_bytes::{constant#0}]) -> i64 {core::num::<impl i64>::from_le_bytes}>(move _20, core::num::<impl i64>::from_le_bytes) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_20);
+        StorageLive(_25);
+        _25 = LendingError::InstructionUnpackError;
+        _18 = Option::<i64>::ok_or::<LendingError>(move _19, move _25) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_25);
+        StorageDead(_19);
+        _17 = <Result<i64, LendingError> as Try>::branch(move _18) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_18);
+        _26 = discriminant(_17);
+        switchInt(move _26) -> [0: bb12, 1: bb14, otherwise: bb13];
+    }
+
+    bb12: {
+        StorageLive(_30);
+        _30 = ((_17 as Continue).0: i64);
+        _16 = _30;
+        StorageDead(_30);
+        StorageDead(_17);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = _16;
+        StorageLive(_33);
+        _33 = &(*_13);
+        _31 = (move _32, move _33);
+        StorageDead(_33);
+        StorageDead(_32);
+        _0 = Result::<(i64, &[u8]), ProgramError>::Ok(move _31);
+        StorageDead(_31);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb16;
+    }
+
+    bb13: {
+        unreachable;
+    }
+
+    bb14: {
+        StorageLive(_27);
+        _27 = move ((_17 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_29);
+        _29 = move _27;
+        _0 = <Result<(i64, &[u8]), ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _29) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_29);
+        StorageDead(_27);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

@@ -1,0 +1,153 @@
+// MIR for `math::orders::should_cancel_reduce_only_order` before PreCodegen
+
+fn math::orders::should_cancel_reduce_only_order(_1: &Order, _2: i64, _3: u64) -> std::result::Result<bool, error::ErrorCode> {
+    debug order => _1;
+    debug existing_base_asset_amount => _2;
+    debug step_size => _3;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _4: bool;
+    let mut _5: bool;
+    let mut _6: &state::user::OrderStatus;
+    let mut _7: &state::user::OrderStatus;
+    let _8: state::user::OrderStatus;
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _12: std::result::Result<u64, error::ErrorCode>;
+    let mut _13: &state::user::Order;
+    let mut _14: std::option::Option<i64>;
+    let mut _15: i64;
+    let mut _16: isize;
+    let _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _18: !;
+    let mut _19: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _20: u64;
+    let mut _21: u64;
+    let mut _22: bool;
+    let mut _23: &state::user::OrderStatus;
+    scope 1 {
+        debug should_cancel => _4;
+    }
+    scope 2 {
+        debug residual => _17;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _20;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &((*_1).12: state::user::OrderStatus);
+        StorageLive(_7);
+        _23 = const _;
+        _7 = &(*_23);
+        _5 = <OrderStatus as PartialEq>::eq(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _5) -> [0: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_9);
+        _9 = ((*_1).18: bool);
+        switchInt(move _9) -> [0: bb5, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &(*_1);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _2;
+        _14 = Option::<i64>::Some(move _15);
+        StorageDead(_15);
+        _12 = Order::get_base_asset_amount_unfilled(move _13, move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb5;
+    }
+
+    bb5: {
+        _4 = const false;
+        goto -> bb12;
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageDead(_13);
+        _11 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _12) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_12);
+        _16 = discriminant(_11);
+        switchInt(move _16) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_20);
+        _20 = ((_11 as Continue).0: u64);
+        _10 = _20;
+        StorageDead(_20);
+        StorageLive(_21);
+        _21 = _3;
+        _4 = Lt(move _10, move _21);
+        StorageDead(_21);
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb12;
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_17);
+        _17 = ((_11 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_19);
+        _19 = _17;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _19) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb13;
+    }
+
+    bb12: {
+        StorageDead(_9);
+        StorageDead(_5);
+        StorageLive(_22);
+        _22 = _4;
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _22);
+        StorageDead(_22);
+        StorageDead(_4);
+        goto -> bb13;
+    }
+
+    bb13: {
+        return;
+    }
+}

@@ -1,0 +1,198 @@
+// MIR for `get_position_update_type` after PreCodegen
+
+fn get_position_update_type(_1: &PerpPosition, _2: &PositionDelta) -> std::result::Result<PositionUpdateType, error::ErrorCode> {
+    debug position => _1;
+    debug delta => _2;
+    let mut _0: std::result::Result<math::position::PositionUpdateType, error::ErrorCode>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: i64;
+    let mut _6: !;
+    let mut _7: math::position::PositionUpdateType;
+    let _8: i64;
+    let mut _10: bool;
+    let mut _11: i64;
+    let mut _12: i64;
+    let mut _13: i64;
+    let mut _14: i64;
+    let mut _15: math::position::PositionUpdateType;
+    let mut _16: bool;
+    let mut _17: i64;
+    let mut _18: i64;
+    let mut _19: i64;
+    let mut _20: i64;
+    let mut _21: math::position::PositionUpdateType;
+    let mut _22: bool;
+    let mut _23: i64;
+    let mut _24: i64;
+    let mut _25: i64;
+    let mut _26: i64;
+    let mut _27: math::position::PositionUpdateType;
+    let mut _28: math::position::PositionUpdateType;
+    scope 1 {
+        debug position_base => _8;
+        let _9: i64;
+        scope 2 {
+            debug delta_base => _9;
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ((*_1).1: i64);
+        _4 = Eq(move _5, const 0_i64);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageLive(_7);
+        _7 = PositionUpdateType::Open;
+        _0 = std::result::Result::<PositionUpdateType, error::ErrorCode>::Ok(move _7);
+        StorageDead(_7);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb18;
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_8);
+        _8 = ((*_1).1: i64);
+        StorageLive(_9);
+        _9 = ((*_2).1: i64);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = _8;
+        _11 = core::num::<impl i64>::signum(move _12) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _9;
+        _13 = core::num::<impl i64>::signum(move _14) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_14);
+        _10 = Eq(move _11, move _13);
+        switchInt(move _10) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageLive(_15);
+        _15 = PositionUpdateType::Increase;
+        _0 = std::result::Result::<PositionUpdateType, error::ErrorCode>::Ok(move _15);
+        StorageDead(_15);
+        goto -> bb17;
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = _8;
+        _17 = core::num::<impl i64>::abs(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = _9;
+        _19 = core::num::<impl i64>::abs(move _20) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_20);
+        _16 = Gt(move _17, move _19);
+        switchInt(move _16) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageLive(_21);
+        _21 = PositionUpdateType::Reduce;
+        _0 = std::result::Result::<PositionUpdateType, error::ErrorCode>::Ok(move _21);
+        StorageDead(_21);
+        goto -> bb16;
+    }
+
+    bb10: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = _8;
+        _23 = core::num::<impl i64>::abs(move _24) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = _9;
+        _25 = core::num::<impl i64>::abs(move _26) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_26);
+        _22 = Eq(move _23, move _25);
+        switchInt(move _22) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageLive(_27);
+        _27 = PositionUpdateType::Close;
+        _0 = std::result::Result::<PositionUpdateType, error::ErrorCode>::Ok(move _27);
+        StorageDead(_27);
+        goto -> bb15;
+    }
+
+    bb14: {
+        StorageDead(_25);
+        StorageDead(_23);
+        StorageLive(_28);
+        _28 = PositionUpdateType::Flip;
+        _0 = std::result::Result::<PositionUpdateType, error::ErrorCode>::Ok(move _28);
+        StorageDead(_28);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_22);
+        goto -> bb16;
+    }
+
+    bb16: {
+        StorageDead(_16);
+        goto -> bb17;
+    }
+
+    bb17: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_8);
+        goto -> bb18;
+    }
+
+    bb18: {
+        return;
+    }
+}

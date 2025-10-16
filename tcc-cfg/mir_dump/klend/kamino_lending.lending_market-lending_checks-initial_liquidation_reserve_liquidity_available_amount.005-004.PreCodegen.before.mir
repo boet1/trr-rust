@@ -1,0 +1,118 @@
+// MIR for `initial_liquidation_reserve_liquidity_available_amount` before PreCodegen
+
+fn initial_liquidation_reserve_liquidity_available_amount(_1: &anchor_lang::prelude::AccountLoader<'_, reserve::Reserve>, _2: &anchor_lang::prelude::AccountLoader<'_, reserve::Reserve>) -> (u64, u64) {
+    debug repay_reserve => _1;
+    debug withdraw_reserve => _2;
+    let mut _0: (u64, u64);
+    let _3: std::cell::Ref<'_, state::reserve::Reserve>;
+    let mut _4: std::result::Result<std::cell::Ref<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _5: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _7: std::result::Result<std::cell::Ref<'_, state::reserve::Reserve>, anchor_lang::error::Error>;
+    let mut _8: &anchor_lang::prelude::AccountLoader<'_, state::reserve::Reserve>;
+    let mut _10: &state::reserve::Reserve;
+    let mut _11: &std::cell::Ref<'_, state::reserve::Reserve>;
+    let mut _13: &state::reserve::Reserve;
+    let mut _14: &std::cell::Ref<'_, state::reserve::Reserve>;
+    let mut _15: u64;
+    let mut _16: u64;
+    scope 1 {
+        debug repay_reserve => _3;
+        let _6: std::cell::Ref<'_, state::reserve::Reserve>;
+        scope 2 {
+            debug withdraw_reserve => _6;
+            let _9: u64;
+            scope 3 {
+                debug repay_reserve_liquidity => _9;
+                let _12: u64;
+                scope 4 {
+                    debug withdraw_reserve_liquidity => _12;
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        _4 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _3 = std::result::Result::<Ref<'_, reserve::Reserve>, anchor_lang::error::Error>::unwrap(move _4) -> [return: bb2, unwind: bb11];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(*_2);
+        _7 = anchor_lang::prelude::AccountLoader::<'_, reserve::Reserve>::load(move _8) -> [return: bb3, unwind: bb10];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        _6 = std::result::Result::<Ref<'_, reserve::Reserve>, anchor_lang::error::Error>::unwrap(move _7) -> [return: bb4, unwind: bb10];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &_3;
+        _10 = <Ref<'_, reserve::Reserve> as Deref>::deref(move _11) -> [return: bb5, unwind: bb9];
+    }
+
+    bb5: {
+        StorageDead(_11);
+        _9 = (((*_10).5: state::reserve::ReserveLiquidity).3: u64);
+        StorageDead(_10);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &_6;
+        _13 = <Ref<'_, reserve::Reserve> as Deref>::deref(move _14) -> [return: bb6, unwind: bb9];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        _12 = (((*_13).5: state::reserve::ReserveLiquidity).3: u64);
+        StorageDead(_13);
+        StorageLive(_15);
+        _15 = _9;
+        StorageLive(_16);
+        _16 = _12;
+        _0 = (move _15, move _16);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_9);
+        drop(_6) -> [return: bb7, unwind: bb10];
+    }
+
+    bb7: {
+        StorageDead(_6);
+        drop(_3) -> [return: bb8, unwind: bb11];
+    }
+
+    bb8: {
+        StorageDead(_3);
+        return;
+    }
+
+    bb9 (cleanup): {
+        drop(_6) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        drop(_3) -> [return: bb11, unwind terminate(cleanup)];
+    }
+
+    bb11 (cleanup): {
+        resume;
+    }
+}

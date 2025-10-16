@@ -1,0 +1,147 @@
+// MIR for `check_not_zero` after PreCodegen
+
+fn check_not_zero(_1: &T) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug value => _1;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: u128;
+    let mut _5: T;
+    let mut _6: &T;
+    let mut _7: !;
+    let _8: ();
+    let mut _9: &str;
+    let _10: &str;
+    let mut _11: anchor_lang::error::Error;
+    let mut _12: anchor_lang::error::AnchorError;
+    let mut _13: std::string::String;
+    let mut _14: &LendingError;
+    let _15: LendingError;
+    let mut _16: u32;
+    let mut _17: LendingError;
+    let mut _18: std::string::String;
+    let mut _19: &LendingError;
+    let _20: LendingError;
+    let mut _21: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _22: anchor_lang::error::ErrorOrigin;
+    let mut _23: anchor_lang::error::Source;
+    let mut _24: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _25: ();
+    let mut _26: &LendingError;
+    let mut _27: &LendingError;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        _5 = <T as Clone>::clone(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        _4 = <T as Into<u128>>::into(move _5) -> [return: bb2, unwind: bb12];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _3 = Eq(move _4, const 0_u128);
+        switchInt(move _3) -> [0: bb9, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = const "Value cannot be 0";
+        _9 = &(*_10);
+        _8 = solana_program::log::sol_log(move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _27 = const _;
+        _14 = &(*_27);
+        _13 = LendingError::name(move _14) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = LendingError::InvalidConfig;
+        _16 = <LendingError as Into<u32>>::into(move _17) -> [return: bb6, unwind: bb11];
+    }
+
+    bb6: {
+        StorageDead(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _26 = const _;
+        _19 = &(*_26);
+        _18 = <LendingError as ToString>::to_string(move _19) -> [return: bb7, unwind: bb11];
+    }
+
+    bb7: {
+        StorageDead(_19);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\lending_market\\config_items.rs", line: const 226_u32 };
+        _22 = anchor_lang::error::ErrorOrigin::Source(move _23);
+        StorageDead(_23);
+        _21 = std::option::Option::<ErrorOrigin>::Some(move _22);
+        StorageDead(_22);
+        StorageLive(_24);
+        _24 = std::option::Option::<ComparedValues>::None;
+        _12 = anchor_lang::error::AnchorError { error_name: move _13, error_code_number: move _16, error_msg: move _18, error_origin: move _21, compared_values: move _24 };
+        StorageDead(_24);
+        StorageDead(_21);
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_13);
+        _11 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _12) -> [return: bb8, unwind: bb12];
+    }
+
+    bb8: {
+        StorageDead(_12);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _11);
+        StorageDead(_11);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb10;
+    }
+
+    bb9: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_25);
+        _25 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _25);
+        StorageDead(_25);
+        goto -> bb10;
+    }
+
+    bb10: {
+        return;
+    }
+
+    bb11 (cleanup): {
+        drop(_13) -> [return: bb12, unwind terminate(cleanup)];
+    }
+
+    bb12 (cleanup): {
+        resume;
+    }
+}

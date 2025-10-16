@@ -1,0 +1,153 @@
+// MIR for `calculate_terminal_reserves` after PreCodegen
+
+fn calculate_terminal_reserves(_1: &AMM) -> std::result::Result<(u128, u128), error::ErrorCode> {
+    debug amm => _1;
+    let mut _0: std::result::Result<(u128, u128), error::ErrorCode>;
+    let _2: controller::amm::SwapDirection;
+    let mut _3: bool;
+    let mut _4: i128;
+    let mut _7: (u128, u128);
+    let mut _8: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (u128, u128)>;
+    let mut _9: std::result::Result<(u128, u128), error::ErrorCode>;
+    let mut _10: u128;
+    let mut _11: i128;
+    let mut _12: u128;
+    let mut _13: controller::amm::SwapDirection;
+    let mut _14: u128;
+    let mut _15: isize;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _20: (u128, u128);
+    let mut _21: u128;
+    let mut _22: u128;
+    scope 1 {
+        debug swap_direction => _2;
+        let _5: u128;
+        let _6: u128;
+        let _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _19: (u128, u128);
+        scope 2 {
+            debug new_quote_asset_amount => _5;
+            debug new_base_asset_amount => _6;
+        }
+        scope 3 {
+            debug residual => _16;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _19;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).15: i128);
+        _3 = Gt(move _4, const 0_i128);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        _2 = SwapDirection::Add;
+        goto -> bb3;
+    }
+
+    bb2: {
+        StorageDead(_4);
+        _2 = SwapDirection::Remove;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_3);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = ((*_1).15: i128);
+        _10 = core::num::<impl i128>::unsigned_abs(move _11) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_11);
+        StorageLive(_12);
+        _12 = ((*_1).5: u128);
+        StorageLive(_13);
+        _13 = _2;
+        StorageLive(_14);
+        _14 = ((*_1).10: u128);
+        _9 = calculate_swap_output(move _10, move _12, move _13, move _14) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_10);
+        _8 = <std::result::Result<(u128, u128), error::ErrorCode> as Try>::branch(move _9) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_9);
+        _15 = discriminant(_8);
+        switchInt(move _15) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_19);
+        _19 = ((_8 as Continue).0: (u128, u128));
+        _7 = _19;
+        StorageDead(_19);
+        StorageLive(_5);
+        _5 = (_7.0: u128);
+        StorageLive(_6);
+        _6 = (_7.1: u128);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _5;
+        StorageLive(_22);
+        _22 = _6;
+        _20 = (move _21, move _22);
+        StorageDead(_22);
+        StorageDead(_21);
+        _0 = std::result::Result::<(u128, u128), error::ErrorCode>::Ok(move _20);
+        StorageDead(_20);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_2);
+        goto -> bb11;
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_16);
+        _16 = ((_8 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_18);
+        _18 = _16;
+        _0 = <std::result::Result<(u128, u128), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _18) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_2);
+        goto -> bb11;
+    }
+
+    bb11: {
+        return;
+    }
+}

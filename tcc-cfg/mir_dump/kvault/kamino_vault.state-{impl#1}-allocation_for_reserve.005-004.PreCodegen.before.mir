@@ -1,0 +1,139 @@
+// MIR for `state::<impl at programs\kvault\src\state.rs:82:1: 82:16>::allocation_for_reserve` before PreCodegen
+
+fn state::<impl at programs\kvault\src\state.rs:82:1: 82:16>::allocation_for_reserve(_1: &state::VaultState, _2: &anchor_lang::prelude::Pubkey) -> std::result::Result<&VaultAllocation, anchor_lang::error::Error> {
+    debug self => _1;
+    debug reserve => _2;
+    let mut _0: std::result::Result<&state::VaultAllocation, anchor_lang::error::Error>;
+    let _3: &state::VaultAllocation;
+    let mut _4: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, &state::VaultAllocation>;
+    let mut _5: std::result::Result<&state::VaultAllocation, anchor_lang::error::Error>;
+    let mut _6: std::option::Option<&state::VaultAllocation>;
+    let mut _7: &mut std::slice::Iter<'_, state::VaultAllocation>;
+    let mut _8: std::slice::Iter<'_, state::VaultAllocation>;
+    let mut _9: &[state::VaultAllocation];
+    let mut _10: &[state::VaultAllocation; 25];
+    let mut _11: {closure@programs\kvault\src\state.rs:210:19: 210:22};
+    let mut _12: &anchor_lang::prelude::Pubkey;
+    let mut _13: {closure@programs\kvault\src\state.rs:211:25: 211:27};
+    let mut _14: isize;
+    let _15: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _16: !;
+    let mut _17: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _18: &state::VaultAllocation;
+    let mut _19: &state::VaultAllocation;
+    let mut _20: isize;
+    let mut _21: isize;
+    let mut _22: isize;
+    let mut _23: isize;
+    let mut _24: isize;
+    scope 1 {
+        debug allocation => _3;
+    }
+    scope 2 {
+        debug residual => _15;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _18;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &((*_1).18: [state::VaultAllocation; 25]);
+        _9 = move _10 as &[state::VaultAllocation] (PointerCoercion(Unsize));
+        StorageDead(_10);
+        _8 = core::slice::<impl [VaultAllocation]>::iter(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _7 = &mut _8;
+        StorageDead(_9);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &(*_2);
+        _11 = {closure@programs\kvault\src\state.rs:210:19: 210:22} { reserve: move _12 };
+        StorageDead(_12);
+        _6 = <std::slice::Iter<'_, VaultAllocation> as Iterator>::find::<{closure@programs\kvault\src\state.rs:210:19: 210:22}>(move _7, move _11) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageDead(_7);
+        StorageLive(_13);
+        _13 = {closure@programs\kvault\src\state.rs:211:25: 211:27};
+        _5 = Option::<&VaultAllocation>::ok_or_else::<anchor_lang::error::Error, {closure@programs\kvault\src\state.rs:211:25: 211:27}>(move _6, move _13) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_13);
+        StorageDead(_6);
+        _4 = <std::result::Result<&VaultAllocation, anchor_lang::error::Error> as Try>::branch(move _5) -> [return: bb4, unwind: bb10];
+    }
+
+    bb4: {
+        StorageDead(_5);
+        _14 = discriminant(_4);
+        switchInt(move _14) -> [0: bb5, 1: bb7, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_18);
+        _18 = ((_4 as Continue).0: &state::VaultAllocation);
+        _3 = _18;
+        StorageDead(_18);
+        _20 = discriminant(_4);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageLive(_19);
+        _19 = &(*_3);
+        _0 = std::result::Result::<&VaultAllocation, anchor_lang::error::Error>::Ok(move _19);
+        StorageDead(_19);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        StorageLive(_15);
+        _15 = move ((_4 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_17);
+        _17 = move _15;
+        _0 = <std::result::Result<&VaultAllocation, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _17) -> [return: bb8, unwind: bb11];
+    }
+
+    bb8: {
+        StorageDead(_17);
+        StorageDead(_15);
+        _22 = discriminant(_4);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+
+    bb11 (cleanup): {
+        _24 = discriminant(_4);
+        goto -> bb10;
+    }
+}

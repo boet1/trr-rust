@@ -1,0 +1,276 @@
+// MIR for `get_most_recent_price_and_twap` after PreCodegen
+
+fn get_most_recent_price_and_twap(_1: &token_info::TokenInfo, _2: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, _3: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, _4: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, _5: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>, _6: &anchor_lang::prelude::Clock) -> std::result::Result<TimestampedPriceWithTwap, anchor_lang::error::Error> {
+    debug token_info => _1;
+    debug pyth_price_account_info => _2;
+    debug switchboard_price_feed_info => _3;
+    debug switchboard_price_twap_info => _4;
+    debug scope_prices_info => _5;
+    debug clock => _6;
+    let mut _0: std::result::Result<utils::prices::types::TimestampedPriceWithTwap, anchor_lang::error::Error>;
+    let _7: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _8: bool;
+    let mut _9: &state::token_info::PythConfiguration;
+    let mut _10: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _11: {closure@programs\klend\src\utils\prices\mod.rs:61:42: 61:45};
+    let mut _13: bool;
+    let mut _14: &state::token_info::TokenInfo;
+    let mut _16: bool;
+    let mut _17: &state::token_info::SwitchboardConfiguration;
+    let mut _18: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _19: {closure@programs\klend\src\utils\prices\mod.rs:73:46: 73:49};
+    let mut _20: &std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _21: &anchor_lang::prelude::Clock;
+    let mut _23: bool;
+    let mut _24: &state::token_info::ScopeConfiguration;
+    let mut _25: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _26: {closure@programs\klend\src\utils\prices\mod.rs:82:23: 82:26};
+    let mut _27: &state::token_info::TokenInfo;
+    let mut _29: std::iter::Flatten<std::array::IntoIter<std::option::Option<utils::prices::types::TimestampedPriceWithTwap>, 3>>;
+    let mut _30: std::array::IntoIter<std::option::Option<utils::prices::types::TimestampedPriceWithTwap>, 3>;
+    let mut _31: [std::option::Option<utils::prices::types::TimestampedPriceWithTwap>; 3];
+    let mut _32: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _33: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _34: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _35: {closure@programs\klend\src\utils\prices\mod.rs:90:17: 90:37};
+    let mut _36: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+    let mut _37: {closure@programs\klend\src\utils\prices\mod.rs:98:34: 98:36};
+    let mut _38: bool;
+    let mut _39: bool;
+    scope 1 {
+        debug pyth_price => _7;
+        let _12: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+        scope 2 {
+            debug switchboard_price_twap_info_opt => _12;
+            let _15: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+            scope 3 {
+                debug switchboard_price => _15;
+                let _22: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+                scope 4 {
+                    debug scope_price => _22;
+                    let _28: std::option::Option<utils::prices::types::TimestampedPriceWithTwap>;
+                    scope 5 {
+                        debug most_recent_price => _28;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _39 = const false;
+        _38 = const false;
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_1).7: state::token_info::PythConfiguration);
+        _8 = PythConfiguration::is_enabled(move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _8) -> [0: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageLive(_10);
+        _10 = _2;
+        StorageLive(_11);
+        _11 = {closure@programs\klend\src\utils\prices\mod.rs:61:42: 61:45};
+        _39 = const true;
+        _7 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::and_then::<TimestampedPriceWithTwap, {closure@programs\klend\src\utils\prices\mod.rs:61:42: 61:45}>(move _10, move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_10);
+        goto -> bb5;
+    }
+
+    bb4: {
+        StorageDead(_9);
+        _39 = const true;
+        _7 = std::option::Option::<TimestampedPriceWithTwap>::None;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageDead(_8);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        _13 = token_info::TokenInfo::is_twap_enabled(move _14) -> [return: bb6, unwind: bb28];
+    }
+
+    bb6: {
+        switchInt(move _13) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb7: {
+        StorageDead(_14);
+        _12 = _4;
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_14);
+        _12 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::None;
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_13);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &((*_1).6: state::token_info::SwitchboardConfiguration);
+        _16 = SwitchboardConfiguration::is_enabled(move _17) -> [return: bb10, unwind: bb28];
+    }
+
+    bb10: {
+        switchInt(move _16) -> [0: bb13, otherwise: bb11];
+    }
+
+    bb11: {
+        StorageDead(_17);
+        StorageLive(_18);
+        _18 = _3;
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = &_12;
+        StorageLive(_21);
+        _21 = &(*_6);
+        _19 = {closure@programs\klend\src\utils\prices\mod.rs:73:46: 73:49} { switchboard_price_twap_info_opt: move _20, clock: move _21 };
+        StorageDead(_21);
+        StorageDead(_20);
+        _15 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::and_then::<TimestampedPriceWithTwap, {closure@programs\klend\src\utils\prices\mod.rs:73:46: 73:49}>(move _18, move _19) -> [return: bb12, unwind: bb28];
+    }
+
+    bb12: {
+        _38 = const true;
+        StorageDead(_19);
+        StorageDead(_18);
+        goto -> bb14;
+    }
+
+    bb13: {
+        StorageDead(_17);
+        _38 = const true;
+        _15 = std::option::Option::<TimestampedPriceWithTwap>::None;
+        goto -> bb14;
+    }
+
+    bb14: {
+        StorageDead(_16);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &((*_1).5: state::token_info::ScopeConfiguration);
+        _23 = token_info::ScopeConfiguration::is_enabled(move _24) -> [return: bb15, unwind: bb26];
+    }
+
+    bb15: {
+        switchInt(move _23) -> [0: bb18, otherwise: bb16];
+    }
+
+    bb16: {
+        StorageDead(_24);
+        StorageLive(_25);
+        _25 = _5;
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &(*_1);
+        _26 = {closure@programs\klend\src\utils\prices\mod.rs:82:23: 82:26} { token_info: move _27 };
+        StorageDead(_27);
+        _22 = std::option::Option::<&anchor_lang::prelude::AccountInfo<'_>>::and_then::<TimestampedPriceWithTwap, {closure@programs\klend\src\utils\prices\mod.rs:82:23: 82:26}>(move _25, move _26) -> [return: bb17, unwind: bb26];
+    }
+
+    bb17: {
+        StorageDead(_26);
+        StorageDead(_25);
+        goto -> bb19;
+    }
+
+    bb18: {
+        StorageDead(_24);
+        _22 = std::option::Option::<TimestampedPriceWithTwap>::None;
+        goto -> bb19;
+    }
+
+    bb19: {
+        StorageDead(_23);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        _39 = const false;
+        _32 = move _7;
+        StorageLive(_33);
+        _38 = const false;
+        _33 = move _15;
+        StorageLive(_34);
+        _34 = move _22;
+        _31 = [move _32, move _33, move _34];
+        StorageDead(_34);
+        StorageDead(_33);
+        StorageDead(_32);
+        _30 = <[std::option::Option<TimestampedPriceWithTwap>; 3] as IntoIterator>::into_iter(move _31) -> [return: bb20, unwind: bb26];
+    }
+
+    bb20: {
+        StorageDead(_31);
+        _29 = <std::array::IntoIter<std::option::Option<TimestampedPriceWithTwap>, 3> as Iterator>::flatten(move _30) -> [return: bb21, unwind: bb26];
+    }
+
+    bb21: {
+        StorageDead(_30);
+        StorageLive(_35);
+        _35 = {closure@programs\klend\src\utils\prices\mod.rs:90:17: 90:37};
+        _28 = <Flatten<std::array::IntoIter<std::option::Option<TimestampedPriceWithTwap>, 3>> as Iterator>::reduce::<{closure@programs\klend\src\utils\prices\mod.rs:90:17: 90:37}>(move _29, move _35) -> [return: bb22, unwind: bb26];
+    }
+
+    bb22: {
+        StorageDead(_35);
+        StorageDead(_29);
+        StorageLive(_36);
+        _36 = move _28;
+        StorageLive(_37);
+        _37 = {closure@programs\klend\src\utils\prices\mod.rs:98:34: 98:36};
+        _0 = std::option::Option::<TimestampedPriceWithTwap>::ok_or_else::<anchor_lang::error::Error, {closure@programs\klend\src\utils\prices\mod.rs:98:34: 98:36}>(move _36, move _37) -> [return: bb23, unwind: bb26];
+    }
+
+    bb23: {
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_28);
+        StorageDead(_22);
+        _38 = const false;
+        StorageDead(_15);
+        StorageDead(_12);
+        _39 = const false;
+        StorageDead(_7);
+        return;
+    }
+
+    bb24 (cleanup): {
+        resume;
+    }
+
+    bb25 (cleanup): {
+        drop(_15) -> [return: bb28, unwind terminate(cleanup)];
+    }
+
+    bb26 (cleanup): {
+        switchInt(_38) -> [0: bb28, otherwise: bb25];
+    }
+
+    bb27 (cleanup): {
+        drop(_7) -> [return: bb24, unwind terminate(cleanup)];
+    }
+
+    bb28 (cleanup): {
+        switchInt(_39) -> [0: bb24, otherwise: bb27];
+    }
+}

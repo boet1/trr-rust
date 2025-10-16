@@ -1,0 +1,56 @@
+// MIR for `math::oracle::<impl at programs/drift/src/math/oracle.rs:32:1: 32:20>::get_error_code` before PreCodegen
+
+fn math::oracle::<impl at programs/drift/src/math/oracle.rs:32:1: 32:20>::get_error_code(_1: &OracleValidity) -> error::ErrorCode {
+    debug self => _1;
+    let mut _0: error::ErrorCode;
+    let mut _2: isize;
+    let mut _3: !;
+
+    bb0: {
+        _2 = discriminant((*_1));
+        switchInt(move _2) -> [0: bb3, 1: bb4, 2: bb5, 3: bb6, 4: bb7, 5: bb8, 6: bb1, otherwise: bb2];
+    }
+
+    bb1: {
+        StorageLive(_3);
+        _3 = panic(const "internal error: entered unreachable code") -> unwind continue;
+    }
+
+    bb2: {
+        unreachable;
+    }
+
+    bb3: {
+        _0 = error::ErrorCode::OracleNonPositive;
+        goto -> bb9;
+    }
+
+    bb4: {
+        _0 = error::ErrorCode::OracleTooVolatile;
+        goto -> bb9;
+    }
+
+    bb5: {
+        _0 = error::ErrorCode::OracleTooUncertain;
+        goto -> bb9;
+    }
+
+    bb6: {
+        _0 = error::ErrorCode::OracleStaleForMargin;
+        goto -> bb9;
+    }
+
+    bb7: {
+        _0 = error::ErrorCode::OracleInsufficientDataPoints;
+        goto -> bb9;
+    }
+
+    bb8: {
+        _0 = error::ErrorCode::OracleStaleForAMM;
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+}

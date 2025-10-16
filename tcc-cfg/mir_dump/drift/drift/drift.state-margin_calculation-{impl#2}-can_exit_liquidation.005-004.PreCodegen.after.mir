@@ -1,0 +1,85 @@
+// MIR for `margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::can_exit_liquidation` after PreCodegen
+
+fn margin_calculation::<impl at programs/drift/src/state/margin_calculation.rs:208:1: 208:23>::can_exit_liquidation(_1: &MarginCalculation) -> std::result::Result<bool, error::ErrorCode> {
+    debug self => _1;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &state::margin_calculation::MarginCalculation;
+    let mut _5: !;
+    let _6: ();
+    let mut _7: &str;
+    let _8: &str;
+    let mut _9: error::ErrorCode;
+    let mut _10: bool;
+    let mut _11: i128;
+    let mut _12: &state::margin_calculation::MarginCalculation;
+    let mut _13: i128;
+    let mut _14: u128;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = MarginCalculation::is_liquidation_mode(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &(*_1);
+        _11 = MarginCalculation::get_total_collateral_plus_buffer(move _12) -> [return: bb5, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const "liquidation mode not enabled";
+        _7 = &(*_8);
+        _6 = solana_program::log::sol_log(move _7) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_7);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageLive(_9);
+        _9 = error::ErrorCode::InvalidMarginCalculation;
+        _0 = std::result::Result::<bool, error::ErrorCode>::Err(move _9);
+        StorageDead(_9);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb6;
+    }
+
+    bb5: {
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = ((*_1).4: u128);
+        _13 = move _14 as i128 (IntToInt);
+        StorageDead(_14);
+        _10 = Ge(move _11, move _13);
+        StorageDead(_13);
+        StorageDead(_11);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _10);
+        StorageDead(_10);
+        goto -> bb6;
+    }
+
+    bb6: {
+        return;
+    }
+}

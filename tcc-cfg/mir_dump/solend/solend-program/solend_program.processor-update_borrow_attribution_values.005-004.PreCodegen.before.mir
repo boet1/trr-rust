@@ -1,0 +1,996 @@
+// MIR for `update_borrow_attribution_values` before PreCodegen
+
+fn update_borrow_attribution_values(_1: &mut Obligation, _2: &[AccountInfo<'_>]) -> Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> {
+    debug obligation => _1;
+    debug deposit_reserve_infos => _2;
+    let mut _0: std::result::Result<(std::option::Option<solana_program::pubkey::Pubkey>, std::option::Option<solana_program::pubkey::Pubkey>), solana_program::program_error::ProgramError>;
+    let _3: &mut std::slice::Iter<'_, solana_program::account_info::AccountInfo<'_>>;
+    let mut _4: std::slice::Iter<'_, solana_program::account_info::AccountInfo<'_>>;
+    let mut _5: &[solana_program::account_info::AccountInfo<'_>];
+    let _8: ();
+    let mut _9: std::slice::IterMut<'_, solend_sdk::state::ObligationCollateral>;
+    let mut _10: std::slice::IterMut<'_, solend_sdk::state::ObligationCollateral>;
+    let mut _11: &mut [solend_sdk::state::ObligationCollateral];
+    let mut _12: &mut [solend_sdk::state::ObligationCollateral];
+    let mut _13: &mut std::vec::Vec<solend_sdk::state::ObligationCollateral>;
+    let mut _15: ();
+    let _16: ();
+    let mut _17: std::option::Option<&mut solend_sdk::state::ObligationCollateral>;
+    let mut _18: &mut std::slice::IterMut<'_, solend_sdk::state::ObligationCollateral>;
+    let mut _19: &mut std::slice::IterMut<'_, solend_sdk::state::ObligationCollateral>;
+    let mut _20: isize;
+    let mut _21: !;
+    let mut _24: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, &solana_program::account_info::AccountInfo<'_>>;
+    let mut _25: std::result::Result<&solana_program::account_info::AccountInfo<'_>, solana_program::program_error::ProgramError>;
+    let mut _26: &mut std::slice::Iter<'_, solana_program::account_info::AccountInfo<'_>>;
+    let mut _27: isize;
+    let mut _29: !;
+    let mut _30: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _33: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::state::Reserve>;
+    let mut _34: std::result::Result<solend_sdk::state::Reserve, solana_program::program_error::ProgramError>;
+    let mut _35: &[u8];
+    let _36: &&mut [u8];
+    let mut _37: &std::cell::Ref<'_, &mut [u8]>;
+    let _38: &std::cell::Ref<'_, &mut [u8]>;
+    let _39: std::cell::Ref<'_, &mut [u8]>;
+    let mut _40: &std::cell::RefCell<&mut [u8]>;
+    let _41: &std::cell::RefCell<&mut [u8]>;
+    let mut _42: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _43: isize;
+    let mut _45: !;
+    let mut _46: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _48: ();
+    let mut _49: bool;
+    let mut _50: &solana_program::pubkey::Pubkey;
+    let mut _51: &solana_program::pubkey::Pubkey;
+    let mut _52: !;
+    let _53: ();
+    let mut _54: &str;
+    let _55: &str;
+    let mut _56: solana_program::program_error::ProgramError;
+    let mut _57: solend_sdk::error::LendingError;
+    let mut _58: solend_sdk::math::Decimal;
+    let mut _59: solend_sdk::math::Decimal;
+    let mut _60: solend_sdk::math::Decimal;
+    let _61: ();
+    let mut _62: bool;
+    let mut _63: &solend_sdk::math::Decimal;
+    let mut _64: &solend_sdk::math::Decimal;
+    let _65: solend_sdk::math::Decimal;
+    let mut _66: solend_sdk::math::Decimal;
+    let mut _67: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::math::Decimal>;
+    let mut _68: std::result::Result<solend_sdk::math::Decimal, solana_program::program_error::ProgramError>;
+    let mut _69: solend_sdk::math::Decimal;
+    let mut _70: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::math::Decimal>;
+    let mut _71: std::result::Result<solend_sdk::math::Decimal, solana_program::program_error::ProgramError>;
+    let mut _72: solend_sdk::math::Decimal;
+    let mut _73: solend_sdk::math::Decimal;
+    let mut _74: isize;
+    let mut _76: !;
+    let mut _77: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _79: solend_sdk::math::Decimal;
+    let mut _80: isize;
+    let mut _82: !;
+    let mut _83: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _85: solend_sdk::math::Decimal;
+    let mut _86: solend_sdk::math::Decimal;
+    let mut _87: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>, solend_sdk::math::Decimal>;
+    let mut _88: std::result::Result<solend_sdk::math::Decimal, solana_program::program_error::ProgramError>;
+    let mut _89: solend_sdk::math::Decimal;
+    let mut _90: solend_sdk::math::Decimal;
+    let mut _91: isize;
+    let mut _93: !;
+    let mut _94: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let _96: ();
+    let mut _97: bool;
+    let mut _98: &solend_sdk::math::Decimal;
+    let mut _99: &solend_sdk::math::Decimal;
+    let _100: solend_sdk::math::Decimal;
+    let mut _101: u64;
+    let mut _102: std::option::Option<solana_program::pubkey::Pubkey>;
+    let mut _103: solana_program::pubkey::Pubkey;
+    let _104: ();
+    let mut _105: bool;
+    let mut _106: &solend_sdk::math::Decimal;
+    let mut _107: &solend_sdk::math::Decimal;
+    let _108: solend_sdk::math::Decimal;
+    let mut _109: u64;
+    let mut _110: std::option::Option<solana_program::pubkey::Pubkey>;
+    let mut _111: solana_program::pubkey::Pubkey;
+    let _112: ();
+    let mut _113: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>>;
+    let mut _114: std::result::Result<(), solana_program::program_error::ProgramError>;
+    let mut _115: solend_sdk::state::Reserve;
+    let mut _116: &mut [u8];
+    let mut _117: &mut &mut [u8];
+    let mut _118: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _119: &mut std::cell::RefMut<'_, &mut [u8]>;
+    let mut _120: std::cell::RefMut<'_, &mut [u8]>;
+    let mut _121: &std::cell::RefCell<&mut [u8]>;
+    let _122: &std::cell::RefCell<&mut [u8]>;
+    let mut _123: &std::rc::Rc<std::cell::RefCell<&mut [u8]>>;
+    let mut _124: isize;
+    let mut _126: !;
+    let mut _127: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+    let mut _129: (std::option::Option<solana_program::pubkey::Pubkey>, std::option::Option<solana_program::pubkey::Pubkey>);
+    let mut _130: std::option::Option<solana_program::pubkey::Pubkey>;
+    let mut _131: std::option::Option<solana_program::pubkey::Pubkey>;
+    let mut _132: &mut [u8];
+    let mut _133: &solana_program::pubkey::Pubkey;
+    let mut _134: &solana_program::pubkey::Pubkey;
+    let mut _135: &solana_program::pubkey::Pubkey;
+    let mut _136: &mut [u8];
+    let mut _137: bool;
+    let mut _138: isize;
+    let mut _139: isize;
+    let mut _140: isize;
+    let mut _141: isize;
+    let mut _142: isize;
+    let mut _143: isize;
+    let mut _144: isize;
+    let mut _145: isize;
+    let mut _146: isize;
+    let mut _147: isize;
+    let mut _148: isize;
+    let mut _149: isize;
+    let mut _150: isize;
+    let mut _151: isize;
+    let mut _152: isize;
+    let mut _153: isize;
+    let mut _154: isize;
+    let mut _155: isize;
+    let mut _156: isize;
+    let mut _157: isize;
+    let mut _158: isize;
+    let mut _159: isize;
+    let mut _160: isize;
+    let mut _161: isize;
+    let mut _162: isize;
+    let mut _163: isize;
+    let mut _164: isize;
+    let mut _165: isize;
+    let mut _166: isize;
+    let mut _167: isize;
+    scope 1 {
+        debug deposit_infos => _3;
+        let mut _6: std::option::Option<solana_program::pubkey::Pubkey>;
+        scope 2 {
+            debug open_exceeded => _6;
+            let mut _7: std::option::Option<solana_program::pubkey::Pubkey>;
+            scope 3 {
+                debug close_exceeded => _7;
+                let mut _14: std::slice::IterMut<'_, solend_sdk::state::ObligationCollateral>;
+                scope 4 {
+                    debug iter => _14;
+                    let _22: &mut solend_sdk::state::ObligationCollateral;
+                    scope 5 {
+                        debug collateral => _22;
+                        let _23: &solana_program::account_info::AccountInfo<'_>;
+                        let _28: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                        let _31: &solana_program::account_info::AccountInfo<'_>;
+                        scope 6 {
+                            debug deposit_reserve_info => _23;
+                            let mut _32: solend_sdk::state::Reserve;
+                            let _44: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                            let _47: solend_sdk::state::Reserve;
+                            scope 11 {
+                                debug deposit_reserve => _32;
+                                let _75: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                let _78: solend_sdk::math::Decimal;
+                                let _81: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                let _84: solend_sdk::math::Decimal;
+                                let _92: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                let _95: solend_sdk::math::Decimal;
+                                let _125: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>;
+                                let _128: ();
+                                scope 16 {
+                                    debug residual => _75;
+                                    scope 17 {
+                                    }
+                                }
+                                scope 18 {
+                                    debug val => _78;
+                                    scope 19 {
+                                    }
+                                }
+                                scope 20 {
+                                    debug residual => _81;
+                                    scope 21 {
+                                    }
+                                }
+                                scope 22 {
+                                    debug val => _84;
+                                    scope 23 {
+                                    }
+                                }
+                                scope 24 {
+                                    debug residual => _92;
+                                    scope 25 {
+                                    }
+                                }
+                                scope 26 {
+                                    debug val => _95;
+                                    scope 27 {
+                                    }
+                                }
+                                scope 28 {
+                                    debug residual => _125;
+                                    scope 29 {
+                                    }
+                                }
+                                scope 30 {
+                                    debug val => _128;
+                                    scope 31 {
+                                    }
+                                }
+                            }
+                            scope 12 {
+                                debug residual => _44;
+                                scope 13 {
+                                }
+                            }
+                            scope 14 {
+                                debug val => _47;
+                                scope 15 {
+                                }
+                            }
+                        }
+                        scope 7 {
+                            debug residual => _28;
+                            scope 8 {
+                            }
+                        }
+                        scope 9 {
+                            debug val => _31;
+                            scope 10 {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _137 = const false;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_2);
+        _4 = bytemuck::core::slice::<impl [AccountInfo<'_>]>::iter(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        _3 = &mut _4;
+        StorageLive(_6);
+        _6 = Option::<Pubkey>::None;
+        StorageLive(_7);
+        _7 = Option::<Pubkey>::None;
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut ((*_1).4: std::vec::Vec<solend_sdk::state::ObligationCollateral>);
+        _12 = <Vec<ObligationCollateral> as DerefMut>::deref_mut(move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _11 = &mut (*_12);
+        StorageDead(_13);
+        _10 = bytemuck::core::slice::<impl [ObligationCollateral]>::iter_mut(move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        _9 = <std::slice::IterMut<'_, ObligationCollateral> as IntoIterator>::into_iter(move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        StorageLive(_14);
+        _14 = move _9;
+        goto -> bb5;
+    }
+
+    bb5: {
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &mut _14;
+        _18 = &mut (*_19);
+        _17 = <std::slice::IterMut<'_, ObligationCollateral> as Iterator>::next(move _18) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_18);
+        _20 = discriminant(_17);
+        switchInt(move _20) -> [0: bb9, 1: bb7, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_22);
+        _22 = move ((_17 as Some).0: &mut solend_sdk::state::ObligationCollateral);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &mut (*_3);
+        _25 = next_account_info::<'_, '_, std::slice::Iter<'_, AccountInfo<'_>>>(move _26) -> [return: bb10, unwind continue];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        _8 = const ();
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageLive(_129);
+        StorageLive(_130);
+        _130 = _6;
+        StorageLive(_131);
+        _131 = _7;
+        _129 = (move _130, move _131);
+        StorageDead(_131);
+        StorageDead(_130);
+        _0 = Result::<(Option<Pubkey>, Option<Pubkey>), ProgramError>::Ok(move _129);
+        StorageDead(_129);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb75;
+    }
+
+    bb10: {
+        StorageDead(_26);
+        _24 = <Result<&AccountInfo<'_>, ProgramError> as Try>::branch(move _25) -> [return: bb11, unwind: bb78];
+    }
+
+    bb11: {
+        StorageDead(_25);
+        _27 = discriminant(_24);
+        switchInt(move _27) -> [0: bb12, 1: bb13, otherwise: bb8];
+    }
+
+    bb12: {
+        StorageLive(_31);
+        _31 = ((_24 as Continue).0: &solana_program::account_info::AccountInfo<'_>);
+        _23 = _31;
+        StorageDead(_31);
+        _138 = discriminant(_24);
+        StorageDead(_24);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = &((*_23).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _41 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _42) -> [return: bb15, unwind continue];
+    }
+
+    bb13: {
+        StorageLive(_28);
+        _28 = move ((_24 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_30);
+        _30 = move _28;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _30) -> [return: bb14, unwind: bb84];
+    }
+
+    bb14: {
+        StorageDead(_30);
+        StorageDead(_28);
+        _160 = discriminant(_24);
+        StorageDead(_24);
+        goto -> bb74;
+    }
+
+    bb15: {
+        _40 = &(*_41);
+        StorageDead(_42);
+        _39 = RefCell::<&mut [u8]>::borrow(move _40) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_40);
+        _38 = &_39;
+        _37 = &(*_38);
+        _36 = <Ref<'_, &mut [u8]> as Deref>::deref(move _37) -> [return: bb17, unwind: bb77];
+    }
+
+    bb17: {
+        _132 = deref_copy (*_36);
+        _35 = &(*_132);
+        StorageDead(_37);
+        _34 = <Reserve as Pack>::unpack(move _35) -> [return: bb18, unwind: bb77];
+    }
+
+    bb18: {
+        StorageDead(_35);
+        _33 = <Result<Reserve, ProgramError> as Try>::branch(move _34) -> [return: bb19, unwind: bb77];
+    }
+
+    bb19: {
+        StorageDead(_34);
+        _43 = discriminant(_33);
+        switchInt(move _43) -> [0: bb20, 1: bb21, otherwise: bb8];
+    }
+
+    bb20: {
+        StorageLive(_47);
+        _47 = move ((_33 as Continue).0: solend_sdk::state::Reserve);
+        _32 = move _47;
+        StorageDead(_47);
+        _140 = discriminant(_33);
+        drop(_39) -> [return: bb23, unwind: bb78];
+    }
+
+    bb21: {
+        StorageLive(_44);
+        _44 = move ((_33 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_46);
+        _46 = move _44;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _46) -> [return: bb22, unwind: bb83];
+    }
+
+    bb22: {
+        StorageDead(_46);
+        StorageDead(_44);
+        _158 = discriminant(_33);
+        drop(_39) -> [return: bb72, unwind: bb78];
+    }
+
+    bb23: {
+        StorageDead(_41);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_36);
+        StorageDead(_33);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        _50 = &((*_22).0: solana_program::pubkey::Pubkey);
+        StorageLive(_51);
+        _133 = deref_copy ((*_23).0: &solana_program::pubkey::Pubkey);
+        _51 = &(*_133);
+        _49 = <Pubkey as PartialEq>::ne(move _50, move _51) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        switchInt(move _49) -> [0: bb28, otherwise: bb25];
+    }
+
+    bb25: {
+        StorageDead(_51);
+        StorageDead(_50);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        _55 = const "Something went wrong, deposit reserve account mismatch";
+        _54 = &(*_55);
+        _53 = solana_program::log::sol_log(move _54) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_54);
+        StorageDead(_55);
+        StorageDead(_53);
+        StorageLive(_56);
+        StorageLive(_57);
+        _57 = InvalidAccountInput;
+        _56 = <LendingError as Into<ProgramError>>::into(move _57) -> [return: bb27, unwind continue];
+    }
+
+    bb27: {
+        StorageDead(_57);
+        _0 = Result::<(Option<Pubkey>, Option<Pubkey>), ProgramError>::Err(move _56);
+        StorageDead(_56);
+        StorageDead(_49);
+        StorageDead(_48);
+        goto -> bb73;
+    }
+
+    bb28: {
+        StorageDead(_51);
+        StorageDead(_50);
+        _48 = const ();
+        StorageDead(_49);
+        StorageDead(_48);
+        StorageLive(_58);
+        StorageLive(_59);
+        _59 = (_32.7: solend_sdk::math::Decimal);
+        StorageLive(_60);
+        _60 = ((*_22).3: solend_sdk::math::Decimal);
+        _58 = <Decimal as SaturatingSub>::saturating_sub(move _59, move _60) -> [return: bb29, unwind continue];
+    }
+
+    bb29: {
+        StorageDead(_60);
+        StorageDead(_59);
+        (_32.7: solend_sdk::math::Decimal) = move _58;
+        StorageDead(_58);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = &((*_1).6: solend_sdk::math::Decimal);
+        StorageLive(_64);
+        StorageLive(_65);
+        _65 = Decimal::zero() -> [return: bb30, unwind continue];
+    }
+
+    bb30: {
+        _64 = &_65;
+        _62 = <Decimal as PartialOrd>::gt(move _63, move _64) -> [return: bb31, unwind continue];
+    }
+
+    bb31: {
+        switchInt(move _62) -> [0: bb43, otherwise: bb32];
+    }
+
+    bb32: {
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageDead(_63);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        _72 = ((*_22).2: solend_sdk::math::Decimal);
+        StorageLive(_73);
+        _73 = ((*_1).8: solend_sdk::math::Decimal);
+        _71 = <Decimal as TryMul<Decimal>>::try_mul(move _72, move _73) -> [return: bb33, unwind continue];
+    }
+
+    bb33: {
+        StorageDead(_73);
+        StorageDead(_72);
+        _70 = <Result<Decimal, ProgramError> as Try>::branch(move _71) -> [return: bb34, unwind: bb78];
+    }
+
+    bb34: {
+        _137 = const true;
+        StorageDead(_71);
+        _74 = discriminant(_70);
+        switchInt(move _74) -> [0: bb35, 1: bb36, otherwise: bb8];
+    }
+
+    bb35: {
+        StorageLive(_78);
+        _78 = ((_70 as Continue).0: solend_sdk::math::Decimal);
+        _69 = _78;
+        StorageDead(_78);
+        StorageLive(_79);
+        _79 = ((*_1).6: solend_sdk::math::Decimal);
+        _68 = <Decimal as TryDiv<Decimal>>::try_div(move _69, move _79) -> [return: bb38, unwind: bb82];
+    }
+
+    bb36: {
+        StorageLive(_75);
+        _75 = move ((_70 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_77);
+        _77 = move _75;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _77) -> [return: bb37, unwind: bb82];
+    }
+
+    bb37: {
+        StorageDead(_77);
+        StorageDead(_75);
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_66);
+        goto -> bb71;
+    }
+
+    bb38: {
+        StorageDead(_79);
+        StorageDead(_69);
+        _67 = <Result<Decimal, ProgramError> as Try>::branch(move _68) -> [return: bb39, unwind: bb82];
+    }
+
+    bb39: {
+        StorageDead(_68);
+        _80 = discriminant(_67);
+        switchInt(move _80) -> [0: bb40, 1: bb41, otherwise: bb8];
+    }
+
+    bb40: {
+        StorageLive(_84);
+        _84 = ((_67 as Continue).0: solend_sdk::math::Decimal);
+        _66 = _84;
+        StorageDead(_84);
+        ((*_22).3: solend_sdk::math::Decimal) = move _66;
+        _61 = const ();
+        StorageDead(_66);
+        _142 = discriminant(_67);
+        _144 = discriminant(_70);
+        _137 = const false;
+        StorageDead(_70);
+        StorageDead(_67);
+        goto -> bb45;
+    }
+
+    bb41: {
+        StorageLive(_81);
+        _81 = move ((_67 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_83);
+        _83 = move _81;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _83) -> [return: bb42, unwind: bb81];
+    }
+
+    bb42: {
+        StorageDead(_83);
+        StorageDead(_81);
+        StorageDead(_66);
+        _154 = discriminant(_67);
+        goto -> bb71;
+    }
+
+    bb43: {
+        StorageDead(_65);
+        StorageDead(_64);
+        StorageDead(_63);
+        StorageLive(_85);
+        _85 = Decimal::zero() -> [return: bb44, unwind continue];
+    }
+
+    bb44: {
+        ((*_22).3: solend_sdk::math::Decimal) = move _85;
+        StorageDead(_85);
+        _61 = const ();
+        goto -> bb45;
+    }
+
+    bb45: {
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageLive(_86);
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        _89 = (_32.7: solend_sdk::math::Decimal);
+        StorageLive(_90);
+        _90 = ((*_22).3: solend_sdk::math::Decimal);
+        _88 = <Decimal as TryAdd>::try_add(move _89, move _90) -> [return: bb46, unwind continue];
+    }
+
+    bb46: {
+        StorageDead(_90);
+        StorageDead(_89);
+        _87 = <Result<Decimal, ProgramError> as Try>::branch(move _88) -> [return: bb47, unwind: bb78];
+    }
+
+    bb47: {
+        StorageDead(_88);
+        _91 = discriminant(_87);
+        switchInt(move _91) -> [0: bb48, 1: bb49, otherwise: bb8];
+    }
+
+    bb48: {
+        StorageLive(_95);
+        _95 = ((_87 as Continue).0: solend_sdk::math::Decimal);
+        _86 = _95;
+        StorageDead(_95);
+        (_32.7: solend_sdk::math::Decimal) = move _86;
+        StorageDead(_86);
+        _146 = discriminant(_87);
+        StorageDead(_87);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        _98 = &(_32.7: solend_sdk::math::Decimal);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        _101 = ((_32.5: solend_sdk::state::ReserveConfig).21: u64);
+        _100 = <Decimal as From<u64>>::from(move _101) -> [return: bb51, unwind continue];
+    }
+
+    bb49: {
+        StorageLive(_92);
+        _92 = move ((_87 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_94);
+        _94 = move _92;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _94) -> [return: bb50, unwind: bb80];
+    }
+
+    bb50: {
+        StorageDead(_94);
+        StorageDead(_92);
+        StorageDead(_86);
+        _152 = discriminant(_87);
+        StorageDead(_87);
+        goto -> bb73;
+    }
+
+    bb51: {
+        _99 = &_100;
+        StorageDead(_101);
+        _97 = <Decimal as PartialOrd>::gt(move _98, move _99) -> [return: bb52, unwind continue];
+    }
+
+    bb52: {
+        switchInt(move _97) -> [0: bb54, otherwise: bb53];
+    }
+
+    bb53: {
+        StorageDead(_100);
+        StorageDead(_99);
+        StorageDead(_98);
+        StorageLive(_102);
+        StorageLive(_103);
+        _134 = deref_copy ((*_23).0: &solana_program::pubkey::Pubkey);
+        _103 = (*_134);
+        _102 = Option::<Pubkey>::Some(move _103);
+        StorageDead(_103);
+        _6 = move _102;
+        StorageDead(_102);
+        _96 = const ();
+        goto -> bb55;
+    }
+
+    bb54: {
+        StorageDead(_100);
+        StorageDead(_99);
+        StorageDead(_98);
+        _96 = const ();
+        goto -> bb55;
+    }
+
+    bb55: {
+        StorageDead(_97);
+        StorageDead(_96);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        _106 = &(_32.7: solend_sdk::math::Decimal);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        _109 = ((_32.5: solend_sdk::state::ReserveConfig).22: u64);
+        _108 = <Decimal as From<u64>>::from(move _109) -> [return: bb56, unwind continue];
+    }
+
+    bb56: {
+        _107 = &_108;
+        StorageDead(_109);
+        _105 = <Decimal as PartialOrd>::gt(move _106, move _107) -> [return: bb57, unwind continue];
+    }
+
+    bb57: {
+        switchInt(move _105) -> [0: bb59, otherwise: bb58];
+    }
+
+    bb58: {
+        StorageDead(_108);
+        StorageDead(_107);
+        StorageDead(_106);
+        StorageLive(_110);
+        StorageLive(_111);
+        _135 = deref_copy ((*_23).0: &solana_program::pubkey::Pubkey);
+        _111 = (*_135);
+        _110 = Option::<Pubkey>::Some(move _111);
+        StorageDead(_111);
+        _7 = move _110;
+        StorageDead(_110);
+        _104 = const ();
+        goto -> bb60;
+    }
+
+    bb59: {
+        StorageDead(_108);
+        StorageDead(_107);
+        StorageDead(_106);
+        _104 = const ();
+        goto -> bb60;
+    }
+
+    bb60: {
+        StorageDead(_105);
+        StorageDead(_104);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        _115 = move _32;
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        _123 = &((*_23).2: std::rc::Rc<std::cell::RefCell<&mut [u8]>>);
+        _122 = <Rc<RefCell<&mut [u8]>> as Deref>::deref(move _123) -> [return: bb61, unwind continue];
+    }
+
+    bb61: {
+        _121 = &(*_122);
+        StorageDead(_123);
+        _120 = RefCell::<&mut [u8]>::borrow_mut(move _121) -> [return: bb62, unwind continue];
+    }
+
+    bb62: {
+        StorageDead(_121);
+        _119 = &mut _120;
+        _118 = &mut (*_119);
+        _117 = <RefMut<'_, &mut [u8]> as DerefMut>::deref_mut(move _118) -> [return: bb63, unwind: bb76];
+    }
+
+    bb63: {
+        _136 = deref_copy (*_117);
+        _116 = &mut (*_136);
+        StorageDead(_118);
+        _114 = <Reserve as Pack>::pack(move _115, move _116) -> [return: bb64, unwind: bb76];
+    }
+
+    bb64: {
+        StorageDead(_116);
+        StorageDead(_115);
+        _113 = <Result<(), ProgramError> as Try>::branch(move _114) -> [return: bb65, unwind: bb76];
+    }
+
+    bb65: {
+        StorageDead(_114);
+        _124 = discriminant(_113);
+        switchInt(move _124) -> [0: bb66, 1: bb67, otherwise: bb8];
+    }
+
+    bb66: {
+        StorageLive(_128);
+        _128 = ((_113 as Continue).0: ());
+        _112 = _128;
+        StorageDead(_128);
+        _148 = discriminant(_113);
+        drop(_120) -> [return: bb69, unwind: bb78];
+    }
+
+    bb67: {
+        StorageLive(_125);
+        _125 = move ((_113 as Break).0: std::result::Result<std::convert::Infallible, solana_program::program_error::ProgramError>);
+        StorageLive(_127);
+        _127 = move _125;
+        _0 = <Result<(Option<Pubkey>, Option<Pubkey>), ProgramError> as FromResidual<Result<Infallible, ProgramError>>>::from_residual(move _127) -> [return: bb68, unwind: bb79];
+    }
+
+    bb68: {
+        StorageDead(_127);
+        StorageDead(_125);
+        _150 = discriminant(_113);
+        drop(_120) -> [return: bb70, unwind: bb78];
+    }
+
+    bb69: {
+        StorageDead(_122);
+        StorageDead(_120);
+        StorageDead(_119);
+        StorageDead(_117);
+        StorageDead(_113);
+        StorageDead(_112);
+        _16 = const ();
+        StorageDead(_32);
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_16);
+        _15 = const ();
+        goto -> bb5;
+    }
+
+    bb70: {
+        StorageDead(_122);
+        StorageDead(_120);
+        StorageDead(_119);
+        StorageDead(_117);
+        StorageDead(_113);
+        StorageDead(_112);
+        goto -> bb73;
+    }
+
+    bb71: {
+        _156 = discriminant(_70);
+        _137 = const false;
+        StorageDead(_70);
+        StorageDead(_67);
+        StorageDead(_62);
+        StorageDead(_61);
+        goto -> bb73;
+    }
+
+    bb72: {
+        StorageDead(_41);
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_36);
+        StorageDead(_33);
+        goto -> bb73;
+    }
+
+    bb73: {
+        StorageDead(_32);
+        goto -> bb74;
+    }
+
+    bb74: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb75;
+    }
+
+    bb75: {
+        return;
+    }
+
+    bb76 (cleanup): {
+        drop(_120) -> [return: bb78, unwind terminate(cleanup)];
+    }
+
+    bb77 (cleanup): {
+        drop(_39) -> [return: bb78, unwind terminate(cleanup)];
+    }
+
+    bb78 (cleanup): {
+        resume;
+    }
+
+    bb79 (cleanup): {
+        _162 = discriminant(_113);
+        goto -> bb76;
+    }
+
+    bb80 (cleanup): {
+        _163 = discriminant(_87);
+        goto -> bb78;
+    }
+
+    bb81 (cleanup): {
+        _164 = discriminant(_67);
+        goto -> bb82;
+    }
+
+    bb82 (cleanup): {
+        _165 = discriminant(_70);
+        goto -> bb78;
+    }
+
+    bb83 (cleanup): {
+        _166 = discriminant(_33);
+        goto -> bb77;
+    }
+
+    bb84 (cleanup): {
+        _167 = discriminant(_24);
+        goto -> bb78;
+    }
+}

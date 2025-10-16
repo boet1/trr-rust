@@ -1,0 +1,40 @@
+// MIR for `reserve::<impl at programs\klend\src\state\reserve.rs:491:1: 491:22>::mint_factor` before PreCodegen
+
+fn reserve::<impl at programs\klend\src\state\reserve.rs:491:1: 491:22>::mint_factor(_1: &ReserveLiquidity) -> u64 {
+    debug self => _1;
+    let mut _0: u64;
+    let mut _2: usize;
+    let mut _3: std::result::Result<usize, std::num::TryFromIntError>;
+    let mut _4: u64;
+    let mut _5: &str;
+    let _6: &str;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = ((*_1).7: u64);
+        _3 = <usize as TryFrom<u64>>::try_from(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = const "mint decimals is expected to be <20";
+        _5 = &(*_6);
+        _2 = std::result::Result::<usize, TryFromIntError>::expect(move _3, move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_3);
+        _0 = utils::consts::ten_pow(move _2) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_2);
+        StorageDead(_6);
+        return;
+    }
+}

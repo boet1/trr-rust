@@ -1,0 +1,226 @@
+// MIR for `prices::types::<impl at programs\klend\src\utils\prices\types.rs:24:1: 26:42>::to_adjusted_exp` before PreCodegen
+
+fn prices::types::<impl at programs\klend\src\utils\prices\types.rs:24:1: 26:42>::to_adjusted_exp(_1: prices::types::Price<T>, _2: u32) -> std::option::Option<prices::types::Price<T>> {
+    debug self => _1;
+    debug target_exp => _2;
+    let mut _0: std::option::Option<utils::prices::types::Price<T>>;
+    let _3: ();
+    let mut _4: bool;
+    let mut _5: u32;
+    let mut _6: u32;
+    let mut _7: !;
+    let mut _8: utils::prices::types::Price<T>;
+    let _9: utils::fraction::uint_types::U256;
+    let mut _10: T;
+    let mut _13: bool;
+    let mut _14: u32;
+    let mut _15: u32;
+    let mut _17: u32;
+    let mut _18: u32;
+    let mut _19: (u32, bool);
+    let mut _21: utils::fraction::uint_types::U128;
+    let mut _22: u32;
+    let mut _23: utils::fraction::uint_types::U256;
+    let mut _24: utils::fraction::uint_types::U256;
+    let mut _26: u32;
+    let mut _27: u32;
+    let mut _28: (u32, bool);
+    let mut _30: utils::fraction::uint_types::U128;
+    let mut _31: u32;
+    let mut _32: utils::fraction::uint_types::U256;
+    let mut _33: utils::fraction::uint_types::U256;
+    let mut _34: std::option::Option<utils::fraction::uint_types::U256>;
+    let mut _35: {closure@programs\klend\src\utils\prices\types.rs:52:28: 52:35};
+    let mut _36: &u32;
+    scope 1 {
+        debug value => _9;
+        let _11: u32;
+        scope 2 {
+            debug exp => _11;
+            let _12: std::option::Option<utils::fraction::uint_types::U256>;
+            let _16: u32;
+            let _25: u32;
+            scope 3 {
+                debug value_256 => _12;
+            }
+            scope 4 {
+                debug diff => _16;
+                let _20: utils::fraction::uint_types::U256;
+                scope 5 {
+                    debug factor => _20;
+                }
+            }
+            scope 6 {
+                debug diff => _25;
+                let _29: utils::fraction::uint_types::U256;
+                scope 7 {
+                    debug factor => _29;
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        StorageLive(_6);
+        _6 = (_1.1: u32);
+        _4 = Eq(move _5, move _6);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageLive(_8);
+        _8 = _1;
+        _0 = std::option::Option::<prices::types::Price<T>>::Some(move _8);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        goto -> bb16;
+    }
+
+    bb2: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _3 = const ();
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = (_1.0: T);
+        _9 = <T as Into<uint_types::U256>>::into(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageLive(_11);
+        _11 = (_1.1: u32);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _11;
+        StorageLive(_15);
+        _15 = _2;
+        _13 = Gt(move _14, move _15);
+        switchInt(move _13) -> [0: bb9, otherwise: bb4];
+    }
+
+    bb4: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = _11;
+        StorageLive(_18);
+        _18 = _2;
+        _19 = CheckedSub(_17, _18);
+        assert(!move (_19.1: bool), "attempt to compute `{} - {}`, which would overflow", move _17, move _18) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        _16 = move (_19.0: u32);
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = _16;
+        _21 = prices::utils::ten_pow(move _22) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_22);
+        _20 = <uint_types::U128 as Into<uint_types::U256>>::into(move _21) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_21);
+        StorageLive(_23);
+        _23 = _9;
+        StorageLive(_24);
+        _24 = _20;
+        _12 = uint_types::U256::checked_div(move _23, move _24) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_20);
+        StorageDead(_16);
+        goto -> bb14;
+    }
+
+    bb9: {
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = _2;
+        StorageLive(_27);
+        _27 = _11;
+        _28 = CheckedSub(_26, _27);
+        assert(!move (_28.1: bool), "attempt to compute `{} - {}`, which would overflow", move _26, move _27) -> [success: bb10, unwind continue];
+    }
+
+    bb10: {
+        _25 = move (_28.0: u32);
+        StorageDead(_27);
+        StorageDead(_26);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = _25;
+        _30 = prices::utils::ten_pow(move _31) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_31);
+        _29 = <uint_types::U128 as Into<uint_types::U256>>::into(move _30) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_30);
+        StorageLive(_32);
+        _32 = _9;
+        StorageLive(_33);
+        _33 = _29;
+        _12 = uint_types::U256::checked_mul(move _32, move _33) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_29);
+        StorageDead(_25);
+        goto -> bb14;
+    }
+
+    bb14: {
+        StorageDead(_13);
+        StorageLive(_34);
+        _34 = _12;
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = &_2;
+        _35 = {closure@programs\klend\src\utils\prices\types.rs:52:28: 52:35} { target_exp: move _36 };
+        StorageDead(_36);
+        _0 = std::option::Option::<uint_types::U256>::and_then::<prices::types::Price<T>, {closure@programs\klend\src\utils\prices\types.rs:52:28: 52:35}>(move _34, move _35) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

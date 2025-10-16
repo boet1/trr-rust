@@ -1,0 +1,221 @@
+// MIR for `calculate_base_asset_value_and_pnl` after PreCodegen
+
+fn calculate_base_asset_value_and_pnl(_1: i128, _2: u128, _3: &AMM) -> std::result::Result<(u128, i128), error::ErrorCode> {
+    debug base_asset_amount => _1;
+    debug quote_asset_amount => _2;
+    debug amm => _3;
+    let mut _0: std::result::Result<(u128, i128), error::ErrorCode>;
+    let _4: ();
+    let mut _5: bool;
+    let mut _6: i128;
+    let mut _7: !;
+    let mut _8: (u128, i128);
+    let _9: controller::amm::SwapDirection;
+    let mut _10: i128;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u128>;
+    let mut _13: std::result::Result<u128, error::ErrorCode>;
+    let mut _14: i128;
+    let mut _15: &state::perp_market::AMM;
+    let mut _16: isize;
+    let mut _18: !;
+    let mut _19: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _22: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _23: std::result::Result<i128, error::ErrorCode>;
+    let mut _24: u128;
+    let mut _25: u128;
+    let mut _26: controller::amm::SwapDirection;
+    let mut _27: isize;
+    let mut _29: !;
+    let mut _30: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _32: (u128, i128);
+    let mut _33: u128;
+    let mut _34: i128;
+    scope 1 {
+        debug swap_direction => _9;
+        let _11: u128;
+        let _17: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _20: u128;
+        scope 2 {
+            debug base_asset_value => _11;
+            let _21: i128;
+            let _28: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _31: i128;
+            scope 7 {
+                debug pnl => _21;
+            }
+            scope 8 {
+                debug residual => _28;
+                scope 9 {
+                }
+            }
+            scope 10 {
+                debug val => _31;
+                scope 11 {
+                }
+            }
+        }
+        scope 3 {
+            debug residual => _17;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _20;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = _1;
+        _5 = Eq(move _6, const 0_i128);
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_8);
+        _8 = (const 0_u128, const 0_i128);
+        _0 = std::result::Result::<(u128, i128), error::ErrorCode>::Ok(move _8);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb16;
+    }
+
+    bb2: {
+        StorageDead(_6);
+        _4 = const ();
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _1;
+        _9 = swap_direction_to_close_position(move _10) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _1;
+        StorageLive(_15);
+        _15 = &(*_3);
+        _13 = calculate_base_asset_value(move _14, move _15) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_15);
+        StorageDead(_14);
+        _12 = <std::result::Result<u128, error::ErrorCode> as Try>::branch(move _13) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_13);
+        _16 = discriminant(_12);
+        switchInt(move _16) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_20);
+        _20 = ((_12 as Continue).0: u128);
+        _11 = _20;
+        StorageDead(_20);
+        StorageDead(_12);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = _11;
+        StorageLive(_25);
+        _25 = _2;
+        StorageLive(_26);
+        _26 = _9;
+        _23 = calculate_pnl(move _24, move _25, move _26) -> [return: bb10, unwind continue];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_17);
+        _17 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_19);
+        _19 = _17;
+        _0 = <std::result::Result<(u128, i128), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _19) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        StorageDead(_17);
+        StorageDead(_12);
+        goto -> bb15;
+    }
+
+    bb10: {
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageDead(_24);
+        _22 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _23) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_23);
+        _27 = discriminant(_22);
+        switchInt(move _27) -> [0: bb12, 1: bb13, otherwise: bb7];
+    }
+
+    bb12: {
+        StorageLive(_31);
+        _31 = ((_22 as Continue).0: i128);
+        _21 = _31;
+        StorageDead(_31);
+        StorageDead(_22);
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = _11;
+        StorageLive(_34);
+        _34 = _21;
+        _32 = (move _33, move _34);
+        StorageDead(_34);
+        StorageDead(_33);
+        _0 = std::result::Result::<(u128, i128), error::ErrorCode>::Ok(move _32);
+        StorageDead(_32);
+        StorageDead(_21);
+        StorageDead(_11);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb13: {
+        StorageLive(_28);
+        _28 = ((_22 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_30);
+        _30 = _28;
+        _0 = <std::result::Result<(u128, i128), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _30) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageDead(_22);
+        StorageDead(_21);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_11);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

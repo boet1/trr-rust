@@ -1,0 +1,989 @@
+// MIR for `state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::meets_withdraw_margin_requirement_and_increment_fuel_bonus_swap` after PreCodegen
+
+fn state::user::<impl at programs/drift/src/state/user.rs:136:1: 136:10>::meets_withdraw_margin_requirement_and_increment_fuel_bonus_swap(_1: &mut User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>, _5: math::margin::MarginRequirementType, _6: u16, _7: i128, _8: u16, _9: i128, _10: &mut UserStats, _11: i64) -> std::result::Result<bool, error::ErrorCode> {
+    debug self => _1;
+    debug perp_market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    debug margin_requirement_type => _5;
+    debug in_market_index => _6;
+    debug in_delta => _7;
+    debug out_market_index => _8;
+    debug out_delta => _9;
+    debug user_stats => _10;
+    debug now => _11;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _12: bool;
+    let mut _13: &math::margin::MarginRequirementType;
+    let mut _14: &math::margin::MarginRequirementType;
+    let _15: math::margin::MarginRequirementType;
+    let mut _17: state::margin_calculation::MarginContext;
+    let mut _18: state::margin_calculation::MarginContext;
+    let mut _19: state::margin_calculation::MarginContext;
+    let mut _20: state::margin_calculation::MarginContext;
+    let mut _21: math::margin::MarginRequirementType;
+    let mut _22: bool;
+    let mut _23: [(u16, i128); 2];
+    let mut _24: (u16, i128);
+    let mut _25: u16;
+    let mut _26: i128;
+    let mut _27: (u16, i128);
+    let mut _28: u16;
+    let mut _29: i128;
+    let mut _30: &state::user::User;
+    let mut _31: i64;
+    let mut _33: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginCalculation>;
+    let mut _34: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _35: &state::user::User;
+    let mut _36: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _37: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _38: &mut state::oracle_map::OracleMap<'_>;
+    let mut _39: state::margin_calculation::MarginContext;
+    let mut _40: isize;
+    let mut _42: !;
+    let mut _43: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _45: ();
+    let mut _46: bool;
+    let mut _47: u128;
+    let mut _48: bool;
+    let mut _49: u8;
+    let mut _50: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u8>;
+    let mut _51: std::result::Result<u8, error::ErrorCode>;
+    let mut _52: &state::margin_calculation::MarginCalculation;
+    let mut _53: isize;
+    let mut _55: !;
+    let mut _56: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _58: ();
+    let mut _59: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _60: std::result::Result<(), error::ErrorCode>;
+    let mut _61: bool;
+    let mut _62: ();
+    let _64: ();
+    let mut _65: &str;
+    let _66: &str;
+    let mut _67: &std::string::String;
+    let _68: &std::string::String;
+    let _69: std::string::String;
+    let mut _71: std::fmt::Arguments<'_>;
+    let mut _72: &[&str];
+    let mut _73: &[&str; 2];
+    let _74: &[&str; 2];
+    let _75: [&str; 2];
+    let mut _76: &[core::fmt::rt::Argument<'_>];
+    let mut _77: &[core::fmt::rt::Argument<'_>; 1];
+    let _78: &[core::fmt::rt::Argument<'_>; 1];
+    let _79: [core::fmt::rt::Argument<'_>; 1];
+    let mut _80: core::fmt::rt::Argument<'_>;
+    let mut _81: &error::ErrorCode;
+    let _82: &error::ErrorCode;
+    let _83: ();
+    let mut _84: &str;
+    let _85: &str;
+    let mut _86: error::ErrorCode;
+    let mut _87: isize;
+    let mut _89: !;
+    let mut _90: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _92: ();
+    let mut _93: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _94: std::result::Result<(), error::ErrorCode>;
+    let mut _95: &state::user::User;
+    let mut _96: state::margin_calculation::MarginCalculation;
+    let mut _97: isize;
+    let mut _99: !;
+    let mut _100: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _102: ();
+    let mut _103: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _104: std::result::Result<(), error::ErrorCode>;
+    let mut _105: bool;
+    let mut _106: &state::margin_calculation::MarginCalculation;
+    let mut _107: ();
+    let _109: ();
+    let mut _110: &str;
+    let _111: &str;
+    let mut _112: &std::string::String;
+    let _113: &std::string::String;
+    let _114: std::string::String;
+    let mut _116: std::fmt::Arguments<'_>;
+    let mut _117: &[&str];
+    let mut _118: &[&str; 2];
+    let _119: &[&str; 2];
+    let _120: [&str; 2];
+    let mut _121: &[core::fmt::rt::Argument<'_>];
+    let mut _122: &[core::fmt::rt::Argument<'_>; 1];
+    let _123: &[core::fmt::rt::Argument<'_>; 1];
+    let _124: [core::fmt::rt::Argument<'_>; 1];
+    let mut _125: core::fmt::rt::Argument<'_>;
+    let mut _126: &error::ErrorCode;
+    let _127: &error::ErrorCode;
+    let _128: ();
+    let mut _129: &str;
+    let _130: &str;
+    let mut _131: &std::string::String;
+    let _132: &std::string::String;
+    let _133: std::string::String;
+    let mut _135: std::fmt::Arguments<'_>;
+    let mut _136: &[&str];
+    let mut _137: &[&str; 2];
+    let _138: &[&str; 2];
+    let _139: [&str; 2];
+    let mut _140: &[core::fmt::rt::Argument<'_>];
+    let mut _141: &[core::fmt::rt::Argument<'_>; 2];
+    let _142: &[core::fmt::rt::Argument<'_>; 2];
+    let _143: [core::fmt::rt::Argument<'_>; 2];
+    let mut _144: core::fmt::rt::Argument<'_>;
+    let mut _145: &i128;
+    let _146: &i128;
+    let mut _147: core::fmt::rt::Argument<'_>;
+    let mut _148: &u128;
+    let _149: &u128;
+    let mut _150: error::ErrorCode;
+    let mut _151: isize;
+    let mut _153: !;
+    let mut _154: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _156: ();
+    let mut _157: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _158: std::result::Result<(), error::ErrorCode>;
+    let mut _159: &mut state::user::UserStats;
+    let mut _160: &mut state::user::User;
+    let mut _161: u32;
+    let mut _162: u32;
+    let mut _163: u32;
+    let mut _164: i64;
+    let mut _165: isize;
+    let mut _167: !;
+    let mut _168: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _173: &math::margin::MarginRequirementType;
+    scope 1 {
+        debug strict => _12;
+        let _16: state::margin_calculation::MarginContext;
+        scope 2 {
+            debug context => _16;
+            let _32: state::margin_calculation::MarginCalculation;
+            let _41: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _44: state::margin_calculation::MarginCalculation;
+            scope 3 {
+                debug calculation => _32;
+                let _54: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _57: u8;
+                let _63: error::ErrorCode;
+                let _88: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _91: ();
+                let _98: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _101: ();
+                let _108: error::ErrorCode;
+                let _152: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _155: ();
+                let _166: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _169: ();
+                scope 8 {
+                    debug residual => _54;
+                    scope 9 {
+                    }
+                }
+                scope 10 {
+                    debug val => _57;
+                    scope 11 {
+                    }
+                }
+                scope 12 {
+                    debug error_code => _63;
+                    let _70: std::string::String;
+                    let mut _172: &[&str; 2];
+                    scope 13 {
+                        debug res => _70;
+                    }
+                }
+                scope 14 {
+                    debug residual => _88;
+                    scope 15 {
+                    }
+                }
+                scope 16 {
+                    debug val => _91;
+                    scope 17 {
+                    }
+                }
+                scope 18 {
+                    debug residual => _98;
+                    scope 19 {
+                    }
+                }
+                scope 20 {
+                    debug val => _101;
+                    scope 21 {
+                    }
+                }
+                scope 22 {
+                    debug error_code => _108;
+                    let _115: std::string::String;
+                    let _134: std::string::String;
+                    let mut _170: &[&str; 2];
+                    let mut _171: &[&str; 2];
+                    scope 23 {
+                        debug res => _115;
+                    }
+                    scope 24 {
+                        debug res => _134;
+                    }
+                }
+                scope 25 {
+                    debug residual => _152;
+                    scope 26 {
+                    }
+                }
+                scope 27 {
+                    debug val => _155;
+                    scope 28 {
+                    }
+                }
+                scope 29 {
+                    debug residual => _166;
+                    scope 30 {
+                    }
+                }
+                scope 31 {
+                    debug val => _169;
+                    scope 32 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _41;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _44;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &_5;
+        StorageLive(_14);
+        _173 = const _;
+        _14 = &(*_173);
+        _12 = <math::margin::MarginRequirementType as PartialEq>::eq(move _13, move _14) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_14);
+        StorageDead(_13);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = _5;
+        _20 = MarginContext::standard(move _21) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_21);
+        StorageLive(_22);
+        _22 = _12;
+        _19 = MarginContext::strict(move _20, move _22) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_22);
+        StorageDead(_20);
+        _18 = MarginContext::ignore_invalid_deposit_oracles(move _19, const true) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_19);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = _6;
+        StorageLive(_26);
+        _26 = _7;
+        _24 = (move _25, move _26);
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _8;
+        StorageLive(_29);
+        _29 = _9;
+        _27 = (move _28, move _29);
+        StorageDead(_29);
+        StorageDead(_28);
+        _23 = [move _24, move _27];
+        StorageDead(_27);
+        StorageDead(_24);
+        _17 = MarginContext::fuel_spot_deltas(move _18, move _23) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_23);
+        StorageDead(_18);
+        StorageLive(_30);
+        _30 = &(*_1);
+        StorageLive(_31);
+        _31 = _11;
+        _16 = MarginContext::fuel_numerator(move _17, move _30, move _31) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_17);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        _35 = &(*_1);
+        StorageLive(_36);
+        _36 = &(*_2);
+        StorageLive(_37);
+        _37 = &(*_3);
+        StorageLive(_38);
+        _38 = &mut (*_4);
+        StorageLive(_39);
+        _39 = _16;
+        _34 = math::margin::calculate_margin_requirement_and_total_collateral_and_liability_info(move _35, move _36, move _37, move _38, move _39) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_39);
+        StorageDead(_38);
+        StorageDead(_37);
+        StorageDead(_36);
+        StorageDead(_35);
+        _33 = <std::result::Result<MarginCalculation, error::ErrorCode> as Try>::branch(move _34) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_34);
+        _40 = discriminant(_33);
+        switchInt(move _40) -> [0: bb9, 1: bb11, otherwise: bb10];
+    }
+
+    bb9: {
+        StorageLive(_44);
+        _44 = ((_33 as Continue).0: state::margin_calculation::MarginCalculation);
+        _32 = _44;
+        StorageDead(_44);
+        StorageDead(_33);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        _47 = (_32.3: u128);
+        _46 = Gt(move _47, const 0_u128);
+        switchInt(move _46) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb10: {
+        unreachable;
+    }
+
+    bb11: {
+        StorageLive(_41);
+        _41 = ((_33 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_43);
+        _43 = _41;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _43) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_43);
+        StorageDead(_41);
+        StorageDead(_33);
+        goto -> bb69;
+    }
+
+    bb13: {
+        StorageDead(_47);
+        goto -> bb20;
+    }
+
+    bb14: {
+        StorageDead(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        _52 = &_32;
+        _51 = MarginCalculation::get_num_of_liabilities(move _52) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_52);
+        _50 = <std::result::Result<u8, error::ErrorCode> as Try>::branch(move _51) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_51);
+        _53 = discriminant(_50);
+        switchInt(move _53) -> [0: bb17, 1: bb18, otherwise: bb10];
+    }
+
+    bb17: {
+        StorageLive(_57);
+        _57 = ((_50 as Continue).0: u8);
+        _49 = _57;
+        StorageDead(_57);
+        _48 = Gt(move _49, const 0_u8);
+        switchInt(move _48) -> [0: bb21, otherwise: bb20];
+    }
+
+    bb18: {
+        StorageLive(_54);
+        _54 = ((_50 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_56);
+        _56 = _54;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _56) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_56);
+        StorageDead(_54);
+        StorageDead(_50);
+        StorageDead(_49);
+        goto -> bb68;
+    }
+
+    bb20: {
+        StorageDead(_50);
+        StorageDead(_49);
+        StorageLive(_58);
+        StorageLive(_59);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = (_32.8: bool);
+        switchInt(move _61) -> [0: bb23, otherwise: bb22];
+    }
+
+    bb21: {
+        StorageDead(_50);
+        StorageDead(_49);
+        _45 = const ();
+        goto -> bb36;
+    }
+
+    bb22: {
+        StorageLive(_62);
+        _62 = ();
+        _60 = std::result::Result::<(), error::ErrorCode>::Ok(move _62);
+        StorageDead(_62);
+        goto -> bb31;
+    }
+
+    bb23: {
+        StorageLive(_63);
+        _63 = error::ErrorCode::InvalidOracle;
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        StorageLive(_72);
+        StorageLive(_73);
+        StorageLive(_74);
+        _172 = const _;
+        _74 = &(*_172);
+        _73 = &(*_74);
+        _72 = move _73 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_73);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        StorageLive(_82);
+        _82 = &_63;
+        _81 = &(*_82);
+        _80 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _81) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_81);
+        _79 = [move _80];
+        StorageDead(_80);
+        _78 = &_79;
+        _77 = &(*_78);
+        _76 = move _77 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_77);
+        _71 = Arguments::<'_>::new_v1(move _72, move _76) -> [return: bb25, unwind continue];
+    }
+
+    bb25: {
+        StorageDead(_76);
+        StorageDead(_72);
+        _70 = format(move _71) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_71);
+        StorageDead(_82);
+        StorageDead(_79);
+        StorageDead(_78);
+        StorageDead(_74);
+        _69 = move _70;
+        StorageDead(_70);
+        _68 = &_69;
+        _67 = &(*_68);
+        _66 = <String as Deref>::deref(move _67) -> [return: bb27, unwind: bb73];
+    }
+
+    bb27: {
+        _65 = &(*_66);
+        StorageDead(_67);
+        _64 = solana_program::log::sol_log(move _65) -> [return: bb28, unwind: bb73];
+    }
+
+    bb28: {
+        StorageDead(_65);
+        drop(_69) -> [return: bb29, unwind: bb74];
+    }
+
+    bb29: {
+        StorageDead(_69);
+        StorageDead(_68);
+        StorageDead(_66);
+        StorageDead(_64);
+        StorageLive(_83);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = const "User attempting to withdraw with outstanding liabilities when an oracle is invalid";
+        _84 = &(*_85);
+        _83 = solana_program::log::sol_log(move _84) -> [return: bb30, unwind continue];
+    }
+
+    bb30: {
+        StorageDead(_84);
+        StorageDead(_85);
+        StorageDead(_83);
+        StorageLive(_86);
+        _86 = _63;
+        _60 = std::result::Result::<(), error::ErrorCode>::Err(move _86);
+        StorageDead(_86);
+        StorageDead(_63);
+        goto -> bb31;
+    }
+
+    bb31: {
+        StorageDead(_61);
+        _59 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _60) -> [return: bb32, unwind continue];
+    }
+
+    bb32: {
+        StorageDead(_60);
+        _87 = discriminant(_59);
+        switchInt(move _87) -> [0: bb33, 1: bb34, otherwise: bb10];
+    }
+
+    bb33: {
+        StorageLive(_91);
+        _91 = ((_59 as Continue).0: ());
+        _58 = _91;
+        StorageDead(_91);
+        StorageDead(_59);
+        StorageDead(_58);
+        _45 = const ();
+        goto -> bb36;
+    }
+
+    bb34: {
+        StorageLive(_88);
+        _88 = ((_59 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_90);
+        _90 = _88;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _90) -> [return: bb35, unwind continue];
+    }
+
+    bb35: {
+        StorageDead(_90);
+        StorageDead(_88);
+        StorageDead(_59);
+        StorageDead(_58);
+        goto -> bb68;
+    }
+
+    bb36: {
+        StorageDead(_48);
+        StorageDead(_46);
+        StorageDead(_45);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        StorageLive(_95);
+        _95 = &(*_1);
+        StorageLive(_96);
+        _96 = _32;
+        _94 = validate_any_isolated_tier_requirements(move _95, move _96) -> [return: bb37, unwind continue];
+    }
+
+    bb37: {
+        StorageDead(_96);
+        StorageDead(_95);
+        _93 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _94) -> [return: bb38, unwind continue];
+    }
+
+    bb38: {
+        StorageDead(_94);
+        _97 = discriminant(_93);
+        switchInt(move _97) -> [0: bb39, 1: bb40, otherwise: bb10];
+    }
+
+    bb39: {
+        StorageLive(_101);
+        _101 = ((_93 as Continue).0: ());
+        _92 = _101;
+        StorageDead(_101);
+        StorageDead(_93);
+        StorageDead(_92);
+        StorageLive(_102);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        _106 = &_32;
+        _105 = MarginCalculation::meets_margin_requirement(move _106) -> [return: bb42, unwind continue];
+    }
+
+    bb40: {
+        StorageLive(_98);
+        _98 = ((_93 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_100);
+        _100 = _98;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _100) -> [return: bb41, unwind continue];
+    }
+
+    bb41: {
+        StorageDead(_100);
+        StorageDead(_98);
+        StorageDead(_93);
+        StorageDead(_92);
+        goto -> bb69;
+    }
+
+    bb42: {
+        switchInt(move _105) -> [0: bb44, otherwise: bb43];
+    }
+
+    bb43: {
+        StorageDead(_106);
+        StorageLive(_107);
+        _107 = ();
+        _104 = std::result::Result::<(), error::ErrorCode>::Ok(move _107);
+        StorageDead(_107);
+        goto -> bb58;
+    }
+
+    bb44: {
+        StorageDead(_106);
+        StorageLive(_108);
+        _108 = error::ErrorCode::InsufficientCollateral;
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        _171 = const _;
+        _119 = &(*_171);
+        _118 = &(*_119);
+        _117 = move _118 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_118);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        StorageLive(_125);
+        StorageLive(_126);
+        StorageLive(_127);
+        _127 = &_108;
+        _126 = &(*_127);
+        _125 = core::fmt::rt::Argument::<'_>::new_display::<error::ErrorCode>(move _126) -> [return: bb45, unwind continue];
+    }
+
+    bb45: {
+        StorageDead(_126);
+        _124 = [move _125];
+        StorageDead(_125);
+        _123 = &_124;
+        _122 = &(*_123);
+        _121 = move _122 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_122);
+        _116 = Arguments::<'_>::new_v1(move _117, move _121) -> [return: bb46, unwind continue];
+    }
+
+    bb46: {
+        StorageDead(_121);
+        StorageDead(_117);
+        _115 = format(move _116) -> [return: bb47, unwind continue];
+    }
+
+    bb47: {
+        StorageDead(_116);
+        StorageDead(_127);
+        StorageDead(_124);
+        StorageDead(_123);
+        StorageDead(_119);
+        _114 = move _115;
+        StorageDead(_115);
+        _113 = &_114;
+        _112 = &(*_113);
+        _111 = <String as Deref>::deref(move _112) -> [return: bb48, unwind: bb72];
+    }
+
+    bb48: {
+        _110 = &(*_111);
+        StorageDead(_112);
+        _109 = solana_program::log::sol_log(move _110) -> [return: bb49, unwind: bb72];
+    }
+
+    bb49: {
+        StorageDead(_110);
+        drop(_114) -> [return: bb50, unwind: bb74];
+    }
+
+    bb50: {
+        StorageDead(_114);
+        StorageDead(_113);
+        StorageDead(_111);
+        StorageDead(_109);
+        StorageLive(_128);
+        StorageLive(_129);
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        StorageLive(_133);
+        StorageLive(_134);
+        StorageLive(_135);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        _170 = const _;
+        _138 = &(*_170);
+        _137 = &(*_138);
+        _136 = move _137 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_137);
+        StorageLive(_140);
+        StorageLive(_141);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        StorageLive(_145);
+        StorageLive(_146);
+        _146 = &(_32.1: i128);
+        _145 = &(*_146);
+        _144 = core::fmt::rt::Argument::<'_>::new_display::<i128>(move _145) -> [return: bb51, unwind continue];
+    }
+
+    bb51: {
+        StorageDead(_145);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        _149 = &(_32.3: u128);
+        _148 = &(*_149);
+        _147 = core::fmt::rt::Argument::<'_>::new_display::<u128>(move _148) -> [return: bb52, unwind continue];
+    }
+
+    bb52: {
+        StorageDead(_148);
+        _143 = [move _144, move _147];
+        StorageDead(_147);
+        StorageDead(_144);
+        _142 = &_143;
+        _141 = &(*_142);
+        _140 = move _141 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_141);
+        _135 = Arguments::<'_>::new_v1(move _136, move _140) -> [return: bb53, unwind continue];
+    }
+
+    bb53: {
+        StorageDead(_140);
+        StorageDead(_136);
+        _134 = format(move _135) -> [return: bb54, unwind continue];
+    }
+
+    bb54: {
+        StorageDead(_135);
+        StorageDead(_149);
+        StorageDead(_146);
+        StorageDead(_143);
+        StorageDead(_142);
+        StorageDead(_138);
+        _133 = move _134;
+        StorageDead(_134);
+        _132 = &_133;
+        _131 = &(*_132);
+        _130 = <String as Deref>::deref(move _131) -> [return: bb55, unwind: bb71];
+    }
+
+    bb55: {
+        _129 = &(*_130);
+        StorageDead(_131);
+        _128 = solana_program::log::sol_log(move _129) -> [return: bb56, unwind: bb71];
+    }
+
+    bb56: {
+        StorageDead(_129);
+        drop(_133) -> [return: bb57, unwind: bb74];
+    }
+
+    bb57: {
+        StorageDead(_133);
+        StorageDead(_132);
+        StorageDead(_130);
+        StorageDead(_128);
+        StorageLive(_150);
+        _150 = _108;
+        _104 = std::result::Result::<(), error::ErrorCode>::Err(move _150);
+        StorageDead(_150);
+        StorageDead(_108);
+        goto -> bb58;
+    }
+
+    bb58: {
+        StorageDead(_105);
+        _103 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _104) -> [return: bb59, unwind continue];
+    }
+
+    bb59: {
+        StorageDead(_104);
+        _151 = discriminant(_103);
+        switchInt(move _151) -> [0: bb60, 1: bb61, otherwise: bb10];
+    }
+
+    bb60: {
+        StorageLive(_155);
+        _155 = ((_103 as Continue).0: ());
+        _102 = _155;
+        StorageDead(_155);
+        StorageDead(_103);
+        StorageDead(_102);
+        StorageLive(_156);
+        StorageLive(_157);
+        StorageLive(_158);
+        StorageLive(_159);
+        _159 = &mut (*_10);
+        StorageLive(_160);
+        _160 = &mut (*_1);
+        StorageLive(_161);
+        _161 = (_32.17: u32);
+        StorageLive(_162);
+        _162 = (_32.18: u32);
+        StorageLive(_163);
+        _163 = (_32.19: u32);
+        StorageLive(_164);
+        _164 = _11;
+        _158 = UserStats::update_fuel_bonus(move _159, move _160, move _161, move _162, move _163, move _164) -> [return: bb63, unwind continue];
+    }
+
+    bb61: {
+        StorageLive(_152);
+        _152 = ((_103 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_154);
+        _154 = _152;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _154) -> [return: bb62, unwind continue];
+    }
+
+    bb62: {
+        StorageDead(_154);
+        StorageDead(_152);
+        StorageDead(_103);
+        StorageDead(_102);
+        goto -> bb69;
+    }
+
+    bb63: {
+        StorageDead(_164);
+        StorageDead(_163);
+        StorageDead(_162);
+        StorageDead(_161);
+        StorageDead(_160);
+        StorageDead(_159);
+        _157 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _158) -> [return: bb64, unwind continue];
+    }
+
+    bb64: {
+        StorageDead(_158);
+        _165 = discriminant(_157);
+        switchInt(move _165) -> [0: bb65, 1: bb66, otherwise: bb10];
+    }
+
+    bb65: {
+        StorageLive(_169);
+        _169 = ((_157 as Continue).0: ());
+        _156 = _169;
+        StorageDead(_169);
+        StorageDead(_157);
+        StorageDead(_156);
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(const true);
+        StorageDead(_32);
+        StorageDead(_16);
+        StorageDead(_12);
+        goto -> bb70;
+    }
+
+    bb66: {
+        StorageLive(_166);
+        _166 = ((_157 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_168);
+        _168 = _166;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _168) -> [return: bb67, unwind continue];
+    }
+
+    bb67: {
+        StorageDead(_168);
+        StorageDead(_166);
+        StorageDead(_157);
+        StorageDead(_156);
+        goto -> bb69;
+    }
+
+    bb68: {
+        StorageDead(_48);
+        StorageDead(_46);
+        StorageDead(_45);
+        goto -> bb69;
+    }
+
+    bb69: {
+        StorageDead(_32);
+        StorageDead(_16);
+        StorageDead(_12);
+        goto -> bb70;
+    }
+
+    bb70: {
+        return;
+    }
+
+    bb71 (cleanup): {
+        drop(_133) -> [return: bb74, unwind terminate(cleanup)];
+    }
+
+    bb72 (cleanup): {
+        drop(_114) -> [return: bb74, unwind terminate(cleanup)];
+    }
+
+    bb73 (cleanup): {
+        drop(_69) -> [return: bb74, unwind terminate(cleanup)];
+    }
+
+    bb74 (cleanup): {
+        resume;
+    }
+}

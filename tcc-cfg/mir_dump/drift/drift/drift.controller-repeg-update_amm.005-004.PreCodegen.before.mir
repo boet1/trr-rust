@@ -1,0 +1,428 @@
+// MIR for `update_amm` before PreCodegen
+
+fn update_amm(_1: u16, _2: &PerpMarketMap<'_>, _3: &mut OracleMap<'_>, _4: &state::state::State, _5: &anchor_lang::prelude::Clock) -> std::result::Result<i128, error::ErrorCode> {
+    debug market_index => _1;
+    debug perp_market_map => _2;
+    debug oracle_map => _3;
+    debug state => _4;
+    debug clock => _5;
+    let mut _0: std::result::Result<i128, error::ErrorCode>;
+    let _6: &mut std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _7: std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _8: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, std::cell::RefMut<'_, state::perp_market::PerpMarket>>;
+    let mut _9: std::result::Result<std::cell::RefMut<'_, state::perp_market::PerpMarket>, error::ErrorCode>;
+    let mut _10: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _11: &u16;
+    let _12: &u16;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _17: std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &state::oracle::OraclePriceData>;
+    let mut _20: std::result::Result<&state::oracle::OraclePriceData, error::ErrorCode>;
+    let mut _21: &mut state::oracle_map::OracleMap<'_>;
+    let mut _22: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _23: &(anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let _24: (anchor_lang::prelude::Pubkey, state::oracle::OracleSource);
+    let mut _25: &state::perp_market::PerpMarket;
+    let _26: &state::perp_market::PerpMarket;
+    let mut _27: &std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _28: isize;
+    let mut _30: !;
+    let mut _31: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _34: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::oracle::MMOraclePriceData>;
+    let mut _35: std::result::Result<state::oracle::MMOraclePriceData, error::ErrorCode>;
+    let mut _36: &state::perp_market::PerpMarket;
+    let _37: &state::perp_market::PerpMarket;
+    let mut _38: &std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _39: state::oracle::OraclePriceData;
+    let mut _40: u64;
+    let mut _41: &state::state::ValidityGuardRails;
+    let _42: &state::state::ValidityGuardRails;
+    let mut _43: isize;
+    let mut _45: !;
+    let mut _46: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _49: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, i128>;
+    let mut _50: std::result::Result<i128, error::ErrorCode>;
+    let mut _51: &mut state::perp_market::PerpMarket;
+    let mut _52: &mut state::perp_market::PerpMarket;
+    let mut _53: &mut std::cell::RefMut<'_, state::perp_market::PerpMarket>;
+    let mut _54: &state::oracle::MMOraclePriceData;
+    let _55: &state::oracle::MMOraclePriceData;
+    let mut _56: &state::state::State;
+    let mut _57: i64;
+    let mut _58: u64;
+    let mut _59: isize;
+    let mut _61: !;
+    let mut _62: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _64: i128;
+    let mut _65: isize;
+    let mut _66: isize;
+    let mut _67: isize;
+    let mut _68: isize;
+    let mut _69: isize;
+    scope 1 {
+        debug market => _6;
+        let _18: &state::oracle::OraclePriceData;
+        let _29: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _32: &state::oracle::OraclePriceData;
+        scope 6 {
+            debug oracle_price_data => _18;
+            let _33: state::oracle::MMOraclePriceData;
+            let _44: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _47: state::oracle::MMOraclePriceData;
+            scope 11 {
+                debug mm_oracle_price_data => _33;
+                let _48: i128;
+                let _60: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _63: i128;
+                scope 16 {
+                    debug cost_of_update => _48;
+                }
+                scope 17 {
+                    debug residual => _60;
+                    scope 18 {
+                    }
+                }
+                scope 19 {
+                    debug val => _63;
+                    scope 20 {
+                    }
+                }
+            }
+            scope 12 {
+                debug residual => _44;
+                scope 13 {
+                }
+            }
+            scope 14 {
+                debug val => _47;
+                scope 15 {
+                }
+            }
+        }
+        scope 7 {
+            debug residual => _29;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _32;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _14;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _17;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = &(*_2);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &_1;
+        _11 = &(*_12);
+        _9 = PerpMarketMap::<'_>::get_ref_mut(move _10, move _11) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_11);
+        StorageDead(_10);
+        _8 = <std::result::Result<RefMut<'_, PerpMarket>, error::ErrorCode> as Try>::branch(move _9) -> [return: bb2, unwind: bb32];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        _13 = discriminant(_8);
+        switchInt(move _13) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_17);
+        _17 = move ((_8 as Continue).0: std::cell::RefMut<'_, state::perp_market::PerpMarket>);
+        _7 = move _17;
+        StorageDead(_17);
+        _6 = &mut _7;
+        _67 = discriminant(_8);
+        StorageDead(_12);
+        StorageDead(_8);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &mut (*_3);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = &(*_6);
+        _26 = <RefMut<'_, PerpMarket> as Deref>::deref(move _27) -> [return: bb7, unwind: bb31];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_14);
+        _14 = ((_8 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_16);
+        _16 = _14;
+        _0 = <std::result::Result<i128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _16) -> [return: bb6, unwind: bb33];
+    }
+
+    bb6: {
+        StorageDead(_16);
+        StorageDead(_14);
+        _65 = discriminant(_8);
+        StorageDead(_12);
+        StorageDead(_8);
+        goto -> bb29;
+    }
+
+    bb7: {
+        _25 = &(*_26);
+        StorageDead(_27);
+        _24 = PerpMarket::oracle_id(move _25) -> [return: bb8, unwind: bb31];
+    }
+
+    bb8: {
+        StorageDead(_25);
+        _23 = &_24;
+        _22 = &(*_23);
+        _20 = OracleMap::<'_>::get_price_data(move _21, move _22) -> [return: bb9, unwind: bb31];
+    }
+
+    bb9: {
+        StorageDead(_22);
+        StorageDead(_21);
+        _19 = <std::result::Result<&OraclePriceData, error::ErrorCode> as Try>::branch(move _20) -> [return: bb10, unwind: bb31];
+    }
+
+    bb10: {
+        StorageDead(_20);
+        _28 = discriminant(_19);
+        switchInt(move _28) -> [0: bb11, 1: bb12, otherwise: bb4];
+    }
+
+    bb11: {
+        StorageLive(_32);
+        _32 = ((_19 as Continue).0: &state::oracle::OraclePriceData);
+        _18 = _32;
+        StorageDead(_32);
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_19);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        _38 = &(*_6);
+        _37 = <RefMut<'_, PerpMarket> as Deref>::deref(move _38) -> [return: bb14, unwind: bb31];
+    }
+
+    bb12: {
+        StorageLive(_29);
+        _29 = ((_19 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_31);
+        _31 = _29;
+        _0 = <std::result::Result<i128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _31) -> [return: bb13, unwind: bb31];
+    }
+
+    bb13: {
+        StorageDead(_31);
+        StorageDead(_29);
+        StorageDead(_26);
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageDead(_19);
+        goto -> bb28;
+    }
+
+    bb14: {
+        _36 = &(*_37);
+        StorageDead(_38);
+        StorageLive(_39);
+        _39 = (*_18);
+        StorageLive(_40);
+        _40 = ((*_5).0: u64);
+        StorageLive(_41);
+        StorageLive(_42);
+        _42 = &(((*_4).7: state::state::OracleGuardRails).1: state::state::ValidityGuardRails);
+        _41 = &(*_42);
+        _35 = PerpMarket::get_mm_oracle_price_data(move _36, move _39, move _40, move _41) -> [return: bb15, unwind: bb31];
+    }
+
+    bb15: {
+        StorageDead(_41);
+        StorageDead(_40);
+        StorageDead(_39);
+        StorageDead(_36);
+        _34 = <std::result::Result<MMOraclePriceData, error::ErrorCode> as Try>::branch(move _35) -> [return: bb16, unwind: bb31];
+    }
+
+    bb16: {
+        StorageDead(_35);
+        _43 = discriminant(_34);
+        switchInt(move _43) -> [0: bb17, 1: bb18, otherwise: bb4];
+    }
+
+    bb17: {
+        StorageLive(_47);
+        _47 = ((_34 as Continue).0: state::oracle::MMOraclePriceData);
+        _33 = _47;
+        StorageDead(_47);
+        StorageDead(_42);
+        StorageDead(_37);
+        StorageDead(_34);
+        StorageLive(_48);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &mut (*_6);
+        _52 = <RefMut<'_, PerpMarket> as DerefMut>::deref_mut(move _53) -> [return: bb20, unwind: bb31];
+    }
+
+    bb18: {
+        StorageLive(_44);
+        _44 = ((_34 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_46);
+        _46 = _44;
+        _0 = <std::result::Result<i128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _46) -> [return: bb19, unwind: bb31];
+    }
+
+    bb19: {
+        StorageDead(_46);
+        StorageDead(_44);
+        StorageDead(_42);
+        StorageDead(_37);
+        StorageDead(_34);
+        goto -> bb27;
+    }
+
+    bb20: {
+        _51 = &mut (*_52);
+        StorageDead(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        _55 = &_33;
+        _54 = &(*_55);
+        StorageLive(_56);
+        _56 = &(*_4);
+        StorageLive(_57);
+        _57 = ((*_5).4: i64);
+        StorageLive(_58);
+        _58 = ((*_5).0: u64);
+        _50 = _update_amm(move _51, move _54, move _56, move _57, move _58) -> [return: bb21, unwind: bb31];
+    }
+
+    bb21: {
+        StorageDead(_58);
+        StorageDead(_57);
+        StorageDead(_56);
+        StorageDead(_54);
+        StorageDead(_51);
+        _49 = <std::result::Result<i128, error::ErrorCode> as Try>::branch(move _50) -> [return: bb22, unwind: bb31];
+    }
+
+    bb22: {
+        StorageDead(_50);
+        _59 = discriminant(_49);
+        switchInt(move _59) -> [0: bb23, 1: bb24, otherwise: bb4];
+    }
+
+    bb23: {
+        StorageLive(_63);
+        _63 = ((_49 as Continue).0: i128);
+        _48 = _63;
+        StorageDead(_63);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_49);
+        StorageLive(_64);
+        _64 = _48;
+        _0 = std::result::Result::<i128, error::ErrorCode>::Ok(move _64);
+        StorageDead(_64);
+        StorageDead(_48);
+        StorageDead(_33);
+        StorageDead(_18);
+        drop(_7) -> [return: bb26, unwind: bb32];
+    }
+
+    bb24: {
+        StorageLive(_60);
+        _60 = ((_49 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_62);
+        _62 = _60;
+        _0 = <std::result::Result<i128, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _62) -> [return: bb25, unwind: bb31];
+    }
+
+    bb25: {
+        StorageDead(_62);
+        StorageDead(_60);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_49);
+        StorageDead(_48);
+        goto -> bb27;
+    }
+
+    bb26: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb30;
+    }
+
+    bb27: {
+        StorageDead(_33);
+        goto -> bb28;
+    }
+
+    bb28: {
+        StorageDead(_18);
+        drop(_7) -> [return: bb29, unwind: bb32];
+    }
+
+    bb29: {
+        StorageDead(_7);
+        StorageDead(_6);
+        goto -> bb30;
+    }
+
+    bb30: {
+        return;
+    }
+
+    bb31 (cleanup): {
+        drop(_7) -> [return: bb32, unwind terminate(cleanup)];
+    }
+
+    bb32 (cleanup): {
+        resume;
+    }
+
+    bb33 (cleanup): {
+        _69 = discriminant(_8);
+        goto -> bb32;
+    }
+}

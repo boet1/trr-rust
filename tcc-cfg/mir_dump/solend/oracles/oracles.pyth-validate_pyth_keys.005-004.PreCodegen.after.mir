@@ -1,0 +1,193 @@
+// MIR for `validate_pyth_keys` after PreCodegen
+
+fn validate_pyth_keys(_1: &AccountInfo<'_>) -> Result<(), anchor_lang::prelude::ProgramError> {
+    debug pyth_price_info => _1;
+    let mut _0: std::result::Result<(), anchor_lang::prelude::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &anchor_lang::prelude::Pubkey;
+    let mut _5: &anchor_lang::prelude::Pubkey;
+    let _6: anchor_lang::prelude::Pubkey;
+    let mut _7: !;
+    let mut _8: ();
+    let mut _9: OracleType;
+    let mut _10: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>, OracleType>;
+    let mut _11: std::result::Result<OracleType, anchor_lang::prelude::ProgramError>;
+    let mut _12: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _13: isize;
+    let _14: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let mut _15: !;
+    let mut _16: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>;
+    let _17: OracleType;
+    let mut _18: isize;
+    let mut _19: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _20: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _21: anchor_lang::prelude::ProgramError;
+    let mut _22: solend_sdk::error::LendingError;
+    let mut _23: &anchor_lang::prelude::Pubkey;
+    let mut _24: &anchor_lang::prelude::Pubkey;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: isize;
+    let mut _28: isize;
+    let mut _29: isize;
+    let mut _30: isize;
+    let mut _31: isize;
+    scope 1 {
+        debug residual => _14;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _17;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        _26 = const false;
+        _25 = const false;
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _24 = deref_copy ((*_1).0: &anchor_lang::prelude::Pubkey);
+        _4 = &(*_24);
+        StorageLive(_5);
+        _23 = const _;
+        _5 = &(*_23);
+        _3 = <Pubkey as PartialEq>::eq(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_8);
+        _8 = ();
+        _0 = Result::<(), anchor_lang::prelude::ProgramError>::Ok(move _8);
+        StorageDead(_8);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb16;
+    }
+
+    bb3: {
+        StorageDead(_5);
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = &(*_1);
+        _11 = get_oracle_type(move _12) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        _10 = <Result<OracleType, anchor_lang::prelude::ProgramError> as Try>::branch(move _11) -> [return: bb5, unwind: bb17];
+    }
+
+    bb5: {
+        _25 = const true;
+        _26 = const true;
+        StorageDead(_11);
+        _13 = discriminant(_10);
+        switchInt(move _13) -> [0: bb6, 1: bb8, otherwise: bb7];
+    }
+
+    bb6: {
+        StorageLive(_17);
+        _17 = move ((_10 as Continue).0: OracleType);
+        _9 = move _17;
+        StorageDead(_17);
+        _18 = discriminant(_9);
+        switchInt(move _18) -> [0: bb11, 2: bb13, otherwise: bb10];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        StorageLive(_14);
+        _14 = move ((_10 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::prelude::ProgramError>);
+        StorageLive(_16);
+        _16 = move _14;
+        _0 = <Result<(), anchor_lang::prelude::ProgramError> as FromResidual<Result<Infallible, anchor_lang::prelude::ProgramError>>>::from_residual(move _16) -> [return: bb9, unwind: bb19];
+    }
+
+    bb9: {
+        StorageDead(_16);
+        StorageDead(_14);
+        _29 = discriminant(_10);
+        _25 = const false;
+        _26 = const false;
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb10: {
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = InvalidOracleConfig;
+        _21 = <LendingError as Into<anchor_lang::prelude::ProgramError>>::into(move _22) -> [return: bb15, unwind: bb19];
+    }
+
+    bb11: {
+        StorageLive(_19);
+        _19 = &(*_1);
+        _0 = validate_pyth_price_account_info(move _19) -> [return: bb12, unwind: bb19];
+    }
+
+    bb12: {
+        StorageDead(_19);
+        goto -> bb18;
+    }
+
+    bb13: {
+        StorageLive(_20);
+        _20 = &(*_1);
+        _0 = validate_pyth_pull_price_account_info(move _20) -> [return: bb14, unwind: bb19];
+    }
+
+    bb14: {
+        StorageDead(_20);
+        goto -> bb18;
+    }
+
+    bb15: {
+        StorageDead(_22);
+        _0 = Result::<(), anchor_lang::prelude::ProgramError>::Err(move _21);
+        StorageDead(_21);
+        goto -> bb18;
+    }
+
+    bb16: {
+        return;
+    }
+
+    bb17 (cleanup): {
+        resume;
+    }
+
+    bb18: {
+        _27 = discriminant(_10);
+        _25 = const false;
+        _26 = const false;
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb16;
+    }
+
+    bb19 (cleanup): {
+        _31 = discriminant(_10);
+        goto -> bb17;
+    }
+}

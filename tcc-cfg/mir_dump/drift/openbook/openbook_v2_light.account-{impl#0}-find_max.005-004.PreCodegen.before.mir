@@ -1,0 +1,249 @@
+// MIR for `account::<impl at programs/openbook_v2/src/account.rs:173:1: 173:14>::find_max` before PreCodegen
+
+fn account::<impl at programs/openbook_v2/src/account.rs:173:1: 173:14>::find_max(_1: &BookSide) -> Option<u64> {
+    debug self => _1;
+    let mut _0: std::option::Option<u64>;
+    let mut _2: u64;
+    let _3: ();
+    let mut _4: std::slice::Iter<'_, account::AnyNode>;
+    let mut _5: std::slice::Iter<'_, account::AnyNode>;
+    let mut _6: &[account::AnyNode];
+    let mut _7: &[account::AnyNode; 1024];
+    let mut _9: ();
+    let _10: ();
+    let mut _11: std::option::Option<&account::AnyNode>;
+    let mut _12: &mut std::slice::Iter<'_, account::AnyNode>;
+    let mut _13: &mut std::slice::Iter<'_, account::AnyNode>;
+    let mut _14: isize;
+    let mut _15: !;
+    let mut _17: bool;
+    let mut _18: u8;
+    let mut _20: u128;
+    let mut _21: u128;
+    let mut _22: std::result::Result<u128, std::io::Error>;
+    let mut _23: &[u8];
+    let _24: &[u8];
+    let _25: &[u8];
+    let mut _26: &[u8; 79];
+    let mut _27: std::ops::Range<usize>;
+    let mut _28: u32;
+    let mut _29: bool;
+    let mut _30: bool;
+    let mut _31: u64;
+    let mut _32: u64;
+    let mut _33: u64;
+    let _34: ();
+    let mut _35: bool;
+    let mut _36: u64;
+    let mut _37: !;
+    let mut _38: u64;
+    scope 1 {
+        debug p => _2;
+        let mut _8: std::slice::Iter<'_, account::AnyNode>;
+        scope 2 {
+            debug iter => _8;
+            let _16: &account::AnyNode;
+            scope 3 {
+                debug node => _16;
+                let _19: u64;
+                scope 4 {
+                    debug price => _19;
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        _2 = const 0_u64;
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &(((*_1).3: account::OrderTreeNodes).6: [account::AnyNode; 1024]);
+        _6 = move _7 as &[account::AnyNode] (PointerCoercion(Unsize));
+        StorageDead(_7);
+        _5 = core::slice::<impl [AnyNode]>::iter(move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        _4 = <std::slice::Iter<'_, AnyNode> as IntoIterator>::into_iter(move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        StorageLive(_8);
+        _8 = move _4;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut _8;
+        _12 = &mut (*_13);
+        _11 = <std::slice::Iter<'_, AnyNode> as Iterator>::next(move _12) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_12);
+        _14 = discriminant(_11);
+        switchInt(move _14) -> [0: bb7, 1: bb5, otherwise: bb6];
+    }
+
+    bb5: {
+        StorageLive(_16);
+        _16 = ((_11 as Some).0: &account::AnyNode);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = ((*_16).0: u8);
+        _17 = Eq(move _18, const _);
+        switchInt(move _17) -> [0: bb16, otherwise: bb8];
+    }
+
+    bb6: {
+        unreachable;
+    }
+
+    bb7: {
+        _3 = const ();
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = _2;
+        _35 = Gt(move _36, const 0_u64);
+        switchInt(move _35) -> [0: bb19, otherwise: bb18];
+    }
+
+    bb8: {
+        StorageDead(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &((*_16).1: [u8; 79]);
+        StorageLive(_27);
+        _27 = std::ops::Range::<usize> { start: const 7_usize, end: const 23_usize };
+        _25 = <[u8; 79] as Index<std::ops::Range<usize>>>::index(move _26, move _27) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_27);
+        StorageDead(_26);
+        _24 = &(*_25);
+        _23 = &(*_24);
+        _22 = <u128 as anchor_lang::AnchorDeserialize>::try_from_slice(move _23) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_23);
+        _21 = std::result::Result::<u128, std::io::Error>::unwrap(move _22) -> [return: bb11, unwind: bb21];
+    }
+
+    bb11: {
+        StorageDead(_22);
+        _28 = const 64_i32 as u32 (IntToInt);
+        _29 = Lt(move _28, const 128_u32);
+        assert(move _29, "attempt to shift right by `{}`, which would overflow", const 64_i32) -> [success: bb12, unwind continue];
+    }
+
+    bb12: {
+        _20 = Shr(move _21, const 64_i32);
+        StorageDead(_21);
+        _19 = move _20 as u64 (IntToInt);
+        StorageDead(_20);
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = _19;
+        StorageLive(_32);
+        _32 = _2;
+        _30 = Gt(move _31, move _32);
+        switchInt(move _30) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageLive(_33);
+        _33 = _19;
+        _2 = move _33;
+        StorageDead(_33);
+        _10 = const ();
+        goto -> bb15;
+    }
+
+    bb14: {
+        StorageDead(_32);
+        StorageDead(_31);
+        _10 = const ();
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_30);
+        StorageDead(_19);
+        goto -> bb17;
+    }
+
+    bb16: {
+        StorageDead(_18);
+        _10 = const ();
+        goto -> bb17;
+    }
+
+    bb17: {
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_10);
+        _9 = const ();
+        goto -> bb3;
+    }
+
+    bb18: {
+        StorageDead(_36);
+        StorageLive(_38);
+        _38 = _2;
+        _0 = Option::<u64>::Some(move _38);
+        StorageDead(_38);
+        StorageDead(_35);
+        StorageDead(_34);
+        StorageDead(_2);
+        goto -> bb20;
+    }
+
+    bb19: {
+        StorageDead(_36);
+        _34 = const ();
+        StorageDead(_35);
+        StorageDead(_34);
+        _0 = Option::<u64>::None;
+        StorageDead(_2);
+        goto -> bb20;
+    }
+
+    bb20: {
+        return;
+    }
+
+    bb21 (cleanup): {
+        resume;
+    }
+}

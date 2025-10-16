@@ -1,0 +1,210 @@
+// MIR for `get_emode_max_liquidation_bonus` after PreCodegen
+
+fn get_emode_max_liquidation_bonus(_1: &state::lending_market::LendingMarket, _2: &reserve::ReserveConfig, _3: &reserve::ReserveConfig, _4: &obligation::Obligation) -> u16 {
+    debug lending_market => _1;
+    debug collateral_reserve => _2;
+    debug debt_reserve => _3;
+    debug obligation => _4;
+    let mut _0: u16;
+    let mut _5: bool;
+    let mut _6: u8;
+    let mut _7: bool;
+    let mut _8: &[u8];
+    let mut _9: &[u8; 20];
+    let mut _10: &u8;
+    let _11: &u8;
+    let mut _12: bool;
+    let mut _13: &[u8];
+    let mut _14: &[u8; 20];
+    let mut _15: &u8;
+    let _16: &u8;
+    let _17: &state::lending_market::ElevationGroup;
+    let mut _18: std::option::Option<&state::lending_market::ElevationGroup>;
+    let mut _19: std::result::Result<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error>;
+    let mut _20: &state::lending_market::LendingMarket;
+    let mut _21: u8;
+    let mut _22: bool;
+    let mut _23: u16;
+    let mut _24: u16;
+    let mut _25: bool;
+    let mut _26: u16;
+    let mut _27: u16;
+    let mut _28: bool;
+    let mut _29: u16;
+    scope 1 {
+        debug elevation_group => _17;
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = ((*_4).14: u8);
+        _5 = Ne(move _6, const _);
+        switchInt(move _5) -> [0: bb18, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_2).22: [u8; 20]);
+        _8 = move _9 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = &((*_4).14: u8);
+        _10 = &(*_11);
+        _7 = core::slice::<impl [u8]>::contains(move _8, move _10) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        switchInt(move _7) -> [0: bb17, otherwise: bb3];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_8);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &((*_3).22: [u8; 20]);
+        _13 = move _14 as &[u8] (PointerCoercion(Unsize));
+        StorageDead(_14);
+        StorageLive(_15);
+        StorageLive(_16);
+        _16 = &((*_4).14: u8);
+        _15 = &(*_16);
+        _12 = core::slice::<impl [u8]>::contains(move _13, move _15) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        switchInt(move _12) -> [0: bb16, otherwise: bb5];
+    }
+
+    bb5: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        _20 = &(*_1);
+        StorageLive(_21);
+        _21 = ((*_4).14: u8);
+        _19 = state::lending_market::LendingMarket::get_elevation_group(move _20, move _21) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_21);
+        StorageDead(_20);
+        _18 = std::result::Result::<std::option::Option<&state::lending_market::ElevationGroup>, anchor_lang::error::Error>::unwrap(move _19) -> [return: bb7, unwind: bb21];
+    }
+
+    bb7: {
+        StorageDead(_19);
+        _17 = std::option::Option::<&state::lending_market::ElevationGroup>::unwrap(move _18) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_18);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = ((*_17).0: u16);
+        StorageLive(_24);
+        _24 = ((*_2).10: u16);
+        _22 = Gt(move _23, move _24);
+        switchInt(move _22) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        StorageDead(_24);
+        StorageDead(_23);
+        goto -> bb11;
+    }
+
+    bb10: {
+        StorageDead(_24);
+        StorageDead(_23);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = ((*_17).0: u16);
+        StorageLive(_27);
+        _27 = ((*_3).10: u16);
+        _25 = Gt(move _26, move _27);
+        switchInt(move _25) -> [0: bb12, otherwise: bb11];
+    }
+
+    bb11: {
+        StorageDead(_27);
+        StorageDead(_26);
+        goto -> bb13;
+    }
+
+    bb12: {
+        StorageDead(_27);
+        StorageDead(_26);
+        StorageLive(_28);
+        StorageLive(_29);
+        _29 = ((*_17).0: u16);
+        _28 = Eq(move _29, const 0_u16);
+        switchInt(move _28) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_29);
+        _0 = const _;
+        goto -> bb15;
+    }
+
+    bb14: {
+        StorageDead(_29);
+        _0 = ((*_17).0: u16);
+        goto -> bb15;
+    }
+
+    bb15: {
+        StorageDead(_28);
+        StorageDead(_25);
+        StorageDead(_22);
+        StorageDead(_17);
+        goto -> bb20;
+    }
+
+    bb16: {
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_13);
+        goto -> bb19;
+    }
+
+    bb17: {
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_8);
+        goto -> bb19;
+    }
+
+    bb18: {
+        StorageDead(_6);
+        goto -> bb19;
+    }
+
+    bb19: {
+        _0 = const _;
+        goto -> bb20;
+    }
+
+    bb20: {
+        StorageDead(_12);
+        StorageDead(_7);
+        StorageDead(_5);
+        return;
+    }
+
+    bb21 (cleanup): {
+        resume;
+    }
+}

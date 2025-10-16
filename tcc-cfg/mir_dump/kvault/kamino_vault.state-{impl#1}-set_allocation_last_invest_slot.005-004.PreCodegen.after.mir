@@ -1,0 +1,162 @@
+// MIR for `state::<impl at programs\kvault\src\state.rs:82:1: 82:16>::set_allocation_last_invest_slot` after PreCodegen
+
+fn state::<impl at programs\kvault\src\state.rs:82:1: 82:16>::set_allocation_last_invest_slot(_1: &mut state::VaultState, _2: &anchor_lang::prelude::Pubkey, _3: u64) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug self => _1;
+    debug reserve => _2;
+    debug slot => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: std::option::Option<usize>;
+    let mut _5: &state::VaultState;
+    let mut _6: &anchor_lang::prelude::Pubkey;
+    let mut _7: isize;
+    let _9: ();
+    let mut _10: &mut state::VaultAllocation;
+    let _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
+    let mut _14: u64;
+    let mut _15: ();
+    let mut _16: anchor_lang::error::Error;
+    let mut _17: anchor_lang::error::AnchorError;
+    let mut _18: std::string::String;
+    let mut _19: &KaminoVaultError;
+    let _20: KaminoVaultError;
+    let mut _21: u32;
+    let mut _22: KaminoVaultError;
+    let mut _23: std::string::String;
+    let mut _24: &KaminoVaultError;
+    let _25: KaminoVaultError;
+    let mut _26: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _27: anchor_lang::error::ErrorOrigin;
+    let mut _28: anchor_lang::error::Source;
+    let mut _29: std::option::Option<anchor_lang::error::ComparedValues>;
+    scope 1 {
+        debug idx => _4;
+        let _8: usize;
+        let mut _30: &KaminoVaultError;
+        let mut _31: &KaminoVaultError;
+        scope 2 {
+            debug idx => _8;
+        }
+    }
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &(*_1);
+        StorageLive(_6);
+        _6 = &(*_2);
+        _4 = state::VaultState::get_reserve_idx_in_allocation(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        _7 = discriminant(_4);
+        switchInt(move _7) -> [0: bb2, 1: bb4, otherwise: bb3];
+    }
+
+    bb2: {
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _31 = const _;
+        _19 = &(*_31);
+        _18 = KaminoVaultError::name(move _19) -> [return: bb7, unwind continue];
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        StorageLive(_8);
+        _8 = ((_4 as Some).0: usize);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _8;
+        _12 = Len(((*_1).18: [state::VaultAllocation; 25]));
+        _13 = Lt(_11, _12);
+        assert(move _13, "index out of bounds: the length is {} but the index is {}", move _12, _11) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        _10 = &mut ((*_1).18: [state::VaultAllocation; 25])[_11];
+        StorageLive(_14);
+        _14 = _3;
+        _9 = VaultAllocation::set_last_invest_slot(move _10, move _14) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageDead(_10);
+        StorageDead(_11);
+        StorageDead(_9);
+        StorageLive(_15);
+        _15 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _15);
+        StorageDead(_15);
+        StorageDead(_8);
+        goto -> bb11;
+    }
+
+    bb7: {
+        StorageDead(_19);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = KaminoVaultError::ReserveNotPartOfAllocations;
+        _21 = <KaminoVaultError as Into<u32>>::into(move _22) -> [return: bb8, unwind: bb12];
+    }
+
+    bb8: {
+        StorageDead(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _30 = const _;
+        _24 = &(*_30);
+        _23 = <KaminoVaultError as ToString>::to_string(move _24) -> [return: bb9, unwind: bb12];
+    }
+
+    bb9: {
+        StorageDead(_24);
+        StorageLive(_26);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = anchor_lang::error::Source { filename: const "programs\\kvault\\src\\state.rs", line: const 413_u32 };
+        _27 = anchor_lang::error::ErrorOrigin::Source(move _28);
+        StorageDead(_28);
+        _26 = Option::<ErrorOrigin>::Some(move _27);
+        StorageDead(_27);
+        StorageLive(_29);
+        _29 = Option::<ComparedValues>::None;
+        _17 = anchor_lang::error::AnchorError { error_name: move _18, error_code_number: move _21, error_msg: move _23, error_origin: move _26, compared_values: move _29 };
+        StorageDead(_29);
+        StorageDead(_26);
+        StorageDead(_23);
+        StorageDead(_21);
+        StorageDead(_18);
+        _16 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _17) -> [return: bb10, unwind: bb13];
+    }
+
+    bb10: {
+        StorageDead(_17);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _16);
+        StorageDead(_16);
+        goto -> bb11;
+    }
+
+    bb11: {
+        StorageDead(_4);
+        return;
+    }
+
+    bb12 (cleanup): {
+        drop(_18) -> [return: bb13, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        resume;
+    }
+}

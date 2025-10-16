@@ -1,0 +1,207 @@
+// MIR for `instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_u8` after PreCodegen
+
+fn instruction::<impl at token-lending\sdk\src\instruction.rs:533:1: 533:24>::unpack_u8(_1: &[u8]) -> Result<(u8, &[u8]), ProgramError> {
+    debug input => _1;
+    let mut _0: std::result::Result<(u8, &[u8]), solana_program::program_error::ProgramError>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &[u8];
+    let mut _5: !;
+    let _6: ();
+    let mut _7: &str;
+    let _8: &str;
+    let mut _9: solana_program::program_error::ProgramError;
+    let mut _10: error::LendingError;
+    let _11: &[u8];
+    let _12: &[u8];
+    let mut _13: (&[u8], &[u8]);
+    let mut _14: &[u8];
+    let mut _16: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::LendingError>, u8>;
+    let mut _17: std::result::Result<u8, error::LendingError>;
+    let mut _18: std::option::Option<u8>;
+    let mut _19: std::option::Option<[u8; 1]>;
+    let mut _20: std::option::Option<&[u8]>;
+    let mut _21: &[u8];
+    let mut _22: std::ops::RangeTo<usize>;
+    let mut _23: {closure@token-lending\sdk\src\instruction.rs:832:23: 832:30};
+    let mut _24: error::LendingError;
+    let mut _25: isize;
+    let mut _27: !;
+    let mut _28: std::result::Result<std::convert::Infallible, error::LendingError>;
+    let mut _30: (u8, &[u8]);
+    let mut _31: u8;
+    let mut _32: &[u8];
+    scope 1 {
+        debug bytes => _11;
+        debug rest => _12;
+        let _15: u8;
+        let _26: std::result::Result<std::convert::Infallible, error::LendingError>;
+        let _29: u8;
+        scope 2 {
+            debug value => _15;
+        }
+        scope 3 {
+            debug residual => _26;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _29;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &(*_1);
+        _3 = core::slice::<impl [u8]>::is_empty(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb5, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const "u8 cannot be unpacked";
+        _7 = &(*_8);
+        _6 = solana_program::log::sol_log(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageDead(_8);
+        StorageDead(_6);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = LendingError::InstructionUnpackError;
+        _9 = <LendingError as Into<ProgramError>>::into(move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        _0 = Result::<(u8, &[u8]), ProgramError>::Err(move _9);
+        StorageDead(_9);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb16;
+    }
+
+    bb5: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        _13 = core::slice::<impl [u8]>::split_at(move _14, const 1_usize) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageLive(_11);
+        _11 = (_13.0: &[u8]);
+        StorageLive(_12);
+        _12 = (_13.1: &[u8]);
+        StorageDead(_13);
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &(*_11);
+        StorageLive(_22);
+        _22 = RangeTo::<usize> { end: const 1_usize };
+        _20 = core::slice::<impl [u8]>::get::<RangeTo<usize>>(move _21, move _22) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageLive(_23);
+        _23 = {closure@token-lending\sdk\src\instruction.rs:832:23: 832:30};
+        _19 = Option::<&[u8]>::and_then::<[u8; 1], {closure@token-lending\sdk\src\instruction.rs:832:23: 832:30}>(move _20, move _23) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        StorageDead(_23);
+        StorageDead(_20);
+        _18 = Option::<[u8; 1]>::map::<u8, fn([u8; core::::num::{impl#6}::from_le_bytes::{constant#0}]) -> u8 {core::num::<impl u8>::from_le_bytes}>(move _19, core::num::<impl u8>::from_le_bytes) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_19);
+        StorageLive(_24);
+        _24 = LendingError::InstructionUnpackError;
+        _17 = Option::<u8>::ok_or::<LendingError>(move _18, move _24) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_24);
+        StorageDead(_18);
+        _16 = <Result<u8, LendingError> as Try>::branch(move _17) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_17);
+        _25 = discriminant(_16);
+        switchInt(move _25) -> [0: bb12, 1: bb14, otherwise: bb13];
+    }
+
+    bb12: {
+        StorageLive(_29);
+        _29 = ((_16 as Continue).0: u8);
+        _15 = _29;
+        StorageDead(_29);
+        StorageDead(_16);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = _15;
+        StorageLive(_32);
+        _32 = &(*_12);
+        _30 = (move _31, move _32);
+        StorageDead(_32);
+        StorageDead(_31);
+        _0 = Result::<(u8, &[u8]), ProgramError>::Ok(move _30);
+        StorageDead(_30);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb16;
+    }
+
+    bb13: {
+        unreachable;
+    }
+
+    bb14: {
+        StorageLive(_26);
+        _26 = move ((_16 as Break).0: std::result::Result<std::convert::Infallible, error::LendingError>);
+        StorageLive(_28);
+        _28 = move _26;
+        _0 = <Result<(u8, &[u8]), ProgramError> as FromResidual<Result<Infallible, LendingError>>>::from_residual(move _28) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb16;
+    }
+
+    bb16: {
+        return;
+    }
+}

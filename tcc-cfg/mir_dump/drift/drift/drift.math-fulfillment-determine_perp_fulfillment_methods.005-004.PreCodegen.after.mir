@@ -1,0 +1,861 @@
+// MIR for `determine_perp_fulfillment_methods` after PreCodegen
+
+fn determine_perp_fulfillment_methods(_1: &Order, _2: &[(anchor_lang::prelude::Pubkey, usize, u64)], _3: &AMM, _4: u64, _5: Option<i64>, _6: Option<u64>, _7: AMMAvailability, _8: u64, _9: u8, _10: FillMode) -> std::result::Result<Vec<PerpFulfillmentMethod>, error::ErrorCode> {
+    debug order => _1;
+    debug maker_orders_info => _2;
+    debug amm => _3;
+    debug amm_reserve_price => _4;
+    debug valid_oracle_price => _5;
+    debug limit_price => _6;
+    debug amm_availability => _7;
+    debug slot => _8;
+    debug min_auction_duration => _9;
+    debug fill_mode => _10;
+    let mut _0: std::result::Result<std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>, error::ErrorCode>;
+    let _11: ();
+    let mut _12: bool;
+    let mut _13: !;
+    let mut _14: &state::user::Order;
+    let mut _15: &state::perp_market::AMM;
+    let mut _16: u64;
+    let mut _17: std::option::Option<i64>;
+    let mut _18: std::option::Option<u64>;
+    let mut _19: state::perp_market::AMMAvailability;
+    let mut _20: u64;
+    let mut _21: u8;
+    let mut _22: state::fill_mode::FillMode;
+    let mut _23: std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _25: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _26: std::result::Result<bool, error::ErrorCode>;
+    let mut _27: state::perp_market::AMMAvailability;
+    let mut _28: std::option::Option<i64>;
+    let mut _29: &state::user::Order;
+    let mut _30: u8;
+    let mut _31: u64;
+    let mut _32: state::fill_mode::FillMode;
+    let mut _33: isize;
+    let mut _35: !;
+    let mut _36: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _39: &controller::position::PositionDirection;
+    let mut _41: isize;
+    let mut _42: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _43: std::result::Result<u64, error::ErrorCode>;
+    let mut _44: &state::perp_market::AMM;
+    let mut _45: u64;
+    let mut _46: isize;
+    let mut _48: !;
+    let mut _49: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _51: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _52: std::result::Result<u64, error::ErrorCode>;
+    let mut _53: &state::perp_market::AMM;
+    let mut _54: u64;
+    let mut _55: isize;
+    let mut _57: !;
+    let mut _58: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _60: ();
+    let mut _61: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _62: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _63: &[(anchor_lang::prelude::Pubkey, usize, u64)];
+    let mut _65: ();
+    let _66: ();
+    let mut _67: std::option::Option<&(anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _68: &mut std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _69: &mut std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+    let mut _70: isize;
+    let mut _71: !;
+    let mut _76: isize;
+    let mut _78: controller::position::PositionDirection;
+    let mut _79: u64;
+    let mut _80: u64;
+    let _81: ();
+    let mut _82: bool;
+    let mut _83: !;
+    let _84: ();
+    let mut _85: bool;
+    let mut _87: isize;
+    let mut _88: u64;
+    let mut _89: u64;
+    let mut _90: u64;
+    let mut _91: u64;
+    let mut _92: bool;
+    let _93: ();
+    let mut _94: &mut std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _95: state::fulfillment::PerpFulfillmentMethod;
+    let mut _96: std::option::Option<u64>;
+    let mut _97: u64;
+    let mut _98: u64;
+    let _99: ();
+    let mut _100: &mut std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _101: state::fulfillment::PerpFulfillmentMethod;
+    let mut _102: anchor_lang::prelude::Pubkey;
+    let mut _103: u16;
+    let mut _104: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u16>;
+    let mut _105: std::result::Result<u16, error::ErrorCode>;
+    let mut _106: usize;
+    let mut _107: isize;
+    let mut _109: !;
+    let mut _110: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _112: u64;
+    let mut _113: bool;
+    let mut _114: usize;
+    let mut _115: &std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _116: !;
+    let _117: ();
+    let mut _118: bool;
+    let mut _120: isize;
+    let mut _122: controller::position::PositionDirection;
+    let mut _123: u64;
+    let mut _124: u64;
+    let mut _125: bool;
+    let _126: ();
+    let mut _127: &mut std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _128: state::fulfillment::PerpFulfillmentMethod;
+    let mut _129: std::option::Option<u64>;
+    let mut _130: std::vec::Vec<state::fulfillment::PerpFulfillmentMethod>;
+    let mut _131: &(anchor_lang::prelude::Pubkey, usize, u64);
+    let mut _132: &(anchor_lang::prelude::Pubkey, usize, u64);
+    let mut _133: &(anchor_lang::prelude::Pubkey, usize, u64);
+    scope 1 {
+        debug fulfillment_methods => _23;
+        let _24: bool;
+        let _34: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _37: bool;
+        scope 2 {
+            debug can_fill_with_amm => _24;
+            let _38: controller::position::PositionDirection;
+            scope 7 {
+                debug maker_direction => _38;
+                let mut _40: u64;
+                let _47: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _50: u64;
+                let _56: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _59: u64;
+                scope 8 {
+                    debug amm_price => _40;
+                    let mut _64: std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)>;
+                    let _119: bool;
+                    let _121: u64;
+                    scope 17 {
+                        debug iter => _64;
+                        let _72: &anchor_lang::prelude::Pubkey;
+                        let _73: &usize;
+                        let _74: &u64;
+                        scope 18 {
+                            debug maker_key => _72;
+                            debug maker_order_index => _73;
+                            debug maker_price => _74;
+                            let _75: bool;
+                            let _77: u64;
+                            scope 19 {
+                                debug taker_crosses_maker => _75;
+                                let _86: bool;
+                                let _108: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                                let _111: u16;
+                                scope 21 {
+                                    debug maker_better_than_amm => _86;
+                                }
+                                scope 22 {
+                                    debug residual => _108;
+                                    scope 23 {
+                                    }
+                                }
+                                scope 24 {
+                                    debug val => _111;
+                                    scope 25 {
+                                    }
+                                }
+                            }
+                            scope 20 {
+                                debug taker_price => _77;
+                            }
+                        }
+                    }
+                    scope 26 {
+                        debug taker_crosses_amm => _119;
+                    }
+                    scope 27 {
+                        debug taker_price => _121;
+                    }
+                }
+                scope 9 {
+                    debug residual => _47;
+                    scope 10 {
+                    }
+                }
+                scope 11 {
+                    debug val => _50;
+                    scope 12 {
+                    }
+                }
+                scope 13 {
+                    debug residual => _56;
+                    scope 14 {
+                    }
+                }
+                scope 15 {
+                    debug val => _59;
+                    scope 16 {
+                    }
+                }
+            }
+        }
+        scope 3 {
+            debug residual => _34;
+            scope 4 {
+            }
+        }
+        scope 5 {
+            debug val => _37;
+            scope 6 {
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = ((*_1).19: bool);
+        switchInt(move _12) -> [0: bb3, otherwise: bb1];
+    }
+
+    bb1: {
+        StorageLive(_14);
+        _14 = &(*_1);
+        StorageLive(_15);
+        _15 = &(*_3);
+        StorageLive(_16);
+        _16 = _4;
+        StorageLive(_17);
+        _17 = _5;
+        StorageLive(_18);
+        _18 = _6;
+        StorageLive(_19);
+        _19 = _7;
+        StorageLive(_20);
+        _20 = _8;
+        StorageLive(_21);
+        _21 = _9;
+        StorageLive(_22);
+        _22 = _10;
+        _0 = determine_perp_fulfillment_methods_for_maker(move _14, move _15, move _16, move _17, move _18, move _19, move _20, move _21, move _22) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_22);
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        StorageDead(_12);
+        StorageDead(_11);
+        goto -> bb72;
+    }
+
+    bb3: {
+        _11 = const ();
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_23);
+        _23 = Vec::<PerpFulfillmentMethod>::with_capacity(const 8_usize) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        StorageLive(_27);
+        _27 = _7;
+        StorageLive(_28);
+        _28 = _5;
+        StorageLive(_29);
+        _29 = &(*_1);
+        StorageLive(_30);
+        _30 = _9;
+        StorageLive(_31);
+        _31 = _8;
+        StorageLive(_32);
+        _32 = _10;
+        _26 = can_fill_with_amm(move _27, move _28, move _29, move _30, move _31, move _32) -> [return: bb5, unwind: bb73];
+    }
+
+    bb5: {
+        StorageDead(_32);
+        StorageDead(_31);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageDead(_28);
+        StorageDead(_27);
+        _25 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _26) -> [return: bb6, unwind: bb73];
+    }
+
+    bb6: {
+        StorageDead(_26);
+        _33 = discriminant(_25);
+        switchInt(move _33) -> [0: bb7, 1: bb9, otherwise: bb8];
+    }
+
+    bb7: {
+        StorageLive(_37);
+        _37 = ((_25 as Continue).0: bool);
+        _24 = _37;
+        StorageDead(_37);
+        StorageDead(_25);
+        StorageLive(_38);
+        StorageLive(_39);
+        _39 = &((*_1).17: controller::position::PositionDirection);
+        _38 = controller::position::PositionDirection::opposite(move _39) -> [return: bb11, unwind: bb73];
+    }
+
+    bb8: {
+        unreachable;
+    }
+
+    bb9: {
+        StorageLive(_34);
+        _34 = ((_25 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_36);
+        _36 = _34;
+        _0 = <std::result::Result<Vec<PerpFulfillmentMethod>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _36) -> [return: bb10, unwind: bb73];
+    }
+
+    bb10: {
+        StorageDead(_36);
+        StorageDead(_34);
+        StorageDead(_25);
+        goto -> bb70;
+    }
+
+    bb11: {
+        StorageDead(_39);
+        StorageLive(_40);
+        _41 = discriminant(_38);
+        switchInt(move _41) -> [0: bb13, 1: bb12, otherwise: bb8];
+    }
+
+    bb12: {
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _53 = &(*_3);
+        StorageLive(_54);
+        _54 = _4;
+        _52 = AMM::ask_price(move _53, move _54) -> [return: bb19, unwind: bb73];
+    }
+
+    bb13: {
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        _44 = &(*_3);
+        StorageLive(_45);
+        _45 = _4;
+        _43 = AMM::bid_price(move _44, move _45) -> [return: bb14, unwind: bb73];
+    }
+
+    bb14: {
+        StorageDead(_45);
+        StorageDead(_44);
+        _42 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _43) -> [return: bb15, unwind: bb73];
+    }
+
+    bb15: {
+        StorageDead(_43);
+        _46 = discriminant(_42);
+        switchInt(move _46) -> [0: bb16, 1: bb17, otherwise: bb8];
+    }
+
+    bb16: {
+        StorageLive(_50);
+        _50 = ((_42 as Continue).0: u64);
+        _40 = _50;
+        StorageDead(_50);
+        StorageDead(_42);
+        goto -> bb24;
+    }
+
+    bb17: {
+        StorageLive(_47);
+        _47 = ((_42 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_49);
+        _49 = _47;
+        _0 = <std::result::Result<Vec<PerpFulfillmentMethod>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _49) -> [return: bb18, unwind: bb73];
+    }
+
+    bb18: {
+        StorageDead(_49);
+        StorageDead(_47);
+        StorageDead(_42);
+        goto -> bb69;
+    }
+
+    bb19: {
+        StorageDead(_54);
+        StorageDead(_53);
+        _51 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _52) -> [return: bb20, unwind: bb73];
+    }
+
+    bb20: {
+        StorageDead(_52);
+        _55 = discriminant(_51);
+        switchInt(move _55) -> [0: bb21, 1: bb22, otherwise: bb8];
+    }
+
+    bb21: {
+        StorageLive(_59);
+        _59 = ((_51 as Continue).0: u64);
+        _40 = _59;
+        StorageDead(_59);
+        StorageDead(_51);
+        goto -> bb24;
+    }
+
+    bb22: {
+        StorageLive(_56);
+        _56 = ((_51 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_58);
+        _58 = _56;
+        _0 = <std::result::Result<Vec<PerpFulfillmentMethod>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _58) -> [return: bb23, unwind: bb73];
+    }
+
+    bb23: {
+        StorageDead(_58);
+        StorageDead(_56);
+        StorageDead(_51);
+        goto -> bb69;
+    }
+
+    bb24: {
+        StorageLive(_60);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        _63 = &(*_2);
+        _62 = core::slice::<impl [(anchor_lang::prelude::Pubkey, usize, u64)]>::iter(move _63) -> [return: bb25, unwind: bb73];
+    }
+
+    bb25: {
+        StorageDead(_63);
+        _61 = <std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)> as IntoIterator>::into_iter(move _62) -> [return: bb26, unwind: bb73];
+    }
+
+    bb26: {
+        StorageDead(_62);
+        StorageLive(_64);
+        _64 = move _61;
+        goto -> bb27;
+    }
+
+    bb27: {
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        _69 = &mut _64;
+        _68 = &mut (*_69);
+        _67 = <std::slice::Iter<'_, (anchor_lang::prelude::Pubkey, usize, u64)> as Iterator>::next(move _68) -> [return: bb28, unwind: bb73];
+    }
+
+    bb28: {
+        StorageDead(_68);
+        _70 = discriminant(_67);
+        switchInt(move _70) -> [0: bb30, 1: bb29, otherwise: bb8];
+    }
+
+    bb29: {
+        StorageLive(_72);
+        _131 = deref_copy ((_67 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _72 = &((*_131).0: anchor_lang::prelude::Pubkey);
+        StorageLive(_73);
+        _132 = deref_copy ((_67 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _73 = &((*_132).1: usize);
+        StorageLive(_74);
+        _133 = deref_copy ((_67 as Some).0: &(anchor_lang::prelude::Pubkey, usize, u64));
+        _74 = &((*_133).2: u64);
+        StorageLive(_75);
+        _76 = discriminant(_6);
+        switchInt(move _76) -> [0: bb31, 1: bb32, otherwise: bb8];
+    }
+
+    bb30: {
+        _60 = const ();
+        goto -> bb57;
+    }
+
+    bb31: {
+        _75 = const true;
+        goto -> bb34;
+    }
+
+    bb32: {
+        StorageLive(_77);
+        _77 = ((_6 as Some).0: u64);
+        StorageLive(_78);
+        _78 = _38;
+        StorageLive(_79);
+        _79 = (*_74);
+        StorageLive(_80);
+        _80 = _77;
+        _75 = do_orders_cross(move _78, move _79, move _80) -> [return: bb33, unwind: bb73];
+    }
+
+    bb33: {
+        StorageDead(_80);
+        StorageDead(_79);
+        StorageDead(_78);
+        StorageDead(_77);
+        goto -> bb34;
+    }
+
+    bb34: {
+        StorageLive(_81);
+        StorageLive(_82);
+        _82 = _75;
+        switchInt(move _82) -> [0: bb35, otherwise: bb36];
+    }
+
+    bb35: {
+        _60 = const ();
+        StorageDead(_82);
+        StorageDead(_81);
+        goto -> bb56;
+    }
+
+    bb36: {
+        _81 = const ();
+        StorageDead(_82);
+        StorageDead(_81);
+        StorageLive(_84);
+        StorageLive(_85);
+        _85 = _24;
+        switchInt(move _85) -> [0: bb38, otherwise: bb37];
+    }
+
+    bb37: {
+        StorageLive(_86);
+        _87 = discriminant(((*_1).17: controller::position::PositionDirection));
+        switchInt(move _87) -> [0: bb40, 1: bb39, otherwise: bb8];
+    }
+
+    bb38: {
+        _84 = const ();
+        goto -> bb46;
+    }
+
+    bb39: {
+        StorageLive(_90);
+        _90 = (*_74);
+        StorageLive(_91);
+        _91 = _40;
+        _86 = Ge(move _90, move _91);
+        StorageDead(_91);
+        StorageDead(_90);
+        goto -> bb41;
+    }
+
+    bb40: {
+        StorageLive(_88);
+        _88 = (*_74);
+        StorageLive(_89);
+        _89 = _40;
+        _86 = Le(move _88, move _89);
+        StorageDead(_89);
+        StorageDead(_88);
+        goto -> bb41;
+    }
+
+    bb41: {
+        StorageLive(_92);
+        _92 = _86;
+        switchInt(move _92) -> [0: bb42, otherwise: bb44];
+    }
+
+    bb42: {
+        StorageLive(_93);
+        StorageLive(_94);
+        _94 = &mut _23;
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        _97 = (*_74);
+        _96 = Option::<u64>::Some(move _97);
+        StorageDead(_97);
+        _95 = PerpFulfillmentMethod::AMM(move _96);
+        StorageDead(_96);
+        _93 = Vec::<PerpFulfillmentMethod>::push(move _94, move _95) -> [return: bb43, unwind: bb73];
+    }
+
+    bb43: {
+        StorageDead(_95);
+        StorageDead(_94);
+        StorageDead(_93);
+        StorageLive(_98);
+        _98 = (*_74);
+        _40 = move _98;
+        StorageDead(_98);
+        _84 = const ();
+        goto -> bb45;
+    }
+
+    bb44: {
+        _84 = const ();
+        goto -> bb45;
+    }
+
+    bb45: {
+        StorageDead(_92);
+        StorageDead(_86);
+        goto -> bb46;
+    }
+
+    bb46: {
+        StorageDead(_85);
+        StorageDead(_84);
+        StorageLive(_99);
+        StorageLive(_100);
+        _100 = &mut _23;
+        StorageLive(_101);
+        StorageLive(_102);
+        _102 = (*_72);
+        StorageLive(_103);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        _106 = (*_73);
+        _105 = <usize as Cast>::cast::<u16>(move _106) -> [return: bb47, unwind: bb73];
+    }
+
+    bb47: {
+        StorageDead(_106);
+        _104 = <std::result::Result<u16, error::ErrorCode> as Try>::branch(move _105) -> [return: bb48, unwind: bb73];
+    }
+
+    bb48: {
+        StorageDead(_105);
+        _107 = discriminant(_104);
+        switchInt(move _107) -> [0: bb49, 1: bb50, otherwise: bb8];
+    }
+
+    bb49: {
+        StorageLive(_111);
+        _111 = ((_104 as Continue).0: u16);
+        _103 = _111;
+        StorageDead(_111);
+        StorageLive(_112);
+        _112 = (*_74);
+        _101 = PerpFulfillmentMethod::Match(move _102, move _103, move _112);
+        StorageDead(_112);
+        StorageDead(_103);
+        StorageDead(_102);
+        _99 = Vec::<PerpFulfillmentMethod>::push(move _100, move _101) -> [return: bb52, unwind: bb73];
+    }
+
+    bb50: {
+        StorageLive(_108);
+        _108 = ((_104 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_110);
+        _110 = _108;
+        _0 = <std::result::Result<Vec<PerpFulfillmentMethod>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _110) -> [return: bb51, unwind: bb73];
+    }
+
+    bb51: {
+        StorageDead(_110);
+        StorageDead(_108);
+        StorageDead(_103);
+        StorageDead(_102);
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_104);
+        StorageDead(_99);
+        StorageDead(_75);
+        StorageDead(_74);
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_66);
+        StorageDead(_64);
+        StorageDead(_61);
+        StorageDead(_60);
+        goto -> bb69;
+    }
+
+    bb52: {
+        StorageDead(_101);
+        StorageDead(_100);
+        StorageDead(_104);
+        StorageDead(_99);
+        StorageLive(_113);
+        StorageLive(_114);
+        StorageLive(_115);
+        _115 = &_23;
+        _114 = Vec::<PerpFulfillmentMethod>::len(move _115) -> [return: bb53, unwind: bb73];
+    }
+
+    bb53: {
+        StorageDead(_115);
+        _113 = Gt(move _114, const 6_usize);
+        switchInt(move _113) -> [0: bb55, otherwise: bb54];
+    }
+
+    bb54: {
+        StorageDead(_114);
+        _60 = const ();
+        StorageDead(_113);
+        goto -> bb56;
+    }
+
+    bb55: {
+        StorageDead(_114);
+        _66 = const ();
+        StorageDead(_113);
+        StorageDead(_75);
+        StorageDead(_74);
+        StorageDead(_73);
+        StorageDead(_72);
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_66);
+        _65 = const ();
+        goto -> bb27;
+    }
+
+    bb56: {
+        StorageDead(_75);
+        StorageDead(_74);
+        StorageDead(_73);
+        StorageDead(_72);
+        goto -> bb57;
+    }
+
+    bb57: {
+        StorageDead(_69);
+        StorageDead(_67);
+        StorageDead(_66);
+        StorageDead(_64);
+        StorageDead(_61);
+        StorageDead(_60);
+        StorageLive(_117);
+        StorageLive(_118);
+        _118 = _24;
+        switchInt(move _118) -> [0: bb59, otherwise: bb58];
+    }
+
+    bb58: {
+        StorageLive(_119);
+        _120 = discriminant(_6);
+        switchInt(move _120) -> [0: bb60, 1: bb61, otherwise: bb8];
+    }
+
+    bb59: {
+        _117 = const ();
+        goto -> bb68;
+    }
+
+    bb60: {
+        _119 = const true;
+        goto -> bb63;
+    }
+
+    bb61: {
+        StorageLive(_121);
+        _121 = ((_6 as Some).0: u64);
+        StorageLive(_122);
+        _122 = _38;
+        StorageLive(_123);
+        _123 = _40;
+        StorageLive(_124);
+        _124 = _121;
+        _119 = do_orders_cross(move _122, move _123, move _124) -> [return: bb62, unwind: bb73];
+    }
+
+    bb62: {
+        StorageDead(_124);
+        StorageDead(_123);
+        StorageDead(_122);
+        StorageDead(_121);
+        goto -> bb63;
+    }
+
+    bb63: {
+        StorageLive(_125);
+        _125 = _119;
+        switchInt(move _125) -> [0: bb66, otherwise: bb64];
+    }
+
+    bb64: {
+        StorageLive(_126);
+        StorageLive(_127);
+        _127 = &mut _23;
+        StorageLive(_128);
+        StorageLive(_129);
+        _129 = Option::<u64>::None;
+        _128 = PerpFulfillmentMethod::AMM(move _129);
+        StorageDead(_129);
+        _126 = Vec::<PerpFulfillmentMethod>::push(move _127, move _128) -> [return: bb65, unwind: bb73];
+    }
+
+    bb65: {
+        StorageDead(_128);
+        StorageDead(_127);
+        StorageDead(_126);
+        _117 = const ();
+        goto -> bb67;
+    }
+
+    bb66: {
+        _117 = const ();
+        goto -> bb67;
+    }
+
+    bb67: {
+        StorageDead(_125);
+        StorageDead(_119);
+        goto -> bb68;
+    }
+
+    bb68: {
+        StorageDead(_118);
+        StorageDead(_117);
+        StorageLive(_130);
+        _130 = move _23;
+        _0 = std::result::Result::<Vec<PerpFulfillmentMethod>, error::ErrorCode>::Ok(move _130);
+        StorageDead(_130);
+        StorageDead(_40);
+        StorageDead(_38);
+        StorageDead(_24);
+        StorageDead(_23);
+        goto -> bb72;
+    }
+
+    bb69: {
+        StorageDead(_40);
+        StorageDead(_38);
+        goto -> bb70;
+    }
+
+    bb70: {
+        StorageDead(_24);
+        drop(_23) -> [return: bb71, unwind: bb74];
+    }
+
+    bb71: {
+        StorageDead(_23);
+        goto -> bb72;
+    }
+
+    bb72: {
+        return;
+    }
+
+    bb73 (cleanup): {
+        drop(_23) -> [return: bb74, unwind terminate(cleanup)];
+    }
+
+    bb74 (cleanup): {
+        resume;
+    }
+}

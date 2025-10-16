@@ -1,0 +1,43 @@
+// MIR for `reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::borrow_weight` after PreCodegen
+
+fn reserve::<impl at token-lending\sdk\src\state\reserve.rs:65:1: 65:13>::borrow_weight(_1: &reserve::Reserve) -> decimal::Decimal {
+    debug self => _1;
+    let mut _0: math::decimal::Decimal;
+    let mut _2: std::result::Result<math::decimal::Decimal, solana_program::program_error::ProgramError>;
+    let mut _3: math::decimal::Decimal;
+    let mut _4: math::decimal::Decimal;
+    let mut _5: u64;
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = decimal::Decimal::one() -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = (((*_1).5: state::reserve::ReserveConfig).17: u64);
+        _4 = decimal::Decimal::from_bps(move _5) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _2 = <decimal::Decimal as common::TryAdd>::try_add(move _3, move _4) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageDead(_3);
+        _0 = Result::<decimal::Decimal, ProgramError>::unwrap(move _2) -> [return: bb4, unwind: bb5];
+    }
+
+    bb4: {
+        StorageDead(_2);
+        return;
+    }
+
+    bb5 (cleanup): {
+        resume;
+    }
+}

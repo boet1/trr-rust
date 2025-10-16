@@ -1,0 +1,2663 @@
+// MIR for `operations::vault_operations::deposit` before PreCodegen
+
+fn operations::vault_operations::deposit(_1: &mut state::VaultState, _2: impl Iterator<Item = T>, _3: u64, _4: u64, _5: u64) -> std::result::Result<DepositEffects, anchor_lang::error::Error> {
+    debug vault => _1;
+    debug reserves_iter => _2;
+    debug max_amount => _3;
+    debug current_slot => _4;
+    debug current_timestamp => _5;
+    let mut _0: std::result::Result<operations::effects::DepositEffects, anchor_lang::error::Error>;
+    let _6: u64;
+    let mut _7: std::result::Result<u64, std::num::TryFromIntError>;
+    let mut _8: usize;
+    let mut _9: &state::VaultState;
+    let mut _11: u64;
+    let mut _12: u64;
+    let mut _13: (u64, bool);
+    let mut _15: u64;
+    let mut _16: u64;
+    let mut _17: (u64, bool);
+    let mut _19: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, operations::vault_operations::common::Holdings>;
+    let mut _20: std::result::Result<operations::vault_operations::common::Holdings, anchor_lang::error::Error>;
+    let mut _21: &state::VaultState;
+    let mut _22: impl Iterator<Item = T>;
+    let mut _23: u64;
+    let mut _24: isize;
+    let mut _26: !;
+    let mut _27: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let _29: ();
+    let mut _30: usize;
+    let mut _31: &str;
+    let _32: &str;
+    let mut _33: bool;
+    let mut _34: bool;
+    let mut _35: bool;
+    let mut _36: bool;
+    let mut _37: bool;
+    let mut _38: bool;
+    let _41: ();
+    let mut _42: std::result::Result<(), std::fmt::Error>;
+    let mut _43: &mut arrform::ArrForm<150>;
+    let mut _44: std::fmt::Arguments<'_>;
+    let mut _45: &[&str];
+    let mut _46: &[&str; 2];
+    let _47: &[&str; 2];
+    let _48: [&str; 2];
+    let mut _49: &[core::fmt::rt::Argument<'_>];
+    let mut _50: &[core::fmt::rt::Argument<'_>; 2];
+    let _51: &[core::fmt::rt::Argument<'_>; 2];
+    let _52: [core::fmt::rt::Argument<'_>; 2];
+    let mut _53: core::fmt::rt::Argument<'_>;
+    let mut _54: &u64;
+    let _55: &u64;
+    let mut _56: core::fmt::rt::Argument<'_>;
+    let mut _57: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _58: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _59: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _60: &mut arrform::ArrForm<150>;
+    let _61: ();
+    let mut _62: &str;
+    let _63: &str;
+    let mut _64: &std::string::String;
+    let _65: &std::string::String;
+    let _66: std::string::String;
+    let mut _68: std::fmt::Arguments<'_>;
+    let mut _69: &[&str];
+    let mut _70: &[&str; 1];
+    let _71: &[&str; 1];
+    let _72: [&str; 1];
+    let mut _73: &[core::fmt::rt::Argument<'_>];
+    let mut _74: &[core::fmt::rt::Argument<'_>; 1];
+    let _75: &[core::fmt::rt::Argument<'_>; 1];
+    let _76: [core::fmt::rt::Argument<'_>; 1];
+    let mut _77: core::fmt::rt::Argument<'_>;
+    let mut _78: &&str;
+    let _79: &&str;
+    let _80: &str;
+    let mut _81: &arrform::ArrForm<150>;
+    let _84: ();
+    let mut _85: std::result::Result<(), std::fmt::Error>;
+    let mut _86: &mut arrform::ArrForm<300>;
+    let mut _87: std::fmt::Arguments<'_>;
+    let mut _88: &[&str];
+    let mut _89: &[&str; 2];
+    let _90: &[&str; 2];
+    let _91: [&str; 2];
+    let mut _92: &[core::fmt::rt::Argument<'_>];
+    let mut _93: &[core::fmt::rt::Argument<'_>; 2];
+    let _94: &[core::fmt::rt::Argument<'_>; 2];
+    let _95: [core::fmt::rt::Argument<'_>; 2];
+    let mut _96: core::fmt::rt::Argument<'_>;
+    let mut _97: &u64;
+    let _98: &u64;
+    let mut _99: core::fmt::rt::Argument<'_>;
+    let mut _100: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _101: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _102: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _103: &mut arrform::ArrForm<300>;
+    let _104: ();
+    let mut _105: &str;
+    let _106: &str;
+    let mut _107: &std::string::String;
+    let _108: &std::string::String;
+    let _109: std::string::String;
+    let mut _111: std::fmt::Arguments<'_>;
+    let mut _112: &[&str];
+    let mut _113: &[&str; 1];
+    let _114: &[&str; 1];
+    let _115: [&str; 1];
+    let mut _116: &[core::fmt::rt::Argument<'_>];
+    let mut _117: &[core::fmt::rt::Argument<'_>; 1];
+    let _118: &[core::fmt::rt::Argument<'_>; 1];
+    let _119: [core::fmt::rt::Argument<'_>; 1];
+    let mut _120: core::fmt::rt::Argument<'_>;
+    let mut _121: &&str;
+    let _122: &&str;
+    let _123: &str;
+    let mut _124: &arrform::ArrForm<300>;
+    let _127: ();
+    let mut _128: std::result::Result<(), std::fmt::Error>;
+    let mut _129: &mut arrform::ArrForm<600>;
+    let mut _130: std::fmt::Arguments<'_>;
+    let mut _131: &[&str];
+    let mut _132: &[&str; 2];
+    let _133: &[&str; 2];
+    let _134: [&str; 2];
+    let mut _135: &[core::fmt::rt::Argument<'_>];
+    let mut _136: &[core::fmt::rt::Argument<'_>; 2];
+    let _137: &[core::fmt::rt::Argument<'_>; 2];
+    let _138: [core::fmt::rt::Argument<'_>; 2];
+    let mut _139: core::fmt::rt::Argument<'_>;
+    let mut _140: &u64;
+    let _141: &u64;
+    let mut _142: core::fmt::rt::Argument<'_>;
+    let mut _143: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _144: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _145: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _146: &mut arrform::ArrForm<600>;
+    let _147: ();
+    let mut _148: &str;
+    let _149: &str;
+    let mut _150: &std::string::String;
+    let _151: &std::string::String;
+    let _152: std::string::String;
+    let mut _154: std::fmt::Arguments<'_>;
+    let mut _155: &[&str];
+    let mut _156: &[&str; 1];
+    let _157: &[&str; 1];
+    let _158: [&str; 1];
+    let mut _159: &[core::fmt::rt::Argument<'_>];
+    let mut _160: &[core::fmt::rt::Argument<'_>; 1];
+    let _161: &[core::fmt::rt::Argument<'_>; 1];
+    let _162: [core::fmt::rt::Argument<'_>; 1];
+    let mut _163: core::fmt::rt::Argument<'_>;
+    let mut _164: &&str;
+    let _165: &&str;
+    let _166: &str;
+    let mut _167: &arrform::ArrForm<600>;
+    let _170: ();
+    let mut _171: std::result::Result<(), std::fmt::Error>;
+    let mut _172: &mut arrform::ArrForm<1200>;
+    let mut _173: std::fmt::Arguments<'_>;
+    let mut _174: &[&str];
+    let mut _175: &[&str; 2];
+    let _176: &[&str; 2];
+    let _177: [&str; 2];
+    let mut _178: &[core::fmt::rt::Argument<'_>];
+    let mut _179: &[core::fmt::rt::Argument<'_>; 2];
+    let _180: &[core::fmt::rt::Argument<'_>; 2];
+    let _181: [core::fmt::rt::Argument<'_>; 2];
+    let mut _182: core::fmt::rt::Argument<'_>;
+    let mut _183: &u64;
+    let _184: &u64;
+    let mut _185: core::fmt::rt::Argument<'_>;
+    let mut _186: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _187: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _188: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _189: &mut arrform::ArrForm<1200>;
+    let _190: ();
+    let mut _191: &str;
+    let _192: &str;
+    let mut _193: &std::string::String;
+    let _194: &std::string::String;
+    let _195: std::string::String;
+    let mut _197: std::fmt::Arguments<'_>;
+    let mut _198: &[&str];
+    let mut _199: &[&str; 1];
+    let _200: &[&str; 1];
+    let _201: [&str; 1];
+    let mut _202: &[core::fmt::rt::Argument<'_>];
+    let mut _203: &[core::fmt::rt::Argument<'_>; 1];
+    let _204: &[core::fmt::rt::Argument<'_>; 1];
+    let _205: [core::fmt::rt::Argument<'_>; 1];
+    let mut _206: core::fmt::rt::Argument<'_>;
+    let mut _207: &&str;
+    let _208: &&str;
+    let _209: &str;
+    let mut _210: &arrform::ArrForm<1200>;
+    let _211: ();
+    let mut _212: usize;
+    let mut _213: &str;
+    let _214: &str;
+    let mut _215: bool;
+    let mut _216: bool;
+    let mut _217: bool;
+    let mut _218: bool;
+    let mut _219: bool;
+    let mut _220: bool;
+    let _223: ();
+    let mut _224: std::result::Result<(), std::fmt::Error>;
+    let mut _225: &mut arrform::ArrForm<150>;
+    let mut _226: std::fmt::Arguments<'_>;
+    let mut _227: &[&str];
+    let mut _228: &[&str; 1];
+    let _229: &[&str; 1];
+    let _230: [&str; 1];
+    let mut _231: &[core::fmt::rt::Argument<'_>];
+    let mut _232: &[core::fmt::rt::Argument<'_>; 1];
+    let _233: &[core::fmt::rt::Argument<'_>; 1];
+    let _234: [core::fmt::rt::Argument<'_>; 1];
+    let mut _235: core::fmt::rt::Argument<'_>;
+    let mut _236: &u64;
+    let _237: &u64;
+    let mut _238: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _239: &mut arrform::ArrForm<150>;
+    let _240: ();
+    let mut _241: &str;
+    let _242: &str;
+    let mut _243: &std::string::String;
+    let _244: &std::string::String;
+    let _245: std::string::String;
+    let mut _247: std::fmt::Arguments<'_>;
+    let mut _248: &[&str];
+    let mut _249: &[&str; 1];
+    let _250: &[&str; 1];
+    let _251: [&str; 1];
+    let mut _252: &[core::fmt::rt::Argument<'_>];
+    let mut _253: &[core::fmt::rt::Argument<'_>; 1];
+    let _254: &[core::fmt::rt::Argument<'_>; 1];
+    let _255: [core::fmt::rt::Argument<'_>; 1];
+    let mut _256: core::fmt::rt::Argument<'_>;
+    let mut _257: &&str;
+    let _258: &&str;
+    let _259: &str;
+    let mut _260: &arrform::ArrForm<150>;
+    let _263: ();
+    let mut _264: std::result::Result<(), std::fmt::Error>;
+    let mut _265: &mut arrform::ArrForm<300>;
+    let mut _266: std::fmt::Arguments<'_>;
+    let mut _267: &[&str];
+    let mut _268: &[&str; 1];
+    let _269: &[&str; 1];
+    let _270: [&str; 1];
+    let mut _271: &[core::fmt::rt::Argument<'_>];
+    let mut _272: &[core::fmt::rt::Argument<'_>; 1];
+    let _273: &[core::fmt::rt::Argument<'_>; 1];
+    let _274: [core::fmt::rt::Argument<'_>; 1];
+    let mut _275: core::fmt::rt::Argument<'_>;
+    let mut _276: &u64;
+    let _277: &u64;
+    let mut _278: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _279: &mut arrform::ArrForm<300>;
+    let _280: ();
+    let mut _281: &str;
+    let _282: &str;
+    let mut _283: &std::string::String;
+    let _284: &std::string::String;
+    let _285: std::string::String;
+    let mut _287: std::fmt::Arguments<'_>;
+    let mut _288: &[&str];
+    let mut _289: &[&str; 1];
+    let _290: &[&str; 1];
+    let _291: [&str; 1];
+    let mut _292: &[core::fmt::rt::Argument<'_>];
+    let mut _293: &[core::fmt::rt::Argument<'_>; 1];
+    let _294: &[core::fmt::rt::Argument<'_>; 1];
+    let _295: [core::fmt::rt::Argument<'_>; 1];
+    let mut _296: core::fmt::rt::Argument<'_>;
+    let mut _297: &&str;
+    let _298: &&str;
+    let _299: &str;
+    let mut _300: &arrform::ArrForm<300>;
+    let _303: ();
+    let mut _304: std::result::Result<(), std::fmt::Error>;
+    let mut _305: &mut arrform::ArrForm<600>;
+    let mut _306: std::fmt::Arguments<'_>;
+    let mut _307: &[&str];
+    let mut _308: &[&str; 1];
+    let _309: &[&str; 1];
+    let _310: [&str; 1];
+    let mut _311: &[core::fmt::rt::Argument<'_>];
+    let mut _312: &[core::fmt::rt::Argument<'_>; 1];
+    let _313: &[core::fmt::rt::Argument<'_>; 1];
+    let _314: [core::fmt::rt::Argument<'_>; 1];
+    let mut _315: core::fmt::rt::Argument<'_>;
+    let mut _316: &u64;
+    let _317: &u64;
+    let mut _318: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _319: &mut arrform::ArrForm<600>;
+    let _320: ();
+    let mut _321: &str;
+    let _322: &str;
+    let mut _323: &std::string::String;
+    let _324: &std::string::String;
+    let _325: std::string::String;
+    let mut _327: std::fmt::Arguments<'_>;
+    let mut _328: &[&str];
+    let mut _329: &[&str; 1];
+    let _330: &[&str; 1];
+    let _331: [&str; 1];
+    let mut _332: &[core::fmt::rt::Argument<'_>];
+    let mut _333: &[core::fmt::rt::Argument<'_>; 1];
+    let _334: &[core::fmt::rt::Argument<'_>; 1];
+    let _335: [core::fmt::rt::Argument<'_>; 1];
+    let mut _336: core::fmt::rt::Argument<'_>;
+    let mut _337: &&str;
+    let _338: &&str;
+    let _339: &str;
+    let mut _340: &arrform::ArrForm<600>;
+    let _343: ();
+    let mut _344: std::result::Result<(), std::fmt::Error>;
+    let mut _345: &mut arrform::ArrForm<1200>;
+    let mut _346: std::fmt::Arguments<'_>;
+    let mut _347: &[&str];
+    let mut _348: &[&str; 1];
+    let _349: &[&str; 1];
+    let _350: [&str; 1];
+    let mut _351: &[core::fmt::rt::Argument<'_>];
+    let mut _352: &[core::fmt::rt::Argument<'_>; 1];
+    let _353: &[core::fmt::rt::Argument<'_>; 1];
+    let _354: [core::fmt::rt::Argument<'_>; 1];
+    let mut _355: core::fmt::rt::Argument<'_>;
+    let mut _356: &u64;
+    let _357: &u64;
+    let mut _358: {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61};
+    let mut _359: &mut arrform::ArrForm<1200>;
+    let _360: ();
+    let mut _361: &str;
+    let _362: &str;
+    let mut _363: &std::string::String;
+    let _364: &std::string::String;
+    let _365: std::string::String;
+    let mut _367: std::fmt::Arguments<'_>;
+    let mut _368: &[&str];
+    let mut _369: &[&str; 1];
+    let _370: &[&str; 1];
+    let _371: [&str; 1];
+    let mut _372: &[core::fmt::rt::Argument<'_>];
+    let mut _373: &[core::fmt::rt::Argument<'_>; 1];
+    let _374: &[core::fmt::rt::Argument<'_>; 1];
+    let _375: [core::fmt::rt::Argument<'_>; 1];
+    let mut _376: core::fmt::rt::Argument<'_>;
+    let mut _377: &&str;
+    let _378: &&str;
+    let _379: &str;
+    let mut _380: &arrform::ArrForm<1200>;
+    let _381: ();
+    let mut _382: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>>;
+    let mut _383: std::result::Result<(), anchor_lang::error::Error>;
+    let mut _384: &mut state::VaultState;
+    let mut _385: &operations::vault_operations::common::Invested;
+    let _386: &operations::vault_operations::common::Invested;
+    let mut _387: u64;
+    let mut _388: isize;
+    let mut _390: !;
+    let mut _391: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _394: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>;
+    let mut _395: std::result::Result<fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, anchor_lang::error::Error>;
+    let mut _396: &state::VaultState;
+    let mut _397: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let _398: &fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _399: isize;
+    let mut _401: !;
+    let mut _402: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _405: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, anchor_lang::error::Error>, u64>;
+    let mut _406: std::result::Result<u64, anchor_lang::error::Error>;
+    let mut _407: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _408: u64;
+    let mut _409: u64;
+    let mut _410: isize;
+    let mut _412: !;
+    let mut _413: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+    let mut _416: u64;
+    let mut _417: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _418: u64;
+    let _419: ();
+    let mut _420: bool;
+    let mut _421: u64;
+    let mut _422: u64;
+    let mut _423: !;
+    let mut _424: anchor_lang::error::Error;
+    let mut _425: anchor_lang::error::AnchorError;
+    let mut _426: std::string::String;
+    let mut _427: &KaminoVaultError;
+    let _428: KaminoVaultError;
+    let mut _429: u32;
+    let mut _430: KaminoVaultError;
+    let mut _431: std::string::String;
+    let mut _432: &KaminoVaultError;
+    let _433: KaminoVaultError;
+    let mut _434: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _435: anchor_lang::error::ErrorOrigin;
+    let mut _436: anchor_lang::error::Source;
+    let mut _437: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _438: ();
+    let mut _439: bool;
+    let mut _440: u64;
+    let mut _441: !;
+    let mut _442: anchor_lang::error::Error;
+    let mut _443: anchor_lang::error::AnchorError;
+    let mut _444: std::string::String;
+    let mut _445: &KaminoVaultError;
+    let _446: KaminoVaultError;
+    let mut _447: u32;
+    let mut _448: KaminoVaultError;
+    let mut _449: std::string::String;
+    let mut _450: &KaminoVaultError;
+    let _451: KaminoVaultError;
+    let mut _452: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _453: anchor_lang::error::ErrorOrigin;
+    let mut _454: anchor_lang::error::Source;
+    let mut _455: std::option::Option<anchor_lang::error::ComparedValues>;
+    let _456: ();
+    let mut _457: &mut state::VaultState;
+    let mut _458: u64;
+    let _459: ();
+    let mut _460: &mut state::VaultState;
+    let mut _461: u64;
+    let _462: ();
+    let mut _463: &mut state::VaultState;
+    let mut _464: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _465: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _466: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+    let mut _467: u64;
+    let _468: ();
+    let mut _469: &mut state::VaultState;
+    let mut _470: u64;
+    let mut _471: operations::effects::DepositEffects;
+    let mut _472: u64;
+    let mut _473: u64;
+    let mut _474: u64;
+    let mut _495: bool;
+    let mut _496: isize;
+    let mut _497: isize;
+    let mut _498: isize;
+    let mut _499: isize;
+    let mut _500: isize;
+    let mut _501: isize;
+    let mut _502: isize;
+    let mut _503: isize;
+    let mut _504: isize;
+    let mut _505: isize;
+    let mut _506: isize;
+    let mut _507: isize;
+    let mut _508: isize;
+    let mut _509: isize;
+    let mut _510: isize;
+    let mut _511: isize;
+    let mut _512: isize;
+    let mut _513: isize;
+    let mut _514: isize;
+    let mut _515: isize;
+    scope 1 {
+        debug num_reserve => _6;
+        let _10: u64;
+        scope 2 {
+            debug crank_funds_to_deposit => _10;
+            let _14: u64;
+            scope 3 {
+                debug max_user_tokens_to_deposit => _14;
+                let _18: operations::vault_operations::common::Holdings;
+                let _25: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                let _28: operations::vault_operations::common::Holdings;
+                scope 4 {
+                    debug holdings => _18;
+                    let _39: arrform::ArrForm<150>;
+                    let mut _40: arrform::ArrForm<150>;
+                    let _82: arrform::ArrForm<300>;
+                    let mut _83: arrform::ArrForm<300>;
+                    let _125: arrform::ArrForm<600>;
+                    let mut _126: arrform::ArrForm<600>;
+                    let _168: arrform::ArrForm<1200>;
+                    let mut _169: arrform::ArrForm<1200>;
+                    let _221: arrform::ArrForm<150>;
+                    let mut _222: arrform::ArrForm<150>;
+                    let _261: arrform::ArrForm<300>;
+                    let mut _262: arrform::ArrForm<300>;
+                    let _301: arrform::ArrForm<600>;
+                    let mut _302: arrform::ArrForm<600>;
+                    let _341: arrform::ArrForm<1200>;
+                    let mut _342: arrform::ArrForm<1200>;
+                    let _389: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                    let _392: ();
+                    let _393: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                    let _400: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                    let _403: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>;
+                    scope 9 {
+                        debug formatted => _39;
+                        let _67: std::string::String;
+                        let mut _493: &[&str; 1];
+                        scope 11 {
+                            debug res => _67;
+                        }
+                    }
+                    scope 10 {
+                        debug af => _40;
+                        let mut _494: &[&str; 2];
+                    }
+                    scope 12 {
+                        debug formatted => _82;
+                        let _110: std::string::String;
+                        let mut _491: &[&str; 1];
+                        scope 14 {
+                            debug res => _110;
+                        }
+                    }
+                    scope 13 {
+                        debug af => _83;
+                        let mut _492: &[&str; 2];
+                    }
+                    scope 15 {
+                        debug formatted => _125;
+                        let _153: std::string::String;
+                        let mut _489: &[&str; 1];
+                        scope 17 {
+                            debug res => _153;
+                        }
+                    }
+                    scope 16 {
+                        debug af => _126;
+                        let mut _490: &[&str; 2];
+                    }
+                    scope 18 {
+                        debug formatted => _168;
+                        let _196: std::string::String;
+                        let mut _487: &[&str; 1];
+                        scope 20 {
+                            debug res => _196;
+                        }
+                    }
+                    scope 19 {
+                        debug af => _169;
+                        let mut _488: &[&str; 2];
+                    }
+                    scope 21 {
+                        debug formatted => _221;
+                        let _246: std::string::String;
+                        let mut _485: &[&str; 1];
+                        scope 23 {
+                            debug res => _246;
+                        }
+                    }
+                    scope 22 {
+                        debug af => _222;
+                        let mut _486: &[&str; 1];
+                    }
+                    scope 24 {
+                        debug formatted => _261;
+                        let _286: std::string::String;
+                        let mut _483: &[&str; 1];
+                        scope 26 {
+                            debug res => _286;
+                        }
+                    }
+                    scope 25 {
+                        debug af => _262;
+                        let mut _484: &[&str; 1];
+                    }
+                    scope 27 {
+                        debug formatted => _301;
+                        let _326: std::string::String;
+                        let mut _481: &[&str; 1];
+                        scope 29 {
+                            debug res => _326;
+                        }
+                    }
+                    scope 28 {
+                        debug af => _302;
+                        let mut _482: &[&str; 1];
+                    }
+                    scope 30 {
+                        debug formatted => _341;
+                        let _366: std::string::String;
+                        let mut _479: &[&str; 1];
+                        scope 32 {
+                            debug res => _366;
+                        }
+                    }
+                    scope 31 {
+                        debug af => _342;
+                        let mut _480: &[&str; 1];
+                    }
+                    scope 33 {
+                        debug residual => _389;
+                        scope 34 {
+                        }
+                    }
+                    scope 35 {
+                        debug val => _392;
+                        scope 36 {
+                        }
+                    }
+                    scope 37 {
+                        debug current_vault_aum => _393;
+                        let _404: u64;
+                        let _411: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>;
+                        let _414: u64;
+                        scope 42 {
+                            debug shares_to_mint => _404;
+                            let _415: u64;
+                            scope 47 {
+                                debug user_tokens_to_deposit => _415;
+                                let mut _475: &KaminoVaultError;
+                                let mut _476: &KaminoVaultError;
+                                let mut _477: &KaminoVaultError;
+                                let mut _478: &KaminoVaultError;
+                            }
+                        }
+                        scope 43 {
+                            debug residual => _411;
+                            scope 44 {
+                            }
+                        }
+                        scope 45 {
+                            debug val => _414;
+                            scope 46 {
+                            }
+                        }
+                    }
+                    scope 38 {
+                        debug residual => _400;
+                        scope 39 {
+                        }
+                    }
+                    scope 40 {
+                        debug val => _403;
+                        scope 41 {
+                        }
+                    }
+                }
+                scope 5 {
+                    debug residual => _25;
+                    scope 6 {
+                    }
+                }
+                scope 7 {
+                    debug val => _28;
+                    scope 8 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _495 = const false;
+        _495 = const true;
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &(*_1);
+        _8 = state::VaultState::get_reserves_with_allocation_count(move _9) -> [return: bb1, unwind: bb192];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        _7 = <usize as TryInto<u64>>::try_into(move _8) -> [return: bb2, unwind: bb192];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        _6 = std::result::Result::<u64, TryFromIntError>::unwrap(move _7) -> [return: bb3, unwind: bb192];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = _6;
+        StorageLive(_12);
+        _12 = ((*_1).24: u64);
+        _13 = CheckedMul(_11, _12);
+        assert(!move (_13.1: bool), "attempt to compute `{} * {}`, which would overflow", move _11, move _12) -> [success: bb4, unwind: bb192];
+    }
+
+    bb4: {
+        _10 = move (_13.0: u64);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = _3;
+        StorageLive(_16);
+        _16 = _10;
+        _17 = CheckedSub(_15, _16);
+        assert(!move (_17.1: bool), "attempt to compute `{} - {}`, which would overflow", move _15, move _16) -> [success: bb5, unwind: bb192];
+    }
+
+    bb5: {
+        _14 = move (_17.0: u64);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &(*_1);
+        StorageLive(_22);
+        _495 = const false;
+        _22 = move _2;
+        StorageLive(_23);
+        _23 = _4;
+        _20 = holdings::<'_, T, impl Iterator<Item = T>>(move _21, move _22, move _23) -> [return: bb6, unwind: bb192];
+    }
+
+    bb6: {
+        StorageDead(_23);
+        StorageDead(_22);
+        StorageDead(_21);
+        _19 = <std::result::Result<Holdings, anchor_lang::error::Error> as Try>::branch(move _20) -> [return: bb7, unwind: bb192];
+    }
+
+    bb7: {
+        StorageDead(_20);
+        _24 = discriminant(_19);
+        switchInt(move _24) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_28);
+        _28 = move ((_19 as Continue).0: operations::vault_operations::common::Holdings);
+        _18 = move _28;
+        StorageDead(_28);
+        _496 = discriminant(_19);
+        StorageDead(_19);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        _32 = const "holdings available {} total invested {}";
+        _31 = &(*_32);
+        _30 = core::str::<impl str>::len(move _31) -> [return: bb12, unwind: bb185];
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_25);
+        _25 = move ((_19 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_27);
+        _27 = move _25;
+        _0 = <std::result::Result<DepositEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _27) -> [return: bb11, unwind: bb190];
+    }
+
+    bb11: {
+        StorageDead(_27);
+        StorageDead(_25);
+        _510 = discriminant(_19);
+        StorageDead(_19);
+        goto -> bb173;
+    }
+
+    bb12: {
+        StorageDead(_31);
+        _37 = Le(const 0_usize, _30);
+        switchInt(move _37) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        _38 = Le(_30, const 50_usize);
+        switchInt(move _38) -> [0: bb14, otherwise: bb19];
+    }
+
+    bb14: {
+        _35 = Le(const 51_usize, _30);
+        switchInt(move _35) -> [0: bb16, otherwise: bb15];
+    }
+
+    bb15: {
+        _36 = Le(_30, const 100_usize);
+        switchInt(move _36) -> [0: bb16, otherwise: bb33];
+    }
+
+    bb16: {
+        _33 = Le(const 101_usize, _30);
+        switchInt(move _33) -> [0: bb18, otherwise: bb17];
+    }
+
+    bb17: {
+        _34 = Le(_30, const 200_usize);
+        switchInt(move _34) -> [0: bb18, otherwise: bb47];
+    }
+
+    bb18: {
+        StorageLive(_168);
+        StorageLive(_169);
+        _169 = ArrForm::<1200>::new() -> [return: bb61, unwind: bb185];
+    }
+
+    bb19: {
+        StorageLive(_39);
+        StorageLive(_40);
+        _40 = ArrForm::<150>::new() -> [return: bb20, unwind: bb185];
+    }
+
+    bb20: {
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        _43 = &mut _40;
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        _494 = const _;
+        _47 = &(*_494);
+        _46 = &(*_47);
+        _45 = move _46 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_46);
+        StorageLive(_49);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        _55 = &(_18.0: u64);
+        _54 = &(*_55);
+        _53 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _54) -> [return: bb21, unwind: bb185];
+    }
+
+    bb21: {
+        StorageDead(_54);
+        StorageLive(_56);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = &((_18.1: operations::vault_operations::common::Invested).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _57 = &(*_58);
+        _56 = core::fmt::rt::Argument::<'_>::new_display::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>(move _57) -> [return: bb22, unwind: bb185];
+    }
+
+    bb22: {
+        StorageDead(_57);
+        _52 = [move _53, move _56];
+        StorageDead(_56);
+        StorageDead(_53);
+        _51 = &_52;
+        _50 = &(*_51);
+        _49 = move _50 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_50);
+        _44 = Arguments::<'_>::new_v1(move _45, move _49) -> [return: bb23, unwind: bb185];
+    }
+
+    bb23: {
+        StorageDead(_49);
+        StorageDead(_45);
+        _42 = ArrForm::<150>::format(move _43, move _44) -> [return: bb24, unwind: bb185];
+    }
+
+    bb24: {
+        StorageDead(_44);
+        StorageDead(_43);
+        StorageLive(_59);
+        StorageLive(_60);
+        _60 = &mut _40;
+        _59 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _60 };
+        StorageDead(_60);
+        _41 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _42, move _59) -> [return: bb25, unwind: bb185];
+    }
+
+    bb25: {
+        StorageDead(_59);
+        StorageDead(_42);
+        StorageDead(_58);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_51);
+        StorageDead(_47);
+        StorageDead(_41);
+        _39 = move _40;
+        StorageDead(_40);
+        StorageLive(_61);
+        StorageLive(_62);
+        StorageLive(_63);
+        StorageLive(_64);
+        StorageLive(_65);
+        StorageLive(_66);
+        StorageLive(_67);
+        StorageLive(_68);
+        StorageLive(_69);
+        StorageLive(_70);
+        StorageLive(_71);
+        _493 = const _;
+        _71 = &(*_493);
+        _70 = &(*_71);
+        _69 = move _70 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_70);
+        StorageLive(_73);
+        StorageLive(_74);
+        StorageLive(_75);
+        StorageLive(_76);
+        StorageLive(_77);
+        StorageLive(_78);
+        StorageLive(_79);
+        StorageLive(_80);
+        StorageLive(_81);
+        _81 = &_39;
+        _80 = ArrForm::<150>::as_str(move _81) -> [return: bb26, unwind: bb185];
+    }
+
+    bb26: {
+        StorageDead(_81);
+        _79 = &_80;
+        _78 = &(*_79);
+        _77 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _78) -> [return: bb27, unwind: bb185];
+    }
+
+    bb27: {
+        StorageDead(_78);
+        _76 = [move _77];
+        StorageDead(_77);
+        _75 = &_76;
+        _74 = &(*_75);
+        _73 = move _74 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_74);
+        _68 = Arguments::<'_>::new_v1(move _69, move _73) -> [return: bb28, unwind: bb185];
+    }
+
+    bb28: {
+        StorageDead(_73);
+        StorageDead(_69);
+        _67 = format(move _68) -> [return: bb29, unwind: bb185];
+    }
+
+    bb29: {
+        StorageDead(_68);
+        StorageDead(_80);
+        StorageDead(_79);
+        StorageDead(_76);
+        StorageDead(_75);
+        StorageDead(_71);
+        _66 = move _67;
+        StorageDead(_67);
+        _65 = &_66;
+        _64 = &(*_65);
+        _63 = <String as Deref>::deref(move _64) -> [return: bb30, unwind: bb184];
+    }
+
+    bb30: {
+        _62 = &(*_63);
+        StorageDead(_64);
+        _61 = solana_program::log::sol_log(move _62) -> [return: bb31, unwind: bb184];
+    }
+
+    bb31: {
+        StorageDead(_62);
+        drop(_66) -> [return: bb32, unwind: bb185];
+    }
+
+    bb32: {
+        StorageDead(_66);
+        StorageDead(_65);
+        StorageDead(_63);
+        StorageDead(_61);
+        _29 = const ();
+        StorageDead(_39);
+        goto -> bb74;
+    }
+
+    bb33: {
+        StorageLive(_82);
+        StorageLive(_83);
+        _83 = ArrForm::<300>::new() -> [return: bb34, unwind: bb185];
+    }
+
+    bb34: {
+        StorageLive(_84);
+        StorageLive(_85);
+        StorageLive(_86);
+        _86 = &mut _83;
+        StorageLive(_87);
+        StorageLive(_88);
+        StorageLive(_89);
+        StorageLive(_90);
+        _492 = const _;
+        _90 = &(*_492);
+        _89 = &(*_90);
+        _88 = move _89 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_89);
+        StorageLive(_92);
+        StorageLive(_93);
+        StorageLive(_94);
+        StorageLive(_95);
+        StorageLive(_96);
+        StorageLive(_97);
+        StorageLive(_98);
+        _98 = &(_18.0: u64);
+        _97 = &(*_98);
+        _96 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _97) -> [return: bb35, unwind: bb185];
+    }
+
+    bb35: {
+        StorageDead(_97);
+        StorageLive(_99);
+        StorageLive(_100);
+        StorageLive(_101);
+        _101 = &((_18.1: operations::vault_operations::common::Invested).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _100 = &(*_101);
+        _99 = core::fmt::rt::Argument::<'_>::new_display::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>(move _100) -> [return: bb36, unwind: bb185];
+    }
+
+    bb36: {
+        StorageDead(_100);
+        _95 = [move _96, move _99];
+        StorageDead(_99);
+        StorageDead(_96);
+        _94 = &_95;
+        _93 = &(*_94);
+        _92 = move _93 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_93);
+        _87 = Arguments::<'_>::new_v1(move _88, move _92) -> [return: bb37, unwind: bb185];
+    }
+
+    bb37: {
+        StorageDead(_92);
+        StorageDead(_88);
+        _85 = ArrForm::<300>::format(move _86, move _87) -> [return: bb38, unwind: bb185];
+    }
+
+    bb38: {
+        StorageDead(_87);
+        StorageDead(_86);
+        StorageLive(_102);
+        StorageLive(_103);
+        _103 = &mut _83;
+        _102 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _103 };
+        StorageDead(_103);
+        _84 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _85, move _102) -> [return: bb39, unwind: bb185];
+    }
+
+    bb39: {
+        StorageDead(_102);
+        StorageDead(_85);
+        StorageDead(_101);
+        StorageDead(_98);
+        StorageDead(_95);
+        StorageDead(_94);
+        StorageDead(_90);
+        StorageDead(_84);
+        _82 = move _83;
+        StorageDead(_83);
+        StorageLive(_104);
+        StorageLive(_105);
+        StorageLive(_106);
+        StorageLive(_107);
+        StorageLive(_108);
+        StorageLive(_109);
+        StorageLive(_110);
+        StorageLive(_111);
+        StorageLive(_112);
+        StorageLive(_113);
+        StorageLive(_114);
+        _491 = const _;
+        _114 = &(*_491);
+        _113 = &(*_114);
+        _112 = move _113 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_113);
+        StorageLive(_116);
+        StorageLive(_117);
+        StorageLive(_118);
+        StorageLive(_119);
+        StorageLive(_120);
+        StorageLive(_121);
+        StorageLive(_122);
+        StorageLive(_123);
+        StorageLive(_124);
+        _124 = &_82;
+        _123 = ArrForm::<300>::as_str(move _124) -> [return: bb40, unwind: bb185];
+    }
+
+    bb40: {
+        StorageDead(_124);
+        _122 = &_123;
+        _121 = &(*_122);
+        _120 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _121) -> [return: bb41, unwind: bb185];
+    }
+
+    bb41: {
+        StorageDead(_121);
+        _119 = [move _120];
+        StorageDead(_120);
+        _118 = &_119;
+        _117 = &(*_118);
+        _116 = move _117 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_117);
+        _111 = Arguments::<'_>::new_v1(move _112, move _116) -> [return: bb42, unwind: bb185];
+    }
+
+    bb42: {
+        StorageDead(_116);
+        StorageDead(_112);
+        _110 = format(move _111) -> [return: bb43, unwind: bb185];
+    }
+
+    bb43: {
+        StorageDead(_111);
+        StorageDead(_123);
+        StorageDead(_122);
+        StorageDead(_119);
+        StorageDead(_118);
+        StorageDead(_114);
+        _109 = move _110;
+        StorageDead(_110);
+        _108 = &_109;
+        _107 = &(*_108);
+        _106 = <String as Deref>::deref(move _107) -> [return: bb44, unwind: bb183];
+    }
+
+    bb44: {
+        _105 = &(*_106);
+        StorageDead(_107);
+        _104 = solana_program::log::sol_log(move _105) -> [return: bb45, unwind: bb183];
+    }
+
+    bb45: {
+        StorageDead(_105);
+        drop(_109) -> [return: bb46, unwind: bb185];
+    }
+
+    bb46: {
+        StorageDead(_109);
+        StorageDead(_108);
+        StorageDead(_106);
+        StorageDead(_104);
+        _29 = const ();
+        StorageDead(_82);
+        goto -> bb74;
+    }
+
+    bb47: {
+        StorageLive(_125);
+        StorageLive(_126);
+        _126 = ArrForm::<600>::new() -> [return: bb48, unwind: bb185];
+    }
+
+    bb48: {
+        StorageLive(_127);
+        StorageLive(_128);
+        StorageLive(_129);
+        _129 = &mut _126;
+        StorageLive(_130);
+        StorageLive(_131);
+        StorageLive(_132);
+        StorageLive(_133);
+        _490 = const _;
+        _133 = &(*_490);
+        _132 = &(*_133);
+        _131 = move _132 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_132);
+        StorageLive(_135);
+        StorageLive(_136);
+        StorageLive(_137);
+        StorageLive(_138);
+        StorageLive(_139);
+        StorageLive(_140);
+        StorageLive(_141);
+        _141 = &(_18.0: u64);
+        _140 = &(*_141);
+        _139 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _140) -> [return: bb49, unwind: bb185];
+    }
+
+    bb49: {
+        StorageDead(_140);
+        StorageLive(_142);
+        StorageLive(_143);
+        StorageLive(_144);
+        _144 = &((_18.1: operations::vault_operations::common::Invested).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _143 = &(*_144);
+        _142 = core::fmt::rt::Argument::<'_>::new_display::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>(move _143) -> [return: bb50, unwind: bb185];
+    }
+
+    bb50: {
+        StorageDead(_143);
+        _138 = [move _139, move _142];
+        StorageDead(_142);
+        StorageDead(_139);
+        _137 = &_138;
+        _136 = &(*_137);
+        _135 = move _136 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_136);
+        _130 = Arguments::<'_>::new_v1(move _131, move _135) -> [return: bb51, unwind: bb185];
+    }
+
+    bb51: {
+        StorageDead(_135);
+        StorageDead(_131);
+        _128 = ArrForm::<600>::format(move _129, move _130) -> [return: bb52, unwind: bb185];
+    }
+
+    bb52: {
+        StorageDead(_130);
+        StorageDead(_129);
+        StorageLive(_145);
+        StorageLive(_146);
+        _146 = &mut _126;
+        _145 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _146 };
+        StorageDead(_146);
+        _127 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _128, move _145) -> [return: bb53, unwind: bb185];
+    }
+
+    bb53: {
+        StorageDead(_145);
+        StorageDead(_128);
+        StorageDead(_144);
+        StorageDead(_141);
+        StorageDead(_138);
+        StorageDead(_137);
+        StorageDead(_133);
+        StorageDead(_127);
+        _125 = move _126;
+        StorageDead(_126);
+        StorageLive(_147);
+        StorageLive(_148);
+        StorageLive(_149);
+        StorageLive(_150);
+        StorageLive(_151);
+        StorageLive(_152);
+        StorageLive(_153);
+        StorageLive(_154);
+        StorageLive(_155);
+        StorageLive(_156);
+        StorageLive(_157);
+        _489 = const _;
+        _157 = &(*_489);
+        _156 = &(*_157);
+        _155 = move _156 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_156);
+        StorageLive(_159);
+        StorageLive(_160);
+        StorageLive(_161);
+        StorageLive(_162);
+        StorageLive(_163);
+        StorageLive(_164);
+        StorageLive(_165);
+        StorageLive(_166);
+        StorageLive(_167);
+        _167 = &_125;
+        _166 = ArrForm::<600>::as_str(move _167) -> [return: bb54, unwind: bb185];
+    }
+
+    bb54: {
+        StorageDead(_167);
+        _165 = &_166;
+        _164 = &(*_165);
+        _163 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _164) -> [return: bb55, unwind: bb185];
+    }
+
+    bb55: {
+        StorageDead(_164);
+        _162 = [move _163];
+        StorageDead(_163);
+        _161 = &_162;
+        _160 = &(*_161);
+        _159 = move _160 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_160);
+        _154 = Arguments::<'_>::new_v1(move _155, move _159) -> [return: bb56, unwind: bb185];
+    }
+
+    bb56: {
+        StorageDead(_159);
+        StorageDead(_155);
+        _153 = format(move _154) -> [return: bb57, unwind: bb185];
+    }
+
+    bb57: {
+        StorageDead(_154);
+        StorageDead(_166);
+        StorageDead(_165);
+        StorageDead(_162);
+        StorageDead(_161);
+        StorageDead(_157);
+        _152 = move _153;
+        StorageDead(_153);
+        _151 = &_152;
+        _150 = &(*_151);
+        _149 = <String as Deref>::deref(move _150) -> [return: bb58, unwind: bb182];
+    }
+
+    bb58: {
+        _148 = &(*_149);
+        StorageDead(_150);
+        _147 = solana_program::log::sol_log(move _148) -> [return: bb59, unwind: bb182];
+    }
+
+    bb59: {
+        StorageDead(_148);
+        drop(_152) -> [return: bb60, unwind: bb185];
+    }
+
+    bb60: {
+        StorageDead(_152);
+        StorageDead(_151);
+        StorageDead(_149);
+        StorageDead(_147);
+        _29 = const ();
+        StorageDead(_125);
+        goto -> bb74;
+    }
+
+    bb61: {
+        StorageLive(_170);
+        StorageLive(_171);
+        StorageLive(_172);
+        _172 = &mut _169;
+        StorageLive(_173);
+        StorageLive(_174);
+        StorageLive(_175);
+        StorageLive(_176);
+        _488 = const _;
+        _176 = &(*_488);
+        _175 = &(*_176);
+        _174 = move _175 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_175);
+        StorageLive(_178);
+        StorageLive(_179);
+        StorageLive(_180);
+        StorageLive(_181);
+        StorageLive(_182);
+        StorageLive(_183);
+        StorageLive(_184);
+        _184 = &(_18.0: u64);
+        _183 = &(*_184);
+        _182 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _183) -> [return: bb62, unwind: bb185];
+    }
+
+    bb62: {
+        StorageDead(_183);
+        StorageLive(_185);
+        StorageLive(_186);
+        StorageLive(_187);
+        _187 = &((_18.1: operations::vault_operations::common::Invested).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _186 = &(*_187);
+        _185 = core::fmt::rt::Argument::<'_>::new_display::<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>>(move _186) -> [return: bb63, unwind: bb185];
+    }
+
+    bb63: {
+        StorageDead(_186);
+        _181 = [move _182, move _185];
+        StorageDead(_185);
+        StorageDead(_182);
+        _180 = &_181;
+        _179 = &(*_180);
+        _178 = move _179 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_179);
+        _173 = Arguments::<'_>::new_v1(move _174, move _178) -> [return: bb64, unwind: bb185];
+    }
+
+    bb64: {
+        StorageDead(_178);
+        StorageDead(_174);
+        _171 = ArrForm::<1200>::format(move _172, move _173) -> [return: bb65, unwind: bb185];
+    }
+
+    bb65: {
+        StorageDead(_173);
+        StorageDead(_172);
+        StorageLive(_188);
+        StorageLive(_189);
+        _189 = &mut _169;
+        _188 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _189 };
+        StorageDead(_189);
+        _170 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _171, move _188) -> [return: bb66, unwind: bb185];
+    }
+
+    bb66: {
+        StorageDead(_188);
+        StorageDead(_171);
+        StorageDead(_187);
+        StorageDead(_184);
+        StorageDead(_181);
+        StorageDead(_180);
+        StorageDead(_176);
+        StorageDead(_170);
+        _168 = move _169;
+        StorageDead(_169);
+        StorageLive(_190);
+        StorageLive(_191);
+        StorageLive(_192);
+        StorageLive(_193);
+        StorageLive(_194);
+        StorageLive(_195);
+        StorageLive(_196);
+        StorageLive(_197);
+        StorageLive(_198);
+        StorageLive(_199);
+        StorageLive(_200);
+        _487 = const _;
+        _200 = &(*_487);
+        _199 = &(*_200);
+        _198 = move _199 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_199);
+        StorageLive(_202);
+        StorageLive(_203);
+        StorageLive(_204);
+        StorageLive(_205);
+        StorageLive(_206);
+        StorageLive(_207);
+        StorageLive(_208);
+        StorageLive(_209);
+        StorageLive(_210);
+        _210 = &_168;
+        _209 = ArrForm::<1200>::as_str(move _210) -> [return: bb67, unwind: bb185];
+    }
+
+    bb67: {
+        StorageDead(_210);
+        _208 = &_209;
+        _207 = &(*_208);
+        _206 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _207) -> [return: bb68, unwind: bb185];
+    }
+
+    bb68: {
+        StorageDead(_207);
+        _205 = [move _206];
+        StorageDead(_206);
+        _204 = &_205;
+        _203 = &(*_204);
+        _202 = move _203 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_203);
+        _197 = Arguments::<'_>::new_v1(move _198, move _202) -> [return: bb69, unwind: bb185];
+    }
+
+    bb69: {
+        StorageDead(_202);
+        StorageDead(_198);
+        _196 = format(move _197) -> [return: bb70, unwind: bb185];
+    }
+
+    bb70: {
+        StorageDead(_197);
+        StorageDead(_209);
+        StorageDead(_208);
+        StorageDead(_205);
+        StorageDead(_204);
+        StorageDead(_200);
+        _195 = move _196;
+        StorageDead(_196);
+        _194 = &_195;
+        _193 = &(*_194);
+        _192 = <String as Deref>::deref(move _193) -> [return: bb71, unwind: bb181];
+    }
+
+    bb71: {
+        _191 = &(*_192);
+        StorageDead(_193);
+        _190 = solana_program::log::sol_log(move _191) -> [return: bb72, unwind: bb181];
+    }
+
+    bb72: {
+        StorageDead(_191);
+        drop(_195) -> [return: bb73, unwind: bb185];
+    }
+
+    bb73: {
+        StorageDead(_195);
+        StorageDead(_194);
+        StorageDead(_192);
+        StorageDead(_190);
+        _29 = const ();
+        StorageDead(_168);
+        goto -> bb74;
+    }
+
+    bb74: {
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_29);
+        StorageLive(_211);
+        StorageLive(_212);
+        StorageLive(_213);
+        StorageLive(_214);
+        _214 = const "shares_issued before deposit {}";
+        _213 = &(*_214);
+        _212 = core::str::<impl str>::len(move _213) -> [return: bb75, unwind: bb185];
+    }
+
+    bb75: {
+        StorageDead(_213);
+        _219 = Le(const 0_usize, _212);
+        switchInt(move _219) -> [0: bb77, otherwise: bb76];
+    }
+
+    bb76: {
+        _220 = Le(_212, const 50_usize);
+        switchInt(move _220) -> [0: bb77, otherwise: bb82];
+    }
+
+    bb77: {
+        _217 = Le(const 51_usize, _212);
+        switchInt(move _217) -> [0: bb79, otherwise: bb78];
+    }
+
+    bb78: {
+        _218 = Le(_212, const 100_usize);
+        switchInt(move _218) -> [0: bb79, otherwise: bb95];
+    }
+
+    bb79: {
+        _215 = Le(const 101_usize, _212);
+        switchInt(move _215) -> [0: bb81, otherwise: bb80];
+    }
+
+    bb80: {
+        _216 = Le(_212, const 200_usize);
+        switchInt(move _216) -> [0: bb81, otherwise: bb108];
+    }
+
+    bb81: {
+        StorageLive(_341);
+        StorageLive(_342);
+        _342 = ArrForm::<1200>::new() -> [return: bb121, unwind: bb185];
+    }
+
+    bb82: {
+        StorageLive(_221);
+        StorageLive(_222);
+        _222 = ArrForm::<150>::new() -> [return: bb83, unwind: bb185];
+    }
+
+    bb83: {
+        StorageLive(_223);
+        StorageLive(_224);
+        StorageLive(_225);
+        _225 = &mut _222;
+        StorageLive(_226);
+        StorageLive(_227);
+        StorageLive(_228);
+        StorageLive(_229);
+        _486 = const _;
+        _229 = &(*_486);
+        _228 = &(*_229);
+        _227 = move _228 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_228);
+        StorageLive(_231);
+        StorageLive(_232);
+        StorageLive(_233);
+        StorageLive(_234);
+        StorageLive(_235);
+        StorageLive(_236);
+        StorageLive(_237);
+        _237 = &((*_1).10: u64);
+        _236 = &(*_237);
+        _235 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _236) -> [return: bb84, unwind: bb185];
+    }
+
+    bb84: {
+        StorageDead(_236);
+        _234 = [move _235];
+        StorageDead(_235);
+        _233 = &_234;
+        _232 = &(*_233);
+        _231 = move _232 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_232);
+        _226 = Arguments::<'_>::new_v1(move _227, move _231) -> [return: bb85, unwind: bb185];
+    }
+
+    bb85: {
+        StorageDead(_231);
+        StorageDead(_227);
+        _224 = ArrForm::<150>::format(move _225, move _226) -> [return: bb86, unwind: bb185];
+    }
+
+    bb86: {
+        StorageDead(_226);
+        StorageDead(_225);
+        StorageLive(_238);
+        StorageLive(_239);
+        _239 = &mut _222;
+        _238 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _239 };
+        StorageDead(_239);
+        _223 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _224, move _238) -> [return: bb87, unwind: bb185];
+    }
+
+    bb87: {
+        StorageDead(_238);
+        StorageDead(_224);
+        StorageDead(_237);
+        StorageDead(_234);
+        StorageDead(_233);
+        StorageDead(_229);
+        StorageDead(_223);
+        _221 = move _222;
+        StorageDead(_222);
+        StorageLive(_240);
+        StorageLive(_241);
+        StorageLive(_242);
+        StorageLive(_243);
+        StorageLive(_244);
+        StorageLive(_245);
+        StorageLive(_246);
+        StorageLive(_247);
+        StorageLive(_248);
+        StorageLive(_249);
+        StorageLive(_250);
+        _485 = const _;
+        _250 = &(*_485);
+        _249 = &(*_250);
+        _248 = move _249 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_249);
+        StorageLive(_252);
+        StorageLive(_253);
+        StorageLive(_254);
+        StorageLive(_255);
+        StorageLive(_256);
+        StorageLive(_257);
+        StorageLive(_258);
+        StorageLive(_259);
+        StorageLive(_260);
+        _260 = &_221;
+        _259 = ArrForm::<150>::as_str(move _260) -> [return: bb88, unwind: bb185];
+    }
+
+    bb88: {
+        StorageDead(_260);
+        _258 = &_259;
+        _257 = &(*_258);
+        _256 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _257) -> [return: bb89, unwind: bb185];
+    }
+
+    bb89: {
+        StorageDead(_257);
+        _255 = [move _256];
+        StorageDead(_256);
+        _254 = &_255;
+        _253 = &(*_254);
+        _252 = move _253 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_253);
+        _247 = Arguments::<'_>::new_v1(move _248, move _252) -> [return: bb90, unwind: bb185];
+    }
+
+    bb90: {
+        StorageDead(_252);
+        StorageDead(_248);
+        _246 = format(move _247) -> [return: bb91, unwind: bb185];
+    }
+
+    bb91: {
+        StorageDead(_247);
+        StorageDead(_259);
+        StorageDead(_258);
+        StorageDead(_255);
+        StorageDead(_254);
+        StorageDead(_250);
+        _245 = move _246;
+        StorageDead(_246);
+        _244 = &_245;
+        _243 = &(*_244);
+        _242 = <String as Deref>::deref(move _243) -> [return: bb92, unwind: bb180];
+    }
+
+    bb92: {
+        _241 = &(*_242);
+        StorageDead(_243);
+        _240 = solana_program::log::sol_log(move _241) -> [return: bb93, unwind: bb180];
+    }
+
+    bb93: {
+        StorageDead(_241);
+        drop(_245) -> [return: bb94, unwind: bb185];
+    }
+
+    bb94: {
+        StorageDead(_245);
+        StorageDead(_244);
+        StorageDead(_242);
+        StorageDead(_240);
+        _211 = const ();
+        StorageDead(_221);
+        goto -> bb133;
+    }
+
+    bb95: {
+        StorageLive(_261);
+        StorageLive(_262);
+        _262 = ArrForm::<300>::new() -> [return: bb96, unwind: bb185];
+    }
+
+    bb96: {
+        StorageLive(_263);
+        StorageLive(_264);
+        StorageLive(_265);
+        _265 = &mut _262;
+        StorageLive(_266);
+        StorageLive(_267);
+        StorageLive(_268);
+        StorageLive(_269);
+        _484 = const _;
+        _269 = &(*_484);
+        _268 = &(*_269);
+        _267 = move _268 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_268);
+        StorageLive(_271);
+        StorageLive(_272);
+        StorageLive(_273);
+        StorageLive(_274);
+        StorageLive(_275);
+        StorageLive(_276);
+        StorageLive(_277);
+        _277 = &((*_1).10: u64);
+        _276 = &(*_277);
+        _275 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _276) -> [return: bb97, unwind: bb185];
+    }
+
+    bb97: {
+        StorageDead(_276);
+        _274 = [move _275];
+        StorageDead(_275);
+        _273 = &_274;
+        _272 = &(*_273);
+        _271 = move _272 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_272);
+        _266 = Arguments::<'_>::new_v1(move _267, move _271) -> [return: bb98, unwind: bb185];
+    }
+
+    bb98: {
+        StorageDead(_271);
+        StorageDead(_267);
+        _264 = ArrForm::<300>::format(move _265, move _266) -> [return: bb99, unwind: bb185];
+    }
+
+    bb99: {
+        StorageDead(_266);
+        StorageDead(_265);
+        StorageLive(_278);
+        StorageLive(_279);
+        _279 = &mut _262;
+        _278 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _279 };
+        StorageDead(_279);
+        _263 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _264, move _278) -> [return: bb100, unwind: bb185];
+    }
+
+    bb100: {
+        StorageDead(_278);
+        StorageDead(_264);
+        StorageDead(_277);
+        StorageDead(_274);
+        StorageDead(_273);
+        StorageDead(_269);
+        StorageDead(_263);
+        _261 = move _262;
+        StorageDead(_262);
+        StorageLive(_280);
+        StorageLive(_281);
+        StorageLive(_282);
+        StorageLive(_283);
+        StorageLive(_284);
+        StorageLive(_285);
+        StorageLive(_286);
+        StorageLive(_287);
+        StorageLive(_288);
+        StorageLive(_289);
+        StorageLive(_290);
+        _483 = const _;
+        _290 = &(*_483);
+        _289 = &(*_290);
+        _288 = move _289 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_289);
+        StorageLive(_292);
+        StorageLive(_293);
+        StorageLive(_294);
+        StorageLive(_295);
+        StorageLive(_296);
+        StorageLive(_297);
+        StorageLive(_298);
+        StorageLive(_299);
+        StorageLive(_300);
+        _300 = &_261;
+        _299 = ArrForm::<300>::as_str(move _300) -> [return: bb101, unwind: bb185];
+    }
+
+    bb101: {
+        StorageDead(_300);
+        _298 = &_299;
+        _297 = &(*_298);
+        _296 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _297) -> [return: bb102, unwind: bb185];
+    }
+
+    bb102: {
+        StorageDead(_297);
+        _295 = [move _296];
+        StorageDead(_296);
+        _294 = &_295;
+        _293 = &(*_294);
+        _292 = move _293 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_293);
+        _287 = Arguments::<'_>::new_v1(move _288, move _292) -> [return: bb103, unwind: bb185];
+    }
+
+    bb103: {
+        StorageDead(_292);
+        StorageDead(_288);
+        _286 = format(move _287) -> [return: bb104, unwind: bb185];
+    }
+
+    bb104: {
+        StorageDead(_287);
+        StorageDead(_299);
+        StorageDead(_298);
+        StorageDead(_295);
+        StorageDead(_294);
+        StorageDead(_290);
+        _285 = move _286;
+        StorageDead(_286);
+        _284 = &_285;
+        _283 = &(*_284);
+        _282 = <String as Deref>::deref(move _283) -> [return: bb105, unwind: bb179];
+    }
+
+    bb105: {
+        _281 = &(*_282);
+        StorageDead(_283);
+        _280 = solana_program::log::sol_log(move _281) -> [return: bb106, unwind: bb179];
+    }
+
+    bb106: {
+        StorageDead(_281);
+        drop(_285) -> [return: bb107, unwind: bb185];
+    }
+
+    bb107: {
+        StorageDead(_285);
+        StorageDead(_284);
+        StorageDead(_282);
+        StorageDead(_280);
+        _211 = const ();
+        StorageDead(_261);
+        goto -> bb133;
+    }
+
+    bb108: {
+        StorageLive(_301);
+        StorageLive(_302);
+        _302 = ArrForm::<600>::new() -> [return: bb109, unwind: bb185];
+    }
+
+    bb109: {
+        StorageLive(_303);
+        StorageLive(_304);
+        StorageLive(_305);
+        _305 = &mut _302;
+        StorageLive(_306);
+        StorageLive(_307);
+        StorageLive(_308);
+        StorageLive(_309);
+        _482 = const _;
+        _309 = &(*_482);
+        _308 = &(*_309);
+        _307 = move _308 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_308);
+        StorageLive(_311);
+        StorageLive(_312);
+        StorageLive(_313);
+        StorageLive(_314);
+        StorageLive(_315);
+        StorageLive(_316);
+        StorageLive(_317);
+        _317 = &((*_1).10: u64);
+        _316 = &(*_317);
+        _315 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _316) -> [return: bb110, unwind: bb185];
+    }
+
+    bb110: {
+        StorageDead(_316);
+        _314 = [move _315];
+        StorageDead(_315);
+        _313 = &_314;
+        _312 = &(*_313);
+        _311 = move _312 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_312);
+        _306 = Arguments::<'_>::new_v1(move _307, move _311) -> [return: bb111, unwind: bb185];
+    }
+
+    bb111: {
+        StorageDead(_311);
+        StorageDead(_307);
+        _304 = ArrForm::<600>::format(move _305, move _306) -> [return: bb112, unwind: bb185];
+    }
+
+    bb112: {
+        StorageDead(_306);
+        StorageDead(_305);
+        StorageLive(_318);
+        StorageLive(_319);
+        _319 = &mut _302;
+        _318 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _319 };
+        StorageDead(_319);
+        _303 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _304, move _318) -> [return: bb113, unwind: bb185];
+    }
+
+    bb113: {
+        StorageDead(_318);
+        StorageDead(_304);
+        StorageDead(_317);
+        StorageDead(_314);
+        StorageDead(_313);
+        StorageDead(_309);
+        StorageDead(_303);
+        _301 = move _302;
+        StorageDead(_302);
+        StorageLive(_320);
+        StorageLive(_321);
+        StorageLive(_322);
+        StorageLive(_323);
+        StorageLive(_324);
+        StorageLive(_325);
+        StorageLive(_326);
+        StorageLive(_327);
+        StorageLive(_328);
+        StorageLive(_329);
+        StorageLive(_330);
+        _481 = const _;
+        _330 = &(*_481);
+        _329 = &(*_330);
+        _328 = move _329 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_329);
+        StorageLive(_332);
+        StorageLive(_333);
+        StorageLive(_334);
+        StorageLive(_335);
+        StorageLive(_336);
+        StorageLive(_337);
+        StorageLive(_338);
+        StorageLive(_339);
+        StorageLive(_340);
+        _340 = &_301;
+        _339 = ArrForm::<600>::as_str(move _340) -> [return: bb114, unwind: bb185];
+    }
+
+    bb114: {
+        StorageDead(_340);
+        _338 = &_339;
+        _337 = &(*_338);
+        _336 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _337) -> [return: bb115, unwind: bb185];
+    }
+
+    bb115: {
+        StorageDead(_337);
+        _335 = [move _336];
+        StorageDead(_336);
+        _334 = &_335;
+        _333 = &(*_334);
+        _332 = move _333 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_333);
+        _327 = Arguments::<'_>::new_v1(move _328, move _332) -> [return: bb116, unwind: bb185];
+    }
+
+    bb116: {
+        StorageDead(_332);
+        StorageDead(_328);
+        _326 = format(move _327) -> [return: bb117, unwind: bb185];
+    }
+
+    bb117: {
+        StorageDead(_327);
+        StorageDead(_339);
+        StorageDead(_338);
+        StorageDead(_335);
+        StorageDead(_334);
+        StorageDead(_330);
+        _325 = move _326;
+        StorageDead(_326);
+        _324 = &_325;
+        _323 = &(*_324);
+        _322 = <String as Deref>::deref(move _323) -> [return: bb118, unwind: bb178];
+    }
+
+    bb118: {
+        _321 = &(*_322);
+        StorageDead(_323);
+        _320 = solana_program::log::sol_log(move _321) -> [return: bb119, unwind: bb178];
+    }
+
+    bb119: {
+        StorageDead(_321);
+        drop(_325) -> [return: bb120, unwind: bb185];
+    }
+
+    bb120: {
+        StorageDead(_325);
+        StorageDead(_324);
+        StorageDead(_322);
+        StorageDead(_320);
+        _211 = const ();
+        StorageDead(_301);
+        goto -> bb133;
+    }
+
+    bb121: {
+        StorageLive(_343);
+        StorageLive(_344);
+        StorageLive(_345);
+        _345 = &mut _342;
+        StorageLive(_346);
+        StorageLive(_347);
+        StorageLive(_348);
+        StorageLive(_349);
+        _480 = const _;
+        _349 = &(*_480);
+        _348 = &(*_349);
+        _347 = move _348 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_348);
+        StorageLive(_351);
+        StorageLive(_352);
+        StorageLive(_353);
+        StorageLive(_354);
+        StorageLive(_355);
+        StorageLive(_356);
+        StorageLive(_357);
+        _357 = &((*_1).10: u64);
+        _356 = &(*_357);
+        _355 = core::fmt::rt::Argument::<'_>::new_display::<u64>(move _356) -> [return: bb122, unwind: bb185];
+    }
+
+    bb122: {
+        StorageDead(_356);
+        _354 = [move _355];
+        StorageDead(_355);
+        _353 = &_354;
+        _352 = &(*_353);
+        _351 = move _352 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_352);
+        _346 = Arguments::<'_>::new_v1(move _347, move _351) -> [return: bb123, unwind: bb185];
+    }
+
+    bb123: {
+        StorageDead(_351);
+        StorageDead(_347);
+        _344 = ArrForm::<1200>::format(move _345, move _346) -> [return: bb124, unwind: bb185];
+    }
+
+    bb124: {
+        StorageDead(_346);
+        StorageDead(_345);
+        StorageLive(_358);
+        StorageLive(_359);
+        _359 = &mut _342;
+        _358 = {closure@programs\kvault\src\utils\macros.rs:75:58: 75:61} { af: move _359 };
+        StorageDead(_359);
+        _343 = std::result::Result::<(), std::fmt::Error>::unwrap_or_else::<{closure@programs\kvault\src\utils\macros.rs:75:58: 75:61}>(move _344, move _358) -> [return: bb125, unwind: bb185];
+    }
+
+    bb125: {
+        StorageDead(_358);
+        StorageDead(_344);
+        StorageDead(_357);
+        StorageDead(_354);
+        StorageDead(_353);
+        StorageDead(_349);
+        StorageDead(_343);
+        _341 = move _342;
+        StorageDead(_342);
+        StorageLive(_360);
+        StorageLive(_361);
+        StorageLive(_362);
+        StorageLive(_363);
+        StorageLive(_364);
+        StorageLive(_365);
+        StorageLive(_366);
+        StorageLive(_367);
+        StorageLive(_368);
+        StorageLive(_369);
+        StorageLive(_370);
+        _479 = const _;
+        _370 = &(*_479);
+        _369 = &(*_370);
+        _368 = move _369 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_369);
+        StorageLive(_372);
+        StorageLive(_373);
+        StorageLive(_374);
+        StorageLive(_375);
+        StorageLive(_376);
+        StorageLive(_377);
+        StorageLive(_378);
+        StorageLive(_379);
+        StorageLive(_380);
+        _380 = &_341;
+        _379 = ArrForm::<1200>::as_str(move _380) -> [return: bb126, unwind: bb185];
+    }
+
+    bb126: {
+        StorageDead(_380);
+        _378 = &_379;
+        _377 = &(*_378);
+        _376 = core::fmt::rt::Argument::<'_>::new_display::<&str>(move _377) -> [return: bb127, unwind: bb185];
+    }
+
+    bb127: {
+        StorageDead(_377);
+        _375 = [move _376];
+        StorageDead(_376);
+        _374 = &_375;
+        _373 = &(*_374);
+        _372 = move _373 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_373);
+        _367 = Arguments::<'_>::new_v1(move _368, move _372) -> [return: bb128, unwind: bb185];
+    }
+
+    bb128: {
+        StorageDead(_372);
+        StorageDead(_368);
+        _366 = format(move _367) -> [return: bb129, unwind: bb185];
+    }
+
+    bb129: {
+        StorageDead(_367);
+        StorageDead(_379);
+        StorageDead(_378);
+        StorageDead(_375);
+        StorageDead(_374);
+        StorageDead(_370);
+        _365 = move _366;
+        StorageDead(_366);
+        _364 = &_365;
+        _363 = &(*_364);
+        _362 = <String as Deref>::deref(move _363) -> [return: bb130, unwind: bb177];
+    }
+
+    bb130: {
+        _361 = &(*_362);
+        StorageDead(_363);
+        _360 = solana_program::log::sol_log(move _361) -> [return: bb131, unwind: bb177];
+    }
+
+    bb131: {
+        StorageDead(_361);
+        drop(_365) -> [return: bb132, unwind: bb185];
+    }
+
+    bb132: {
+        StorageDead(_365);
+        StorageDead(_364);
+        StorageDead(_362);
+        StorageDead(_360);
+        _211 = const ();
+        StorageDead(_341);
+        goto -> bb133;
+    }
+
+    bb133: {
+        StorageDead(_214);
+        StorageDead(_212);
+        StorageDead(_211);
+        StorageLive(_381);
+        StorageLive(_382);
+        StorageLive(_383);
+        StorageLive(_384);
+        _384 = &mut (*_1);
+        StorageLive(_385);
+        StorageLive(_386);
+        _386 = &(_18.1: operations::vault_operations::common::Invested);
+        _385 = &(*_386);
+        StorageLive(_387);
+        _387 = _5;
+        _383 = charge_fees(move _384, move _385, move _387) -> [return: bb134, unwind: bb185];
+    }
+
+    bb134: {
+        StorageDead(_387);
+        StorageDead(_385);
+        StorageDead(_384);
+        _382 = <std::result::Result<(), anchor_lang::error::Error> as Try>::branch(move _383) -> [return: bb135, unwind: bb185];
+    }
+
+    bb135: {
+        StorageDead(_383);
+        _388 = discriminant(_382);
+        switchInt(move _388) -> [0: bb136, 1: bb137, otherwise: bb9];
+    }
+
+    bb136: {
+        StorageLive(_392);
+        _392 = ((_382 as Continue).0: ());
+        _381 = _392;
+        StorageDead(_392);
+        _498 = discriminant(_382);
+        StorageDead(_386);
+        StorageDead(_382);
+        StorageDead(_381);
+        StorageLive(_393);
+        StorageLive(_394);
+        StorageLive(_395);
+        StorageLive(_396);
+        _396 = &(*_1);
+        StorageLive(_397);
+        StorageLive(_398);
+        _398 = &((_18.1: operations::vault_operations::common::Invested).1: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _397 = &(*_398);
+        _395 = state::VaultState::compute_aum(move _396, move _397) -> [return: bb139, unwind: bb185];
+    }
+
+    bb137: {
+        StorageLive(_389);
+        _389 = move ((_382 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_391);
+        _391 = move _389;
+        _0 = <std::result::Result<DepositEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _391) -> [return: bb138, unwind: bb189];
+    }
+
+    bb138: {
+        StorageDead(_391);
+        StorageDead(_389);
+        _508 = discriminant(_382);
+        StorageDead(_386);
+        StorageDead(_382);
+        StorageDead(_381);
+        goto -> bb172;
+    }
+
+    bb139: {
+        StorageDead(_397);
+        StorageDead(_396);
+        _394 = <std::result::Result<FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>, anchor_lang::error::Error> as Try>::branch(move _395) -> [return: bb140, unwind: bb185];
+    }
+
+    bb140: {
+        StorageDead(_395);
+        _399 = discriminant(_394);
+        switchInt(move _399) -> [0: bb141, 1: bb142, otherwise: bb9];
+    }
+
+    bb141: {
+        StorageLive(_403);
+        _403 = ((_394 as Continue).0: fixed::FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>>);
+        _393 = _403;
+        StorageDead(_403);
+        _500 = discriminant(_394);
+        StorageDead(_398);
+        StorageDead(_394);
+        StorageLive(_404);
+        StorageLive(_405);
+        StorageLive(_406);
+        StorageLive(_407);
+        _407 = _393;
+        StorageLive(_408);
+        _408 = _14;
+        StorageLive(_409);
+        _409 = ((*_1).10: u64);
+        _406 = get_shares_to_mint(move _407, move _408, move _409) -> [return: bb144, unwind: bb185];
+    }
+
+    bb142: {
+        StorageLive(_400);
+        _400 = move ((_394 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_402);
+        _402 = move _400;
+        _0 = <std::result::Result<DepositEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _402) -> [return: bb143, unwind: bb188];
+    }
+
+    bb143: {
+        StorageDead(_402);
+        StorageDead(_400);
+        _506 = discriminant(_394);
+        StorageDead(_398);
+        StorageDead(_394);
+        goto -> bb171;
+    }
+
+    bb144: {
+        StorageDead(_409);
+        StorageDead(_408);
+        StorageDead(_407);
+        _405 = <std::result::Result<u64, anchor_lang::error::Error> as Try>::branch(move _406) -> [return: bb145, unwind: bb185];
+    }
+
+    bb145: {
+        StorageDead(_406);
+        _410 = discriminant(_405);
+        switchInt(move _410) -> [0: bb146, 1: bb147, otherwise: bb9];
+    }
+
+    bb146: {
+        StorageLive(_414);
+        _414 = ((_405 as Continue).0: u64);
+        _404 = _414;
+        StorageDead(_414);
+        _502 = discriminant(_405);
+        StorageDead(_405);
+        StorageLive(_415);
+        StorageLive(_416);
+        _416 = ((*_1).10: u64);
+        StorageLive(_417);
+        _417 = _393;
+        StorageLive(_418);
+        _418 = _404;
+        _415 = compute_amount_to_deposit_from_shares_to_mint(move _416, move _417, move _418) -> [return: bb149, unwind: bb185];
+    }
+
+    bb147: {
+        StorageLive(_411);
+        _411 = move ((_405 as Break).0: std::result::Result<std::convert::Infallible, anchor_lang::error::Error>);
+        StorageLive(_413);
+        _413 = move _411;
+        _0 = <std::result::Result<DepositEffects, anchor_lang::error::Error> as FromResidual<std::result::Result<Infallible, anchor_lang::error::Error>>>::from_residual(move _413) -> [return: bb148, unwind: bb187];
+    }
+
+    bb148: {
+        StorageDead(_413);
+        StorageDead(_411);
+        _504 = discriminant(_405);
+        StorageDead(_405);
+        goto -> bb170;
+    }
+
+    bb149: {
+        StorageDead(_418);
+        StorageDead(_417);
+        StorageDead(_416);
+        StorageLive(_419);
+        StorageLive(_420);
+        StorageLive(_421);
+        _421 = _415;
+        StorageLive(_422);
+        _422 = ((*_1).20: u64);
+        _420 = Lt(move _421, move _422);
+        switchInt(move _420) -> [0: bb155, otherwise: bb150];
+    }
+
+    bb150: {
+        StorageDead(_422);
+        StorageDead(_421);
+        StorageLive(_424);
+        StorageLive(_425);
+        StorageLive(_426);
+        StorageLive(_427);
+        _476 = const _;
+        _427 = &(*_476);
+        _426 = KaminoVaultError::name(move _427) -> [return: bb151, unwind: bb185];
+    }
+
+    bb151: {
+        StorageDead(_427);
+        StorageLive(_429);
+        StorageLive(_430);
+        _430 = KaminoVaultError::DepositAmountBelowMinimum;
+        _429 = <KaminoVaultError as Into<u32>>::into(move _430) -> [return: bb152, unwind: bb176];
+    }
+
+    bb152: {
+        StorageDead(_430);
+        StorageLive(_431);
+        StorageLive(_432);
+        _475 = const _;
+        _432 = &(*_475);
+        _431 = <KaminoVaultError as ToString>::to_string(move _432) -> [return: bb153, unwind: bb176];
+    }
+
+    bb153: {
+        StorageDead(_432);
+        StorageLive(_434);
+        StorageLive(_435);
+        StorageLive(_436);
+        _436 = anchor_lang::error::Source { filename: const "programs\\kvault\\src\\operations\\vault_operations.rs", line: const 88_u32 };
+        _435 = anchor_lang::error::ErrorOrigin::Source(move _436);
+        StorageDead(_436);
+        _434 = Option::<ErrorOrigin>::Some(move _435);
+        StorageDead(_435);
+        StorageLive(_437);
+        _437 = Option::<ComparedValues>::None;
+        _425 = anchor_lang::error::AnchorError { error_name: move _426, error_code_number: move _429, error_msg: move _431, error_origin: move _434, compared_values: move _437 };
+        StorageDead(_437);
+        StorageDead(_434);
+        StorageDead(_431);
+        StorageDead(_429);
+        StorageDead(_426);
+        _424 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _425) -> [return: bb154, unwind: bb185];
+    }
+
+    bb154: {
+        StorageDead(_425);
+        _0 = std::result::Result::<DepositEffects, anchor_lang::error::Error>::Err(move _424);
+        StorageDead(_424);
+        StorageDead(_420);
+        StorageDead(_419);
+        goto -> bb169;
+    }
+
+    bb155: {
+        StorageDead(_422);
+        StorageDead(_421);
+        _419 = const ();
+        StorageDead(_420);
+        StorageDead(_419);
+        StorageLive(_438);
+        StorageLive(_439);
+        StorageLive(_440);
+        _440 = _404;
+        _439 = Eq(move _440, const 0_u64);
+        switchInt(move _439) -> [0: bb157, otherwise: bb156];
+    }
+
+    bb156: {
+        StorageDead(_440);
+        StorageLive(_442);
+        StorageLive(_443);
+        StorageLive(_444);
+        StorageLive(_445);
+        _478 = const _;
+        _445 = &(*_478);
+        _444 = KaminoVaultError::name(move _445) -> [return: bb158, unwind: bb185];
+    }
+
+    bb157: {
+        StorageDead(_440);
+        _438 = const ();
+        StorageDead(_439);
+        StorageDead(_438);
+        StorageLive(_456);
+        StorageLive(_457);
+        _457 = &mut (*_1);
+        StorageLive(_458);
+        _458 = _415;
+        _456 = deposit_into_vault(move _457, move _458) -> [return: bb162, unwind: bb185];
+    }
+
+    bb158: {
+        StorageDead(_445);
+        StorageLive(_447);
+        StorageLive(_448);
+        _448 = KaminoVaultError::DepositAmountsZeroShares;
+        _447 = <KaminoVaultError as Into<u32>>::into(move _448) -> [return: bb159, unwind: bb175];
+    }
+
+    bb159: {
+        StorageDead(_448);
+        StorageLive(_449);
+        StorageLive(_450);
+        _477 = const _;
+        _450 = &(*_477);
+        _449 = <KaminoVaultError as ToString>::to_string(move _450) -> [return: bb160, unwind: bb175];
+    }
+
+    bb160: {
+        StorageDead(_450);
+        StorageLive(_452);
+        StorageLive(_453);
+        StorageLive(_454);
+        _454 = anchor_lang::error::Source { filename: const "programs\\kvault\\src\\operations\\vault_operations.rs", line: const 92_u32 };
+        _453 = anchor_lang::error::ErrorOrigin::Source(move _454);
+        StorageDead(_454);
+        _452 = Option::<ErrorOrigin>::Some(move _453);
+        StorageDead(_453);
+        StorageLive(_455);
+        _455 = Option::<ComparedValues>::None;
+        _443 = anchor_lang::error::AnchorError { error_name: move _444, error_code_number: move _447, error_msg: move _449, error_origin: move _452, compared_values: move _455 };
+        StorageDead(_455);
+        StorageDead(_452);
+        StorageDead(_449);
+        StorageDead(_447);
+        StorageDead(_444);
+        _442 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _443) -> [return: bb161, unwind: bb185];
+    }
+
+    bb161: {
+        StorageDead(_443);
+        _0 = std::result::Result::<DepositEffects, anchor_lang::error::Error>::Err(move _442);
+        StorageDead(_442);
+        StorageDead(_439);
+        StorageDead(_438);
+        goto -> bb169;
+    }
+
+    bb162: {
+        StorageDead(_458);
+        StorageDead(_457);
+        StorageDead(_456);
+        StorageLive(_459);
+        StorageLive(_460);
+        _460 = &mut (*_1);
+        StorageLive(_461);
+        _461 = _404;
+        _459 = mint_shares(move _460, move _461) -> [return: bb163, unwind: bb185];
+    }
+
+    bb163: {
+        StorageDead(_461);
+        StorageDead(_460);
+        StorageDead(_459);
+        StorageLive(_462);
+        StorageLive(_463);
+        _463 = &mut (*_1);
+        StorageLive(_464);
+        StorageLive(_465);
+        _465 = _393;
+        StorageLive(_466);
+        StorageLive(_467);
+        _467 = _415;
+        _466 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as From<u64>>::from(move _467) -> [return: bb164, unwind: bb185];
+    }
+
+    bb164: {
+        StorageDead(_467);
+        _464 = <FixedU128<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UInt<typenum::uint::UTerm, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B1>, typenum::bit::B0>, typenum::bit::B0>> as Add>::add(move _465, move _466) -> [return: bb165, unwind: bb185];
+    }
+
+    bb165: {
+        StorageDead(_466);
+        StorageDead(_465);
+        _462 = update_prev_aum(move _463, move _464) -> [return: bb166, unwind: bb185];
+    }
+
+    bb166: {
+        StorageDead(_464);
+        StorageDead(_463);
+        StorageDead(_462);
+        StorageLive(_468);
+        StorageLive(_469);
+        _469 = &mut (*_1);
+        StorageLive(_470);
+        _470 = _10;
+        _468 = deposit_crank_funds(move _469, move _470) -> [return: bb167, unwind: bb185];
+    }
+
+    bb167: {
+        StorageDead(_470);
+        StorageDead(_469);
+        StorageDead(_468);
+        StorageLive(_471);
+        StorageLive(_472);
+        _472 = _404;
+        StorageLive(_473);
+        _473 = _415;
+        StorageLive(_474);
+        _474 = _10;
+        _471 = DepositEffects { shares_to_mint: move _472, token_to_deposit: move _473, crank_funds_to_deposit: move _474 };
+        StorageDead(_474);
+        StorageDead(_473);
+        StorageDead(_472);
+        _0 = std::result::Result::<DepositEffects, anchor_lang::error::Error>::Ok(move _471);
+        StorageDead(_471);
+        StorageDead(_415);
+        StorageDead(_404);
+        StorageDead(_393);
+        drop(_18) -> [return: bb168, unwind: bb192];
+    }
+
+    bb168: {
+        StorageDead(_18);
+        StorageDead(_14);
+        StorageDead(_10);
+        StorageDead(_6);
+        goto -> bb174;
+    }
+
+    bb169: {
+        StorageDead(_415);
+        goto -> bb170;
+    }
+
+    bb170: {
+        StorageDead(_404);
+        goto -> bb171;
+    }
+
+    bb171: {
+        StorageDead(_393);
+        goto -> bb172;
+    }
+
+    bb172: {
+        drop(_18) -> [return: bb173, unwind: bb192];
+    }
+
+    bb173: {
+        StorageDead(_18);
+        StorageDead(_14);
+        StorageDead(_10);
+        StorageDead(_6);
+        goto -> bb174;
+    }
+
+    bb174: {
+        return;
+    }
+
+    bb175 (cleanup): {
+        drop(_444) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb176 (cleanup): {
+        drop(_426) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb177 (cleanup): {
+        drop(_365) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb178 (cleanup): {
+        drop(_325) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb179 (cleanup): {
+        drop(_285) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb180 (cleanup): {
+        drop(_245) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb181 (cleanup): {
+        drop(_195) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb182 (cleanup): {
+        drop(_152) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb183 (cleanup): {
+        drop(_109) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb184 (cleanup): {
+        drop(_66) -> [return: bb185, unwind terminate(cleanup)];
+    }
+
+    bb185 (cleanup): {
+        drop(_18) -> [return: bb192, unwind terminate(cleanup)];
+    }
+
+    bb186 (cleanup): {
+        resume;
+    }
+
+    bb187 (cleanup): {
+        _512 = discriminant(_405);
+        goto -> bb185;
+    }
+
+    bb188 (cleanup): {
+        _513 = discriminant(_394);
+        goto -> bb185;
+    }
+
+    bb189 (cleanup): {
+        _514 = discriminant(_382);
+        goto -> bb185;
+    }
+
+    bb190 (cleanup): {
+        _515 = discriminant(_19);
+        goto -> bb192;
+    }
+
+    bb191 (cleanup): {
+        drop(_2) -> [return: bb186, unwind terminate(cleanup)];
+    }
+
+    bb192 (cleanup): {
+        switchInt(_495) -> [0: bb186, otherwise: bb191];
+    }
+}

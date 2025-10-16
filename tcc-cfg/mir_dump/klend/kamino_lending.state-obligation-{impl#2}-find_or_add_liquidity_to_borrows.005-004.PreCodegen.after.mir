@@ -1,0 +1,302 @@
+// MIR for `obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::find_or_add_liquidity_to_borrows` after PreCodegen
+
+fn obligation::<impl at programs\klend\src\state\obligation.rs:179:1: 179:16>::find_or_add_liquidity_to_borrows(_1: &mut obligation::Obligation, _2: anchor_lang::prelude::Pubkey, _3: utils::fraction::BigFraction, _4: reserve::AssetTier) -> std::result::Result<(&mut obligation::ObligationLiquidity, usize), anchor_lang::error::Error> {
+    debug self => _1;
+    debug borrow_reserve => _2;
+    debug cumulative_borrow_rate => _3;
+    debug borrow_reserve_asset_tier => _4;
+    let mut _0: std::result::Result<(&mut state::obligation::ObligationLiquidity, usize), anchor_lang::error::Error>;
+    let mut _5: std::option::Option<usize>;
+    let mut _6: &state::obligation::Obligation;
+    let mut _7: anchor_lang::prelude::Pubkey;
+    let mut _8: isize;
+    let mut _10: (&mut state::obligation::ObligationLiquidity, usize);
+    let mut _11: &mut state::obligation::ObligationLiquidity;
+    let mut _12: &mut state::obligation::ObligationLiquidity;
+    let _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
+    let mut _16: usize;
+    let mut _17: std::option::Option<(usize, &mut state::obligation::ObligationLiquidity)>;
+    let mut _18: &mut std::iter::Enumerate<std::slice::IterMut<'_, state::obligation::ObligationLiquidity>>;
+    let mut _19: std::iter::Enumerate<std::slice::IterMut<'_, state::obligation::ObligationLiquidity>>;
+    let mut _20: std::slice::IterMut<'_, state::obligation::ObligationLiquidity>;
+    let mut _21: &mut [state::obligation::ObligationLiquidity];
+    let mut _22: &mut [state::obligation::ObligationLiquidity; 5];
+    let mut _23: {closure@programs\klend\src\state\obligation.rs:386:19: 386:22};
+    let mut _24: isize;
+    let mut _27: state::obligation::ObligationLiquidity;
+    let mut _28: anchor_lang::prelude::Pubkey;
+    let mut _29: utils::fraction::BigFraction;
+    let mut _30: u8;
+    let mut _31: state::reserve::AssetTier;
+    let _32: usize;
+    let mut _33: usize;
+    let mut _34: bool;
+    let mut _35: (&mut state::obligation::ObligationLiquidity, usize);
+    let mut _36: &mut state::obligation::ObligationLiquidity;
+    let mut _37: usize;
+    let _38: ();
+    let _39: ();
+    let mut _40: std::fmt::Arguments<'_>;
+    let mut _41: &[&str];
+    let mut _42: &[&str; 1];
+    let _43: &[&str; 1];
+    let _44: [&str; 1];
+    let mut _45: anchor_lang::error::Error;
+    let mut _46: anchor_lang::error::AnchorError;
+    let mut _47: std::string::String;
+    let mut _48: &LendingError;
+    let _49: LendingError;
+    let mut _50: u32;
+    let mut _51: LendingError;
+    let mut _52: std::string::String;
+    let mut _53: &LendingError;
+    let _54: LendingError;
+    let mut _55: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _56: anchor_lang::error::ErrorOrigin;
+    let mut _57: anchor_lang::error::Source;
+    let mut _58: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _59: &LendingError;
+    let mut _60: &LendingError;
+    let mut _61: &[&str; 1];
+    scope 1 {
+        debug liquidity_index => _9;
+        let _9: usize;
+    }
+    scope 2 {
+        debug index => _25;
+        debug liquidity => _26;
+        let _25: usize;
+        let _26: &mut state::obligation::ObligationLiquidity;
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        _7 = _2;
+        _5 = obligation::Obligation::find_liquidity_index_in_borrows(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_6);
+        _8 = discriminant(_5);
+        switchInt(move _8) -> [1: bb2, otherwise: bb4];
+    }
+
+    bb2: {
+        StorageLive(_9);
+        _9 = ((_5 as Some).0: usize);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = _9;
+        _14 = Len(((*_1).7: [state::obligation::ObligationLiquidity; 5]));
+        _15 = Lt(_13, _14);
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb3, unwind continue];
+    }
+
+    bb3: {
+        _12 = &mut ((*_1).7: [state::obligation::ObligationLiquidity; 5])[_13];
+        _11 = &mut (*_12);
+        StorageLive(_16);
+        _16 = _9;
+        _10 = (move _11, move _16);
+        StorageDead(_16);
+        StorageDead(_11);
+        _0 = std::result::Result::<(&mut obligation::ObligationLiquidity, usize), anchor_lang::error::Error>::Ok(move _10);
+        StorageDead(_10);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_9);
+        goto -> bb20;
+    }
+
+    bb4: {
+        StorageLive(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        _22 = &mut ((*_1).7: [state::obligation::ObligationLiquidity; 5]);
+        _21 = move _22 as &mut [state::obligation::ObligationLiquidity] (PointerCoercion(Unsize));
+        StorageDead(_22);
+        _20 = core::slice::<impl [obligation::ObligationLiquidity]>::iter_mut(move _21) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_21);
+        _19 = <std::slice::IterMut<'_, obligation::ObligationLiquidity> as Iterator>::enumerate(move _20) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        _18 = &mut _19;
+        StorageDead(_20);
+        StorageLive(_23);
+        _23 = {closure@programs\klend\src\state\obligation.rs:386:19: 386:22};
+        _17 = <Enumerate<std::slice::IterMut<'_, obligation::ObligationLiquidity>> as Iterator>::find::<{closure@programs\klend\src\state\obligation.rs:386:19: 386:22}>(move _18, move _23) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_23);
+        StorageDead(_18);
+        _24 = discriminant(_17);
+        switchInt(move _24) -> [1: bb8, otherwise: bb12];
+    }
+
+    bb8: {
+        StorageLive(_25);
+        _25 = (((_17 as Some).0: (usize, &mut state::obligation::ObligationLiquidity)).0: usize);
+        StorageLive(_26);
+        _26 = move (((_17 as Some).0: (usize, &mut state::obligation::ObligationLiquidity)).1: &mut state::obligation::ObligationLiquidity);
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = _2;
+        StorageLive(_29);
+        _29 = _3;
+        _27 = obligation::ObligationLiquidity::new(move _28, move _29) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_29);
+        StorageDead(_28);
+        (*_26) = move _27;
+        StorageDead(_27);
+        StorageLive(_30);
+        StorageLive(_31);
+        _31 = move _4;
+        _30 = <reserve::AssetTier as Into<u8>>::into(move _31) -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        StorageDead(_31);
+        StorageLive(_32);
+        _32 = _25;
+        _33 = Len(((*_1).13: [u8; 5]));
+        _34 = Lt(_32, _33);
+        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _32) -> [success: bb11, unwind continue];
+    }
+
+    bb11: {
+        ((*_1).13: [u8; 5])[_32] = move _30;
+        StorageDead(_30);
+        StorageDead(_32);
+        StorageLive(_35);
+        StorageLive(_36);
+        _36 = &mut (*_26);
+        StorageLive(_37);
+        _37 = _25;
+        _35 = (move _36, move _37);
+        StorageDead(_37);
+        StorageDead(_36);
+        _0 = std::result::Result::<(&mut obligation::ObligationLiquidity, usize), anchor_lang::error::Error>::Ok(move _35);
+        StorageDead(_35);
+        StorageDead(_26);
+        StorageDead(_25);
+        goto -> bb19;
+    }
+
+    bb12: {
+        StorageLive(_38);
+        StorageLive(_39);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        _61 = const _;
+        _43 = &(*_61);
+        _42 = &(*_43);
+        _41 = move _42 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_42);
+        _40 = Arguments::<'_>::new_const(move _41) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        StorageDead(_41);
+        _39 = _print(move _40) -> [return: bb14, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_40);
+        StorageDead(_43);
+        StorageDead(_39);
+        _38 = const ();
+        StorageDead(_38);
+        StorageLive(_45);
+        StorageLive(_46);
+        StorageLive(_47);
+        StorageLive(_48);
+        _60 = const _;
+        _48 = &(*_60);
+        _47 = LendingError::name(move _48) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_48);
+        StorageLive(_50);
+        StorageLive(_51);
+        _51 = LendingError::ObligationReserveLimit;
+        _50 = <LendingError as Into<u32>>::into(move _51) -> [return: bb16, unwind: bb21];
+    }
+
+    bb16: {
+        StorageDead(_51);
+        StorageLive(_52);
+        StorageLive(_53);
+        _59 = const _;
+        _53 = &(*_59);
+        _52 = <LendingError as ToString>::to_string(move _53) -> [return: bb17, unwind: bb21];
+    }
+
+    bb17: {
+        StorageDead(_53);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        _57 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\state\\obligation.rs", line: const 394_u32 };
+        _56 = anchor_lang::error::ErrorOrigin::Source(move _57);
+        StorageDead(_57);
+        _55 = std::option::Option::<ErrorOrigin>::Some(move _56);
+        StorageDead(_56);
+        StorageLive(_58);
+        _58 = std::option::Option::<ComparedValues>::None;
+        _46 = anchor_lang::error::AnchorError { error_name: move _47, error_code_number: move _50, error_msg: move _52, error_origin: move _55, compared_values: move _58 };
+        StorageDead(_58);
+        StorageDead(_55);
+        StorageDead(_52);
+        StorageDead(_50);
+        StorageDead(_47);
+        _45 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _46) -> [return: bb18, unwind: bb22];
+    }
+
+    bb18: {
+        StorageDead(_46);
+        _0 = std::result::Result::<(&mut obligation::ObligationLiquidity, usize), anchor_lang::error::Error>::Err(move _45);
+        StorageDead(_45);
+        goto -> bb19;
+    }
+
+    bb19: {
+        StorageDead(_19);
+        StorageDead(_17);
+        goto -> bb20;
+    }
+
+    bb20: {
+        StorageDead(_5);
+        return;
+    }
+
+    bb21 (cleanup): {
+        drop(_47) -> [return: bb22, unwind terminate(cleanup)];
+    }
+
+    bb22 (cleanup): {
+        resume;
+    }
+}

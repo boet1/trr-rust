@@ -1,0 +1,77 @@
+// MIR for `cpi_mem::<impl at programs\kvault\src\utils\cpi_mem.rs:24:1: 24:35>::del_ix` before PreCodegen
+
+fn cpi_mem::<impl at programs\kvault\src\utils\cpi_mem.rs:24:1: 24:35>::del_ix(_1: &mut cpi_mem::CpiMemoryLender<'_>, _2: Instruction) -> () {
+    debug self => _1;
+    debug ix => _2;
+    let mut _0: ();
+    let _3: std::vec::Vec<anchor_lang::prelude::AccountMeta>;
+    let _4: std::vec::Vec<u8>;
+    let mut _5: std::option::Option<std::vec::Vec<anchor_lang::prelude::AccountMeta>>;
+    let mut _6: std::vec::Vec<anchor_lang::prelude::AccountMeta>;
+    let mut _7: std::option::Option<std::vec::Vec<u8>>;
+    let mut _8: std::vec::Vec<u8>;
+    let mut _9: bool;
+    scope 1 {
+        debug ix_accounts => _3;
+        debug ix_data => _4;
+    }
+
+    bb0: {
+        _9 = const false;
+        StorageLive(_3);
+        _3 = move (_2.1: std::vec::Vec<anchor_lang::prelude::AccountMeta>);
+        StorageLive(_4);
+        _9 = const true;
+        _4 = move (_2.2: std::vec::Vec<u8>);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = move _3;
+        _5 = Option::<Vec<AccountMeta>>::Some(move _6);
+        StorageDead(_6);
+        drop(((*_1).0: std::option::Option<std::vec::Vec<anchor_lang::prelude::AccountMeta>>)) -> [return: bb1, unwind: bb2];
+    }
+
+    bb1: {
+        ((*_1).0: std::option::Option<std::vec::Vec<anchor_lang::prelude::AccountMeta>>) = move _5;
+        StorageDead(_5);
+        StorageLive(_7);
+        StorageLive(_8);
+        _9 = const false;
+        _8 = move _4;
+        _7 = Option::<Vec<u8>>::Some(move _8);
+        StorageDead(_8);
+        drop(((*_1).1: std::option::Option<std::vec::Vec<u8>>)) -> [return: bb3, unwind: bb4];
+    }
+
+    bb2 (cleanup): {
+        ((*_1).0: std::option::Option<std::vec::Vec<anchor_lang::prelude::AccountMeta>>) = move _5;
+        goto -> bb7;
+    }
+
+    bb3: {
+        ((*_1).1: std::option::Option<std::vec::Vec<u8>>) = move _7;
+        StorageDead(_7);
+        _0 = const ();
+        _9 = const false;
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
+    }
+
+    bb4 (cleanup): {
+        ((*_1).1: std::option::Option<std::vec::Vec<u8>>) = move _7;
+        goto -> bb7;
+    }
+
+    bb5 (cleanup): {
+        resume;
+    }
+
+    bb6 (cleanup): {
+        drop(_4) -> [return: bb5, unwind terminate(cleanup)];
+    }
+
+    bb7 (cleanup): {
+        switchInt(_9) -> [0: bb5, otherwise: bb6];
+    }
+}

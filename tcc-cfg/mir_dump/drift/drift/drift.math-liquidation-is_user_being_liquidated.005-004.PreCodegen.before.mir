@@ -1,0 +1,187 @@
+// MIR for `is_user_being_liquidated` before PreCodegen
+
+fn is_user_being_liquidated(_1: &User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>, _5: u32) -> std::result::Result<bool, error::ErrorCode> {
+    debug user => _1;
+    debug market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    debug liquidation_margin_buffer_ratio => _5;
+    let mut _0: std::result::Result<bool, error::ErrorCode>;
+    let _6: state::margin_calculation::MarginCalculation;
+    let mut _7: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginCalculation>;
+    let mut _8: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _9: &state::user::User;
+    let mut _10: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _11: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _12: &mut state::oracle_map::OracleMap<'_>;
+    let mut _13: state::margin_calculation::MarginContext;
+    let mut _14: u32;
+    let mut _15: isize;
+    let _16: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _17: !;
+    let mut _18: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _19: state::margin_calculation::MarginCalculation;
+    let mut _21: bool;
+    let mut _22: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, bool>;
+    let mut _23: std::result::Result<bool, error::ErrorCode>;
+    let mut _24: &state::margin_calculation::MarginCalculation;
+    let mut _25: isize;
+    let mut _27: !;
+    let mut _28: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _30: bool;
+    scope 1 {
+        debug margin_calculation => _6;
+        let _20: bool;
+        let _26: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+        let _29: bool;
+        scope 6 {
+            debug is_being_liquidated => _20;
+        }
+        scope 7 {
+            debug residual => _26;
+            scope 8 {
+            }
+        }
+        scope 9 {
+            debug val => _29;
+            scope 10 {
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _16;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _19;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &(*_1);
+        StorageLive(_10);
+        _10 = &(*_2);
+        StorageLive(_11);
+        _11 = &(*_3);
+        StorageLive(_12);
+        _12 = &mut (*_4);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = _5;
+        _13 = MarginContext::liquidation(move _14) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_14);
+        _8 = math::margin::calculate_margin_requirement_and_total_collateral_and_liability_info(move _9, move _10, move _11, move _12, move _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_11);
+        StorageDead(_10);
+        StorageDead(_9);
+        _7 = <std::result::Result<MarginCalculation, error::ErrorCode> as Try>::branch(move _8) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_8);
+        _15 = discriminant(_7);
+        switchInt(move _15) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_19);
+        _19 = ((_7 as Continue).0: state::margin_calculation::MarginCalculation);
+        _6 = _19;
+        StorageDead(_19);
+        StorageDead(_7);
+        StorageLive(_20);
+        StorageLive(_21);
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = &_6;
+        _23 = MarginCalculation::can_exit_liquidation(move _24) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_16);
+        _16 = ((_7 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_18);
+        _18 = _16;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageDead(_7);
+        goto -> bb13;
+    }
+
+    bb8: {
+        StorageDead(_24);
+        _22 = <std::result::Result<bool, error::ErrorCode> as Try>::branch(move _23) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_23);
+        _25 = discriminant(_22);
+        switchInt(move _25) -> [0: bb10, 1: bb11, otherwise: bb5];
+    }
+
+    bb10: {
+        StorageLive(_29);
+        _29 = ((_22 as Continue).0: bool);
+        _21 = _29;
+        StorageDead(_29);
+        _20 = Not(move _21);
+        StorageDead(_21);
+        StorageDead(_22);
+        StorageLive(_30);
+        _30 = _20;
+        _0 = std::result::Result::<bool, error::ErrorCode>::Ok(move _30);
+        StorageDead(_30);
+        StorageDead(_20);
+        StorageDead(_6);
+        goto -> bb14;
+    }
+
+    bb11: {
+        StorageLive(_26);
+        _26 = ((_22 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_28);
+        _28 = _26;
+        _0 = <std::result::Result<bool, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _28) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_28);
+        StorageDead(_26);
+        StorageDead(_21);
+        StorageDead(_22);
+        StorageDead(_20);
+        goto -> bb13;
+    }
+
+    bb13: {
+        StorageDead(_6);
+        goto -> bb14;
+    }
+
+    bb14: {
+        return;
+    }
+}

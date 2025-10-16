@@ -1,0 +1,123 @@
+// MIR for `utils::constraints::check_remaining_accounts` after PreCodegen
+
+fn utils::constraints::check_remaining_accounts(_1: &anchor_lang::context::Context<'_, '_, '_, '_, T>) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug ctx => _1;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _2: ();
+    let mut _3: bool;
+    let mut _4: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _5: !;
+    let mut _6: anchor_lang::error::Error;
+    let mut _7: anchor_lang::error::AnchorError;
+    let mut _8: std::string::String;
+    let mut _9: &LendingError;
+    let _10: LendingError;
+    let mut _11: u32;
+    let mut _12: LendingError;
+    let mut _13: std::string::String;
+    let mut _14: &LendingError;
+    let _15: LendingError;
+    let mut _16: std::option::Option<anchor_lang::error::ErrorOrigin>;
+    let mut _17: anchor_lang::error::ErrorOrigin;
+    let mut _18: anchor_lang::error::Source;
+    let mut _19: std::option::Option<anchor_lang::error::ComparedValues>;
+    let mut _20: ();
+    let mut _21: &LendingError;
+    let mut _22: &LendingError;
+    let mut _23: &[anchor_lang::prelude::AccountInfo<'_>];
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _23 = deref_copy ((*_1).2: &[anchor_lang::prelude::AccountInfo<'_>]);
+        _4 = &(*_23);
+        _3 = core::slice::<impl [anchor_lang::prelude::AccountInfo<'_>]>::is_empty(move _4) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _3) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_4);
+        _2 = const ();
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageLive(_20);
+        _20 = ();
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Ok(move _20);
+        StorageDead(_20);
+        goto -> bb8;
+    }
+
+    bb3: {
+        StorageDead(_4);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _22 = const _;
+        _9 = &(*_22);
+        _8 = LendingError::name(move _9) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_9);
+        StorageLive(_11);
+        StorageLive(_12);
+        _12 = LendingError::InvalidAccountInput;
+        _11 = <LendingError as Into<u32>>::into(move _12) -> [return: bb5, unwind: bb9];
+    }
+
+    bb5: {
+        StorageDead(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _21 = const _;
+        _14 = &(*_21);
+        _13 = <LendingError as ToString>::to_string(move _14) -> [return: bb6, unwind: bb9];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageLive(_16);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = anchor_lang::error::Source { filename: const "programs\\klend\\src\\utils\\constraints.rs", line: const 22_u32 };
+        _17 = anchor_lang::error::ErrorOrigin::Source(move _18);
+        StorageDead(_18);
+        _16 = std::option::Option::<ErrorOrigin>::Some(move _17);
+        StorageDead(_17);
+        StorageLive(_19);
+        _19 = std::option::Option::<ComparedValues>::None;
+        _7 = anchor_lang::error::AnchorError { error_name: move _8, error_code_number: move _11, error_msg: move _13, error_origin: move _16, compared_values: move _19 };
+        StorageDead(_19);
+        StorageDead(_16);
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_8);
+        _6 = <anchor_lang::error::Error as From<anchor_lang::error::AnchorError>>::from(move _7) -> [return: bb7, unwind: bb10];
+    }
+
+    bb7: {
+        StorageDead(_7);
+        _0 = std::result::Result::<(), anchor_lang::error::Error>::Err(move _6);
+        StorageDead(_6);
+        StorageDead(_3);
+        StorageDead(_2);
+        goto -> bb8;
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        drop(_8) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        resume;
+    }
+}

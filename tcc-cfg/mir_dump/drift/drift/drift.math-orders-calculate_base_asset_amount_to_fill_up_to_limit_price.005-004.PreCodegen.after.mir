@@ -1,0 +1,438 @@
+// MIR for `calculate_base_asset_amount_to_fill_up_to_limit_price` after PreCodegen
+
+fn calculate_base_asset_amount_to_fill_up_to_limit_price(_1: &Order, _2: &PerpMarket, _3: Option<u64>, _4: Option<i64>) -> std::result::Result<u64, error::ErrorCode> {
+    debug order => _1;
+    debug market => _2;
+    debug limit_price => _3;
+    debug existing_base_asset_amount => _4;
+    let mut _0: std::result::Result<u64, error::ErrorCode>;
+    let _5: u64;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _7: std::result::Result<u64, error::ErrorCode>;
+    let mut _8: &state::user::Order;
+    let mut _9: std::option::Option<i64>;
+    let mut _10: isize;
+    let _11: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _12: !;
+    let mut _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _14: u64;
+    let mut _17: (u64, controller::position::PositionDirection);
+    let mut _18: isize;
+    let mut _21: isize;
+    let mut _22: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _23: std::result::Result<u64, error::ErrorCode>;
+    let mut _24: u64;
+    let mut _25: u64;
+    let mut _26: isize;
+    let mut _28: !;
+    let mut _29: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _31: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, u64>;
+    let mut _32: std::result::Result<u64, error::ErrorCode>;
+    let mut _33: u64;
+    let mut _34: u64;
+    let mut _35: isize;
+    let mut _37: !;
+    let mut _38: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _40: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, (u64, controller::position::PositionDirection)>;
+    let mut _41: std::result::Result<(u64, controller::position::PositionDirection), error::ErrorCode>;
+    let mut _42: &state::perp_market::AMM;
+    let _43: &state::perp_market::AMM;
+    let mut _44: u64;
+    let mut _45: controller::position::PositionDirection;
+    let mut _46: isize;
+    let mut _48: !;
+    let mut _49: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _51: u64;
+    let mut _52: controller::position::PositionDirection;
+    let _53: ();
+    let mut _54: bool;
+    let mut _55: &controller::position::PositionDirection;
+    let mut _56: &controller::position::PositionDirection;
+    let mut _57: bool;
+    let mut _58: u64;
+    let mut _59: !;
+    let mut _60: u64;
+    let mut _61: u64;
+    let mut _62: u64;
+    let mut _63: u64;
+    scope 1 {
+        debug base_asset_amount_unfilled => _5;
+        let _15: u64;
+        let _16: controller::position::PositionDirection;
+        scope 6 {
+            debug max_trade_base_asset_amount => _15;
+            debug max_trade_direction => _16;
+        }
+        scope 7 {
+            debug limit_price => _19;
+            let _19: u64;
+            let _20: u64;
+            let _27: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _30: u64;
+            let _36: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _39: u64;
+            scope 8 {
+                debug adjusted_limit_price => _20;
+                let _47: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _50: (u64, controller::position::PositionDirection);
+                scope 17 {
+                    debug residual => _47;
+                    scope 18 {
+                    }
+                }
+                scope 19 {
+                    debug val => _50;
+                    scope 20 {
+                    }
+                }
+            }
+            scope 9 {
+                debug residual => _27;
+                scope 10 {
+                }
+            }
+            scope 11 {
+                debug val => _30;
+                scope 12 {
+                }
+            }
+            scope 13 {
+                debug residual => _36;
+                scope 14 {
+                }
+            }
+            scope 15 {
+                debug val => _39;
+                scope 16 {
+                }
+            }
+        }
+    }
+    scope 2 {
+        debug residual => _11;
+        scope 3 {
+        }
+    }
+    scope 4 {
+        debug val => _14;
+        scope 5 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &(*_1);
+        StorageLive(_9);
+        _9 = _4;
+        _7 = Order::get_base_asset_amount_unfilled(move _8, move _9) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_9);
+        StorageDead(_8);
+        _6 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _7) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_7);
+        _10 = discriminant(_6);
+        switchInt(move _10) -> [0: bb3, 1: bb5, otherwise: bb4];
+    }
+
+    bb3: {
+        StorageLive(_14);
+        _14 = ((_6 as Continue).0: u64);
+        _5 = _14;
+        StorageDead(_14);
+        StorageDead(_6);
+        StorageLive(_17);
+        _18 = discriminant(_3);
+        switchInt(move _18) -> [1: bb8, otherwise: bb7];
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_11);
+        _11 = ((_6 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_13);
+        _13 = _11;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _13) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_13);
+        StorageDead(_11);
+        StorageDead(_6);
+        goto -> bb37;
+    }
+
+    bb7: {
+        StorageLive(_51);
+        _51 = _5;
+        StorageLive(_52);
+        _52 = ((*_1).17: controller::position::PositionDirection);
+        _17 = (move _51, move _52);
+        StorageDead(_52);
+        StorageDead(_51);
+        goto -> bb27;
+    }
+
+    bb8: {
+        StorageLive(_19);
+        _19 = ((_3 as Some).0: u64);
+        StorageLive(_20);
+        _21 = discriminant(((*_1).17: controller::position::PositionDirection));
+        switchInt(move _21) -> [0: bb10, 1: bb9, otherwise: bb4];
+    }
+
+    bb9: {
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        _33 = _19;
+        StorageLive(_34);
+        _34 = (((*_2).1: state::perp_market::AMM).53: u64);
+        _32 = <u64 as SafeMath>::safe_add(move _33, move _34) -> [return: bb16, unwind continue];
+    }
+
+    bb10: {
+        StorageLive(_22);
+        StorageLive(_23);
+        StorageLive(_24);
+        _24 = _19;
+        StorageLive(_25);
+        _25 = (((*_2).1: state::perp_market::AMM).53: u64);
+        _23 = <u64 as SafeMath>::safe_sub(move _24, move _25) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_25);
+        StorageDead(_24);
+        _22 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _23) -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        StorageDead(_23);
+        _26 = discriminant(_22);
+        switchInt(move _26) -> [0: bb13, 1: bb14, otherwise: bb4];
+    }
+
+    bb13: {
+        StorageLive(_30);
+        _30 = ((_22 as Continue).0: u64);
+        _20 = _30;
+        StorageDead(_30);
+        StorageDead(_22);
+        goto -> bb21;
+    }
+
+    bb14: {
+        StorageLive(_27);
+        _27 = ((_22 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_29);
+        _29 = _27;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _29) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_29);
+        StorageDead(_27);
+        StorageDead(_22);
+        goto -> bb35;
+    }
+
+    bb16: {
+        StorageDead(_34);
+        StorageDead(_33);
+        _31 = <std::result::Result<u64, error::ErrorCode> as Try>::branch(move _32) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_32);
+        _35 = discriminant(_31);
+        switchInt(move _35) -> [0: bb18, 1: bb19, otherwise: bb4];
+    }
+
+    bb18: {
+        StorageLive(_39);
+        _39 = ((_31 as Continue).0: u64);
+        _20 = _39;
+        StorageDead(_39);
+        StorageDead(_31);
+        goto -> bb21;
+    }
+
+    bb19: {
+        StorageLive(_36);
+        _36 = ((_31 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_38);
+        _38 = _36;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _38) -> [return: bb20, unwind continue];
+    }
+
+    bb20: {
+        StorageDead(_38);
+        StorageDead(_36);
+        StorageDead(_31);
+        goto -> bb35;
+    }
+
+    bb21: {
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        _43 = &((*_2).1: state::perp_market::AMM);
+        _42 = &(*_43);
+        StorageLive(_44);
+        _44 = _20;
+        StorageLive(_45);
+        _45 = ((*_1).17: controller::position::PositionDirection);
+        _41 = calculate_base_asset_amount_to_trade_to_price(move _42, move _44, move _45) -> [return: bb22, unwind continue];
+    }
+
+    bb22: {
+        StorageDead(_45);
+        StorageDead(_44);
+        StorageDead(_42);
+        _40 = <std::result::Result<(u64, controller::position::PositionDirection), error::ErrorCode> as Try>::branch(move _41) -> [return: bb23, unwind continue];
+    }
+
+    bb23: {
+        StorageDead(_41);
+        _46 = discriminant(_40);
+        switchInt(move _46) -> [0: bb24, 1: bb25, otherwise: bb4];
+    }
+
+    bb24: {
+        StorageLive(_50);
+        _50 = ((_40 as Continue).0: (u64, controller::position::PositionDirection));
+        _17 = _50;
+        StorageDead(_50);
+        StorageDead(_20);
+        StorageDead(_43);
+        StorageDead(_40);
+        StorageDead(_19);
+        goto -> bb27;
+    }
+
+    bb25: {
+        StorageLive(_47);
+        _47 = ((_40 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_49);
+        _49 = _47;
+        _0 = <std::result::Result<u64, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _49) -> [return: bb26, unwind continue];
+    }
+
+    bb26: {
+        StorageDead(_49);
+        StorageDead(_47);
+        StorageDead(_20);
+        StorageDead(_43);
+        StorageDead(_40);
+        goto -> bb36;
+    }
+
+    bb27: {
+        StorageLive(_15);
+        _15 = (_17.0: u64);
+        StorageLive(_16);
+        _16 = (_17.1: controller::position::PositionDirection);
+        StorageDead(_17);
+        StorageLive(_53);
+        StorageLive(_54);
+        StorageLive(_55);
+        _55 = &_16;
+        StorageLive(_56);
+        _56 = &((*_1).17: controller::position::PositionDirection);
+        _54 = <controller::position::PositionDirection as PartialEq>::ne(move _55, move _56) -> [return: bb28, unwind continue];
+    }
+
+    bb28: {
+        switchInt(move _54) -> [0: bb30, otherwise: bb29];
+    }
+
+    bb29: {
+        StorageDead(_56);
+        StorageDead(_55);
+        goto -> bb31;
+    }
+
+    bb30: {
+        StorageDead(_56);
+        StorageDead(_55);
+        StorageLive(_57);
+        StorageLive(_58);
+        _58 = _15;
+        _57 = Eq(move _58, const 0_u64);
+        switchInt(move _57) -> [0: bb32, otherwise: bb31];
+    }
+
+    bb31: {
+        StorageDead(_58);
+        _0 = std::result::Result::<u64, error::ErrorCode>::Ok(const 0_u64);
+        StorageDead(_57);
+        StorageDead(_54);
+        StorageDead(_53);
+        StorageDead(_16);
+        StorageDead(_15);
+        goto -> bb37;
+    }
+
+    bb32: {
+        StorageDead(_58);
+        _53 = const ();
+        StorageDead(_57);
+        StorageDead(_54);
+        StorageDead(_53);
+        StorageLive(_60);
+        StorageLive(_61);
+        _61 = _5;
+        StorageLive(_62);
+        _62 = _15;
+        _60 = std::cmp::min::<u64>(move _61, move _62) -> [return: bb33, unwind continue];
+    }
+
+    bb33: {
+        StorageDead(_62);
+        StorageDead(_61);
+        StorageLive(_63);
+        _63 = (((*_2).1: state::perp_market::AMM).52: u64);
+        _0 = math::orders::standardize_base_asset_amount(move _60, move _63) -> [return: bb34, unwind continue];
+    }
+
+    bb34: {
+        StorageDead(_63);
+        StorageDead(_60);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_5);
+        goto -> bb38;
+    }
+
+    bb35: {
+        StorageDead(_20);
+        goto -> bb36;
+    }
+
+    bb36: {
+        StorageDead(_19);
+        StorageDead(_17);
+        goto -> bb37;
+    }
+
+    bb37: {
+        StorageDead(_5);
+        goto -> bb38;
+    }
+
+    bb38: {
+        return;
+    }
+}

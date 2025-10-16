@@ -1,0 +1,38 @@
+// MIR for `allowed_signer_update_reserve_config` after PreCodegen
+
+fn allowed_signer_update_reserve_config(_1: state::UpdateConfigMode, _2: anchor_lang::prelude::Pubkey, _3: anchor_lang::prelude::Pubkey) -> anchor_lang::prelude::Pubkey {
+    debug mode => _1;
+    debug lending_market_owner => _2;
+    debug global_admin => _3;
+    let mut _0: anchor_lang::prelude::Pubkey;
+    let mut _4: bool;
+    let mut _5: state::UpdateConfigMode;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _1;
+        _4 = is_update_reserve_config_mode_global_admin_only(move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_5);
+        _0 = _3;
+        goto -> bb4;
+    }
+
+    bb3: {
+        StorageDead(_5);
+        _0 = _2;
+        goto -> bb4;
+    }
+
+    bb4: {
+        StorageDead(_4);
+        return;
+    }
+}

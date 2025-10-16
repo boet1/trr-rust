@@ -1,0 +1,129 @@
+// MIR for `try_entry` after PreCodegen
+
+fn try_entry(_1: &anchor_lang::prelude::Pubkey, _2: &[anchor_lang::prelude::AccountInfo<'_>], _3: &[u8]) -> Result<(), anchor_lang::error::Error> {
+    debug program_id => _1;
+    debug accounts => _2;
+    debug data => _3;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _4: ();
+    let mut _5: bool;
+    let mut _6: &anchor_lang::prelude::Pubkey;
+    let mut _7: &anchor_lang::prelude::Pubkey;
+    let _8: &anchor_lang::prelude::Pubkey;
+    let mut _9: !;
+    let mut _10: anchor_lang::error::Error;
+    let mut _11: anchor_lang::error::ErrorCode;
+    let _12: ();
+    let mut _13: bool;
+    let mut _14: usize;
+    let mut _15: &[u8];
+    let mut _16: !;
+    let mut _17: anchor_lang::error::Error;
+    let mut _18: anchor_lang::error::ErrorCode;
+    let mut _19: &anchor_lang::prelude::Pubkey;
+    let mut _20: &[anchor_lang::prelude::AccountInfo<'_>];
+    let mut _21: &[u8];
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = &(*_1);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = const {alloc6: &anchor_lang::prelude::Pubkey};
+        _7 = &(*_8);
+        _5 = <anchor_lang::prelude::Pubkey as PartialEq>::ne(move _6, move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _5) -> [0: bb4, otherwise: bb2];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        StorageLive(_10);
+        StorageLive(_11);
+        _11 = DeclaredProgramIdMismatch;
+        _10 = <ErrorCode as Into<anchor_lang::error::Error>>::into(move _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_11);
+        _0 = Result::<(), anchor_lang::error::Error>::Err(move _10);
+        StorageDead(_10);
+        StorageDead(_5);
+        StorageDead(_4);
+        goto -> bb10;
+    }
+
+    bb4: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        _4 = const ();
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        StorageLive(_15);
+        _15 = &(*_3);
+        _14 = core::slice::<impl [u8]>::len(move _15) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_15);
+        _13 = Lt(move _14, const 8_usize);
+        switchInt(move _13) -> [0: bb8, otherwise: bb6];
+    }
+
+    bb6: {
+        StorageDead(_14);
+        StorageLive(_17);
+        StorageLive(_18);
+        _18 = InstructionMissing;
+        _17 = <ErrorCode as Into<anchor_lang::error::Error>>::into(move _18) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_18);
+        _0 = Result::<(), anchor_lang::error::Error>::Err(move _17);
+        StorageDead(_17);
+        StorageDead(_13);
+        StorageDead(_12);
+        goto -> bb10;
+    }
+
+    bb8: {
+        StorageDead(_14);
+        _12 = const ();
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageLive(_19);
+        _19 = &(*_1);
+        StorageLive(_20);
+        _20 = &(*_2);
+        StorageLive(_21);
+        _21 = &(*_3);
+        _0 = dispatch(move _19, move _20, move _21) -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        StorageDead(_21);
+        StorageDead(_20);
+        StorageDead(_19);
+        goto -> bb10;
+    }
+
+    bb10: {
+        return;
+    }
+}
+
+alloc6 (static: ID, size: 32, align: 1) {
+    0x00 │ 06 73 bd 46 f2 e4 7e 04 f1 2b d9 2f b7 31 96 8e │ .s.F..~..+./.1..
+    0x10 │ cd 9d 97 57 c2 74 da 87 47 6f 46 5c 04 0c 65 73 │ ...W.t..GoF\..es
+}

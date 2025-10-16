@@ -1,0 +1,43 @@
+// MIR for `withdraw_from_accounting` before PreCodegen
+
+fn withdraw_from_accounting(_1: &mut state::VaultState, _2: u64, _3: u64) -> () {
+    debug vault => _1;
+    debug available_to_send_to_user => _2;
+    debug shares_to_burn => _3;
+    let mut _0: ();
+    let _4: ();
+    let mut _5: &mut state::VaultState;
+    let mut _6: u64;
+    let _7: ();
+    let mut _8: &mut state::VaultState;
+    let mut _9: u64;
+
+    bb0: {
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &mut (*_1);
+        StorageLive(_6);
+        _6 = _2;
+        _4 = withdraw_from_vault(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &mut (*_1);
+        StorageLive(_9);
+        _9 = _3;
+        _7 = burn_shares(move _8, move _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_7);
+        _0 = const ();
+        return;
+    }
+}

@@ -1,0 +1,42 @@
+// MIR for `refresh_reserve_limit_timestamps` after PreCodegen
+
+fn refresh_reserve_limit_timestamps(_1: &mut reserve::Reserve, _2: u64) -> () {
+    debug reserve => _1;
+    debug timestamp => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: &mut state::reserve::Reserve;
+    let mut _5: u64;
+    let _6: ();
+    let mut _7: &mut state::reserve::Reserve;
+    let mut _8: u64;
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &mut (*_1);
+        StorageLive(_5);
+        _5 = _2;
+        _3 = reserve::Reserve::update_deposit_limit_crossed_timestamp(move _4, move _5) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_5);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &mut (*_1);
+        StorageLive(_8);
+        _8 = _2;
+        _6 = reserve::Reserve::update_borrow_limit_crossed_timestamp(move _7, move _8) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_8);
+        StorageDead(_7);
+        StorageDead(_6);
+        _0 = const ();
+        return;
+    }
+}

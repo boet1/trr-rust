@@ -1,0 +1,175 @@
+// MIR for `close_vault` before PreCodegen
+
+fn close_vault(_1: &anchor_lang::prelude::Interface<'_, TokenInterface>, _2: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>, _3: &anchor_lang::prelude::AccountInfo<'_>, _4: &anchor_lang::prelude::AccountInfo<'_>, _5: u8) -> std::result::Result<(), anchor_lang::error::Error> {
+    debug token_program => _1;
+    debug account => _2;
+    debug destination => _3;
+    debug authority => _4;
+    debug nonce => _5;
+    let mut _0: std::result::Result<(), anchor_lang::error::Error>;
+    let _6: [&[u8]; 2];
+    let mut _7: &u8;
+    let _8: &u8;
+    let _10: [&[&[u8]]; 1];
+    let mut _11: &[&[u8]];
+    let _12: &[&[u8]];
+    let mut _13: &[&[u8]; 2];
+    let mut _14: std::ops::RangeFull;
+    let mut _16: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _17: &anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount>;
+    let mut _18: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _19: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _20: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _21: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _23: &anchor_lang::prelude::Interface<'_, anchor_spl::token_interface::TokenInterface>;
+    let mut _25: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _26: anchor_spl::token_2022::CloseAccount<'_>;
+    let mut _27: &[&[&[u8]]];
+    let mut _28: &[&[&[u8]]; 1];
+    let mut _29: anchor_lang::context::CpiContext<'_, '_, '_, '_, anchor_spl::token_2022::CloseAccount<'_>>;
+    let mut _30: bool;
+    scope 1 {
+        debug signature_seeds => _6;
+        let _9: &[&[&[u8]]; 1];
+        scope 2 {
+            debug signers => _9;
+            let _15: anchor_spl::token_2022::CloseAccount<'_>;
+            scope 3 {
+                debug cpi_accounts => _15;
+                let _22: anchor_lang::prelude::AccountInfo<'_>;
+                scope 4 {
+                    debug cpi_program => _22;
+                    let _24: anchor_lang::context::CpiContext<'_, '_, '_, '_, anchor_spl::token_2022::CloseAccount<'_>>;
+                    scope 5 {
+                        debug cpi_context => _24;
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _30 = const false;
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        _8 = &_5;
+        _7 = &(*_8);
+        _6 = get_signer_seeds(move _7) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_7);
+        StorageDead(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &_6;
+        StorageLive(_14);
+        _14 = RangeFull;
+        _12 = <[&[u8]; 2] as Index<RangeFull>>::index(move _13, move _14) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_14);
+        StorageDead(_13);
+        _11 = &(*_12);
+        _10 = [move _11];
+        StorageDead(_11);
+        _9 = &_10;
+        StorageLive(_15);
+        StorageLive(_16);
+        StorageLive(_17);
+        _17 = &(*_2);
+        _16 = <anchor_lang::prelude::InterfaceAccount<'_, anchor_spl::token_interface::TokenAccount> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _17) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_17);
+        StorageLive(_18);
+        StorageLive(_19);
+        _19 = &(*_3);
+        _18 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _19) -> [return: bb4, unwind: bb10];
+    }
+
+    bb4: {
+        StorageDead(_19);
+        StorageLive(_20);
+        StorageLive(_21);
+        _21 = &(*_4);
+        _20 = <anchor_lang::prelude::AccountInfo<'_> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _21) -> [return: bb5, unwind: bb9];
+    }
+
+    bb5: {
+        StorageDead(_21);
+        _30 = const true;
+        _15 = anchor_spl::token_2022::CloseAccount::<'_> { account: move _16, destination: move _18, authority: move _20 };
+        StorageDead(_20);
+        StorageDead(_18);
+        StorageDead(_16);
+        StorageLive(_22);
+        StorageLive(_23);
+        _23 = &(*_1);
+        _22 = <anchor_lang::prelude::Interface<'_, TokenInterface> as anchor_lang::ToAccountInfo<'_>>::to_account_info(move _23) -> [return: bb6, unwind: bb13];
+    }
+
+    bb6: {
+        StorageDead(_23);
+        StorageLive(_24);
+        StorageLive(_25);
+        _25 = move _22;
+        StorageLive(_26);
+        _30 = const false;
+        _26 = move _15;
+        StorageLive(_27);
+        StorageLive(_28);
+        _28 = &(*_9);
+        _27 = move _28 as &[&[&[u8]]] (PointerCoercion(Unsize));
+        StorageDead(_28);
+        _24 = anchor_lang::context::CpiContext::<'_, '_, '_, '_, anchor_spl::token_2022::CloseAccount<'_>>::new_with_signer(move _25, move _26, move _27) -> [return: bb7, unwind: bb13];
+    }
+
+    bb7: {
+        StorageDead(_27);
+        StorageDead(_26);
+        StorageDead(_25);
+        StorageLive(_29);
+        _29 = move _24;
+        _0 = anchor_spl::token_2022::close_account(move _29) -> [return: bb8, unwind: bb13];
+    }
+
+    bb8: {
+        StorageDead(_29);
+        StorageDead(_24);
+        StorageDead(_22);
+        _30 = const false;
+        StorageDead(_15);
+        StorageDead(_12);
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageDead(_6);
+        return;
+    }
+
+    bb9 (cleanup): {
+        drop(_18) -> [return: bb10, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        drop(_16) -> [return: bb11, unwind terminate(cleanup)];
+    }
+
+    bb11 (cleanup): {
+        resume;
+    }
+
+    bb12 (cleanup): {
+        drop(_15) -> [return: bb11, unwind terminate(cleanup)];
+    }
+
+    bb13 (cleanup): {
+        switchInt(_30) -> [0: bb11, otherwise: bb12];
+    }
+}

@@ -1,0 +1,109 @@
+// MIR for `oracle_map::<impl at programs/drift/src/state/oracle_map.rs:44:1: 44:23>::get_account_info` before PreCodegen
+
+fn oracle_map::<impl at programs/drift/src/state/oracle_map.rs:44:1: 44:23>::get_account_info(_1: &OracleMap<'_>, _2: &anchor_lang::prelude::Pubkey) -> std::result::Result<anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode> {
+    debug self => _1;
+    debug pubkey => _2;
+    let mut _0: std::result::Result<anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode>;
+    let mut _3: anchor_lang::prelude::AccountInfo<'_>;
+    let mut _4: &anchor_lang::prelude::AccountInfo<'_>;
+    let _5: &anchor_lang::prelude::AccountInfo<'_>;
+    let mut _6: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, &anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _7: std::result::Result<&anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode>;
+    let mut _8: std::option::Option<&anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _9: &std::collections::BTreeMap<anchor_lang::prelude::Pubkey, anchor_lang::prelude::AccountInfo<'_>>;
+    let mut _10: &anchor_lang::prelude::Pubkey;
+    let mut _11: error::ErrorCode;
+    let mut _12: isize;
+    let _13: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _14: !;
+    let mut _15: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _16: &anchor_lang::prelude::AccountInfo<'_>;
+    scope 1 {
+        debug residual => _13;
+        scope 2 {
+        }
+    }
+    scope 3 {
+        debug val => _16;
+        scope 4 {
+        }
+    }
+
+    bb0: {
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &((*_1).0: std::collections::BTreeMap<anchor_lang::prelude::Pubkey, anchor_lang::prelude::AccountInfo<'_>>);
+        StorageLive(_10);
+        _10 = &(*_2);
+        _8 = BTreeMap::<anchor_lang::prelude::Pubkey, anchor_lang::prelude::AccountInfo<'_>>::get::<anchor_lang::prelude::Pubkey>(move _9, move _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        StorageDead(_10);
+        StorageDead(_9);
+        StorageLive(_11);
+        _11 = error::ErrorCode::OracleNotFound;
+        _7 = Option::<&anchor_lang::prelude::AccountInfo<'_>>::ok_or::<error::ErrorCode>(move _8, move _11) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        StorageDead(_11);
+        StorageDead(_8);
+        _6 = <std::result::Result<&anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode> as Try>::branch(move _7) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        StorageDead(_7);
+        _12 = discriminant(_6);
+        switchInt(move _12) -> [0: bb4, 1: bb6, otherwise: bb5];
+    }
+
+    bb4: {
+        StorageLive(_16);
+        _16 = ((_6 as Continue).0: &anchor_lang::prelude::AccountInfo<'_>);
+        _5 = _16;
+        StorageDead(_16);
+        _4 = &(*_5);
+        _3 = <anchor_lang::prelude::AccountInfo<'_> as Clone>::clone(move _4) -> [return: bb8, unwind continue];
+    }
+
+    bb5: {
+        unreachable;
+    }
+
+    bb6: {
+        StorageLive(_13);
+        _13 = ((_6 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_15);
+        _15 = _13;
+        _0 = <std::result::Result<anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _15) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_15);
+        StorageDead(_13);
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb9;
+    }
+
+    bb8: {
+        StorageDead(_4);
+        _0 = std::result::Result::<anchor_lang::prelude::AccountInfo<'_>, error::ErrorCode>::Ok(move _3);
+        StorageDead(_3);
+        StorageDead(_6);
+        StorageDead(_5);
+        goto -> bb9;
+    }
+
+    bb9: {
+        return;
+    }
+}

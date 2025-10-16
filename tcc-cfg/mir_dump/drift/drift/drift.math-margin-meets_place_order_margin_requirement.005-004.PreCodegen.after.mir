@@ -1,0 +1,390 @@
+// MIR for `math::margin::meets_place_order_margin_requirement` after PreCodegen
+
+fn math::margin::meets_place_order_margin_requirement(_1: &User, _2: &PerpMarketMap<'_>, _3: &SpotMarketMap<'_>, _4: &mut OracleMap<'_>, _5: bool) -> std::result::Result<(), error::ErrorCode> {
+    debug user => _1;
+    debug perp_market_map => _2;
+    debug spot_market_map => _3;
+    debug oracle_map => _4;
+    debug risk_increasing => _5;
+    let mut _0: std::result::Result<(), error::ErrorCode>;
+    let _6: math::margin::MarginRequirementType;
+    let mut _7: bool;
+    let mut _9: state::margin_calculation::MarginContext;
+    let mut _10: math::margin::MarginRequirementType;
+    let mut _12: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>, state::margin_calculation::MarginCalculation>;
+    let mut _13: std::result::Result<state::margin_calculation::MarginCalculation, error::ErrorCode>;
+    let mut _14: &state::user::User;
+    let mut _15: &state::perp_market_map::PerpMarketMap<'_>;
+    let mut _16: &state::spot_market_map::SpotMarketMap<'_>;
+    let mut _17: &mut state::oracle_map::OracleMap<'_>;
+    let mut _18: state::margin_calculation::MarginContext;
+    let mut _19: isize;
+    let mut _21: !;
+    let mut _22: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let _24: ();
+    let mut _25: bool;
+    let mut _26: &state::margin_calculation::MarginCalculation;
+    let mut _27: !;
+    let _28: ();
+    let mut _29: &str;
+    let _30: &str;
+    let mut _31: &std::string::String;
+    let _32: &std::string::String;
+    let _33: std::string::String;
+    let mut _35: std::fmt::Arguments<'_>;
+    let mut _36: &[&str];
+    let mut _37: &[&str; 3];
+    let _38: &[&str; 3];
+    let _39: [&str; 3];
+    let mut _40: &[core::fmt::rt::Argument<'_>];
+    let mut _41: &[core::fmt::rt::Argument<'_>; 3];
+    let _42: &[core::fmt::rt::Argument<'_>; 3];
+    let _43: [core::fmt::rt::Argument<'_>; 3];
+    let mut _44: core::fmt::rt::Argument<'_>;
+    let mut _45: &i128;
+    let _46: &i128;
+    let mut _47: core::fmt::rt::Argument<'_>;
+    let mut _48: &u128;
+    let _49: &u128;
+    let mut _50: core::fmt::rt::Argument<'_>;
+    let mut _51: &math::margin::MarginRequirementType;
+    let _52: &math::margin::MarginRequirementType;
+    let mut _53: error::ErrorCode;
+    let _54: ();
+    let mut _55: std::ops::ControlFlow<std::result::Result<std::convert::Infallible, error::ErrorCode>>;
+    let mut _56: std::result::Result<(), error::ErrorCode>;
+    let mut _57: &state::user::User;
+    let mut _58: state::margin_calculation::MarginCalculation;
+    let mut _59: isize;
+    let mut _61: !;
+    let mut _62: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+    let mut _64: ();
+    scope 1 {
+        debug margin_type => _6;
+        let _8: state::margin_calculation::MarginContext;
+        scope 2 {
+            debug context => _8;
+            let _11: state::margin_calculation::MarginCalculation;
+            let _20: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+            let _23: state::margin_calculation::MarginCalculation;
+            scope 3 {
+                debug calculation => _11;
+                let _34: std::string::String;
+                let _60: std::result::Result<std::convert::Infallible, error::ErrorCode>;
+                let _63: ();
+                let mut _65: &[&str; 3];
+                scope 8 {
+                    debug res => _34;
+                }
+                scope 9 {
+                    debug residual => _60;
+                    scope 10 {
+                    }
+                }
+                scope 11 {
+                    debug val => _63;
+                    scope 12 {
+                    }
+                }
+            }
+            scope 4 {
+                debug residual => _20;
+                scope 5 {
+                }
+            }
+            scope 6 {
+                debug val => _23;
+                scope 7 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = _5;
+        switchInt(move _7) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _6 = math::margin::MarginRequirementType::Initial;
+        goto -> bb3;
+    }
+
+    bb2: {
+        _6 = math::margin::MarginRequirementType::Maintenance;
+        goto -> bb3;
+    }
+
+    bb3: {
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        _10 = _6;
+        _9 = MarginContext::standard(move _10) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        StorageDead(_10);
+        _8 = MarginContext::strict(move _9, const true) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        StorageDead(_9);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        StorageLive(_14);
+        _14 = &(*_1);
+        StorageLive(_15);
+        _15 = &(*_2);
+        StorageLive(_16);
+        _16 = &(*_3);
+        StorageLive(_17);
+        _17 = &mut (*_4);
+        StorageLive(_18);
+        _18 = _8;
+        _13 = math::margin::calculate_margin_requirement_and_total_collateral_and_liability_info(move _14, move _15, move _16, move _17, move _18) -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        StorageDead(_18);
+        StorageDead(_17);
+        StorageDead(_16);
+        StorageDead(_15);
+        StorageDead(_14);
+        _12 = <std::result::Result<MarginCalculation, error::ErrorCode> as Try>::branch(move _13) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        StorageDead(_13);
+        _19 = discriminant(_12);
+        switchInt(move _19) -> [0: bb8, 1: bb10, otherwise: bb9];
+    }
+
+    bb8: {
+        StorageLive(_23);
+        _23 = ((_12 as Continue).0: state::margin_calculation::MarginCalculation);
+        _11 = _23;
+        StorageDead(_23);
+        StorageDead(_12);
+        StorageLive(_24);
+        StorageLive(_25);
+        StorageLive(_26);
+        _26 = &_11;
+        _25 = MarginCalculation::meets_margin_requirement(move _26) -> [return: bb12, unwind continue];
+    }
+
+    bb9: {
+        unreachable;
+    }
+
+    bb10: {
+        StorageLive(_20);
+        _20 = ((_12 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_22);
+        _22 = _20;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _22) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        StorageDead(_22);
+        StorageDead(_20);
+        StorageDead(_12);
+        goto -> bb28;
+    }
+
+    bb12: {
+        switchInt(move _25) -> [0: bb14, otherwise: bb13];
+    }
+
+    bb13: {
+        StorageDead(_26);
+        _24 = const ();
+        StorageDead(_25);
+        StorageDead(_24);
+        StorageLive(_54);
+        StorageLive(_55);
+        StorageLive(_56);
+        StorageLive(_57);
+        _57 = &(*_1);
+        StorageLive(_58);
+        _58 = _11;
+        _56 = validate_any_isolated_tier_requirements(move _57, move _58) -> [return: bb23, unwind continue];
+    }
+
+    bb14: {
+        StorageDead(_26);
+        StorageLive(_28);
+        StorageLive(_29);
+        StorageLive(_30);
+        StorageLive(_31);
+        StorageLive(_32);
+        StorageLive(_33);
+        StorageLive(_34);
+        StorageLive(_35);
+        StorageLive(_36);
+        StorageLive(_37);
+        StorageLive(_38);
+        _65 = const _;
+        _38 = &(*_65);
+        _37 = &(*_38);
+        _36 = move _37 as &[&str] (PointerCoercion(Unsize));
+        StorageDead(_37);
+        StorageLive(_40);
+        StorageLive(_41);
+        StorageLive(_42);
+        StorageLive(_43);
+        StorageLive(_44);
+        StorageLive(_45);
+        StorageLive(_46);
+        _46 = &(_11.1: i128);
+        _45 = &(*_46);
+        _44 = core::fmt::rt::Argument::<'_>::new_display::<i128>(move _45) -> [return: bb15, unwind continue];
+    }
+
+    bb15: {
+        StorageDead(_45);
+        StorageLive(_47);
+        StorageLive(_48);
+        StorageLive(_49);
+        _49 = &(_11.3: u128);
+        _48 = &(*_49);
+        _47 = core::fmt::rt::Argument::<'_>::new_display::<u128>(move _48) -> [return: bb16, unwind continue];
+    }
+
+    bb16: {
+        StorageDead(_48);
+        StorageLive(_50);
+        StorageLive(_51);
+        StorageLive(_52);
+        _52 = &_6;
+        _51 = &(*_52);
+        _50 = core::fmt::rt::Argument::<'_>::new_debug::<math::margin::MarginRequirementType>(move _51) -> [return: bb17, unwind continue];
+    }
+
+    bb17: {
+        StorageDead(_51);
+        _43 = [move _44, move _47, move _50];
+        StorageDead(_50);
+        StorageDead(_47);
+        StorageDead(_44);
+        _42 = &_43;
+        _41 = &(*_42);
+        _40 = move _41 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        StorageDead(_41);
+        _35 = Arguments::<'_>::new_v1(move _36, move _40) -> [return: bb18, unwind continue];
+    }
+
+    bb18: {
+        StorageDead(_40);
+        StorageDead(_36);
+        _34 = format(move _35) -> [return: bb19, unwind continue];
+    }
+
+    bb19: {
+        StorageDead(_35);
+        StorageDead(_52);
+        StorageDead(_49);
+        StorageDead(_46);
+        StorageDead(_43);
+        StorageDead(_42);
+        StorageDead(_38);
+        _33 = move _34;
+        StorageDead(_34);
+        _32 = &_33;
+        _31 = &(*_32);
+        _30 = <String as Deref>::deref(move _31) -> [return: bb20, unwind: bb30];
+    }
+
+    bb20: {
+        _29 = &(*_30);
+        StorageDead(_31);
+        _28 = solana_program::log::sol_log(move _29) -> [return: bb21, unwind: bb30];
+    }
+
+    bb21: {
+        StorageDead(_29);
+        drop(_33) -> [return: bb22, unwind: bb31];
+    }
+
+    bb22: {
+        StorageDead(_33);
+        StorageDead(_32);
+        StorageDead(_30);
+        StorageDead(_28);
+        StorageLive(_53);
+        _53 = error::ErrorCode::InsufficientCollateral;
+        _0 = std::result::Result::<(), error::ErrorCode>::Err(move _53);
+        StorageDead(_53);
+        StorageDead(_25);
+        StorageDead(_24);
+        goto -> bb28;
+    }
+
+    bb23: {
+        StorageDead(_58);
+        StorageDead(_57);
+        _55 = <std::result::Result<(), error::ErrorCode> as Try>::branch(move _56) -> [return: bb24, unwind continue];
+    }
+
+    bb24: {
+        StorageDead(_56);
+        _59 = discriminant(_55);
+        switchInt(move _59) -> [0: bb25, 1: bb26, otherwise: bb9];
+    }
+
+    bb25: {
+        StorageLive(_63);
+        _63 = ((_55 as Continue).0: ());
+        _54 = _63;
+        StorageDead(_63);
+        StorageDead(_55);
+        StorageDead(_54);
+        StorageLive(_64);
+        _64 = ();
+        _0 = std::result::Result::<(), error::ErrorCode>::Ok(move _64);
+        StorageDead(_64);
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_6);
+        goto -> bb29;
+    }
+
+    bb26: {
+        StorageLive(_60);
+        _60 = ((_55 as Break).0: std::result::Result<std::convert::Infallible, error::ErrorCode>);
+        StorageLive(_62);
+        _62 = _60;
+        _0 = <std::result::Result<(), error::ErrorCode> as FromResidual<std::result::Result<Infallible, error::ErrorCode>>>::from_residual(move _62) -> [return: bb27, unwind continue];
+    }
+
+    bb27: {
+        StorageDead(_62);
+        StorageDead(_60);
+        StorageDead(_55);
+        StorageDead(_54);
+        goto -> bb28;
+    }
+
+    bb28: {
+        StorageDead(_11);
+        StorageDead(_8);
+        StorageDead(_6);
+        goto -> bb29;
+    }
+
+    bb29: {
+        return;
+    }
+
+    bb30 (cleanup): {
+        drop(_33) -> [return: bb31, unwind terminate(cleanup)];
+    }
+
+    bb31 (cleanup): {
+        resume;
+    }
+}

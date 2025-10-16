@@ -1,0 +1,55 @@
+// MIR for `global_config::<impl at programs\klend\src\state\global_config.rs:58:5: 58:15>::from_str` before PreCodegen
+
+fn global_config::<impl at programs\klend\src\state\global_config.rs:58:5: 58:15>::from_str(_1: &str) -> std::result::Result<global_config::UpdateGlobalConfigMode, strum::ParseError> {
+    debug s => _1;
+    let mut _0: std::result::Result<state::global_config::UpdateGlobalConfigMode, strum::ParseError>;
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: state::global_config::UpdateGlobalConfigMode;
+    let mut _5: state::global_config::UpdateGlobalConfigMode;
+    let mut _6: strum::ParseError;
+
+    bb0: {
+        _2 = <str as PartialEq>::eq(_1, const "PendingAdmin") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        switchInt(move _2) -> [0: bb2, otherwise: bb5];
+    }
+
+    bb2: {
+        _3 = <str as PartialEq>::eq(_1, const "FeeCollector") -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        switchInt(move _3) -> [0: bb4, otherwise: bb6];
+    }
+
+    bb4: {
+        StorageLive(_6);
+        _6 = VariantNotFound;
+        _0 = std::result::Result::<global_config::UpdateGlobalConfigMode, strum::ParseError>::Err(move _6);
+        StorageDead(_6);
+        goto -> bb7;
+    }
+
+    bb5: {
+        StorageLive(_4);
+        _4 = global_config::UpdateGlobalConfigMode::PendingAdmin;
+        _0 = std::result::Result::<global_config::UpdateGlobalConfigMode, strum::ParseError>::Ok(move _4);
+        StorageDead(_4);
+        goto -> bb7;
+    }
+
+    bb6: {
+        StorageLive(_5);
+        _5 = global_config::UpdateGlobalConfigMode::FeeCollector;
+        _0 = std::result::Result::<global_config::UpdateGlobalConfigMode, strum::ParseError>::Ok(move _5);
+        StorageDead(_5);
+        goto -> bb7;
+    }
+
+    bb7: {
+        return;
+    }
+}
